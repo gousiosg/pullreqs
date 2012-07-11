@@ -1,5 +1,7 @@
 require "pullreqs/version"
+require "pullreqs/mergepoint"
+require "pullreqs/command"
 
-module Pullreqs
+module PullReqs
   # Your code goes here...
 end

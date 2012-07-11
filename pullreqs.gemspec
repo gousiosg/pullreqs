@@ -13,5 +13,5 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "pullreqs"
   gem.require_paths = ["lib"]
-  gem.version       = Pullreqs::VERSION
+  gem.version       = PullReqs::VERSION
 end
