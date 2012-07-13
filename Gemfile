@@ -7,3 +7,7 @@ gem "daemons"
 gem "trollop"
 gem "amqp"
 gem "ghtorrent"
+
+group :test do
+  gem "shoulda"
+end
