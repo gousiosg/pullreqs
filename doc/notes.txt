@@ -1,0 +1,109 @@
+# Times between opening and closing a pull request, per pull request
+
+select a.pull_request_id, a.created_at, b.created_at from pull_request_history a, pull_request_history b where a.pull_request_id = b.pull_request_id and a.action='opened' and b.action='merged' group by a.pull_request_id;
+
+# Hours before a pull request has been merged 
+
+select a.pull_request_id, timediff(b.created_at, a.created_at) from pull_request_history a, pull_request_history b where a.pull_request_id = b.pull_request_id and a.action='opened' and b.action='merged' group by a.pull_request_id;
+
+# Pull request lifetime descriptive statistics per owner/project
+
+select p.id, p.name, 
+  count(pr.id) as count,
+  min(timestampdiff(minute, b.created_at, a.created_at))) as min,
+  avg(timestampdiff(hour, b.created_at, a.created_at))) as average,
+  max(timestampdiff(hour, b.created_at, a.created_at))) as max
+from pull_request_history a, pull_request_history b, 
+     projects p, pull_requests pr
+where  p.id = pr.base_repo_id 
+	and pr.id=a.pull_request_id
+    and a.pull_request_id = b.pull_request_id 
+    and a.action='opened' and b.action='merged' 
+group by p.id
+order by count desc;
+
+# At the time a pull request was merged, what is the size of the team?
+# Beware of pull request history duplicates!
+
+#select pull_request_id, created_at, action, count(*) 
+#from pull_request_history a
+#group by pull_request_id, created_at, action,  ext_ref_id
+#having count(*) >1;
+
+select pr.user_id, p.name, pr.id, prh.created_at, count(pm.user_id) as teamsize, 
+(select distinct(timestampdiff(minute,a.created_at, b.created_at))
+from pull_request_history a, pull_request_history b 
+where a.pull_request_id = b.pull_request_id and 
+	a.action='opened' and b.action='merged' and b.pull_request_id = pr.id) as diff
+from projects p, pull_requests pr, pull_request_history prh, project_members pm
+where 
+	prh.action = 'merged' and
+	pm.created_at < prh.created_at and
+	pr.id = prh.pull_request_id and
+	p.id = pr.base_repo_id and
+	pm.repo_id = pr.id  
+group by
+	pr.id
+order by 
+	diff desc
+	limit 100;
+
+# Commit % coming from pull requests
+
+select p.name, a.total_commits, b.commits_from_pull_reqs, (100 * b.commits_from_pull_reqs)/a.total_commits as ratio
+from
+(select p.id as prid, count(c.id) as total_commits
+	from commits c, projects p
+	where p.id = c.project_id
+	and exists (select * from pull_requests pr where pr.base_repo_id = p.id)
+	group by project_id) as a,
+(select p.id as prid, count(c.id) as commits_from_pull_reqs
+	from commits c, projects p
+	where  p.id = c.project_id
+	and exists (select * from pull_request_commits prc1 where prc1.commit_id = c.id)
+	and exists (select * from pull_requests pr where pr.base_repo_id = p.id)
+	group by project_id) as b,
+projects p
+where
+  a.prid = b.prid
+  and a.prid = p.id
+order by ratio desc
+
+select p.name, a.project_id, count(a.commit_id), count(b.pullreq_commits)
+from
+project p,
+project_commits a,
+(select pc.project_id, pc.commit_id  as pullreq_commits
+from project_commits pc
+where exists (select * from pull_request_commits prc where prc.commit_id = pc.commit_id )) as b
+where a.project_id = b.project_id
+and p.id = a.project_id
+group by p.name, a.project_id;
+
+select p.name, a.prid, a.all_commits, b.pullreq_commits
+from
+projects p,
+(select pc.project_id as prid, count(pc.commit_id) as all_commits from project_commits pc group by pc.project_id) as a,
+(select pc.project_id as prid, count(pc.commit_id) as pullreq_commits
+from project_commits pc
+where exists (select * from pull_request_commits prc where prc.commit_id = pc.commit_id ) group by pc.project_id) as b
+where a.prid = b.prid
+and p.id = a.prid
+group by p.name, a.prid;
+
+# Pull request patch length (or commit number) vs time to merge. 
+# Pull request patch length (or commit number) vs acceptance rate.
+# Watches vs forks
+# Forks vs pull requests
+# Pull request acceptance rate/time for famous users
+
+
+
+# Pull request acceptance rate/time for users known to the project
+
+
+
+# Membership promotion: if pull request is accepted, user becomes member?
+
+# Forks with more users than original project
+
