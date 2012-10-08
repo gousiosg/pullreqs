@@ -1,13 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in pullreqs.gemspec
 gemspec
-gem "rugged"
-gem "daemons"
-gem "trollop"
-gem "amqp"
-gem "ghtorrent"
-
-group :test do
-  gem "shoulda"
-end
+gem "ghtorrent", :git => 'git@github.com:gousiosg/github-mirror.git'

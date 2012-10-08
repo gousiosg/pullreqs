@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/pullreqs/version', __FILE__)
+require 'rake'
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Georgios Gousios"]
@@ -13,5 +13,5 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "pullreqs"
   gem.require_paths = ["lib"]
-  gem.version       = PullReqs::VERSION
+  gem.version       = 0.1
 end
