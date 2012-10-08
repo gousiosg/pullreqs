@@ -50,54 +50,49 @@ order by
 
 # Commit % coming from pull requests
 
-select p.name, a.total_commits, b.commits_from_pull_reqs, (100 * b.commits_from_pull_reqs)/a.total_commits as ratio
+select u.login, p.name, a.total_commits, b.commits_from_pull_reqs, (100 * b.commits_from_pull_reqs)/a.total_commits as ratio
 from
 (select p.id as prid, count(c.id) as total_commits
 	from commits c, projects p
 	where p.id = c.project_id
-	and exists (select * from pull_requests pr where pr.base_repo_id = p.id)
-	group by project_id) as a,
-(select p.id as prid, count(c.id) as commits_from_pull_reqs
-	from commits c, projects p
-	where  p.id = c.project_id
-	and exists (select * from pull_request_commits prc1 where prc1.commit_id = c.id)
-	and exists (select * from pull_requests pr where pr.base_repo_id = p.id)
-	group by project_id) as b,
-projects p
+	group by p.id) as a,
+(select p.id as prid, count(prc.commit_id) as commits_from_pull_reqs
+	from projects p, pull_requests pr, pull_request_commits prc
+	where p.id = pr.base_repo_id
+	and pr.id = prc.pull_request_id
+	group by p.id) as b,
+projects p, users u
 where
   a.prid = b.prid
   and a.prid = p.id
+  and u.id = p.owner_id
 order by ratio desc
-
-select p.name, a.project_id, count(a.commit_id), count(b.pullreq_commits)
-from
-project p,
-project_commits a,
-(select pc.project_id, pc.commit_id  as pullreq_commits
-from project_commits pc
-where exists (select * from pull_request_commits prc where prc.commit_id = pc.commit_id )) as b
-where a.project_id = b.project_id
-and p.id = a.project_id
-group by p.name, a.project_id;
-
-select p.name, a.prid, a.all_commits, b.pullreq_commits
-from
-projects p,
-(select pc.project_id as prid, count(pc.commit_id) as all_commits from project_commits pc group by pc.project_id) as a,
-(select pc.project_id as prid, count(pc.commit_id) as pullreq_commits
-from project_commits pc
-where exists (select * from pull_request_commits prc where prc.commit_id = pc.commit_id ) group by pc.project_id) as b
-where a.prid = b.prid
-and p.id = a.prid
-group by p.name, a.prid;
 
 # Pull request patch length (or commit number) vs time to merge. 
 # Pull request patch length (or commit number) vs acceptance rate.
 # Watches vs forks
+
 # Forks vs pull requests
-# Pull request acceptance rate/time for famous users
 
 
+# Pull request acceptance rate/time by user fame
+
+select a.user_id, a.num_followers, b.avgtime
+from 
+(select u.id as user_id, count(f.user_id) as num_followers
+from followers f, users u 
+where f.follower_id  = u.id
+group by u.login) as a,
+(select p.user_id as user_id, avg(timestampdiff(minute,a.created_at, b.created_at)) as avgtime
+from pull_request_history a, pull_request_history b,
+	 pull_requests p
+where a.pull_request_id = b.pull_request_id 
+and a.action='opened' and b.action='merged' 
+and a.pull_request_id = p.id
+and b.pull_request_id = p.id
+group by p.user_id
+) as b
+where a.user_id = b.user_id
 
 # Pull request acceptance rate/time for users known to the project
 
@@ -106,4 +101,41 @@ group by p.name, a.prid;
 # Membership promotion: if pull request is accepted, user becomes member?
 
 # Forks with more users than original project
+
+# Most active/important/big projects
+
+select a.login, a.name, a.num_commits, b.num_pull_requests, c.num_forks, d.num_watchers
+from
+(select u.login, p.name, count(*) as num_commits
+from projects p, commits c, users u
+where c.project_id = p.id
+and u.id = p.owner_id
+group by p.id
+order by count(*) desc
+limit 100) as a,
+(select u.login, p.name, count(*) as num_pull_requests
+from projects p, users u, pull_requests pr
+where pr.base_repo_id = p.id
+and u.id = p.owner_id
+group by p.id
+order by count(*) desc
+limit 100) as b,
+(select u.login, p.name, count(f.forked_from_id) as num_forks
+from projects p, users u, forks f
+where f.forked_from_id = p.id
+and u.id = p.owner_id
+group by p.id
+order by count(f.forked_from_id) desc
+limit 100) as c,
+(select u.login, p.name, count(w.user_id) as num_watchers
+from projects p, users u, watchers w
+where w.repo_id = p.id
+and u.id = p.owner_id
+group by p.id
+order by count(w.user_id) desc
+limit 100) as d
+where 
+	a.login = b.login and a.name = b.name and
+	a.login = c.login and a.name = c.name and
+	a.login = d.login and a.name = d.name
 
