@@ -14,4 +14,11 @@ Gem::Specification.new do |gem|
   gem.name          = "pullreqs"
   gem.require_paths = ["lib"]
   gem.version       = 0.1
+
+  gem.add_dependency "mongo", ['>= 1.6']
+  gem.add_dependency "bson_ext", ['>= 1.6']
+  gem.add_dependency "json", ['>= 1.6']
+  gem.add_dependency "trollop", ['>= 1.16']
+  gem.add_dependency "sequel", ['>= 3.35']
+  gem.add_dependency "github-linguist", ['>= 2.3.4']
 end

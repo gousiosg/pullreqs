@@ -4,6 +4,7 @@ require 'rubygems'
 require 'bundler'
 require 'ghtorrent'
 require 'time'
+require 'linguist'
 
 class PullReqDataExtraction < GHTorrent::Command
 
@@ -53,9 +54,11 @@ Extract data for pull requests for a given repository
       Trollop::die "Cannot find repository #{owner}/#{repo}"
     end
 
-    print "project_id, pull_req_id, created_at, merged_at, " <<
+    print "project_name, github_id, pull_req_id, created_at," <<
+          "merged_at, lifetime_minutes, " <<
           "team_size_at_merge, num_commits, num_comments, " <<
           "files_added, files_deleted, files_modified, " <<
+          "src_files, doc_files, other_files, " <<
           "lines_addded, lines_deleted, " <<
           "total_commits_last_month, main_repo_commits_last_month, " <<
           "requester_followers\n"
@@ -71,8 +74,9 @@ Extract data for pull requests for a given repository
 
   def pull_reqs(project)
     q = <<-QUERY
-    select p.id as project_id, pr.id, a.created_at as created_at,
-           b.created_at as merged_at
+    select p.name as project_name, pr.id, pr.pullreq_id as github_id,
+           a.created_at as created_at, b.created_at as merged_at,
+           timestampdiff(minute, a.created_at, b.created_at) as lifetime_minutes
     from pull_requests pr, projects p,
          pull_request_history a, pull_request_history b
     where p.id = pr.base_repo_id
@@ -82,29 +86,34 @@ Extract data for pull requests for a given repository
 	    and a.created_at < b.created_at
       and p.id = ?
 	  group by pr.id
+    order by merged_at desc
     QUERY
     db.fetch(q, project[:id]).all
   end
 
   def per_pull_req(pr)
 
-    #stats = pr_stats(pr[:id])
-    stats = Hash.new
+    stats = pr_stats(pr[:id])
 
-    print pr[:project_id], ", ",
+    print pr[:project_name], ", ",
+          pr[:github_id], ", ",
           pr[:id], ", ",
           Time.at(pr[:created_at]).to_i, ", ",
           Time.at(pr[:merged_at]).to_i, ", ",
+          pr[:lifetime_minutes], ", ",
           team_size_at_merge(pr[:id], 3)[0][:teamsize], ", ",
           num_commits(pr[:id])[0][:commit_count], ", ",
           num_comments(pr[:id])[0][:comment_count], ", ",
           stats[:files_added], ", ",
           stats[:files_deleted], ", ",
           stats[:files_modified], ", ",
+          stats[:src_files], ", ",
+          stats[:doc_files], ", ",
+          stats[:other_files], ", ",
           stats[:lines_added], ", ",
-          stats[:lines_deleted], ",",
-          commits_last_month(pr[:id], false)[0][:num_commits], ",",
-          commits_last_month(pr[:id], true)[0][:num_commits], ",",
+          stats[:lines_deleted], ", ",
+          commits_last_month(pr[:id], false)[0][:num_commits], ", ",
+          commits_last_month(pr[:id], true)[0][:num_commits], ", ",
           requester_followers(pr[:id])[0][:num_followers],
           "\n"
   end
@@ -176,13 +185,7 @@ Extract data for pull requests for a given repository
       mongo.find(:commits, {:sha => x[:sha]})[0]
     }
 
-    result = {
-        :lines_added => 0,
-        :lines_deleted => 0,
-        :files_added => 0,
-        :files_removed => 0,
-        :files_modified => 0
-    }
+    result = Hash.new(0)
 
     def file_count(commit, status)
       commit['files'].reduce(0) { |acc, y|
@@ -194,12 +197,27 @@ Extract data for pull requests for a given repository
       }
     end
 
+    def file_type(f)
+      lang = Linguist::Language.detect(f, nil)
+      if lang.nil? then :data else lang.type end
+    end
+
+    def file_type_count(commit, type)
+      commit['files'].reduce(0) { |acc, y|
+        if file_type(y['filename']) == type then acc + 1 else acc end
+      }
+    end
+
     raw_commits.each{ |x|
       result[:lines_added] += x['stats']['additions']
       result[:lines_deleted] += x['stats']['deletions']
       result[:files_added] += file_count(x, "added")
       result[:files_removed] += file_count(x, "removed")
       result[:files_modified] += file_count(x, "modified")
+      result[:files_touched] += (file_count(x, "modified") + file_count(x, "added") + file_count(x, "removed"))
+      result[:src_files] += file_type_count(x, :programming)
+      result[:doc_files] += file_type_count(x, :markup)
+      result[:other_files] += file_type_count(x, :data)
     }
     result
   end

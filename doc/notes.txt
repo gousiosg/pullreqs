@@ -139,3 +139,5 @@ where
 	a.login = c.login and a.name = c.name and
 	a.login = d.login and a.name = d.name
 
+
+# Rename commits.project_id to commits.owner_project_id
