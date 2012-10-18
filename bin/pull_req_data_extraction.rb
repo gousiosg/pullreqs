@@ -5,23 +5,29 @@ require 'bundler'
 require 'ghtorrent'
 require 'time'
 require 'linguist'
+require 'grit'
+
+require 'java_pull_req_data'
+require 'ruby_pull_req_data'
 
 class PullReqDataExtraction < GHTorrent::Command
 
   include GHTorrent::Persister
+  include GHTorrent::Settings
+  include Grit
 
   def prepare_options(options)
     options.banner <<-BANNER
 Extract data for pull requests for a given repository
 
-#{command_name} owner repo
+#{command_name} owner repo lang
 
     BANNER
   end
 
   def validate
     super
-    Trollop::die "Two arguments are required" unless args[0] && !args[0].empty?
+    Trollop::die "Three arguments required" unless !args[2].nil?
   end
 
   def logger
@@ -36,6 +42,11 @@ Extract data for pull requests for a given repository
   def mongo
     @mongo ||= connect(:mongo, settings)
     @mongo
+  end
+
+  def repo
+    @repo ||= clone(ARGV[0], ARGV[1])
+    @repo
   end
 
   def go
@@ -54,6 +65,11 @@ Extract data for pull requests for a given repository
       Trollop::die "Cannot find repository #{owner}/#{repo}"
     end
 
+    case ARGV[2]
+      when "ruby" then self.extend(RubyData)
+      when "java" then self.extend(JavaData)
+    end
+
     print "project_name, github_id, pull_req_id, created_at," <<
           "merged_at, lifetime_minutes, " <<
           "team_size_at_merge, num_commits, num_comments, " <<
@@ -61,14 +77,41 @@ Extract data for pull requests for a given repository
           "src_files, doc_files, other_files, " <<
           "lines_addded, lines_deleted, " <<
           "total_commits_last_month, main_repo_commits_last_month, " <<
-          "requester_followers\n"
+          "commits_on_files_touched, " <<
+          "requester_followers, num_test_cases, test_lines\n"
 
     pull_reqs(repo_entry).each do |pr|
       begin
         per_pull_req(pr)
       rescue Exception => e
-        puts "Error processing pull_request #{pr[:id]}: #{e.message}"
+        STDERR.puts "Error processing pull_request #{pr[:id]}: #{e.message}"
       end
+    end
+  end
+
+  def clone(user, repo)
+
+    def spawn(cmd)
+      proc = IO.popen(cmd, "r")
+
+      proc_out = Thread.new {
+        while !proc.eof
+          logger.debug "#{proc.gets}"
+        end
+      }
+
+      proc_out.join
+    end
+
+    checkout_dir = File.join(config(:cache_dir), "repos", user, repo)
+
+    begin
+      repo = Grit::Repo.new(checkout_dir)
+      spawn("cd #{checkout_dir} && git pull")
+      repo
+    rescue
+      spawn("git clone git://github.com/#{user}/#{repo}.git #{checkout_dir}")
+      Grit::Repo.new(checkout_dir)
     end
   end
 
@@ -114,7 +157,10 @@ Extract data for pull requests for a given repository
           stats[:lines_deleted], ", ",
           commits_last_month(pr[:id], false)[0][:num_commits], ", ",
           commits_last_month(pr[:id], true)[0][:num_commits], ", ",
-          requester_followers(pr[:id])[0][:num_followers],
+          commits_on_files_touched(pr[:id], Time.at(Time.at(pr[:merged_at]).to_i - 3600 * 24 * 30)), ", ",
+          requester_followers(pr[:id])[0][:num_followers], ", ",
+          num_test_cases(pr[:id]), ", ",
+          test_lines(pr[:id]),
           "\n"
   end
 
@@ -171,7 +217,7 @@ Extract data for pull requests for a given repository
     if_empty(db.fetch(q, pr_id).all, :num_followers)
   end
 
-  def pr_stats(pr_id)
+  def commit_entries(pr_id)
     q = <<-QUERY
     select c.sha as sha
     from pull_requests pr, pull_request_commits prc, commits c
@@ -181,19 +227,19 @@ Extract data for pull requests for a given repository
     QUERY
     commits = db.fetch(q, pr_id).all
 
-    raw_commits = commits.map{ |x|
+    commits.map{ |x|
       mongo.find(:commits, {:sha => x[:sha]})[0]
     }
+  end
 
+  def pr_stats(pr_id)
+
+    raw_commits = commit_entries(pr_id)
     result = Hash.new(0)
 
     def file_count(commit, status)
       commit['files'].reduce(0) { |acc, y|
-        if y['status'] == status then
-          acc + 1
-        else
-          acc
-        end
+        if y['status'] == status then acc + 1 else acc end
       }
     end
 
@@ -222,6 +268,19 @@ Extract data for pull requests for a given repository
     result
   end
 
+  def commits_on_files_touched(pr_id, oldest)
+    commit_entries(pr_id).map { |c|
+      c['files'].map{ |f|
+        size = repo.log(c['sha'], f['filename']).find_all{ |l|
+          #STDERR.print(f['filename'], " ", l.id, " ", l.authored_date," ", oldest, "\n")
+          l.authored_date > oldest
+        }.size
+        #STDERR.print(f['filename'], " #{size} commits\n")
+        size
+      }
+    }.flatten.reduce(0){|acc,x| acc + x}
+  end
+
   def commits_last_month(pr_id, exclude_pull_req)
     q = <<-QUERY
     select count(c.id) as num_commits
@@ -245,6 +304,23 @@ Extract data for pull requests for a given repository
     not_zero(if_empty(db.fetch(q, pr_id).all, :num_commits), :num_commits)
   end
 
+  private
+
+  def files_at_commit(pr_id, filter)
+    q = <<-QUERY
+    select c.sha
+    from pull_requests p, commits c
+    where c.id = p.base_commit_id
+    and p.id = ?
+    QUERY
+
+    base_commit = db.fetch(q, pr_id).all[0][:sha]
+    files = repo.lstree(base_commit, :recursive => true)
+    return files if filter.nil?
+
+    files.select{|x| filter.call(x)}
+  end
+
   def if_empty(result, field)
     if result.nil? or result.empty?
       [{field => 0}]
@@ -261,6 +337,29 @@ Extract data for pull requests for a given repository
     end
   end
 
+  def src_files(pr_id)
+    raise Exception.new("Unimplemented")
+  end
+
+  def src_lines(pr_id)
+    raise Exception.new("Unimplemented")
+  end
+
+  def test_files(pr_id)
+    raise Exception.new("Unimplemented")
+  end
+
+  def test_lines(pr_id)
+    raise Exception.new("Unimplemented")
+  end
+
+  def num_test_cases(pr_id)
+    raise Exception.new("Unimplemented")
+  end
+
+  def num_assertions(pr_id)
+    raise Exception.new("Unimplemented")
+  end
 end
 
 PullReqDataExtraction.run
