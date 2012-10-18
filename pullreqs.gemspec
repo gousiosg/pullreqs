@@ -21,4 +21,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency "trollop", ['>= 1.16']
   gem.add_dependency "sequel", ['>= 3.35']
   gem.add_dependency "github-linguist", ['>= 2.3.4']
+  gem.add_dependency "grit", ['>= 2.5.0']
 end

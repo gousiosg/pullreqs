@@ -73,12 +73,13 @@ Extract data for pull requests for a given repository
     print "project_name, github_id, pull_req_id, created_at," <<
           "merged_at, lifetime_minutes, " <<
           "team_size_at_merge, num_commits, num_comments, " <<
-          "files_added, files_deleted, files_modified, " <<
-          "src_files, doc_files, other_files, " <<
-          "lines_addded, lines_deleted, " <<
-          "total_commits_last_month, main_repo_commits_last_month, " <<
+          #"files_added, files_deleted, files_modified, " <<
+          #"src_files, doc_files, other_files, " <<
+          "total_commits_last_month, main_team_commits_last_month, " <<
+          "sloc, churn, " <<
           "commits_on_files_touched, " <<
-          "requester_followers, num_test_cases, test_lines\n"
+          "test_lines_per_1000_lines, test_cases_per_1000_lines " <<
+          "assertions_per_1000_lines\n"
 
     pull_reqs(repo_entry).each do |pr|
       begin
@@ -138,6 +139,8 @@ Extract data for pull requests for a given repository
 
     stats = pr_stats(pr[:id])
 
+    src = src_lines(pr[:id].to_f)
+
     print pr[:project_name], ", ",
           pr[:github_id], ", ",
           pr[:id], ", ",
@@ -147,20 +150,20 @@ Extract data for pull requests for a given repository
           team_size_at_merge(pr[:id], 3)[0][:teamsize], ", ",
           num_commits(pr[:id])[0][:commit_count], ", ",
           num_comments(pr[:id])[0][:comment_count], ", ",
-          stats[:files_added], ", ",
-          stats[:files_deleted], ", ",
-          stats[:files_modified], ", ",
-          stats[:src_files], ", ",
-          stats[:doc_files], ", ",
-          stats[:other_files], ", ",
-          stats[:lines_added], ", ",
-          stats[:lines_deleted], ", ",
+          #stats[:files_added], ", ",
+          #stats[:files_deleted], ", ",
+          #stats[:files_modified], ", ",
+          #stats[:src_files], ", ",
+          #stats[:doc_files], ", ",
+          #stats[:other_files], ", ",
           commits_last_month(pr[:id], false)[0][:num_commits], ", ",
           commits_last_month(pr[:id], true)[0][:num_commits], ", ",
+          src, ", ",
+          stats[:lines_added] + stats[:lines_deleted], ", ",
           commits_on_files_touched(pr[:id], Time.at(Time.at(pr[:merged_at]).to_i - 3600 * 24 * 30)), ", ",
-          requester_followers(pr[:id])[0][:num_followers], ", ",
-          num_test_cases(pr[:id]), ", ",
-          test_lines(pr[:id]),
+          (test_lines(pr[:id]).to_f / src.to_f) * 1000, ", ",
+          (num_test_cases(pr[:id]).to_f / src.to_f) * 1000, ", ",
+          (num_assertions(pr[:id]).to_f / src.to_f) * 1000, ", ",
           "\n"
   end
 
@@ -269,16 +272,28 @@ Extract data for pull requests for a given repository
   end
 
   def commits_on_files_touched(pr_id, oldest)
-    commit_entries(pr_id).map { |c|
-      c['files'].map{ |f|
-        size = repo.log(c['sha'], f['filename']).find_all{ |l|
-          #STDERR.print(f['filename'], " ", l.id, " ", l.authored_date," ", oldest, "\n")
-          l.authored_date > oldest
-        }.size
-        #STDERR.print(f['filename'], " #{size} commits\n")
-        size
+    commits = commit_entries(pr_id)
+    parent_commits = commits.map { |c|
+      c['parents'].map { |x| x['sha'] }
+    }.flatten.uniq
+
+    commits.flat_map { |c| # Create sha, filename pairs
+      c['files'].map { |f|
+        [c['sha'], f['filename']]
       }
-    }.flatten.reduce(0){|acc,x| acc + x}
+    }.group_by { |c|      # Group them by filename
+      c[1]
+    }.flat_map { |k, v|
+      if v.size > 1       # Find first commit not in the pull request set
+        [v.find { |x| not parent_commits.include?(x[0])}]
+      else
+        v
+      end
+    }.map { |c|
+      repo.log(c[0], c[1]).find_all { |l| # Get all commits per file newer than +oldest+
+        l.authored_date > oldest
+      }.size
+    }.flatten.reduce(0) { |acc, x| acc + x }  # Count the total number of commits
   end
 
   def commits_last_month(pr_id, exclude_pull_req)
@@ -301,7 +316,7 @@ Extract data for pull requests for a given repository
     end
     q << ";"
 
-    not_zero(if_empty(db.fetch(q, pr_id).all, :num_commits), :num_commits)
+    if_empty(db.fetch(q, pr_id).all, :num_commits)
   end
 
   private
@@ -335,6 +350,14 @@ Extract data for pull requests for a given repository
     else
       result
     end
+  end
+
+  def count_lines(files, exclude_filter)
+    files.map{ |f|
+      repo.blob(f[:sha]).data.lines.select {|l|
+        not l.strip.empty? and exclude_filter.call(l)
+      }.size
+    }.reduce(0){|acc,x| acc + x}
   end
 
   def src_files(pr_id)

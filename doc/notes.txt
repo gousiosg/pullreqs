@@ -141,3 +141,24 @@ where
 
 
 # Rename commits.project_id to commits.owner_project_id
+
+# Projects to look into
+akka akka scala
+scala scala scala
+rails rails ruby
+capistrano capistrano ruby
+mojombo jekyll ruby
+mongoid mongoid ruby
+mitchellh vagrant ruby
+intridea grape ruby
+joyent node javascript
+jquery jquery javascript
+mozilla pdf.js javascipt
+django django python
+facebook tornado
+elasticsearch elasticsearch java
+jenkinsci jenkins java
+SpringSource spring-framework java
+KentBeck junit java
+netty netty java
+
