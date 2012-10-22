@@ -151,6 +151,8 @@ mojombo jekyll ruby
 mongoid mongoid ruby
 mitchellh vagrant ruby
 intridea grape ruby
+eventmachine eventmachine ruby
+puppetlabs puppet ruby
 joyent node javascript
 jquery jquery javascript
 mozilla pdf.js javascipt
