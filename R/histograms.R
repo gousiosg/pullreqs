@@ -2,8 +2,6 @@ library(ggplot2)
 library(grid)
 library(reshape)
 
-DF = read.csv(pipe("cut -f2-16 -d',' ~/Desktop/rails.csv"))
-
 # Plot a list of plots using n columns 
 multiplot <- function(plots, cols=1, title = "") {
   require(grid)
@@ -31,6 +29,7 @@ multiplot <- function(plots, cols=1, title = "") {
   }
 }
 
+# Plot a histogram for var. It must exist in dataframe data.
 plot.histogram <- function(data, var, title = var)
 {
   p <- ggplot(data, aes_string(x = var)) 
@@ -39,43 +38,35 @@ plot.histogram <- function(data, var, title = var)
   p
 }
 
-store <- function(f, name, where = "~/")
-{
-  pdf(paste(where, paste(name, "pdf", sep=".")))
-  print(f)
-  dev.off()
-}
-
-store.histogram <- function(data, name, where = "~/")
-{
-  store(plot.histogram(data, name), name, where)
-}
-
-plot.store.all_vars <- function(data, skip = 1, where = "~/") 
-{
-  lapply(colnames(data)[skip:length(colnames(data))], 
-         function(x){store.histogram(data, x, where)})
-}
-
-plot.all_vars <- function(data, skip = 1) 
+# Plot histograms for all vars in the provided dataframe
+plot.hist.all_vars <- function(data, skip = 1) 
 {
   lapply(colnames(data)[skip:length(colnames(data))],
          function(x){plot.histogram(data, x)})
 }
 
-plot.all_files <- function(dir = ".", skip = 1)
+# Plot histograms for all files/variables combinations in the provided dir.
+# The histograms are plotted per variable name. Skip is set 
+plot.hist.all_files <- function(dir = ".", skip = 1)
 {
+  # Load all csv files in dir and parse them to dataframes
   dfs <- lapply(list.files(path = dir, pattern = "*.csv", full.names = T), 
                 function(x){read.csv(pipe(paste("cut -f2-16 -d',' ", x)))})
 
+  # Extract column names. All files are expected to have equal number of columns
   cols <- colnames(dfs[[1]])[skip:length(colnames(dfs[[1]]))]
 
+  # Create a plot per variable name for all dataframes
   lapply(cols, function(x){
       items <- Filter(function(y){ x %in% colnames(y)}, dfs)
       multiplot(lapply(items, function(z){plot.histogram(z, x)}), 2)
       })
 }
 
-plot.all_files("~/Desktop/")
-
-#multiplot(plot.all_vars(DF, skip = 9), cols = 2)
+# Store a plot as PDF. By default, will store to user's home directory
+store <- function(f, name, where = "~/")
+{
+  pdf(paste(where, paste(name, "pdf", sep=".")))
+  print(f)
+  dev.off()
+}
