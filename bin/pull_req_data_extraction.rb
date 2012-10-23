@@ -70,7 +70,7 @@ Extract data for pull requests for a given repository
       when "java" then self.extend(JavaData)
     end
 
-    print "project_name, github_id, pull_req_id, created_at," <<
+    print "pull_req_id, project_name, github_id, created_at," <<
           "merged_at, lifetime_minutes, " <<
           "team_size_at_merge, num_commits, num_comments, " <<
           #"files_added, files_deleted, files_modified, " <<
@@ -141,9 +141,9 @@ Extract data for pull requests for a given repository
 
     src = src_lines(pr[:id].to_f)
 
-    print pr[:project_name], ", ",
+    print pr[:id], ", ",
+          pr[:project_name], ", ",
           pr[:github_id], ", ",
-          pr[:id], ", ",
           Time.at(pr[:created_at]).to_i, ", ",
           Time.at(pr[:merged_at]).to_i, ", ",
           pr[:lifetime_minutes], ", ",
