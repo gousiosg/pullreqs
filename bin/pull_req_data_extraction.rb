@@ -78,7 +78,7 @@ Extract data for pull requests for a given repository
           "total_commits_last_month, main_team_commits_last_month, " <<
           "sloc, churn, " <<
           "commits_on_files_touched, " <<
-          "test_lines_per_1000_lines, test_cases_per_1000_lines " <<
+          "test_lines_per_1000_lines, test_cases_per_1000_lines, " <<
           "assertions_per_1000_lines\n"
 
     pull_reqs(repo_entry).each do |pr|
