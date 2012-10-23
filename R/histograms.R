@@ -2,12 +2,17 @@ library(ggplot2)
 library(grid)
 library(reshape)
 
+options(error=traceback)
+
+is.integer <- function(N){
+  !length(grep("[^[:digit:]]", format(N, scientific = FALSE)))
+}
+
 # Plot a list of plots using n columns 
 multiplot <- function(plots, cols=1, title = "") {
   require(grid)
 
   numPlots = length(plots)
-  print(plots[1])
   layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
                    ncol = cols, nrow = ceiling(numPlots/cols))
 
@@ -46,20 +51,29 @@ plot.hist.all_vars <- function(data, skip = 1)
 }
 
 # Plot histograms for all files/variables combinations in the provided dir.
-# The histograms are plotted per variable name. Skip is set 
-plot.hist.all_files <- function(dir = ".", skip = 1)
+# The histograms are plotted per variable name. columns can be
+# * a vector of var
+plot.hist.all_files <- function(dir = ".", columns = NULL)
 {
   # Load all csv files in dir and parse them to dataframes
-  dfs <- lapply(list.files(path = dir, pattern = "*.csv", full.names = T), 
+  dfs <- lapply(list.files(path = dir, pattern = "*.csv$", full.names = T),
                 function(x){read.csv(pipe(paste("cut -f2-16 -d',' ", x)))})
-
+  cols = NULL
   # Extract column names. All files are expected to have equal number of columns
-  cols <- colnames(dfs[[1]])[skip:length(colnames(dfs[[1]]))]
+  if (is.integer(columns)) {
+    cols <- colnames(dfs[[1]])[columns:length(colnames(dfs[[1]]))]
+  } else if (is.vector(columns)) {
+    cols <- columns
+  }  else {
+    cols <- colnames(dfs[[1]])
+  }
 
   # Create a plot per variable name for all dataframes
   lapply(cols, function(x){
       items <- Filter(function(y){ x %in% colnames(y)}, dfs)
-      multiplot(lapply(items, function(z){plot.histogram(z, x)}), 2)
+      multiplot(lapply(items, function(z){
+        print(sprintf("Plotting project %s %s", z$project_name[[1]], x))
+        plot.histogram(z, x, title = z$project_name[[1]])}), 2, title = x)
       })
 }
 
