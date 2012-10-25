@@ -86,6 +86,7 @@ Extract data for pull requests for a given repository
         per_pull_req(pr)
       rescue Exception => e
         STDERR.puts "Error processing pull_request #{pr[:id]}: #{e.message}"
+        #raise e
       end
     end
   end
@@ -163,7 +164,7 @@ Extract data for pull requests for a given repository
           commits_on_files_touched(pr[:id], Time.at(Time.at(pr[:merged_at]).to_i - 3600 * 24 * 30)), ", ",
           (test_lines(pr[:id]).to_f / src.to_f) * 1000, ", ",
           (num_test_cases(pr[:id]).to_f / src.to_f) * 1000, ", ",
-          (num_assertions(pr[:id]).to_f / src.to_f) * 1000, ", ",
+          (num_assertions(pr[:id]).to_f / src.to_f) * 1000,
           "\n"
   end
 
@@ -352,12 +353,16 @@ Extract data for pull requests for a given repository
     end
   end
 
-  def count_lines(files, exclude_filter)
+  def count_lines(files, exclude_filter = lambda{true})
     files.map{ |f|
-      repo.blob(f[:sha]).data.lines.select {|l|
-        not l.strip.empty? and exclude_filter.call(l)
-      }.size
+      count_file_lines(repo.blob(f[:sha]).data.lines, exclude_filter)
     }.reduce(0){|acc,x| acc + x}
+  end
+
+  def count_file_lines(buff, exclude_filter = lambda{true})
+    buff.select {|l|
+      not l.strip.empty? and exclude_filter.call(l)
+    }.size
   end
 
   def src_files(pr_id)
