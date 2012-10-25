@@ -56,8 +56,7 @@ plot.hist.all_vars <- function(data, skip = 1)
 plot.hist.all_files <- function(dir = ".", columns = NULL)
 {
   # Load all csv files in dir and parse them to dataframes
-  dfs <- lapply(list.files(path = dir, pattern = "*.csv$", full.names = T),
-                function(x){read.csv(pipe(paste("cut -f2-16 -d',' ", x)))})
+  dfs <- load.all(dir)
   cols = NULL
   # Extract column names. All files are expected to have equal number of columns
   if (is.integer(columns)) {
@@ -83,4 +82,10 @@ store <- function(f, name, where = "~/")
   pdf(paste(where, paste(name, "pdf", sep=".")))
   print(f)
   dev.off()
+}
+
+# Load all csv files in the provided dir as data frames
+load.all <- function(dir = ".") {
+  lapply(list.files(path = dir, pattern = "*.csv$", full.names = T),
+         function(x){read.csv(pipe(paste("cut -f2-16 -d',' ", x)))})
 }
