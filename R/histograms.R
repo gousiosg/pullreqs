@@ -89,3 +89,13 @@ load.all <- function(dir = ".") {
   lapply(list.files(path = dir, pattern = "*.csv$", full.names = T),
          function(x){read.csv(pipe(paste("cut -f2-16 -d',' ", x)))})
 }
+
+# Merge all dataframes in the provided list into one dataframe
+merge.dataframes <- function(dataframes) {
+  merged <- data.frame()
+  for (i in 1:length(dataframes)) {
+    merged <- rbind(merged, dataframes[[i]])
+  }
+  merged
+}
+
