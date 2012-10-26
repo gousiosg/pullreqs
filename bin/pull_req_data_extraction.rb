@@ -142,6 +142,8 @@ Extract data for pull requests for a given repository
 
     src = src_lines(pr[:id].to_f)
 
+    if src == 0 then raise Exception.new("Bad number of lines: #{0}") end
+
     print pr[:id], ", ",
           pr[:project_name], ", ",
           pr[:github_id], ", ",
@@ -278,7 +280,7 @@ Extract data for pull requests for a given repository
       c['parents'].map { |x| x['sha'] }
     }.flatten.uniq
 
-    commits.flat_map { |c| # Create sha, filename pairs
+    a = commits.flat_map { |c| # Create sha, filename pairs
       c['files'].map { |f|
         [c['sha'], f['filename']]
       }
@@ -291,9 +293,13 @@ Extract data for pull requests for a given repository
         v
       end
     }.map { |c|
-      repo.log(c[0], c[1]).find_all { |l| # Get all commits per file newer than +oldest+
-        l.authored_date > oldest
-      }.size
+      if c.nil?
+        0 # File has been just added
+      else
+        repo.log(c[0], c[1]).find_all { |l| # Get all commits per file newer than +oldest+
+          l.authored_date > oldest
+        }.size
+      end
     }.flatten.reduce(0) { |acc, x| acc + x }  # Count the total number of commits
   end
 
