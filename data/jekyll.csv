@@ -1,11 +1,4 @@
-D, [2012-10-25T16:35:37.519542 #18308] DEBUG -- : GHTorrent: User mojombo exists
-D, [2012-10-25T16:35:37.519828 #18308] DEBUG -- : GHTorrent: Transaction committed (1 ms)
-D, [2012-10-25T16:35:37.538089 #18308] DEBUG -- : GHTorrent: User mojombo exists
-D, [2012-10-25T16:35:37.539077 #18308] DEBUG -- : GHTorrent: Repo jekyll exists
-D, [2012-10-25T16:35:37.539291 #18308] DEBUG -- : GHTorrent: Transaction committed (3 ms)
 pull_req_id, project_name, github_id, created_at,merged_at, lifetime_minutes, team_size_at_merge, num_commits, num_comments, total_commits_last_month, main_team_commits_last_month, sloc, churn, commits_on_files_touched, test_lines_per_1000_lines, test_cases_per_1000_lines, assertions_per_1000_lines
-D, [2012-10-25T16:35:37.956906 #18308] DEBUG -- : Already up-to-date.
-
 155522, jekyll, 574, 1339450895, 1339451625, 12, 1, 1, 0, 22, 1, 2198, 4, 2, 565.5141037306643, 66.87898089171975, 114.19472247497725
 142810, jekyll, 569, 1338486876, 1339449580, 16045, 1, 2, 0, 22, 1, 2187, 18, 4, 568.3584819387288, 67.21536351165982, 114.76909007773205
 142752, jekyll, 568, 1338483345, 1339447978, 16077, 1, 1, 0, 22, 1, 2187, 8, 1, 568.3584819387288, 67.21536351165982, 114.76909007773205
