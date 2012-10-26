@@ -3,8 +3,8 @@ module JavaData
   def src_files(pr_id)
     files_at_commit(pr_id,
                     lambda { |f|
-                      not f[:path].include?("/test/") and
-                          f[:path].end_with?('.java')
+                      f[:path].end_with?('.java') and
+                      not f[:path].include?("/test/")
                     }
     )
   end
@@ -16,8 +16,8 @@ module JavaData
   def test_files(pr_id)
     files_at_commit(pr_id,
                     lambda { |f|
-                          f[:path].include?("/test/") and
-                          f[:path].end_with?('.java')
+                        f[:path].end_with?('.java')  and
+                        f[:path].include?("/test/")
                     }
     )
   end
@@ -30,10 +30,10 @@ module JavaData
     test_files(pr_id).map {|f|
       buff = repo.blob(f[:sha]).data
 
-      junit4 = count_lines(test_files(pr_id), lambda{|l| not l.match(/@Test/).nil?})
+      junit4 = buff.lines.select{|l| not l.match(/@Test/).nil?}.size
 
       if junit4 == 0 #Try Junit 3 style
-        buff.blob(f[:sha]).data.scan(
+        buff.scan(
           /(public|protected|private|static|\s) +[\w<>\[\]]+\s+(\w+) *\([^\)]*\) *(\{?|[^;])/
         ).map{ |x|
           if x[1].match(/^test/) then 1 else 0 end
