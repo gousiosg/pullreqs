@@ -1,6 +1,7 @@
 library(ggplot2)
 library(grid)
 library(reshape)
+library(ellipse)
 
 options(error=traceback)
 
@@ -41,6 +42,14 @@ plot.histogram <- function(data, var, title = var)
   p <- p + geom_histogram(colour="black", fill="white") + scale_x_log10()
   p <- p + ggtitle(title)
   p
+}
+
+# Plot a correlation matrix
+plot.mutlicor <- function(dataframe) 
+{
+  ctab <- cor(dataframe, method = "spearman")
+  colorfun <- colorRamp(c("#CC0000","white","#3366CC"), space="Lab")
+  plotcorr(ctab, col=rgb(colorfun((ctab+1)/2), maxColorValue=255))
 }
 
 # Plot histograms for all vars in the provided dataframe
@@ -94,8 +103,8 @@ load.all <- function(dir = ".") {
 merge.dataframes <- function(dataframes) {
   merged <- data.frame()
   for (i in 1:length(dataframes)) {
+    print(sprintf("Merging dataframe %d", i))
     merged <- rbind(merged, dataframes[[i]])
   }
   merged
 }
-
