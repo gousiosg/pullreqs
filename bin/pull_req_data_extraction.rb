@@ -72,7 +72,8 @@ Extract data for pull requests for a given repository
 
     print "pull_req_id, project_name, github_id, created_at," <<
           "merged_at, lifetime_minutes, " <<
-          "team_size_at_merge, num_commits, num_comments, " <<
+          "team_size_at_merge, num_commits, " <<
+          "num_commit_comments, num_issue_comments, num_comments, " <<
           #"files_added, files_deleted, files_modified, " <<
           #"src_files, doc_files, other_files, " <<
           "total_commits_last_month, main_team_commits_last_month, " <<
@@ -153,6 +154,8 @@ Extract data for pull requests for a given repository
           team_size_at_merge(pr[:id], 3)[0][:teamsize], ", ",
           num_commits(pr[:id])[0][:commit_count], ", ",
           num_comments(pr[:id])[0][:comment_count], ", ",
+          num_issue_comments(pr[:id])[0][:issue_comment_count], ", ",
+          num_comments(pr[:id])[0][:comment_count] + num_issue_comments(pr[:id])[0][:issue_comment_count], ", ",
           #stats[:files_added], ", ",
           #stats[:files_deleted], ", ",
           #stats[:files_modified], ", ",
@@ -208,6 +211,17 @@ Extract data for pull requests for a given repository
     group by prc.pull_request_id
     QUERY
     if_empty(db.fetch(q, pr_id).all, :comment_count)
+  end
+
+  def num_issue_comments(pr_id)
+    q = <<-QUERY
+    select count(*) as issue_comment_count
+    from issue_comments ic, issues i
+    where ic.issue_id=i.id
+    and pull_request_id is not null
+    and i.pull_request_id=?;
+    QUERY
+    if_empty(db.fetch(q, pr_id).all, :issue_comment_count)
   end
 
   def requester_followers(pr_id)
