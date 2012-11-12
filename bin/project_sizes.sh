@@ -25,10 +25,24 @@ issue_comments=`echo "select count(*) from issue_comments ic, issues i where ic.
 
 project_members=`echo "select count(*) from project_members where repo_id=$id"|mysql -s -u gousios -p'G30rG10sGou' -h mcheck.st.ewi.tudelft.nl gousiosdb`
 
+pull_requests=`echo "select count(*) from pull_requests where base_repo_id=$id;"|mysql -s -u gousios -p'G30rG10sGou' -h mcheck.st.ewi.tudelft.nl gousiosdb`
+
+pull_request_comments=`echo "select count(*) from pull_requests pr, pull_request_comments prc where pr.base_repo_id=$id and prc.pull_request_id = pr.id;"|mysql -s -u gousios -p'G30rG10sGou' -h mcheck.st.ewi.tudelft.nl gousiosdb`
+
+pull_request_events=`echo "select count(*) from pull_requests pr, pull_request_history prh where pr.base_repo_id=$id and prh.pull_request_id = pr.id;"|mysql -s -u gousios -p'G30rG10sGou' -h mcheck.st.ewi.tudelft.nl gousiosdb`
+
+watchers=`echo "select count(*) from watchers where repo_id=$id"|mysql -s -u gousios -p'G30rG10sGou' -h mcheck.st.ewi.tudelft.nl gousiosdb`
+
 echo "commits: $num_commits"
 echo "forks: $num_forks"
 echo "issues: $issues"
 echo "issue events: $issue_events"
 echo "issue comments: $issue_comments"
+echo "pull requests: $pull_requests"
+echo "pull request comments: $pull_request_comments"
+echo "pull request events: $pull_request_events"
+
 echo "project_members: $project_members"
+echo "watchers/stargazers $watchers"
+
 
