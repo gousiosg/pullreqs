@@ -49,6 +49,7 @@ Extract data for pull requests for a given repository
     @repo
   end
 
+  # Main command code
   def go
 
     @ght ||= GHTorrent::Mirror.new(settings)
@@ -70,6 +71,7 @@ Extract data for pull requests for a given repository
       when "java" then self.extend(JavaData)
     end
 
+    # Print file header
     print "pull_req_id, project_name, github_id, created_at," <<
           "merged_at, lifetime_minutes, " <<
           "team_size_at_merge, num_commits, " <<
@@ -82,9 +84,10 @@ Extract data for pull requests for a given repository
           "test_lines_per_1000_lines, test_cases_per_1000_lines, " <<
           "assertions_per_1000_lines\n"
 
+    # Process the list of merged pull requests
     pull_reqs(repo_entry).each do |pr|
       begin
-        per_pull_req(pr)
+        process_pull_request(pr)
       rescue Exception => e
         STDERR.puts "Error processing pull_request #{pr[:id]}: #{e.message}"
         #raise e
@@ -92,32 +95,7 @@ Extract data for pull requests for a given repository
     end
   end
 
-  def clone(user, repo)
-
-    def spawn(cmd)
-      proc = IO.popen(cmd, "r")
-
-      proc_out = Thread.new {
-        while !proc.eof
-          logger.debug "#{proc.gets}"
-        end
-      }
-
-      proc_out.join
-    end
-
-    checkout_dir = File.join(config(:cache_dir), "repos", user, repo)
-
-    begin
-      repo = Grit::Repo.new(checkout_dir)
-      spawn("cd #{checkout_dir} && git pull")
-      repo
-    rescue
-      spawn("git clone git://github.com/#{user}/#{repo}.git #{checkout_dir}")
-      Grit::Repo.new(checkout_dir)
-    end
-  end
-
+  # Get a list of full requests that have been merged for the processed project
   def pull_reqs(project)
     q = <<-QUERY
     select p.name as project_name, pr.id, pr.pullreq_id as github_id,
@@ -137,14 +115,18 @@ Extract data for pull requests for a given repository
     db.fetch(q, project[:id]).all
   end
 
-  def per_pull_req(pr)
+  # Process a single pull request
+  def process_pull_request(pr)
 
+    # Statistics accross pull request commits
     stats = pr_stats(pr[:id])
 
+    # Count number of src/comment lines
     src = src_lines(pr[:id].to_f)
 
     if src == 0 then raise Exception.new("Bad number of lines: #{0}") end
 
+    # Print line for a pull request
     print pr[:id], ", ",
           pr[:project_name], ", ",
           pr[:github_id], ", ",
@@ -171,8 +153,12 @@ Extract data for pull requests for a given repository
           (num_test_cases(pr[:id]).to_f / src.to_f) * 1000, ", ",
           (num_assertions(pr[:id]).to_f / src.to_f) * 1000,
           "\n"
+
+    file_diffs(pr[:id])
   end
 
+  # Number of developers that have committed at least once in the interval
+  # between the pull request merge up to +interval_months+ back
   def team_size_at_merge(pr_id, interval_months)
     q = <<-QUERY
     select count(distinct author_id) as teamsize
@@ -191,6 +177,7 @@ Extract data for pull requests for a given repository
     not_zero(if_empty(db.fetch(q, pr_id).all, :teamsize), :teamsize)
   end
 
+  # Number of commits in pull request
   def num_commits(pr_id)
     q = <<-QUERY
     select count(*) as commit_count
@@ -202,6 +189,7 @@ Extract data for pull requests for a given repository
     if_empty(db.fetch(q, pr_id).all, :commit_count)
   end
 
+  # Number of src code review comments in pull request
   def num_comments(pr_id)
     q = <<-QUERY
     select count(*) as comment_count
@@ -213,6 +201,7 @@ Extract data for pull requests for a given repository
     if_empty(db.fetch(q, pr_id).all, :comment_count)
   end
 
+  # Number of pull request discussion comments
   def num_issue_comments(pr_id)
     q = <<-QUERY
     select count(*) as issue_comment_count
@@ -224,6 +213,7 @@ Extract data for pull requests for a given repository
     if_empty(db.fetch(q, pr_id).all, :issue_comment_count)
   end
 
+  # Number of followers of the person that created the pull request
   def requester_followers(pr_id)
     q = <<-QUERY
     select count(f.follower_id) as num_followers
@@ -237,21 +227,9 @@ Extract data for pull requests for a given repository
     if_empty(db.fetch(q, pr_id).all, :num_followers)
   end
 
-  def commit_entries(pr_id)
-    q = <<-QUERY
-    select c.sha as sha
-    from pull_requests pr, pull_request_commits prc, commits c
-    where pr.id = prc.pull_request_id
-    and prc.commit_id = c.id
-    and pr.id = ?
-    QUERY
-    commits = db.fetch(q, pr_id).all
-
-    commits.map{ |x|
-      mongo.find(:commits, {:sha => x[:sha]})[0]
-    }
-  end
-
+  # Various statistics for the pull request. Returned as Hash with the following
+  # keys: :lines_added, :lines_deleted, :files_added, :files_removed,
+  # :files_modified, :files_touched, :src_files, :doc_files, :other_files.
   def pr_stats(pr_id)
 
     raw_commits = commit_entries(pr_id)
@@ -288,13 +266,14 @@ Extract data for pull requests for a given repository
     result
   end
 
+  # Total number of commits on the files touched by the pull request
   def commits_on_files_touched(pr_id, oldest)
     commits = commit_entries(pr_id)
     parent_commits = commits.map { |c|
       c['parents'].map { |x| x['sha'] }
     }.flatten.uniq
 
-    a = commits.flat_map { |c| # Create sha, filename pairs
+    commits.flat_map { |c| # Create sha, filename pairs
       c['files'].map { |f|
         [c['sha'], f['filename']]
       }
@@ -317,6 +296,9 @@ Extract data for pull requests for a given repository
     }.flatten.reduce(0) { |acc, x| acc + x }  # Count the total number of commits
   end
 
+  # Total number of commits on the project in the month before the pull request
+  # was merged. The second parameter controls whether commits from other
+  # pull requests should be accounted for
   def commits_last_month(pr_id, exclude_pull_req)
     q = <<-QUERY
     select count(c.id) as num_commits
@@ -340,9 +322,32 @@ Extract data for pull requests for a given repository
     if_empty(db.fetch(q, pr_id).all, :num_commits)
   end
 
+  
+  def file_diffs(pr_id)
+
+  end
+
   private
 
-  def files_at_commit(pr_id, filter)
+  # JSON objects for the commits included in the pull request
+  def commit_entries(pr_id)
+    q = <<-QUERY
+    select c.sha as sha
+    from pull_requests pr, pull_request_commits prc, commits c
+    where pr.id = prc.pull_request_id
+    and prc.commit_id = c.id
+    and pr.id = ?
+    QUERY
+    commits = db.fetch(q, pr_id).all
+
+    commits.map{ |x|
+      mongo.find(:commits, {:sha => x[:sha]})[0]
+    }
+  end
+
+  # List of files in a project checkout. Filter is an optional binary function
+  # that takes a file entry and decides whether to include it in the result.
+  def files_at_commit(pr_id, filter = lambda{true})
     q = <<-QUERY
     select c.sha
     from pull_requests p, commits c
@@ -383,6 +388,33 @@ Extract data for pull requests for a given repository
     buff.select {|l|
       not l.strip.empty? and exclude_filter.call(l)
     }.size
+  end
+
+  # Clone or update, if already cloned, a git repository
+  def clone(user, repo)
+
+    def spawn(cmd)
+      proc = IO.popen(cmd, "r")
+
+      proc_out = Thread.new {
+        while !proc.eof
+          logger.debug "#{proc.gets}"
+        end
+      }
+
+      proc_out.join
+    end
+
+    checkout_dir = File.join(config(:cache_dir), "repos", user, repo)
+
+    begin
+      repo = Grit::Repo.new(checkout_dir)
+      spawn("cd #{checkout_dir} && git pull")
+      repo
+    rescue
+      spawn("git clone git://github.com/#{user}/#{repo}.git #{checkout_dir}")
+      Grit::Repo.new(checkout_dir)
+    end
   end
 
   def src_files(pr_id)
