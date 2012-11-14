@@ -6,6 +6,7 @@ require 'ghtorrent'
 require 'time'
 require 'linguist'
 require 'grit'
+require 'pp'
 
 require 'java_pull_req_data'
 require 'ruby_pull_req_data'
@@ -23,6 +24,10 @@ Extract data for pull requests for a given repository
 #{command_name} owner repo lang
 
     BANNER
+    options.opt :extract_diffs,
+                'Extract file diffs for modified files'
+    options.opt :diff_dir,
+                'Base directory to store file diffs', :default => "diffs"
   end
 
   def validate
@@ -89,8 +94,8 @@ Extract data for pull requests for a given repository
       begin
         process_pull_request(pr)
       rescue Exception => e
-        STDERR.puts "Error processing pull_request #{pr[:id]}: #{e.message}"
-        #raise e
+        #STDERR.puts "Error processing pull_request #{pr[:github_id]}: #{e.message}"
+        raise e
       end
     end
   end
@@ -154,7 +159,23 @@ Extract data for pull requests for a given repository
           (num_assertions(pr[:id]).to_f / src.to_f) * 1000,
           "\n"
 
-    file_diffs(pr[:id])
+    unless options[:extract_diffs].nil?
+      FileUtils.mkdir_p(File.join(options[:diff_dir], pr[:github_id].to_s))
+
+      file_diffs(pr[:id]).each {|f|
+        num = 0
+        repo.log(f[:latest], f[:filename])[0..f[:num_versions]].map{|x| x.sha}.each { |sha|
+          d = repo.tree(sha, f[:filename]).blobs[0].data
+          filename = f[:filename].gsub("/", "-") + "-" + sha[0..10] + "." + num.to_s
+          file = File.open(File.join(options[:diff_dir],
+                                  pr[:github_id].to_s, filename), "w")
+          file.write(d)
+          file.close
+          num += 1
+        }
+      }
+    end
+
   end
 
   # Number of developers that have committed at least once in the interval
@@ -322,9 +343,44 @@ Extract data for pull requests for a given repository
     if_empty(db.fetch(q, pr_id).all, :num_commits)
   end
 
-  
   def file_diffs(pr_id)
+    commit_entries(pr_id).map { |c|
+      # For each commit
+      c['files'].select { |f|
+        # Select modified files
+        f['status']=="modified"
+      }.flatten.\
+      # Create a tuple of the form [sha, filename]
+      map { |x|
+        [c['sha'], x['filename']]
+      }
+    }.\
+    # Flatten tuples across commits
+    reduce([]) { |acc, x| acc += x }.
+    # Create a hash of commits per filename indexed by filename
+    group_by{|e| e[1]}.\
+    # Map result to a Hash
+    map { |k,v|
+      commits = v.map{|x| x[0]}#.unshift("master")
+      # Find the latest point in the commit log that contains
+      # all commits to a file
+      latest = commits.find{|sha|
+        l = repo.log(sha, k).map{|x| x.sha}
+        a = commits.reduce(true){|acc,x| acc &= l.include?(x)}
+        a
+      }
 
+      # Find the latest commit that in
+      #latest = log.find{|e| not v.find{|x| x[0] == e.sha}.nil?}
+      if latest.nil?
+        fail
+      end
+      {
+          :latest  => latest,
+          :num_versions => v.size,
+          :filename => k
+      }
+    }
   end
 
   private
