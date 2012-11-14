@@ -1,79 +1,567 @@
-pull_req_id, project_name, github_id, created_at,merged_at, lifetime_minutes, team_size_at_merge, num_commits, num_comments, total_commits_last_month, main_team_commits_last_month, sloc, churn, commits_on_files_touched, test_lines_per_1000_lines, test_cases_per_1000_lines, assertions_per_1000_lines
-454125, jenkins, 590, 1350468093, 1350468937, 14, 14, 1, 1, 193, 103, 77715, 45, 3, 271.8522807694782, 785.2795470629866, 28.694589204143345
-454239, jenkins, 589, 1350458795, 1350458924, 2, 13, 1, 0, 191, 102, 77715, 2, 1, 271.8522807694782, 785.2795470629866, 28.694589204143345
-454238, jenkins, 572, 1348241822, 1348242062, 4, 11, 1, 0, 332, 27, 76482, 2, 1, 269.5143955440496, 674.4724248842865, 27.6797154886117
-420460, jenkins, 569, 1347908035, 1347910553, 41, 11, 2, 0, 280, 14, 76181, 11, 2, 270.5398983998635, 677.1373439571546, 27.64468830810832
-420350, jenkins, 568, 1347905609, 1347905897, 4, 11, 1, 0, 282, 14, 76181, 2, 1, 270.5398983998635, 677.1373439571546, 27.64468830810832
-415240, jenkins, 564, 1347451601, 1347453271, 27, 11, 1, 0, 249, 23, 75912, 11, 11, 269.83876067024977, 673.4113183686374, 27.597744757087153
-246635, jenkins, 541, 1345058498, 1345060750, 37, 15, 2, 0, 190, 95, 75363, 107, 2, 265.8599047277842, 535.0105489431153, 27.082255218077837
-223599, jenkins, 526, 1343086570, 1343261509, 2915, 21, 1, 0, 214, 55, 75097, 6, 1, 266.36217159140847, 536.9056020879663, 27.098286216493335
-225049, jenkins, 528, 1343146939, 1343260894, 1899, 21, 1, 0, 214, 55, 75097, 20, 3, 266.36217159140847, 536.9056020879663, 27.098286216493335
-223915, jenkins, 527, 1343108064, 1343240192, 2202, 22, 4, 0, 214, 55, 75097, 10, 26, 266.36217159140847, 536.9056020879663, 27.098286216493335
-221916, jenkins, 495, 1339590400, 1343027887, 57291, 22, 0, 0, 172, 26, 74929, 0, 0, 266.95938822084906, 538.1094102416954, 27.15904389488716
-218703, jenkins, 524, 1342791944, 1342819784, 464, 23, 1, 0, 194, 18, 74929, 2, 1, 266.95938822084906, 538.1094102416954, 27.15904389488716
-61799, jenkins, 522, 1342550154, 1342670565, 2006, 24, 3, 2, 222, 15, 74924, 11, 70, 266.97720356628054, 538.1453205915327, 27.160856334418877
-54672, jenkins, 517, 1341523602, 1341884163, 6009, 24, 4, 1, 279, 25, 74853, 173, 48, 266.6292600162986, 529.2773836719971, 26.94614778298799
-184934, jenkins, 512, 1341224603, 1341225212, 10, 27, 1, 0, 309, 21, 74851, 8, 4, 266.6363842834431, 529.2915258313183, 26.946867777317607
-170282, jenkins, 506, 1340355608, 1341020033, 11073, 28, 1, 0, 360, 21, 74848, 133, 3, 264.89685763146645, 521.8175502351432, 26.80098332620778
-168716, jenkins, 505, 1340279385, 1340925291, 10765, 29, 1, 0, 386, 35, 74848, 69, 3, 264.89685763146645, 521.8175502351432, 26.80098332620778
-178646, jenkins, 511, 1340824000, 1340824143, 2, 30, 1, 0, 374, 37, 74763, 4, 1, 266.9502293915439, 529.9145299145299, 26.978585664031673
-399813, jenkins, 508, 1340611442, 1340613660, 36, 31, 1, 0, 372, 44, 74752, 16, 2, 266.9895119863014, 529.9925085616438, 26.982555650684933
-170964, jenkins, 507, 1340382610, 1340401277, 311, 32, 3, 0, 394, 71, 74848, 9, 55, 264.89685763146645, 521.8175502351432, 26.80098332620778
-161217, jenkins, 500, 1339775999, 1340367715, 9861, 32, 1, 0, 386, 75, 74262, 2, 1, 265.08847055021414, 509.170235113517, 26.82394764482508
-165406, jenkins, 503, 1340117688, 1340168979, 854, 32, 1, 0, 389, 94, 74316, 4, 1, 265.20533936164486, 514.3576080521018, 26.8313687496636
-397622, jenkins, 496, 1339671278, 1339671417, 2, 34, 1, 0, 367, 110, 74262, 13, 3, 264.2131911340928, 501.7909563437559, 26.77008429614069
-397379, jenkins, 494, 1339565372, 1339565490, 1, 34, 1, 0, 353, 110, 74262, 2, 1, 264.2131911340928, 501.7909563437559, 26.77008429614069
-320400, jenkins, 491, 1338556617, 1338875512, 5314, 35, 1, 0, 265, 115, 73933, 1, 2, 264.7802740318937, 504.0239135433433, 26.781004422923456
-395022, jenkins, 489, 1338454757, 1338497002, 704, 35, 1, 0, 258, 130, 73911, 35, 4, 264.85908728064834, 504.17393892654684, 26.788975930511018
-319921, jenkins, 490, 1338474184, 1338474568, 6, 35, 2, 0, 268, 145, 73911, 8, 3, 264.85908728064834, 504.17393892654684, 26.788975930511018
-317089, jenkins, 485, 1337844828, 1337916652, 1197, 35, 1, 0, 198, 145, 74064, 528, 32, 262.96176279974077, 495.7334197450853, 26.747137610715054
-316952, jenkins, 484, 1337813710, 1337839695, 433, 35, 2, 0, 189, 143, 74064, 10, 56, 262.96176279974077, 495.7334197450853, 26.747137610715054
-315944, jenkins, 480, 1337678292, 1337684597, 105, 34, 1, 0, 171, 136, 73835, 19, 3, 263.7773413692693, 497.27094196519266, 26.830094128800706
-315928, jenkins, 479, 1337676350, 1337677796, 24, 34, 1, 0, 170, 136, 73835, 192, 56, 263.7773413692693, 497.27094196519266, 26.830094128800706
-392555, jenkins, 476, 1337298854, 1337301468, 43, 32, 1, 0, 174, 134, 73729, 2, 1, 264.15657339717075, 497.98586716217494, 26.868667688426534
-313727, jenkins, 475, 1337234612, 1337234936, 5, 32, 1, 0, 174, 135, 73729, 4, 2, 264.15657339717075, 497.98586716217494, 26.868667688426534
-309112, jenkins, 470, 1336427747, 1336454644, 448, 30, 1, 0, 215, 161, 73653, 272, 2, 264.23906697622635, 498.4997216678207, 26.869238184459558
-308483, jenkins, 468, 1336311201, 1336415599, 1739, 29, 1, 0, 205, 153, 73649, 11, 1, 264.2534182405735, 498.52679601895477, 26.87069749758992
-308255, jenkins, 466, 1336230031, 1336230057, 0, 29, 1, 0, 208, 155, 73649, 1, 45, 264.2534182405735, 498.52679601895477, 26.87069749758992
-305996, jenkins, 462, 1335858471, 1335859545, 17, 27, 1, 0, 234, 181, 73629, 20, 2, 264.325197951894, 498.66221190020235, 26.877996441619473
-305976, jenkins, 461, 1335853355, 1335853827, 7, 27, 1, 0, 233, 180, 73629, 7, 1, 264.175800296079, 498.66221190020235, 26.796506811174943
-303532, jenkins, 455, 1335369008, 1335414924, 765, 27, 1, 0, 256, 198, 73598, 4, 1, 264.66751813907985, 509.7964618603766, 26.794206364303378
-303420, jenkins, 454, 1335358058, 1335358427, 6, 26, 1, 0, 250, 194, 73597, 7, 1, 264.6711143117247, 509.8033887250839, 26.794570430859952
-302928, jenkins, 453, 1335281016, 1335281060, 0, 26, 1, 0, 247, 193, 73585, 18, 45, 263.9668410681525, 508.0655024801251, 26.7445810966909
-301656, jenkins, 451, 1335020019, 1335159463, 2324, 26, 1, 0, 241, 185, 73577, 42, 4, 263.6013971757479, 506.2995229487476, 26.720306617557117
-292046, jenkins, 422, 1333307505, 1335124151, 30277, 25, 0, 0, 239, 184, 73577, 0, 0, 263.6013971757479, 506.2995229487476, 26.720306617557117
-296220, jenkins, 433, 1334065467, 1334912929, 14124, 25, 1, 0, 267, 210, 73446, 10, 1, 263.81286931895545, 507.20257059608423, 26.767965580154126
-300399, jenkins, 448, 1334783500, 1334783563, 1, 23, 1, 0, 262, 208, 73558, 8, 39, 263.45196987411293, 506.43029989939913, 26.727208461350227
-295909, jenkins, 432, 1334009677, 1334598504, 9813, 23, 1, 0, 246, 200, 73446, 73, 66, 263.81286931895545, 507.20257059608423, 26.767965580154126
-298633, jenkins, 443, 1334496006, 1334598486, 1708, 23, 1, 0, 246, 200, 73542, 6, 1, 263.50928721002964, 506.54048026977785, 26.733023306409944
-298366, jenkins, 441, 1334408284, 1334598457, 3169, 23, 1, 0, 246, 200, 73527, 26, 1, 263.56304486787167, 506.6438179172277, 26.73847702204632
-295864, jenkins, 431, 1334003296, 1334598420, 9918, 23, 1, 0, 246, 200, 73446, 94, 8, 263.81286931895545, 507.20257059608423, 26.767965580154126
-299175, jenkins, 444, 1334596799, 1334598346, 25, 23, 1, 0, 246, 200, 73548, 2, 7, 263.48779028661556, 506.4991570131071, 26.7308424430304
-293249, jenkins, 425, 1333497011, 1334425835, 15480, 23, 1, 0, 244, 197, 73506, 4, 1, 263.17579517318313, 506.78856147797455, 26.63728131036922
-298421, jenkins, 442, 1334425318, 1334425662, 5, 23, 1, 0, 244, 197, 73527, 27, 45, 263.56304486787167, 506.6438179172277, 26.73847702204632
-298107, jenkins, 440, 1334343794, 1334404795, 1016, 23, 1, 0, 237, 192, 73479, 6, 1, 263.73521686468246, 506.9747819104779, 26.75594387512078
-297563, jenkins, 436, 1334256542, 1334256615, 1, 22, 1, 0, 236, 194, 73449, 1, 3, 263.80209396996554, 507.18185407561714, 26.766872251494235
-294920, jenkins, 429, 1333764197, 1333898985, 2246, 21, 2, 0, 212, 177, 73526, 9, 9, 263.49862633626196, 506.65070859287874, 26.711639420069094
-381904, jenkins, 421, 1333221837, 1333300785, 1315, 20, 1, 0, 162, 136, 73313, 54, 2, 262.95472835649883, 506.29492722982286, 26.489162904259818
-289480, jenkins, 418, 1332856848, 1333032659, 2930, 20, 1, 0, 138, 113, 73306, 75, 3, 262.2431997380842, 504.5153193463018, 26.4098436690039
-289620, jenkins, 419, 1332871235, 1333032612, 2689, 20, 2, 0, 138, 113, 73306, 8, 57, 262.27048263443646, 504.5153193463018, 26.4098436690039
-284421, jenkins, 410, 1332200632, 1333027689, 13844, 20, 1, 0, 136, 111, 73214, 3, 1, 262.25858442374414, 499.5629251236102, 26.402054251919033
-287175, jenkins, 413, 1332438230, 1332444255, 100, 16, 1, 0, 114, 93, 73247, 5, 59, 262.39982524881566, 501.15363086542794, 26.417464196485863
-286348, jenkins, 411, 1332350339, 1332363641, 221, 17, 1, 0, 102, 77, 73221, 3, 3, 262.2335122437552, 499.5151664140069, 26.39953018942653
-282568, jenkins, 409, 1331852443, 1331852660, 3, 16, 1, 0, 108, 78, 73189, 4, 1, 262.3481670742871, 499.73356651955896, 26.41107270218202
-281696, jenkins, 404, 1331317224, 1331750332, 7218, 15, 1, 0, 104, 72, 73112, 2, 1, 262.3645913119597, 500.25987525987523, 26.42521063573695
-48493, jenkins, 373, 1329225236, 1331750220, 42083, 15, 1, 0, 104, 72, 71971, 9, 3, 264.25921551736116, 500.7016715065791, 26.316155118033652
-42554, jenkins, 389, 1330098359, 1330323954, 3759, 13, 1, 0, 132, 97, 72211, 5, 1, 263.3809253437842, 499.03754275664375, 26.22869091966598
-40116, jenkins, 386, 1329954249, 1329986497, 537, 13, 2, 0, 141, 104, 72218, 28, 48, 263.35539616162174, 498.98917167465174, 26.22614860561079
-37904, jenkins, 382, 1329834809, 1329925761, 1515, 13, 1, 0, 131, 101, 72220, 2, 11, 263.3481030185544, 498.97535308778737, 26.225422320686793
-38831, jenkins, 383, 1329882439, 1329894271, 197, 13, 1, 0, 130, 99, 72220, 4, 1, 263.3481030185544, 498.97535308778737, 26.225422320686793
-35261, jenkins, 379, 1329669477, 1329764794, 1588, 12, 3, 0, 124, 95, 72148, 134, 8, 263.6109109053612, 499.473304873316, 26.251593945778122
-36484, jenkins, 380, 1329752926, 1329753054, 2, 12, 1, 0, 120, 93, 72165, 28, 3, 263.54881175084876, 499.3556433173976, 26.24540982470727
-18505, jenkins, 378, 1329597673, 1329748366, 2511, 12, 1, 0, 119, 92, 72085, 31, 5, 263.8412984670875, 499.9098286744815, 26.274537004924742
-34751, jenkins, 367, 1328295860, 1329573533, 21294, 11, 1, 0, 112, 84, 72039, 113, 5, 264.0097724843488, 500.22904260192394, 26.291314426907647
-27347, jenkins, 371, 1328857120, 1329511846, 10912, 11, 1, 0, 110, 82, 71948, 10, 2, 264.14910768888643, 499.02707510980156, 26.2411741813532
-373970, jenkins, 376, 1329314832, 1329475116, 2671, 11, 2, 0, 108, 80, 71955, 118, 11, 264.3179765130985, 500.81300813008136, 26.32200680981169
-269353, jenkins, 352, 1326774666, 1327935456, 19346, 11, 2, 0, 60, 30, 71545, 22, 2, 262.7297505066741, 437.76644070165634, 26.2911454329443
-20791, jenkins, 365, 1327872251, 1327931505, 987, 10, 2, 0, 59, 29, 71714, 4, 3, 262.11060601835067, 436.7348077083972, 26.22918816409627
-18096, jenkins, 362, 1327680804, 1327709881, 484, 9, 1, 0, 47, 21, 71674, 2, 1, 262.256885341965, 436.97854173061364, 26.24382621313168
-267583, jenkins, 343, 1326187155, 1327589359, 23370, 8, 1, 0, 35, 15, 71545, 113, 3, 262.71577328953805, 437.76644070165634, 26.2911454329443
+Updating client properties
+GHTorrent version: 0.6
+D, [2012-11-12T18:54:50.389929 #6528] DEBUG -- : GHTorrent: User jenkinsci exists
+D, [2012-11-12T18:54:50.390223 #6528] DEBUG -- : GHTorrent: Transaction committed (2 ms)
+D, [2012-11-12T18:54:50.410174 #6528] DEBUG -- : GHTorrent: User jenkinsci exists
+D, [2012-11-12T18:54:50.410828 #6528] DEBUG -- : GHTorrent: Repo jenkinsci/jenkins exists
+D, [2012-11-12T18:54:50.411067 #6528] DEBUG -- : GHTorrent: Transaction committed (3 ms)
+pull_req_id, project_name, github_id, created_at,merged_at, lifetime_minutes, team_size_at_merge, num_commits, num_commit_comments, num_issue_comments, num_comments, total_commits_last_month, main_team_commits_last_month, sloc, churn, commits_on_files_touched, test_lines_per_1000_lines, test_cases_per_1000_lines, assertions_per_1000_lines
+D, [2012-11-12T18:54:56.331704 #6528] DEBUG -- : Updating edbe2ae..7afae8d
+
+D, [2012-11-12T18:54:56.331845 #6528] DEBUG -- : Fast-forward
+
+D, [2012-11-12T18:54:56.387314 #6528] DEBUG -- :  changelog.html                                     |   45 ++++-
+
+D, [2012-11-12T18:54:56.387386 #6528] DEBUG -- :  cli/pom.xml                                        |    2 +-
+
+D, [2012-11-12T18:54:56.387416 #6528] DEBUG -- :  core/pom.xml                                       |    9 +-
+
+D, [2012-11-12T18:54:56.387448 #6528] DEBUG -- :  core/src/main/java/hudson/EnvVars.java             |    4 +
+
+D, [2012-11-12T18:54:56.387474 #6528] DEBUG -- :  core/src/main/java/hudson/FilePath.java            |    3 +-
+
+D, [2012-11-12T18:54:56.387498 #6528] DEBUG -- :  core/src/main/java/hudson/Launcher.java            |   28 ++--
+
+D, [2012-11-12T18:54:56.387523 #6528] DEBUG -- :  core/src/main/java/hudson/PluginManager.java       |   61 +++++++
+
+D, [2012-11-12T18:54:56.387552 #6528] DEBUG -- :  .../main/java/hudson/TcpSlaveAgentListener.java    |    2 +
+
+D, [2012-11-12T18:54:56.387581 #6528] DEBUG -- :  core/src/main/java/hudson/model/ComputerSet.java   |    2 +-
+
+D, [2012-11-12T18:54:56.387609 #6528] DEBUG -- :  core/src/main/java/hudson/model/Job.java           |    2 +-
+
+D, [2012-11-12T18:54:56.387634 #6528] DEBUG -- :  core/src/main/java/hudson/model/Label.java         |    5 +-
+
+D, [2012-11-12T18:54:56.387656 #6528] DEBUG -- :  .../src/main/java/hudson/model/ManagementLink.java |    8 +
+
+D, [2012-11-12T18:54:56.387679 #6528] DEBUG -- :  .../hudson/model/ParametersDefinitionProperty.java |    8 +
+
+D, [2012-11-12T18:54:56.387703 #6528] DEBUG -- :  core/src/main/java/hudson/model/RunMap.java        |    8 +-
+
+D, [2012-11-12T18:54:56.387728 #6528] DEBUG -- :  core/src/main/java/hudson/model/UpdateSite.java    |    9 +-
+
+D, [2012-11-12T18:54:56.387751 #6528] DEBUG -- :  .../java/hudson/slaves/AbstractCloudSlave.java     |    2 +-
+
+D, [2012-11-12T18:54:56.387776 #6528] DEBUG -- :  core/src/main/java/hudson/slaves/NodeProperty.java |    4 +-
+
+D, [2012-11-12T18:54:56.387800 #6528] DEBUG -- :  core/src/main/java/hudson/tasks/LogRotator.java    |    6 +-
+
+D, [2012-11-12T18:54:56.387825 #6528] DEBUG -- :  core/src/main/java/hudson/tasks/Maven.java         |   63 ++++++-
+
+D, [2012-11-12T18:54:56.387854 #6528] DEBUG -- :  .../main/java/hudson/util/jna/Kernel32Utils.java   |   17 ++-
+
+D, [2012-11-12T18:54:56.387877 #6528] DEBUG -- :  core/src/main/java/jenkins/management/CliLink.java |   54 ++++++
+
+D, [2012-11-12T18:54:56.387901 #6528] DEBUG -- :  .../java/jenkins/management/ConfigureLink.java     |   54 ++++++
+
+D, [2012-11-12T18:54:56.387927 #6528] DEBUG -- :  .../main/java/jenkins/management/ConsoleLink.java  |   61 +++++++
+
+D, [2012-11-12T18:54:56.387955 #6528] DEBUG -- :  .../main/java/jenkins/management/NodesLink.java    |   56 ++++++
+
+D, [2012-11-12T18:54:56.387983 #6528] DEBUG -- :  .../main/java/jenkins/management/PluginsLink.java  |   54 ++++++
+
+D, [2012-11-12T18:54:56.388014 #6528] DEBUG -- :  .../main/java/jenkins/management/ReloadLink.java   |   54 ++++++
+
+D, [2012-11-12T18:54:56.388042 #6528] DEBUG -- :  .../main/java/jenkins/management/ShutdownLink.java |   55 ++++++
+
+D, [2012-11-12T18:54:56.388068 #6528] DEBUG -- :  .../java/jenkins/management/StatisticsLink.java    |   54 ++++++
+
+D, [2012-11-12T18:54:56.388095 #6528] DEBUG -- :  .../java/jenkins/management/SystemInfoLink.java    |   54 ++++++
+
+D, [2012-11-12T18:54:56.388123 #6528] DEBUG -- :  .../java/jenkins/management/SystemLogLink.java     |   54 ++++++
+
+D, [2012-11-12T18:54:56.388151 #6528] DEBUG -- :  .../jenkins/mvn/DefaultGlobalSettingsProvider.java |   34 ++++
+
+D, [2012-11-12T18:54:56.388175 #6528] DEBUG -- :  .../java/jenkins/mvn/DefaultSettingsProvider.java  |   34 ++++
+
+D, [2012-11-12T18:54:56.388199 #6528] DEBUG -- :  .../mvn/FilePathGlobalSettingsProvider.java        |   75 ++++++++
+
+D, [2012-11-12T18:54:56.388223 #6528] DEBUG -- :  .../java/jenkins/mvn/FilePathSettingsProvider.java |   72 ++++++++
+
+D, [2012-11-12T18:54:56.388247 #6528] DEBUG -- :  .../java/jenkins/mvn/GlobalSettingsProvider.java   |   79 +++++++++
+
+D, [2012-11-12T18:54:56.388271 #6528] DEBUG -- :  .../mvn/GlobalSettingsProviderDescriptor.java      |   20 ++
+
+D, [2012-11-12T18:54:56.388296 #6528] DEBUG -- :  .../main/java/jenkins/mvn/SettingsProvider.java    |   74 ++++++++
+
+D, [2012-11-12T18:54:56.388320 #6528] DEBUG -- :  .../jenkins/mvn/SettingsProviderDescriptor.java    |   19 ++
+
+D, [2012-11-12T18:54:56.388346 #6528] DEBUG -- :  core/src/main/java/jenkins/util/TimeDuration.java  |   25 ++-
+
+D, [2012-11-12T18:54:56.388371 #6528] DEBUG -- :  .../PluginUpdateMonitor/message.jelly              |   35 ++++
+
+D, [2012-11-12T18:54:56.388396 #6528] DEBUG -- :  .../PluginUpdateMonitor/message.properties}        |    8 +-
+
+D, [2012-11-12T18:54:56.388423 #6528] DEBUG -- :  .../resources/hudson/model/Computer/index.jelly    |    2 +-
+
+D, [2012-11-12T18:54:56.388449 #6528] DEBUG -- :  .../main/resources/hudson/model/Label/index.jelly  |    2 +-
+
+D, [2012-11-12T18:54:56.388475 #6528] DEBUG -- :  .../resources/hudson/model/User/configure.jelly    |    7 +-
+
+D, [2012-11-12T18:54:56.388497 #6528] DEBUG -- :  .../main/resources/hudson/tasks/Maven/config.jelly |    6 +
+
+D, [2012-11-12T18:54:56.388520 #6528] DEBUG -- :  .../resources/hudson/views/JobColumn/column.jelly  |    2 +-
+
+D, [2012-11-12T18:54:56.388544 #6528] DEBUG -- :  .../jenkins/management/Messages.properties         |   55 ++++++
+
+D, [2012-11-12T18:54:56.388567 #6528] DEBUG -- :  .../jenkins/management/Messages_bg.properties      |   35 ++++
+
+D, [2012-11-12T18:54:56.388591 #6528] DEBUG -- :  .../jenkins/management/Messages_cs.properties      |   41 +++++
+
+D, [2012-11-12T18:54:56.388615 #6528] DEBUG -- :  .../jenkins/management/Messages_da.properties      |   45 +++++
+
+D, [2012-11-12T18:54:56.388639 #6528] DEBUG -- :  .../jenkins/management/Messages_de.properties      |   44 +++++
+
+D, [2012-11-12T18:54:56.388663 #6528] DEBUG -- :  .../Messages_el.properties}                        |   18 +-
+
+D, [2012-11-12T18:54:56.388686 #6528] DEBUG -- :  .../Messages_eo.properties}                        |   26 ++-
+
+D, [2012-11-12T18:54:56.388710 #6528] DEBUG -- :  .../jenkins/management/Messages_es.properties      |   45 +++++
+
+D, [2012-11-12T18:54:56.388732 #6528] DEBUG -- :  .../jenkins/management/Messages_fi.properties      |   45 +++++
+
+D, [2012-11-12T18:54:56.388756 #6528] DEBUG -- :  .../jenkins/management/Messages_fr.properties      |   44 +++++
+
+D, [2012-11-12T18:54:56.388784 #6528] DEBUG -- :  .../jenkins/management/Messages_he.properties      |   34 ++++
+
+D, [2012-11-12T18:54:56.388807 #6528] DEBUG -- :  .../jenkins/management/Messages_hu.properties      |   38 ++++
+
+D, [2012-11-12T18:54:56.388835 #6528] DEBUG -- :  .../jenkins/management/Messages_it.properties      |   44 +++++
+
+D, [2012-11-12T18:54:56.388860 #6528] DEBUG -- :  .../jenkins/management/Messages_ja.properties      |   53 ++++++
+
+D, [2012-11-12T18:54:56.388886 #6528] DEBUG -- :  .../Messages_ko.properties}                        |   25 ++-
+
+D, [2012-11-12T18:54:56.388910 #6528] DEBUG -- :  .../Messages_lv.properties}                        |   26 ++-
+
+D, [2012-11-12T18:54:56.388935 #6528] DEBUG -- :  .../jenkins/management/Messages_nb_NO.properties   |   41 +++++
+
+D, [2012-11-12T18:54:56.388958 #6528] DEBUG -- :  .../jenkins/management/Messages_nl.properties      |   45 +++++
+
+D, [2012-11-12T18:54:56.388986 #6528] DEBUG -- :  .../Messages_pl.properties}                        |   27 ++-
+
+D, [2012-11-12T18:54:56.389010 #6528] DEBUG -- :  .../jenkins/management/Messages_pt_BR.properties   |   44 +++++
+
+D, [2012-11-12T18:54:56.389035 #6528] DEBUG -- :  .../Messages_pt_PT.properties}                     |   24 ++-
+
+D, [2012-11-12T18:54:56.389058 #6528] DEBUG -- :  .../Messages_ro.properties}                        |   24 ++-
+
+D, [2012-11-12T18:54:56.389081 #6528] DEBUG -- :  .../jenkins/management/Messages_ru.properties      |   44 +++++
+
+D, [2012-11-12T18:54:56.389105 #6528] DEBUG -- :  .../Messages_sk.properties}                        |   26 ++-
+
+D, [2012-11-12T18:54:56.389128 #6528] DEBUG -- :  .../jenkins/management/Messages_sv_SE.properties   |   43 +++++
+
+D, [2012-11-12T18:54:56.389196 #6528] DEBUG -- :  .../jenkins/management/Messages_tr.properties      |   39 ++++
+
+D, [2012-11-12T18:54:56.389222 #6528] DEBUG -- :  .../jenkins/management/Messages_uk.properties      |   33 ++++
+
+D, [2012-11-12T18:54:56.389247 #6528] DEBUG -- :  .../jenkins/management/Messages_zh_CN.properties   |   43 +++++
+
+D, [2012-11-12T18:54:56.389269 #6528] DEBUG -- :  .../jenkins/management/Messages_zh_TW.properties   |   44 +++++
+
+D, [2012-11-12T18:54:56.389293 #6528] DEBUG -- :  .../jenkins/management/PluginsLink/info.jelly      |   30 +++
+
+D, [2012-11-12T18:54:56.389317 #6528] DEBUG -- :  .../PluginsLink/info_da.properties}                |   17 +-
+
+D, [2012-11-12T18:54:56.389341 #6528] DEBUG -- :  .../PluginsLink/info_de.properties}                |   17 +-
+
+D, [2012-11-12T18:54:56.389371 #6528] DEBUG -- :  .../PluginsLink/info_es.properties}                |   17 +-
+
+D, [2012-11-12T18:54:56.389399 #6528] DEBUG -- :  .../PluginsLink/info_fr.properties}                |   17 +-
+
+D, [2012-11-12T18:54:56.389425 #6528] DEBUG -- :  .../PluginsLink/info_ja.properties}                |   17 +-
+
+D, [2012-11-12T18:54:56.389449 #6528] DEBUG -- :  .../resources/jenkins/model/Jenkins/manage.jelly   |   58 +------
+
+D, [2012-11-12T18:54:56.389474 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_bg.properties     |   12 --
+
+D, [2012-11-12T18:54:56.389497 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_cs.properties     |   18 --
+
+D, [2012-11-12T18:54:56.389522 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_da.properties     |   23 ---
+
+D, [2012-11-12T18:54:56.389545 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_de.properties     |   24 +---
+
+D, [2012-11-12T18:54:56.389570 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_el.properties     |    2 -
+
+D, [2012-11-12T18:54:56.389593 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_eo.properties     |   10 -
+
+D, [2012-11-12T18:54:56.389616 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_es.properties     |   25 ---
+
+D, [2012-11-12T18:54:56.389640 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_fi.properties     |   22 ---
+
+D, [2012-11-12T18:54:56.389667 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_fr.properties     |   24 ---
+
+D, [2012-11-12T18:54:56.389693 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_he.properties     |   11 --
+
+D, [2012-11-12T18:54:56.389719 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_hu.properties     |   16 --
+
+D, [2012-11-12T18:54:56.389745 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_it.properties     |   21 ---
+
+D, [2012-11-12T18:54:56.389770 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_ja.properties     |   32 ----
+
+D, [2012-11-12T18:54:56.389795 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_ko.properties     |   11 --
+
+D, [2012-11-12T18:54:56.389820 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_lv.properties     |   12 --
+
+D, [2012-11-12T18:54:56.389851 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_nb_NO.properties  |   20 --
+
+D, [2012-11-12T18:54:56.389878 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_nl.properties     |   26 ---
+
+D, [2012-11-12T18:54:56.389905 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_pl.properties     |   12 --
+
+D, [2012-11-12T18:54:56.389928 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_pt_BR.properties  |   23 ---
+
+D, [2012-11-12T18:54:56.389952 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_pt_PT.properties  |    8 -
+
+D, [2012-11-12T18:54:56.389976 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_ro.properties     |    9 -
+
+D, [2012-11-12T18:54:56.390001 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_ru.properties     |   28 +---
+
+D, [2012-11-12T18:54:56.390025 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_sk.properties     |   12 --
+
+D, [2012-11-12T18:54:56.390049 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_sv_SE.properties  |   21 ---
+
+D, [2012-11-12T18:54:56.390073 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_tr.properties     |   25 +---
+
+D, [2012-11-12T18:54:56.390094 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_uk.properties     |   10 -
+
+D, [2012-11-12T18:54:56.390116 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_zh_CN.properties  |   23 +---
+
+D, [2012-11-12T18:54:56.390139 #6528] DEBUG -- :  .../jenkins/model/Jenkins/manage_zh_TW.properties  |   22 ---
+
+D, [2012-11-12T18:54:56.390165 #6528] DEBUG -- :  .../mvn/DefaultGlobalSettingsProvider/config.jelly |   27 +++
+
+D, [2012-11-12T18:54:56.390187 #6528] DEBUG -- :  .../mvn/DefaultGlobalSettingsProvider/help.html    |    3 +
+
+D, [2012-11-12T18:54:56.390212 #6528] DEBUG -- :  .../mvn/DefaultSettingsProvider/config.jelly       |   27 +++
+
+D, [2012-11-12T18:54:56.390235 #6528] DEBUG -- :  .../jenkins/mvn/DefaultSettingsProvider/help.html  |    3 +
+
+D, [2012-11-12T18:54:56.390261 #6528] DEBUG -- :  .../FilePathGlobalSettingsProvider/config.jelly    |   30 +++
+
+D, [2012-11-12T18:54:56.390287 #6528] DEBUG -- :  .../FilePathGlobalSettingsProvider/help-path.html  |    3 +
+
+D, [2012-11-12T18:54:56.390310 #6528] DEBUG -- :  .../mvn/FilePathGlobalSettingsProvider/help.html   |    3 +
+
+D, [2012-11-12T18:54:56.390336 #6528] DEBUG -- :  .../mvn/FilePathSettingsProvider/config.jelly      |   30 +++
+
+D, [2012-11-12T18:54:56.390361 #6528] DEBUG -- :  .../mvn/FilePathSettingsProvider/help-path.html    |    3 +
+
+D, [2012-11-12T18:54:56.390382 #6528] DEBUG -- :  .../jenkins/mvn/FilePathSettingsProvider/help.html |    3 +
+
+D, [2012-11-12T18:54:56.390408 #6528] DEBUG -- :  .../manage.properties => mvn/Messages.properties}  |   18 +-
+
+D, [2012-11-12T18:54:56.390433 #6528] DEBUG -- :  core/src/main/resources/lib/form/combobox.jelly    |  110 ++++++------
+
+D, [2012-11-12T18:54:56.390456 #6528] DEBUG -- :  .../lib/form/dropdownDescriptorSelector.jelly      |    2 +-
+
+D, [2012-11-12T18:54:56.390485 #6528] DEBUG -- :  core/src/main/resources/lib/hudson/jobLink.jelly   |    2 +-
+
+D, [2012-11-12T18:54:56.390512 #6528] DEBUG -- :  .../project/config-concurrentBuild_de.properties   |    2 +-
+
+D, [2012-11-12T18:54:56.390534 #6528] DEBUG -- :  .../main/resources/lib/hudson/projectView.jelly    |    8 +-
+
+D, [2012-11-12T18:54:56.390561 #6528] DEBUG -- :  core/src/test/java/hudson/FilePathTest.java        |   29 +++-
+
+D, [2012-11-12T18:54:56.390586 #6528] DEBUG -- :  core/src/test/java/hudson/LauncherTest.java        |   17 ++
+
+D, [2012-11-12T18:54:56.390611 #6528] DEBUG -- :  debian/debian/changelog                            |   12 ++
+
+D, [2012-11-12T18:54:56.390638 #6528] DEBUG -- :  maven-plugin/pom.xml                               |   14 +--
+
+D, [2012-11-12T18:54:56.390662 #6528] DEBUG -- :  .../src/main/java/hudson/maven/MavenBuild.java     |   20 +--
+
+D, [2012-11-12T18:54:56.390686 #6528] DEBUG -- :  .../src/main/java/hudson/maven/MavenModuleSet.java |  186 ++++++++++++--------
+
+D, [2012-11-12T18:54:56.390713 #6528] DEBUG -- :  .../java/hudson/maven/MavenModuleSetBuild.java     |   91 ++--------
+
+D, [2012-11-12T18:54:56.390739 #6528] DEBUG -- :  .../src/main/java/hudson/maven/MavenUtil.java      |    4 +-
+
+D, [2012-11-12T18:54:56.390764 #6528] DEBUG -- :  .../src/main/java/hudson/maven/PluginImpl.java     |   14 ++
+
+D, [2012-11-12T18:54:56.390790 #6528] DEBUG -- :  .../main/java/hudson/maven/RedeployPublisher.java  |   52 +-----
+
+D, [2012-11-12T18:54:56.390819 #6528] DEBUG -- :  .../hudson/maven/reporters/SurefireArchiver.java   |   56 +++---
+
+D, [2012-11-12T18:54:56.390847 #6528] DEBUG -- :  .../maven/settings/ConfigProviderDelegate.java     |   76 --------
+
+D, [2012-11-12T18:54:56.390875 #6528] DEBUG -- :  .../maven/settings/ConfigProviderFacade.java       |   55 ------
+
+D, [2012-11-12T18:54:56.390900 #6528] DEBUG -- :  .../maven/settings/ConfigProviderMediator.java     |   95 ----------
+
+D, [2012-11-12T18:54:56.390923 #6528] DEBUG -- :  .../java/hudson/maven/settings/SettingConfig.java  |   65 -------
+
+D, [2012-11-12T18:54:56.390946 #6528] DEBUG -- :  .../maven/settings/SettingsProviderUtils.java      |   83 ---------
+
+D, [2012-11-12T18:54:56.390970 #6528] DEBUG -- :  .../maven/MavenModuleSet/configure-entries.jelly   |   34 +---
+
+D, [2012-11-12T18:54:56.390995 #6528] DEBUG -- :  .../resources/hudson/maven/Messages.properties     |    6 +
+
+D, [2012-11-12T18:54:56.391038 #6528] DEBUG -- :  .../src/main/webapp/alternate-settings.html        |   10 -
+
+D, [2012-11-12T18:54:56.391065 #6528] DEBUG -- :  .../src/main/webapp/alternate-settings_de.html     |   10 -
+
+D, [2012-11-12T18:54:56.391104 #6528] DEBUG -- :  .../src/main/webapp/alternate-settings_ja.html     |    8 -
+
+D, [2012-11-12T18:54:56.391133 #6528] DEBUG -- :  plugins/pom.xml                                    |   12 +-
+
+D, [2012-11-12T18:54:56.391159 #6528] DEBUG -- :  pom.xml                                            |   13 ++-
+
+D, [2012-11-12T18:54:56.391188 #6528] DEBUG -- :  test/pom.xml                                       |    2 +-
+
+D, [2012-11-12T18:54:56.391213 #6528] DEBUG -- :  .../java/hudson/model/FreeStyleProjectTest.java    |    2 +-
+
+D, [2012-11-12T18:54:56.391239 #6528] DEBUG -- :  .../java/hudson/tasks/junit/SuiteResultTest.java   |    2 +-
+
+D, [2012-11-12T18:54:56.391265 #6528] DEBUG -- :  ui-samples-plugin/pom.xml                          |    2 +-
+
+D, [2012-11-12T18:54:56.391291 #6528] DEBUG -- :  war/pom.xml                                        |    6 +-
+
+D, [2012-11-12T18:54:56.391315 #6528] DEBUG -- :  war/src/main/webapp/help/tasks/junit/report.html   |    2 +-
+
+D, [2012-11-12T18:54:56.391339 #6528] DEBUG -- :  .../webapp/help/tasks/maven/maven-settings.html    |   14 ++
+
+D, [2012-11-12T18:54:56.391363 #6528] DEBUG -- :  war/src/main/webapp/scripts/behavior.js            |    6 +-
+
+D, [2012-11-12T18:54:56.391384 #6528] DEBUG -- :  war/src/main/webapp/scripts/hudson-behavior.js     |    7 +-
+
+D, [2012-11-12T18:54:56.391410 #6528] DEBUG -- :  158 files changed, 2886 insertions(+), 1495 deletions(-)
+
+D, [2012-11-12T18:54:56.391434 #6528] DEBUG -- :  create mode 100644 core/src/main/java/jenkins/management/CliLink.java
+
+D, [2012-11-12T18:54:56.391469 #6528] DEBUG -- :  create mode 100644 core/src/main/java/jenkins/management/ConfigureLink.java
+
+D, [2012-11-12T18:54:56.391492 #6528] DEBUG -- :  create mode 100644 core/src/main/java/jenkins/management/ConsoleLink.java
+
+D, [2012-11-12T18:54:56.391516 #6528] DEBUG -- :  create mode 100644 core/src/main/java/jenkins/management/NodesLink.java
+
+D, [2012-11-12T18:54:56.391541 #6528] DEBUG -- :  create mode 100644 core/src/main/java/jenkins/management/PluginsLink.java
+
+D, [2012-11-12T18:54:56.391577 #6528] DEBUG -- :  create mode 100644 core/src/main/java/jenkins/management/ReloadLink.java
+
+D, [2012-11-12T18:54:56.391607 #6528] DEBUG -- :  create mode 100644 core/src/main/java/jenkins/management/ShutdownLink.java
+
+D, [2012-11-12T18:54:56.391633 #6528] DEBUG -- :  create mode 100644 core/src/main/java/jenkins/management/StatisticsLink.java
+
+D, [2012-11-12T18:54:56.391657 #6528] DEBUG -- :  create mode 100644 core/src/main/java/jenkins/management/SystemInfoLink.java
+
+D, [2012-11-12T18:54:56.391683 #6528] DEBUG -- :  create mode 100644 core/src/main/java/jenkins/management/SystemLogLink.java
+
+D, [2012-11-12T18:54:56.391709 #6528] DEBUG -- :  create mode 100644 core/src/main/java/jenkins/mvn/DefaultGlobalSettingsProvider.java
+
+D, [2012-11-12T18:54:56.391735 #6528] DEBUG -- :  create mode 100644 core/src/main/java/jenkins/mvn/DefaultSettingsProvider.java
+
+D, [2012-11-12T18:54:56.391766 #6528] DEBUG -- :  create mode 100644 core/src/main/java/jenkins/mvn/FilePathGlobalSettingsProvider.java
+
+D, [2012-11-12T18:54:56.391792 #6528] DEBUG -- :  create mode 100644 core/src/main/java/jenkins/mvn/FilePathSettingsProvider.java
+
+D, [2012-11-12T18:54:56.391815 #6528] DEBUG -- :  create mode 100644 core/src/main/java/jenkins/mvn/GlobalSettingsProvider.java
+
+D, [2012-11-12T18:54:56.391839 #6528] DEBUG -- :  create mode 100644 core/src/main/java/jenkins/mvn/GlobalSettingsProviderDescriptor.java
+
+D, [2012-11-12T18:54:56.391859 #6528] DEBUG -- :  create mode 100644 core/src/main/java/jenkins/mvn/SettingsProvider.java
+
+D, [2012-11-12T18:54:56.391884 #6528] DEBUG -- :  create mode 100644 core/src/main/java/jenkins/mvn/SettingsProviderDescriptor.java
+
+D, [2012-11-12T18:54:56.391907 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/hudson/PluginManager/PluginUpdateMonitor/message.jelly
+
+D, [2012-11-12T18:54:56.391932 #6528] DEBUG -- :  copy core/src/main/resources/{jenkins/model/Jenkins/manage.properties => hudson/PluginManager/PluginUpdateMonitor/message.properties} (74%)
+
+D, [2012-11-12T18:54:56.391954 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages.properties
+
+D, [2012-11-12T18:54:56.391978 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_bg.properties
+
+D, [2012-11-12T18:54:56.392002 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_cs.properties
+
+D, [2012-11-12T18:54:56.392025 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_da.properties
+
+D, [2012-11-12T18:54:56.392049 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_de.properties
+
+D, [2012-11-12T18:54:56.392076 #6528] DEBUG -- :  copy core/src/main/resources/jenkins/{model/Jenkins/manage.properties => management/Messages_el.properties} (74%)
+
+D, [2012-11-12T18:54:56.392103 #6528] DEBUG -- :  copy core/src/main/resources/jenkins/{model/Jenkins/manage.properties => management/Messages_eo.properties} (58%)
+
+D, [2012-11-12T18:54:56.392130 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_es.properties
+
+D, [2012-11-12T18:54:56.392153 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_fi.properties
+
+D, [2012-11-12T18:54:56.392178 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_fr.properties
+
+D, [2012-11-12T18:54:56.392205 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_he.properties
+
+D, [2012-11-12T18:54:56.392231 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_hu.properties
+
+D, [2012-11-12T18:54:56.392254 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_it.properties
+
+D, [2012-11-12T18:54:56.392277 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_ja.properties
+
+D, [2012-11-12T18:54:56.392300 #6528] DEBUG -- :  copy core/src/main/resources/jenkins/{model/Jenkins/manage.properties => management/Messages_ko.properties} (52%)
+
+D, [2012-11-12T18:54:56.392325 #6528] DEBUG -- :  copy core/src/main/resources/jenkins/{model/Jenkins/manage.properties => management/Messages_lv.properties} (61%)
+
+D, [2012-11-12T18:54:56.392350 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_nb_NO.properties
+
+D, [2012-11-12T18:54:56.392373 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_nl.properties
+
+D, [2012-11-12T18:54:56.392395 #6528] DEBUG -- :  copy core/src/main/resources/jenkins/{model/Jenkins/manage.properties => management/Messages_pl.properties} (51%)
+
+D, [2012-11-12T18:54:56.392419 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_pt_BR.properties
+
+D, [2012-11-12T18:54:56.392444 #6528] DEBUG -- :  copy core/src/main/resources/jenkins/{model/Jenkins/manage.properties => management/Messages_pt_PT.properties} (60%)
+
+D, [2012-11-12T18:54:56.392467 #6528] DEBUG -- :  copy core/src/main/resources/jenkins/{model/Jenkins/manage.properties => management/Messages_ro.properties} (63%)
+
+D, [2012-11-12T18:54:56.392494 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_ru.properties
+
+D, [2012-11-12T18:54:56.392517 #6528] DEBUG -- :  copy core/src/main/resources/jenkins/{model/Jenkins/manage.properties => management/Messages_sk.properties} (54%)
+
+D, [2012-11-12T18:54:56.392543 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_sv_SE.properties
+
+D, [2012-11-12T18:54:56.392567 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_tr.properties
+
+D, [2012-11-12T18:54:56.392594 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_uk.properties
+
+D, [2012-11-12T18:54:56.392640 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_zh_CN.properties
+
+D, [2012-11-12T18:54:56.392663 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/Messages_zh_TW.properties
+
+D, [2012-11-12T18:54:56.392687 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/management/PluginsLink/info.jelly
+
+D, [2012-11-12T18:54:56.392708 #6528] DEBUG -- :  copy core/src/main/resources/jenkins/{model/Jenkins/manage.properties => management/PluginsLink/info_da.properties} (74%)
+
+D, [2012-11-12T18:54:56.392730 #6528] DEBUG -- :  copy core/src/main/resources/jenkins/{model/Jenkins/manage.properties => management/PluginsLink/info_de.properties} (74%)
+
+D, [2012-11-12T18:54:56.392750 #6528] DEBUG -- :  copy core/src/main/resources/jenkins/{model/Jenkins/manage.properties => management/PluginsLink/info_es.properties} (74%)
+
+D, [2012-11-12T18:54:56.392776 #6528] DEBUG -- :  copy core/src/main/resources/jenkins/{model/Jenkins/manage.properties => management/PluginsLink/info_fr.properties} (74%)
+
+D, [2012-11-12T18:54:56.392797 #6528] DEBUG -- :  copy core/src/main/resources/jenkins/{model/Jenkins/manage.properties => management/PluginsLink/info_ja.properties} (74%)
+
+D, [2012-11-12T18:54:56.392819 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/mvn/DefaultGlobalSettingsProvider/config.jelly
+
+D, [2012-11-12T18:54:56.392844 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/mvn/DefaultGlobalSettingsProvider/help.html
+
+D, [2012-11-12T18:54:56.392867 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/mvn/DefaultSettingsProvider/config.jelly
+
+D, [2012-11-12T18:54:56.392891 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/mvn/DefaultSettingsProvider/help.html
+
+D, [2012-11-12T18:54:56.392919 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/mvn/FilePathGlobalSettingsProvider/config.jelly
+
+D, [2012-11-12T18:54:56.392942 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/mvn/FilePathGlobalSettingsProvider/help-path.html
+
+D, [2012-11-12T18:54:56.392969 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/mvn/FilePathGlobalSettingsProvider/help.html
+
+D, [2012-11-12T18:54:56.392999 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/mvn/FilePathSettingsProvider/config.jelly
+
+D, [2012-11-12T18:54:56.393026 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/mvn/FilePathSettingsProvider/help-path.html
+
+D, [2012-11-12T18:54:56.393054 #6528] DEBUG -- :  create mode 100644 core/src/main/resources/jenkins/mvn/FilePathSettingsProvider/help.html
+
+D, [2012-11-12T18:54:56.393081 #6528] DEBUG -- :  rename core/src/main/resources/jenkins/{model/Jenkins/manage.properties => mvn/Messages.properties} (74%)
+
+D, [2012-11-12T18:54:56.393104 #6528] DEBUG -- :  delete mode 100644 maven-plugin/src/main/java/hudson/maven/settings/ConfigProviderDelegate.java
+
+D, [2012-11-12T18:54:56.396662 #6528] DEBUG -- :  delete mode 100644 maven-plugin/src/main/java/hudson/maven/settings/ConfigProviderFacade.java
+
+D, [2012-11-12T18:54:56.396699 #6528] DEBUG -- :  delete mode 100644 maven-plugin/src/main/java/hudson/maven/settings/ConfigProviderMediator.java
+
+D, [2012-11-12T18:54:56.396735 #6528] DEBUG -- :  delete mode 100644 maven-plugin/src/main/java/hudson/maven/settings/SettingConfig.java
+
+D, [2012-11-12T18:54:56.396769 #6528] DEBUG -- :  delete mode 100644 maven-plugin/src/main/java/hudson/maven/settings/SettingsProviderUtils.java
+
+D, [2012-11-12T18:54:56.396804 #6528] DEBUG -- :  delete mode 100644 maven-plugin/src/main/webapp/alternate-settings.html
+
+D, [2012-11-12T18:54:56.396827 #6528] DEBUG -- :  delete mode 100644 maven-plugin/src/main/webapp/alternate-settings_de.html
+
+D, [2012-11-12T18:54:56.396851 #6528] DEBUG -- :  delete mode 100644 maven-plugin/src/main/webapp/alternate-settings_ja.html
+
+D, [2012-11-12T18:54:56.396876 #6528] DEBUG -- :  create mode 100644 war/src/main/webapp/help/tasks/maven/maven-settings.html
+
+454570, jenkins, 608, 1352212656, 1352233701, 350, 17, 1, 0, 0, 0, 203, 163, 78157, 59, 46, 272.69470424913953, 9.186637153421959, 28.87777166472613
+454125, jenkins, 590, 1350468093, 1350468937, 14, 15, 1, 1, 0, 1, 252, 145, 77715, 45, 3, 271.8522807694782, 9.174548028051214, 28.694589204143345
+454239, jenkins, 589, 1350458795, 1350458924, 2, 14, 1, 0, 0, 0, 250, 144, 77715, 2, 1, 271.8522807694782, 9.174548028051214, 28.694589204143345
+454238, jenkins, 572, 1348241822, 1348242062, 4, 11, 1, 0, 0, 0, 333, 28, 76482, 2, 1, 269.5143955440496, 8.904055856279909, 27.6797154886117
+420460, jenkins, 569, 1347908035, 1347910553, 41, 11, 2, 0, 0, 0, 281, 15, 76181, 11, 2, 270.5398983998635, 8.91298355232932, 27.64468830810832
+420350, jenkins, 568, 1347905609, 1347905897, 4, 11, 1, 0, 0, 0, 283, 15, 76181, 2, 1, 270.5398983998635, 8.91298355232932, 27.64468830810832
+410236, jenkins, 566, 1347649975, 1347652696, 45, 11, 15, 0, 0, 0, 268, 28, 75988, 447, 97, 269.72679896825815, 8.896141496025688, 27.570142654103282
+415240, jenkins, 564, 1347451601, 1347453271, 27, 11, 1, 0, 0, 0, 250, 24, 75912, 11, 11, 269.83876067024977, 8.905047950258194, 27.597744757087153
+246635, jenkins, 541, 1345058498, 1345060750, 37, 15, 2, 0, 0, 0, 195, 97, 75363, 107, 2, 265.8599047277842, 8.691267598158248, 27.082255218077837
+223599, jenkins, 526, 1343086570, 1343261509, 2915, 21, 1, 0, 0, 0, 214, 55, 75097, 6, 1, 266.36217159140847, 8.69542058937108, 27.098286216493335
+225049, jenkins, 528, 1343146939, 1343260894, 1899, 21, 1, 0, 0, 0, 214, 55, 75097, 20, 3, 266.36217159140847, 8.69542058937108, 27.098286216493335
+223915, jenkins, 527, 1343108064, 1343240192, 2202, 22, 4, 0, 0, 0, 214, 55, 75097, 10, 26, 266.36217159140847, 8.69542058937108, 27.098286216493335
+222124, jenkins, 525, 1343035236, 1343070504, 587, 22, 3, 0, 0, 0, 182, 28, 74929, 236, 4, 266.95938822084906, 8.71491678789254, 27.15904389488716
+221916, jenkins, 495, 1339590400, 1343027887, 57291, 22, 0, 0, 0, 0, 172, 26, 74929, 0, 0, 266.95938822084906, 8.71491678789254, 27.15904389488716
+218703, jenkins, 524, 1342791944, 1342819784, 464, 23, 1, 0, 0, 0, 194, 18, 74929, 2, 1, 266.95938822084906, 8.71491678789254, 27.15904389488716
+61799, jenkins, 522, 1342550154, 1342670565, 2006, 24, 3, 2, 0, 2, 222, 15, 74924, 11, 70, 266.97720356628054, 8.715498371683307, 27.160856334418877
+191039, jenkins, 515, 1341511329, 1341939493, 7136, 24, 3, 0, 0, 0, 286, 25, 74921, 1416, 133, 266.98789391492375, 8.715847359218376, 27.161943914256348
+54672, jenkins, 517, 1341523602, 1341884163, 6009, 24, 4, 1, 0, 1, 279, 25, 74853, 173, 48, 266.6292600162986, 8.697046210572722, 26.94614778298799
+184934, jenkins, 512, 1341224603, 1341225212, 10, 27, 1, 0, 0, 0, 309, 21, 74851, 8, 4, 266.6363842834431, 8.697278593472364, 26.946867777317607
+170282, jenkins, 506, 1340355608, 1341020033, 11073, 28, 1, 0, 0, 0, 360, 21, 74848, 133, 3, 264.89685763146645, 8.630825138948268, 26.80098332620778
+168716, jenkins, 505, 1340279385, 1340925291, 10765, 29, 1, 0, 0, 0, 386, 35, 74848, 69, 3, 264.89685763146645, 8.630825138948268, 26.80098332620778
+178646, jenkins, 511, 1340824000, 1340824143, 2, 30, 1, 0, 0, 0, 374, 37, 74763, 4, 1, 266.9502293915439, 8.707515749769271, 26.978585664031673
+399813, jenkins, 508, 1340611442, 1340613660, 36, 31, 1, 0, 0, 0, 372, 44, 74752, 16, 2, 266.9895119863014, 8.708797089041097, 26.982555650684933
+170964, jenkins, 507, 1340382610, 1340401277, 311, 32, 3, 0, 0, 0, 394, 71, 74848, 9, 55, 264.89685763146645, 8.630825138948268, 26.80098332620778
+161217, jenkins, 500, 1339775999, 1340367715, 9861, 32, 1, 0, 0, 0, 386, 75, 74262, 2, 1, 265.08847055021414, 8.59120411515984, 26.82394764482508
+165406, jenkins, 503, 1340117688, 1340168979, 854, 32, 1, 0, 0, 0, 389, 94, 74316, 4, 1, 265.20533936164486, 8.598417568222187, 26.8313687496636
+397622, jenkins, 496, 1339671278, 1339671417, 2, 34, 1, 0, 0, 0, 367, 110, 74262, 13, 3, 264.2131911340928, 8.55080660364655, 26.77008429614069
+397379, jenkins, 494, 1339565372, 1339565490, 1, 34, 1, 0, 0, 0, 353, 110, 74262, 2, 1, 264.2131911340928, 8.55080660364655, 26.77008429614069
+294917, jenkins, 428, 1333763044, 1338938581, 86258, 35, 3, 0, 0, 0, 275, 114, 74064, 11, 0, 262.96176279974077, 8.560164182328796, 26.747137610715054
+320400, jenkins, 491, 1338556617, 1338875512, 5314, 35, 1, 0, 0, 0, 265, 115, 73933, 1, 2, 264.7802740318937, 8.561805959449773, 26.781004422923456
+321344, jenkins, 493, 1338838900, 1338839226, 5, 35, 3, 0, 0, 0, 258, 117, 73941, 30, 1, 264.7651505930404, 8.560879620237758, 26.77810686899014
+395022, jenkins, 489, 1338454757, 1338497002, 704, 35, 1, 0, 0, 0, 258, 130, 73911, 35, 4, 264.85908728064834, 8.564354426269432, 26.788975930511018
+319921, jenkins, 490, 1338474184, 1338474568, 6, 35, 2, 0, 0, 0, 268, 145, 73911, 8, 3, 264.85908728064834, 8.564354426269432, 26.788975930511018
+317089, jenkins, 485, 1337844828, 1337916652, 1197, 35, 1, 0, 0, 0, 198, 145, 74064, 528, 32, 262.96176279974077, 8.560164182328796, 26.747137610715054
+316952, jenkins, 484, 1337813710, 1337839695, 433, 35, 2, 0, 0, 0, 189, 143, 74064, 10, 56, 262.96176279974077, 8.560164182328796, 26.747137610715054
+315944, jenkins, 480, 1337678292, 1337684597, 105, 34, 1, 0, 0, 0, 171, 136, 73835, 19, 3, 263.7773413692693, 8.586713618202749, 26.830094128800706
+315928, jenkins, 479, 1337676350, 1337677796, 24, 34, 1, 0, 0, 0, 170, 136, 73835, 192, 56, 263.7773413692693, 8.586713618202749, 26.830094128800706
+392555, jenkins, 476, 1337298854, 1337301468, 43, 32, 1, 0, 0, 0, 174, 134, 73729, 2, 1, 264.15657339717075, 8.59905871502394, 26.868667688426534
+313727, jenkins, 475, 1337234612, 1337234936, 5, 32, 1, 0, 0, 0, 174, 135, 73729, 4, 2, 264.15657339717075, 8.59905871502394, 26.868667688426534
+309112, jenkins, 470, 1336427747, 1336454644, 448, 30, 1, 0, 0, 0, 215, 161, 73653, 272, 2, 264.23906697622635, 8.594354608773573, 26.869238184459558
+308483, jenkins, 468, 1336311201, 1336415599, 1739, 29, 1, 0, 0, 0, 205, 153, 73649, 11, 1, 264.2534182405735, 8.594821382503497, 26.87069749758992
+308255, jenkins, 466, 1336230031, 1336230057, 0, 29, 1, 0, 0, 0, 208, 155, 73649, 1, 45, 264.2534182405735, 8.594821382503497, 26.87069749758992
+305996, jenkins, 462, 1335858471, 1335859545, 17, 27, 1, 0, 0, 0, 234, 181, 73629, 20, 2, 264.325197951894, 8.597156011897486, 26.877996441619473
+305976, jenkins, 461, 1335853355, 1335853827, 7, 27, 1, 0, 0, 0, 233, 180, 73629, 7, 1, 264.175800296079, 8.583574406823399, 26.796506811174943
+303532, jenkins, 455, 1335369008, 1335414924, 765, 27, 1, 0, 0, 0, 256, 198, 73598, 4, 1, 264.66751813907985, 8.587189869289928, 26.794206364303378
+303420, jenkins, 454, 1335358058, 1335358427, 6, 26, 1, 0, 0, 0, 250, 194, 73597, 7, 1, 264.6711143117247, 8.587306547821242, 26.794570430859952
+302928, jenkins, 453, 1335281016, 1335281060, 0, 26, 1, 0, 0, 0, 247, 193, 73585, 18, 45, 263.9668410681525, 8.561527485221173, 26.7445810966909
+301656, jenkins, 451, 1335020019, 1335159463, 2324, 26, 1, 0, 0, 0, 242, 185, 73577, 42, 4, 263.6013971757479, 8.548867173165528, 26.720306617557117
+292046, jenkins, 422, 1333307505, 1335124151, 30277, 25, 0, 0, 0, 0, 240, 184, 73577, 0, 0, 263.6013971757479, 8.548867173165528, 26.720306617557117
+296220, jenkins, 433, 1334065467, 1334912929, 14124, 25, 1, 0, 0, 0, 268, 210, 73446, 10, 1, 263.81286931895545, 8.564115132205973, 26.767965580154126
+300399, jenkins, 448, 1334783500, 1334783563, 1, 23, 1, 0, 0, 0, 263, 208, 73558, 8, 39, 263.45196987411293, 8.551075341907067, 26.727208461350227
+295909, jenkins, 432, 1334009677, 1334598504, 9813, 23, 1, 0, 0, 0, 247, 200, 73446, 73, 66, 263.81286931895545, 8.564115132205973, 26.767965580154126
+298633, jenkins, 443, 1334496006, 1334598486, 1708, 23, 1, 0, 0, 0, 247, 200, 73542, 6, 1, 263.50928721002964, 8.552935737401757, 26.733023306409944
+298366, jenkins, 441, 1334408284, 1334598457, 3169, 23, 1, 0, 0, 0, 247, 200, 73527, 26, 1, 263.56304486787167, 8.554680593523466, 26.73847702204632
+295864, jenkins, 431, 1334003296, 1334598420, 9918, 23, 1, 0, 0, 0, 247, 200, 73446, 94, 8, 263.81286931895545, 8.564115132205973, 26.767965580154126
+299175, jenkins, 444, 1334596799, 1334598346, 25, 23, 1, 0, 0, 0, 247, 200, 73548, 2, 7, 263.48779028661556, 8.552237994235059, 26.7308424430304
+293249, jenkins, 425, 1333497011, 1334425835, 15480, 23, 1, 0, 0, 0, 245, 197, 73506, 4, 1, 263.17579517318313, 8.516311593611405, 26.63728131036922
+298421, jenkins, 442, 1334425318, 1334425662, 5, 23, 1, 0, 0, 0, 245, 197, 73527, 27, 45, 263.56304486787167, 8.554680593523466, 26.73847702204632
+298107, jenkins, 440, 1334343794, 1334404795, 1016, 23, 1, 0, 0, 0, 238, 192, 73479, 6, 1, 263.73521686468246, 8.560268920371808, 26.75594387512078
+297563, jenkins, 436, 1334256542, 1334256615, 1, 22, 1, 0, 0, 0, 237, 194, 73449, 1, 3, 263.80209396996554, 8.56376533376901, 26.766872251494235
+294920, jenkins, 429, 1333764197, 1333898985, 2246, 21, 2, 0, 0, 0, 213, 177, 73526, 9, 9, 263.49862633626196, 8.554796942578136, 26.711639420069094
+381904, jenkins, 421, 1333221837, 1333300785, 1315, 20, 1, 0, 0, 0, 165, 136, 73313, 54, 2, 262.95472835649883, 8.470530465265368, 26.489162904259818
+289480, jenkins, 418, 1332856848, 1333032659, 2930, 20, 1, 0, 0, 0, 147, 115, 73306, 75, 3, 262.2431997380842, 8.457697869205795, 26.4098436690039
+289620, jenkins, 419, 1332871235, 1333032612, 2689, 20, 2, 0, 0, 0, 147, 115, 73306, 8, 57, 262.27048263443646, 8.457697869205795, 26.4098436690039
+284421, jenkins, 410, 1332200632, 1333027689, 13844, 20, 1, 0, 0, 0, 145, 113, 73214, 3, 1, 262.25858442374414, 8.44100855027727, 26.402054251919033
+287175, jenkins, 413, 1332438230, 1332444255, 100, 16, 1, 0, 0, 0, 125, 96, 73247, 5, 59, 262.39982524881566, 8.450858055620024, 26.417464196485863
+286348, jenkins, 411, 1332350339, 1332363641, 221, 17, 1, 0, 0, 0, 113, 80, 73221, 3, 3, 262.2335122437552, 8.4402015815135, 26.39953018942653
+282568, jenkins, 409, 1331852443, 1331852660, 3, 16, 1, 0, 0, 0, 119, 81, 73189, 4, 1, 262.3481670742871, 8.443891841670196, 26.41107270218202
+281696, jenkins, 404, 1331317224, 1331750332, 7218, 15, 1, 0, 0, 0, 115, 75, 73112, 2, 1, 262.3645913119597, 8.43910712331765, 26.42521063573695
+48493, jenkins, 373, 1329225236, 1331750220, 42083, 15, 1, 0, 0, 0, 115, 75, 71971, 9, 3, 264.25921551736116, 8.517319475900015, 26.316155118033652
+42554, jenkins, 389, 1330098359, 1330323954, 3759, 13, 1, 0, 0, 0, 134, 97, 72211, 5, 1, 263.3809253437842, 8.489011369458947, 26.22869091966598
+40116, jenkins, 386, 1329954249, 1329986497, 537, 13, 2, 0, 0, 0, 144, 104, 72218, 28, 48, 263.35539616162174, 8.488188540253123, 26.22614860561079
+37904, jenkins, 382, 1329834809, 1329925761, 1515, 13, 1, 0, 0, 0, 134, 101, 72220, 2, 11, 263.3481030185544, 8.487953475491553, 26.225422320686793
+38831, jenkins, 383, 1329882439, 1329894271, 197, 13, 1, 0, 0, 0, 133, 99, 72220, 4, 1, 263.3481030185544, 8.487953475491553, 26.225422320686793
+35261, jenkins, 379, 1329669477, 1329764794, 1588, 12, 3, 0, 0, 0, 127, 95, 72148, 134, 8, 263.6109109053612, 8.496424017297777, 26.251593945778122
+36484, jenkins, 380, 1329752926, 1329753054, 2, 12, 1, 0, 0, 0, 123, 93, 72165, 28, 3, 263.54881175084876, 8.494422503983925, 26.24540982470727
+18505, jenkins, 378, 1329597673, 1329748366, 2511, 12, 1, 0, 0, 0, 122, 92, 72085, 31, 5, 263.8412984670875, 8.503849621974059, 26.274537004924742
+34751, jenkins, 367, 1328295860, 1329573533, 21294, 11, 1, 0, 0, 0, 115, 84, 72039, 113, 5, 264.0097724843488, 8.509279695720373, 26.291314426907647
+27347, jenkins, 371, 1328857120, 1329511846, 10912, 11, 1, 0, 0, 0, 113, 82, 71948, 10, 2, 264.14910768888643, 8.506143325735254, 26.2411741813532
+373970, jenkins, 376, 1329314832, 1329475116, 2671, 11, 2, 0, 0, 0, 111, 80, 71955, 118, 11, 264.3179765130985, 8.519213397262178, 26.32200680981169
+272156, jenkins, 342, 1325888497, 1328715963, 47124, 11, 12, 0, 0, 0, 79, 47, 71542, 290, 0, 262.36336697324646, 8.5264599815493, 26.16644768108244
+270470, jenkins, 344, 1326197355, 1328175426, 32967, 11, 6, 0, 0, 0, 78, 42, 71714, 222, 9, 262.11060601835067, 8.519954262765987, 26.22918816409627
+269353, jenkins, 352, 1326774666, 1327935456, 19346, 11, 2, 0, 0, 0, 66, 30, 71545, 22, 2, 262.7297505066741, 8.540079670137676, 26.2911454329443
+20791, jenkins, 365, 1327872251, 1327931505, 987, 10, 2, 0, 0, 0, 65, 29, 71714, 4, 3, 262.11060601835067, 8.519954262765987, 26.22918816409627
+19994, jenkins, 364, 1327765531, 1327773978, 140, 9, 3, 0, 0, 0, 58, 25, 71714, 136, 2, 262.11060601835067, 8.519954262765987, 26.22918816409627
+18096, jenkins, 362, 1327680804, 1327709881, 484, 9, 1, 0, 0, 0, 53, 21, 71674, 2, 1, 262.256885341965, 8.524709099534, 26.24382621313168
+267583, jenkins, 343, 1326187155, 1327589359, 23370, 8, 1, 0, 0, 0, 40, 15, 71545, 113, 3, 262.71577328953805, 8.540079670137676, 26.2911454329443
