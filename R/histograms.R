@@ -49,7 +49,8 @@ plot.mutlicor <- function(dataframe)
 {
   ctab <- cor(dataframe, method = "spearman")
   colorfun <- colorRamp(c("#CC0000","white","#3366CC"), space="Lab")
-  plotcorr(ctab, col=rgb(colorfun((ctab+1)/2), maxColorValue=255))
+  #plotcorr(ctab, col=rgb(colorfun((ctab+1)/2), maxColorValue=255))
+  plotcorr(ctab)
 }
 
 # Plot histograms for all vars in the provided dataframe
@@ -96,7 +97,7 @@ store <- function(f, name, where = "~/")
 # Load all csv files in the provided dir as data frames
 load.all <- function(dir = ".") {
   lapply(list.files(path = dir, pattern = "*.csv$", full.names = T),
-         function(x){read.csv(pipe(paste("cut -f2-16 -d',' ", x)))})
+         function(x){read.csv(pipe(paste("cut -f2-19 -d',' ", x)))})
 }
 
 # Merge all dataframes in the provided list into one dataframe
