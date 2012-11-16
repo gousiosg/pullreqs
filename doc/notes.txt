@@ -164,3 +164,15 @@ SpringSource spring-framework java
 KentBeck junit java
 netty netty java
 
+# Select project with more than 100 pull requests which are not
+# forks of other projects
+select u.login, p.name #, p.id, count(*)
+from projects p, users u, pull_requests pr
+where p.owner_id = u.id 
+and pr.base_repo_id = p.id
+and p.language='Java'
+and not exists (select * from forks where forked_project_id=p.id)
+group by p.id
+having count(*) > 100
+order by count(*) desc
+
