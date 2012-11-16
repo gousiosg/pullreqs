@@ -27,6 +27,12 @@ project_members=`echo "select count(*) from project_members where repo_id=$id"|m
 
 pull_requests=`echo "select count(*) from pull_requests where base_repo_id=$id;"|mysql -s -u gousios -p'G30rG10sGou' -h mcheck.st.ewi.tudelft.nl gousiosdb`
 
+pr_merged=`echo "select count(pr.pullreq_id) from pull_requests pr where pr.base_repo_id = $id and exists(select prh.* from pull_request_history prh where prh.pull_request_id = pr.id and prh.action='closed') and exists(select prh.* from pull_request_history prh where prh.pull_request_id = pr.id and prh.action='merged')"|mysql -s -u gousios -p'G30rG10sGou' -h mcheck.st.ewi.tudelft.nl gousiosdb`
+
+pr_ignored=`echo "select count(pr.pullreq_id) from pull_requests pr where pr.base_repo_id = $id and exists(select prh.* from pull_request_history prh where prh.pull_request_id = pr.id and prh.action='closed') and not exists(select prh.* from pull_request_history prh where prh.pull_request_id = pr.id and prh.action='merged')"|mysql -s -u gousios -p'G30rG10sGou' -h mcheck.st.ewi.tudelft.nl gousiosdb`
+
+pr_open=`echo "select count(pr.pullreq_id) from pull_requests pr where pr.base_repo_id = $id and exists(select prh.* from pull_request_history prh where prh.pull_request_id = pr.id and prh.action='opened') and not exists(select prh.* from pull_request_history prh where prh.pull_request_id = pr.id and prh.action='closed')"|mysql -s -u gousios -p'G30rG10sGou' -h mcheck.st.ewi.tudelft.nl gousiosdb`
+
 pull_request_comments=`echo "select count(*) from pull_requests pr, pull_request_comments prc where pr.base_repo_id=$id and prc.pull_request_id = pr.id;"|mysql -s -u gousios -p'G30rG10sGou' -h mcheck.st.ewi.tudelft.nl gousiosdb`
 
 pull_request_events=`echo "select count(*) from pull_requests pr, pull_request_history prh where pr.base_repo_id=$id and prh.pull_request_id = pr.id;"|mysql -s -u gousios -p'G30rG10sGou' -h mcheck.st.ewi.tudelft.nl gousiosdb`
@@ -38,7 +44,7 @@ echo "forks: $num_forks"
 echo "issues: $issues"
 echo "issue events: $issue_events"
 echo "issue comments: $issue_comments"
-echo "pull requests: $pull_requests"
+echo "pull requests (open/merged/ignored): $pull_requests ($pr_open/$pr_merged/$pr_ignored)"
 echo "pull request comments: $pull_request_comments"
 echo "pull request events: $pull_request_events"
 
