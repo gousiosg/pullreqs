@@ -1,27 +1,16 @@
-\documentclass{sig-alternate}
+\documentclass[conference]{IEEEtran}
 
 \begin{document}
-\conferenceinfo{FSE}{2013}
 
-\title{An analysis of the pull request development model}
+\title{An exploration of pull requests on Github}
 
-\numberofauthors{2}
-\author{
-\alignauthor
-Georgios Gousios\\
-       \affaddr{Delft University of Technology}\\
-       \affaddr{The Netherlands}\\
-       \email{G.Gousios@tudelft.nl}
-\alignauthor
-Martin Pinzger\\
-       \affaddr{Delft University of Technology}\\
-       \affaddr{The Netherlands}\\
-       \email{M.Pinzger@tudelft.nl}
-\alignauthor
-Arie van Deursen\\
-       \affaddr{Delft University of Technology}\\
-       \affaddr{The Netherlands}\\
-       \email{Arie.vanDeursen@tudelft.nl}
+\author{\IEEEauthorblockN{Georgios Gousios and Martin Pinzger and Arie van
+Deursen}
+\IEEEauthorblockA{
+Software Engineering Research Group\\
+Delft University of Technology\\
+Delft, The Netherlands\\
+Email: \{g.gousios, m.pinzger, a.vandeursen\}@tudelft.nl}
 }
 
 \maketitle
@@ -30,18 +19,51 @@ Arie van Deursen\\
 Foo
 \end{abstract}
 
-\category{H.4}{Information Systems Applications}{Miscellaneous}
-\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
-\terms{Theory}
-\keywords{ACM proceedings, \LaTeX, text tagging}
+\begin{IEEEkeywords}
+
+\end{IEEEkeywords}
 
 \section{Introduction}
 
-\section{Related Work}
+Since its appearence in 2005, the Git version control system has 
+revolutionized the way distributed software development has been
+carried out. 
 
-Global software development
+A unique characteristic of Github as a code hosting site is the fact that it
+allows any user to fork any public repository.  The clone creates a public
+project that belongs to user that cloned it, so the user can modify the
+repository without being part of the development team. What is more important is
+that Github automates the selective contribution of commits from the clone to
+the source, in a mechanism called pull request.  Pull requests are not unique to
+Github; in fact, the Git software distribution includes the
+\textsf{git-request-pull} utility which provides the same functionality at the
+command line. Github pull
+requests\footnote{\url{https://github.com/blog/712-pull-requests-2-0}} improve
+Git pull requests by introducing code reviews and integration with its project
+forking and issue management facilities, effectively lowering the entry barrier
+for casual contributions. Combined, cloning and pull requests create a new
+development model, where changes are pushed to the project maintainers and go
+through code review by the community before being integrated. 
 
+In this paper, we provide a quantitative examination of the way
+pull requests work on Github. Specifically, we examine 50 large Ruby and 
+Java projects and identify common factors that affect pull request
+handling and merge time.
 
+\section{Collaborative Development models with Git}
+
+Collabora
+
+\begin{description}
+
+  \item[Shared repository] Developers share a common repository, with read and
+    write permissions. To work on it, they clone it locally and 
+
+  \item[Pull requests]
+
+  \item[Mixed]
+
+\end{description}
 
 \section{Research Questions}
 
@@ -57,20 +79,12 @@ Global software development
 
 To answer the research questions, we used the GHTorrent program to collect
 
-
-\begin{table}
-  \centering
-  \begin{footnotesize}
-  \begin{tabular}{lcccccccccccccc}
-     
-  \end{tabular}
-  \begin{footnotesize}
-  \caption{Descriptive statistics for the selected projects}
-  \label{tab:descrstats}
-\end{table}
-
 \section{Results}
 
+
+\section{Related Work}
+
+Global software development
 \section{Conclusions}
 
 
