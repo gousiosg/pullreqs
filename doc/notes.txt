@@ -68,6 +68,34 @@ where
   and u.id = p.owner_id
 order by ratio desc
 
+# Number of core team members vs commiters through pull requests
+
+select u.login, p.name, a.num_project_members, b.num_pull_request_committers
+from
+(select repo_id as project_id, count(*) as num_project_members 
+from project_members 
+group by repo_id) as a, 
+(select p.id as project_id, count(distinct u.login) as num_pull_request_committers
+from users u, pull_requests pr, projects p, pull_request_commits prc, commits c
+where
+	pr.user_id = u.id and
+	pr.base_repo_id = p.id and
+	prc.pull_request_id = pr.id and
+	c.id = prc.commit_id and
+	c.author_id = u.id and
+	u.id not in (select user_id from project_members where repo_id = p.id)
+group by p.id
+) as b, 
+users u, projects p
+where
+	a.project_id = b.project_id and
+	a.project_id = p.id and
+	u.id = p.owner_id
+group by 
+	a.project_id
+order by 
+	b.num_pull_request_committers desc
+
 # Pull request patch length (or commit number) vs time to merge. 
 # Pull request patch length (or commit number) vs acceptance rate.
 # Watches vs forks
