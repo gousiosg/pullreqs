@@ -19,6 +19,10 @@ pull_reqs=`echo "select count(*) from pull_requests where base_repo_id=$id;"|mys
 
 issues=`echo "select count(*) from issues where repo_id=$id;"|mysql -s -u gousios -p'G30rG10sGou' -h mcheck.st.ewi.tudelft.nl gousiosdb`
 
+issues_closed=`echo "select count(*) from issue_events ie, issues i where ie.issue_id=i.id and ie.action='closed' and i.repo_id=$id;"|mysql -s -u gousios -p'G30rG10sGou' -h mcheck.st.ewi.tudelft.nl gousiosdb`
+
+issues_open=$(($issues - $issues_closed))
+
 issue_events=`echo "select count(*) from issue_events ie, issues i where ie.issue_id=i.id and i.repo_id=$id"|mysql -s -u gousios -p'G30rG10sGou' -h mcheck.st.ewi.tudelft.nl gousiosdb`
 
 issue_comments=`echo "select count(*) from issue_comments ic, issues i where ic.issue_id=i.id and i.repo_id=$id"|mysql -s -u gousios -p'G30rG10sGou' -h mcheck.st.ewi.tudelft.nl gousiosdb`
@@ -41,7 +45,7 @@ watchers=`echo "select count(*) from watchers where repo_id=$id"|mysql -s -u gou
 
 echo "commits: $num_commits"
 echo "forks: $num_forks"
-echo "issues: $issues"
+echo "issues (open/closed): $issues ($issues_open/$issues_closed)"
 echo "issue events: $issue_events"
 echo "issue comments: $issue_comments"
 echo "pull requests (open/merged/ignored): $pull_requests ($pr_open/$pr_merged/$pr_ignored)"

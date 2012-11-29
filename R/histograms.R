@@ -5,6 +5,11 @@ library(ellipse)
 
 options(error=traceback)
 
+hist_x_axis_max <- function(dfs, var) {
+  # Find max value for column var across data frames
+  maxval = max(unlist(Map(function(x){max(x)}, Map(function(x){x$var}, dfs))))
+}
+
 is.integer <- function(N){
   !length(grep("[^[:digit:]]", format(N, scientific = FALSE)))
 }
@@ -55,7 +60,7 @@ plot.histogram <- function(data, var, title = var)
   }
 
   p <- ggplot(data, aes_string(x = var))
-  p <- p + geom_histogram(colour="black", fill="white") + scale_x_log10() #+ xlim(0, 10^5)
+  p <- p + geom_histogram(colour="black", fill="white") + scale_x_log10()
   p <- p + ggtitle(title)
   p
 }
