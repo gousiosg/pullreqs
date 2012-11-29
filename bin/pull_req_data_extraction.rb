@@ -81,7 +81,8 @@ Extract data for pull requests for a given repository
           "merged_at, lifetime_minutes, " <<
           "team_size_at_merge, num_commits, " <<
           "num_commit_comments, num_issue_comments, num_comments, " <<
-          #"files_added, files_deleted, files_modified, " <<
+          #"files_added, files_deleted, files_modified" <<
+          "files_changed, " <<
           #"src_files, doc_files, other_files, " <<
           "total_commits_last_month, main_team_commits_last_month, " <<
           "sloc, churn, " <<
@@ -94,8 +95,8 @@ Extract data for pull requests for a given repository
       begin
         process_pull_request(pr)
       rescue Exception => e
-        #STDERR.puts "Error processing pull_request #{pr[:github_id]}: #{e.message}"
-        raise e
+        STDERR.puts "Error processing pull_request #{pr[:github_id]}: #{e.message}"
+        #raise e
       end
     end
   end
@@ -146,6 +147,7 @@ Extract data for pull requests for a given repository
           #stats[:files_added], ", ",
           #stats[:files_deleted], ", ",
           #stats[:files_modified], ", ",
+          stats[:files_added] + stats[:files_modified] + stats[:files_deleted], ", ",
           #stats[:src_files], ", ",
           #stats[:doc_files], ", ",
           #stats[:other_files], ", ",
@@ -159,8 +161,8 @@ Extract data for pull requests for a given repository
           (num_assertions(pr[:id]).to_f / src.to_f) * 1000,
           "\n"
 
-    unless options[:extract_diffs].nil?
-      FileUtils.mkdir_p(File.join(options[:diff_dir], pr[:github_id].to_s))
+    if options[:extract_diffs]
+      FileUtils.mkdir_p(File.join(options[:diff_dir], pr[:project_name], pr[:github_id].to_s))
 
       file_diffs(pr[:id]).each {|f|
         num = 0
@@ -274,6 +276,7 @@ Extract data for pull requests for a given repository
     end
 
     raw_commits.each{ |x|
+      next if x.nil?
       result[:lines_added] += x['stats']['additions']
       result[:lines_deleted] += x['stats']['deletions']
       result[:files_added] += file_count(x, "added")
@@ -413,7 +416,6 @@ Extract data for pull requests for a given repository
 
     base_commit = db.fetch(q, pr_id).all[0][:sha]
     files = repo.lstree(base_commit, :recursive => true)
-    return files if filter.nil?
 
     files.select{|x| filter.call(x)}
   end
