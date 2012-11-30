@@ -56,12 +56,49 @@ Here are some examples of projects you may want to try:
 
 ```bash
 rails rails ruby
-mojombo jekyll ruby
-diaspora diaspora ruby
 puppetlabs puppet ruby
-kentbeck junit java
+Katello katello ruby
+rapid7 metasploit-framework ruby
+openshift crankcase ruby
+spree spree ruby
+CocoaPods Specs ruby
+gitlabhq gitlabhq ruby
+diaspora diaspora ruby
+mongoid mongoid ruby
+fog fog ruby
+resolve refinerycms ruby
+enspiral loomio ruby
+opscode chef ruby
+mitchellh vagrant ruby
+Shopify active_merchant ruby
+sanger sequencescape ruby
+JumpstartLab reading ruby
+mojombo jekyll ruby
+puppetlabs facter ruby
+imathis octopress ruby
+jbossas jboss-as java
+hornetq hornetq java
+jclouds jclouds java
+infinispan infinispan java
+neo4j community java
+Maescool Catacomb-Snatch java
+sakaiproject nakamura java
+openmicroscopy openmicroscopy java
+sonatype nexus java
+elasticsearch elasticsearch java
+SpringSource spring-integration java
+cgeo c-geo-opensource java
+dana-i2cat opennaas java
+brooklyncentral brooklyn java
+SpoutDev SpoutAPI java
+ModeShape modeshape java
 jenkinsci jenkins java
+floodlight floodlight java
+KentBeck junit java
 netty netty java
+SpringSource spring-framework java
+intridea grape ruby
+eventmachine eventmachine ruby
 ```
 
 The data extraction script extracts several variables
@@ -82,6 +119,8 @@ the pull request
 * `num_commit_comments`: Number of code review comments in the pull request
 * `num_issue_comments`: Number of general discussion comments in the pull request
 * `num_comments`: Total number of comments (`num_commit_comments + num_issue_comments`)
+* `files_changed`: Total number of files changed (added, remove, deleted) by the
+pull request
 * `total_commits_last_month`: Number of commits 
 * `main_team_commits_last_month`: Number of commits to the repository during
 the last month, excluding the commits coming from this and other pull requests
