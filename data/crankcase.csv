@@ -1,2 +1,0 @@
-pull_req_id, project_name, github_id, created_at,merged_at, lifetime_minutes, team_size_at_merge, num_commits, num_commit_comments, num_issue_comments, num_comments, total_commits_last_month, main_team_commits_last_month, sloc, churn, commits_on_files_touched, test_lines_per_1000_lines, test_cases_per_1000_lines, assertions_per_1000_lines
-
