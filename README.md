@@ -59,9 +59,7 @@ rails rails ruby
 puppetlabs puppet ruby
 Katello katello ruby
 rapid7 metasploit-framework ruby
-openshift crankcase ruby
 spree spree ruby
-CocoaPods Specs ruby
 gitlabhq gitlabhq ruby
 diaspora diaspora ruby
 mongoid mongoid ruby
@@ -78,10 +76,8 @@ puppetlabs facter ruby
 imathis octopress ruby
 jbossas jboss-as java
 hornetq hornetq java
-jclouds jclouds java
 infinispan infinispan java
 neo4j community java
-Maescool Catacomb-Snatch java
 sakaiproject nakamura java
 openmicroscopy openmicroscopy java
 sonatype nexus java
@@ -99,6 +95,21 @@ netty netty java
 SpringSource spring-framework java
 intridea grape ruby
 eventmachine eventmachine ruby
+akka akka scala
+scala scala scala
+scala-ide scala-ide scala
+harrah xsbt scala
+scalaz scalaz scala
+xbmc xmbc c
+antirez redis c
+mruby mruby c
+libgit2 libgit2 c
+zfsonlinux zfs c
+ajaxorg cloud9 javascript
+joyent node javascript
+jquery jquery javascript
+mrdoob three.js javascript
+mbostock d3 javascript
 ```
 
 The data extraction script extracts several variables
@@ -112,9 +123,14 @@ actual pull request on Github using the following URL:
 `https://github.com/#{owner}/#{repo}/pull/#{github_id}`
 * `created_at`: The epoch timestamp of the creation date of the pull request
 * `merged_at`: The epoch timestamp of the merge date of the pull request
-* `lifetime_minutes`: Number of minutes between the creation and the merge of
+* `closed_at`: The epoch timestamp of the closing date of the pull request
+* `lifetime_minutes`: Number of minutes between the creation and the close of
 the pull request
-* `team_size_at_merge`: The number of people that had committed to the repository in the period `(merged_at - 1 month, merged_at)` 
+* `mergetime_minutes`: Number of minutes between the creation and the merge of
+the pull request
+* `team_size_at_merge`: The number of people that had committed to the
+     repository directly (not through pull requests) in the period
+     `(merged_at - 3 months, merged_at)`
 * `num_commits`: Number of commits included in the pull request
 * `num_commit_comments`: Number of code review comments in the pull request
 * `num_issue_comments`: Number of general discussion comments in the pull request

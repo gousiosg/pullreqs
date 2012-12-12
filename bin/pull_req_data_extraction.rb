@@ -77,17 +77,17 @@ Extract data for pull requests for a given repository
     end
 
     # Print file header
-    print "pull_req_id, project_name, github_id, created_at," <<
-          "merged_at, lifetime_minutes, " <<
-          "team_size_at_merge, num_commits, " <<
-          "num_commit_comments, num_issue_comments, num_comments, " <<
+    print "pull_req_id,project_name,github_id,"<<
+          "created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes," <<
+          "team_size_at_merge,num_commits," <<
+          "num_commit_comments,num_issue_comments,num_comments," <<
           #"files_added, files_deleted, files_modified" <<
-          "files_changed, " <<
+          "files_changed," <<
           #"src_files, doc_files, other_files, " <<
-          "total_commits_last_month, main_team_commits_last_month, " <<
-          "sloc, churn, " <<
-          "commits_on_files_touched, " <<
-          "test_lines_per_1000_lines, test_cases_per_1000_lines, " <<
+          "total_commits_last_month,main_team_commits_last_month," <<
+          "sloc,churn," <<
+          "commits_on_files_touched," <<
+          "test_lines_per_1000_lines,test_cases_per_1000_lines," <<
           "assertions_per_1000_lines\n"
 
     # Process the list of merged pull requests
@@ -96,6 +96,7 @@ Extract data for pull requests for a given repository
         process_pull_request(pr)
       rescue Exception => e
         STDERR.puts "Error processing pull_request #{pr[:github_id]}: #{e.message}"
+        STDERR.puts e.backtrace[0]
         #raise e
       end
     end
@@ -105,18 +106,26 @@ Extract data for pull requests for a given repository
   def pull_reqs(project)
     q = <<-QUERY
     select p.name as project_name, pr.id, pr.pullreq_id as github_id,
-           a.created_at as created_at, b.created_at as merged_at,
-           timestampdiff(minute, a.created_at, b.created_at) as lifetime_minutes
+           a.created_at as created_at, b.created_at as closed_at,
+			     (select created_at
+            from pull_request_history prh1
+            where prh1.pull_request_id = pr.id
+            and prh1.action='merged' limit 1) as merged_at,
+           timestampdiff(minute, a.created_at, b.created_at) as lifetime_minutes,
+			timestampdiff(minute, a.created_at, (select created_at
+                                           from pull_request_history prh1
+                                           where prh1.pull_request_id = pr.id and prh1.action='merged' limit 1)
+      ) as mergetime_minutes
     from pull_requests pr, projects p,
          pull_request_history a, pull_request_history b
     where p.id = pr.base_repo_id
 	    and a.pull_request_id = pr.id
       and a.pull_request_id = b.pull_request_id
-      and a.action='opened' and b.action='merged'
+      and a.action='opened' and b.action='closed'
 	    and a.created_at < b.created_at
       and p.id = ?
 	  group by pr.id
-    order by merged_at desc
+    order by closed_at desc;
     QUERY
     db.fetch(q, project[:id]).all
   end
@@ -124,8 +133,10 @@ Extract data for pull requests for a given repository
   # Process a single pull request
   def process_pull_request(pr)
 
-    # Statistics accross pull request commits
+    # Statistics across pull request commits
     stats = pr_stats(pr[:id])
+
+    merged = ! pr[:merged_at].nil?
 
     # Count number of src/comment lines
     src = src_lines(pr[:id].to_f)
@@ -133,31 +144,33 @@ Extract data for pull requests for a given repository
     if src == 0 then raise Exception.new("Bad number of lines: #{0}") end
 
     # Print line for a pull request
-    print pr[:id], ", ",
-          pr[:project_name], ", ",
-          pr[:github_id], ", ",
-          Time.at(pr[:created_at]).to_i, ", ",
-          Time.at(pr[:merged_at]).to_i, ", ",
-          pr[:lifetime_minutes], ", ",
-          team_size_at_merge(pr[:id], 3)[0][:teamsize], ", ",
-          num_commits(pr[:id])[0][:commit_count], ", ",
-          num_comments(pr[:id])[0][:comment_count], ", ",
-          num_issue_comments(pr[:id])[0][:issue_comment_count], ", ",
-          num_comments(pr[:id])[0][:comment_count] + num_issue_comments(pr[:id])[0][:issue_comment_count], ", ",
-          #stats[:files_added], ", ",
-          #stats[:files_deleted], ", ",
-          #stats[:files_modified], ", ",
-          stats[:files_added] + stats[:files_modified] + stats[:files_deleted], ", ",
-          #stats[:src_files], ", ",
-          #stats[:doc_files], ", ",
-          #stats[:other_files], ", ",
-          commits_last_month(pr[:id], false)[0][:num_commits], ", ",
-          commits_last_month(pr[:id], true)[0][:num_commits], ", ",
-          src, ", ",
-          stats[:lines_added] + stats[:lines_deleted], ", ",
-          commits_on_files_touched(pr[:id], Time.at(Time.at(pr[:merged_at]).to_i - 3600 * 24 * 30)), ", ",
-          (test_lines(pr[:id]).to_f / src.to_f) * 1000, ", ",
-          (num_test_cases(pr[:id]).to_f / src.to_f) * 1000, ", ",
+    print pr[:id], ",",
+          pr[:project_name], ",",
+          pr[:github_id], ",",
+          Time.at(pr[:created_at]).to_i, ",",
+          if pr[:merged_at].nil? then '' else Time.at(pr[:merged_at]).to_i end, ",",
+          Time.at(pr[:closed_at]).to_i, ",",
+          pr[:lifetime_minutes], ",",
+          if pr[:mergetime_minutes].nil? then '' else Time.at(pr[:mergetime_minutes]).to_i end, ",",
+          team_size_at_merge(pr[:id], 3)[0][:teamsize], ",",
+          num_commits(pr[:id])[0][:commit_count], ",",
+          num_comments(pr[:id])[0][:comment_count], ",",
+          num_issue_comments(pr[:id])[0][:issue_comment_count], ",",
+          num_comments(pr[:id])[0][:comment_count] + num_issue_comments(pr[:id])[0][:issue_comment_count], ",",
+          #stats[:files_added], ",",
+          #stats[:files_deleted], ",",
+          #stats[:files_modified], ",",
+          stats[:files_added] + stats[:files_modified] + stats[:files_deleted], ",",
+          #stats[:src_files], ",",
+          #stats[:doc_files], ",",
+          #stats[:other_files], ",",
+          commits_last_month(pr[:id], false)[0][:num_commits], ",",
+          commits_last_month(pr[:id], true)[0][:num_commits], ",",
+          src, ",",
+          stats[:lines_added] + stats[:lines_deleted], ",",
+          commits_on_files_touched(pr[:id], Time.at(Time.at(if pr[:merged_at].nil? then pr[:closed_at] else pr[:merged_at] end).to_i - 3600 * 24 * 30)), ",",
+          (test_lines(pr[:id]).to_f / src.to_f) * 1000, ",",
+          (num_test_cases(pr[:id]).to_f / src.to_f) * 1000, ",",
           (num_assertions(pr[:id]).to_f / src.to_f) * 1000,
           "\n"
 
@@ -168,7 +181,7 @@ Extract data for pull requests for a given repository
         num = 0
         repo.log(f[:latest], f[:filename])[0..f[:num_versions]].map{|x| x.sha}.each { |sha|
           d = repo.tree(sha, f[:filename]).blobs[0].data
-          filename = f[:filename].gsub("/", "-") + "-" + sha[0..10] + "." + num.to_s
+          filename = f[:filename].gsub("/","-") + "-" + sha[0..10] + "." + num.to_s
           file = File.open(File.join(options[:diff_dir],
                                   pr[:github_id].to_s, filename), "w")
           file.write(d)
@@ -192,7 +205,7 @@ Extract data for pull requests for a given repository
       and p.id = pr.base_repo_id
       and prh.pull_request_id = pr.id
       and not exists (select * from pull_request_commits prc1 where prc1.commit_id = c.id)
-      and prh.action = 'merged'
+      and prh.action = IF(IFNULL((select id from pull_request_history where action='merged' and pull_request_id=pr.id), 1) <> 1, 'merged', 'closed')
       and c.created_at < prh.created_at
       and c.created_at > DATE_SUB(prh.created_at, INTERVAL #{interval_months} MONTH)
       and pr.id=?;
@@ -290,10 +303,12 @@ Extract data for pull requests for a given repository
     result
   end
 
-  # Total number of commits on the files touched by the pull request
+  # Number of commits on the files touched by the pull request during the
+  # last month
   def commits_on_files_touched(pr_id, oldest)
     commits = commit_entries(pr_id)
     parent_commits = commits.map { |c|
+      next if c.nil?
       c['parents'].map { |x| x['sha'] }
     }.flatten.uniq
 
