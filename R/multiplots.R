@@ -5,15 +5,6 @@ library(ellipse)
 
 options(error=traceback)
 
-hist_x_axis_max <- function(dfs, var) {
-  # Find max value for column var across data frames
-  maxval = max(unlist(Map(function(x){max(x)}, Map(function(x){x$var}, dfs))))
-}
-
-is.integer <- function(N){
-  !length(grep("[^[:digit:]]", format(N, scientific = FALSE)))
-}
-
 # Plot a list of plots using n columns
 multiplot <- function(plots, cols=1, title = "") {
   require(grid)
