@@ -53,16 +53,11 @@ module JavaData
   def count_sloc(files)
     files.map { |f|
       buff = repo.blob(f[:sha]).data
-      # Count lines except empty and single line comments
-      count_file_lines(buff.lines, lambda{|l| l.match(/^\s*\/\//).nil?}) -
-          # Count multiline comments
-          count_multiline_comments(buff)
+      # Count lines except empty ones
+      count_file_lines(buff.lines, lambda{|l| not l.strip.empty?}) -
+          count_single_line_comments(buff, /^\s*\/\//) -
+          count_multiline_comments(buff, /\/\*(?:.|[\r\n])*?\*\//)
     }.reduce(0){|acc, x| acc + x}
   end
 
-  def count_multiline_comments(file_str)
-    file_str.scan(/\/\*(?:.|[\r\n])*?\*\//).map { |x|
-      x.lines.count
-    }.reduce(0){|acc, x| acc + x}
-  end
 end

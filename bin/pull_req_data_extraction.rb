@@ -10,6 +10,8 @@ require 'pp'
 
 require 'java_pull_req_data'
 require 'ruby_pull_req_data'
+require 'scala'
+require 'c'
 
 class PullReqDataExtraction < GHTorrent::Command
 
@@ -74,6 +76,8 @@ Extract data for pull requests for a given repository
     case ARGV[2]
       when "ruby" then self.extend(RubyData)
       when "java" then self.extend(JavaData)
+      when "c" then self.extend(CData)
+      when "scala" then self.extend(ScalaData)
     end
 
     # Print file header
@@ -96,7 +100,7 @@ Extract data for pull requests for a given repository
         process_pull_request(pr)
       rescue Exception => e
         STDERR.puts "Error processing pull_request #{pr[:github_id]}: #{e.message}"
-        STDERR.puts e.backtrace[0]
+        STDERR.puts e.backtrace
         #raise e
       end
     end
@@ -148,10 +152,10 @@ Extract data for pull requests for a given repository
           pr[:project_name], ",",
           pr[:github_id], ",",
           Time.at(pr[:created_at]).to_i, ",",
-          if pr[:merged_at].nil? then '' else Time.at(pr[:merged_at]).to_i end, ",",
+          unless merged then '' else Time.at(pr[:merged_at]).to_i end, ",",
           Time.at(pr[:closed_at]).to_i, ",",
           pr[:lifetime_minutes], ",",
-          if pr[:mergetime_minutes].nil? then '' else Time.at(pr[:mergetime_minutes]).to_i end, ",",
+          unless merged then '' else Time.at(pr[:mergetime_minutes]).to_i end, ",",
           team_size_at_merge(pr[:id], 3)[0][:teamsize], ",",
           num_commits(pr[:id])[0][:commit_count], ",",
           num_comments(pr[:id])[0][:comment_count], ",",
@@ -168,7 +172,7 @@ Extract data for pull requests for a given repository
           commits_last_month(pr[:id], true)[0][:num_commits], ",",
           src, ",",
           stats[:lines_added] + stats[:lines_deleted], ",",
-          commits_on_files_touched(pr[:id], Time.at(Time.at(if pr[:merged_at].nil? then pr[:closed_at] else pr[:merged_at] end).to_i - 3600 * 24 * 30)), ",",
+          commits_on_files_touched(pr[:id], Time.at(Time.at(unless merged then pr[:closed_at] else pr[:merged_at] end).to_i - 3600 * 24 * 30)), ",",
           (test_lines(pr[:id]).to_f / src.to_f) * 1000, ",",
           (num_test_cases(pr[:id]).to_f / src.to_f) * 1000, ",",
           (num_assertions(pr[:id]).to_f / src.to_f) * 1000,
@@ -308,7 +312,9 @@ Extract data for pull requests for a given repository
   def commits_on_files_touched(pr_id, oldest)
     commits = commit_entries(pr_id)
     parent_commits = commits.map { |c|
-      next if c.nil?
+      if c.nil?
+        next
+      end
       c['parents'].map { |x| x['sha'] }
     }.flatten.uniq
 
@@ -488,6 +494,18 @@ Extract data for pull requests for a given repository
       spawn("git clone git://github.com/#{user}/#{repo}.git #{checkout_dir}")
       Grit::Repo.new(checkout_dir)
     end
+  end
+
+  def count_multiline_comments(file_str, comment_regexp)
+    file_str.scan(comment_regexp).map { |x|
+      x.lines.count
+    }.reduce(0){|acc, x| acc + x}
+  end
+
+  def count_single_line_comments(file_str, comment_regexp)
+    file_str.split("\n").select {|l|
+      l.match(comment_regexp)
+    }.size
   end
 
   def src_files(pr_id)
