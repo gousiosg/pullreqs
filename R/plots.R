@@ -1,7 +1,5 @@
 library(ggplot2)
 
-
-
 # Plot a stack barchart displaying the 
 plot.percentage.merged <- function(dfs) 
 {
@@ -37,19 +35,23 @@ plot.accept.lifetime.boxplot <- function(dfs, projects)
 {
   ggplot(data.accept.lifetime(dfs, projects), aes(factor(name), lifetime)) +
     geom_boxplot() +
-    ylim(0, 3000)
+    ylim(0, 3000) +
+    xlab("Project") +
+    ylab("Lifetime (minutes)")
 }
 
 plot.accept.lifetime.freq <- function(dfs, projects)
 {
   ggplot(data.accept.lifetime(dfs, projects), aes(x=lifetime, colour = name)) + 
     geom_density(alpha = 0.2) + 
-    xlim(0, 5000)
+    xlim(0, 5000) +
+    xlab("Lifetime (minutes)")
 }
 
 plot.accept.lifetime.histogram <- function(dfs, projects)
 {
   ggplot(data.accept.lifetime(dfs, projects), aes(x=lifetime, fill = name)) + 
     geom_bar() +
-    xlim(0, 3000)
+    xlim(0, 3000) +
+    xlab("Lifetime (minutes)")
 }
