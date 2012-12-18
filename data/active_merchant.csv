@@ -1,4 +1,4 @@
-pull_req_id, project_name, github_id, created_at,merged_at, lifetime_minutes, team_size_at_merge, num_commits, num_commit_comments, num_issue_comments, num_comments, total_commits_last_month, main_team_commits_last_month, sloc, churn, commits_on_files_touched, test_lines_per_1000_lines, test_cases_per_1000_lines, assertions_per_1000_lines
+pull_req_id, project_name, github_id, created_at,merged_at, lifetime_minutes, team_size_at_merge, num_commits, num_commit_comments, num_issue_comments, num_comments, files_changed, total_commits_last_month, main_team_commits_last_month, sloc, churn, commits_on_files_touched, test_lines_per_1000_lines, test_cases_per_1000_lines, assertions_per_1000_lines
 485091, active_merchant, 501, 1352140117, 1352140199, 1, 27, 3, 0, 0, 0, 106, 83, 35, 25914, 12, 124, 1371.536621131435, 114.53268503511616, 377.74947904607546
 485095, active_merchant, 492, 1351716005, 1351867884, 2531, 27, 1, 0, 2, 2, 1, 81, 33, 25500, 2, 1, 1378.5882352941176, 114.8235294117647, 379.33333333333337
 485092, active_merchant, 497, 1351859397, 1351859461, 1, 27, 2, 0, 0, 0, 3, 80, 32, 25513, 20, 10, 1377.8857837181044, 114.7650217536158, 379.1400462509309
