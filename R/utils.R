@@ -3,11 +3,6 @@ hist_x_axis_max <- function(dfs, var) {
   maxval = max(unlist(Map(function(x){max(x)}, Map(function(x){x$var}, dfs))))
 }
 
-# Names of all projects in dataframes
-projects <- function(dfs) {
-  nam
-}
-
 ### Data conversions
 
 # Trim whitespace from strings
@@ -34,11 +29,22 @@ merge.dataframes <- function(dataframes) {
   merged
 }
 
-# Store a plot as PDF. By default, will store to user's home directory
-store <- function(printer, data, cols, name, where = "~/")
+
+# Saving plots as PDFs
+
+# Store multiple plots on the same PDF
+store.multi <- function(printer, data, cols, name, where = "~/")
 {
   pdf(paste(where, paste(name, "pdf", sep=".")), width = 11.7, height = 16.5, title = name)
   printer <- match.fun(printer)
   printer(data, cols)
+  dev.off()
+}
+
+# Store a plot as PDF. By default, will store to user's home directory
+store.pdf <- function(data, where, name)
+{
+  pdf(paste(where,name, sep="/"))
+  plot(data)
   dev.off()
 }

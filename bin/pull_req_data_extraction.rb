@@ -420,8 +420,10 @@ Extract data for pull requests for a given repository
     QUERY
     commits = db.fetch(q, pr_id).all
 
-    commits.map{ |x|
-      mongo.find(:commits, {:sha => x[:sha]})[0]
+    commits.reduce([]){ |acc, x|
+      a = mongo.find(:commits, {:sha => x[:sha]})[0]
+      acc << a unless a.nil?
+      acc
     }
   end
 

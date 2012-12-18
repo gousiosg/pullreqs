@@ -32,6 +32,8 @@ EPSTOPDF?=epstopdf
 # pybcompact location
 PYBCOMPACT?=pybcompact.py
 
+PICS=figs
+
 ## Filename substitutions for genetated files
 
 # Output file
