@@ -1,25 +1,562 @@
-pull_req_id, project_name, github_id, created_at,merged_at, lifetime_minutes, team_size_at_merge, num_commits, num_commit_comments, num_issue_comments, num_comments, files_changed, total_commits_last_month, main_team_commits_last_month, sloc, churn, commits_on_files_touched, test_lines_per_1000_lines, test_cases_per_1000_lines, assertions_per_1000_lines
-54242, spring-framework, 160, 1349641556, 1349641758, 3, 13, 1, 0, 2, 2, 27, 143, 98, 183053, 2115, 33, 1204.186765581553, 53.54187038726489, 144.00201034673017
-454241, spring-framework, 159, 1349448303, 1349452381, 67, 13, 1, 0, 0, 0, 1, 169, 113, 183054, 10, 2, 1203.978061118577, 53.5251892884067, 143.9247435183061
-254975, spring-framework, 121, 1345462098, 1345462466, 6, 15, 0, 0, 0, 0, 0, 67, 11, 180533, 0, 0, 1165.199714179679, 51.85201597491871, 141.7635556934189
-506898, spring-framework, 111, 1343492536, 1343492615, 1, 15, 1, 0, 0, 0, 7, 64, 40, 180264, 327, 25, 1160.664358940221, 51.75742244707762, 141.49247769937426
-226309, spring-framework, 109, 1343201937, 1343205106, 52, 15, 0, 0, 0, 0, 0, 87, 69, 180241, 0, 0, 1154.5763727453798, 51.708545780371836, 141.14435672238838
-7272, spring-framework, 105, 1342028619, 1342032267, 60, 15, 0, 0, 2, 2, 0, 226, 186, 179907, 0, 0, 1155.319137109729, 51.71005019259951, 141.20628991645685
-159665, spring-framework, 95, 1339683624, 1339743449, 997, 17, 1, 0, 0, 0, 1, 153, 124, 179170, 1, 9, 1157.0854495730312, 51.760897471674944, 141.35737009544007
-142664, spring-framework, 86, 1338479328, 1338549674, 1172, 16, 1, 0, 2, 2, 6, 158, 140, 179135, 112, 0, 1156.9319228514807, 51.74309878024953, 141.38498897479553
-121492, spring-framework, 77, 1336791769, 1336798207, 107, 14, 1, 0, 1, 1, 18, 61, 42, 178183, 92, 22, 1155.6770286727692, 51.71088150945938, 141.1021253430462
-117986, spring-framework, 76, 1336576933, 1336577140, 3, 13, 1, 0, 0, 0, 14, 41, 23, 177867, 1138, 21, 1154.9922132829586, 51.67344139160159, 140.9423895382505
-113000, spring-framework, 73, 1336155344, 1336155378, 0, 14, 1, 0, 0, 0, 12, 41, 23, 177674, 1247, 17, 1155.7571732498845, 51.7126872812004, 141.00543692380427
-94967, spring-framework, 69, 1334776052, 1334776609, 9, 16, 1, 0, 0, 0, 27, 40, 24, 176940, 2604, 31, 1156.9289024528089, 51.69548999660902, 141.17214875098904
-299189, spring-framework, 67, 1334598194, 1334640410, 703, 16, 1, 0, 1, 1, 1, 38, 22, 176940, 6, 3, 1156.9289024528089, 51.69548999660902, 141.17214875098904
-291295, spring-framework, 61, 1333119460, 1334640221, 25346, 16, 3, 0, 3, 3, 7, 38, 22, 176940, 54, 8, 1156.9289024528089, 51.69548999660902, 141.17214875098904
-506902, spring-framework, 50, 1330892953, 1330955984, 1050, 16, 1, 0, 1, 1, 3, 142, 102, 176913, 22, 3, 1156.8567601024233, 51.66381215625759, 141.13151662116408
-506903, spring-framework, 48, 1330707816, 1330710904, 51, 16, 1, 0, 2, 2, 1, 148, 105, 176913, 4, 1, 1156.8567601024233, 51.66381215625759, 141.13151662116408
-272823, spring-framework, 33, 1328812521, 1329056361, 4064, 12, 2, 0, 0, 0, 7, 131, 83, 176647, 340, 7, 1156.6966888766863, 51.65669385837291, 141.1175961097556
-273880, spring-framework, 25, 1328302282, 1329056235, 12565, 12, 1, 0, 2, 2, 1, 131, 83, 176647, 15, 1, 1156.6966888766863, 51.65669385837291, 141.1175961097556
-272006, spring-framework, 16, 1326202204, 1328695099, 41548, 11, 1, 0, 3, 3, 2, 102, 58, 176299, 103, 2, 1156.705369854622, 51.66790509305214, 140.85162139320133
-270182, spring-framework, 21, 1327538062, 1328130383, 9872, 9, 2, 0, 0, 0, 4, 81, 41, 176226, 664, 4, 1156.5603259450932, 51.643911795081316, 140.85322256647714
-268324, spring-framework, 22, 1327681042, 1328019602, 5642, 9, 23, 0, 0, 0, 5982, 73, 36, 176218, 1724348, 5994, 1156.3858402660342, 51.64058155239533, 140.81989354095495
-506911, spring-framework, 19, 1327031832, 1327065690, 564, 9, 1, 0, 1, 1, 3, 83, 52, 176019, 133, 11, 1157.2557507996296, 51.68760190661236, 140.96205523267375
-506915, spring-framework, 12, 1325799270, 1325862329, 1050, 9, 0, 0, 3, 3, 0, 112, 98, 175932, 0, 0, 1157.2653070504514, 51.667689789236746, 140.90102994338721
-506918, spring-framework, 8, 1324382194, 1324382269, 1, 9, 1, 0, 0, 0, 1, 207, 151, 175898, 58, 1, 1156.9716540267657, 51.65493638358594, 140.86004388907207
+Updating client properties
+GHTorrent version: 0.6
+D, [2012-12-23T15:12:45.068397 #17867] DEBUG -- : GHTorrent: User SpringSource exists
+D, [2012-12-23T15:12:45.068674 #17867] DEBUG -- : GHTorrent: Transaction committed (1 ms)
+D, [2012-12-23T15:12:45.090469 #17867] DEBUG -- : GHTorrent: User SpringSource exists
+D, [2012-12-23T15:12:45.091159 #17867] DEBUG -- : GHTorrent: Repo SpringSource/spring-framework exists
+D, [2012-12-23T15:12:45.091388 #17867] DEBUG -- : GHTorrent: Transaction committed (2 ms)
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size_at_merge,num_commits,num_commit_comments,num_issue_comments,num_comments,files_changed,total_commits_last_month,main_team_commits_last_month,sloc,churn,commits_on_files_touched,test_lines_per_1000_lines,test_cases_per_1000_lines,assertions_per_1000_lines
+D, [2012-12-23T15:12:50.951248 #17867] DEBUG -- : Updating 25a7136..aa91449
+
+D, [2012-12-23T15:12:50.951352 #17867] DEBUG -- : Fast-forward
+
+D, [2012-12-23T15:12:51.022023 #17867] DEBUG -- :  .gitignore                                         |    1 -
+
+D, [2012-12-23T15:12:51.022104 #17867] DEBUG -- :  build.gradle                                       |   69 +-
+
+D, [2012-12-23T15:12:51.022132 #17867] DEBUG -- :  gradle.properties                                  |    3 +-
+
+D, [2012-12-23T15:12:51.022166 #17867] DEBUG -- :  gradle/jdiff.gradle                                |   11 +-
+
+D, [2012-12-23T15:12:51.022200 #17867] DEBUG -- :  .../aop/aspectj/AbstractAspectJAdvice.java         |   19 +-
+
+D, [2012-12-23T15:12:51.022229 #17867] DEBUG -- :  .../aspectj/annotation/AspectJProxyFactory.java    |    4 +-
+
+D, [2012-12-23T15:12:51.022256 #17867] DEBUG -- :  .../AbstractAdvisingBeanPostProcessor.java         |    2 +-
+
+D, [2012-12-23T15:12:51.022277 #17867] DEBUG -- :  .../autoproxy/AbstractAutoProxyCreator.java        |   39 +-
+
+D, [2012-12-23T15:12:51.022300 #17867] DEBUG -- :  .../interceptor/AsyncExecutionAspectSupport.java   |    4 +-
+
+D, [2012-12-23T15:12:51.022325 #17867] DEBUG -- :  .../annotation/AnnotationMethodMatcher.java        |   19 +-
+
+D, [2012-12-23T15:12:51.022349 #17867] DEBUG -- :  .../aop/target/ThreadLocalTargetSource.java        |   13 +-
+
+D, [2012-12-23T15:12:51.022373 #17867] DEBUG -- :  spring-aspects/aspects.gradle                      |    6 +-
+
+D, [2012-12-23T15:12:51.022397 #17867] DEBUG -- :  .../aspectj/SpringConfiguredConfiguration.java     |    2 +-
+
+D, [2012-12-23T15:12:51.022424 #17867] DEBUG -- :  .../mock/staticmock/MockStaticEntityMethods.java   |    6 +-
+
+D, [2012-12-23T15:12:51.022452 #17867] DEBUG -- :  .../java/org/springframework/beans/BeanUtils.java  |    3 +-
+
+D, [2012-12-23T15:12:51.022473 #17867] DEBUG -- :  .../beans/CachedIntrospectionResults.java          |   28 +-
+
+D, [2012-12-23T15:12:51.022498 #17867] DEBUG -- :  .../springframework/beans/ExtendedBeanInfo.java    |   15 +-
+
+D, [2012-12-23T15:12:51.022520 #17867] DEBUG -- :  .../AutowiredAnnotationBeanPostProcessor.java      |    4 +-
+
+D, [2012-12-23T15:12:51.022543 #17867] DEBUG -- :  .../InitDestroyAnnotationBeanPostProcessor.java    |   88 +-
+
+D, [2012-12-23T15:12:51.022574 #17867] DEBUG -- :  .../factory/annotation/InjectionMetadata.java      |   45 +-
+
+D, [2012-12-23T15:12:51.022601 #17867] DEBUG -- :  .../RequiredAnnotationBeanPostProcessor.java       |   18 +-
+
+D, [2012-12-23T15:12:51.022631 #17867] DEBUG -- :  .../beans/factory/config/DeprecatedBeanWarner.java |   43 +-
+
+D, [2012-12-23T15:12:51.022657 #17867] DEBUG -- :  .../factory/config/PropertyOverrideConfigurer.java |   18 +-
+
+D, [2012-12-23T15:12:51.022682 #17867] DEBUG -- :  .../config/PropertyPlaceholderConfigurer.java      |    4 +-
+
+D, [2012-12-23T15:12:51.022709 #17867] DEBUG -- :  .../AbstractAutowireCapableBeanFactory.java        |    4 +-
+
+D, [2012-12-23T15:12:51.022735 #17867] DEBUG -- :  .../beans/factory/support/AbstractBeanFactory.java |   18 +-
+
+D, [2012-12-23T15:12:51.022756 #17867] DEBUG -- :  .../support/DefaultListableBeanFactory.java        |   10 +-
+
+D, [2012-12-23T15:12:51.022783 #17867] DEBUG -- :  .../support/DefaultSingletonBeanRegistry.java      |   18 +-
+
+D, [2012-12-23T15:12:51.022810 #17867] DEBUG -- :  .../support/FactoryBeanRegistrySupport.java        |    4 +-
+
+D, [2012-12-23T15:12:51.022835 #17867] DEBUG -- :  .../beans/factory/support/RootBeanDefinition.java  |   26 +-
+
+D, [2012-12-23T15:12:51.022856 #17867] DEBUG -- :  .../support/SimpleBeanDefinitionRegistry.java      |    4 +-
+
+D, [2012-12-23T15:12:51.022885 #17867] DEBUG -- :  .../xml/DefaultNamespaceHandlerResolver.java       |    4 +-
+
+D, [2012-12-23T15:12:51.022909 #17867] DEBUG -- :  .../beans/factory/xml/PluggableSchemaResolver.java |    4 +-
+
+D, [2012-12-23T15:12:51.022934 #17867] DEBUG -- :  .../beans/ExtendedBeanInfoTests.java               |   20 +-
+
+D, [2012-12-23T15:12:51.022958 #17867] DEBUG -- :  .../factory/config/DeprecatedBeanWarnerTests.java  |   17 +-
+
+D, [2012-12-23T15:12:51.022983 #17867] DEBUG -- :  .../scheduling/quartz/SchedulerAccessor.java       |   10 +-
+
+D, [2012-12-23T15:12:51.023005 #17867] DEBUG -- :  .../annotation/AnnotationCacheOperationSource.java |   44 +-
+
+D, [2012-12-23T15:12:51.023028 #17867] DEBUG -- :  .../cache/annotation/CacheEvict.java               |    6 +-
+
+D, [2012-12-23T15:12:51.023049 #17867] DEBUG -- :  .../annotation/SpringCacheAnnotationParser.java    |   17 +-
+
+D, [2012-12-23T15:12:51.023074 #17867] DEBUG -- :  .../cache/concurrent/ConcurrentMapCache.java       |    4 +-
+
+D, [2012-12-23T15:12:51.023100 #17867] DEBUG -- :  .../concurrent/ConcurrentMapCacheManager.java      |    4 +-
+
+D, [2012-12-23T15:12:51.023123 #17867] DEBUG -- :  .../AbstractFallbackCacheOperationSource.java      |    7 +-
+
+D, [2012-12-23T15:12:51.023145 #17867] DEBUG -- :  .../interceptor/CacheOperationSourcePointcut.java  |    5 +-
+
+D, [2012-12-23T15:12:51.023170 #17867] DEBUG -- :  .../cache/interceptor/ExpressionEvaluator.java     |   12 +-
+
+D, [2012-12-23T15:12:51.023194 #17867] DEBUG -- :  .../cache/support/AbstractCacheManager.java        |    9 +-
+
+D, [2012-12-23T15:12:51.023220 #17867] DEBUG -- :  .../cache/support/NoOpCacheManager.java            |   62 +-
+
+D, [2012-12-23T15:12:51.023244 #17867] DEBUG -- :  .../AnnotationConfigApplicationContext.java        |    6 +
+
+D, [2012-12-23T15:12:51.023267 #17867] DEBUG -- :  ...lassPathScanningCandidateComponentProvider.java |   48 +-
+
+D, [2012-12-23T15:12:51.023298 #17867] DEBUG -- :  .../CommonAnnotationBeanPostProcessor.java         |    6 +-
+
+D, [2012-12-23T15:12:51.023327 #17867] DEBUG -- :  .../annotation/ComponentScanAnnotationParser.java  |   16 +-
+
+D, [2012-12-23T15:12:51.023351 #17867] DEBUG -- :  .../ConfigurationClassPostProcessor.java           |    4 +
+
+D, [2012-12-23T15:12:51.023376 #17867] DEBUG -- :  .../event/AbstractApplicationEventMulticaster.java |    2 +-
+
+D, [2012-12-23T15:12:51.023402 #17867] DEBUG -- :  .../expression/StandardBeanExpressionResolver.java |    6 +-
+
+D, [2012-12-23T15:12:51.023429 #17867] DEBUG -- :  .../support/AbstractApplicationContext.java        |    2 +-
+
+D, [2012-12-23T15:12:51.023455 #17867] DEBUG -- :  .../datetime/joda/DateTimeFormatterFactory.java    |    8 +-
+
+D, [2012-12-23T15:12:51.023482 #17867] DEBUG -- :  .../support/FormattingConversionService.java       |   24 +-
+
+D, [2012-12-23T15:12:51.023506 #17867] DEBUG -- :  .../support/WebSphereMBeanServerFactoryBean.java   |    5 +-
+
+D, [2012-12-23T15:12:51.023534 #17867] DEBUG -- :  .../scheduling/config/ScheduledTaskRegistrar.java  |    2 +-
+
+D, [2012-12-23T15:12:51.023562 #17867] DEBUG -- :  ...va => AnnotationCacheOperationSourceTests.java} |    2 +-
+
+D, [2012-12-23T15:12:51.023591 #17867] DEBUG -- :  .../springframework/core/CollectionFactory.java    |    2 +-
+
+D, [2012-12-23T15:12:51.023614 #17867] DEBUG -- :  .../LocalVariableTableParameterNameDiscoverer.java |   11 +-
+
+D, [2012-12-23T15:12:51.023644 #17867] DEBUG -- :  .../org/springframework/core/MethodParameter.java  |   97 +--
+
+D, [2012-12-23T15:12:51.023671 #17867] DEBUG -- :  .../springframework/core/SimpleAliasRegistry.java  |    4 +-
+
+D, [2012-12-23T15:12:51.023696 #17867] DEBUG -- :  .../convert/converter/ConvertingComparator.java    |   14 +-
+
+D, [2012-12-23T15:12:51.023720 #17867] DEBUG -- :  .../convert/support/GenericConversionService.java  |   93 +-
+
+D, [2012-12-23T15:12:51.023743 #17867] DEBUG -- :  .../org/springframework/core/io/VfsResource.java   |    1 -
+
+D, [2012-12-23T15:12:51.023828 #17867] DEBUG -- :  .../classreading/CachingMetadataReaderFactory.java |   19 +-
+
+D, [2012-12-23T15:12:51.023857 #17867] DEBUG -- :  .../org/springframework/util/AntPathMatcher.java   |   94 ++-
+
+D, [2012-12-23T15:12:51.023881 #17867] DEBUG -- :  .../springframework/util/AntPathStringMatcher.java |  120 ---
+
+D, [2012-12-23T15:12:51.023906 #17867] DEBUG -- :  .../springframework/util/CachingMapDecorator.java  |    2 +
+
+D, [2012-12-23T15:12:51.023931 #17867] DEBUG -- :  .../util/ConcurrentReferenceHashMap.java           |    4 +-
+
+D, [2012-12-23T15:12:51.023957 #17867] DEBUG -- :  .../org/springframework/util/xml/StaxUtils.java    |    4 +-
+
+D, [2012-12-23T15:12:51.024034 #17867] DEBUG -- :  .../springframework/core/MethodParameterTests.java |   31 +-
+
+D, [2012-12-23T15:12:51.024063 #17867] DEBUG -- :  .../convert/support/DefaultConversionTests.java    |   34 +-
+
+D, [2012-12-23T15:12:51.024088 #17867] DEBUG -- :  .../support/GenericConversionServiceTests.java     |   15 +-
+
+D, [2012-12-23T15:12:51.024119 #17867] DEBUG -- :  .../common/TemplateAwareExpressionParser.java      |    1 -
+
+D, [2012-12-23T15:12:51.024144 #17867] DEBUG -- :  .../expression/spel/ast/Indexer.java               |  439 ++++----
+
+D, [2012-12-23T15:12:51.024170 #17867] DEBUG -- :  .../spel/support/ReflectivePropertyAccessor.java   |  173 ++--
+
+D, [2012-12-23T15:12:51.024195 #17867] DEBUG -- :  .../expression/spel/SpelReproTests.java            |  338 ++++---
+
+D, [2012-12-23T15:12:51.024220 #17867] DEBUG -- :  .../jdbc/core/SqlRowSetResultSetExtractor.java     |    5 +-
+
+D, [2012-12-23T15:12:51.024244 #17867] DEBUG -- :  .../datasource/init/ResourceDatabasePopulator.java |   10 +-
+
+D, [2012-12-23T15:12:51.024268 #17867] DEBUG -- :  .../jdbc/support/lob/OracleLobHandler.java         |   51 +-
+
+D, [2012-12-23T15:12:51.024294 #17867] DEBUG -- :  .../nativejdbc/WebSphereNativeJdbcExtractor.java   |    4 +-
+
+D, [2012-12-23T15:12:51.024318 #17867] DEBUG -- :  .../listener/AbstractJmsListeningContainer.java    |    1 +
+
+D, [2012-12-23T15:12:51.024347 #17867] DEBUG -- :  .../listener/DefaultMessageListenerContainer.java  |   13 +-
+
+D, [2012-12-23T15:12:51.024373 #17867] DEBUG -- :  .../destination/JndiDestinationResolver.java       |    4 +-
+
+D, [2012-12-23T15:12:51.024423 #17867] DEBUG -- :  .../support/OpenSessionInViewInterceptor.java      |   13 +-
+
+D, [2012-12-23T15:12:51.024450 #17867] DEBUG -- :  .../hibernate3/FilterDefinitionFactoryBean.java    |    7 +-
+
+D, [2012-12-23T15:12:51.024477 #17867] DEBUG -- :  .../orm/hibernate3/HibernateAccessor.java          |    3 +-
+
+D, [2012-12-23T15:12:51.024503 #17867] DEBUG -- :  .../orm/hibernate3/HibernateOperations.java        |    2 -
+
+D, [2012-12-23T15:12:51.024531 #17867] DEBUG -- :  .../orm/hibernate3/LocalSessionFactoryBean.java    |    2 +-
+
+D, [2012-12-23T15:12:51.024562 #17867] DEBUG -- :  .../orm/hibernate3/SessionHolder.java              |   23 +-
+
+D, [2012-12-23T15:12:51.024591 #17867] DEBUG -- :  .../org/springframework/orm/jdo/JdoOperations.java |    2 -
+
+D, [2012-12-23T15:12:51.024616 #17867] DEBUG -- :  .../PersistenceAnnotationBeanPostProcessor.java    |    6 +-
+
+D, [2012-12-23T15:12:51.024640 #17867] DEBUG -- :  .../test/util/XmlExpectationsHelper.java           |    1 -
+
+D, [2012-12-23T15:12:51.024665 #17867] DEBUG -- :  .../test/web/client/MockRestServiceServer.java     |    1 +
+
+D, [2012-12-23T15:12:51.024691 #17867] DEBUG -- :  .../client/response/MockRestResponseCreators.java  |    4 +-
+
+D, [2012-12-23T15:12:51.024716 #17867] DEBUG -- :  .../test/web/servlet/ResultMatcher.java            |    2 +-
+
+D, [2012-12-23T15:12:51.024739 #17867] DEBUG -- :  .../servlet/request/MockMvcRequestBuilders.java    |    4 +-
+
+D, [2012-12-23T15:12:51.024765 #17867] DEBUG -- :  .../web/servlet/result/ContentResultMatchers.java  |    2 -
+
+D, [2012-12-23T15:12:51.024789 #17867] DEBUG -- :  .../web/servlet/result/JsonPathResultMatchers.java |    2 +-
+
+D, [2012-12-23T15:12:51.024818 #17867] DEBUG -- :  .../web/servlet/setup/DefaultMockMvcBuilder.java   |    5 +-
+
+D, [2012-12-23T15:12:51.024843 #17867] DEBUG -- :  .../web-resources/WEB-INF/layouts/tiles.xml        |    5 +-
+
+D, [2012-12-23T15:12:51.024865 #17867] DEBUG -- :  .../META-INF/web-resources/WEB-INF/views/tiles.xml |   11 +-
+
+D, [2012-12-23T15:12:51.024888 #17867] DEBUG -- :  .../springframework/mock/env/MockEnvironment.java  |    2 +-
+
+D, [2012-12-23T15:12:51.024913 #17867] DEBUG -- :  .../mock/jndi/ExpectedLookupTemplate.java          |   18 +-
+
+D, [2012-12-23T15:12:51.024937 #17867] DEBUG -- :  .../mock/web/MockServletContext.java               |    4 +-
+
+D, [2012-12-23T15:12:51.024961 #17867] DEBUG -- :  .../org/springframework/test/AssertThrows.java     |    2 +-
+
+D, [2012-12-23T15:12:51.024990 #17867] DEBUG -- :  .../springframework/test/context/ContextCache.java |   17 +-
+
+D, [2012-12-23T15:12:51.025015 #17867] DEBUG -- :  ...tractTransactionalJUnit4SpringContextTests.java |    2 +-
+
+D, [2012-12-23T15:12:51.025043 #17867] DEBUG -- :  .../support/AbstractGenericContextLoader.java      |    2 +-
+
+D, [2012-12-23T15:12:51.025071 #17867] DEBUG -- :  .../support/AnnotationConfigContextLoader.java     |    2 +-
+
+D, [2012-12-23T15:12:51.025096 #17867] DEBUG -- :  .../AnnotationConfigContextLoaderUtils.java        |    4 +-
+
+D, [2012-12-23T15:12:51.025119 #17867] DEBUG -- :  ...tractTransactionalTestNGSpringContextTests.java |    2 +-
+
+D, [2012-12-23T15:12:51.025140 #17867] DEBUG -- :  .../TransactionalTestExecutionListener.java        |    5 +-
+
+D, [2012-12-23T15:12:51.025166 #17867] DEBUG -- :  .../web/AbstractGenericWebContextLoader.java       |  114 ++-
+
+D, [2012-12-23T15:12:51.025189 #17867] DEBUG -- :  .../web/AnnotationConfigWebContextLoader.java      |   36 +-
+
+D, [2012-12-23T15:12:51.025215 #17867] DEBUG -- :  .../context/web/GenericXmlWebContextLoader.java    |    8 +-
+
+D, [2012-12-23T15:12:51.025240 #17867] DEBUG -- :  .../context/web/ServletTestExecutionListener.java  |   39 +-
+
+D, [2012-12-23T15:12:51.025262 #17867] DEBUG -- :  .../test/context/web/WebAppConfiguration.java      |   29 +-
+
+D, [2012-12-23T15:12:51.025285 #17867] DEBUG -- :  .../context/web/WebMergedContextConfiguration.java |   44 +-
+
+D, [2012-12-23T15:12:51.025309 #17867] DEBUG -- :  .../GlassFishWorkManagerTaskExecutor.java          |    3 +-
+
+D, [2012-12-23T15:12:51.025332 #17867] DEBUG -- :  .../AnnotationTransactionAttributeSource.java      |   33 +-
+
+D, [2012-12-23T15:12:51.025354 #17867] DEBUG -- :  .../Ejb3TransactionAnnotationParser.java           |   13 +-
+
+D, [2012-12-23T15:12:51.025378 #17867] DEBUG -- :  .../SpringTransactionAnnotationParser.java         |   12 +-
+
+D, [2012-12-23T15:12:51.025401 #17867] DEBUG -- :  ...AbstractFallbackTransactionAttributeSource.java |    4 +-
+
+D, [2012-12-23T15:12:51.025424 #17867] DEBUG -- :  .../transaction/jta/OC4JJtaTransactionManager.java |    3 -
+
+D, [2012-12-23T15:12:51.025453 #17867] DEBUG -- :  .../http/client/support/ProxyFactoryBean.java      |    4 +-
+
+D, [2012-12-23T15:12:51.025476 #17867] DEBUG -- :  .../converter/GenericHttpMessageConverter.java     |    1 -
+
+D, [2012-12-23T15:12:51.025502 #17867] DEBUG -- :  .../json/Jackson2ObjectMapperFactoryBean.java      |    8 +-
+
+D, [2012-12-23T15:12:51.025528 #17867] DEBUG -- :  .../json/JacksonObjectMapperFactoryBean.java       |   28 +-
+
+D, [2012-12-23T15:12:51.025551 #17867] DEBUG -- :  .../xml/AbstractJaxb2HttpMessageConverter.java     |   22 +-
+
+D, [2012-12-23T15:12:51.025818 #17867] DEBUG -- :  .../jaxrpc/JaxRpcServicePostProcessor.java         |    8 +-
+
+D, [2012-12-23T15:12:51.025848 #17867] DEBUG -- :  .../web/accept/ContentNegotiationManager.java      |    4 +-
+
+D, [2012-12-23T15:12:51.025871 #17867] DEBUG -- :  .../ContentNegotiationManagerFactoryBean.java      |    6 +-
+
+D, [2012-12-23T15:12:51.025898 #17867] DEBUG -- :  .../web/accept/ContentNegotiationStrategy.java     |    2 +-
+
+D, [2012-12-23T15:12:51.025925 #17867] DEBUG -- :  .../MappingMediaTypeFileExtensionResolver.java     |   10 +-
+
+D, [2012-12-23T15:12:51.025948 #17867] DEBUG -- :  .../web/bind/annotation/RequestMapping.java        |    4 +-
+
+D, [2012-12-23T15:12:51.025972 #17867] DEBUG -- :  .../annotation/support/HandlerMethodResolver.java  |   12 +-
+
+D, [2012-12-23T15:12:51.025997 #17867] DEBUG -- :  .../web/context/request/async/DeferredResult.java  |    2 +-
+
+D, [2012-12-23T15:12:51.026018 #17867] DEBUG -- :  .../web/context/request/async/WebAsyncManager.java |    8 +-
+
+D, [2012-12-23T15:12:51.026043 #17867] DEBUG -- :  .../support/StandardServletEnvironment.java        |    4 +-
+
+D, [2012-12-23T15:12:51.026069 #17867] DEBUG -- :  .../support/WebApplicationContextUtils.java        |    3 +-
+
+D, [2012-12-23T15:12:51.026095 #17867] DEBUG -- :  .../AbstractNamedValueMethodArgumentResolver.java  |    9 +-
+
+D, [2012-12-23T15:12:51.026116 #17867] DEBUG -- :  .../annotation/ExceptionHandlerMethodResolver.java |    6 +-
+
+D, [2012-12-23T15:12:51.026175 #17867] DEBUG -- :  .../annotation/SessionAttributesHandler.java       |   18 +-
+
+D, [2012-12-23T15:12:51.026199 #17867] DEBUG -- :  .../HandlerMethodArgumentResolverComposite.java    |   10 +-
+
+D, [2012-12-23T15:12:51.026225 #17867] DEBUG -- :  .../web/util/HierarchicalUriComponents.java        |    7 +-
+
+D, [2012-12-23T15:12:51.026248 #17867] DEBUG -- :  .../context/PortletApplicationContextUtils.java    |    9 +-
+
+D, [2012-12-23T15:12:51.026272 #17867] DEBUG -- :  .../annotation/AnnotationMethodHandlerAdapter.java |    4 +-
+
+D, [2012-12-23T15:12:51.026295 #17867] DEBUG -- :  .../AnnotationMethodHandlerExceptionResolver.java  |   26 +-
+
+D, [2012-12-23T15:12:51.026319 #17867] DEBUG -- :  .../web/portlet/mvc/package-info.java              |   17 +-
+
+D, [2012-12-23T15:12:51.026342 #17867] DEBUG -- :  .../view/tiles3/SimpleSpringPreparerFactory.java   |    6 +-
+
+D, [2012-12-23T15:12:51.026365 #17867] DEBUG -- :  .../web/servlet/view/tiles3/TilesConfigurer.java   |    1 -
+
+D, [2012-12-23T15:12:51.026390 #17867] DEBUG -- :  .../web/servlet/view/tiles3/TilesViewResolver.java |    4 +-
+
+D, [2012-12-23T15:12:51.026416 #17867] DEBUG -- :  .../web/servlet/AsyncHandlerInterceptor.java       |    2 +-
+
+D, [2012-12-23T15:12:51.026441 #17867] DEBUG -- :  .../web/servlet/FrameworkServlet.java              |    2 -
+
+D, [2012-12-23T15:12:51.026467 #17867] DEBUG -- :  .../annotation/ContentNegotiationConfigurer.java   |    8 +-
+
+D, [2012-12-23T15:12:51.026490 #17867] DEBUG -- :  .../web/servlet/handler/MappedInterceptor.java     |    3 +-
+
+D, [2012-12-23T15:12:51.026514 #17867] DEBUG -- :  .../web/servlet/mvc/UrlFilenameViewController.java |    4 +-
+
+D, [2012-12-23T15:12:51.026543 #17867] DEBUG -- :  .../annotation/AnnotationMethodHandlerAdapter.java |    7 +-
+
+D, [2012-12-23T15:12:51.026572 #17867] DEBUG -- :  .../AnnotationMethodHandlerExceptionResolver.java  |   12 +-
+
+D, [2012-12-23T15:12:51.026598 #17867] DEBUG -- :  .../mvc/condition/ProducesRequestCondition.java    |    2 +-
+
+D, [2012-12-23T15:12:51.026625 #17867] DEBUG -- :  .../ExceptionHandlerExceptionResolver.java         |    4 +-
+
+D, [2012-12-23T15:12:51.026646 #17867] DEBUG -- :  .../annotation/RequestMappingHandlerAdapter.java   |    6 +-
+
+D, [2012-12-23T15:12:51.026671 #17867] DEBUG -- :  .../mvc/method/annotation/package-info.java        |    5 +-
+
+D, [2012-12-23T15:12:51.026694 #17867] DEBUG -- :  .../InternalPathMethodNameResolver.java            |    4 +-
+
+D, [2012-12-23T15:12:51.026718 #17867] DEBUG -- :  .../mvc/multiaction/MultiActionController.java     |    4 +-
+
+D, [2012-12-23T15:12:51.026740 #17867] DEBUG -- :  .../web/servlet/mvc/package-info.java              |    6 +-
+
+D, [2012-12-23T15:12:51.026763 #17867] DEBUG -- :  .../support/DefaultHandlerExceptionResolver.java   |    2 +-
+
+D, [2012-12-23T15:12:51.026785 #17867] DEBUG -- :  .../AbstractDispatcherServletInitializer.java      |    5 +-
+
+D, [2012-12-23T15:12:51.026807 #17867] DEBUG -- :  .../servlet/view/AbstractCachingViewResolver.java  |   43 +-
+
+D, [2012-12-23T15:12:51.026831 #17867] DEBUG -- :  .../view/ContentNegotiatingViewResolver.java       |    5 -
+
+D, [2012-12-23T15:12:51.026857 #17867] DEBUG -- :  .../web/servlet/view/RedirectView.java             |   12 +-
+
+D, [2012-12-23T15:12:51.026882 #17867] DEBUG -- :  .../view/tiles2/SimpleSpringPreparerFactory.java   |    6 +-
+
+D, [2012-12-23T15:12:51.026903 #17867] DEBUG -- :  src/dist/changelog.txt                             |   25 +-
+
+D, [2012-12-23T15:12:51.026926 #17867] DEBUG -- :  src/reference/docbook/beans-annotation-config.xml  |   12 +-
+
+D, [2012-12-23T15:12:51.026950 #17867] DEBUG -- :  src/reference/docbook/beans-classpath-scanning.xml |   11 +-
+
+D, [2012-12-23T15:12:51.026977 #17867] DEBUG -- :  src/reference/docbook/beans-context-additional.xml |    4 +-
+
+D, [2012-12-23T15:12:51.027000 #17867] DEBUG -- :  src/reference/docbook/beans-scopes.xml             |    2 +-
+
+D, [2012-12-23T15:12:51.027022 #17867] DEBUG -- :  src/reference/docbook/beans.xml                    |    4 +-
+
+D, [2012-12-23T15:12:51.027045 #17867] DEBUG -- :  src/reference/docbook/index.xml                    |    3 +
+
+D, [2012-12-23T15:12:51.027067 #17867] DEBUG -- :  src/reference/docbook/migration-3.2.xml            |  359 +++++++
+
+D, [2012-12-23T15:12:51.027090 #17867] DEBUG -- :  src/reference/docbook/mvc.xml                      |  348 ++++++-
+
+D, [2012-12-23T15:12:51.027115 #17867] DEBUG -- :  src/reference/docbook/new-in-3.0.xml               |   25 +-
+
+D, [2012-12-23T15:12:51.027140 #17867] DEBUG -- :  src/reference/docbook/new-in-3.1.xml               |  923 +++++++++---------
+
+D, [2012-12-23T15:12:51.027164 #17867] DEBUG -- :  src/reference/docbook/new-in-3.2.xml               |  544 ++++++-----
+
+D, [2012-12-23T15:12:51.027185 #17867] DEBUG -- :  src/reference/docbook/scheduling.xml               |    2 +-
+
+D, [2012-12-23T15:12:51.027207 #17867] DEBUG -- :  src/reference/docbook/testing.xml                  | 1056 +++++++++++++++++++-
+
+D, [2012-12-23T15:12:51.027232 #17867] DEBUG -- :  src/reference/docbook/validation.xml               |    4 +-
+
+D, [2012-12-23T15:12:51.027253 #17867] DEBUG -- :  src/reference/docbook/view.xml                     |    2 +-
+
+D, [2012-12-23T15:12:51.027276 #17867] DEBUG -- :  src/reference/docbook/web-integration.xml          |   28 +-
+
+D, [2012-12-23T15:12:51.027302 #17867] DEBUG -- :  src/reference/docbook/xsd-configuration.xml        |    6 +-
+
+D, [2012-12-23T15:12:51.027327 #17867] DEBUG -- :  193 files changed, 4429 insertions(+), 2295 deletions(-)
+
+D, [2012-12-23T15:12:51.027351 #17867] DEBUG -- :  rename spring-context/src/test/java/org/springframework/cache/annotation/{AnnotationCacheOperationSourceTest.java => AnnotationCacheOperationSourceTests.java} (98%)
+
+D, [2012-12-23T15:12:51.033964 #17867] DEBUG -- :  delete mode 100644 spring-core/src/main/java/org/springframework/util/AntPathStringMatcher.java
+
+D, [2012-12-23T15:12:51.034035 #17867] DEBUG -- :  create mode 100644 src/reference/docbook/migration-3.2.xml
+
+692964,spring-framework,204,1355450907,,1355494216,721,,10,1,0,1,1,1,0,0,186151,1,0,1205.596531847801,54.11735633974569,146.42413954262938
+692959,spring-framework,203,1355333462,1355336444,1355336444,49,49,11,1,0,0,0,1,138,6,186211,8,45,1205.1328868863816,54.08380815311663,146.39844047881166
+692961,spring-framework,199,1355163595,,1355172493,148,,12,1,0,5,5,1,0,0,186063,32,0,1206.102234189495,54.12682800986762,146.5148901178633
+692962,spring-framework,198,1354916015,,1355171791,4262,,12,2,0,2,2,2,0,0,186043,44,0,1206.2157673226081,54.132646753707476,146.53064076584445
+663912,spring-framework,196,1354648534,,1354657974,157,,12,1,0,0,0,1,0,0,186008,2,0,1207.0824910756526,54.15896090490732,146.5367080985764
+522412,spring-framework,184,1353452885,,1354290882,13966,,12,1,0,3,3,195,0,0,185610,17707,0,1214.045579440763,54.081137869726845,145.6387048111632
+590145,spring-framework,194,1354224966,,1354288396,1057,,12,1,0,1,1,9,0,0,185913,149,0,1214.9930343762942,54.09519506435806,145.77248497953343
+589960,spring-framework,192,1354131971,,1354224186,1536,,13,1,0,1,1,6,0,0,185961,71,0,1214.6740445577298,54.08123208629766,145.73485838428488
+580434,spring-framework,191,1354117844,,1354197330,1324,,14,1,0,2,2,7,0,0,185961,394,0,1214.6740445577298,54.08123208629766,145.73485838428488
+565440,spring-framework,189,1353948351,,1354026739,1306,,14,1,0,4,4,5,0,0,185957,5766,0,1213.7429620826322,54.06626263060815,145.71648284280775
+692949,spring-framework,190,1353977273,,1354000656,389,,14,1,0,4,4,2,0,0,185961,15,0,1214.6740445577298,54.08123208629766,145.73485838428488
+692953,spring-framework,187,1353877810,,1353970169,1539,,14,1,0,1,1,1,0,0,185806,7,0,1214.357986286772,54.07790921714046,145.80799328331702
+692952,spring-framework,188,1353940658,,1353946755,101,,14,1,0,1,1,2,0,0,185956,39,0,1213.3999440727914,54.05042052958765,145.71726645012797
+473270,spring-framework,182,1352777553,,1352788092,175,,14,3,0,1,1,0,0,0,185168,0,0,1215.4745960425128,54.16162619891126,145.9377430225525
+469845,spring-framework,181,1352727390,,1352737948,175,,14,1,0,1,1,0,0,0,185144,0,0,1215.3458929265869,54.16324590588947,145.94045715767186
+456253,spring-framework,180,1352370066,,1352733933,6064,,14,1,0,0,0,0,0,0,185190,0,0,1215.038608996166,54.149792105405254,145.90420649063122
+454389,spring-framework,175,1351271778,,1352155670,14671,,16,1,0,4,4,0,0,0,184020,0,0,1210.982501901967,53.80393435496142,144.90816215628735
+506937,spring-framework,178,1351903087,,1352146541,4057,,16,1,0,1,1,0,0,0,185171,0,0,1213.910385535532,54.14454747233638,145.66535796642023
+454243,spring-framework,161,1349737978,,1351984358,37379,,16,11,0,5,5,20,0,0,183053,1625,16,1206.1752607168416,53.57464777960482,144.07302803013337
+405024,spring-framework,146,1347576423,,1351979224,73320,,16,12,0,0,0,5,0,0,182004,1777,0,1168.199600008791,52.07028416957869,142.1342388079383
+506938,spring-framework,177,1351873341,,1351878251,81,,16,1,0,2,2,0,0,0,184306,0,0,1213.7586405217412,53.9537508274283,145.28013195446704
+454338,spring-framework,168,1350610983,,1351699648,18084,,16,1,0,4,4,0,0,0,183165,0,0,1208.1565801326672,53.72751344416236,144.29612644337072
+454329,spring-framework,176,1351657562,,1351670810,220,,16,3,0,1,1,0,0,0,184216,0,0,1212.9565292917011,53.92582620402136,145.03083336952275
+168348,spring-framework,99,1340263790,,1351635419,189467,,16,2,0,3,3,4,0,0,180204,219,0,1162.6489978024906,51.79130318971832,141.66167232691836
+445679,spring-framework,156,1348862868,,1351598693,45537,,16,3,0,1,1,0,0,0,183053,0,0,1163.4499298017513,51.897537871545396,141.76768476889205
+454245,spring-framework,163,1349836170,,1351597237,29291,,16,1,0,1,1,0,0,0,183053,0,0,1206.1752607168416,53.57464777960482,144.07302803013337
+401110,spring-framework,145,1347542342,,1351595688,67495,,16,1,0,3,3,0,0,0,182004,0,0,1168.199600008791,52.07028416957869,142.1342388079383
+448098,spring-framework,157,1349018042,,1351595097,42890,,16,4,0,1,1,0,0,0,183053,0,0,1163.4499298017513,51.897537871545396,141.76768476889205
+454324,spring-framework,167,1350310449,,1351593006,21315,,16,1,0,2,2,0,0,0,183162,0,0,1207.9579825509659,53.72293379631146,144.2930302136906
+432757,spring-framework,153,1348469698,,1351389446,48602,,15,1,0,3,3,0,0,0,182105,0,0,1167.623074599819,52.04689602152604,142.06089893193487
+506934,spring-framework,173,1351133198,,1351363170,3832,,15,1,0,1,1,0,0,0,184020,0,0,1210.9879360939028,53.80393435496142,144.90816215628735
+506932,spring-framework,174,1351161857,,1351163173,21,,15,1,0,1,1,0,0,0,183812,0,0,1210.361673884186,53.77777294191892,144.8001218636433
+454287,spring-framework,171,1350952869,,1351161619,3479,,15,2,0,2,2,0,0,0,183185,0,0,1208.5323579987444,53.754401288315094,144.3349619237383
+7939,spring-framework,114,1344273172,,1351146704,114558,,14,1,0,4,4,16,0,0,180151,582,0,1162.6024834721984,51.78433647329185,141.64783986766656
+342056,spring-framework,127,1346249624,,1351144995,81589,,14,1,0,2,2,0,0,0,181598,0,0,1165.4258306809547,51.905857994030775,141.835262502891
+506935,spring-framework,172,1351011741,,1351034845,385,,14,1,0,1,1,0,0,0,183185,0,0,1208.5323579987444,53.754401288315094,144.3349619237383
+506930,spring-framework,170,1350767339,,1350918674,2522,,13,1,0,1,1,0,0,0,183165,0,0,1208.1292823410586,53.72751344416236,144.27974776840554
+506931,spring-framework,166,1350006639,,1350064678,967,,13,1,0,1,1,0,0,0,183084,0,0,1206.6537764086431,53.631120141574364,144.13602499399184
+454242,spring-framework,160,1349641556,1349641758,1349641758,3,3,13,1,0,2,2,27,143,98,183053,2115,33,1204.186765581553,53.54187038726489,144.00201034673017
+454241,spring-framework,159,1349448303,1349452381,1349452381,67,67,13,1,0,0,0,1,169,113,183054,10,2,1203.978061118577,53.5251892884067,143.9247435183061
+454240,spring-framework,158,1349356534,,1349446826,1504,,13,1,0,4,4,0,0,0,183054,0,0,1163.6457001759045,51.897254362100796,141.76691031061873
+342556,spring-framework,128,1346260978,,1348577107,38602,,14,14,0,16,16,8,0,0,181598,1274,0,1165.4258306809547,51.905857994030775,141.835262502891
+381210,spring-framework,148,1347619616,,1348576097,15941,,14,1,6,4,10,0,0,0,182004,0,0,1168.199600008791,52.07028416957869,142.1342388079383
+342551,spring-framework,129,1346261257,,1348522154,37681,,14,10,0,14,14,8,0,0,181598,1274,0,1165.4258306809547,51.905857994030775,141.835262502891
+431250,spring-framework,152,1348386524,,1348407547,350,,14,1,0,0,0,0,0,0,182105,0,0,1167.623074599819,52.04689602152604,142.06089893193487
+420038,spring-framework,149,1347896649,,1348254838,5969,,14,1,0,0,0,0,0,0,182007,0,0,1168.1803447120164,52.069425901201605,142.13189602597703
+427385,spring-framework,150,1348181598,,1348233421,863,,14,2,0,1,1,0,0,0,182181,0,0,1167.097556825355,52.019694699227685,141.99614668928155
+427387,spring-framework,151,1348181627,,1348232040,840,,14,1,0,0,0,0,0,0,182181,199,2,1167.097556825355,52.019694699227685,141.99614668928155
+406971,spring-framework,147,1347602017,,1347880437,4640,,14,1,0,1,1,0,0,0,182004,0,0,1168.199600008791,52.07028416957869,142.1342388079383
+361065,spring-framework,139,1347039049,,1347384314,5754,,16,1,0,0,0,0,0,0,181960,0,0,1167.2895141789404,52.02242251044186,142.03671136513518
+359266,spring-framework,137,1346980093,,1347368448,6472,,16,1,0,1,1,0,0,0,181855,0,0,1167.727035275357,52.04146160402519,142.09122652662836
+367462,spring-framework,143,1347353722,,1347362671,149,,16,1,0,1,1,0,0,0,181990,0,0,1168.0037364690368,52.07428979614265,142.21111050057695
+333996,spring-framework,124,1346092229,,1346933299,14017,,16,2,0,2,2,0,0,0,181163,0,0,1165.552568681243,51.90353438616053,141.70111998586907
+333984,spring-framework,123,1346091764,,1346932769,14016,,16,1,0,1,1,0,0,0,181163,0,0,1165.552568681243,51.90353438616053,141.70111998586907
+159277,spring-framework,94,1339664778,,1346766842,118367,,16,3,0,0,0,0,0,0,180204,0,0,1162.6489978024906,51.79130318971832,141.66167232691836
+341302,spring-framework,126,1346223369,,1346249559,436,,15,1,0,2,2,0,0,0,181598,0,0,1165.4258306809547,51.905857994030775,141.835262502891
+334163,spring-framework,125,1346096428,1346149986,1346149986,892,892,15,2,0,0,0,0,77,32,181446,0,0,1154.7016743273482,51.45332495618531,140.75813189599108
+333967,spring-framework,122,1346091232,,1346091733,8,,15,1,0,0,0,0,0,0,181163,0,0,1165.552568681243,51.90353438616053,141.70111998586907
+254744,spring-framework,120,1345453582,,1345795489,5698,,15,1,0,4,4,0,0,0,180533,0,0,1161.9482310713277,51.75785036530718,141.58630278120899
+254975,spring-framework,121,1345462098,1345462466,1345462466,6,6,15,0,0,0,0,0,67,11,180533,0,0,1165.199714179679,51.85201597491871,141.7635556934189
+10781,spring-framework,117,1344352660,,1344539431,3112,,17,1,0,0,0,2,0,0,180151,54,0,1162.6024834721984,51.78433647329185,141.64783986766656
+10724,spring-framework,116,1344351561,,1344536185,3077,,17,1,0,2,2,4,0,0,180151,37,0,1162.6024834721984,51.78433647329185,141.64783986766656
+10626,spring-framework,115,1344349397,,1344532689,3054,,17,1,0,1,1,4,0,0,180151,37,0,1162.6024834721984,51.78433647329185,141.64783986766656
+231592,spring-framework,113,1344008646,,1344254148,4091,,15,1,0,0,0,2,0,0,180281,17,0,1160.3219418574338,51.752541865199326,141.479135349815
+231352,spring-framework,112,1344001912,,1344028147,437,,15,1,0,0,0,2,0,0,180281,20,0,1160.3219418574338,51.752541865199326,141.479135349815
+153217,spring-framework,90,1339259085,,1344013328,79237,,15,1,0,1,1,1,0,0,180157,192,0,1154.6873005212121,51.70490183562115,141.16576097514945
+506898,spring-framework,111,1343492536,1343492615,1343492615,1,1,15,1,0,0,0,7,64,40,180264,327,25,1160.664358940221,51.75742244707762,141.49247769937426
+226309,spring-framework,109,1343201937,1343205106,1343205106,52,52,15,0,0,0,0,0,87,69,180241,0,0,1154.5763727453798,51.708545780371836,141.14435672238838
+206069,spring-framework,108,1342208933,,1342450185,4020,,15,1,0,1,1,2,0,0,179907,31,0,1155.319137109729,51.71005019259951,141.20628991645685
+7272,spring-framework,105,1342028619,1342032267,1342032267,60,60,15,0,0,2,2,0,113,93,179907,0,0,1155.319137109729,51.71005019259951,141.20628991645685
+197893,spring-framework,104,1341872064,,1341912485,673,,15,1,0,1,1,0,0,0,179888,0,0,1155.391132260073,51.70995285955706,141.2045272614071
+188049,spring-framework,103,1341363586,,1341479522,1932,,15,1,0,1,1,0,0,0,179720,0,0,1155.6866236367682,51.71934119741821,141.26418873803695
+168516,spring-framework,100,1340270761,,1341479406,20144,,15,1,0,1,1,0,0,0,179716,0,0,1155.7123461461415,51.720492332346595,141.26733290302477
+169722,spring-framework,101,1340318373,,1341255500,15618,,16,1,0,1,1,0,0,0,179348,0,0,1157.0076053259584,51.77085888886411,141.44010527020095
+148020,spring-framework,89,1338912216,,1340118097,20098,,17,9,0,1,1,9,0,0,179170,1887,0,1157.0854495730312,51.760897471674944,141.35737009544007
+165109,spring-framework,97,1340107279,,1340116360,151,,17,1,0,0,0,0,0,0,179273,0,0,1157.0677123716343,51.78136138738126,141.43234062017146
+45352,spring-framework,88,1338911954,,1340047229,18921,,17,9,1,9,10,8,0,0,179170,2258,0,1157.0854495730312,51.760897471674944,141.35737009544007
+397214,spring-framework,92,1339499144,,1340011810,8544,,17,1,0,0,0,1,0,0,179170,8,0,1157.0854495730312,51.760897471674944,141.35737009544007
+159665,spring-framework,95,1339683624,1339743449,1339743449,997,997,17,1,0,0,0,1,153,124,179170,1,9,1157.0854495730312,51.760897471674944,141.35737009544007
+158912,spring-framework,93,1339640938,,1339672104,519,,17,1,0,3,3,0,0,0,179165,0,0,1157.134484971953,51.75676052800491,141.35573354170737
+155286,spring-framework,91,1339438708,,1339510689,1199,,16,1,0,3,3,4,0,0,179155,15,0,1157.1600011163519,51.754067706734396,141.36362367782087
+275280,spring-framework,40,1329316749,,1338912454,159988,,16,7,0,4,4,8,0,0,179155,1274,0,1156.9367307638636,51.74290418910999,141.36362367782087
+146368,spring-framework,87,1338808441,,1338813565,85,,16,1,0,1,1,0,0,0,179157,0,0,1156.817763190944,51.73674486623464,141.36204558013364
+142664,spring-framework,86,1338479328,1338549674,1338549675,1172,1172,16,1,0,2,2,6,158,140,179135,112,0,1156.9319228514807,51.74309878024953,141.38498897479553
+318461,spring-framework,14,1325897295,,1338192802,204985,,16,2,0,3,3,0,0,0,176896,0,0,1156.8492221418235,51.674430173661364,141.12246743849494
+271893,spring-framework,30,1328671565,,1337878206,153504,,15,1,0,10,10,4,0,0,178454,389,0,1156.5109215820323,51.766841875217146,141.30252053750547
+292795,spring-framework,62,1333446673,,1337692202,70758,,15,1,0,11,11,8,0,0,178627,778,0,1157.669333303476,51.81187614414394,141.52395774434996
+123288,spring-framework,78,1336995254,,1337611961,10278,,15,1,0,2,2,0,0,0,178454,0,0,1156.5109215820323,51.766841875217146,141.30252053750547
+276690,spring-framework,42,1329582446,,1337248469,127827,,14,1,0,1,1,0,0,0,178454,0,0,1156.5109215820323,51.766841875217146,141.30252053750547
+273666,spring-framework,34,1328985728,,1337247612,137758,,14,1,0,5,5,11,0,0,178496,42,0,1156.7149964144853,51.78267300107566,141.3701147364647
+313774,spring-framework,53,1330988171,,1337244536,104332,,14,1,0,1,1,0,0,0,178454,0,0,1156.5109215820323,51.766841875217146,141.30252053750547
+313758,spring-framework,56,1331333051,,1337242159,98545,,14,1,0,10,10,0,0,0,178454,0,0,1156.5109215820323,51.766841875217146,141.30252053750547
+313757,spring-framework,57,1331662992,,1337241978,93043,,14,1,0,1,1,0,0,0,178454,0,0,1156.5109215820323,51.766841875217146,141.30252053750547
+285138,spring-framework,59,1332264378,,1337234297,82891,,14,2,0,2,2,0,0,0,178454,0,0,1156.5109215820323,51.766841875217146,141.30252053750547
+313724,spring-framework,49,1330766239,,1337233173,107842,,14,1,0,1,1,0,0,0,178454,0,0,1156.5109215820323,51.766841875217146,141.30252053750547
+392299,spring-framework,81,1337192926,,1337197687,79,,13,1,0,0,0,0,0,0,178462,0,0,1156.5823536663268,51.77012473243604,141.30178973675066
+506962,spring-framework,60,1332419166,,1337171376,79263,,14,0,0,0,0,0,0,0,178454,0,0,1156.5109215820323,51.766841875217146,141.30252053750547
+313318,spring-framework,52,1330970013,,1337171166,103412,,14,7,0,2,2,0,0,0,176887,0,0,1156.8741626009826,51.67705936558368,141.12964774121332
+313315,spring-framework,18,1326381699,,1337170845,179879,,14,4,0,1,1,0,0,0,176889,0,0,1156.8497758481305,51.67082181481042,141.1337053180243
+293197,spring-framework,63,1333487048,,1337167616,61342,,14,1,0,2,2,2,0,0,177655,83,0,1155.8188624018462,51.706960119332415,141.0148884073063
+274336,spring-framework,37,1329154165,,1337156656,133434,,14,1,0,6,6,2,0,0,177655,47,0,1155.8188624018462,51.706960119332415,141.0148884073063
+295565,spring-framework,64,1333962212,,1337151072,53147,,14,1,0,4,4,0,0,0,177655,0,0,1155.8188624018462,51.706960119332415,141.0148884073063
+297736,spring-framework,65,1334292057,,1337149603,47625,,14,1,0,1,1,1,0,0,176896,7,0,1156.8492221418235,51.674430173661364,141.12246743849494
+392013,spring-framework,54,1331129354,,1337089440,99394,,15,3,0,0,0,226,0,0,177655,13551,0,1155.8188624018462,51.706960119332415,141.0148884073063
+124328,spring-framework,79,1337068205,,1337070541,38,,14,1,0,2,2,13,0,0,178238,172,0,1155.6626533062536,51.711756191160134,141.0978579203088
+121492,spring-framework,77,1336791769,1336798207,1336798207,107,107,14,1,0,1,1,18,61,42,178183,92,22,1155.6770286727692,51.71088150945938,141.1021253430462
+117986,spring-framework,76,1336576933,1336577140,1336577141,3,3,13,1,0,0,0,14,41,23,177867,1138,21,1154.9922132829586,51.67344139160159,140.9423895382505
+113958,spring-framework,75,1336265850,,1336563276,4957,,13,1,0,6,6,0,0,0,177867,0,0,1154.9922132829586,51.67344139160159,140.9423895382505
+113299,spring-framework,74,1336182796,,1336482870,5001,,13,2,0,5,5,2,0,0,177867,296,0,1154.9922132829586,51.67344139160159,140.9423895382505
+113000,spring-framework,73,1336155344,1336155378,1336155378,0,0,14,1,0,0,0,12,41,23,177674,1247,17,1155.7571732498845,51.7126872812004,141.00543692380427
+109506,spring-framework,72,1335909606,,1335969662,1000,,14,1,0,2,2,0,0,0,177674,0,0,1155.7571732498845,51.7126872812004,141.00543692380427
+299127,spring-framework,66,1334590469,,1335876959,21441,,15,1,0,4,4,1,0,0,177655,22,0,1155.8188624018462,51.706960119332415,141.0148884073063
+97272,spring-framework,70,1334928850,,1335862543,15561,,15,1,0,5,5,1,0,0,177655,8,0,1155.8188624018462,51.706960119332415,141.0148884073063
+106098,spring-framework,71,1335609790,,1335862217,4207,,15,2,0,2,2,2,0,0,176896,4,0,1156.8492221418235,51.674430173661364,141.12246743849494
+271457,spring-framework,28,1328617342,,1335861253,120791,,15,3,0,4,4,7,0,0,176285,76,0,1156.7915591230112,51.672008395495936,140.86280738576738
+305533,spring-framework,7,1324208822,,1335788235,193050,,15,1,0,6,6,0,0,0,177655,0,0,1155.8188624018462,51.706960119332415,141.0148884073063
+273953,spring-framework,36,1329073288,,1335768155,111641,,15,1,0,3,3,0,0,0,176940,0,0,1156.9289024528089,51.69548999660902,141.17214875098904
+273947,spring-framework,35,1329072581,,1335767774,111646,,15,1,0,2,2,0,0,0,176940,0,0,1156.9289024528089,51.69548999660902,141.17214875098904
+94967,spring-framework,69,1334776052,1334776609,1334776609,9,9,16,1,0,0,0,27,40,24,176940,2604,31,1156.9289024528089,51.69548999660902,141.17214875098904
+299557,spring-framework,68,1334664371,,1334690781,440,,16,16,0,3,3,69,0,0,176940,762,2,1156.9289024528089,51.69548999660902,141.17214875098904
+299189,spring-framework,67,1334598194,1334640410,1334640410,703,703,16,1,0,1,1,1,38,22,176940,6,3,1156.9289024528089,51.69548999660902,141.17214875098904
+291295,spring-framework,61,1333119460,1334640221,1334640221,25346,25346,16,3,0,3,3,7,38,22,176940,54,8,1156.9289024528089,51.69548999660902,141.17214875098904
+281872,spring-framework,58,1331765967,,1331814118,802,,15,1,0,5,5,0,0,0,176924,0,0,1156.8074427437768,51.6662521760756,141.12839411272637
+506964,spring-framework,55,1331163733,,1331208708,749,,17,0,0,0,0,0,0,0,176913,0,0,1156.8793700858614,51.66946465211714,141.13716911702363
+506901,spring-framework,51,1330969875,,1330970060,3,,16,7,0,0,0,54,0,0,176913,576,19,1156.8793700858614,51.66946465211714,141.13716911702363
+506902,spring-framework,50,1330892953,1330955984,1330955984,1050,1050,16,1,0,1,1,3,142,102,176913,22,3,1156.8567601024233,51.66381215625759,141.13151662116408
+506903,spring-framework,48,1330707816,1330710904,1330710904,51,51,16,1,0,2,2,1,148,105,176913,4,1,1156.8567601024233,51.66381215625759,141.13151662116408
+506904,spring-framework,47,1330642045,,1330697745,928,,16,1,0,2,2,0,0,0,176887,0,0,1156.8741626009826,51.67705936558368,141.12964774121332
+506967,spring-framework,44,1330539031,,1330626459,1457,,16,0,0,0,0,0,0,0,176913,0,0,1156.8567601024233,51.66381215625759,141.13151662116408
+274968,spring-framework,38,1329253822,,1330615365,22692,,16,1,0,8,8,4,0,0,176819,83,0,1157.104157358655,51.66300001696651,141.17261154061498
+506906,spring-framework,45,1330551740,,1330598199,774,,16,1,0,1,1,0,0,0,176913,0,0,1156.8567601024233,51.66381215625759,141.13151662116408
+506905,spring-framework,46,1330570108,,1330597416,455,,16,3,0,1,1,0,0,0,176913,0,0,1156.8567601024233,51.66381215625759,141.13151662116408
+275725,spring-framework,41,1329396194,,1329846331,7502,,14,1,0,6,6,2,0,0,176819,21,0,1157.104157358655,51.66300001696651,141.17261154061498
+275208,spring-framework,39,1329305807,,1329312407,110,,13,1,0,1,1,0,0,0,176239,0,0,1156.4863622694181,51.634428248004134,140.82013629219412
+372183,spring-framework,29,1328655750,,1329072667,6948,,12,3,0,0,0,95,0,0,176239,374,0,1156.4863622694181,51.634428248004134,140.82013629219412
+272823,spring-framework,33,1328812521,1329056361,1329056361,4064,4064,12,2,0,0,0,7,131,83,176647,340,7,1156.6966888766863,51.65669385837291,141.1175961097556
+273880,spring-framework,25,1328302282,1329056235,1329056235,12565,12565,12,1,0,2,2,1,131,83,176647,15,1,1156.6966888766863,51.65669385837291,141.1175961097556
+272603,spring-framework,32,1328780082,,1328805829,429,,11,1,0,1,1,0,0,0,176604,0,0,1156.9217005277344,51.669271364182016,141.08966954315872
+272006,spring-framework,16,1326202204,1328695099,1328695099,41548,41548,11,1,0,3,3,2,102,58,176299,103,2,1156.705369854622,51.66790509305214,140.85162139320133
+506908,spring-framework,27,1328503197,,1328514736,192,,11,1,0,1,1,0,0,0,176299,0,0,1156.705369854622,51.66790509305214,140.85162139320133
+506909,spring-framework,26,1328302415,,1328512029,3493,,11,3,0,0,0,0,0,0,176280,0,0,1156.5577490356252,51.6451100521897,140.81574767415475
+506970,spring-framework,20,1327310260,,1328189413,14652,,10,0,0,0,0,0,0,0,176201,0,0,1156.1058109772362,51.639888536387424,140.82212927281913
+270555,spring-framework,5,1322575280,,1328183819,93475,,10,250,0,1,1,0,0,0,176232,0,0,1156.560670025875,51.65350220164329,140.82572971991468
+270554,spring-framework,3,1322068522,,1328183715,101919,,10,250,0,1,1,0,0,0,176232,0,0,1156.560670025875,51.65350220164329,140.82572971991468
+270500,spring-framework,4,1322575153,,1328179374,93403,,10,250,0,1,1,0,0,0,176232,0,0,1156.560670025875,51.65350220164329,140.82572971991468
+269711,spring-framework,23,1327980461,,1328137132,2611,,9,1,0,2,2,0,0,0,176228,0,0,1156.4791066118892,51.64900015888508,140.82892616383322
+270182,spring-framework,21,1327538062,1328130383,1328130383,9872,9872,9,2,0,0,0,4,81,41,176226,664,4,1156.5603259450932,51.643911795081316,140.85322256647714
+270036,spring-framework,24,1328117783,,1328117890,1,,9,3,0,0,0,4,0,0,176239,639,0,1156.4863622694181,51.634428248004134,140.82013629219412
+268324,spring-framework,22,1327681042,1328019602,1328019602,5642,5642,9,23,0,0,0,5982,73,36,176218,1724348,5994,1156.3858402660342,51.64058155239533,140.81989354095495
+506913,spring-framework,15,1325934996,,1327069801,18913,,9,2,0,2,2,0,0,0,175935,0,0,1157.2455736493591,51.66680876460057,140.89862733395856
+506911,spring-framework,19,1327031832,1327065690,1327065690,564,564,9,1,0,1,1,3,83,52,176019,133,11,1157.2557507996296,51.68760190661236,140.96205523267375
+506912,spring-framework,17,1326206265,,1326219966,228,,8,1,0,1,1,0,0,0,175948,0,0,1157.3760429217723,51.68004183054084,140.95073544456315
+506916,spring-framework,11,1325797864,,1325897356,1658,,9,2,0,3,3,0,0,0,175935,0,0,1157.2455736493591,51.66680876460057,140.89862733395856
+506915,spring-framework,12,1325799270,1325862329,1325862329,1050,1050,9,0,0,3,3,0,112,98,175932,0,0,1157.2653070504514,51.667689789236746,140.90102994338721
+506917,spring-framework,9,1324550760,,1324560587,163,,9,3,0,1,1,0,0,0,175898,0,0,1156.9716540267657,51.65493638358594,140.86004388907207
+506918,spring-framework,8,1324382194,1324382269,1324382269,1,1,9,1,0,0,0,1,207,151,175898,58,1,1156.9716540267657,51.65493638358594,140.86004388907207
