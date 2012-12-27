@@ -1,13 +1,4 @@
-Updating client properties
-GHTorrent version: 0.6
-D, [2012-12-23T16:12:21.805349 #6730] DEBUG -- : GHTorrent: User scala exists
-D, [2012-12-23T16:12:21.805692 #6730] DEBUG -- : GHTorrent: Transaction committed (13 ms)
-D, [2012-12-23T16:12:21.839409 #6730] DEBUG -- : GHTorrent: User scala exists
-D, [2012-12-23T16:12:21.851596 #6730] DEBUG -- : GHTorrent: Repo scala/scala exists
-D, [2012-12-23T16:12:21.851880 #6730] DEBUG -- : GHTorrent: Transaction committed (25 ms)
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size_at_merge,num_commits,num_commit_comments,num_issue_comments,num_comments,files_changed,total_commits_last_month,main_team_commits_last_month,sloc,churn,commits_on_files_touched,test_lines_per_1000_lines,test_cases_per_1000_lines,assertions_per_1000_lines
-D, [2012-12-23T16:12:23.647800 #6730] DEBUG -- : Cloning into /var/lib/ghtorrent/repos/scala/scala...
-
 657198,scala,1756,1355249629,,1355259888,170,,10,2,0,7,7,7,0,0,249171,99,0,0.0,0.0,0.0
 647056,scala,1731,1354948091,1355185083,1355185083,3949,3949,10,1,0,7,7,1,347,8,246725,3,1,0.0,0.0,0.0
 647037,scala,1744,1355138693,1355167720,1355167720,483,483,10,1,0,9,9,3,345,8,248744,44,4,0.0,0.0,0.0

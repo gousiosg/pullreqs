@@ -1,13 +1,4 @@
-Updating client properties
-GHTorrent version: 0.6
-D, [2012-12-23T21:01:29.126469 #859] DEBUG -- : GHTorrent: User scalaz exists
-D, [2012-12-23T21:01:29.126773 #859] DEBUG -- : GHTorrent: Transaction committed (12 ms)
-D, [2012-12-23T21:01:29.161805 #859] DEBUG -- : GHTorrent: User scalaz exists
-D, [2012-12-23T21:01:29.173476 #859] DEBUG -- : GHTorrent: Repo scalaz/scalaz exists
-D, [2012-12-23T21:01:29.173759 #859] DEBUG -- : GHTorrent: Transaction committed (24 ms)
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size_at_merge,num_commits,num_commit_comments,num_issue_comments,num_comments,files_changed,total_commits_last_month,main_team_commits_last_month,sloc,churn,commits_on_files_touched,test_lines_per_1000_lines,test_cases_per_1000_lines,assertions_per_1000_lines
-D, [2012-12-23T21:01:30.763562 #859] DEBUG -- : Cloning into /var/lib/ghtorrent/repos/scalaz/scalaz...
-
 648441,scalaz,214,1355238579,,1355297765,986,,6,1,0,0,0,1,0,0,24153,4,1,0.0,0.0,0.0
 648447,scalaz,212,1355110598,1355128119,1355128119,292,292,6,1,0,0,0,2,104,50,24153,4,2,0.0,0.0,0.0
 648448,scalaz,211,1355067638,1355128102,1355128102,1007,1007,6,1,0,0,0,1,103,49,24153,6,1,0.0,0.0,0.0

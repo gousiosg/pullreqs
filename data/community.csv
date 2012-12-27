@@ -1,13 +1,4 @@
-Updating client properties
-GHTorrent version: 0.6
-D, [2012-12-24T01:55:26.582023 #24520] DEBUG -- : GHTorrent: User neo4j exists
-D, [2012-12-24T01:55:26.582380 #24520] DEBUG -- : GHTorrent: Transaction committed (41 ms)
-D, [2012-12-24T01:55:26.613805 #24520] DEBUG -- : GHTorrent: User neo4j exists
-D, [2012-12-24T01:55:26.625645 #24520] DEBUG -- : GHTorrent: Repo neo4j/community exists
-D, [2012-12-24T01:55:26.625921 #24520] DEBUG -- : GHTorrent: Transaction committed (24 ms)
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size_at_merge,num_commits,num_commit_comments,num_issue_comments,num_comments,files_changed,total_commits_last_month,main_team_commits_last_month,sloc,churn,commits_on_files_touched,test_lines_per_1000_lines,test_cases_per_1000_lines,assertions_per_1000_lines
-D, [2012-12-24T01:55:29.402265 #24520] DEBUG -- : Already up-to-date.
-
 505738,community,970,1352191406,1352193218,1352193218,30,30,20,1,0,0,0,3,123,91,116248,13,18,535.2436170944876,13.428188011836763,43.2695616268667
 505739,community,967,1352102642,1352126567,1352126567,398,398,20,1,0,0,0,2,117,86,116238,6,8,535.5133433128581,13.429343244033793,43.28188716254581
 505742,community,964,1351941250,,1352125123,3064,,20,1,0,0,0,0,0,0,115560,0,0,537.2966424368294,13.490827275874004,43.45794392523364
