@@ -1,3 +1,4 @@
+*.err
 *.gem
 *.rbc
 .bundle
