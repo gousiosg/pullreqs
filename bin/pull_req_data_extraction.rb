@@ -61,6 +61,7 @@ Extract data for pull requests for a given repository
   def go
 
     Signal.trap("TERM") {
+      mongo.close
       info "pull_request_data_extraction: Received SIGTERM, exiting"
       Trollop::die("Bye bye")
     }
