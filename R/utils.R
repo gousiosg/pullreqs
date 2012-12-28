@@ -20,15 +20,16 @@ load.all <- function(dir = ".") {
 }
 
 # Merge all dataframes in the provided list into one dataframe
-merge.dataframes <- function(dataframes) {
+merge.dataframes <- function(dataframes, fields) {
   merged <- data.frame()
   for (i in 1:length(dataframes)) {
-    print(sprintf("Merging dataframe %d", i))
+    name <- unique(dataframes[[i]]['project_name'])
+    print(dataframes[[i]][1])
+    print(sprintf("Merging dataframe %s", name))
     merged <- rbind(merged, dataframes[[i]])
   }
   merged
 }
-
 
 # Saving plots as PDFs
 

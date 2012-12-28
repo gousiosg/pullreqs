@@ -1,5 +1,4 @@
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size_at_merge,num_commits,num_commit_comments,num_issue_comments,num_comments,files_changed,total_commits_last_month,main_team_commits_last_month,sloc,churn,commits_on_files_touched,test_lines_per_1000_lines,test_cases_per_1000_lines,assertions_per_1000_lines
-
 757340,scala-ide,265,1355753523,1355757890,1355757890,72,72,7,1,0,0,0,3,111,33,34755,38,4,0.0,0.0,0.0
 753762,scala-ide,264,1355591793,1355733997,1355733997,2370,2370,7,1,0,0,0,1,109,32,34754,3,1,0.0,0.0,0.0
 672417,scala-ide,261,1355412634,,1355490854,1303,,7,3,47,0,47,38,0,0,34378,1543,2,0.0,0.0,0.0

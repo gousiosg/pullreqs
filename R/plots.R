@@ -1,6 +1,7 @@
 library(ggplot2)
+library(igraph)
 
-# Plot a stack barchart displaying the 
+# Plot a stacked barchart displaying the proportion of merged/unmerged pull requests
 plot.percentage.merged <- function(dfs) 
 {
   a <- do.call(rbind, Map(function(x){
@@ -18,6 +19,7 @@ plot.percentage.merged <- function(dfs)
     ylab("Percentage")
 }
 
+# Plot various charts for selected projects 
 data.accept.lifetime <- function(dfs, projects)
 {
   do.call(rbind, Map(function(x){
@@ -44,8 +46,9 @@ plot.accept.lifetime.freq <- function(dfs, projects)
 {
   ggplot(data.accept.lifetime(dfs, projects), aes(x=lifetime, colour = name)) + 
     geom_density(alpha = 0.2) + 
-    xlim(0, 5000) +
-    xlab("Lifetime (minutes)")
+    xlim(0, 10000) +
+    xlab("Lifetime (minutes)") + 
+    ylab("Probability")
 }
 
 plot.accept.lifetime.histogram <- function(dfs, projects)

@@ -1,4 +1,5 @@
 library(ggplot2)
+library(igraph)
 
 plot.hist.all_files(dir = "~/Developer/pullreqs/data/")
 plot.mutlicor(dfs[[12]][5:15])
@@ -13,9 +14,7 @@ dfs <- load.all(dir="~/Developer/pullreqs/data")
 
 store.pdf(plot.percentage.merged(dfs), plot.location, "perc-merged.pdf")
 
-projects = c("metasploit-framework", "junit", "puppet", "netty", 
-             "spree", "chef", "jekyll", "jenkins", "libgit")
+projects = c("junit", "puppet", "netty", 
+             "akka", "chef", "jekyll", "jenkins", "libgit")
 store.pdf(plot.accept.lifetime.freq(dfs, projects), plot.location, "lifetime-freq.pdf")
 store.pdf(plot.accept.lifetime.boxplot(dfs, projects), plot.location, "lifetime-boxplot.pdf")
-plot.accept.lifetime.histogram(dfs, projects)
-
