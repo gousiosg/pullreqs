@@ -1,13 +1,7 @@
-Updating client properties
-GHTorrent version: 0.6
-D, [2012-12-23T13:19:25.311729 #17393] DEBUG -- : GHTorrent: User sanger exists
-D, [2012-12-23T13:19:25.315704 #17393] DEBUG -- : GHTorrent: Transaction committed (22 ms)
-D, [2012-12-23T13:19:25.361166 #17393] DEBUG -- : GHTorrent: User sanger exists
-D, [2012-12-23T13:19:25.372387 #17393] DEBUG -- : GHTorrent: Repo sanger/sequencescape exists
-D, [2012-12-23T13:19:25.372942 #17393] DEBUG -- : GHTorrent: Transaction committed (25 ms)
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size_at_merge,num_commits,num_commit_comments,num_issue_comments,num_comments,files_changed,total_commits_last_month,main_team_commits_last_month,sloc,churn,commits_on_files_touched,test_lines_per_1000_lines,test_cases_per_1000_lines,assertions_per_1000_lines
-D, [2012-12-23T13:19:27.554000 #17393] DEBUG -- : Already up-to-date.
-
+743731,sequencescape,707,1355300801,1355317676,1355317676,281,281,2,2,0,0,0,3,69,21,48691,89,9,294.71565587069483,19.05896366885051,28.691133885112237
+744078,sequencescape,708,1355309352,1355317645,1355317645,138,138,2,1,0,0,0,1,68,20,48691,13,1,294.71565587069483,19.05896366885051,28.691133885112237
+719002,sequencescape,705,1354879553,,1355308039,7141,,2,15,0,0,0,1874,0,0,48622,7487,58,295.13389000863805,19.086010447945377,28.731849779935008
 671225,sequencescape,704,1354707041,,1354791678,1410,,2,1,0,0,0,1,0,0,48622,8,0,295.13389000863805,19.086010447945377,28.731849779935008
 472552,sequencescape,394,1327050764,,1354722598,461197,,2,1,0,0,0,27,0,0,45654,216,0,372.12511499540017,24.94852586848907,44.07061812765584
 670991,sequencescape,703,1354701003,1354704104,1354704104,51,51,2,1,0,0,0,1,73,18,48619,15,3,295.1521010304614,19.087188136325302,28.733622657808677

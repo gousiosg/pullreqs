@@ -1,804 +1,79 @@
-Updating client properties
-GHTorrent version: 0.6
-D, [2012-12-23T13:47:15.072818 #17086] DEBUG -- : GHTorrent: User jbossas exists
-D, [2012-12-23T13:47:15.073123 #17086] DEBUG -- : GHTorrent: Transaction committed (13 ms)
-D, [2012-12-23T13:47:15.112327 #17086] DEBUG -- : GHTorrent: User jbossas exists
-D, [2012-12-23T13:47:15.126204 #17086] DEBUG -- : GHTorrent: Repo jbossas/jboss-as exists
-D, [2012-12-23T13:47:15.126497 #17086] DEBUG -- : GHTorrent: Transaction committed (32 ms)
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size_at_merge,num_commits,num_commit_comments,num_issue_comments,num_comments,files_changed,total_commits_last_month,main_team_commits_last_month,sloc,churn,commits_on_files_touched,test_lines_per_1000_lines,test_cases_per_1000_lines,assertions_per_1000_lines
-D, [2012-12-23T13:47:27.579440 #17086] DEBUG -- : Updating 09140ef..ca57e1c
 
-D, [2012-12-23T13:47:27.579543 #17086] DEBUG -- : Fast-forward
-
-D, [2012-12-23T13:47:27.840201 #17086] DEBUG -- :  .../resources/docs/schema/jboss-as-config_1_4.xsd  |   52 ++-
-
-D, [2012-12-23T13:47:27.840250 #17086] DEBUG -- :  .../resources/docs/schema/jboss-as-logging_1_2.xsd |    6 +
-
-D, [2012-12-23T13:47:27.840271 #17086] DEBUG -- :  .../api/main/jbosgi-xservice.properties            |    3 +-
-
-D, [2012-12-23T13:47:27.840293 #17086] DEBUG -- :  .../modules/org/jboss/as/logging/main/module.xml   |    1 +
-
-D, [2012-12-23T13:47:27.840313 #17086] DEBUG -- :  .../main/resources/modules/sun/jdk/main/module.xml |    1 +
-
-D, [2012-12-23T13:47:27.840335 #17086] DEBUG -- :  cli/src/main/java/org/jboss/as/cli/Util.java       |    1 -
-
-D, [2012-12-23T13:47:27.840355 #17086] DEBUG -- :  .../as/cli/handlers/DeploymentOverlayHandler.java  |  217 ++--------
-
-D, [2012-12-23T13:47:27.840375 #17086] DEBUG -- :  .../infinispan/subsystem/FileStoreResource.java    |    2 +-
-
-D, [2012-12-23T13:47:27.840397 #17086] DEBUG -- :  .../InfinispanSubsystemTransformer_1_3.java        |    8 +
-
-D, [2012-12-23T13:47:27.840416 #17086] DEBUG -- :  .../as/clustering/jgroups/JGroupsMessages.java     |    4 +-
-
-D, [2012-12-23T13:47:27.840440 #17086] DEBUG -- :  .../jgroups/subsystem/JGroupsExtension.java        |   51 +++-
-
-D, [2012-12-23T13:47:27.840460 #17086] DEBUG -- :  .../jgroups/subsystem/ProtocolLayerAdd.java        |    3 +-
-
-D, [2012-12-23T13:47:27.840480 #17086] DEBUG -- :  .../jgroups/subsystem/ProtocolStackAdd.java        |   14 +-
-
-D, [2012-12-23T13:47:27.840502 #17086] DEBUG -- :  .../jgroups/subsystem/TransportLayerAdd.java       |    3 +-
-
-D, [2012-12-23T13:47:27.840523 #17086] DEBUG -- :  .../JGroupsSubsystemTransformerTestCase.java       |  165 ++++++++
-
-D, [2012-12-23T13:47:27.840546 #17086] DEBUG -- :  .../subsystem/OperationSequencesTestCase.java      |    2 +-
-
-D, [2012-12-23T13:47:27.840566 #17086] DEBUG -- :  .../jgroups/subsystem/OperationTestCaseBase.java   |   32 ++-
-
-D, [2012-12-23T13:47:27.840587 #17086] DEBUG -- :  .../jgroups/subsystem/jgroups-transformer_1_1.xml  |   28 ++
-
-D, [2012-12-23T13:47:27.840607 #17086] DEBUG -- :  .../infinispan/DistributedCacheManagerFactory.java |    8 +-
-
-D, [2012-12-23T13:47:27.840626 #17086] DEBUG -- :  .../cmp/jdbc/keygen/JDBCInformixCreateCommand.java |    2 +-
-
-D, [2012-12-23T13:47:27.840648 #17086] DEBUG -- :  .../as/cmp/jdbc/keygen/JDBCMySQLCreateCommand.java |    2 +-
-
-D, [2012-12-23T13:47:27.840668 #17086] DEBUG -- :  .../as/connector/logging/ConnectorLogger.java      |    5 +
-
-D, [2012-12-23T13:47:27.840689 #17086] DEBUG -- :  .../subsystems/common/pool/Constants.java          |    3 +
-
-D, [2012-12-23T13:47:27.840709 #17086] DEBUG -- :  .../common/pool/PoolConfigurationRWHandler.java    |  102 ++----
-
-D, [2012-12-23T13:47:27.840730 #17086] DEBUG -- :  .../datasources/DataSourceModelNodeUtil.java       |   55 ++-
-
-D, [2012-12-23T13:47:27.840752 #17086] DEBUG -- :  .../DisableRequiredWriteAttributeHandler.java      |   12 -
-
-D, [2012-12-23T13:47:27.840771 #17086] DEBUG -- :  .../jca/JcaArchiveValidationDefinition.java        |    2 +-
-
-D, [2012-12-23T13:47:27.840792 #17086] DEBUG -- :  .../jca/JcaArchiveValidationWriteHandler.java      |   77 ++++
-
-D, [2012-12-23T13:47:27.840812 #17086] DEBUG -- :  .../subsystems/jca/JcaAttributeWriteHandler.java   |  113 -----
-
-D, [2012-12-23T13:47:27.840831 #17086] DEBUG -- :  .../jca/JcaBeanValidationDefinition.java           |    2 +-
-
-D, [2012-12-23T13:47:27.840853 #17086] DEBUG -- :  .../jca/JcaBeanValidationWriteHandler.java         |   66 +++
-
-D, [2012-12-23T13:47:27.840873 #17086] DEBUG -- :  .../jca/JcaBootstrapContextDefinition.java         |    6 +-
-
-D, [2012-12-23T13:47:27.840894 #17086] DEBUG -- :  .../jca/JcaCachedConnectionManagerDefinition.java  |    6 +-
-
-D, [2012-12-23T13:47:27.840914 #17086] DEBUG -- :  .../JcaCachedConnectionManagerWriteHandler.java    |   77 ++++
-
-D, [2012-12-23T13:47:27.840933 #17086] DEBUG -- :  .../subsystems/jca/JcaWorkManagerDefinition.java   |    6 +-
-
-D, [2012-12-23T13:47:27.840955 #17086] DEBUG -- :  .../resourceadapters/AdminObjectAdd.java           |    3 +-
-
-D, [2012-12-23T13:47:27.840974 #17086] DEBUG -- :  .../AdminObjectResourceDefinition.java             |    4 +-
-
-D, [2012-12-23T13:47:27.840995 #17086] DEBUG -- :  .../resourceadapters/ConnectionDefinitionAdd.java  |    3 +-
-
-D, [2012-12-23T13:47:27.841015 #17086] DEBUG -- :  .../ConnectionDefinitionResourceDefinition.java    |    3 +-
-
-D, [2012-12-23T13:47:27.841034 #17086] DEBUG -- :  .../subsystems/resourceadapters/RaAdd.java         |    2 +-
-
-D, [2012-12-23T13:47:27.841056 #17086] DEBUG -- :  .../resourceadapters/RaOperationUtil.java          |    6 +-
-
-D, [2012-12-23T13:47:27.841075 #17086] DEBUG -- :  .../ResourceAdapterResourceDefinition.java         |    3 +-
-
-D, [2012-12-23T13:47:27.841103 #17086] DEBUG -- :  .../controller/AbstractWriteAttributeHandler.java  |   78 +++-
-
-D, [2012-12-23T13:47:27.841123 #17086] DEBUG -- :  .../jboss/as/controller/AttributeDefinition.java   |   13 +-
-
-D, [2012-12-23T13:47:27.841145 #17086] DEBUG -- :  .../jboss/as/controller/OperationContextImpl.java  |    4 +-
-
-D, [2012-12-23T13:47:27.841165 #17086] DEBUG -- :  .../ReloadRequiredWriteAttributeHandler.java       |   15 +
-
-D, [2012-12-23T13:47:27.841184 #17086] DEBUG -- :  .../RestartParentWriteAttributeHandler.java        |    9 +
-
-D, [2012-12-23T13:47:27.841207 #17086] DEBUG -- :  .../as/controller/SimpleAttributeDefinition.java   |    9 -
-
-D, [2012-12-23T13:47:27.841227 #17086] DEBUG -- :  .../descriptions/ModelDescriptionConstants.java    |    1 -
-
-D, [2012-12-23T13:47:27.841249 #17086] DEBUG -- :  .../controller/extension/ExtensionAddHandler.java  |    6 +-
-
-D, [2012-12-23T13:47:27.841270 #17086] DEBUG -- :  .../operations/global/WriteAttributeHandlers.java  |   36 ++-
-
-D, [2012-12-23T13:47:27.841292 #17086] DEBUG -- :  .../operations/validation/OperationValidator.java  |    5 +-
-
-D, [2012-12-23T13:47:27.841311 #17086] DEBUG -- :  .../org/jboss/as/controller/parsing/Attribute.java |    1 -
-
-D, [2012-12-23T13:47:27.841332 #17086] DEBUG -- :  .../jboss/as/controller/parsing/ParseUtils.java    |    3 +-
-
-D, [2012-12-23T13:47:27.841352 #17086] DEBUG -- :  .../services/path/PathResourceDefinition.java      |    1 +
-
-D, [2012-12-23T13:47:27.841371 #17086] DEBUG -- :  .../services/path/PathWriteAttributeHandler.java   |  114 +++--
-
-D, [2012-12-23T13:47:27.841395 #17086] DEBUG -- :  .../ModelControllerImplUnitTestCase.java           |  113 +++++-
-
-D, [2012-12-23T13:47:27.841415 #17086] DEBUG -- :  ...ChildFirstClassLoaderKernelServicesFactory.java |    2 +-
-
-D, [2012-12-23T13:47:27.841437 #17086] DEBUG -- :  .../impl/ClassLoaderObjectConverterImpl.java       |   10 +
-
-D, [2012-12-23T13:47:27.841458 #17086] DEBUG -- :  .../model/bridge/impl/ObjectSerializerImpl.java    |   23 +
-
-D, [2012-12-23T13:47:27.841480 #17086] DEBUG -- :  .../bridge/local/ClassLoaderObjectConverter.java   |    2 +
-
-D, [2012-12-23T13:47:27.841500 #17086] DEBUG -- :  .../local/LegacyControllerKernelServicesProxy.java |   48 +++
-
-D, [2012-12-23T13:47:27.841519 #17086] DEBUG -- :  .../local/ScopedKernelServicesBootstrap.java       |    3 +-
-
-D, [2012-12-23T13:47:27.841541 #17086] DEBUG -- :  .../core/model/bridge/shared/ObjectSerializer.java |    4 +
-
-D, [2012-12-23T13:47:27.841560 #17086] DEBUG -- :  .../model/test/AbstractKernelServicesImpl.java     |   19 +-
-
-D, [2012-12-23T13:47:27.841637 #17086] DEBUG -- :  .../as/core/model/test/CoreModelTestDelegate.java  |   88 +++--
-
-D, [2012-12-23T13:47:27.841660 #17086] DEBUG -- :  .../jboss/as/core/model/test/KernelServices.java   |   14 +
-
-D, [2012-12-23T13:47:27.841679 #17086] DEBUG -- :  .../as/core/model/test/KernelServicesBuilder.java  |    7 +-
-
-D, [2012-12-23T13:47:27.841701 #17086] DEBUG -- :  .../core/model/test/LegacyKernelServicesImpl.java  |  195 +++++++++-
-
-D, [2012-12-23T13:47:27.841723 #17086] DEBUG -- :  .../test/LegacyKernelServicesInitializer.java      |   10 +-
-
-D, [2012-12-23T13:47:27.841745 #17086] DEBUG -- :  .../as/core/model/test/MainKernelServicesImpl.java |   39 ++-
-
-D, [2012-12-23T13:47:27.841814 #17086] DEBUG -- :  .../DomainDeploymentOverlayTestCase.java           |   51 +++
-
-D, [2012-12-23T13:47:27.841838 #17086] DEBUG -- :  ...omainDeploymentOverlayTransformersTestCase.java |  249 +++++++++++
-
-D, [2012-12-23T13:47:27.841858 #17086] DEBUG -- :  .../StandaloneDeploymentOverlayTestCase.java       |   49 +++
-
-D, [2012-12-23T13:47:27.841880 #17086] DEBUG -- :  .../interfaces/InterfacesTransformersTestCase.java |    4 +-
-
-D, [2012-12-23T13:47:27.841902 #17086] DEBUG -- :  .../core/model/test/jvm/AbstractJvmModelTest.java  |   18 +
-
-D, [2012-12-23T13:47:27.841921 #17086] DEBUG -- :  .../test/jvm/DomainModelJvmModelTestCase.java      |   25 +-
-
-D, [2012-12-23T13:47:27.841943 #17086] DEBUG -- :  .../model/test/jvm/JvmTransformersTestCase.java    |   89 ++++
-
-D, [2012-12-23T13:47:27.841963 #17086] DEBUG -- :  .../test/paths/PathsTransformersTestCase.java      |    3 +-
-
-D, [2012-12-23T13:47:27.841985 #17086] DEBUG -- :  .../test/profile/ProfileTransformersTestCase.java  |    4 +-
-
-D, [2012-12-23T13:47:27.842006 #17086] DEBUG -- :  .../SocketBindingGroupTransformersTestCase.java    |    4 +-
-
-D, [2012-12-23T13:47:27.842026 #17086] DEBUG -- :  .../AbstractSystemPropertyTransformersTest.java    |   26 +-
-
-D, [2012-12-23T13:47:27.842047 #17086] DEBUG -- :  .../DomainServerGroupSystemPropertyTestCase.java   |   23 +-
-
-D, [2012-12-23T13:47:27.842069 #17086] DEBUG -- :  .../test/util/StandardServerGroupInitializers.java |   74 ++++
-
-D, [2012-12-23T13:47:27.842090 #17086] DEBUG -- :  .../test/util/TransformersTestParameters.java      |   13 +-
-
-D, [2012-12-23T13:47:27.842110 #17086] DEBUG -- :  .../domain-no-servergroup-overlay.xml              |   19 +
-
-D, [2012-12-23T13:47:27.842130 #17086] DEBUG -- :  .../core/model/test/deploymentoverlay/domain.xml   |   23 +
-
-D, [2012-12-23T13:47:27.842149 #17086] DEBUG -- :  .../model/test/deploymentoverlay/standalone.xml    |    9 +
-
-D, [2012-12-23T13:47:27.842195 #17086] DEBUG -- :  .../model/test/jvm/domain-with-expressions.xml     |   19 +
-
-D, [2012-12-23T13:47:27.842217 #17086] DEBUG -- :  .../model/test/jvm/domain-without-expressions.xml  |   19 +
-
-D, [2012-12-23T13:47:27.842237 #17086] DEBUG -- :  .../scanner/AbstractWriteAttributeHandler.java     |    9 +-
-
-D, [2012-12-23T13:47:27.842256 #17086] DEBUG -- :  .../scanner/DeploymentScannerDefinition.java       |    4 +-
-
-D, [2012-12-23T13:47:27.842280 #17086] DEBUG -- :  .../WriteAutoDeployExplodedAttributeHandler.java   |    4 +-
-
-D, [2012-12-23T13:47:27.842300 #17086] DEBUG -- :  .../WriteAutoDeployXMLAttributeHandler.java        |    4 +-
-
-D, [2012-12-23T13:47:27.842321 #17086] DEBUG -- :  .../WriteAutoDeployZipAttributeHandler.java        |    4 +-
-
-D, [2012-12-23T13:47:27.842341 #17086] DEBUG -- :  .../WriteDeploymentTimeoutAttributeHandler.java    |    4 +-
-
-D, [2012-12-23T13:47:27.842360 #17086] DEBUG -- :  .../scanner/WriteEnabledAttributeHandler.java      |    4 +-
-
-D, [2012-12-23T13:47:27.842379 #17086] DEBUG -- :  .../scanner/WriteScanIntervalAttributeHandler.java |    4 +-
-
-D, [2012-12-23T13:47:27.842401 #17086] DEBUG -- :  .../management/security/KeystoreAttributes.java    |    4 +-
-
-D, [2012-12-23T13:47:27.842422 #17086] DEBUG -- :  .../security/PropertiesFileResourceDefinition.java |    6 +-
-
-D, [2012-12-23T13:47:27.842442 #17086] DEBUG -- :  .../java/org/jboss/as/ee/naming/Attachments.java   |    3 +
-
-D, [2012-12-23T13:47:27.842463 #17086] DEBUG -- :  .../jboss/as/ee/naming/ModuleContextProcessor.java |    9 +-
-
-D, [2012-12-23T13:47:27.842484 #17086] DEBUG -- :  .../jboss/as/ee/subsystem/EESubsystemParser10.java |   20 +-
-
-D, [2012-12-23T13:47:27.842503 #17086] DEBUG -- :  .../jboss/as/ee/subsystem/EESubsystemParser11.java |   28 +-
-
-D, [2012-12-23T13:47:27.842525 #17086] DEBUG -- :  .../org/jboss/as/ee/subsystem/EeSubsystemAdd.java  |    8 +-
-
-D, [2012-12-23T13:47:27.842544 #17086] DEBUG -- :  .../as/ee/subsystem/EeSubsystemRootResource.java   |   28 +-
-
-D, [2012-12-23T13:47:27.842564 #17086] DEBUG -- :  .../as/ee/subsystem/EeWriteAttributeHandler.java   |   14 +-
-
-D, [2012-12-23T13:47:27.842583 #17086] DEBUG -- :  .../jboss/as/ee/subsystem/EeSubsystemTestCase.java |    7 +-
-
-D, [2012-12-23T13:47:27.842605 #17086] DEBUG -- :  .../main/java/org/jboss/as/ejb3/EjbMessages.java   |    3 +
-
-D, [2012-12-23T13:47:27.842626 #17086] DEBUG -- :  ...bExceptionTransformingInterceptorFactories.java |    6 +-
-
-D, [2012-12-23T13:47:27.842645 #17086] DEBUG -- :  .../component/singleton/SingletonComponent.java    |    8 +
-
-D, [2012-12-23T13:47:27.842667 #17086] DEBUG -- :  .../deployment/processors/EjbInjectionSource.java  |   18 +-
-
-D, [2012-12-23T13:47:27.842687 #17086] DEBUG -- :  .../EjbJndiBindingsDeploymentUnitProcessor.java    |    3 +-
-
-D, [2012-12-23T13:47:27.842706 #17086] DEBUG -- :  .../as/ejb3/remote/RemoteViewInjectionSource.java  |    7 +-
-
-D, [2012-12-23T13:47:27.842728 #17086] DEBUG -- :  .../remote/RemoteViewManagedReferenceFactory.java  |    6 +-
-
-D, [2012-12-23T13:47:27.842747 #17086] DEBUG -- :  ...aultSingletonBeanAccessTimeoutWriteHandler.java |    4 +
-
-D, [2012-12-23T13:47:27.842766 #17086] DEBUG -- :  ...faultStatefulBeanAccessTimeoutWriteHandler.java |    4 +
-
-D, [2012-12-23T13:47:27.842787 #17086] DEBUG -- :  ...ultEntityBeanOptimisticLockingWriteHandler.java |    7 +-
-
-D, [2012-12-23T13:47:27.842809 #17086] DEBUG -- :  .../subsystem/TimerServiceResourceDefinition.java  |    3 +-
-
-D, [2012-12-23T13:47:27.842828 #17086] DEBUG -- :  .../operations/ServerGroupAddHandler.java          |   12 +-
-
-D, [2012-12-23T13:47:27.842848 #17086] DEBUG -- :  .../ServerGroupProfileWriteAttributeHandler.java   |   34 ++-
-
-D, [2012-12-23T13:47:27.842871 #17086] DEBUG -- :  .../coordination/ServerOperationResolver.java      |   11 +-
-
-D, [2012-12-23T13:47:27.842891 #17086] DEBUG -- :  .../controller/resources/DomainRootDefinition.java |    6 +-
-
-D, [2012-12-23T13:47:27.842913 #17086] DEBUG -- :  .../resources/ServerGroupResourceDefinition.java   |   10 +-
-
-D, [2012-12-23T13:47:27.842932 #17086] DEBUG -- :  .../resources/SocketBindingResourceDefinition.java |   41 +--
-
-D, [2012-12-23T13:47:27.842953 #17086] DEBUG -- :  .../transformers/DomainTransformers.java           |    2 +
-
-D, [2012-12-23T13:47:27.842973 #17086] DEBUG -- :  .../controller/transformers/JvmTransformers.java   |   60 +++
-
-D, [2012-12-23T13:47:27.842995 #17086] DEBUG -- :  .../controller/DomainModelControllerService.java   |    2 +-
-
-D, [2012-12-23T13:47:27.843016 #17086] DEBUG -- :  .../java/org/jboss/as/host/controller/Main.java    |   46 ++-
-
-D, [2012-12-23T13:47:27.843035 #17086] DEBUG -- :  .../controller/ManagedServerBootCmdFactory.java    |   29 ++-
-
-D, [2012-12-23T13:47:27.843057 #17086] DEBUG -- :  .../controller/ManagedServerOperationsFactory.java |   37 ++-
-
-D, [2012-12-23T13:47:27.843134 #17086] DEBUG -- :  .../as/host/controller/ServerInventoryImpl.java    |    4 +-
-
-D, [2012-12-23T13:47:27.843157 #17086] DEBUG -- :  .../ignored/IgnoreDomainResourceTypeResource.java  |    5 +-
-
-D, [2012-12-23T13:47:27.843177 #17086] DEBUG -- :  .../ignored/IgnoredDomainResourceRoot.java         |    3 +-
-
-D, [2012-12-23T13:47:27.843197 #17086] DEBUG -- :  .../controller/model/jvm/JVMOptionAddHandler.java  |    4 +-
-
-D, [2012-12-23T13:47:27.843218 #17086] DEBUG -- :  .../model/jvm/JVMOptionRemoveHandler.java          |    5 +-
-
-D, [2012-12-23T13:47:27.843237 #17086] DEBUG -- :  .../host/controller/model/jvm/JvmAttributes.java   |   19 +-
-
-D, [2012-12-23T13:47:27.843260 #17086] DEBUG -- :  .../model/jvm/JvmResourceDefinition.java           |    9 +-
-
-D, [2012-12-23T13:47:27.843279 #17086] DEBUG -- :  .../HttpManagementWriteAttributeHandler.java       |    2 +
-
-D, [2012-12-23T13:47:27.843299 #17086] DEBUG -- :  ...tRequiredServerConfigWriteAttributeHandler.java |   53 ++--
-
-D, [2012-12-23T13:47:27.843322 #17086] DEBUG -- :  .../controller/operations/StartServersHandler.java |   12 +-
-
-D, [2012-12-23T13:47:27.843341 #17086] DEBUG -- :  .../as/host/controller/parsing/DomainXml.java      |   10 +-
-
-D, [2012-12-23T13:47:27.843363 #17086] DEBUG -- :  .../jboss/as/host/controller/parsing/JvmXml.java   |    7 +-
-
-D, [2012-12-23T13:47:27.843382 #17086] DEBUG -- :  .../operations/AbstractOperationTestCase.java      |    5 +-
-
-D, [2012-12-23T13:47:27.843426 #17086] DEBUG -- :  .../operations/ReloadRequiredServerTestCase.java   |   23 +-
-
-D, [2012-12-23T13:47:27.843447 #17086] DEBUG -- :  .../jboss/as/jacorb/JacORBSubsystemResource.java   |    5 +-
-
-D, [2012-12-23T13:47:27.843467 #17086] DEBUG -- :  .../jaxr/extension/JAXRWriteAttributeHandler.java  |    1 +
-
-D, [2012-12-23T13:47:27.843490 #17086] DEBUG -- :  .../subsystem/JSR77ManagementSubsystemAdd.java     |    6 +-
-
-D, [2012-12-23T13:47:27.843509 #17086] DEBUG -- :  logging/pom.xml                                    |    9 +-
-
-D, [2012-12-23T13:47:27.843532 #17086] DEBUG -- :  .../as/logging/AbstractFileHandlerDefinition.java  |   11 +-
-
-D, [2012-12-23T13:47:27.843552 #17086] DEBUG -- :  .../as/logging/AbstractHandlerDefinition.java      |   35 ++-
-
-D, [2012-12-23T13:47:27.843571 #17086] DEBUG -- :  .../as/logging/AsyncHandlerResourceDefinition.java |   29 ++-
-
-D, [2012-12-23T13:47:27.843593 #17086] DEBUG -- :  .../main/java/org/jboss/as/logging/Attribute.java  |    1 +
-
-D, [2012-12-23T13:47:27.843612 #17086] DEBUG -- :  .../org/jboss/as/logging/CommonAttributes.java     |    8 +
-
-D, [2012-12-23T13:47:27.843631 #17086] DEBUG -- :  .../org/jboss/as/logging/HandlerOperations.java    |   33 ++-
-
-D, [2012-12-23T13:47:27.843651 #17086] DEBUG -- :  .../org/jboss/as/logging/LoggerOperations.java     |   12 -
-
-D, [2012-12-23T13:47:27.843672 #17086] DEBUG -- :  .../jboss/as/logging/LoggerResourceDefinition.java |   47 ++-
-
-D, [2012-12-23T13:47:27.843694 #17086] DEBUG -- :  .../as/logging/LoggingDeploymentUnitProcessor.java |   16 +-
-
-D, [2012-12-23T13:47:27.843715 #17086] DEBUG -- :  .../org/jboss/as/logging/LoggingExtension.java     |   86 +++-
-
-D, [2012-12-23T13:47:27.843740 #17086] DEBUG -- :  .../org/jboss/as/logging/LoggingOperations.java    |   55 ++--
-
-D, [2012-12-23T13:47:27.843760 #17086] DEBUG -- :  .../jboss/as/logging/LoggingSubsystemParser.java   |   60 +++-
-
-D, [2012-12-23T13:47:27.843782 #17086] DEBUG -- :  .../as/logging/RootLoggerResourceDefinition.java   |   34 ++-
-
-D, [2012-12-23T13:47:27.843802 #17086] DEBUG -- :  .../logmanager/LoggerConfigurationImpl.java        |   52 +++
-
-D, [2012-12-23T13:47:27.843822 #17086] DEBUG -- :  .../stdio/LogContextStdioContextSelector.java      |   65 +++
-
-D, [2012-12-23T13:47:27.843841 #17086] DEBUG -- :  .../jboss/as/logging/LocalDescriptions.properties  |   31 ++-
-
-D, [2012-12-23T13:47:27.843860 #17086] DEBUG -- :  .../as/logging/AbstractLoggingSubsystemTest.java   |   54 +++-
-
-D, [2012-12-23T13:47:27.843884 #17086] DEBUG -- :  .../LoggingOperationsSubsystemTestCase.java        |  131 ++++++-
-
-D, [2012-12-23T13:47:27.843906 #17086] DEBUG -- :  .../logging/LoggingSubsystemRollbackTestCase.java  |   40 +--
-
-D, [2012-12-23T13:47:27.843926 #17086] DEBUG -- :  .../jboss/as/logging/LoggingSubsystemTestCase.java |   44 ++
-
-D, [2012-12-23T13:47:27.843948 #17086] DEBUG -- :  .../test/java/org/jboss/as/logging/Operations.java |   53 +++-
-
-D, [2012-12-23T13:47:27.843968 #17086] DEBUG -- :  logging/src/test/resources/logging.xml             |    2 +-
-
-D, [2012-12-23T13:47:27.843989 #17086] DEBUG -- :  .../as/mail/extension/MailSessionDefinition.java   |    2 +-
-
-D, [2012-12-23T13:47:27.844008 #17086] DEBUG -- :  .../BroadcastGroupWriteAttributeHandler.java       |   44 +--
-
-D, [2012-12-23T13:47:27.844027 #17086] DEBUG -- :  .../as/messaging/ClusterConnectionDefinition.java  |    4 +-
-
-D, [2012-12-23T13:47:27.844047 #17086] DEBUG -- :  .../DiscoveryGroupWriteAttributeHandler.java       |   45 +--
-
-D, [2012-12-23T13:47:27.844066 #17086] DEBUG -- :  .../as/messaging/Messaging12SubsystemParser.java   |    2 +-
-
-D, [2012-12-23T13:47:27.844090 #17086] DEBUG -- :  .../as/messaging/Messaging13SubsystemParser.java   |    8 +
-
-D, [2012-12-23T13:47:27.844110 #17086] DEBUG -- :  .../as/messaging/MessagingSubsystemParser.java     |   44 +--
-
-D, [2012-12-23T13:47:27.844129 #17086] DEBUG -- :  .../deployment/MessagingDeploymentParser_1_0.java  |    4 +-
-
-D, [2012-12-23T13:47:27.844151 #17086] DEBUG -- :  .../as/messaging/jms/bridge/JMSBridgeHandler.java  |    2 +-
-
-D, [2012-12-23T13:47:27.844170 #17086] DEBUG -- :  .../jms/bridge/JMSBridgeWriteAttributeHandler.java |   66 +--
-
-D, [2012-12-23T13:47:27.844191 #17086] DEBUG -- :  .../model/test/ChildFirstClassLoaderBuilder.java   |   41 ++
-
-D, [2012-12-23T13:47:27.844211 #17086] DEBUG -- :  .../org/jboss/as/naming/InMemoryNamingStore.java   |   15 -
-
-D, [2012-12-23T13:47:27.844230 #17086] DEBUG -- :  .../java/org/jboss/as/naming/JndiPermission.java   |   46 ++-
-
-D, [2012-12-23T13:47:27.844249 #17086] DEBUG -- :  .../java/org/jboss/as/naming/NamingContext.java    |   38 ++-
-
-D, [2012-12-23T13:47:27.844268 #17086] DEBUG -- :  .../java/org/jboss/as/naming/NamingLogger.java     |   11 +
-
-D, [2012-12-23T13:47:27.844290 #17086] DEBUG -- :  .../java/org/jboss/as/naming/NamingMessages.java   |    3 +-
-
-D, [2012-12-23T13:47:27.844309 #17086] DEBUG -- :  .../java/org/jboss/as/naming/SecurityActions.java  |    1 -
-
-D, [2012-12-23T13:47:27.844331 #17086] DEBUG -- :  .../jboss/as/naming/ServiceBasedNamingStore.java   |    3 +-
-
-D, [2012-12-23T13:47:27.844351 #17086] DEBUG -- :  .../as/naming/management/JndiViewOperation.java    |   22 +-
-
-D, [2012-12-23T13:47:27.844372 #17086] DEBUG -- :  .../org/jboss/as/naming/NamingContextTestCase.java |  349 ++++++++++------
-
-D, [2012-12-23T13:47:27.844392 #17086] DEBUG -- :  .../java/org/jboss/as/naming/SecurityHelper.java   |  245 +++++++++++
-
-D, [2012-12-23T13:47:27.844411 #17086] DEBUG -- :  .../management/ActivationAttributeHandler.java     |    3 +-
-
-D, [2012-12-23T13:47:27.844433 #17086] DEBUG -- :  .../osgi/service/BundleLifecycleIntegration.java   |   32 ++
-
-D, [2012-12-23T13:47:27.844455 #17086] DEBUG -- :  .../parser/ActivationWriteHandlerTestCase.java     |    2 +-
-
-D, [2012-12-23T13:47:27.844476 #17086] DEBUG -- :  pom.xml                                            |   28 +-
-
-D, [2012-12-23T13:47:27.844874 #17086] DEBUG -- :  .../main/java/org/jboss/as/process/ExitCodes.java  |   26 ++-
-
-D, [2012-12-23T13:47:27.844898 #17086] DEBUG -- :  .../java/org/jboss/as/process/ManagedProcess.java  |   37 ++-
-
-D, [2012-12-23T13:47:27.844920 #17086] DEBUG -- :  .../org/jboss/as/process/ProcessController.java    |   17 +-
-
-D, [2012-12-23T13:47:27.844939 #17086] DEBUG -- :  .../java/org/jboss/as/process/RespawnPolicy.java   |   26 +-
-
-D, [2012-12-23T13:47:27.844959 #17086] DEBUG -- :  .../RemotingSubsystemTransformersTestCase.java     |  247 +++++++++++
-
-D, [2012-12-23T13:47:27.844981 #17086] DEBUG -- :  .../as/remoting/remoting-with-expressions.xml      |   47 +++
-
-D, [2012-12-23T13:47:27.845000 #17086] DEBUG -- :  .../as/remoting/remoting-without-expressions.xml   |   47 +++
-
-D, [2012-12-23T13:47:27.845023 #17086] DEBUG -- :  .../java/org/jboss/as/remoting/ConnectorAdd.java   |    2 +-
-
-D, [2012-12-23T13:47:27.845042 #17086] DEBUG -- :  .../org/jboss/as/remoting/ConnectorResource.java   |   76 ++--
-
-D, [2012-12-23T13:47:27.845065 #17086] DEBUG -- :  .../as/remoting/GenericOutboundConnectionAdd.java  |    2 +-
-
-D, [2012-12-23T13:47:27.845085 #17086] DEBUG -- :  .../as/remoting/LocalOutboundConnectionAdd.java    |    2 +-
-
-D, [2012-12-23T13:47:27.845104 #17086] DEBUG -- :  .../org/jboss/as/remoting/PropertyResource.java    |   11 +-
-
-D, [2012-12-23T13:47:27.845125 #17086] DEBUG -- :  .../as/remoting/PropertyResourceTransformers.java  |   44 ++
-
-D, [2012-12-23T13:47:27.845144 #17086] DEBUG -- :  .../as/remoting/RemoteOutboundConnectionAdd.java   |    2 +-
-
-D, [2012-12-23T13:47:27.845166 #17086] DEBUG -- :  ...RemoteOutboundConnectionResourceDefinition.java |    6 +-
-
-D, [2012-12-23T13:47:27.845185 #17086] DEBUG -- :  .../org/jboss/as/remoting/RemotingExtension.java   |   39 ++-
-
-D, [2012-12-23T13:47:27.845208 #17086] DEBUG -- :  .../as/remoting/RemotingSubsystem11Parser.java     |   27 +-
-
-D, [2012-12-23T13:47:27.845228 #17086] DEBUG -- :  .../as/remoting/RemotingSubsystemRootResource.java |   11 +-
-
-D, [2012-12-23T13:47:27.845248 #17086] DEBUG -- :  .../org/jboss/as/remoting/SaslPolicyResource.java  |   25 +-
-
-D, [2012-12-23T13:47:27.845270 #17086] DEBUG -- :  .../remoting/SaslPolicyResourceTransformers.java   |   55 +++
-
-D, [2012-12-23T13:47:27.845308 #17086] DEBUG -- :  .../java/org/jboss/as/remoting/SaslResource.java   |   17 +-
-
-D, [2012-12-23T13:47:27.845332 #17086] DEBUG -- :  .../as/remoting/SaslResourceTransformers.java      |   50 +++
-
-D, [2012-12-23T13:47:27.845352 #17086] DEBUG -- :  ...nition.java => WrappedAttributeMarshaller.java} |   32 +-
-
-D, [2012-12-23T13:47:27.845371 #17086] DEBUG -- :  .../security/SecurityDomainReloadWriteHandler.java |    9 +-
-
-D, [2012-12-23T13:47:27.845393 #17086] DEBUG -- :  .../as/security/remoting/RemotingLoginModule.java  |    2 +-
-
-D, [2012-12-23T13:47:27.845414 #17086] DEBUG -- :  .../java/org/jboss/as/server/DomainServerMain.java |    7 +-
-
-D, [2012-12-23T13:47:27.845434 #17086] DEBUG -- :  server/src/main/java/org/jboss/as/server/Main.java |    3 +-
-
-D, [2012-12-23T13:47:27.845453 #17086] DEBUG -- :  .../resources/ServerRootResourceDefinition.java    |    4 +-
-
-D, [2012-12-23T13:47:27.845472 #17086] DEBUG -- :  .../SystemPropertyResourceDefinition.java          |    6 +-
-
-D, [2012-12-23T13:47:27.845495 #17086] DEBUG -- :  .../java/org/jboss/as/server/deployment/Phase.java |    1 +
-
-D, [2012-12-23T13:47:27.845514 #17086] DEBUG -- :  .../module/ManifestDependencyProcessor.java        |    1 +
-
-D, [2012-12-23T13:47:27.845535 #17086] DEBUG -- :  .../module/SubDeploymentDependencyProcessor.java   |    6 +-
-
-D, [2012-12-23T13:47:27.845555 #17086] DEBUG -- :  .../DeploymentStructureDescriptorParser.java       |    2 +-
-
-D, [2012-12-23T13:47:27.845574 #17086] DEBUG -- :  .../DeploymentOverlayDeploymentAdd.java            |    7 +-
-
-D, [2012-12-23T13:47:27.845598 #17086] DEBUG -- :  .../DeploymentOverlayDeploymentDefinition.java     |   15 +-
-
-D, [2012-12-23T13:47:27.845617 #17086] DEBUG -- :  .../DeploymentOverlayDeploymentRemove.java         |    3 +-
-
-D, [2012-12-23T13:47:27.845637 #17086] DEBUG -- :  .../service/DeploymentOverlayIndexService.java     |    6 +-
-
-D, [2012-12-23T13:47:27.845656 #17086] DEBUG -- :  .../service/DeploymentOverlayLinkService.java      |   16 +-
-
-D, [2012-12-23T13:47:27.845678 #17086] DEBUG -- :  .../server/moduleservice/ServiceModuleLoader.java  |    9 +-
-
-D, [2012-12-23T13:47:27.845698 #17086] DEBUG -- :  .../server/operations/ServerShutdownHandler.java   |    2 +-
-
-D, [2012-12-23T13:47:27.845717 #17086] DEBUG -- :  .../SystemPropertyValueWriteAttributeHandler.java  |   91 ++--
-
-D, [2012-12-23T13:47:27.845739 #17086] DEBUG -- :  .../org/jboss/as/server/parsing/CommonXml.java     |   34 +--
-
-D, [2012-12-23T13:47:27.845758 #17086] DEBUG -- :  .../org/jboss/as/server/parsing/StandaloneXml.java |    2 +-
-
-D, [2012-12-23T13:47:27.845782 #17086] DEBUG -- :  .../net/BindingGroupDefaultInterfaceHandler.java   |   37 --
-
-D, [2012-12-23T13:47:27.845801 #17086] DEBUG -- :  .../net/BindingGroupPortOffsetHandler.java         |   37 --
-
-D, [2012-12-23T13:47:27.845821 #17086] DEBUG -- :  .../net/OutboundSocketBindingWriteHandler.java     |  105 ++---
-
-D, [2012-12-23T13:47:27.845840 #17086] DEBUG -- :  .../integration/domain/AdminOnlyModeTestCase.java  |  204 +++++++++
-
-D, [2012-12-23T13:47:27.845859 #17086] DEBUG -- :  .../domain/extension/SubsystemInitialization.java  |    2 +
-
-D, [2012-12-23T13:47:27.845882 #17086] DEBUG -- :  .../domain/extension/TestExtension.java            |    8 +-
-
-D, [2012-12-23T13:47:27.845901 #17086] DEBUG -- :  .../cli/DomainDeploymentOverlayTestCase.java       |   10 +-
-
-D, [2012-12-23T13:47:27.845921 #17086] DEBUG -- :  .../domain/suites/DatasourceTestCase.java          |    2 +-
-
-D, [2012-12-23T13:47:27.845942 #17086] DEBUG -- :  .../domain/suites/DeploymentOverlayTestCase.java   |    1 -
-
-D, [2012-12-23T13:47:27.845963 #17086] DEBUG -- :  .../suites/DirectoryGroupingByTypeTestCase.java    |    2 +-
-
-D, [2012-12-23T13:47:27.845985 #17086] DEBUG -- :  .../integration/domain/suites/DomainTestSuite.java |   19 +-
-
-D, [2012-12-23T13:47:27.846005 #17086] DEBUG -- :  .../domain/suites/IgnoredResourcesTestCase.java    |   35 +-
-
-D, [2012-12-23T13:47:27.846024 #17086] DEBUG -- :  .../domain/suites/ManagementAccessTestCase.java    |    2 +-
-
-D, [2012-12-23T13:47:27.846043 #17086] DEBUG -- :  .../domain/suites/ModelPersistenceTestCase.java    |   99 +++---
-
-D, [2012-12-23T13:47:27.846063 #17086] DEBUG -- :  .../domain/suites/ServerManagementTestCase.java    |   87 +----
-
-D, [2012-12-23T13:47:27.846084 #17086] DEBUG -- :  .../suites/ServerRestartRequiredTestCase.java      |   37 ++-
-
-D, [2012-12-23T13:47:27.846106 #17086] DEBUG -- :  .../suites/ValidateAddressOperationTestCase.java   |   52 ++-
-
-D, [2012-12-23T13:47:27.846126 #17086] DEBUG -- :  .../suites/ValidateOperationOperationTestCase.java |    3 +-
-
-D, [2012-12-23T13:47:27.846145 #17086] DEBUG -- :  .../test/integration/respawn/RespawnTestCase.java  |   73 ++++-
-
-D, [2012-12-23T13:47:27.846180 #17086] DEBUG -- :  .../src/test/resources/host-configs/host-slave.xml |    2 +-
-
-D, [2012-12-23T13:47:27.846204 #17086] DEBUG -- :  .../DeploymentOverlayTestCase.java                 |    1 -
-
-D, [2012-12-23T13:47:27.846226 #17086] DEBUG -- :  .../ejb/singleton/creation/SingletonBeanOne.java   |   76 ++++
-
-D, [2012-12-23T13:47:27.846246 #17086] DEBUG -- :  .../ejb/singleton/creation/SingletonBeanTwo.java   |   57 +++
-
-D, [2012-12-23T13:47:27.846565 #17086] DEBUG -- :  .../SingletonReentrantPostConstructTestCase.java   |   81 ++++
-
-D, [2012-12-23T13:47:27.846587 #17086] DEBUG -- :  .../singleton/startup/postconstruct/Client.java    |   48 +++
-
-D, [2012-12-23T13:47:27.846610 #17086] DEBUG -- :  .../startup/postconstruct/Controller.java          |   49 +++
-
-D, [2012-12-23T13:47:27.846632 #17086] DEBUG -- :  .../SinglePostConstructInvocationTestCase.java     |   57 +++
-
-D, [2012-12-23T13:47:27.846652 #17086] DEBUG -- :  .../ejb/stateful/passivation/ManagedBean.java      |   22 +
-
-D, [2012-12-23T13:47:27.846674 #17086] DEBUG -- :  .../PassivationSucceedsUnitTestCase.java           |    5 +
-
-D, [2012-12-23T13:47:27.846696 #17086] DEBUG -- :  .../stateful/passivation/TestPassivationBean.java  |   12 +
-
-D, [2012-12-23T13:47:27.846716 #17086] DEBUG -- :  .../passivation/TestPassivationRemote.java         |    7 +
-
-D, [2012-12-23T13:47:27.846738 #17086] DEBUG -- :  .../ModuleDeploymentTestCaseSetup.java             |  140 +++++++
-
-D, [2012-12-23T13:47:27.846757 #17086] DEBUG -- :  .../ModuleIJDeploymentTestCase.java                |  222 ----------
-
-D, [2012-12-23T13:47:27.846780 #17086] DEBUG -- :  .../ModuleDeploymentActivationTestCase.java        |  132 ++++++
-
-D, [2012-12-23T13:47:27.846802 #17086] DEBUG -- :  .../moduledeployment/{ => activation}/module.xml   |    4 +-
-
-D, [2012-12-23T13:47:27.846822 #17086] DEBUG -- :  .../{ra16outij2.rar => activation/ra16out.rar}     |  Bin 13031 -> 12282 bytes
-
-D, [2012-12-23T13:47:27.846844 #17086] DEBUG -- :  .../jca/moduledeployment/ironjacamar.xml           |    5 -
-
-D, [2012-12-23T13:47:27.846865 #17086] DEBUG -- :  .../test/integration/jca/moduledeployment/ra.xml   |  105 -----
-
-D, [2012-12-23T13:47:27.846887 #17086] DEBUG -- :  .../logging/profiles/LoggingProfilesTestCase.java  |  438 ++++++++++++++++++++
-
-D, [2012-12-23T13:47:27.846907 #17086] DEBUG -- :  .../logging/profiles/LoggingServlet.java           |   40 ++
-
-D, [2012-12-23T13:47:27.846928 #17086] DEBUG -- :  .../profiles/NonExistingProfileTestCase.java       |  188 +++++++++
-
-D, [2012-12-23T13:47:27.846949 #17086] DEBUG -- :  .../management/cli/DeploymentOverlayTestCase.java  |   10 +-
-
-D, [2012-12-23T13:47:27.846968 #17086] DEBUG -- :  .../auditing/SecurityAuditingTestCase.java         |   94 +++--
-
-D, [2012-12-23T13:47:27.846990 #17086] DEBUG -- :  .../jacc/JACCAuthzPropagationTestCase.java         |    1 -
-
-D, [2012-12-23T13:47:27.847012 #17086] DEBUG -- :  .../security/vault/VaultDatasourceTestCase.java    |  314 ++++++++++++++
-
-D, [2012-12-23T13:47:27.847034 #17086] DEBUG -- :  .../integration/security/vault/vaulttest.keystore  |  Bin 0 -> 1324 bytes
-
-D, [2012-12-23T13:47:27.847056 #17086] DEBUG -- :  .../ssl/HttpsConnectorSettingsTestCase.java        |  151 +++++++
-
-D, [2012-12-23T13:47:27.847076 #17086] DEBUG -- :  .../weld/multideployment/SimpleBean.java           |   32 ++
-
-D, [2012-12-23T13:47:27.847097 #17086] DEBUG -- :  .../WeldCrossDeploymentTestCase.java               |   78 ++++
-
-D, [2012-12-23T13:47:27.847136 #17086] DEBUG -- :  .../WeldModuleDeploymentTestCase.java              |  168 ++++++++
-
-D, [2012-12-23T13:47:27.847160 #17086] DEBUG -- :  .../multideployment}/module.xml                    |   16 +-
-
-D, [2012-12-23T13:47:27.847179 #17086] DEBUG -- :  .../management/cli/GlobalOpsTestCase.java          |   24 +-
-
-D, [2012-12-23T13:47:27.847199 #17086] DEBUG -- :  testsuite/integration/osgi/pom.xml                 |    3 +-
-
-D, [2012-12-23T13:47:27.847218 #17086] DEBUG -- :  .../domain/mixed/SimpleMixedDomainTest.java        |  110 +++++-
-
-D, [2012-12-23T13:47:27.847240 #17086] DEBUG -- :  .../SimpleMixedDomain_7_1_2_Final_TestCase.java    |    4 +-
-
-D, [2012-12-23T13:47:27.847264 #17086] DEBUG -- :  .../SimpleMixedDomain_7_1_3_Final_TestCase.java    |    4 +-
-
-D, [2012-12-23T13:47:27.847283 #17086] DEBUG -- :  .../as/test/integration/domain/mixed/Version.java  |   54 +++
-
-D, [2012-12-23T13:47:27.847304 #17086] DEBUG -- :  .../domain/mixed/util/AbstractMixedDomainTest.java |   15 +-
-
-D, [2012-12-23T13:47:27.847325 #17086] DEBUG -- :  .../domain/mixed/util/OldVersionCopier.java        |  129 +++++-
-
-D, [2012-12-23T13:47:27.847345 #17086] DEBUG -- :  .../src/test/resources/master-config/domain.xml    |    2 -
-
-D, [2012-12-23T13:47:27.847366 #17086] DEBUG -- :  .../src/test/resources/master-config/host.xml      |    6 +-
-
-D, [2012-12-23T13:47:27.847386 #17086] DEBUG -- :  .../src/test/resources/patched-jars/ReadMe.txt     |    5 +
-
-D, [2012-12-23T13:47:27.847405 #17086] DEBUG -- :  .../patched-jars/jboss-remoting-3.2.13.GA.jar      |  Bin 0 -> 238362 bytes
-
-D, [2012-12-23T13:47:27.847427 #17086] DEBUG -- :  .../resources/patched-jars/xnio-api-3.0.7.GA.jar   |  Bin 0 -> 241808 bytes
-
-D, [2012-12-23T13:47:27.847447 #17086] DEBUG -- :  .../domain/configuration/host-slave.xml            |    6 +-
-
-D, [2012-12-23T13:47:27.847469 #17086] DEBUG -- :  .../domain/configuration/host-slave.xml            |    6 +-
-
-D, [2012-12-23T13:47:27.847489 #17086] DEBUG -- :  .../management/util/DomainLifecycleUtil.java       |   41 +-
-
-D, [2012-12-23T13:47:27.847510 #17086] DEBUG -- :  .../domain/management/util/DomainTestUtils.java    |    8 +-
-
-D, [2012-12-23T13:47:27.847530 #17086] DEBUG -- :  .../ParticipantWriteAttributeHandler.java          |   12 -
-
-D, [2012-12-23T13:47:27.847549 #17086] DEBUG -- :  .../subsystem/TransactionSubsystem12Parser.java    |    2 +-
-
-D, [2012-12-23T13:47:27.847571 #17086] DEBUG -- :  .../as/txn/subsystem/TransactionSubsystemAdd.java  |    3 +-
-
-D, [2012-12-23T13:47:27.847590 #17086] DEBUG -- :  ...TransactionSubsystemRootResourceDefinition.java |    4 +-
-
-D, [2012-12-23T13:47:27.847610 #17086] DEBUG -- :  .../jboss/as/txn/TransactionSubsystemTestCase.java |   16 +-
-
-D, [2012-12-23T13:47:27.847632 #17086] DEBUG -- :  .../resources/org/jboss/as/txn/expressions.xml     |   14 +
-
-D, [2012-12-23T13:47:27.847652 #17086] DEBUG -- :  .../test/resources/org/jboss/as/txn/minimal.xml    |    8 +
-
-D, [2012-12-23T13:47:27.847674 #17086] DEBUG -- :  .../test/resources/org/jboss/as/txn/socket-id.xml  |   14 +
-
-D, [2012-12-23T13:47:27.847693 #17086] DEBUG -- :  .../java/org/jboss/as/web/WebSSLDefinition.java    |    5 +-
-
-D, [2012-12-23T13:47:27.847714 #17086] DEBUG -- :  .../web/security/jaspi/WebJASPIAuthenticator.java  |    4 +-
-
-D, [2012-12-23T13:47:27.847734 #17086] DEBUG -- :  .../java/org/jboss/as/webservices/WSLogger.java    |    7 +-
-
-D, [2012-12-23T13:47:27.847755 #17086] DEBUG -- :  .../deployers/WSIntegrationProcessorJAXWS_JMS.java |    3 +-
-
-D, [2012-12-23T13:47:27.847775 #17086] DEBUG -- :  .../jboss/as/webservices/dmr/WSSubsystemAdd.java   |    2 +-
-
-D, [2012-12-23T13:47:27.847794 #17086] DEBUG -- :  .../webservices/metadata/model/POJOEndpoint.java   |   12 +-
-
-D, [2012-12-23T13:47:27.847814 #17086] DEBUG -- :  .../publish/WSEndpointDeploymentUnit.java          |   27 ++-
-
-D, [2012-12-23T13:47:27.847837 #17086] DEBUG -- :  .../as/webservices/service/EndpointService.java    |    6 +-
-
-D, [2012-12-23T13:47:27.847857 #17086] DEBUG -- :  .../as/webservices/util/VirtualFileAdaptor.java    |   27 +-
-
-D, [2012-12-23T13:47:27.847879 #17086] DEBUG -- :  .../main/java/org/jboss/as/weld/WeldLogger.java    |   17 +
-
-D, [2012-12-23T13:47:27.847899 #17086] DEBUG -- :  .../java/org/jboss/as/weld/WeldStartService.java   |   18 +-
-
-D, [2012-12-23T13:47:27.847922 #17086] DEBUG -- :  .../java/org/jboss/as/weld/WeldSubsystemAdd.java   |    4 +-
-
-D, [2012-12-23T13:47:27.847944 #17086] DEBUG -- :  .../org/jboss/as/weld/deployment/UrlScanner.java   |  181 ++++++++
-
-D, [2012-12-23T13:47:27.847963 #17086] DEBUG -- :  .../jboss/as/weld/deployment/WeldAttachments.java  |   10 +
-
-D, [2012-12-23T13:47:27.847988 #17086] DEBUG -- :  .../processors/ExternalBeanArchiveProcessor.java   |  167 ++++++++
-
-D, [2012-12-23T13:47:27.848008 #17086] DEBUG -- :  .../processors/WeldDeploymentProcessor.java        |   35 ++-
-
-D, [2012-12-23T13:47:27.848027 #17086] DEBUG -- :  331 files changed, 8400 insertions(+), 2477 deletions(-)
-
-D, [2012-12-23T13:47:27.848049 #17086] DEBUG -- :  create mode 100644 clustering/jgroups/src/test/java/org/jboss/as/clustering/jgroups/subsystem/JGroupsSubsystemTransformerTestCase.java
-
-D, [2012-12-23T13:47:27.848071 #17086] DEBUG -- :  create mode 100644 clustering/jgroups/src/test/resources/org/jboss/as/clustering/jgroups/subsystem/jgroups-transformer_1_1.xml
-
-D, [2012-12-23T13:47:27.848093 #17086] DEBUG -- :  create mode 100644 connector/src/main/java/org/jboss/as/connector/subsystems/jca/JcaArchiveValidationWriteHandler.java
-
-D, [2012-12-23T13:47:27.848113 #17086] DEBUG -- :  delete mode 100644 connector/src/main/java/org/jboss/as/connector/subsystems/jca/JcaAttributeWriteHandler.java
-
-D, [2012-12-23T13:47:27.848135 #17086] DEBUG -- :  create mode 100644 connector/src/main/java/org/jboss/as/connector/subsystems/jca/JcaBeanValidationWriteHandler.java
-
-D, [2012-12-23T13:47:27.848154 #17086] DEBUG -- :  create mode 100644 connector/src/main/java/org/jboss/as/connector/subsystems/jca/JcaCachedConnectionManagerWriteHandler.java
-
-D, [2012-12-23T13:47:27.848176 #17086] DEBUG -- :  create mode 100644 core-model-test/tests/src/test/java/org/jboss/as/core/model/test/deploymentoverlay/DomainDeploymentOverlayTestCase.java
-
-D, [2012-12-23T13:47:27.848196 #17086] DEBUG -- :  create mode 100644 core-model-test/tests/src/test/java/org/jboss/as/core/model/test/deploymentoverlay/DomainDeploymentOverlayTransformersTestCase.java
-
-D, [2012-12-23T13:47:27.848215 #17086] DEBUG -- :  create mode 100644 core-model-test/tests/src/test/java/org/jboss/as/core/model/test/deploymentoverlay/StandaloneDeploymentOverlayTestCase.java
-
-D, [2012-12-23T13:47:27.848238 #17086] DEBUG -- :  create mode 100644 core-model-test/tests/src/test/java/org/jboss/as/core/model/test/jvm/JvmTransformersTestCase.java
-
-D, [2012-12-23T13:47:27.848258 #17086] DEBUG -- :  create mode 100644 core-model-test/tests/src/test/java/org/jboss/as/core/model/test/util/StandardServerGroupInitializers.java
-
-D, [2012-12-23T13:47:27.848280 #17086] DEBUG -- :  create mode 100644 core-model-test/tests/src/test/resources/org/jboss/as/core/model/test/deploymentoverlay/domain-no-servergroup-overlay.xml
-
-D, [2012-12-23T13:47:27.848300 #17086] DEBUG -- :  create mode 100644 core-model-test/tests/src/test/resources/org/jboss/as/core/model/test/deploymentoverlay/domain.xml
-
-D, [2012-12-23T13:47:27.848322 #17086] DEBUG -- :  create mode 100644 core-model-test/tests/src/test/resources/org/jboss/as/core/model/test/deploymentoverlay/standalone.xml
-
-D, [2012-12-23T13:47:27.848342 #17086] DEBUG -- :  create mode 100644 core-model-test/tests/src/test/resources/org/jboss/as/core/model/test/jvm/domain-with-expressions.xml
-
-D, [2012-12-23T13:47:27.848363 #17086] DEBUG -- :  create mode 100644 core-model-test/tests/src/test/resources/org/jboss/as/core/model/test/jvm/domain-without-expressions.xml
-
-D, [2012-12-23T13:47:27.848384 #17086] DEBUG -- :  create mode 100644 host-controller/src/main/java/org/jboss/as/domain/controller/transformers/JvmTransformers.java
-
-D, [2012-12-23T13:47:27.848404 #17086] DEBUG -- :  create mode 100644 logging/src/main/java/org/jboss/as/logging/stdio/LogContextStdioContextSelector.java
-
-D, [2012-12-23T13:47:27.848444 #17086] DEBUG -- :  create mode 100644 naming/src/test/java/org/jboss/as/naming/SecurityHelper.java
-
-D, [2012-12-23T13:47:27.848467 #17086] DEBUG -- :  create mode 100644 remoting-test/src/test/java/org/jboss/as/remoting/RemotingSubsystemTransformersTestCase.java
-
-D, [2012-12-23T13:47:27.848489 #17086] DEBUG -- :  create mode 100644 remoting-test/src/test/resources/org/jboss/as/remoting/remoting-with-expressions.xml
-
-D, [2012-12-23T13:47:27.848509 #17086] DEBUG -- :  create mode 100644 remoting-test/src/test/resources/org/jboss/as/remoting/remoting-without-expressions.xml
-
-D, [2012-12-23T13:47:27.848531 #17086] DEBUG -- :  create mode 100644 remoting/src/main/java/org/jboss/as/remoting/PropertyResourceTransformers.java
-
-D, [2012-12-23T13:47:27.848553 #17086] DEBUG -- :  create mode 100644 remoting/src/main/java/org/jboss/as/remoting/SaslPolicyResourceTransformers.java
-
-D, [2012-12-23T13:47:27.848573 #17086] DEBUG -- :  create mode 100644 remoting/src/main/java/org/jboss/as/remoting/SaslResourceTransformers.java
-
-D, [2012-12-23T13:47:27.848595 #17086] DEBUG -- :  rename remoting/src/main/java/org/jboss/as/remoting/{NamedValueAttributeDefinition.java => WrappedAttributeMarshaller.java} (56%)
-
-D, [2012-12-23T13:47:27.848615 #17086] DEBUG -- :  delete mode 100644 server/src/main/java/org/jboss/as/server/services/net/BindingGroupDefaultInterfaceHandler.java
-
-D, [2012-12-23T13:47:27.848634 #17086] DEBUG -- :  delete mode 100644 server/src/main/java/org/jboss/as/server/services/net/BindingGroupPortOffsetHandler.java
-
-D, [2012-12-23T13:47:27.848656 #17086] DEBUG -- :  create mode 100644 testsuite/domain/src/test/java/org/jboss/as/test/integration/domain/AdminOnlyModeTestCase.java
-
-D, [2012-12-23T13:47:27.848680 #17086] DEBUG -- :  create mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/ejb/singleton/creation/SingletonBeanOne.java
-
-D, [2012-12-23T13:47:27.848702 #17086] DEBUG -- :  create mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/ejb/singleton/creation/SingletonBeanTwo.java
-
-D, [2012-12-23T13:47:27.852191 #17086] DEBUG -- :  create mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/ejb/singleton/creation/SingletonReentrantPostConstructTestCase.java
-
-D, [2012-12-23T13:47:27.852222 #17086] DEBUG -- :  create mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/ejb/singleton/startup/postconstruct/Client.java
-
-D, [2012-12-23T13:47:27.852245 #17086] DEBUG -- :  create mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/ejb/singleton/startup/postconstruct/Controller.java
-
-D, [2012-12-23T13:47:27.852265 #17086] DEBUG -- :  create mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/ejb/singleton/startup/postconstruct/SinglePostConstructInvocationTestCase.java
-
-D, [2012-12-23T13:47:27.852289 #17086] DEBUG -- :  create mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/ejb/stateful/passivation/ManagedBean.java
-
-D, [2012-12-23T13:47:27.852309 #17086] DEBUG -- :  create mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/jca/moduledeployment/ModuleDeploymentTestCaseSetup.java
-
-D, [2012-12-23T13:47:27.852329 #17086] DEBUG -- :  delete mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/jca/moduledeployment/ModuleIJDeploymentTestCase.java
-
-D, [2012-12-23T13:47:27.852349 #17086] DEBUG -- :  create mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/jca/moduledeployment/activation/ModuleDeploymentActivationTestCase.java
-
-D, [2012-12-23T13:47:27.852371 #17086] DEBUG -- :  copy testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/jca/moduledeployment/{ => activation}/module.xml (96%)
-
-D, [2012-12-23T13:47:27.852393 #17086] DEBUG -- :  rename testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/jca/moduledeployment/{ra16outij2.rar => activation/ra16out.rar} (59%)
-
-D, [2012-12-23T13:47:27.852413 #17086] DEBUG -- :  delete mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/jca/moduledeployment/ironjacamar.xml
-
-D, [2012-12-23T13:47:27.852436 #17086] DEBUG -- :  delete mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/jca/moduledeployment/ra.xml
-
-D, [2012-12-23T13:47:27.852456 #17086] DEBUG -- :  create mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/logging/profiles/LoggingProfilesTestCase.java
-
-D, [2012-12-23T13:47:27.852476 #17086] DEBUG -- :  create mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/logging/profiles/LoggingServlet.java
-
-D, [2012-12-23T13:47:27.852498 #17086] DEBUG -- :  create mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/logging/profiles/NonExistingProfileTestCase.java
-
-D, [2012-12-23T13:47:27.852518 #17086] DEBUG -- :  create mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/security/vault/VaultDatasourceTestCase.java
-
-D, [2012-12-23T13:47:27.852538 #17086] DEBUG -- :  create mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/security/vault/vaulttest.keystore
-
-D, [2012-12-23T13:47:27.852561 #17086] DEBUG -- :  create mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/web/security/ssl/HttpsConnectorSettingsTestCase.java
-
-D, [2012-12-23T13:47:27.852581 #17086] DEBUG -- :  create mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/weld/multideployment/SimpleBean.java
-
-D, [2012-12-23T13:47:27.852603 #17086] DEBUG -- :  create mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/weld/multideployment/WeldCrossDeploymentTestCase.java
-
-D, [2012-12-23T13:47:27.852623 #17086] DEBUG -- :  create mode 100644 testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/weld/multideployment/WeldModuleDeploymentTestCase.java
-
-D, [2012-12-23T13:47:27.852644 #17086] DEBUG -- :  rename testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/{jca/moduledeployment => weld/multideployment}/module.xml (75%)
-
-D, [2012-12-23T13:47:27.852664 #17086] DEBUG -- :  create mode 100644 testsuite/mixed-domain/src/test/java/org/jboss/as/test/integration/domain/mixed/Version.java
-
-D, [2012-12-23T13:47:27.852684 #17086] DEBUG -- :  create mode 100644 testsuite/mixed-domain/src/test/resources/patched-jars/ReadMe.txt
-
-D, [2012-12-23T13:47:27.852706 #17086] DEBUG -- :  create mode 100644 testsuite/mixed-domain/src/test/resources/patched-jars/jboss-remoting-3.2.13.GA.jar
-
-D, [2012-12-23T13:47:27.852730 #17086] DEBUG -- :  create mode 100644 testsuite/mixed-domain/src/test/resources/patched-jars/xnio-api-3.0.7.GA.jar
-
-D, [2012-12-23T13:47:27.852753 #17086] DEBUG -- :  create mode 100644 transactions/src/test/resources/org/jboss/as/txn/expressions.xml
-
-D, [2012-12-23T13:47:27.852777 #17086] DEBUG -- :  create mode 100644 transactions/src/test/resources/org/jboss/as/txn/minimal.xml
-
-D, [2012-12-23T13:47:27.852800 #17086] DEBUG -- :  create mode 100644 transactions/src/test/resources/org/jboss/as/txn/socket-id.xml
-
-D, [2012-12-23T13:47:27.852820 #17086] DEBUG -- :  create mode 100644 weld/src/main/java/org/jboss/as/weld/deployment/UrlScanner.java
-
-D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/main/java/org/jboss/as/weld/deployment/processors/ExternalBeanArchiveProcessor.java
-
-742889,jboss-as,3626,1355248912,1355275677,1355275677,446,446,54,1,0,0,0,15,455,148,371095,1243,17,482.0894919090799,10.29116533502203,37.130653875692204
+761350,jboss-as,3743,1356097617,,1356122945,422,,54,1,0,0,0,2,0,0,355564,4,0,436.377136043019,9.466650167058532,32.286733190086736
+761221,jboss-as,3741,1356093894,,1356122877,483,,54,1,0,0,0,1,0,0,372249,2,0,489.9355001625256,10.417758006065833,37.30836080150652
+761412,jboss-as,3719,1355951194,,1356098591,2456,,54,1,0,0,0,1,0,0,371951,6,0,488.73373105597244,10.391153673467741,37.254907232404264
+761408,jboss-as,3728,1356010039,,1356098569,1475,,54,5,0,0,0,7,0,0,372249,135,0,489.9355001625256,10.417758006065833,37.30836080150652
+761409,jboss-as,3739,1356082414,,1356098548,268,,54,1,0,0,0,1,0,0,372249,2,0,489.9355001625256,10.417758006065833,37.30836080150652
+761410,jboss-as,3738,1356080816,,1356098548,295,,54,1,0,0,0,1,0,0,372249,1,0,489.9355001625256,10.417758006065833,37.30836080150652
+760628,jboss-as,3736,1356037508,,1356049524,200,,54,1,0,0,0,1,0,0,371849,2,0,489.4755666950832,10.418207390634372,37.30815465417414
+760627,jboss-as,3708,1355905180,,1356049508,2405,,54,1,0,0,0,4,0,0,372015,709,0,488.61470639624747,10.38667795653401,37.24849804443369
+760625,jboss-as,3707,1355884930,,1356049496,2742,,54,1,0,0,0,12,0,0,372015,721,0,488.61470639624747,10.38667795653401,37.24849804443369
+760474,jboss-as,3702,1355848263,,1355869052,346,,54,1,0,0,0,1,0,0,371859,16,0,488.07478103259564,10.372210972438479,37.21571886118125
+646513,jboss-as,3609,1355170952,,1355837117,11102,,54,1,0,4,4,5,0,0,370445,16,0,482.42789078000783,10.303823779508429,37.18500722104496
+754423,jboss-as,3678,1355621003,,1355824922,3398,,54,1,0,0,0,1,0,0,371731,2,0,486.7955591543347,10.343501080082103,37.190871893923294
+756549,jboss-as,3683,1355733437,,1355824915,1524,,54,1,0,0,0,2,0,0,371752,5,0,487.6207794443608,10.361746540704555,37.20760076610213
+758908,jboss-as,3693,1355785044,,1355824879,663,,54,1,0,0,0,1,0,0,371824,9,0,488.1207237832953,10.373187314428332,37.21922199750419
+758930,jboss-as,3694,1355785548,,1355824872,655,,54,1,0,0,0,4,0,0,371824,79,0,488.1207237832953,10.373187314428332,37.21922199750419
+502209,jboss-as,3468,1353379918,,1355817789,40631,,54,1,0,4,4,61,0,0,366808,482,0,477.48685961047744,10.291487644762382,36.94848531111644
+758384,jboss-as,3689,1355763615,,1355774335,178,,54,1,0,0,0,13,0,0,371824,956,0,488.1207237832953,10.373187314428332,37.21922199750419
+745075,jboss-as,3639,1355328275,,1355741234,6882,,54,3,0,0,0,17,0,0,371634,322,0,486.08846338063796,10.340819193077058,37.173670869726664
+750159,jboss-as,3662,1355450846,,1355741219,4839,,54,1,0,0,0,1,0,0,371634,3,0,486.08846338063796,10.340819193077058,37.173670869726664
+752621,jboss-as,3675,1355523019,,1355741187,3636,,54,1,0,0,0,5,0,0,371634,155,0,486.08846338063796,10.340819193077058,37.173670869726664
+755888,jboss-as,3680,1355703045,,1355741166,635,,54,10,0,0,0,18,0,0,371731,583,0,486.7955591543347,10.343501080082103,37.190871893923294
+756311,jboss-as,3682,1355725019,,1355725138,1,,54,1,0,0,0,1,0,0,371752,2,0,487.6207794443608,10.361746540704555,37.20760076610213
+646525,jboss-as,3596,1354872084,,1355723113,14183,,54,5,0,4,4,18,0,0,370445,1079,0,482.42789078000783,10.303823779508429,37.18500722104496
+748488,jboss-as,3654,1355416639,,1355723090,5107,,54,1,0,0,0,4,0,0,371580,46,0,483.82851606652673,10.30733623984068,37.092954410894016
+754492,jboss-as,3679,1355625819,,1355723066,1620,,54,1,0,0,0,1,0,0,371731,6,0,486.7955591543347,10.343501080082103,37.190871893923294
+743700,jboss-as,3627,1355300295,,1355577399,4618,,54,2,0,0,0,3,0,0,371634,10,0,486.08846338063796,10.340819193077058,37.173670869726664
+751834,jboss-as,3672,1355503695,,1355536417,545,,54,1,0,0,0,9,0,0,371634,321,0,486.08846338063796,10.340819193077058,37.173670869726664
+751474,jboss-as,3670,1355496661,,1355536389,662,,54,1,0,0,0,2,0,0,371634,39,0,486.08846338063796,10.340819193077058,37.173670869726664
+751150,jboss-as,3668,1355489079,,1355536371,788,,54,1,0,0,0,2,0,0,371634,105,0,486.08846338063796,10.340819193077058,37.173670869726664
+751015,jboss-as,3667,1355485660,,1355536353,844,,54,1,0,0,0,1,0,0,371634,2,0,486.08846338063796,10.340819193077058,37.173670869726664
+751002,jboss-as,3666,1355485331,,1355536340,850,,54,1,0,0,0,1,0,0,371634,24,0,486.08846338063796,10.340819193077058,37.173670869726664
+750242,jboss-as,3663,1355454940,,1355536329,1356,,54,1,0,0,0,5,0,0,371634,45,0,486.08846338063796,10.340819193077058,37.173670869726664
+747470,jboss-as,3642,1355392944,,1355536317,2389,,54,1,0,0,0,3,0,0,371504,154,0,483.24647917653647,10.309444851199448,37.100542659029244
+646559,jboss-as,3558,1354306270,,1355536304,20500,,54,2,0,3,3,22,0,0,368941,556,0,477.7403433069244,10.283487061616897,37.01946923762878
+751154,jboss-as,3669,1355489338,1355531966,1355531966,710,710,54,1,0,0,0,1,493,138,355530,4,3,436.4216803082722,9.467555480550164,32.28982083087222
+747669,jboss-as,3646,1355399557,,1355495043,1591,,54,1,0,0,0,1,0,0,371634,27,0,486.08846338063796,10.340819193077058,37.173670869726664
+646552,jboss-as,3573,1354612420,,1355485075,14544,,54,1,0,6,6,1,0,0,369078,21,0,477.94233197318727,10.285088788819706,37.046369602089534
+744980,jboss-as,3638,1355326788,,1355475439,2477,,54,1,0,0,0,17,0,0,371708,1381,0,481.24334154766643,10.274193721953791,37.0694200824303
+749687,jboss-as,3659,1355437986,,1355469885,531,,54,1,0,0,0,19,0,0,371618,1963,0,483.82478781975044,10.306282257587092,37.089161450737045
+749104,jboss-as,3656,1355427080,,1355454312,453,,54,1,0,0,0,1,0,0,371580,2,0,483.82851606652673,10.30733623984068,37.092954410894016
+749855,jboss-as,3660,1355441777,,1355451197,157,,54,1,0,0,0,2,0,0,371618,57,0,483.82478781975044,10.306282257587092,37.089161450737045
+749608,jboss-as,3658,1355436205,,1355451166,249,,54,1,0,0,0,2,0,0,371618,117,0,483.82478781975044,10.306282257587092,37.089161450737045
+748112,jboss-as,3651,1355409585,,1355451153,692,,54,1,0,0,0,1,0,0,371504,19,0,483.24647917653647,10.309444851199448,37.100542659029244
+747945,jboss-as,3650,1355406686,,1355451101,740,,54,1,0,0,0,2,0,0,371504,6,0,483.24647917653647,10.309444851199448,37.100542659029244
+747922,jboss-as,3648,1355406186,,1355451087,748,,54,1,0,0,0,3,0,0,371504,666,0,483.24647917653647,10.309444851199448,37.100542659029244
+747614,jboss-as,3645,1355397881,,1355451063,886,,54,1,0,0,0,1,0,0,371504,2,0,483.24647917653647,10.309444851199448,37.100542659029244
+747572,jboss-as,3644,1355396801,,1355451046,904,,54,1,0,0,0,1,0,0,371504,2,0,483.24647917653647,10.309444851199448,37.100542659029244
+747539,jboss-as,3643,1355395640,,1355451032,923,,54,1,0,0,0,1,0,0,371504,94,0,483.24647917653647,10.309444851199448,37.100542659029244
+743800,jboss-as,3628,1355302388,,1355451017,2477,,54,1,0,0,0,2,0,0,371504,314,0,483.24647917653647,10.309444851199448,37.100542659029244
+646670,jboss-as,3614,1355210770,,1355451005,4003,,54,4,3,3,6,5,0,0,371116,46,0,482.06221235408873,10.290582998307807,37.12855279750806
+749981,jboss-as,3661,1355445050,,1355447236,36,,54,1,0,0,0,1,0,0,355530,4,0,436.4216803082722,9.467555480550164,32.28982083087222
+747848,jboss-as,3647,1355404116,,1355444900,679,,54,1,0,0,0,1,0,0,355530,4,0,436.4216803082722,9.467555480550164,32.28982083087222
+749460,jboss-as,3657,1355433358,1355436168,1355436168,46,46,54,1,0,0,0,6,501,146,371580,150,13,483.82851606652673,10.30733623984068,37.092954410894016
+748339,jboss-as,3653,1355413718,,1355416340,43,,54,3,0,0,0,46,0,0,371504,1210,66,483.24647917653647,10.309444851199448,37.100542659029244
+748337,jboss-as,3652,1355413549,1355416337,1355416337,46,46,54,1,0,0,0,26,498,147,371504,663,66,483.24647917653647,10.309444851199448,37.100542659029244
+747946,jboss-as,3649,1355406640,,1355413317,111,,54,3,0,0,0,52,0,0,371504,1277,0,483.24647917653647,10.309444851199448,37.100542659029244
+646556,jboss-as,3559,1354310999,,1355385215,17903,,54,4,0,20,20,57,0,0,370445,3152,0,482.42789078000783,10.303823779508429,37.18500722104496
+646546,jboss-as,3575,1354626101,,1355366453,12339,,54,2,0,12,12,6,0,0,370445,74,0,482.42789078000783,10.303823779508429,37.18500722104496
+744610,jboss-as,3636,1355320887,,1355359470,643,,54,4,0,0,0,21,0,0,371708,287,0,481.22719984503965,10.274193721953791,37.0694200824303
+745676,jboss-as,3640,1355339555,,1355355187,260,,54,1,0,0,0,1,0,0,371708,4,0,481.24334154766643,10.274193721953791,37.0694200824303
+744925,jboss-as,3637,1355325882,,1355355176,488,,54,5,0,0,0,9,0,0,371708,144,0,481.23796098012417,10.274193721953791,37.0694200824303
+744463,jboss-as,3635,1355318265,,1355355159,614,,54,2,0,0,0,54,0,0,371708,1627,0,481.24334154766643,10.274193721953791,37.0694200824303
+743918,jboss-as,3630,1355305539,,1355355144,826,,54,1,0,0,0,1,0,0,371708,6,0,481.22719984503965,10.274193721953791,37.0694200824303
+743899,jboss-as,3629,1355305115,,1355355109,833,,54,1,0,0,0,1,0,0,371619,2,0,481.34245019764865,10.276654315306807,37.07829793417452
+746465,jboss-as,3623,1355237496,,1355355094,1959,,54,1,0,0,0,11,0,0,371708,240,0,481.22719984503965,10.274193721953791,37.0694200824303
+492996,jboss-as,3456,1353103728,,1355350831,37451,,54,4,1,11,12,21,0,0,366718,1311,0,477.524964686762,10.291286492618307,36.94119186950191
+746287,jboss-as,3624,1355244205,,1355350811,1776,,54,3,0,0,0,23,0,0,371147,2095,0,482.02194817686797,10.289723478837226,37.12545164045513
+744291,jboss-as,3633,1355314876,,1355347600,545,,54,1,0,0,0,4,0,0,355502,32,0,436.45605369308754,9.468301162862655,32.29236403733313
+646408,jboss-as,3537,1354114936,,1355342649,20461,,54,1,0,7,7,7,0,0,368820,80,0,477.7208394338702,10.286860799305893,37.01534623935795
+744232,jboss-as,3631,1355313287,1355321443,1355321443,135,135,54,1,0,0,0,1,501,151,371708,7,2,481.22719984503965,10.274193721953791,37.0694200824303
+744255,jboss-as,3632,1355313846,,1355314042,3,,54,1,0,0,0,1,0,0,371708,7,0,481.22719984503965,10.274193721953791,37.0694200824303
+646520,jboss-as,3603,1354976106,,1355305624,5491,,54,3,0,3,3,22,0,0,370445,434,0,482.42789078000783,10.303823779508429,37.18500722104496
+646512,jboss-as,3610,1355177803,,1355305558,2129,,54,2,0,3,3,2,0,0,370445,51,0,482.42789078000783,10.303823779508429,37.18500722104496
+742889,jboss-as,3626,1355248912,1355275677,1355275677,446,446,54,1,0,0,0,15,486,152,371095,1243,17,482.0894919090799,10.29116533502203,37.130653875692204
 646675,jboss-as,3618,1355215599,,1355215645,0,,54,1,0,1,1,1,0,0,355502,5,0,436.45605369308754,9.468301162862655,32.29236403733313
 646679,jboss-as,3615,1355215241,,1355215462,3,,54,1,0,0,0,3,0,0,371116,6,0,482.06221235408873,10.290582998307807,37.12855279750806
 646676,jboss-as,3617,1355215298,,1355215453,2,,54,1,0,0,0,2,0,0,355502,4,0,436.45605369308754,9.468301162862655,32.29236403733313
@@ -810,11 +85,10 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 646617,jboss-as,3586,1354728660,,1355179022,7506,,54,2,0,11,11,5,0,0,369079,52,0,478.8459923214271,10.298608157061226,37.11671484966633
 646579,jboss-as,3601,1354904444,,1355179005,4576,,54,2,0,4,4,5,0,0,355439,52,0,436.5334136096489,9.469979377614724,32.29808771687969
 646664,jboss-as,3549,1354259005,,1355178982,15332,,54,1,0,9,9,8,0,0,355439,74,0,436.5334136096489,9.469979377614724,32.29808771687969
-646565,jboss-as,3607,1355154464,1355167466,1355167466,216,216,54,1,0,5,5,2,442,147,370445,12,30,482.42789078000783,10.303823779508429,37.18500722104496
+646565,jboss-as,3607,1355154464,1355167466,1355167466,216,216,54,1,0,5,5,2,460,150,370445,12,30,482.42789078000783,10.303823779508429,37.18500722104496
 646571,jboss-as,3602,1354932274,,1355114424,3035,,54,1,0,4,4,1,0,0,370445,8,0,482.42789078000783,10.303823779508429,37.18500722104496
 646586,jboss-as,3597,1354880838,,1355114415,3892,,54,1,0,4,4,2,0,0,370445,4,0,482.42789078000783,10.303823779508429,37.18500722104496
 646584,jboss-as,3598,1354880928,,1355114408,3891,,54,1,0,4,4,2,0,0,355439,4,0,436.5334136096489,9.469979377614724,32.29808771687969
-646525,jboss-as,3596,1354872084,,1354872352,4,,55,5,0,4,4,18,0,0,370445,1079,0,482.42789078000783,10.303823779508429,37.18500722104496
 646611,jboss-as,3592,1354803902,,1354834819,515,,55,3,0,4,4,15,0,0,369085,617,0,479.47220829890136,10.30385954454936,37.151333703618405
 580424,jboss-as,3540,1354137052,,1354834798,11629,,55,6,4,11,15,46,0,0,368820,19111,0,477.7208394338702,10.286860799305893,37.01534623935795
 646587,jboss-as,3594,1354830478,,1354832232,29,,55,250,0,4,4,1109,0,0,369639,34167,87,483.34997118810514,10.315469958527103,37.198455790649795
@@ -822,7 +96,7 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 646621,jboss-as,3583,1354709139,,1354794356,1420,,55,1,0,6,6,6,0,0,369042,534,0,478.6853528866633,10.291511535272408,37.10959728161022
 646627,jboss-as,3581,1354650578,,1354794340,2396,,55,1,0,12,12,1,0,0,368991,90,0,478.68647202777305,10.29022388079926,37.101175909439526
 646612,jboss-as,3589,1354787632,,1354794328,111,,55,1,0,4,4,1,0,0,355433,90,0,435.90493848348353,9.46451229908309,32.26205782805761
-646620,jboss-as,3584,1354709209,1354794303,1354794303,1418,1418,55,1,0,5,5,6,450,159,355433,534,6,435.90493848348353,9.46451229908309,32.26205782805761
+646620,jboss-as,3584,1354709209,1354794303,1354794303,1418,1418,55,1,0,5,5,6,460,161,355433,534,6,435.90493848348353,9.46451229908309,32.26205782805761
 646619,jboss-as,3585,1354718772,,1354724505,95,,55,2,0,4,4,12,0,0,369042,299,0,478.6853528866633,10.291511535272408,37.10959728161022
 640916,jboss-as,3561,1354532504,,1354703081,2842,,55,1,0,7,7,3,0,0,368991,10,0,478.68647202777305,10.29022388079926,37.101175909439526
 640928,jboss-as,3562,1354532563,,1354703076,2841,,55,1,0,7,7,3,0,0,355442,10,0,435.8263795499688,9.461459253549101,32.247173941177465
@@ -849,7 +123,7 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 641466,jboss-as,3563,1354534794,,1354593336,975,,54,3,0,8,8,25,0,0,369031,1119,0,477.81622682105296,10.283688904184201,37.0510878489883
 646659,jboss-as,3560,1354332841,,1354593324,4341,,54,2,0,8,8,22,0,0,369031,1098,0,477.81080722215745,10.283688904184201,37.0510878489883
 587764,jboss-as,3547,1354216820,,1354593313,6274,,54,2,0,9,9,22,0,0,368820,1076,0,477.7208394338702,10.286860799305893,37.01534623935795
-644867,jboss-as,3566,1354557549,1354567224,1354567224,161,161,54,1,0,4,4,2,424,150,355481,117,2,435.33690970825444,9.454795052337538,32.19581355965579
+644867,jboss-as,3566,1354557549,1354567224,1354567224,161,161,54,1,0,4,4,2,428,150,355481,117,2,435.33690970825444,9.454795052337538,32.19581355965579
 646405,jboss-as,3538,1354115639,,1354565002,7489,,54,1,0,0,0,1,0,0,368820,37,0,477.7208394338702,10.286860799305893,37.01534623935795
 643807,jboss-as,3565,1354552528,,1354557578,84,,54,2,0,4,4,3,0,0,369031,151,0,477.81622682105296,10.283688904184201,37.0510878489883
 641676,jboss-as,3564,1354537286,,1354546227,149,,54,2,0,4,4,2,0,0,369031,4,0,477.81080722215745,10.283688904184201,37.0510878489883
@@ -871,10 +145,10 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 487416,jboss-as,3373,1351627584,,1354220186,43210,,53,2,0,12,12,19,0,0,365985,841,0,474.94842684809487,10.232659808462095,36.71735180403569
 487425,jboss-as,3201,1349522328,,1354219490,78226,,53,1,1,7,8,4,0,0,366258,200,0,463.8670008573191,10.047562101032605,35.71526082706726
 646436,jboss-as,3528,1354018093,,1354096056,1299,,52,1,0,8,8,1,0,0,368091,31,0,478.57730832864695,10.307233809030919,37.088654707667395
-646421,jboss-as,3533,1354061601,1354096020,1354096020,573,573,52,1,0,4,4,1,444,157,368847,2,14,477.6858697508723,10.286107789950847,37.012636675911686
+646421,jboss-as,3533,1354061601,1354096020,1354096020,573,573,52,1,0,4,4,1,445,157,368847,2,14,477.6858697508723,10.286107789950847,37.012636675911686
 646475,jboss-as,3517,1353931956,,1354094457,2708,,52,7,0,5,5,12,0,0,355657,203,0,434.9274722555721,9.447304565916037,32.179881177651495
 646432,jboss-as,3529,1354018596,,1354094441,1264,,52,1,0,6,6,1,0,0,355664,31,0,434.96952179585224,9.449930271267265,32.17924782941203
-646422,jboss-as,3532,1354059674,1354094344,1354094344,577,577,52,1,0,4,4,2,444,157,355497,21,0,435.17385519427734,9.454369516479746,32.19436450940514
+646422,jboss-as,3532,1354059674,1354094344,1354094344,577,577,52,1,0,4,4,2,445,157,355497,21,0,435.17385519427734,9.454369516479746,32.19436450940514
 646420,jboss-as,3534,1354086740,,1354094059,121,,52,1,0,4,4,1,0,0,368847,19,0,477.6858697508723,10.286107789950847,37.012636675911686
 636351,jboss-as,3513,1353906367,,1354074240,2797,,51,1,0,12,12,53,0,0,368080,523,0,478.5481417083243,10.30482503803521,37.089763094979354
 646428,jboss-as,3530,1354021694,,1354035121,223,,51,1,0,4,4,5,0,0,368091,44,0,478.57730832864695,10.307233809030919,37.088654707667395
@@ -892,27 +166,27 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 646494,jboss-as,3511,1353901981,,1353964967,1049,,49,1,0,4,4,5,0,0,355657,43,0,434.9274722555721,9.447304565916037,32.179881177651495
 646490,jboss-as,3512,1353906336,,1353964963,977,,49,1,0,4,4,1,0,0,368080,42,0,478.5481417083243,10.30482503803521,37.089763094979354
 646488,jboss-as,3514,1353906393,,1353964959,976,,49,1,0,4,4,1,0,0,355657,42,0,434.9274722555721,9.447304565916037,32.179881177651495
-646480,jboss-as,3516,1353931415,1353964683,1353964683,554,554,49,1,0,4,4,1,414,145,355657,4,2,434.9274722555721,9.447304565916037,32.179881177651495
-646484,jboss-as,3515,1353931413,1353964681,1353964681,554,554,49,1,0,10,10,1,414,145,368080,4,2,478.5481417083243,10.30482503803521,37.089763094979354
+646480,jboss-as,3516,1353931415,1353964683,1353964683,554,554,49,1,0,4,4,1,415,145,355657,4,2,434.9274722555721,9.447304565916037,32.179881177651495
+646484,jboss-as,3515,1353931413,1353964681,1353964681,554,554,49,1,0,10,10,1,415,145,368080,4,2,478.5481417083243,10.30482503803521,37.089763094979354
 646503,jboss-as,3502,1353672725,,1353903081,3839,,49,1,0,4,4,5,0,0,367169,193,0,478.39278370450666,10.300433860157039,36.958457821874944
 646502,jboss-as,3505,1353680496,,1353888424,3465,,49,1,0,4,4,1,0,0,367169,2,0,478.39278370450666,10.300433860157039,36.958457821874944
-646501,jboss-as,3506,1353680766,1353685485,1353685485,78,78,49,1,0,4,4,1,461,148,367169,2,14,478.39278370450666,10.300433860157039,36.958457821874944
+646501,jboss-as,3506,1353680766,1353685485,1353685485,78,78,49,1,0,4,4,1,462,148,367169,2,14,478.39278370450666,10.300433860157039,36.958457821874944
 646507,jboss-as,3498,1353612745,,1353672617,997,,49,1,0,4,4,1,0,0,355632,21,0,434.9580465199982,9.447968686732352,32.182143339182076
 646506,jboss-as,3499,1353621478,,1353672605,852,,49,1,0,4,4,1,0,0,355632,2,0,434.9580465199982,9.447968686732352,32.182143339182076
 646509,jboss-as,3496,1353602695,,1353672564,1164,,49,1,0,10,10,2,0,0,366830,175,0,478.32783578224246,10.296322547228963,36.97625603140419
 646508,jboss-as,3497,1353612694,,1353672550,997,,49,1,0,4,4,1,0,0,366814,21,0,478.0270109646851,10.294045483542067,36.972416538081966
 646505,jboss-as,3500,1353631038,,1353672534,691,,49,1,0,7,7,11,0,0,366830,547,0,478.32783578224246,10.296322547228963,36.97625603140419
-646504,jboss-as,3501,1353660100,1353672463,1353672463,206,206,49,1,0,7,7,19,456,145,366830,257,38,478.32783578224246,10.296322547228963,36.97625603140419
+646504,jboss-as,3501,1353660100,1353672463,1353672463,206,206,49,1,0,7,7,19,457,145,366830,257,38,478.32783578224246,10.296322547228963,36.97625603140419
 646511,jboss-as,3495,1353594716,,1353625331,510,,49,1,0,4,4,1,0,0,366814,4,0,478.0270109646851,10.294045483542067,36.972416538081966
 521626,jboss-as,3483,1353549455,,1353581720,537,,47,1,0,4,4,1,0,0,366798,24,0,478.04786285639506,10.294494517418308,36.97402930223174
 521625,jboss-as,3484,1353549479,,1353581712,537,,47,1,0,4,4,1,0,0,355616,24,0,434.97761630522814,9.44839377305858,32.18359128948079
 521624,jboss-as,3485,1353562603,,1353581706,318,,47,1,0,5,5,1,0,0,366798,2,0,478.04786285639506,10.294494517418308,36.97402930223174
-521623,jboss-as,3486,1353569529,1353581621,1353581621,201,201,47,2,0,6,6,2,464,134,366798,6,16,478.04786285639506,10.294494517418308,36.97402930223174
-521622,jboss-as,3487,1353569734,1353581549,1353581549,196,196,47,2,0,6,6,2,464,134,355616,6,5,434.97761630522814,9.44839377305858,32.18359128948079
+521623,jboss-as,3486,1353569529,1353581621,1353581621,201,201,47,2,0,6,6,2,465,134,366798,6,16,478.04786285639506,10.294494517418308,36.97402930223174
+521622,jboss-as,3487,1353569734,1353581549,1353581549,196,196,47,2,0,6,6,2,465,134,355616,6,5,434.97761630522814,9.44839377305858,32.18359128948079
 507479,jboss-as,3475,1353476776,,1353481945,86,,45,1,0,4,4,3,0,0,366856,17,0,477.51706391608695,10.292866955971826,36.94365091480036
 507453,jboss-as,3477,1353476879,,1353481925,84,,45,1,0,4,4,3,0,0,355616,17,0,434.97761630522814,9.44839377305858,32.18359128948079
 507454,jboss-as,3476,1353476821,,1353476831,0,,45,250,0,0,0,1231,0,0,366856,39173,74,477.51706391608695,10.292866955971826,36.94365091480036
-505613,jboss-as,3469,1353409302,1353436313,1353436313,450,450,44,1,0,3,3,10,446,126,366808,258,0,477.48685961047744,10.291487644762382,36.94848531111644
+505613,jboss-as,3469,1353409302,1353436313,1353436313,450,450,44,1,0,3,3,10,447,126,366808,258,0,477.48685961047744,10.291487644762382,36.94848531111644
 497533,jboss-as,3461,1353315399,,1353364998,826,,43,1,0,4,4,0,0,0,366753,0,0,477.47939348826054,10.290304373788352,36.93766649488893
 497531,jboss-as,3460,1353315377,,1353364986,826,,43,1,0,4,4,0,0,0,355555,0,0,434.239428499107,9.447202261253533,32.172237769121516
 499410,jboss-as,3466,1353348031,,1353357141,151,,43,1,0,4,4,0,0,0,355555,0,0,434.239428499107,9.447202261253533,32.172237769121516
@@ -928,7 +202,7 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 256523,jboss-as,2952,1345520646,,1353344405,130335,,42,18,2,34,36,0,0,0,364244,0,0,445.88243045870354,9.754450313526098,34.08704055523221
 490317,jboss-as,3453,1353066886,,1353150936,1400,,41,1,0,4,4,0,0,0,366718,0,0,477.524964686762,10.291286492618307,36.94119186950191
 491409,jboss-as,3455,1353080671,,1353150926,1170,,41,1,0,5,5,0,0,0,366718,0,0,477.524964686762,10.291286492618307,36.94119186950191
-487966,jboss-as,3450,1353016205,1353056325,1353056325,668,668,39,1,0,4,4,1,512,113,355555,6,1,434.239428499107,9.447202261253533,32.172237769121516
+487966,jboss-as,3450,1353016205,1353056325,1353056325,668,668,39,1,0,4,4,1,513,113,355555,6,1,434.239428499107,9.447202261253533,32.172237769121516
 487967,jboss-as,3451,1353016248,,1353056320,667,,39,1,0,4,4,0,0,0,366698,0,0,477.30830274503813,10.283666668484694,36.89957403640052
 484885,jboss-as,3445,1352980344,,1353021616,687,,39,1,0,4,4,0,0,0,366696,0,0,477.31090603660795,10.283722756724917,36.89977529070402
 485795,jboss-as,3449,1352991127,,1353021611,508,,39,2,0,4,4,0,0,0,366696,0,0,477.31090603660795,10.283722756724917,36.89977529070402
@@ -962,8 +236,8 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 477886,jboss-as,3402,1352122392,,1352858711,12271,,40,3,0,12,12,7,0,0,367052,470,12,476.15596700195067,10.262851040179594,36.82039602018242
 476043,jboss-as,3431,1352821806,,1352821822,0,,40,250,0,1,1,1200,0,0,367052,37854,63,476.15596700195067,10.262851040179594,36.82039602018242
 475507,jboss-as,3403,1352123145,,1352814362,11520,,39,1,0,15,15,0,0,0,355399,0,0,434.1317786487863,9.448535308202892,32.19761451213988
-467074,jboss-as,3421,1352627000,1352721141,1352721141,1569,1569,38,1,0,7,7,6,471,86,367052,119,8,476.1586914115711,10.262851040179594,36.82312042980286
-467105,jboss-as,3422,1352628681,1352721141,1352721141,1541,1541,38,2,0,9,9,9,471,86,367052,218,11,476.1586914115711,10.262851040179594,36.82312042980286
+467074,jboss-as,3421,1352627000,1352721141,1352721141,1569,1569,38,1,0,7,7,6,472,86,367052,119,8,476.1586914115711,10.262851040179594,36.82312042980286
+467105,jboss-as,3422,1352628681,1352721141,1352721141,1541,1541,38,2,0,9,9,9,472,86,367052,218,11,476.1586914115711,10.262851040179594,36.82312042980286
 464645,jboss-as,3360,1351523178,,1352507017,16397,,38,2,0,18,18,13,0,0,366690,170,0,476.33150617687966,10.270255529193598,36.862199678202295
 457419,jboss-as,3327,1351006144,,1352506992,24954,,38,1,0,32,32,0,0,0,366708,0,0,476.2972174045835,10.269751409841072,36.84948242198152
 464287,jboss-as,3392,1351857497,,1352497385,10664,,38,4,0,23,23,1,0,0,355304,37,0,434.2788147614437,9.451061626100467,32.2034089118051
@@ -977,13 +251,13 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 464236,jboss-as,3364,1351551883,,1352496333,15740,,38,1,0,22,22,0,0,0,366138,0,0,476.2493923056334,10.263889571691548,36.852225117305494
 458238,jboss-as,3390,1351801897,,1352384868,9716,,37,8,7,25,32,0,0,0,366129,0,0,476.06990978589516,10.253216762397953,36.839474611407454
 458236,jboss-as,3391,1351857473,,1352384857,8789,,37,4,0,21,21,9,0,0,366675,122,0,476.3509920229086,10.270675666462125,36.86370764300811
-486968,jboss-as,3416,1352346665,1352351527,1352351527,81,81,37,2,0,3,3,3,549,84,355399,79,1,434.1317786487863,9.448535308202892,32.19761451213988
-484411,jboss-as,3414,1352325497,1352346058,1352346058,342,342,37,1,0,4,4,1,554,84,366675,19,2,476.3509920229086,10.270675666462125,36.86370764300811
+486968,jboss-as,3416,1352346665,1352351527,1352351527,81,81,37,2,0,3,3,3,550,84,355399,79,1,434.1317786487863,9.448535308202892,32.19761451213988
+484411,jboss-as,3414,1352325497,1352346058,1352346058,342,342,37,1,0,4,4,1,555,84,366675,19,2,476.3509920229086,10.270675666462125,36.86370764300811
 478640,jboss-as,3409,1352194562,,1352295469,1681,,36,1,0,4,4,0,0,0,366669,0,0,476.27151463581595,10.265389220250416,36.85067458661627
 459111,jboss-as,3410,1352238859,,1352295459,943,,36,1,0,4,4,0,0,0,366674,0,0,476.30865564506894,10.267976458652646,36.85289930565025
 487439,jboss-as,3406,1352188690,,1352225734,617,,36,1,0,5,5,0,0,0,355305,0,0,434.2775924909585,9.451035026245057,32.203318275847515
 487475,jboss-as,3398,1352108259,,1352225722,1957,,36,1,0,8,8,0,0,0,366138,0,0,476.2493923056334,10.263889571691548,36.852225117305494
-487427,jboss-as,3408,1352191776,1352216032,1352216032,404,404,36,1,0,3,3,25,532,74,355305,1925,16,434.2775924909585,9.451035026245057,32.203318275847515
+487427,jboss-as,3408,1352191776,1352216032,1352216032,404,404,36,1,0,3,3,25,533,74,355305,1925,16,434.2775924909585,9.451035026245057,32.203318275847515
 487518,jboss-as,3351,1351265355,,1352204265,15588,,36,2,0,7,7,0,0,0,367182,0,0,472.8526997510771,10.188407928493227,36.548632558240875
 487429,jboss-as,3407,1352191709,,1352191727,0,,36,250,0,0,0,1417,0,0,366669,38055,64,476.27151463581595,10.265389220250416,36.85067458661627
 487478,jboss-as,3395,1351905835,,1352168745,4381,,36,1,0,4,4,0,0,0,366138,0,0,476.2493923056334,10.263889571691548,36.852225117305494
@@ -991,7 +265,7 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 487472,jboss-as,3399,1352118894,,1352168672,829,,36,1,0,4,4,0,0,0,366138,0,0,476.2493923056334,10.263889571691548,36.852225117305494
 487441,jboss-as,3404,1352147220,,1352168633,356,,36,2,0,4,4,0,0,0,366287,0,0,476.1566749570692,10.26244447659895,36.86180508726763
 487440,jboss-as,3405,1352148734,,1352168609,331,,36,1,0,4,4,0,0,0,366287,0,0,476.1566749570692,10.26244447659895,36.86180508726763
-487442,jboss-as,3401,1352121864,1352168525,1352168525,777,777,36,1,0,4,4,2,535,73,355304,6,4,434.2788147614437,9.451061626100467,32.2034089118051
+487442,jboss-as,3401,1352121864,1352168525,1352168525,777,777,36,1,0,4,4,2,536,73,355304,6,4,434.2788147614437,9.451061626100467,32.2034089118051
 487479,jboss-as,3394,1351883947,,1352147424,4391,,36,4,0,9,9,0,0,0,366138,0,0,476.2493923056334,10.263889571691548,36.852225117305494
 487491,jboss-as,3382,1351696861,,1352126782,7165,,36,1,0,4,4,0,0,0,366088,0,0,476.01396385568495,10.248901903367496,36.783505605209676
 487443,jboss-as,3400,1352118914,,1352121906,49,,36,250,0,3,3,1396,0,0,366138,36164,51,476.2493923056334,10.263889571691548,36.852225117305494
@@ -999,19 +273,19 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 487496,jboss-as,3377,1351667501,,1351804913,2290,,35,1,0,4,4,0,0,0,355253,0,0,434.0934488941684,9.435529045497153,32.13484474444973
 487487,jboss-as,3385,1351725886,,1351804907,1317,,35,2,0,4,4,0,0,0,366129,0,0,476.06990978589516,10.253216762397953,36.839474611407454
 487482,jboss-as,3388,1351772322,,1351804888,542,,35,1,0,4,4,0,0,0,366129,0,0,476.06990978589516,10.253216762397953,36.839474611407454
-487483,jboss-as,3387,1351744367,1351804885,1351804885,1008,1008,35,1,0,4,4,2,604,66,366129,105,2,476.06990978589516,10.253216762397953,36.839474611407454
+487483,jboss-as,3387,1351744367,1351804885,1351804885,1008,1008,35,1,0,4,4,2,605,66,366129,105,2,476.06990978589516,10.253216762397953,36.839474611407454
 487480,jboss-as,3389,1351776538,,1351804882,472,,35,2,0,4,4,0,0,0,355253,0,0,434.0934488941684,9.435529045497153,32.13484474444973
-487485,jboss-as,3386,1351725928,1351804870,1351804870,1315,1315,35,2,0,4,4,6,604,66,355253,64,23,434.0934488941684,9.435529045497153,32.13484474444973
+487485,jboss-as,3386,1351725928,1351804870,1351804870,1315,1315,35,2,0,4,4,6,605,66,355253,64,23,434.0934488941684,9.435529045497153,32.13484474444973
 487489,jboss-as,3383,1351698651,,1351707440,146,,35,1,0,4,4,0,0,0,366088,0,0,476.01396385568495,10.248901903367496,36.783505605209676
 487488,jboss-as,3384,1351705074,,1351707372,38,,35,1,0,3,3,0,0,0,366088,0,0,476.01396385568495,10.248901903367496,36.783505605209676
 487492,jboss-as,3380,1351675527,,1351707261,528,,35,1,0,11,11,0,0,0,366088,0,0,476.01396385568495,10.248901903367496,36.783505605209676
 487497,jboss-as,3376,1351666264,,1351707246,683,,35,1,0,6,6,0,0,0,366088,0,0,476.01396385568495,10.248901903367496,36.783505605209676
 487509,jboss-as,3363,1351539473,,1351707233,2796,,35,1,0,4,4,0,0,0,367219,0,0,472.99023198690696,10.190104542520949,36.54767318684491
 487493,jboss-as,3379,1351671197,,1351707204,600,,35,1,0,4,4,0,0,0,355253,0,0,434.0934488941684,9.435529045497153,32.13484474444973
-487494,jboss-as,3378,1351668035,1351707163,1351707163,652,652,35,1,0,2,2,1,617,63,355253,2,1,434.0934488941684,9.435529045497153,32.13484474444973
+487494,jboss-as,3378,1351668035,1351707163,1351707163,652,652,35,1,0,2,2,1,618,63,355253,2,1,434.0934488941684,9.435529045497153,32.13484474444973
 487501,jboss-as,3371,1351614529,,1351666849,872,,34,1,0,5,5,0,0,0,355248,0,0,434.0573345944242,9.432846912579382,32.13529703193262
 487503,jboss-as,3369,1351609880,,1351666838,949,,34,1,0,4,4,0,0,0,355248,0,0,434.0573345944242,9.432846912579382,32.13529703193262
-487498,jboss-as,3375,1351658542,1351666814,1351666814,137,137,34,1,0,4,4,2,608,60,355248,26,2,434.0573345944242,9.432846912579382,32.13529703193262
+487498,jboss-as,3375,1351658542,1351666814,1351666814,137,137,34,1,0,4,4,2,609,60,355248,26,2,434.0573345944242,9.432846912579382,32.13529703193262
 487542,jboss-as,3338,1351163501,,1351666158,8317,,33,2,0,9,9,0,0,0,367182,0,0,472.8526997510771,10.188407928493227,36.548632558240875
 487524,jboss-as,3346,1351244030,,1351666107,6974,,33,2,0,4,4,0,0,0,367182,0,0,472.8526997510771,10.188407928493227,36.548632558240875
 487523,jboss-as,3347,1351250044,,1351666075,6873,,33,1,0,7,7,0,0,0,367182,0,0,472.8526997510771,10.188407928493227,36.548632558240875
@@ -1020,22 +294,22 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 487502,jboss-as,3370,1351614506,,1351666010,858,,33,1,0,5,5,0,0,0,366573,0,0,474.18385969506755,10.216246150152902,36.65845547817215
 487500,jboss-as,3374,1351658448,,1351665994,125,,33,1,0,4,4,0,0,0,365985,0,0,474.94842684809487,10.232659808462095,36.71735180403569
 487539,jboss-as,3340,1351173176,,1351631198,7573,,33,1,0,22,22,0,0,0,367182,0,0,472.8526997510771,10.188407928493227,36.548632558240875
-487510,jboss-as,3362,1351529195,1351615032,1351615032,1430,1430,33,2,0,13,13,25,604,59,366573,2326,39,474.18385969506755,10.216246150152902,36.65845547817215
-487534,jboss-as,3342,1351181370,1351592491,1351592491,6792,6792,33,13,0,11,11,132,589,54,367219,7595,33,472.99023198690696,10.190104542520949,36.54767318684491
-487583,jboss-as,3307,1350894633,1351550857,1351550857,10877,10877,33,0,0,15,15,0,578,50,367219,0,0,472.99023198690696,10.190104542520949,36.54767318684491
+487510,jboss-as,3362,1351529195,1351615032,1351615032,1430,1430,33,2,0,13,13,25,605,59,366573,2326,39,474.18385969506755,10.216246150152902,36.65845547817215
+487534,jboss-as,3342,1351181370,1351592491,1351592491,6792,6792,33,13,0,11,11,132,590,54,367219,7595,33,472.99023198690696,10.190104542520949,36.54767318684491
+487583,jboss-as,3307,1350894633,1351550857,1351550857,10877,10877,33,0,0,15,15,0,579,50,367219,0,0,472.99023198690696,10.190104542520949,36.54767318684491
 487536,jboss-as,3341,1351173323,,1351529485,5876,,32,2,0,14,14,0,0,0,367184,0,0,472.86646476970674,10.18835243365724,36.55932720379973
 487533,jboss-as,3343,1351237414,,1351529468,4807,,32,1,0,4,4,0,0,0,367182,0,0,472.8526997510771,10.188407928493227,36.548632558240875
 487515,jboss-as,3356,1351510395,,1351529453,317,,32,1,0,8,8,0,0,0,367184,0,0,472.8501241884178,10.18835243365724,36.54843348294044
 487514,jboss-as,3357,1351512583,,1351529441,280,,32,1,0,5,5,0,0,0,367184,0,0,472.8501241884178,10.18835243365724,36.54843348294044
 487512,jboss-as,3358,1351513348,,1351529427,267,,32,1,0,9,9,0,0,0,367184,0,0,472.8501241884178,10.18835243365724,36.54843348294044
 487525,jboss-as,3345,1351240146,,1351529403,4760,,32,1,0,4,4,0,0,0,355246,0,0,434.0597782944776,9.432900018578675,32.135477950490646
-487511,jboss-as,3359,1351513417,1351529339,1351529339,265,265,32,2,0,4,4,2,574,49,355248,3,17,434.0573345944242,9.432846912579382,32.13529703193262
+487511,jboss-as,3359,1351513417,1351529339,1351529339,265,265,32,2,0,4,4,2,575,49,355248,3,17,434.0573345944242,9.432846912579382,32.13529703193262
 487516,jboss-as,3353,1351319088,,1351514833,3202,,32,1,0,4,4,0,0,0,367182,0,0,472.8526997510771,10.188407928493227,36.548632558240875
 487554,jboss-as,3328,1351019352,,1351430769,6796,,30,1,0,4,4,0,0,0,367341,0,0,471.3603981042138,10.183997974633924,36.53825736849412
 487522,jboss-as,3348,1351251699,,1351430758,2924,,30,1,0,4,4,0,0,0,367182,0,0,472.8526997510771,10.188407928493227,36.548632558240875
 487517,jboss-as,3352,1351301426,,1351430746,2095,,30,1,0,9,9,0,0,0,367182,0,0,472.8526997510771,10.188407928493227,36.548632558240875
-487521,jboss-as,3349,1351251837,1351430549,1351430549,2918,2918,30,1,0,4,4,1,568,44,355246,4,1,434.0597782944776,9.432900018578675,32.135477950490646
-487519,jboss-as,3350,1351257292,1351261206,1351261206,65,65,29,1,0,5,5,1,620,44,367182,3,2,472.8526997510771,10.188407928493227,36.548632558240875
+487521,jboss-as,3349,1351251837,1351430549,1351430549,2918,2918,30,1,0,4,4,1,569,44,355246,4,1,434.0597782944776,9.432900018578675,32.135477950490646
+487519,jboss-as,3350,1351257292,1351261206,1351261206,65,65,29,1,0,5,5,1,621,44,367182,3,2,472.8526997510771,10.188407928493227,36.548632558240875
 487527,jboss-as,3344,1351239722,,1351239994,4,,29,250,0,1,1,1862,0,0,355246,66600,771,434.0597782944776,9.432900018578675,32.135477950490646
 487541,jboss-as,3339,1351166095,,1351207734,693,,28,1,0,12,12,0,0,0,367507,0,0,473.0250036053735,10.19300312647106,36.5680109494513
 487545,jboss-as,3336,1351095692,,1351207717,1867,,28,1,0,4,4,0,0,0,367507,0,0,473.0250036053735,10.19300312647106,36.5680109494513
@@ -1045,7 +319,7 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 487543,jboss-as,3337,1351158346,,1351176869,308,,28,4,0,6,6,0,0,0,367507,0,0,473.0250036053735,10.19300312647106,36.5680109494513
 487552,jboss-as,3330,1351082503,,1351176855,1572,,28,1,0,4,4,0,0,0,367516,0,0,473.0134198238988,10.192753512772233,36.567115445313945
 487548,jboss-as,3333,1351082827,,1351176840,1566,,28,2,0,15,15,0,0,0,367507,0,0,473.0250036053735,10.19300312647106,36.5680109494513
-487550,jboss-as,3332,1351082533,1351176730,1351176730,1569,1569,28,1,0,7,7,1,650,47,355238,14,1,434.06955336985345,9.433112448555617,32.136201645094275
+487550,jboss-as,3332,1351082533,1351176730,1351176730,1569,1569,28,1,0,7,7,1,651,47,355238,14,1,434.06955336985345,9.433112448555617,32.136201645094275
 487551,jboss-as,3331,1351082527,,1351082555,0,,27,1,0,0,0,0,0,0,367516,0,0,473.0134198238988,10.192753512772233,36.567115445313945
 487568,jboss-as,3318,1350970529,,1351038894,1139,,26,1,0,3,3,0,0,0,367299,0,0,470.28715025088553,10.171549609446254,36.47981617156595
 487651,jboss-as,3264,1350476985,,1351033505,9275,,26,1,0,10,10,0,0,0,367077,0,0,470.42990980094095,10.174976912200982,36.471911887696585
@@ -1059,25 +333,25 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 487562,jboss-as,3321,1350991458,,1351015352,398,,26,1,0,4,4,0,0,0,367331,0,0,471.3732301384855,10.184275217719168,36.539252064214566
 487564,jboss-as,3320,1350982649,,1351015336,544,,26,1,0,4,4,0,0,0,367299,0,0,470.28715025088553,10.171549609446254,36.47981617156595
 487566,jboss-as,3319,1350972850,,1351015320,707,,26,2,0,10,10,0,0,0,367299,0,0,470.28715025088553,10.171549609446254,36.47981617156595
-487559,jboss-as,3323,1350998159,1351009352,1351009352,186,186,26,1,0,3,3,1,652,42,355238,2,16,434.06955336985345,9.433112448555617,32.136201645094275
+487559,jboss-as,3323,1350998159,1351009352,1351009352,186,186,26,1,0,3,3,1,653,42,355238,2,16,434.06955336985345,9.433112448555617,32.136201645094275
 487555,jboss-as,3325,1350999691,,1351003276,59,,26,1,0,2,2,0,0,0,355238,0,0,434.06955336985345,9.433112448555617,32.136201645094275
 487556,jboss-as,3324,1350999683,,1351003270,59,,26,1,0,2,2,0,0,0,367331,0,0,471.3732301384855,10.184275217719168,36.539252064214566
 487581,jboss-as,3309,1350898131,,1350993213,1584,,26,1,0,7,7,0,0,0,367077,0,0,470.42990980094095,10.174976912200982,36.471911887696585
 487574,jboss-as,3314,1350951066,,1350993206,702,,26,1,0,4,4,0,0,0,367299,0,0,470.28715025088553,10.171549609446254,36.47981617156595
 487588,jboss-as,3302,1350859876,,1350993203,2222,,26,1,0,8,8,0,0,0,367077,0,0,470.42990980094095,10.174976912200982,36.471911887696585
-487585,jboss-as,3305,1350866294,1350990933,1350990933,2077,2077,26,2,0,7,7,12,644,40,367299,1176,20,470.28715025088553,10.171549609446254,36.47981617156595
-487573,jboss-as,3315,1350952530,1350956773,1350956773,70,70,26,1,0,3,3,1,631,39,355238,2,15,434.06955336985345,9.433112448555617,32.136201645094275
-487577,jboss-as,3313,1350910049,1350956764,1350956764,778,778,26,1,0,6,6,1,631,39,367299,2,36,470.28715025088553,10.171549609446254,36.47981617156595
+487585,jboss-as,3305,1350866294,1350990933,1350990933,2077,2077,26,2,0,7,7,12,645,40,367299,1176,20,470.28715025088553,10.171549609446254,36.47981617156595
+487573,jboss-as,3315,1350952530,1350956773,1350956773,70,70,26,1,0,3,3,1,632,39,355238,2,15,434.06955336985345,9.433112448555617,32.136201645094275
+487577,jboss-as,3313,1350910049,1350956764,1350956764,778,778,26,1,0,6,6,1,632,39,367299,2,36,470.28715025088553,10.171549609446254,36.47981617156595
 487579,jboss-as,3311,1350904250,,1350941381,618,,26,1,0,4,4,0,0,0,367077,0,0,470.42990980094095,10.174976912200982,36.471911887696585
 487578,jboss-as,3312,1350906646,,1350941367,578,,26,1,0,4,4,0,0,0,367077,0,0,470.42990980094095,10.174976912200982,36.471911887696585
 487584,jboss-as,3306,1350893584,,1350941355,796,,26,1,0,4,4,0,0,0,367077,0,0,470.42990980094095,10.174976912200982,36.471911887696585
-487616,jboss-as,3293,1350658643,1350941319,1350941319,4711,4711,26,1,0,12,12,2,627,39,355238,6,2,434.06955336985345,9.433112448555617,32.136201645094275
-487617,jboss-as,3292,1350658043,1350941309,1350941309,4721,4721,26,1,0,9,9,2,627,39,367077,6,4,470.42990980094095,10.174976912200982,36.471911887696585
+487616,jboss-as,3293,1350658643,1350941319,1350941319,4711,4711,26,1,0,12,12,2,628,39,355238,6,2,434.06955336985345,9.433112448555617,32.136201645094275
+487617,jboss-as,3292,1350658043,1350941309,1350941309,4721,4721,26,1,0,9,9,2,628,39,367077,6,4,470.42990980094095,10.174976912200982,36.471911887696585
 487590,jboss-as,3301,1350859866,,1350890699,513,,26,1,0,4,4,0,0,0,367081,0,0,470.38936910382176,10.172141843353375,36.460617683835444
 487587,jboss-as,3303,1350859887,,1350890690,513,,26,1,0,6,6,0,0,0,367081,0,0,470.38936910382176,10.172141843353375,36.460617683835444
-487586,jboss-as,3304,1350862079,1350890607,1350890607,475,475,26,1,0,4,4,1,622,44,367081,2,4,470.38936910382176,10.172141843353375,36.460617683835444
-487591,jboss-as,3300,1350814237,1350834695,1350834695,340,340,26,1,0,3,3,3,622,44,367082,16,40,470.38808767523335,10.172114132537144,36.460518358295964
-487592,jboss-as,3299,1350754762,1350834504,1350834504,1329,1329,26,2,0,3,3,3,622,44,355232,108,3,434.0543644716692,9.433271777317358,32.13674443743807
+487586,jboss-as,3304,1350862079,1350890607,1350890607,475,475,26,1,0,4,4,1,623,44,367081,2,4,470.38936910382176,10.172141843353375,36.460617683835444
+487591,jboss-as,3300,1350814237,1350834695,1350834695,340,340,26,1,0,3,3,3,623,44,367082,16,40,470.38808767523335,10.172114132537144,36.460518358295964
+487592,jboss-as,3299,1350754762,1350834504,1350834504,1329,1329,26,2,0,3,3,3,623,44,355232,108,3,434.0543644716692,9.433271777317358,32.13674443743807
 487594,jboss-as,3298,1350754593,,1350754607,0,,26,250,0,1,1,1427,0,0,367082,38829,73,470.38808767523335,10.172114132537144,36.460518358295964
 487619,jboss-as,3290,1350653830,,1350751744,1631,,26,6,0,17,17,0,0,0,367101,0,0,469.5111154695847,10.15524337988728,36.37146180478942
 487620,jboss-as,3289,1350641854,,1350747070,1753,,27,1,0,7,7,0,0,0,367160,0,0,469.43566837346117,10.15361150452119,36.365617169626326
@@ -1085,7 +359,7 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 487615,jboss-as,3294,1350660007,,1350747039,1450,,27,1,0,8,8,0,0,0,367101,0,0,469.5111154695847,10.15524337988728,36.37146180478942
 487614,jboss-as,3295,1350660010,,1350747028,1450,,27,1,0,4,4,0,0,0,367101,0,0,469.5111154695847,10.15524337988728,36.37146180478942
 487612,jboss-as,3297,1350669416,,1350747014,1293,,27,2,0,5,5,0,0,0,367101,0,0,469.5111154695847,10.15524337988728,36.37146180478942
-487613,jboss-as,3296,1350660084,1350746775,1350746775,1444,1444,27,1,0,3,3,4,657,44,355232,305,4,433.73063237546165,9.424826592198901,32.12829925231961
+487613,jboss-as,3296,1350660084,1350746775,1350746775,1444,1444,27,1,0,3,3,4,658,44,355232,305,4,433.73063237546165,9.424826592198901,32.12829925231961
 487621,jboss-as,3288,1350641175,,1350656457,254,,28,1,0,8,8,0,0,0,355232,0,0,433.73063237546165,9.424826592198901,32.12829925231961
 487638,jboss-as,3273,1350555256,,1350655745,1674,,28,1,0,9,9,0,0,0,367181,0,0,469.35435112383266,10.153030794077035,36.36353732900123
 487622,jboss-as,3287,1350636286,,1350644485,136,,28,3,0,10,10,0,0,0,367247,0,0,469.32446010450735,10.15120613646946,36.35700223555264
@@ -1095,19 +369,19 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 487626,jboss-as,3283,1350623274,,1350634674,190,,29,1,0,4,4,0,0,0,355205,0,0,433.7636013006574,9.425542996297912,32.130741402851875
 487625,jboss-as,3284,1350623318,,1350634669,189,,29,1,0,4,4,0,0,0,367209,0,0,469.33217867753785,10.152256616804054,36.36076457821023
 487624,jboss-as,3285,1350624603,,1350634663,167,,29,3,0,4,4,0,0,0,355205,0,0,433.7636013006574,9.425542996297912,32.130741402851875
-487628,jboss-as,3281,1350578847,1350602211,1350602211,389,389,29,1,0,7,7,11,659,51,355096,432,12,433.89111676842316,9.428436253858111,32.14060423096853
-487629,jboss-as,3280,1350578777,1350598850,1350598850,334,334,29,1,0,3,3,12,659,51,367108,442,17,469.4476829706789,10.15504974013097,36.370768275275935
+487628,jboss-as,3281,1350578847,1350602211,1350602211,389,389,29,1,0,7,7,11,660,51,355096,432,12,433.89111676842316,9.428436253858111,32.14060423096853
+487629,jboss-as,3280,1350578777,1350598850,1350598850,334,334,29,1,0,3,3,12,660,51,367108,442,17,469.4476829706789,10.15504974013097,36.370768275275935
 487640,jboss-as,3272,1350555039,,1350573795,312,,28,1,0,4,4,0,0,0,367150,0,0,468.58777066594035,10.134822279722185,36.26038403922103
 487635,jboss-as,3275,1350560030,,1350573780,229,,28,1,0,4,4,0,0,0,367150,0,0,468.58777066594035,10.134822279722185,36.26038403922103
 487634,jboss-as,3276,1350560070,,1350573764,228,,28,1,0,4,4,0,0,0,355096,0,0,433.89111676842316,9.428436253858111,32.14060423096853
-487633,jboss-as,3277,1350561175,1350573748,1350573748,209,209,28,1,0,5,5,1,669,50,355096,2,10,433.89111676842316,9.428436253858111,32.14060423096853
+487633,jboss-as,3277,1350561175,1350573748,1350573748,209,209,28,1,0,5,5,1,670,50,355096,2,10,433.89111676842316,9.428436253858111,32.14060423096853
 487650,jboss-as,3265,1350480763,,1350551654,1181,,27,5,0,10,10,0,0,0,367437,0,0,468.34423316105887,10.132349219049797,36.237504660662914
 487643,jboss-as,3270,1350525767,,1350551618,430,,27,1,0,4,4,0,0,0,355090,0,0,433.89844828071756,9.428595567320961,32.14114731476527
-487644,jboss-as,3269,1350525743,1350551531,1350551531,429,429,27,1,0,4,4,2,667,50,367437,11,3,468.34423316105887,10.132349219049797,36.237504660662914
+487644,jboss-as,3269,1350525743,1350551531,1350551531,429,429,27,1,0,4,4,2,668,50,367437,11,3,468.34423316105887,10.132349219049797,36.237504660662914
 487647,jboss-as,3266,1350486067,,1350503695,293,,27,1,0,4,4,0,0,0,367365,0,0,468.8715582594967,10.134335061859458,36.22827433206756
 487653,jboss-as,3263,1350472416,,1350478851,107,,27,4,0,4,4,0,0,0,367339,0,0,468.6924067414568,10.132330082022328,36.21994942001802
 487667,jboss-as,3255,1350376522,,1350469809,1554,,27,1,0,4,4,0,0,0,367213,0,0,468.85322687377624,10.135806738868178,36.23237739404651
-487656,jboss-as,3261,1350462287,1350469686,1350469686,123,123,27,1,0,3,3,1,664,50,354962,18,1,434.0549129202563,9.431995537550499,32.1527374761242
+487656,jboss-as,3261,1350462287,1350469686,1350469686,123,123,27,1,0,3,3,1,665,50,354962,18,1,434.0549129202563,9.431995537550499,32.1527374761242
 487675,jboss-as,3248,1350285354,,1350373295,1465,,26,1,0,4,4,0,0,0,367162,0,0,468.86660384244556,10.137214635501495,36.23741018950763
 487670,jboss-as,3252,1350338386,,1350373278,581,,26,1,0,4,4,0,0,0,367171,0,0,468.9068581124326,10.136966154734443,36.23652194753943
 487668,jboss-as,3254,1350365097,,1350373269,136,,26,1,0,4,4,0,0,0,367171,0,0,468.9068581124326,10.136966154734443,36.23652194753943
@@ -1492,13 +766,13 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 237014,jboss-as,2860,1344611323,,1344856392,4084,,25,1,0,4,4,0,0,0,363755,0,0,445.76981759700897,9.737323198306553,34.06963478165249
 169252,jboss-as,2872,1344724402,,1344856374,2199,,25,1,0,4,4,0,0,0,363863,0,0,445.98104231537695,9.750922737403913,34.092501848223094
 236921,jboss-as,2858,1344608749,,1344779314,2842,,25,2,0,3,3,0,0,0,353686,0,0,432.01879633347096,9.378375168935158,32.03406411336609
-238837,jboss-as,2875,1344773739,1344778017,1344778017,71,71,25,1,0,3,3,1,731,37,353974,2,17,432.5148174724697,9.398995406442282,32.05885178007424
-238836,jboss-as,2874,1344773713,1344778004,1344778004,71,71,25,1,0,3,3,1,731,37,363863,2,23,445.98104231537695,9.750922737403913,34.092501848223094
+238837,jboss-as,2875,1344773739,1344778017,1344778017,71,71,25,1,0,3,3,1,732,37,353974,2,17,432.5148174724697,9.398995406442282,32.05885178007424
+238836,jboss-as,2874,1344773713,1344778004,1344778004,71,71,25,1,0,3,3,1,732,37,363863,2,23,445.98104231537695,9.750922737403913,34.092501848223094
 15072,jboss-as,2839,1344478019,,1344773380,4922,,25,1,0,8,8,1,0,0,363659,2,0,441.96348777288614,9.682147286331427,34.001633398320955
 15073,jboss-as,2840,1344478077,,1344773367,4921,,25,1,0,8,8,1,0,0,353612,2,0,429.3689128197007,9.32377860479848,31.95027318077441
 135354,jboss-as,2863,1344627834,,1344709695,1364,,25,1,0,5,5,0,0,0,353821,0,0,432.4559593692856,9.397407163509232,32.06140958281164
 135034,jboss-as,2866,1344632635,,1344709594,1282,,25,1,0,7,7,0,0,0,353821,0,0,432.4559593692856,9.397407163509232,32.06140958281164
-135033,jboss-as,2865,1344632583,1344709590,1344709590,1283,1283,25,1,0,6,6,1,761,38,363863,2,21,445.98104231537695,9.750922737403913,34.092501848223094
+135033,jboss-as,2865,1344632583,1344709590,1344709590,1283,1283,25,1,0,6,6,1,762,38,363863,2,21,445.98104231537695,9.750922737403913,34.092501848223094
 238364,jboss-as,2775,1343771094,,1344684256,15219,,25,1,0,17,17,6,0,0,353416,409,0,429.89281752948364,9.320460873305112,31.94535618081807
 237921,jboss-as,2869,1344641802,,1344650130,138,,25,1,0,4,4,0,0,0,363863,0,0,445.98104231537695,9.750922737403913,34.092501848223094
 237920,jboss-as,2868,1344641744,,1344650115,139,,25,1,0,4,4,0,0,0,353821,0,0,432.4559593692856,9.397407163509232,32.06140958281164
@@ -1569,7 +843,7 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 228989,jboss-as,2788,1343918592,,1344125783,3453,,27,1,0,7,7,55,0,0,362808,4650,0,441.63855262287495,9.677294877731471,34.02074926682984
 231599,jboss-as,2799,1344008762,,1344116822,1801,,27,1,0,8,8,1,0,0,362820,2,0,441.8582217077339,9.676974808444958,34.01962405600573
 61846,jboss-as,2546,1340286549,,1344116817,63837,,27,1,5,30,35,0,0,0,361105,0,0,442.6607219506792,9.717395217457526,34.17011672505227
-231601,jboss-as,2800,1344008787,1344116719,1344116719,1798,1798,27,1,0,3,3,1,717,45,353490,2,10,429.79999434213136,9.318509717389459,31.938668703499395
+231601,jboss-as,2800,1344008787,1344116719,1344116719,1798,1798,27,1,0,3,3,1,718,45,353490,2,10,429.79999434213136,9.318509717389459,31.938668703499395
 231261,jboss-as,2798,1343999062,,1344066250,1119,,28,1,0,6,6,5,0,0,362820,42,0,441.8582217077339,9.676974808444958,34.01962405600573
 230605,jboss-as,2770,1343722783,,1343978033,4254,,30,1,0,5,5,2,0,0,361126,10,0,442.6349805884927,9.716830136849742,34.16812968326844
 227857,jboss-as,2783,1343884108,,1343947478,1056,,30,1,0,7,7,2,0,0,361833,23,0,441.5628204171538,9.695080327112231,34.0958397934959
@@ -1606,8 +880,8 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 473013,jboss-as,2769,1343722142,,1343777309,919,,33,1,0,16,16,0,0,0,353284,0,0,431.5961096454977,9.366402101425482,32.03371791533158
 473014,jboss-as,2768,1343722092,,1343777296,920,,33,1,0,4,4,0,0,0,361126,0,0,442.6349805884927,9.716830136849742,34.16812968326844
 310449,jboss-as,2289,1336645888,,1343725466,117992,,35,5,0,22,22,12,0,0,359804,346,0,440.3564162710809,9.691387533212527,33.882335938455384
-473019,jboss-as,2757,1343607486,1343674071,1343674071,1109,1109,33,1,0,12,12,2,676,53,353263,30,2,431.62176621950215,9.366958894647897,32.03562218517082
-473020,jboss-as,2756,1343607320,1343674005,1343674005,1111,1111,33,1,0,13,13,2,676,53,361105,30,2,442.6607219506792,9.717395217457526,34.17011672505227
+473019,jboss-as,2757,1343607486,1343674071,1343674071,1109,1109,33,1,0,12,12,2,677,53,353263,30,2,431.62176621950215,9.366958894647897,32.03562218517082
+473020,jboss-as,2756,1343607320,1343674005,1343674005,1111,1111,33,1,0,13,13,2,677,53,361105,30,2,442.6607219506792,9.717395217457526,34.17011672505227
 473018,jboss-as,2760,1343648807,,1343650913,35,,33,1,0,2,2,0,0,0,353263,0,0,431.62176621950215,9.366958894647897,32.03562218517082
 473022,jboss-as,2753,1343306983,,1343379853,1214,,39,1,0,8,8,0,0,0,361105,0,0,442.6108749532685,9.717395217457526,34.17011672505227
 202290,jboss-as,2665,1342081655,,1343306812,20419,,41,3,0,21,21,0,0,0,361094,0,0,442.6243582003578,9.717691238292522,34.17115764870089
@@ -1624,7 +898,7 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 220239,jboss-as,2729,1342886129,,1343096675,3509,,42,1,0,4,4,0,0,0,360317,0,0,442.5658517361101,9.724770132966249,34.205990835847324
 220250,jboss-as,2730,1342887414,,1343096664,3487,,42,1,0,4,4,1,0,0,360317,6,0,442.5658517361101,9.724770132966249,34.205990835847324
 220267,jboss-as,2731,1342889221,,1343096648,3457,,42,1,0,21,21,0,0,0,353251,0,0,431.63642848852515,9.367277091926137,32.03671044101786
-222681,jboss-as,2736,1343053244,1343096629,1343096629,723,723,42,1,0,4,4,17,664,65,353251,54,22,431.63642848852515,9.367277091926137,32.03671044101786
+222681,jboss-as,2736,1343053244,1343096629,1343096629,723,723,42,1,0,4,4,17,665,65,353251,54,22,431.63642848852515,9.367277091926137,32.03671044101786
 168985,jboss-as,2548,1340288712,,1343071538,46380,,42,1,0,15,15,0,0,0,360317,0,0,442.5658517361101,9.724770132966249,34.205990835847324
 218455,jboss-as,2728,1342784844,,1342792398,125,,42,7,0,4,4,10,0,0,353102,398,0,431.7166144626765,9.368397800069102,32.03890094080464
 216961,jboss-as,2719,1342716439,,1342792365,1265,,42,1,0,4,4,6,0,0,352869,101,0,431.3498777166597,9.360414204704862,31.94103194103194
@@ -1646,7 +920,7 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 211710,jboss-as,2697,1342524999,,1342707981,3049,,43,1,0,4,4,0,0,0,358762,0,0,435.9045829825901,9.451948645620217,32.43654567652093
 214658,jboss-as,2278,1336572303,,1342625716,100890,,42,2,0,12,12,6,0,0,348766,71,0,419.57071503529585,9.092055991696439,31.419347069381764
 213619,jboss-as,2704,1342591423,,1342624647,553,,42,4,0,11,11,16,0,0,358861,463,0,436.8097954361159,9.471633863807993,32.47496941712808
-212853,jboss-as,2701,1342554355,1342624514,1342624514,1169,1169,42,1,0,3,3,4,660,70,352865,629,4,430.57259858586144,9.292505632465673,31.71751236308503
+212853,jboss-as,2701,1342554355,1342624514,1342624514,1169,1169,42,1,0,3,3,4,661,70,352865,629,4,430.57259858586144,9.292505632465673,31.71751236308503
 212821,jboss-as,2699,1342553339,,1342624226,1181,,42,1,0,11,11,31,0,0,358840,6277,0,436.2780069111582,9.469401404525694,32.471296399509534
 211735,jboss-as,2698,1342525772,,1342610791,1416,,43,1,0,8,8,0,0,0,358762,0,0,435.9045829825901,9.451948645620217,32.43654567652093
 213468,jboss-as,2662,1342031984,,1342582500,9175,,44,3,0,20,20,26,0,0,358762,3162,0,435.9045829825901,9.451948645620217,32.43654567652093
@@ -3984,8 +3258,8 @@ D, [2012-12-23T13:47:27.852840 #17086] DEBUG -- :  create mode 100644 weld/src/m
 503092,jboss-as,332,1316617651,,1317117249,8326,,60,2,0,1,1,0,0,0,202155,0,0,310.3905419109099,6.955059236724296,28.87883060028196
 503071,jboss-as,347,1317014170,,1317111463,1621,,61,2,0,3,3,0,0,0,202155,0,0,310.4251688061141,6.955059236724296,28.87883060028196
 503069,jboss-as,349,1317028505,,1317111456,1382,,61,1,0,1,1,0,0,0,202155,0,0,310.3905419109099,6.955059236724296,28.87883060028196
-503072,jboss-as,346,1316994844,1317014092,1317014092,320,320,61,1,0,0,0,15,544,274,202133,168,24,310.45895524234044,6.955816220013555,28.881973749956714
 503074,jboss-as,345,1316955008,,1317014092,984,,61,1,0,0,0,0,0,0,202133,0,0,310.45895524234044,6.955816220013555,28.881973749956714
+503072,jboss-as,346,1316994844,1317014092,1317014092,320,320,61,1,0,0,0,15,544,274,202133,168,24,310.45895524234044,6.955816220013555,28.881973749956714
 503077,jboss-as,343,1316843135,,1316847039,65,,61,1,0,0,0,0,0,0,202127,0,0,310.46322361683497,6.9560226986003855,28.87788370677841
 503088,jboss-as,336,1316679229,,1316776538,1621,,61,1,0,1,1,0,0,0,201402,0,0,310.9303780498704,6.981062750121648,28.9123246045223
 503082,jboss-as,340,1316709576,,1316776504,1115,,61,2,0,0,0,0,0,0,201882,0,0,310.30007628218465,6.964464390089261,28.84853528298709

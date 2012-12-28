@@ -1,629 +1,129 @@
-Updating client properties
-GHTorrent version: 0.6
-D, [2012-12-23T15:01:16.727749 #6983] DEBUG -- : GHTorrent: User netty exists
-D, [2012-12-23T15:01:16.728115 #6983] DEBUG -- : GHTorrent: Transaction committed (15 ms)
-D, [2012-12-23T15:01:16.814893 #6983] DEBUG -- : GHTorrent: User netty exists
-D, [2012-12-23T15:01:16.817447 #6983] DEBUG -- : GHTorrent: Repo netty/netty exists
-D, [2012-12-23T15:01:16.821470 #6983] DEBUG -- : GHTorrent: Transaction committed (68 ms)
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size_at_merge,num_commits,num_commit_comments,num_issue_comments,num_comments,files_changed,total_commits_last_month,main_team_commits_last_month,sloc,churn,commits_on_files_touched,test_lines_per_1000_lines,test_cases_per_1000_lines,assertions_per_1000_lines
-D, [2012-12-23T15:01:21.488537 #6983] DEBUG -- : Updating 2903b91..fc4b205
 
-D, [2012-12-23T15:01:21.488683 #6983] DEBUG -- : Fast-forward
 
-D, [2012-12-23T15:01:21.559649 #6983] DEBUG -- :  NOTICE.txt                                         |   58 ++-
 
-D, [2012-12-23T15:01:21.559716 #6983] DEBUG -- :  all/pom.xml                                        |    2 +-
 
-D, [2012-12-23T15:01:21.559740 #6983] DEBUG -- :  buffer/pom.xml                                     |    2 +-
 
-D, [2012-12-23T15:01:21.559762 #6983] DEBUG -- :  .../main/java/io/netty/buffer/AbstractByteBuf.java |   59 +++-
 
-D, [2012-12-23T15:01:21.559787 #6983] DEBUG -- :  .../io/netty/buffer/AbstractByteBufAllocator.java  |   51 ++-
 
-D, [2012-12-23T15:01:21.559812 #6983] DEBUG -- :  .../netty/buffer/{ChannelBufType.java => Buf.java} |   20 +-
 
-D, [2012-12-23T15:01:21.559837 #6983] DEBUG -- :  .../buffer/{ChannelBufType.java => BufType.java}   |    4 +-
 
-D, [2012-12-23T15:01:21.559860 #6983] DEBUG -- :  buffer/src/main/java/io/netty/buffer/ByteBuf.java  |  122 +++---
 
-D, [2012-12-23T15:01:21.559882 #6983] DEBUG -- :  .../java/io/netty/buffer/ByteBufAllocator.java     |   12 +-
 
-D, [2012-12-23T15:01:21.559907 #6983] DEBUG -- :  .../src/main/java/io/netty/buffer/ByteBufUtil.java |    3 +
 
-D, [2012-12-23T15:01:21.559930 #6983] DEBUG -- :  .../src/main/java/io/netty/buffer/ChannelBuf.java  |   44 --
 
-D, [2012-12-23T15:01:21.559958 #6983] DEBUG -- :  .../java/io/netty/buffer/CompositeByteBuf.java     |  149 ++++++
 
-D, [2012-12-23T15:01:21.559984 #6983] DEBUG -- :  .../io/netty/buffer/DefaultCompositeByteBuf.java   |   91 ++--
 
-D, [2012-12-23T15:01:21.560007 #6983] DEBUG -- :  .../java/io/netty/buffer/DefaultMessageBuf.java    |  129 +++++-
 
-D, [2012-12-23T15:01:21.560030 #6983] DEBUG -- :  .../java/io/netty/buffer/DuplicatedByteBuf.java    |   47 +--
 
-D, [2012-12-23T15:01:21.560054 #6983] DEBUG -- :  ...Type.java => IllegalBufferAccessException.java} |   29 +-
 
-D, [2012-12-23T15:01:21.560077 #6983] DEBUG -- :  .../src/main/java/io/netty/buffer/MessageBuf.java  |   21 +-
 
-D, [2012-12-23T15:01:21.560100 #6983] DEBUG -- :  .../src/main/java/io/netty/buffer/PoolArena.java   |  395 +++++++++++++++
 
-D, [2012-12-23T15:01:21.560123 #6983] DEBUG -- :  .../src/main/java/io/netty/buffer/PoolChunk.java   |  349 ++++++++++++++
 
-D, [2012-12-23T15:01:21.560145 #6983] DEBUG -- :  .../main/java/io/netty/buffer/PoolChunkList.java   |  129 +++++
 
-D, [2012-12-23T15:01:21.560170 #6983] DEBUG -- :  .../src/main/java/io/netty/buffer/PoolSubpage.java |  155 ++++++
 
-D, [2012-12-23T15:01:21.560190 #6983] DEBUG -- :  .../main/java/io/netty/buffer/PoolThreadCache.java |   18 +-
 
-D, [2012-12-23T15:01:21.560212 #6983] DEBUG -- :  .../main/java/io/netty/buffer/PooledByteBuf.java   |  199 ++++++++
 
-D, [2012-12-23T15:01:21.560238 #6983] DEBUG -- :  .../io/netty/buffer/PooledByteBufAllocator.java    |  165 +++++++
 
-D, [2012-12-23T15:01:21.560260 #6983] DEBUG -- :  .../java/io/netty/buffer/PooledDirectByteBuf.java  |  285 +++++++++++
 
-D, [2012-12-23T15:01:21.560280 #6983] DEBUG -- :  .../java/io/netty/buffer/PooledHeapByteBuf.java    |  260 ++++++++++
 
-D, [2012-12-23T15:01:21.560302 #6983] DEBUG -- :  .../io/netty/buffer/QueueBackedMessageBuf.java     |   40 ++-
 
-D, [2012-12-23T15:01:21.560324 #6983] DEBUG -- :  .../main/java/io/netty/buffer/ReadOnlyByteBuf.java |   47 +--
 
-D, [2012-12-23T15:01:21.560347 #6983] DEBUG -- :  .../main/java/io/netty/buffer/SlicedByteBuf.java   |   64 +--
 
-D, [2012-12-23T15:01:21.560375 #6983] DEBUG -- :  .../main/java/io/netty/buffer/SwappedByteBuf.java  |   55 ++-
 
-D, [2012-12-23T15:01:21.560398 #6983] DEBUG -- :  buffer/src/main/java/io/netty/buffer/Unpooled.java |   10 +-
 
-D, [2012-12-23T15:01:21.560418 #6983] DEBUG -- :  .../io/netty/buffer/UnpooledByteBufAllocator.java  |   27 +-
 
-D, [2012-12-23T15:01:21.560442 #6983] DEBUG -- :  .../io/netty/buffer/UnpooledDirectByteBuf.java     |  116 ++---
 
-D, [2012-12-23T15:01:21.560463 #6983] DEBUG -- :  .../java/io/netty/buffer/UnpooledHeapByteBuf.java  |  113 ++---
 
-D, [2012-12-23T15:01:21.560485 #6983] DEBUG -- :  .../io/netty/buffer/AbstractChannelBufferTest.java |   18 +-
 
-D, [2012-12-23T15:01:21.560510 #6983] DEBUG -- :  .../buffer/AbstractCompositeChannelBufferTest.java |    2 +-
 
-D, [2012-12-23T15:01:21.560530 #6983] DEBUG -- :  .../java/io/netty/buffer/ChannelBuffersTest.java   |    2 +-
 
-D, [2012-12-23T15:01:21.560552 #6983] DEBUG -- :  codec-http/pom.xml                                 |    2 +-
 
-D, [2012-12-23T15:01:21.560576 #6983] DEBUG -- :  .../handler/codec/http/HttpMessageDecoder.java     |   28 +-
 
-D, [2012-12-23T15:01:21.560598 #6983] DEBUG -- :  .../codec/http/multipart/AbstractDiskHttpData.java |    2 +-
 
-D, [2012-12-23T15:01:21.560618 #6983] DEBUG -- :  .../http/websocketx/WebSocket07FrameDecoder.java   |   76 +++
 
-D, [2012-12-23T15:01:21.560643 #6983] DEBUG -- :  .../http/websocketx/WebSocket07FrameEncoder.java   |   73 +++
 
-D, [2012-12-23T15:01:21.560666 #6983] DEBUG -- :  .../http/websocketx/WebSocketClientHandshaker.java |   17 +-
 
-D, [2012-12-23T15:01:21.560689 #6983] DEBUG -- :  .../websocketx/WebSocketClientHandshaker00.java    |    4 +-
 
-D, [2012-12-23T15:01:21.560716 #6983] DEBUG -- :  .../websocketx/WebSocketClientHandshaker07.java    |  230 +++++++++
 
-D, [2012-12-23T15:01:21.560739 #6983] DEBUG -- :  .../websocketx/WebSocketClientHandshaker08.java    |    4 +-
 
-D, [2012-12-23T15:01:21.560762 #6983] DEBUG -- :  .../websocketx/WebSocketClientHandshaker13.java    |    4 +-
 
-D, [2012-12-23T15:01:21.560785 #6983] DEBUG -- :  .../WebSocketClientHandshakerFactory.java          |   16 +-
 
-D, [2012-12-23T15:01:21.560808 #6983] DEBUG -- :  .../http/websocketx/WebSocketServerHandshaker.java |   42 ++-
 
-D, [2012-12-23T15:01:21.560827 #6983] DEBUG -- :  .../websocketx/WebSocketServerHandshaker00.java    |   27 +-
 
-D, [2012-12-23T15:01:21.560852 #6983] DEBUG -- :  .../websocketx/WebSocketServerHandshaker07.java    |  179 +++++++
 
-D, [2012-12-23T15:01:21.560874 #6983] DEBUG -- :  .../websocketx/WebSocketServerHandshaker08.java    |   12 +-
 
-D, [2012-12-23T15:01:21.560896 #6983] DEBUG -- :  .../websocketx/WebSocketServerHandshaker13.java    |   12 +-
 
-D, [2012-12-23T15:01:21.560920 #6983] DEBUG -- :  .../WebSocketServerHandshakerFactory.java          |    4 +
 
-D, [2012-12-23T15:01:21.560942 #6983] DEBUG -- :  .../websocketx/WebSocketServerProtocolHandler.java |   12 +-
 
-D, [2012-12-23T15:01:21.560964 #6983] DEBUG -- :  .../WebSocketServerProtocolHandshakeHandler.java   |    6 +-
 
-D, [2012-12-23T15:01:21.560991 #6983] DEBUG -- :  .../codec/http/websocketx/WebSocketVersion.java    |    9 +
 
-D, [2012-12-23T15:01:21.561011 #6983] DEBUG -- :  .../handler/codec/spdy/SpdySessionHandler.java     |   41 +-
 
-D, [2012-12-23T15:01:21.561033 #6983] DEBUG -- :  .../handler/codec/spdy/SpdySessionHandlerTest.java |    8 +-
 
-D, [2012-12-23T15:01:21.561058 #6983] DEBUG -- :  codec-socks/pom.xml                                |    2 +-
 
-D, [2012-12-23T15:01:21.561080 #6983] DEBUG -- :  codec/pom.xml                                      |    2 +-
 
-D, [2012-12-23T15:01:21.561102 #6983] DEBUG -- :  .../io/netty/handler/codec/ByteToByteCodec.java    |   42 ++-
 
-D, [2012-12-23T15:01:21.561135 #6983] DEBUG -- :  .../io/netty/handler/codec/ByteToByteDecoder.java  |   44 ++-
 
-D, [2012-12-23T15:01:21.561159 #6983] DEBUG -- :  .../io/netty/handler/codec/ByteToByteEncoder.java  |   34 ++-
 
-D, [2012-12-23T15:01:21.561242 #6983] DEBUG -- :  .../io/netty/handler/codec/ByteToMessageCodec.java |    6 +-
 
-D, [2012-12-23T15:01:21.561273 #6983] DEBUG -- :  .../netty/handler/codec/ByteToMessageDecoder.java  |   39 ++-
 
-D, [2012-12-23T15:01:21.561299 #6983] DEBUG -- :  .../handler/codec/CorruptedFrameException.java     |    2 +-
 
-D, [2012-12-23T15:01:21.561323 #6983] DEBUG -- :  .../io/netty/handler/codec/DecoderException.java   |    2 +-
 
-D, [2012-12-23T15:01:21.561348 #6983] DEBUG -- :  .../handler/codec/DelimiterBasedFrameDecoder.java  |    2 +-
 
-D, [2012-12-23T15:01:21.561370 #6983] DEBUG -- :  .../io/netty/handler/codec/EncoderException.java   |    2 +-
 
-D, [2012-12-23T15:01:21.561391 #6983] DEBUG -- :  .../codec/LengthFieldBasedFrameDecoder.java        |    8 +-
 
-D, [2012-12-23T15:01:21.561469 #6983] DEBUG -- :  .../netty/handler/codec/LengthFieldPrepender.java  |    5 +-
 
-D, [2012-12-23T15:01:21.561493 #6983] DEBUG -- :  .../netty/handler/codec/MessageToByteEncoder.java  |   33 ++
 
-D, [2012-12-23T15:01:21.561515 #6983] DEBUG -- :  .../netty/handler/codec/MessageToMessageCodec.java |   35 ++-
 
-D, [2012-12-23T15:01:21.561540 #6983] DEBUG -- :  .../handler/codec/MessageToMessageDecoder.java     |   38 ++-
 
-D, [2012-12-23T15:01:21.561563 #6983] DEBUG -- :  .../handler/codec/MessageToMessageEncoder.java     |   36 ++
 
-D, [2012-12-23T15:01:21.561583 #6983] DEBUG -- :  .../io/netty/handler/codec/ReplayingDecoder.java   |   79 ++--
 
-D, [2012-12-23T15:01:21.561607 #6983] DEBUG -- :  .../handler/codec/ReplayingDecoderBuffer.java      |   49 +--
 
-D, [2012-12-23T15:01:21.561630 #6983] DEBUG -- :  .../netty/handler/codec/TooLongFrameException.java |    4 +-
 
-D, [2012-12-23T15:01:21.561652 #6983] DEBUG -- :  .../codec/UnreplayableOperationException.java      |    6 +-
 
-D, [2012-12-23T15:01:21.561678 #6983] DEBUG -- :  .../codec/UnsupportedMessageTypeException.java     |    3 +
 
-D, [2012-12-23T15:01:21.561704 #6983] DEBUG -- :  .../handler/codec/bytes/ByteArrayDecoder.java      |    3 +-
 
-D, [2012-12-23T15:01:21.561731 #6983] DEBUG -- :  .../handler/codec/bytes/ByteArrayEncoder.java      |    3 +-
 
-D, [2012-12-23T15:01:21.561761 #6983] DEBUG -- :  .../codec/compression/CompressionException.java    |    6 +-
 
-D, [2012-12-23T15:01:21.561784 #6983] DEBUG -- :  .../io/netty/handler/codec/compression/Snappy.java |  457 ++++++++++++++++++
 
-D, [2012-12-23T15:01:21.561808 #6983] DEBUG -- :  .../codec/compression/SnappyChecksumUtil.java      |   80 +++
 
-D, [2012-12-23T15:01:21.561830 #6983] DEBUG -- :  .../codec/compression/SnappyFramedDecoder.java     |  188 ++++++++
 
-D, [2012-12-23T15:01:21.561850 #6983] DEBUG -- :  .../codec/compression/SnappyFramedEncoder.java     |  107 +++++
 
-D, [2012-12-23T15:01:21.561875 #6983] DEBUG -- :  .../handler/codec/compression/ZlibEncoder.java     |   11 +
 
-D, [2012-12-23T15:01:21.561898 #6983] DEBUG -- :  .../handler/codec/compression/package-info.java    |    5 +-
 
-D, [2012-12-23T15:01:21.561920 #6983] DEBUG -- :  .../handler/codec/protobuf/ProtobufDecoder.java    |    6 +-
 
-D, [2012-12-23T15:01:21.561942 #6983] DEBUG -- :  .../handler/codec/protobuf/ProtobufEncoder.java    |    3 +-
 
-D, [2012-12-23T15:01:21.561964 #6983] DEBUG -- :  .../codec/sctp/SctpInboundByteStreamHandler.java   |    4 +-
 
-D, [2012-12-23T15:01:21.561986 #6983] DEBUG -- :  .../codec/sctp/SctpOutboundByteStreamHandler.java  |    4 +-
 
-D, [2012-12-23T15:01:21.562010 #6983] DEBUG -- :  .../serialization/CompatibleObjectEncoder.java     |    2 +-
 
-D, [2012-12-23T15:01:21.562033 #6983] DEBUG -- :  .../netty/handler/codec/string/StringDecoder.java  |   16 +-
 
-D, [2012-12-23T15:01:21.562056 #6983] DEBUG -- :  .../netty/handler/codec/string/StringEncoder.java  |    8 +-
 
-D, [2012-12-23T15:01:21.562078 #6983] DEBUG -- :  .../codec/compression/SnappyChecksumUtilTest.java  |   51 ++
 
-D, [2012-12-23T15:01:21.562100 #6983] DEBUG -- :  .../codec/compression/SnappyFramedDecoderTest.java |  131 +++++
 
-D, [2012-12-23T15:01:21.562119 #6983] DEBUG -- :  .../codec/compression/SnappyFramedEncoderTest.java |   84 ++++
 
-D, [2012-12-23T15:01:21.562143 #6983] DEBUG -- :  .../handler/codec/compression/SnappyTest.java      |  170 +++++++
 
-D, [2012-12-23T15:01:21.562175 #6983] DEBUG -- :  common/pom.xml                                     |    2 +-
 
-D, [2012-12-23T15:01:21.562198 #6983] DEBUG -- :  common/src/main/java/io/netty/util/Attribute.java  |   31 ++
 
-D, [2012-12-23T15:01:21.562220 #6983] DEBUG -- :  .../src/main/java/io/netty/util/AttributeKey.java  |   12 +
 
-D, [2012-12-23T15:01:21.562242 #6983] DEBUG -- :  .../src/main/java/io/netty/util/AttributeMap.java  |    9 +
 
-D, [2012-12-23T15:01:21.562263 #6983] DEBUG -- :  .../java/io/netty/util/DefaultAttributeMap.java    |    6 +-
 
-D, [2012-12-23T15:01:21.562286 #6983] DEBUG -- :  common/src/main/java/io/netty/util/UniqueName.java |    1 +
 
-D, [2012-12-23T15:01:21.562308 #6983] DEBUG -- :  .../java/io/netty/util/internal/DetectionUtil.java |   10 +
 
-D, [2012-12-23T15:01:21.562329 #6983] DEBUG -- :  .../internal/SharedResourceMisuseDetector.java     |    8 +-
 
-D, [2012-12-23T15:01:21.562350 #6983] DEBUG -- :  .../main/java/io/netty/util/internal/Signal.java   |   14 +
 
-D, [2012-12-23T15:01:21.562372 #6983] DEBUG -- :  example/pom.xml                                    |    2 +-
 
-D, [2012-12-23T15:01:21.562394 #6983] DEBUG -- :  .../http/websocketx/client/WebSocketClient.java    |    2 +-
-
-D, [2012-12-23T15:01:21.562416 #6983] DEBUG -- :  handler/pom.xml                                    |    2 +-
-
-D, [2012-12-23T15:01:21.562437 #6983] DEBUG -- :  .../netty/handler/logging/ByteLoggingHandler.java  |   10 +-
-
-D, [2012-12-23T15:01:21.562459 #6983] DEBUG -- :  .../io/netty/handler/logging/LoggingHandler.java   |    5 +-
-
-D, [2012-12-23T15:01:21.562481 #6983] DEBUG -- :  .../handler/logging/MessageLoggingHandler.java     |    6 +-
-
-D, [2012-12-23T15:01:21.562501 #6983] DEBUG -- :  .../io/netty/handler/ssl/ImmediateExecutor.java    |    5 +-
-
-D, [2012-12-23T15:01:21.562522 #6983] DEBUG -- :  .../main/java/io/netty/handler/ssl/SslHandler.java |   62 ++--
-
-D, [2012-12-23T15:01:21.562545 #6983] DEBUG -- :  .../java/io/netty/handler/stream/ChunkedFile.java  |   13 +-
-
-D, [2012-12-23T15:01:21.562567 #6983] DEBUG -- :  .../io/netty/handler/stream/ChunkedNioFile.java    |   13 +-
-
-D, [2012-12-23T15:01:21.562587 #6983] DEBUG -- :  .../io/netty/handler/stream/ChunkedNioStream.java  |    4 +-
-
-D, [2012-12-23T15:01:21.562610 #6983] DEBUG -- :  .../io/netty/handler/stream/ChunkedStream.java     |    4 +-
-
-D, [2012-12-23T15:01:21.562632 #6983] DEBUG -- :  .../netty/handler/stream/ChunkedWriteHandler.java  |    6 +-
-
-D, [2012-12-23T15:01:21.562652 #6983] DEBUG -- :  .../io/netty/handler/timeout/IdleStateEvent.java   |   15 +-
-
-D, [2012-12-23T15:01:21.562671 #6983] DEBUG -- :  .../io/netty/handler/timeout/IdleStateHandler.java |   93 +++--
-
-D, [2012-12-23T15:01:21.562693 #6983] DEBUG -- :  .../netty/handler/timeout/ReadTimeoutHandler.java  |   45 +-
-
-D, [2012-12-23T15:01:21.562714 #6983] DEBUG -- :  .../netty/handler/timeout/WriteTimeoutHandler.java |   59 ++-
-
-D, [2012-12-23T15:01:21.562737 #6983] DEBUG -- :  license/{LICENSE.felix.txt => LICENSE.caliper.txt} |   25 +
-
-D, [2012-12-23T15:01:21.562758 #6983] DEBUG -- :  license/LICENSE.jboss-marshalling.txt              |  504 ++++++++++++++++++++
-
-D, [2012-12-23T15:01:21.563073 #6983] DEBUG -- :  license/{LICENSE.felix.txt => LICENSE.metrics.txt} |   25 +
-
-D, [2012-12-23T15:01:21.563100 #6983] DEBUG -- :  license/{LICENSE.felix.txt => LICENSE.osgi.txt}    |   26 +
-
-D, [2012-12-23T15:01:21.563123 #6983] DEBUG -- :  license/LICENSE.snappy.txt                         |   28 ++
-
-D, [2012-12-23T15:01:21.563145 #6983] DEBUG -- :  metrics-yammer/pom.xml                             |    2 +-
-
-D, [2012-12-23T15:01:21.563170 #6983] DEBUG -- :  microbench/pom.xml                                 |   59 +++
-
-D, [2012-12-23T15:01:21.563193 #6983] DEBUG -- :  .../test/java/com/google/caliper/StandardVm.java   |   88 ++++
-
-D, [2012-12-23T15:01:21.563219 #6983] DEBUG -- :  .../buffer/ByteBufAllocatorBenchmark.java          |   98 ++++
-
-D, [2012-12-23T15:01:21.563247 #6983] DEBUG -- :  .../io/netty/microbench/util/DefaultBenchmark.java |  128 +++++
-
-D, [2012-12-23T15:01:21.563271 #6983] DEBUG -- :  pom.xml                                            |   47 ++-
-
-D, [2012-12-23T15:01:21.563294 #6983] DEBUG -- :  tarball/pom.xml                                    |    2 +-
-
-D, [2012-12-23T15:01:21.563319 #6983] DEBUG -- :  testsuite/pom.xml                                  |    2 +-
-
-D, [2012-12-23T15:01:21.563341 #6983] DEBUG -- :  .../testsuite/transport/socket/SctpEchoTest.java   |    3 +-
-
-D, [2012-12-23T15:01:21.563361 #6983] DEBUG -- :  .../transport/socket/SocketObjectEchoTest.java     |    4 +-
-
-D, [2012-12-23T15:01:21.563386 #6983] DEBUG -- :  .../socket/SocketShutdownOutputByPeerTest.java     |    2 +-
-
-D, [2012-12-23T15:01:21.563408 #6983] DEBUG -- :  .../socket/SocketShutdownOutputBySelfTest.java     |    4 +-
-
-D, [2012-12-23T15:01:21.563453 #6983] DEBUG -- :  .../transport/socket/SocketStringEchoTest.java     |    4 +-
-
-D, [2012-12-23T15:01:21.563479 #6983] DEBUG -- :  .../transport/socket/SocketTestPermutation.java    |   13 +-
-
-D, [2012-12-23T15:01:21.563502 #6983] DEBUG -- :  transport/pom.xml                                  |    2 +-
-
-D, [2012-12-23T15:01:21.563526 #6983] DEBUG -- :  .../main/java/com/sun/nio/sctp/HandlerResult.java  |    5 -
-
-D, [2012-12-23T15:01:21.563552 #6983] DEBUG -- :  .../java/io/netty/bootstrap/AbstractBootstrap.java |    8 +-
-
-D, [2012-12-23T15:01:21.563574 #6983] DEBUG -- :  .../main/java/io/netty/bootstrap/Bootstrap.java    |   33 +--
-
-D, [2012-12-23T15:01:21.563597 #6983] DEBUG -- :  .../java/io/netty/bootstrap/ServerBootstrap.java   |   21 +-
-
-D, [2012-12-23T15:01:21.563624 #6983] DEBUG -- :  .../java/io/netty/channel/AbstractChannel.java     |   93 ++++-
-
-D, [2012-12-23T15:01:21.563646 #6983] DEBUG -- :  .../io/netty/channel/AbstractServerChannel.java    |   14 +-
-
-D, [2012-12-23T15:01:21.563666 #6983] DEBUG -- :  .../src/main/java/io/netty/channel/Channel.java    |   70 ++--
-
-D, [2012-12-23T15:01:21.563692 #6983] DEBUG -- :  .../main/java/io/netty/channel/ChannelConfig.java  |   21 +-
-
-D, [2012-12-23T15:01:21.563715 #6983] DEBUG -- :  .../netty/channel/ChannelFlushFutureNotifier.java  |   59 +++-
-
-D, [2012-12-23T15:01:21.564071 #6983] DEBUG -- :  .../main/java/io/netty/channel/ChannelFuture.java  |   17 +
-
-D, [2012-12-23T15:01:21.564102 #6983] DEBUG -- :  .../io/netty/channel/ChannelFutureNotifier.java    |   41 ++-
-
-D, [2012-12-23T15:01:21.564123 #6983] DEBUG -- :  .../main/java/io/netty/channel/ChannelHandler.java |  144 +++---
-
-D, [2012-12-23T15:01:21.564145 #6983] DEBUG -- :  .../io/netty/channel/ChannelHandlerContext.java    |   53 ++-
-
-D, [2012-12-23T15:01:21.564170 #6983] DEBUG -- :  .../channel/ChannelHandlerLifeCycleException.java  |   55 ---
-
-D, [2012-12-23T15:01:21.564190 #6983] DEBUG -- :  .../channel/ChannelInboundByteHandlerAdapter.java  |    4 +-
-
-D, [2012-12-23T15:01:21.564212 #6983] DEBUG -- :  .../io/netty/channel/ChannelInboundHandler.java    |    8 +-
-
-D, [2012-12-23T15:01:21.564237 #6983] DEBUG -- :  .../channel/ChannelInboundHandlerAdapter.java      |    6 +-
-
-D, [2012-12-23T15:01:21.564258 #6983] DEBUG -- :  .../io/netty/channel/ChannelInboundInvoker.java    |   59 +++
-
-D, [2012-12-23T15:01:21.564280 #6983] DEBUG -- :  .../ChannelInboundMessageHandlerAdapter.java       |   48 ++-
-
-D, [2012-12-23T15:01:21.564302 #6983] DEBUG -- :  .../java/io/netty/channel/ChannelInitializer.java  |   34 ++
-
-D, [2012-12-23T15:01:21.564322 #6983] DEBUG -- :  .../java/io/netty/channel/ChannelMetadata.java     |   19 +-
-
-D, [2012-12-23T15:01:21.564344 #6983] DEBUG -- :  .../io/netty/channel/ChannelOperationHandler.java  |   62 +++
-
-D, [2012-12-23T15:01:21.564365 #6983] DEBUG -- :  .../main/java/io/netty/channel/ChannelOption.java  |   18 +
-
-D, [2012-12-23T15:01:21.564582 #6983] DEBUG -- :  .../io/netty/channel/ChannelOutboundHandler.java   |   12 +-
-
-D, [2012-12-23T15:01:21.564605 #6983] DEBUG -- :  .../channel/ChannelOutboundHandlerAdapter.java     |    6 +-
-
-D, [2012-12-23T15:01:21.564627 #6983] DEBUG -- :  .../io/netty/channel/ChannelOutboundInvoker.java   |  127 +++++
-
-D, [2012-12-23T15:01:21.564650 #6983] DEBUG -- :  .../java/io/netty/channel/ChannelPipeline.java     |   40 ++-
-
-D, [2012-12-23T15:01:21.564676 #6983] DEBUG -- :  .../io/netty/channel/ChannelPipelineException.java |    3 +-
-
-D, [2012-12-23T15:01:21.564700 #6983] DEBUG -- :  .../io/netty/channel/ChannelPropertyAccess.java    |    7 +
-
-D, [2012-12-23T15:01:21.564725 #6983] DEBUG -- :  .../java/io/netty/channel/ChannelStateHandler.java |   15 +
-
-D, [2012-12-23T15:01:21.564749 #6983] DEBUG -- :  .../io/netty/channel/CombinedChannelHandler.java   |   23 +-
-
-D, [2012-12-23T15:01:21.564776 #6983] DEBUG -- :  .../io/netty/channel/CompleteChannelFuture.java    |   22 +-
-
-D, [2012-12-23T15:01:21.564800 #6983] DEBUG -- :  .../io/netty/channel/DefaultChannelConfig.java     |   15 +-
-
-D, [2012-12-23T15:01:21.564822 #6983] DEBUG -- :  .../io/netty/channel/DefaultChannelFuture.java     |   36 ++-
-
-D, [2012-12-23T15:01:21.564989 #6983] DEBUG -- :  .../channel/DefaultChannelHandlerContext.java      |   55 ++-
-
-D, [2012-12-23T15:01:21.565016 #6983] DEBUG -- :  .../io/netty/channel/DefaultChannelPipeline.java   |   75 ++--
-
-D, [2012-12-23T15:01:21.565037 #6983] DEBUG -- :  .../io/netty/channel/DefaultEventExecutor.java     |    3 +
-
-D, [2012-12-23T15:01:21.565060 #6983] DEBUG -- :  .../netty/channel/DefaultEventExecutorGroup.java   |   10 +
-
-D, [2012-12-23T15:01:21.565081 #6983] DEBUG -- :  .../java/io/netty/channel/DefaultFileRegion.java   |   19 +
-
-D, [2012-12-23T15:01:21.565101 #6983] DEBUG -- :  .../main/java/io/netty/channel/EventExecutor.java  |    2 -
-
-D, [2012-12-23T15:01:21.565125 #6983] DEBUG -- :  .../src/main/java/io/netty/channel/EventLoop.java  |    7 +
-
-D, [2012-12-23T15:01:21.565147 #6983] DEBUG -- :  .../java/io/netty/channel/EventLoopException.java  |    4 +
-
-D, [2012-12-23T15:01:21.565167 #6983] DEBUG -- :  .../java/io/netty/channel/FailedChannelFuture.java |    5 +-
-
-D, [2012-12-23T15:01:21.565190 #6983] DEBUG -- :  .../src/main/java/io/netty/channel/FileRegion.java |    2 +-
-
-D, [2012-12-23T15:01:21.565209 #6983] DEBUG -- :  .../channel/MultithreadEventExecutorGroup.java     |   30 ++-
-
-D, [2012-12-23T15:01:21.565231 #6983] DEBUG -- :  .../netty/channel/MultithreadEventLoopGroup.java   |    7 +
-
-D, [2012-12-23T15:01:21.565251 #6983] DEBUG -- :  .../netty/channel/SingleThreadEventExecutor.java   |   11 +
-
-D, [2012-12-23T15:01:21.565273 #6983] DEBUG -- :  .../io/netty/channel/SingleThreadEventLoop.java    |    8 +
-
-D, [2012-12-23T15:01:21.565295 #6983] DEBUG -- :  .../io/netty/channel/SucceededChannelFuture.java   |    5 +-
-
-D, [2012-12-23T15:01:21.565317 #6983] DEBUG -- :  .../java/io/netty/channel/VoidChannelFuture.java   |   14 +-
-
-D, [2012-12-23T15:01:21.565338 #6983] DEBUG -- :  .../channel/embedded/AbstractEmbeddedChannel.java  |  154 ++++++-
-
-D, [2012-12-23T15:01:21.565359 #6983] DEBUG -- :  .../channel/embedded/EmbeddedByteChannel.java      |   36 +-
-
-D, [2012-12-23T15:01:21.565567 #6983] DEBUG -- :  .../netty/channel/embedded/EmbeddedEventLoop.java  |   30 +-
-
-D, [2012-12-23T15:01:21.565591 #6983] DEBUG -- :  .../channel/embedded/EmbeddedMessageChannel.java   |   36 +-
-
-D, [2012-12-23T15:01:21.565613 #6983] DEBUG -- :  .../channel/embedded/EmbeddedSocketAddress.java    |    2 +-
-
-D, [2012-12-23T15:01:21.565634 #6983] DEBUG -- :  .../io/netty/channel/embedded/package-info.java    |    2 +-
-
-D, [2012-12-23T15:01:21.565656 #6983] DEBUG -- :  .../java/io/netty/channel/group/ChannelGroup.java  |    7 +-
-
-D, [2012-12-23T15:01:21.565678 #6983] DEBUG -- :  .../io/netty/channel/group/ChannelGroupFuture.java |   35 +-
-
-D, [2012-12-23T15:01:21.565699 #6983] DEBUG -- :  .../java/io/netty/channel/local/LocalChannel.java  |    6 +-
-
-D, [2012-12-23T15:01:21.565722 #6983] DEBUG -- :  .../io/netty/channel/local/LocalServerChannel.java |    2 +-
-
-D, [2012-12-23T15:01:21.565742 #6983] DEBUG -- :  .../channel/socket/ChannelInputShutdownEvent.java  |   22 +-
-
-D, [2012-12-23T15:01:21.565765 #6983] DEBUG -- :  .../io/netty/channel/socket/DatagramChannel.java   |   83 +++-
-
-D, [2012-12-23T15:01:21.565784 #6983] DEBUG -- :  .../channel/socket/DatagramChannelConfig.java      |   30 +-
-
-D, [2012-12-23T15:01:21.565806 #6983] DEBUG -- :  .../io/netty/channel/socket/DatagramPacket.java    |   18 +-
-
-D, [2012-12-23T15:01:21.565828 #6983] DEBUG -- :  .../socket/DefaultDatagramChannelConfig.java       |   46 ++-
-
-D, [2012-12-23T15:01:21.565848 #6983] DEBUG -- :  .../channel/socket/DefaultSctpChannelConfig.java   |   28 +-
-
-D, [2012-12-23T15:01:21.565868 #6983] DEBUG -- :  .../socket/DefaultSctpServerChannelConfig.java     |   28 +-
-
-D, [2012-12-23T15:01:21.565893 #6983] DEBUG -- :  .../socket/DefaultServerSocketChannelConfig.java   |   29 +-
-
-D, [2012-12-23T15:01:21.565916 #6983] DEBUG -- :  .../channel/socket/DefaultSocketChannelConfig.java |   44 ++-
-
-D, [2012-12-23T15:01:21.565939 #6983] DEBUG -- :  .../channel/socket/InternetProtocolFamily.java     |    2 +-
-
-D, [2012-12-23T15:01:21.566144 #6983] DEBUG -- :  .../java/io/netty/channel/socket/SctpChannel.java  |   16 +
-
-D, [2012-12-23T15:01:21.566185 #6983] DEBUG -- :  .../io/netty/channel/socket/SctpChannelConfig.java |   18 +-
-
-D, [2012-12-23T15:01:21.566210 #6983] DEBUG -- :  .../java/io/netty/channel/socket/SctpMessage.java  |    4 +-
-
-D, [2012-12-23T15:01:21.566234 #6983] DEBUG -- :  .../channel/socket/SctpServerChannelConfig.java    |   18 +-
-
-D, [2012-12-23T15:01:21.566257 #6983] DEBUG -- :  .../channel/socket/ServerSocketChannelConfig.java  |   18 +-
-
-D, [2012-12-23T15:01:21.566281 #6983] DEBUG -- :  .../io/netty/channel/socket/SocketChannel.java     |   11 +-
-
-D, [2012-12-23T15:01:21.566305 #6983] DEBUG -- :  .../netty/channel/socket/SocketChannelConfig.java  |   29 +-
-
-D, [2012-12-23T15:01:21.566330 #6983] DEBUG -- :  .../channel/socket/aio/AbstractAioChannel.java     |   51 ++-
-
-D, [2012-12-23T15:01:21.566353 #6983] DEBUG -- :  .../netty/channel/socket/aio/AioChannelFinder.java |   12 +
-
-D, [2012-12-23T15:01:21.566375 #6983] DEBUG -- :  .../channel/socket/aio/AioCompletionHandler.java   |    2 -
-
-D, [2012-12-23T15:01:21.566397 #6983] DEBUG -- :  .../io/netty/channel/socket/aio/AioEventLoop.java  |    3 +
-
-D, [2012-12-23T15:01:21.566417 #6983] DEBUG -- :  .../channel/socket/aio/AioEventLoopGroup.java      |   21 +
-
-D, [2012-12-23T15:01:21.566439 #6983] DEBUG -- :  .../channel/socket/aio/AioServerSocketChannel.java |   50 ++-
-
-D, [2012-12-23T15:01:21.566461 #6983] DEBUG -- :  .../socket/aio/AioServerSocketChannelConfig.java   |  134 +++++-
-
-D, [2012-12-23T15:01:21.566481 #6983] DEBUG -- :  .../netty/channel/socket/aio/AioSocketChannel.java |  119 +++--
-
-D, [2012-12-23T15:01:21.566503 #6983] DEBUG -- :  .../channel/socket/aio/AioSocketChannelConfig.java |  260 +----------
-
-D, [2012-12-23T15:01:21.566523 #6983] DEBUG -- :  .../socket/aio/DefaultAioSocketChannelConfig.java  |  339 +++++++++++++
-
-D, [2012-12-23T15:01:21.566719 #6983] DEBUG -- :  .../socket/aio/ReflectiveAioChannelFinder.java     |    3 +
-
-D, [2012-12-23T15:01:21.566743 #6983] DEBUG -- :  .../channel/socket/aio/UnsafeAioChannelFinder.java |    3 +
-
-D, [2012-12-23T15:01:21.566765 #6983] DEBUG -- :  .../io/netty/channel/socket/aio/package-info.java  |    2 +
-
-D, [2012-12-23T15:01:21.566786 #6983] DEBUG -- :  .../channel/socket/nio/AbstractNioByteChannel.java |   30 ++-
-
-D, [2012-12-23T15:01:21.566809 #6983] DEBUG -- :  .../channel/socket/nio/AbstractNioChannel.java     |   34 ++-
-
-D, [2012-12-23T15:01:21.566832 #6983] DEBUG -- :  .../socket/nio/AbstractNioMessageChannel.java      |   19 +-
-
-D, [2012-12-23T15:01:21.566854 #6983] DEBUG -- :  .../channel/socket/nio/NioDatagramChannel.java     |    6 +-
-
-D, [2012-12-23T15:01:21.566874 #6983] DEBUG -- :  .../socket/nio/NioDatagramChannelConfig.java       |   17 +-
-
-D, [2012-12-23T15:01:21.566896 #6983] DEBUG -- :  .../io/netty/channel/socket/nio/NioEventLoop.java  |  133 ++++--
-
-D, [2012-12-23T15:01:21.566916 #6983] DEBUG -- :  .../channel/socket/nio/NioEventLoopGroup.java      |   43 ++-
-
-D, [2012-12-23T15:01:21.566938 #6983] DEBUG -- :  .../netty/channel/socket/nio/NioSctpChannel.java   |   34 +-
-
-D, [2012-12-23T15:01:21.566957 #6983] DEBUG -- :  .../channel/socket/nio/NioSctpServerChannel.java   |   14 +-
-
-D, [2012-12-23T15:01:21.567118 #6983] DEBUG -- :  .../channel/socket/nio/NioServerSocketChannel.java |    7 +-
-
-D, [2012-12-23T15:01:21.567142 #6983] DEBUG -- :  .../netty/channel/socket/nio/NioSocketChannel.java |   26 +-
-
-D, [2012-12-23T15:01:21.567164 #6983] DEBUG -- :  .../java/io/netty/channel/socket/nio/NioTask.java  |    5 +-
-
-D, [2012-12-23T15:01:21.567187 #6983] DEBUG -- :  .../socket/nio/ProtocolFamilyConverter.java        |    3 -
-
-D, [2012-12-23T15:01:21.567209 #6983] DEBUG -- :  .../io/netty/channel/socket/nio/SelectorUtil.java  |    3 +
-
-D, [2012-12-23T15:01:21.567232 #6983] DEBUG -- :  .../channel/socket/oio/AbstractOioByteChannel.java |   29 +-
-
-D, [2012-12-23T15:01:21.567254 #6983] DEBUG -- :  .../channel/socket/oio/AbstractOioChannel.java     |   20 +-
-
-D, [2012-12-23T15:01:21.567274 #6983] DEBUG -- :  .../socket/oio/AbstractOioMessageChannel.java      |   23 +-
-
-D, [2012-12-23T15:01:21.567295 #6983] DEBUG -- :  .../channel/socket/oio/OioDatagramChannel.java     |   22 +-
-
-D, [2012-12-23T15:01:21.567316 #6983] DEBUG -- :  .../channel/socket/oio/OioEventLoopGroup.java      |   30 ++-
-
-D, [2012-12-23T15:01:21.567335 #6983] DEBUG -- :  .../netty/channel/socket/oio/OioSctpChannel.java   |  173 ++++++--
-
-D, [2012-12-23T15:01:21.567524 #6983] DEBUG -- :  .../channel/socket/oio/OioSctpServerChannel.java   |   56 ++-
-
-D, [2012-12-23T15:01:21.567555 #6983] DEBUG -- :  .../channel/socket/oio/OioServerSocketChannel.java |   23 +-
-
-D, [2012-12-23T15:01:21.567575 #6983] DEBUG -- :  .../netty/channel/socket/oio/OioSocketChannel.java |   45 ++-
-
-D, [2012-12-23T15:01:21.589475 #6983] DEBUG -- :  .../io/netty/channel/AbstractEventLoopTest.java    |   74 +++
-
-D, [2012-12-23T15:01:21.589532 #6983] DEBUG -- :  .../local/LocalTransportThreadModelTest.java       |   29 +-
-
-D, [2012-12-23T15:01:21.589555 #6983] DEBUG -- :  .../channel/socket/aio/AioEventLoopTest.java}      |   17 +-
-
-D, [2012-12-23T15:01:21.589575 #6983] DEBUG -- :  .../channel/socket/nio/NioEventLoopTest.java}      |   20 +-
-
-D, [2012-12-23T15:01:21.589600 #6983] DEBUG -- :  264 files changed, 9467 insertions(+), 2093 deletions(-)
-
-D, [2012-12-23T15:01:21.589620 #6983] DEBUG -- :  copy buffer/src/main/java/io/netty/buffer/{ChannelBufType.java => Buf.java} (55%)
-
-D, [2012-12-23T15:01:21.589643 #6983] DEBUG -- :  copy buffer/src/main/java/io/netty/buffer/{ChannelBufType.java => BufType.java} (93%)
-
-D, [2012-12-23T15:01:21.589666 #6983] DEBUG -- :  delete mode 100644 buffer/src/main/java/io/netty/buffer/ChannelBuf.java
-
-D, [2012-12-23T15:01:21.589688 #6983] DEBUG -- :  copy buffer/src/main/java/io/netty/buffer/{ChannelBufType.java => IllegalBufferAccessException.java} (51%)
-
-D, [2012-12-23T15:01:21.589713 #6983] DEBUG -- :  create mode 100644 buffer/src/main/java/io/netty/buffer/PoolArena.java
-
-D, [2012-12-23T15:01:21.589735 #6983] DEBUG -- :  create mode 100644 buffer/src/main/java/io/netty/buffer/PoolChunk.java
-
-D, [2012-12-23T15:01:21.589755 #6983] DEBUG -- :  create mode 100644 buffer/src/main/java/io/netty/buffer/PoolChunkList.java
-
-D, [2012-12-23T15:01:21.589778 #6983] DEBUG -- :  create mode 100644 buffer/src/main/java/io/netty/buffer/PoolSubpage.java
-
-D, [2012-12-23T15:01:21.589801 #6983] DEBUG -- :  copy transport/src/main/java/io/netty/channel/ChannelInputShutdownEvent.java => buffer/src/main/java/io/netty/buffer/PoolThreadCache.java (57%)
-
-D, [2012-12-23T15:01:21.589824 #6983] DEBUG -- :  create mode 100644 buffer/src/main/java/io/netty/buffer/PooledByteBuf.java
-
-D, [2012-12-23T15:01:21.589846 #6983] DEBUG -- :  create mode 100644 buffer/src/main/java/io/netty/buffer/PooledByteBufAllocator.java
-
-D, [2012-12-23T15:01:21.589869 #6983] DEBUG -- :  create mode 100644 buffer/src/main/java/io/netty/buffer/PooledDirectByteBuf.java
-
-D, [2012-12-23T15:01:21.589892 #6983] DEBUG -- :  create mode 100644 buffer/src/main/java/io/netty/buffer/PooledHeapByteBuf.java
-
-D, [2012-12-23T15:01:21.589914 #6983] DEBUG -- :  create mode 100644 codec-http/src/main/java/io/netty/handler/codec/http/websocketx/WebSocket07FrameDecoder.java
-
-D, [2012-12-23T15:01:21.589934 #6983] DEBUG -- :  create mode 100644 codec-http/src/main/java/io/netty/handler/codec/http/websocketx/WebSocket07FrameEncoder.java
-
-D, [2012-12-23T15:01:21.589956 #6983] DEBUG -- :  create mode 100644 codec-http/src/main/java/io/netty/handler/codec/http/websocketx/WebSocketClientHandshaker07.java
-
-D, [2012-12-23T15:01:21.589976 #6983] DEBUG -- :  create mode 100644 codec-http/src/main/java/io/netty/handler/codec/http/websocketx/WebSocketServerHandshaker07.java
-
-D, [2012-12-23T15:01:21.589997 #6983] DEBUG -- :  create mode 100644 codec/src/main/java/io/netty/handler/codec/compression/Snappy.java
-
-D, [2012-12-23T15:01:21.590017 #6983] DEBUG -- :  create mode 100644 codec/src/main/java/io/netty/handler/codec/compression/SnappyChecksumUtil.java
-
-D, [2012-12-23T15:01:21.590039 #6983] DEBUG -- :  create mode 100644 codec/src/main/java/io/netty/handler/codec/compression/SnappyFramedDecoder.java
-
-D, [2012-12-23T15:01:21.590104 #6983] DEBUG -- :  create mode 100644 codec/src/main/java/io/netty/handler/codec/compression/SnappyFramedEncoder.java
-
-D, [2012-12-23T15:01:21.590141 #6983] DEBUG -- :  create mode 100644 codec/src/test/java/io/netty/handler/codec/compression/SnappyChecksumUtilTest.java
-
-D, [2012-12-23T15:01:21.590174 #6983] DEBUG -- :  create mode 100644 codec/src/test/java/io/netty/handler/codec/compression/SnappyFramedDecoderTest.java
-
-D, [2012-12-23T15:01:21.590201 #6983] DEBUG -- :  create mode 100644 codec/src/test/java/io/netty/handler/codec/compression/SnappyFramedEncoderTest.java
-
-D, [2012-12-23T15:01:21.590224 #6983] DEBUG -- :  create mode 100644 codec/src/test/java/io/netty/handler/codec/compression/SnappyTest.java
-
-D, [2012-12-23T15:01:21.590247 #6983] DEBUG -- :  copy license/{LICENSE.felix.txt => LICENSE.caliper.txt} (89%)
-
-D, [2012-12-23T15:01:21.590269 #6983] DEBUG -- :  create mode 100644 license/LICENSE.jboss-marshalling.txt
-
-D, [2012-12-23T15:01:21.590289 #6983] DEBUG -- :  copy license/{LICENSE.felix.txt => LICENSE.metrics.txt} (89%)
-
-D, [2012-12-23T15:01:21.590311 #6983] DEBUG -- :  rename license/{LICENSE.felix.txt => LICENSE.osgi.txt} (89%)
-
-D, [2012-12-23T15:01:21.590334 #6983] DEBUG -- :  create mode 100644 license/LICENSE.snappy.txt
-
-D, [2012-12-23T15:01:21.590356 #6983] DEBUG -- :  create mode 100644 microbench/pom.xml
-
-D, [2012-12-23T15:01:21.590377 #6983] DEBUG -- :  create mode 100644 microbench/src/test/java/com/google/caliper/StandardVm.java
-
-D, [2012-12-23T15:01:21.590400 #6983] DEBUG -- :  create mode 100644 microbench/src/test/java/io/netty/microbench/buffer/ByteBufAllocatorBenchmark.java
-
-D, [2012-12-23T15:01:21.590420 #6983] DEBUG -- :  create mode 100644 microbench/src/test/java/io/netty/microbench/util/DefaultBenchmark.java
-
-D, [2012-12-23T15:01:21.590442 #6983] DEBUG -- :  delete mode 100644 transport/src/main/java/io/netty/channel/ChannelHandlerLifeCycleException.java
-
-D, [2012-12-23T15:01:21.590463 #6983] DEBUG -- :  rename buffer/src/main/java/io/netty/buffer/ChannelBufType.java => transport/src/main/java/io/netty/channel/socket/ChannelInputShutdownEvent.java (51%)
-
-D, [2012-12-23T15:01:21.590485 #6983] DEBUG -- :  create mode 100644 transport/src/main/java/io/netty/channel/socket/aio/DefaultAioSocketChannelConfig.java
-
-D, [2012-12-23T15:01:21.590515 #6983] DEBUG -- :  create mode 100644 transport/src/test/java/io/netty/channel/AbstractEventLoopTest.java
-
-D, [2012-12-23T15:01:21.590540 #6983] DEBUG -- :  copy transport/src/{main/java/io/netty/channel/ChannelInputShutdownEvent.java => test/java/io/netty/channel/socket/aio/AioEventLoopTest.java} (57%)
-
-D, [2012-12-23T15:01:21.590562 #6983] DEBUG -- :  rename transport/src/{main/java/io/netty/channel/ChannelInputShutdownEvent.java => test/java/io/netty/channel/socket/nio/NioEventLoopTest.java} (51%)
-
-618821,netty,791,1354815979,,1354957547,2359,,14,1,11,0,11,1,0,0,56668,18,0,167.872520646573,7.305710453871674,22.04065786687372
-704494,netty,793,1354821079,,1354856433,589,,14,2,0,0,0,3,0,0,55930,38,0,190.00536384766673,7.813338101197926,24.816735204720185
-660855,netty,790,1354638570,,1354708887,1171,,14,8,0,0,0,87,0,0,56843,2844,0,169.07974596696164,7.353587952782225,22.39501785620041
-660760,netty,789,1354613481,,1354638340,414,,14,3,0,0,0,21,0,0,57107,1107,0,168.29810706218151,7.319593044635509,22.291487908662685
+763276,netty,851,1356381658,,1356551765,2835,,14,3,0,0,0,12,0,0,58778,1279,12,190.63254959338528,7.843070536595325,23.83544863724523
+763275,netty,848,1356287630,,1356551724,4401,,14,1,0,0,0,5,0,0,58774,995,0,190.64552353081294,7.843604314833089,23.837070813625072
+618758,netty,796,1354963685,,1355402509,7313,,15,32,13,9,22,81,0,0,55930,6856,16,190.00536384766673,7.813338101197926,24.816735204720185
+747039,netty,801,1355291067,,1355376911,1430,,15,2,0,0,0,3,0,0,55930,28,0,190.11264080100128,7.813338101197926,24.816735204720185
+743388,netty,802,1355291093,,1355376895,1430,,15,3,0,0,0,4,0,0,55930,16,0,190.11264080100128,7.813338101197926,24.816735204720185
+745211,netty,804,1355330653,1355333440,1355333440,46,46,15,1,0,0,0,1,223,40,56627,8,3,169.1066099210624,7.381637734649549,22.480442191887263
+745205,netty,800,1355245919,,1355330553,1410,,15,2,0,0,0,2,0,0,56668,26,0,167.872520646573,7.305710453871674,22.04065786687372
+767415,netty,798,1355152955,,1355163306,172,,15,1,0,6,6,8,0,0,55947,17,0,190.05487336228933,7.810963948022235,24.809194416143853
+618821,netty,791,1354815979,,1354957547,2359,,15,1,11,7,18,1,0,0,56668,18,0,167.872520646573,7.305710453871674,22.04065786687372
+704494,netty,793,1354821079,,1354856433,589,,15,2,0,1,1,3,0,0,55930,38,0,190.00536384766673,7.813338101197926,24.816735204720185
+660855,netty,790,1354638570,,1354708887,1171,,14,8,0,4,4,87,0,0,56843,2844,0,169.07974596696164,7.353587952782225,22.39501785620041
+660760,netty,789,1354613481,,1354638340,414,,14,3,0,2,2,21,0,0,57107,1107,0,168.29810706218151,7.319593044635509,22.291487908662685
 655364,netty,788,1354613439,,1354613453,0,,14,250,0,0,0,1058,0,0,55925,16291,150,190.0402324541797,7.814036656236031,24.81895395619133
 495784,netty,750,1353265749,,1354605123,22322,,14,3,3,15,18,29,0,0,54753,3200,58,191.3137179697916,7.889978631307873,25.25888992383979
 456358,netty,680,1351088913,,1354529354,57280,,14,25,17,12,29,100,0,0,49204,5312,4,202.7680676367775,8.14974392325827,26.989675636127146
@@ -637,17 +137,17 @@ D, [2012-12-23T15:01:21.590562 #6983] DEBUG -- :  rename transport/src/{main/jav
 506620,netty,754,1353418416,,1353426333,131,,12,1,0,8,8,1,0,0,56796,21,0,167.67025846890627,7.289245721529686,21.990985280653568
 503227,netty,753,1353388534,,1353399135,176,,12,2,0,3,3,2,0,0,54753,8,0,191.3137179697916,7.889978631307873,25.25888992383979
 496564,netty,752,1353280484,,1353300296,330,,11,1,0,1,1,9,0,0,54753,233,0,191.3137179697916,7.889978631307873,25.25888992383979
-470172,netty,730,1352733517,,1353265983,8874,,11,2,0,0,0,0,0,0,53620,0,0,187.26221559119733,7.646400596792242,24.841477060798212
+470172,netty,730,1352733517,,1353265983,8874,,11,2,0,0,0,1,0,0,53620,14,0,187.26221559119733,7.646400596792242,24.841477060798212
 495393,netty,749,1353230051,,1353231656,26,,11,1,0,1,1,1,0,0,54752,3,0,191.31721215663356,7.8901227352425485,25.2593512565751
-454754,netty,714,1352311144,,1353175991,14414,,10,28,50,31,81,34,0,0,53369,386,0,187.4683805205269,7.551200134909779,24.92083419213401
+454754,netty,714,1352311144,,1353175991,14414,,10,28,50,31,81,51,0,0,53369,1115,0,187.4683805205269,7.551200134909779,24.92083419213401
 493271,netty,745,1353110582,,1353173484,1048,,10,2,0,1,1,3,0,0,53691,135,0,188.4487157996685,7.692164422342665,24.88312752602857
 493272,netty,746,1353110617,,1353173377,1046,,10,1,0,1,1,1,0,0,56794,6,0,167.78180793745818,7.289502412226644,21.99175969292531
 484339,netty,739,1352966969,,1353044114,1285,,9,3,0,1,1,4,0,0,53688,107,0,187.02503352704514,7.63671583966622,24.81001341081806
 461494,netty,732,1352761453,,1352834547,1218,,9,3,3,7,10,5,0,0,53620,844,0,187.26221559119733,7.646400596792242,24.841477060798212
 472134,netty,731,1352757580,1352761124,1352761124,59,59,9,0,0,0,0,0,252,125,53620,0,0,187.26221559119733,7.646400596792242,24.841477060798212
-469171,netty,728,1352710326,,1352713891,59,,8,2,0,0,0,0,0,0,53611,0,0,187.29365242207757,7.647684243905169,24.845647348491916
+469171,netty,728,1352710326,,1352713891,59,,8,2,0,0,0,8,0,0,53611,48,0,187.29365242207757,7.647684243905169,24.845647348491916
 456351,netty,154,1326982264,,1352713865,428860,,8,2,0,4,4,0,0,0,60368,0,0,227.47150808375298,8.265968725152398,24.996686986482906
-468901,netty,727,1352702433,,1352713837,190,,8,8,0,0,0,6,0,0,53611,199,0,187.29365242207757,7.647684243905169,24.845647348491916
+468901,netty,727,1352702433,,1352713837,190,,8,8,0,0,0,19,0,0,53611,288,0,187.29365242207757,7.647684243905169,24.845647348491916
 254179,netty,538,1345425121,,1352671351,120710,,8,13,0,5,5,0,0,0,44428,0,0,191.25326370757182,8.10299810930044,27.280093634644818
 463646,netty,721,1352483357,,1352652870,2825,,7,1,0,6,6,4,0,0,56690,454,4,165.76115717057684,7.285235491268302,22.085023813723762
 456360,netty,708,1351984382,,1352065897,1358,,6,1,0,6,6,0,0,0,49207,0,0,202.75570548905645,8.149247058345358,26.98803015831081

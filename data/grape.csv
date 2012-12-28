@@ -1,65 +1,46 @@
-Updating client properties
-GHTorrent version: 0.6
-D, [2012-12-23T15:41:20.442246 #26038] DEBUG -- : GHTorrent: User intridea exists
-D, [2012-12-23T15:41:20.442555 #26038] DEBUG -- : GHTorrent: Transaction committed (14 ms)
-D, [2012-12-23T15:41:20.478840 #26038] DEBUG -- : GHTorrent: User intridea exists
-D, [2012-12-23T15:41:20.490088 #26038] DEBUG -- : GHTorrent: Repo intridea/grape exists
-D, [2012-12-23T15:41:20.490345 #26038] DEBUG -- : GHTorrent: Transaction committed (24 ms)
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size_at_merge,num_commits,num_commit_comments,num_issue_comments,num_comments,files_changed,total_commits_last_month,main_team_commits_last_month,sloc,churn,commits_on_files_touched,test_lines_per_1000_lines,test_cases_per_1000_lines,assertions_per_1000_lines
-D, [2012-12-23T15:41:21.603062 #26038] DEBUG -- : Updating 3b7c92c..241664f
 
-D, [2012-12-23T15:41:21.603180 #26038] DEBUG -- : Fast-forward
 
-D, [2012-12-23T15:41:21.606528 #26038] DEBUG -- :  CHANGELOG.markdown                       |    5 +-
 
-D, [2012-12-23T15:41:21.606570 #26038] DEBUG -- :  Gemfile                                  |    2 +-
 
-D, [2012-12-23T15:41:21.606601 #26038] DEBUG -- :  README.markdown                          |  351 +++++++++++++++++-------------
 
-D, [2012-12-23T15:41:21.606626 #26038] DEBUG -- :  grape.gemspec                            |    1 +
 
-D, [2012-12-23T15:41:21.606651 #26038] DEBUG -- :  lib/grape/entity.rb                      |    2 +-
 
-D, [2012-12-23T15:41:21.606673 #26038] DEBUG -- :  lib/grape/error_formatter/json.rb        |    2 +-
 
-D, [2012-12-23T15:41:21.606697 #26038] DEBUG -- :  lib/grape/error_formatter/txt.rb         |    2 +-
 
-D, [2012-12-23T15:41:21.606720 #26038] DEBUG -- :  lib/grape/error_formatter/xml.rb         |    6 +-
 
-D, [2012-12-23T15:41:21.606742 #26038] DEBUG -- :  lib/grape/formatter/base.rb              |    2 +-
 
-D, [2012-12-23T15:41:21.606768 #26038] DEBUG -- :  lib/grape/formatter/json.rb              |    2 +-
 
-D, [2012-12-23T15:41:21.606790 #26038] DEBUG -- :  lib/grape/formatter/serializable_hash.rb |    2 +-
 
-D, [2012-12-23T15:41:21.606814 #26038] DEBUG -- :  lib/grape/formatter/txt.rb               |    2 +-
 
-D, [2012-12-23T15:41:21.606839 #26038] DEBUG -- :  lib/grape/formatter/xml.rb               |    2 +-
 
-D, [2012-12-23T15:41:21.606862 #26038] DEBUG -- :  lib/grape/middleware/base.rb             |    2 +-
 
-D, [2012-12-23T15:41:21.606889 #26038] DEBUG -- :  lib/grape/middleware/error.rb            |    6 +-
 
-D, [2012-12-23T15:41:21.606915 #26038] DEBUG -- :  lib/grape/middleware/formatter.rb        |   11 +-
 
-D, [2012-12-23T15:41:21.606937 #26038] DEBUG -- :  lib/grape/parser/json.rb                 |    2 +-
 
-D, [2012-12-23T15:41:21.606959 #26038] DEBUG -- :  lib/grape/parser/xml.rb                  |    2 +-
 
-D, [2012-12-23T15:41:21.606982 #26038] DEBUG -- :  lib/grape/validations.rb                 |    2 +-
 
-D, [2012-12-23T15:41:21.607005 #26038] DEBUG -- :  spec/grape/api_spec.rb                   |   28 ++-
 
-D, [2012-12-23T15:41:21.607028 #26038] DEBUG -- :  spec/grape/entity_spec.rb                |   42 ++--
 
-D, [2012-12-23T15:41:21.607056 #26038] DEBUG -- :  spec/grape/middleware/base_spec.rb       |   30 ++--
 
-D, [2012-12-23T15:41:21.607083 #26038] DEBUG -- :  spec/grape/middleware/exception_spec.rb  |   24 ++-
 
-D, [2012-12-23T15:41:21.607107 #26038] DEBUG -- :  spec/grape/middleware/formatter_spec.rb  |    6 +-
 
-D, [2012-12-23T15:41:21.607133 #26038] DEBUG -- :  24 files changed, 309 insertions(+), 227 deletions(-)
 
+
+
+
+
+
+
+
+
+766232,grape,300,1356640615,,1356668680,467,,2,3,0,0,0,4,0,0,1859,31,20,2011.2963959117803,213.01775147928996,0.0
+764015,grape,298,1356576653,,1356656614,1332,,2,2,0,0,0,3,0,0,1846,11,17,2007.042253521127,213.4344528710726,0.0
+764397,grape,299,1356592140,,1356614940,380,,2,1,0,0,0,1,0,0,1846,2,13,2007.042253521127,213.4344528710726,0.0
+750895,grape,292,1355482037,1355669844,1355669844,3130,3130,2,2,0,0,0,3,41,7,1847,6,4,1993.5029778018406,212.2360584731998,0.0
+750379,grape,291,1355461778,1355487226,1355487226,424,424,2,1,0,0,0,1,49,10,1847,6,1,1993.5029778018406,212.2360584731998,0.0
+670647,grape,290,1355396764,,1355419613,380,,2,8,3,0,3,11,0,0,1847,58,18,1980.5089334055224,210.61180292366,0.0
+747183,grape,289,1355384256,1355398926,1355398926,244,244,2,6,0,0,0,7,40,9,1847,89,25,1980.5089334055224,210.61180292366,0.0
 743036,grape,288,1355279750,1355320319,1355320319,676,676,2,1,0,0,0,1,31,8,1847,2,6,1980.5089334055224,210.61180292366,0.0
 630153,grape,287,1355096140,1355097816,1355097816,27,27,2,0,0,0,0,0,30,7,1847,0,0,1980.5089334055224,210.61180292366,0.0
 626366,grape,285,1354462097,1354498136,1354498136,600,600,2,1,0,0,0,9,29,6,1850,83,37,1977.837837837838,210.27027027027026,0.0

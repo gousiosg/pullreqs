@@ -1,187 +1,54 @@
-Updating client properties
-GHTorrent version: 0.6
-D, [2012-12-23T14:51:39.669267 #12359] DEBUG -- : GHTorrent: User floodlight exists
-D, [2012-12-23T14:51:39.669603 #12359] DEBUG -- : GHTorrent: Transaction committed (7 ms)
-D, [2012-12-23T14:51:39.692059 #12359] DEBUG -- : GHTorrent: User floodlight exists
-D, [2012-12-23T14:51:39.692956 #12359] DEBUG -- : GHTorrent: Repo floodlight/floodlight exists
-D, [2012-12-23T14:51:39.693219 #12359] DEBUG -- : GHTorrent: Transaction committed (3 ms)
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size_at_merge,num_commits,num_commit_comments,num_issue_comments,num_comments,files_changed,total_commits_last_month,main_team_commits_last_month,sloc,churn,commits_on_files_touched,test_lines_per_1000_lines,test_cases_per_1000_lines,assertions_per_1000_lines
-D, [2012-12-23T14:51:41.970923 #12359] DEBUG -- : Updating 7106b84..78c5ca2
 
-D, [2012-12-23T14:51:41.971014 #12359] DEBUG -- : Fast-forward
 
-D, [2012-12-23T14:51:41.977109 #12359] DEBUG -- :  .gitignore                                         |    1 +
 
-D, [2012-12-23T14:51:41.977148 #12359] DEBUG -- :  build.xml                                          |   38 +-
 
-D, [2012-12-23T14:51:41.977172 #12359] DEBUG -- :  lib/commons-logging-1.1.1.jar                      |  Bin 0 -> 60686 bytes
 
-D, [2012-12-23T14:51:41.977199 #12359] DEBUG -- :  .../packetstreamer/thrift/OFMessageType.java       |    8 +-
 
-D, [2012-12-23T14:51:41.977221 #12359] DEBUG -- :  lib/httpclient-4.2.2.jar                           |  Bin 0 -> 428353 bytes
 
-D, [2012-12-23T14:51:41.977245 #12359] DEBUG -- :  lib/httpcore-4.2.2.jar                             |  Bin 0 -> 223571 bytes
 
-D, [2012-12-23T14:51:41.977270 #12359] DEBUG -- :  lib/json-simple-1.1.1.jar                          |  Bin 0 -> 23737 bytes
 
-D, [2012-12-23T14:51:41.977296 #12359] DEBUG -- :  setup-eclipse.sh                                   |    9 +-
 
-D, [2012-12-23T14:51:41.977317 #12359] DEBUG -- :  .../devicemanager/internal/Device.java             |   13 +-
 
-D, [2012-12-23T14:51:41.977339 #12359] DEBUG -- :  .../devicemanager/internal/DeviceManagerImpl.java  |   13 +-
 
-D, [2012-12-23T14:51:41.977364 #12359] DEBUG -- :  .../flowcache/PortDownReconciliation.java          |  812 ++++++++++----------
 
-D, [2012-12-23T14:51:41.977392 #12359] DEBUG -- :  .../loadbalancer/ILoadBalancerService.java         |  142 ++++
 
-D, [2012-12-23T14:51:41.977417 #12359] DEBUG -- :  .../loadbalancer/LBMember.java                     |   38 +
 
-D, [2012-12-23T14:51:41.977444 #12359] DEBUG -- :  .../loadbalancer/LBMemberSerializer.java           |   27 +
 
-D, [2012-12-23T14:51:41.977465 #12359] DEBUG -- :  .../loadbalancer/LBMonitor.java                    |   44 ++
 
-D, [2012-12-23T14:51:41.977487 #12359] DEBUG -- :  .../floodlightcontroller/loadbalancer/LBPool.java  |   58 ++
 
-D, [2012-12-23T14:51:41.977512 #12359] DEBUG -- :  .../loadbalancer/LBPoolSerializer.java             |   28 +
 
-D, [2012-12-23T14:51:41.977532 #12359] DEBUG -- :  .../floodlightcontroller/loadbalancer/LBStats.java |   22 +
 
-D, [2012-12-23T14:51:41.977553 #12359] DEBUG -- :  .../floodlightcontroller/loadbalancer/LBVip.java   |   61 ++
 
-D, [2012-12-23T14:51:41.977577 #12359] DEBUG -- :  .../loadbalancer/LBVipSerializer.java              |   27 +
 
-D, [2012-12-23T14:51:41.977599 #12359] DEBUG -- :  .../loadbalancer/LoadBalancer.java                 |  810 +++++++++++++++++++
 
-D, [2012-12-23T14:51:41.977621 #12359] DEBUG -- :  .../loadbalancer/LoadBalancerWebRoutable.java      |   33 +
-
-D, [2012-12-23T14:51:41.977645 #12359] DEBUG -- :  .../loadbalancer/MembersResource.java              |  133 ++++
-
-D, [2012-12-23T14:51:41.977667 #12359] DEBUG -- :  .../loadbalancer/MonitorsResource.java             |  156 ++++
-
-D, [2012-12-23T14:51:41.977690 #12359] DEBUG -- :  .../loadbalancer/PoolMemberResource.java           |   25 +
-
-D, [2012-12-23T14:51:41.977716 #12359] DEBUG -- :  .../loadbalancer/PoolsResource.java                |  143 ++++
-
-D, [2012-12-23T14:51:41.977739 #12359] DEBUG -- :  .../loadbalancer/VipsResource.java                 |  148 ++++
-
-D, [2012-12-23T14:51:41.977761 #12359] DEBUG -- :  .../staticflowentry/StaticFlowEntryPusher.java     |    7 -
-
-D, [2012-12-23T14:51:41.977785 #12359] DEBUG -- :  .../topology/ITopologyService.java                 |    4 +
-
-D, [2012-12-23T14:51:41.977807 #12359] DEBUG -- :  .../topology/TopologyInstance.java                 |    8 +-
-
-D, [2012-12-23T14:51:41.977829 #12359] DEBUG -- :  .../topology/TopologyManager.java                  |   22 +-
-
-D, [2012-12-23T14:51:41.977854 #12359] DEBUG -- :  .../java/org/openflow/protocol/OFPacketQueue.java  |  142 ++++
-
-D, [2012-12-23T14:51:41.977876 #12359] DEBUG -- :  .../openflow/protocol/OFQueueGetConfigReply.java   |  125 +++
-
-D, [2012-12-23T14:51:41.977897 #12359] DEBUG -- :  .../openflow/protocol/OFQueueGetConfigRequest.java |   95 +++
-
-D, [2012-12-23T14:51:41.977926 #12359] DEBUG -- :  .../java/org/openflow/protocol/OFQueueProp.java    |  166 ++++
-
-D, [2012-12-23T14:51:41.977948 #12359] DEBUG -- :  src/main/java/org/openflow/protocol/OFType.java    |   12 +-
-
-D, [2012-12-23T14:51:41.977969 #12359] DEBUG -- :  .../vendor/openflow/OFOpenFlowVendorData.java      |   98 +++
-
-D, [2012-12-23T14:51:41.977994 #12359] DEBUG -- :  .../openflow/OFOpenFlowVendorExtensions.java       |   47 ++
-
-D, [2012-12-23T14:51:41.978014 #12359] DEBUG -- :  .../vendor/openflow/OFQueueDeleteVendorData.java   |   52 ++
-
-D, [2012-12-23T14:51:41.978036 #12359] DEBUG -- :  .../vendor/openflow/OFQueueModifyVendorData.java   |   52 ++
-
-D, [2012-12-23T14:51:41.978060 #12359] DEBUG -- :  .../vendor/openflow/OFQueueVendorData.java         |  119 +++
-
-D, [2012-12-23T14:51:41.978080 #12359] DEBUG -- :  ...odlightcontroller.core.module.IFloodlightModule |    3 +-
-
-D, [2012-12-23T14:51:41.978100 #12359] DEBUG -- :  src/main/resources/floodlightdefault.properties    |    3 +-
-
-D, [2012-12-23T14:51:41.978125 #12359] DEBUG -- :  src/main/thrift/packetstreamer.thrift              |    2 +
-
-D, [2012-12-23T14:51:41.978147 #12359] DEBUG -- :  .../internal/DeviceManagerImplTest.java            |   68 ++
-
-D, [2012-12-23T14:51:41.978170 #12359] DEBUG -- :  .../flowcache/PortDownReconciliationTest.java      |  753 +++++++++---------
-
-D, [2012-12-23T14:51:41.978193 #12359] DEBUG -- :  46 files changed, 3757 insertions(+), 810 deletions(-)
-
-D, [2012-12-23T14:51:41.978215 #12359] DEBUG -- :  create mode 100644 lib/commons-logging-1.1.1.jar
-
-D, [2012-12-23T14:51:41.978239 #12359] DEBUG -- :  create mode 100644 lib/httpclient-4.2.2.jar
-
-D, [2012-12-23T14:51:41.978259 #12359] DEBUG -- :  create mode 100644 lib/httpcore-4.2.2.jar
-
-D, [2012-12-23T14:51:41.978280 #12359] DEBUG -- :  create mode 100644 lib/json-simple-1.1.1.jar
-
-D, [2012-12-23T14:51:41.978303 #12359] DEBUG -- :  create mode 100644 src/main/java/net/floodlightcontroller/loadbalancer/ILoadBalancerService.java
-
-D, [2012-12-23T14:51:41.978325 #12359] DEBUG -- :  create mode 100644 src/main/java/net/floodlightcontroller/loadbalancer/LBMember.java
-
-D, [2012-12-23T14:51:41.978347 #12359] DEBUG -- :  create mode 100644 src/main/java/net/floodlightcontroller/loadbalancer/LBMemberSerializer.java
-
-D, [2012-12-23T14:51:41.978368 #12359] DEBUG -- :  create mode 100644 src/main/java/net/floodlightcontroller/loadbalancer/LBMonitor.java
-
-D, [2012-12-23T14:51:41.978390 #12359] DEBUG -- :  create mode 100644 src/main/java/net/floodlightcontroller/loadbalancer/LBPool.java
-
-D, [2012-12-23T14:51:41.978413 #12359] DEBUG -- :  create mode 100644 src/main/java/net/floodlightcontroller/loadbalancer/LBPoolSerializer.java
-
-D, [2012-12-23T14:51:41.978433 #12359] DEBUG -- :  create mode 100644 src/main/java/net/floodlightcontroller/loadbalancer/LBStats.java
-
-D, [2012-12-23T14:51:41.978458 #12359] DEBUG -- :  create mode 100644 src/main/java/net/floodlightcontroller/loadbalancer/LBVip.java
-
-D, [2012-12-23T14:51:41.978479 #12359] DEBUG -- :  create mode 100644 src/main/java/net/floodlightcontroller/loadbalancer/LBVipSerializer.java
-
-D, [2012-12-23T14:51:41.983153 #12359] DEBUG -- :  create mode 100644 src/main/java/net/floodlightcontroller/loadbalancer/LoadBalancer.java
-
-D, [2012-12-23T14:51:41.983191 #12359] DEBUG -- :  create mode 100644 src/main/java/net/floodlightcontroller/loadbalancer/LoadBalancerWebRoutable.java
-
-D, [2012-12-23T14:51:41.983216 #12359] DEBUG -- :  create mode 100644 src/main/java/net/floodlightcontroller/loadbalancer/MembersResource.java
-
-D, [2012-12-23T14:51:41.983239 #12359] DEBUG -- :  create mode 100644 src/main/java/net/floodlightcontroller/loadbalancer/MonitorsResource.java
-
-D, [2012-12-23T14:51:41.983262 #12359] DEBUG -- :  create mode 100644 src/main/java/net/floodlightcontroller/loadbalancer/PoolMemberResource.java
-
-D, [2012-12-23T14:51:41.983290 #12359] DEBUG -- :  create mode 100644 src/main/java/net/floodlightcontroller/loadbalancer/PoolsResource.java
-
-D, [2012-12-23T14:51:41.983317 #12359] DEBUG -- :  create mode 100644 src/main/java/net/floodlightcontroller/loadbalancer/VipsResource.java
-
-D, [2012-12-23T14:51:41.983389 #12359] DEBUG -- :  create mode 100644 src/main/java/org/openflow/protocol/OFPacketQueue.java
-
-D, [2012-12-23T14:51:41.983413 #12359] DEBUG -- :  create mode 100644 src/main/java/org/openflow/protocol/OFQueueGetConfigReply.java
-
-D, [2012-12-23T14:51:41.983435 #12359] DEBUG -- :  create mode 100644 src/main/java/org/openflow/protocol/OFQueueGetConfigRequest.java
-
-D, [2012-12-23T14:51:41.983458 #12359] DEBUG -- :  create mode 100644 src/main/java/org/openflow/protocol/OFQueueProp.java
-
-D, [2012-12-23T14:51:41.983480 #12359] DEBUG -- :  create mode 100644 src/main/java/org/openflow/vendor/openflow/OFOpenFlowVendorData.java
-
-D, [2012-12-23T14:51:41.983501 #12359] DEBUG -- :  create mode 100644 src/main/java/org/openflow/vendor/openflow/OFOpenFlowVendorExtensions.java
-
-D, [2012-12-23T14:51:41.983524 #12359] DEBUG -- :  create mode 100644 src/main/java/org/openflow/vendor/openflow/OFQueueDeleteVendorData.java
-
-D, [2012-12-23T14:51:41.983549 #12359] DEBUG -- :  create mode 100644 src/main/java/org/openflow/vendor/openflow/OFQueueModifyVendorData.java
-
-D, [2012-12-23T14:51:41.983572 #12359] DEBUG -- :  create mode 100644 src/main/java/org/openflow/vendor/openflow/OFQueueVendorData.java
-
-742840,floodlight,346,1355265331,1355274668,1355274668,155,155,7,1,0,0,0,1,63,7,35761,2,1,315.0359329996365,7.46623416571125,30.64791253041022
-630643,floodlight,342,1354839847,1354839861,1354839861,0,0,7,7,0,0,0,23,75,7,35693,451,36,314.5714846048245,7.340374863418598,30.7063009553694
-590383,floodlight,340,1354226028,1354236173,1354236173,169,169,8,1,0,0,0,3,89,10,35343,966,3,309.50966245083896,7.328183798772034,30.614265908383555
-590522,floodlight,341,1354226566,1354226577,1354226577,0,0,8,1,0,0,0,6,89,10,35343,422,29,309.50966245083896,7.328183798772034,30.614265908383555
-630641,floodlight,339,1354151132,1354151285,1354151285,2,2,8,4,0,0,0,13,87,9,35197,724,11,302.4121373980737,7.273347160269341,30.400318208938263
-507607,floodlight,338,1353443970,1353443978,1353443978,0,0,9,1,0,0,0,3,114,9,35154,1133,37,302.8958297775502,7.282243841383627,30.437503555783124
-507608,floodlight,337,1353431859,1353431917,1353431917,0,0,9,44,0,0,0,194,112,8,34615,7412,167,296.576628629207,6.8756319514661275,28.80254225046945
+767128,floodlight,353,1356662724,,1356663326,10,,2,1,0,0,0,3,0,0,37704,59,3,300.47209845109273,7.107999151283684,29.22766815192022
+766910,floodlight,352,1356655086,,1356655210,2,,2,17,0,0,0,85,0,0,37659,2558,27,300.2469529196208,7.116492737459836,29.262593271196792
+766541,floodlight,351,1355856842,,1356646000,13152,,2,9,0,0,0,69,0,0,37659,792,0,300.2469529196208,7.116492737459836,29.262593271196792
+750326,floodlight,350,1355458734,1355459052,1355459052,5,5,6,5,0,0,0,19,80,10,37514,464,13,301.40747454283735,7.143999573492563,29.375699738764194
+750296,floodlight,349,1355457355,1355458960,1355458961,26,26,6,1,0,0,0,1,80,10,37514,2,4,301.40747454283735,7.143999573492563,29.375699738764194
+750156,floodlight,348,1355450792,1355456916,1355456916,102,102,6,7,0,0,0,17,78,10,37165,772,7,304.2378581999193,7.2110856989102645,29.65155388133997
+747120,floodlight,347,1355381366,1355381386,1355381386,0,0,6,18,0,0,0,164,71,8,35761,3824,42,315.0359329996365,7.46623416571125,30.64791253041022
+742840,floodlight,346,1355265331,1355274668,1355274668,155,155,7,1,0,0,0,1,77,7,35761,2,1,315.0359329996365,7.46623416571125,30.64791253041022
+630643,floodlight,342,1354839847,1354839861,1354839861,0,0,7,7,0,0,0,23,78,7,35693,451,36,314.5714846048245,7.340374863418598,30.7063009553694
+590383,floodlight,340,1354226028,1354236173,1354236173,169,169,8,1,0,0,0,3,92,10,35343,966,3,309.50966245083896,7.328183798772034,30.614265908383555
+590522,floodlight,341,1354226566,1354226577,1354226577,0,0,8,1,0,0,0,6,92,10,35343,422,29,309.50966245083896,7.328183798772034,30.614265908383555
+630641,floodlight,339,1354151132,1354151285,1354151285,2,2,8,4,0,0,0,13,90,9,35197,724,11,302.4121373980737,7.273347160269341,30.400318208938263
+507607,floodlight,338,1353443970,1353443978,1353443978,0,0,9,1,0,0,0,3,117,9,35154,1133,37,302.8958297775502,7.282243841383627,30.437503555783124
+507608,floodlight,337,1353431859,1353431917,1353431917,0,0,9,44,0,0,0,194,115,8,34615,7412,167,296.576628629207,6.8756319514661275,28.80254225046945
 477316,floodlight,333,1352208724,,1353372318,19393,,9,1,0,0,0,3,0,0,34376,15,5,295.20595764486853,6.894344891784966,28.886432394693973
 477336,floodlight,336,1352931059,,1353371360,7338,,8,6,0,0,0,13,0,0,34612,121,7,296.4289841673408,6.8762278978389,28.7761470010401
-459423,floodlight,335,1352398932,1352398938,1352398938,0,0,9,3,0,0,0,3,99,9,34607,14,3,296.4718120611437,6.87722137139885,28.780304562660735
-477320,floodlight,332,1351716581,1352226571,1352226571,8499,8499,10,1,0,0,0,1,95,7,34376,10,14,295.20595764486853,6.894344891784966,28.886432394693973
-477317,floodlight,334,1352223421,1352226365,1352226365,49,49,10,18,0,0,0,43,95,7,34376,1075,31,295.20595764486853,6.894344891784966,28.886432394693973
-477325,floodlight,330,1351195565,1351716392,1351716392,8620,8620,10,0,0,0,0,0,103,6,34376,0,0,295.20595764486853,6.894344891784966,28.886432394693973
-477321,floodlight,331,1351702687,1351702827,1351702827,2,2,10,43,0,0,0,99,103,6,34089,2800,40,295.3152043181085,6.864384405526709,28.865616474522575
-477326,floodlight,329,1350965899,1351702809,1351702809,12221,12221,10,1,0,0,0,1,102,5,34089,4,2,295.3152043181085,6.864384405526709,28.865616474522575
+459423,floodlight,335,1352398932,1352398938,1352398938,0,0,9,3,0,0,0,3,101,9,34607,14,3,296.4718120611437,6.87722137139885,28.780304562660735
+477320,floodlight,332,1351716581,1352226571,1352226571,8499,8499,10,1,0,0,0,1,97,7,34376,10,14,295.20595764486853,6.894344891784966,28.886432394693973
+477317,floodlight,334,1352223421,1352226365,1352226365,49,49,10,18,0,0,0,43,97,7,34376,1075,31,295.20595764486853,6.894344891784966,28.886432394693973
+477325,floodlight,330,1351195565,1351716392,1351716392,8620,8620,10,0,0,0,0,0,105,6,34376,0,0,295.20595764486853,6.894344891784966,28.886432394693973
+477321,floodlight,331,1351702687,1351702827,1351702827,2,2,10,43,0,0,0,99,105,6,34089,2800,40,295.3152043181085,6.864384405526709,28.865616474522575
+477326,floodlight,329,1350965899,1351702809,1351702809,12221,12221,10,1,0,0,0,1,104,5,34089,4,2,295.3152043181085,6.864384405526709,28.865616474522575
 477328,floodlight,328,1350952390,,1351194718,4038,,11,1,0,1,1,0,0,0,34089,0,0,295.3152043181085,6.864384405526709,28.865616474522575
-477329,floodlight,327,1350934620,1350934630,1350934630,0,0,12,3,0,0,0,12,88,10,34086,119,44,295.3411957988617,6.864988558352402,28.8681570146101
-477330,floodlight,326,1350419836,1350675514,1350675514,4261,4261,12,2,0,1,1,8,90,16,34086,72,45,295.3411957988617,6.864988558352402,28.8681570146101
-477331,floodlight,324,1349768428,1350263811,1350263811,8256,8256,12,1,0,0,0,1,88,21,33385,2,1,292.2869552194099,6.889321551595028,29.0849183765164
-477332,floodlight,323,1349463758,1350263796,1350263796,13333,13333,12,36,0,0,0,94,87,20,33385,3712,19,292.2869552194099,6.889321551595028,29.0849183765164
+477329,floodlight,327,1350934620,1350934630,1350934630,0,0,12,3,0,0,0,12,90,10,34086,119,44,295.3411957988617,6.864988558352402,28.8681570146101
+477330,floodlight,326,1350419836,1350675514,1350675514,4261,4261,12,2,0,1,1,8,92,16,34086,72,45,295.3411957988617,6.864988558352402,28.8681570146101
+477331,floodlight,324,1349768428,1350263811,1350263811,8256,8256,12,1,0,0,0,1,89,21,33385,2,1,292.2869552194099,6.889321551595028,29.0849183765164
+477332,floodlight,323,1349463758,1350263796,1350263796,13333,13333,12,36,0,0,0,94,88,20,33385,3712,19,292.2869552194099,6.889321551595028,29.0849183765164
 439604,floodlight,321,1348676578,,1348683997,123,,12,1,0,2,2,1,0,0,33385,2,2,292.2869552194099,6.889321551595028,29.0849183765164
 437477,floodlight,320,1348604759,,1348604785,0,,12,20,0,0,0,212,0,0,33300,1003,122,278.9189189189189,6.756756756756757,27.26726726726727
 434869,floodlight,319,1348523779,,1348525258,24,,12,1,0,1,1,1,0,0,33300,42,3,278.9189189189189,6.756756756756757,27.26726726726727

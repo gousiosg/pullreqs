@@ -1,248 +1,39 @@
-Updating client properties
-GHTorrent version: 0.6
-D, [2012-12-23T14:11:10.844386 #14689] DEBUG -- : GHTorrent: User jenkinsci exists
-D, [2012-12-23T14:11:10.844716 #14689] DEBUG -- : GHTorrent: Transaction committed (12 ms)
-D, [2012-12-23T14:11:10.876782 #14689] DEBUG -- : GHTorrent: User jenkinsci exists
-D, [2012-12-23T14:11:10.887912 #14689] DEBUG -- : GHTorrent: Repo jenkinsci/jenkins exists
-D, [2012-12-23T14:11:10.888186 #14689] DEBUG -- : GHTorrent: Transaction committed (24 ms)
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size_at_merge,num_commits,num_commit_comments,num_issue_comments,num_comments,files_changed,total_commits_last_month,main_team_commits_last_month,sloc,churn,commits_on_files_touched,test_lines_per_1000_lines,test_cases_per_1000_lines,assertions_per_1000_lines
-D, [2012-12-23T14:11:15.990470 #14689] DEBUG -- : Updating 1f94f6e..a049059
 
-D, [2012-12-23T14:11:15.990570 #14689] DEBUG -- : Fast-forward
 
-D, [2012-12-23T14:11:16.011832 #14689] DEBUG -- :  changelog.html                                     |   25 +++-
 
-D, [2012-12-23T14:11:16.011884 #14689] DEBUG -- :  cli/pom.xml                                        |    2 +-
 
-D, [2012-12-23T14:11:16.011908 #14689] DEBUG -- :  core/pom.xml                                       |    2 +-
 
-D, [2012-12-23T14:11:16.011928 #14689] DEBUG -- :  .../main/java/hudson/ClassicPluginStrategy.java    |   16 ++-
 
-D, [2012-12-23T14:11:16.011951 #14689] DEBUG -- :  core/src/main/java/hudson/cli/CLICommand.java      |    5 +
 
-D, [2012-12-23T14:11:16.011971 #14689] DEBUG -- :  core/src/main/java/hudson/cli/ConsoleCommand.java  |  147 ++++++++++++++++++++
 
-D, [2012-12-23T14:11:16.011996 #14689] DEBUG -- :  .../java/hudson/console/AnnotatedLargeText.java    |    3 +-
 
-D, [2012-12-23T14:11:16.012016 #14689] DEBUG -- :  core/src/main/java/hudson/model/Descriptor.java    |    2 +-
 
-D, [2012-12-23T14:11:16.012038 #14689] DEBUG -- :  .../src/main/java/hudson/slaves/SlaveComputer.java |   54 +++++++
 
-D, [2012-12-23T14:11:16.012064 #14689] DEBUG -- :  .../main/java/hudson/tasks/CommandInterpreter.java |    2 +
 
-D, [2012-12-23T14:11:16.012086 #14689] DEBUG -- :  core/src/main/java/hudson/tools/ToolInstaller.java |    2 +-
 
-D, [2012-12-23T14:11:16.012108 #14689] DEBUG -- :  .../main/java/hudson/util/MaskingClassLoader.java  |   15 ++-
 
-D, [2012-12-23T14:11:16.012128 #14689] DEBUG -- :  .../model/JenkinsLocationConfiguration.java        |   12 ++-
 
-D, [2012-12-23T14:11:16.012150 #14689] DEBUG -- :  core/src/main/resources/dsld/IntelliJ.gdsl         |   11 +-
-
-D, [2012-12-23T14:11:16.012172 #14689] DEBUG -- :  .../resources/hudson/model/Messages_de.properties  |    2 +
-
-D, [2012-12-23T14:11:16.012194 #14689] DEBUG -- :  .../config_da.properties                           |    9 --
-
-D, [2012-12-23T14:11:16.012215 #14689] DEBUG -- :  .../config_de.properties                           |   12 --
-
-D, [2012-12-23T14:11:16.012236 #14689] DEBUG -- :  .../config_es.properties                           |   10 --
-
-D, [2012-12-23T14:11:16.012259 #14689] DEBUG -- :  .../config_fi.properties                           |    5 -
-
-D, [2012-12-23T14:11:16.012281 #14689] DEBUG -- :  .../config_fr.properties                           |    9 --
-
-D, [2012-12-23T14:11:16.012301 #14689] DEBUG -- :  .../config_hu.properties                           |    1 -
-
-D, [2012-12-23T14:11:16.012323 #14689] DEBUG -- :  .../config_ja.properties                           |   10 --
-
-D, [2012-12-23T14:11:16.012345 #14689] DEBUG -- :  .../config_nl.properties                           |    9 --
-
-D, [2012-12-23T14:11:16.012365 #14689] DEBUG -- :  .../config_pt_BR.properties                        |   10 --
-
-D, [2012-12-23T14:11:16.012387 #14689] DEBUG -- :  .../config_ru.properties                           |    9 --
-
-D, [2012-12-23T14:11:16.012407 #14689] DEBUG -- :  .../config_sv_SE.properties                        |    1 -
-
-D, [2012-12-23T14:11:16.012433 #14689] DEBUG -- :  .../config_tr.properties                           |    9 --
-
-D, [2012-12-23T14:11:16.012454 #14689] DEBUG -- :  .../config_zh_CN.properties                        |    8 -
-
-D, [2012-12-23T14:11:16.012474 #14689] DEBUG -- :  .../config_zh_TW.properties                        |    3 -
-
-D, [2012-12-23T14:11:16.012495 #14689] DEBUG -- :  .../index_da.properties                            |   29 ++++
-
-D, [2012-12-23T14:11:16.012517 #14689] DEBUG -- :  .../index_de.properties                            |   29 ++++
-
-D, [2012-12-23T14:11:16.012539 #14689] DEBUG -- :  .../index_es.properties                            |   29 ++++
-
-D, [2012-12-23T14:11:16.012561 #14689] DEBUG -- :  .../index_fi.properties                            |   29 ++++
-
-D, [2012-12-23T14:11:16.012583 #14689] DEBUG -- :  .../index_fr.properties                            |   29 ++++
-
-D, [2012-12-23T14:11:16.012604 #14689] DEBUG -- :  .../index_hu.properties                            |   29 ++++
-
-D, [2012-12-23T14:11:16.012626 #14689] DEBUG -- :  .../index_ja.properties                            |   29 ++++
-
-D, [2012-12-23T14:11:16.012646 #14689] DEBUG -- :  .../index_nl.properties                            |   29 ++++
-
-D, [2012-12-23T14:11:16.012667 #14689] DEBUG -- :  .../index_pt_BR.properties                         |   29 ++++
-
-D, [2012-12-23T14:11:16.012687 #14689] DEBUG -- :  .../index_ru.properties                            |   29 ++++
-
-D, [2012-12-23T14:11:16.012710 #14689] DEBUG -- :  .../index_tr.properties                            |   29 ++++
-
-D, [2012-12-23T14:11:16.012729 #14689] DEBUG -- :  .../index_zh_CN.properties                         |   29 ++++
-
-D, [2012-12-23T14:11:16.012752 #14689] DEBUG -- :  .../index_zh_TW.properties                         |   29 ++++
-
-D, [2012-12-23T14:11:16.012771 #14689] DEBUG -- :  .../hudson/security/Messages_de.properties         |    4 +-
-
-D, [2012-12-23T14:11:16.012793 #14689] DEBUG -- :  .../hudson/security/Messages_ja.properties         |    5 +-
-
-D, [2012-12-23T14:11:16.012813 #14689] DEBUG -- :  .../hudson/security/Messages_pt_BR.properties      |   28 ++--
-
-D, [2012-12-23T14:11:16.012833 #14689] DEBUG -- :  .../hudson/slaves/SlaveComputer/statistics.groovy  |   20 +++
-
-D, [2012-12-23T14:11:16.012854 #14689] DEBUG -- :  .../hudson/slaves/SlaveComputer/systemInfo.jelly   |    3 +
-
-D, [2012-12-23T14:11:16.012876 #14689] DEBUG -- :  .../tasks/junit/CaseResult/index_nl.properties     |    4 +-
-
-D, [2012-12-23T14:11:16.012896 #14689] DEBUG -- :  core/src/main/resources/lib/form/hetero-list.jelly |    8 +-
-
-D, [2012-12-23T14:11:16.012916 #14689] DEBUG -- :  .../lib/form/repeatableHeteroProperty.jelly        |    6 +
-
-D, [2012-12-23T14:11:16.012938 #14689] DEBUG -- :  .../resources/lib/form/serverTcpPort_da.properties |   25 ++++
-
-D, [2012-12-23T14:11:16.012957 #14689] DEBUG -- :  .../resources/lib/form/serverTcpPort_de.properties |   25 ++++
-
-D, [2012-12-23T14:11:16.012982 #14689] DEBUG -- :  .../resources/lib/form/serverTcpPort_es.properties |   25 ++++
-
-D, [2012-12-23T14:11:16.013001 #14689] DEBUG -- :  .../resources/lib/form/serverTcpPort_fi.properties |   25 ++++
-
-D, [2012-12-23T14:11:16.013021 #14689] DEBUG -- :  .../resources/lib/form/serverTcpPort_fr.properties |   25 ++++
-
-D, [2012-12-23T14:11:16.013043 #14689] DEBUG -- :  .../resources/lib/form/serverTcpPort_nl.properties |   25 ++++
-
-D, [2012-12-23T14:11:16.013066 #14689] DEBUG -- :  .../lib/form/serverTcpPort_pt_BR.properties        |   25 ++++
-
-D, [2012-12-23T14:11:16.013088 #14689] DEBUG -- :  .../resources/lib/form/serverTcpPort_ru.properties |   25 ++++
-
-D, [2012-12-23T14:11:16.013107 #14689] DEBUG -- :  .../lib/form/serverTcpPort_sv_SE.properties        |   25 ++++
-
-D, [2012-12-23T14:11:16.013129 #14689] DEBUG -- :  .../resources/lib/form/serverTcpPort_tr.properties |   25 ++++
-
-D, [2012-12-23T14:11:16.013149 #14689] DEBUG -- :  .../lib/form/serverTcpPort_zh_CN.properties        |   25 ++++
-
-D, [2012-12-23T14:11:16.013175 #14689] DEBUG -- :  .../lib/form/serverTcpPort_zh_TW.properties        |   25 ++++
-
-D, [2012-12-23T14:11:16.013195 #14689] DEBUG -- :  debian/debian/changelog                            |    6 +
-
-D, [2012-12-23T14:11:16.013217 #14689] DEBUG -- :  maven-plugin/pom.xml                               |    2 +-
-
-D, [2012-12-23T14:11:16.018282 #14689] DEBUG -- :  .../src/main/java/hudson/maven/Maven2Builder.java  |   19 ++-
-
-D, [2012-12-23T14:11:16.018358 #14689] DEBUG -- :  .../src/main/java/hudson/maven/Maven3Builder.java  |   27 ++++-
-
-D, [2012-12-23T14:11:16.018379 #14689] DEBUG -- :  .../src/main/java/hudson/maven/MavenBuild.java     |   18 ++-
-
-D, [2012-12-23T14:11:16.018401 #14689] DEBUG -- :  .../src/main/java/hudson/maven/MavenBuilder.java   |   25 +++-
-
-D, [2012-12-23T14:11:16.018423 #14689] DEBUG -- :  .../src/main/java/hudson/maven/MavenModuleSet.java |    4 +
-
-D, [2012-12-23T14:11:16.018443 #14689] DEBUG -- :  .../hudson/maven/reporters/SurefireArchiver.java   |   10 ++-
-
-D, [2012-12-23T14:11:16.018465 #14689] DEBUG -- :  .../maven/reporters/TestFailureDetector.java       |   22 +++
-
-D, [2012-12-23T14:11:16.018540 #14689] DEBUG -- :  plugins/pom.xml                                    |   12 +-
-
-D, [2012-12-23T14:11:16.018562 #14689] DEBUG -- :  pom.xml                                            |    4 +-
-
-D, [2012-12-23T14:11:16.018583 #14689] DEBUG -- :  rpm/SOURCES/jenkins.init.in                        |    2 +-
-
-D, [2012-12-23T14:11:16.018607 #14689] DEBUG -- :  test/pom.xml                                       |    4 +-
-
-D, [2012-12-23T14:11:16.018628 #14689] DEBUG -- :  .../hudson/maven/MavenBuildSurefireFailedTest.java |   23 +++
-
-D, [2012-12-23T14:11:16.018649 #14689] DEBUG -- :  ui-samples-plugin/pom.xml                          |    2 +-
-
-D, [2012-12-23T14:11:16.018669 #14689] DEBUG -- :  war/images/make.sh                                 |    3 +
-
-D, [2012-12-23T14:11:16.018688 #14689] DEBUG -- :  war/pom.xml                                        |    4 +-
-
-D, [2012-12-23T14:11:16.018713 #14689] DEBUG -- :  79 files changed, 1176 insertions(+), 171 deletions(-)
-
-D, [2012-12-23T14:11:16.018735 #14689] DEBUG -- :  create mode 100644 core/src/main/java/hudson/cli/ConsoleCommand.java
-
-D, [2012-12-23T14:11:16.018755 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/hudson/security/GlobalSecurityConfiguration/index_da.properties
-
-D, [2012-12-23T14:11:16.018778 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/hudson/security/GlobalSecurityConfiguration/index_de.properties
-
-D, [2012-12-23T14:11:16.018800 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/hudson/security/GlobalSecurityConfiguration/index_es.properties
-
-D, [2012-12-23T14:11:16.018822 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/hudson/security/GlobalSecurityConfiguration/index_fi.properties
-
-D, [2012-12-23T14:11:16.018843 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/hudson/security/GlobalSecurityConfiguration/index_fr.properties
-
-D, [2012-12-23T14:11:16.018865 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/hudson/security/GlobalSecurityConfiguration/index_hu.properties
-
-D, [2012-12-23T14:11:16.018888 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/hudson/security/GlobalSecurityConfiguration/index_ja.properties
-
-D, [2012-12-23T14:11:16.018908 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/hudson/security/GlobalSecurityConfiguration/index_nl.properties
-
-D, [2012-12-23T14:11:16.018930 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/hudson/security/GlobalSecurityConfiguration/index_pt_BR.properties
-
-D, [2012-12-23T14:11:16.018952 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/hudson/security/GlobalSecurityConfiguration/index_ru.properties
-
-D, [2012-12-23T14:11:16.018975 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/hudson/security/GlobalSecurityConfiguration/index_tr.properties
-
-D, [2012-12-23T14:11:16.018994 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/hudson/security/GlobalSecurityConfiguration/index_zh_CN.properties
-
-D, [2012-12-23T14:11:16.019017 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/hudson/security/GlobalSecurityConfiguration/index_zh_TW.properties
-
-D, [2012-12-23T14:11:16.019039 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/hudson/slaves/SlaveComputer/statistics.groovy
-
-D, [2012-12-23T14:11:16.019058 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/lib/form/serverTcpPort_da.properties
-
-D, [2012-12-23T14:11:16.019083 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/lib/form/serverTcpPort_de.properties
-
-D, [2012-12-23T14:11:16.019107 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/lib/form/serverTcpPort_es.properties
-
-D, [2012-12-23T14:11:16.019129 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/lib/form/serverTcpPort_fi.properties
-
-D, [2012-12-23T14:11:16.019149 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/lib/form/serverTcpPort_fr.properties
-
-D, [2012-12-23T14:11:16.019169 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/lib/form/serverTcpPort_nl.properties
-
-D, [2012-12-23T14:11:16.019194 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/lib/form/serverTcpPort_pt_BR.properties
-
-D, [2012-12-23T14:11:16.019214 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/lib/form/serverTcpPort_ru.properties
-
-D, [2012-12-23T14:11:16.019236 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/lib/form/serverTcpPort_sv_SE.properties
-
-D, [2012-12-23T14:11:16.019256 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/lib/form/serverTcpPort_tr.properties
-
-D, [2012-12-23T14:11:16.019278 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/lib/form/serverTcpPort_zh_CN.properties
-
-D, [2012-12-23T14:11:16.019301 #14689] DEBUG -- :  create mode 100644 core/src/main/resources/lib/form/serverTcpPort_zh_TW.properties
-
-D, [2012-12-23T14:11:16.019323 #14689] DEBUG -- :  create mode 100644 maven-plugin/src/main/java/hudson/maven/reporters/TestFailureDetector.java
-
+767360,jenkins,656,1356239219,,1356672146,7215,,13,1,0,0,0,1,0,0,78184,8,2,274.9411644326205,9.247416351171594,29.07244448992121
+747719,jenkins,646,1355400953,,1355737777,5613,,13,37,0,0,0,212,0,0,77885,770,148,275.7270334467484,9.257238235860562,29.158374526545547
+506784,jenkins,599,1351541893,,1355401705,64330,,13,2,0,0,0,14,0,0,78149,2,0,272.7226196112554,9.187577576168602,28.880727840407427
 692394,jenkins,641,1354795748,,1355071443,4594,,13,4,0,0,0,8,0,0,78399,84,0,275.96015255296624,9.26032219798722,29.235066773810892
 607446,jenkins,628,1353855292,,1355060966,20094,,13,8,5,0,5,21,0,0,78285,418,6,274.45870856485914,9.248259564412084,29.226544037810562
 732954,jenkins,629,1354023569,,1355009194,16427,,13,1,0,0,0,13,0,0,78285,3585,136,274.45870856485914,9.248259564412084,29.226544037810562
 732872,jenkins,634,1354126735,,1355008584,14697,,13,1,0,0,0,1,0,0,78292,15,0,274.43416951923564,9.247432687886375,29.223930925254177
 691862,jenkins,640,1354792503,,1355008490,3599,,13,1,0,0,0,1,0,0,78399,3,0,275.96015255296624,9.26032219798722,29.235066773810892
-718456,jenkins,643,1354877134,1354882945,1354882945,96,96,13,1,0,0,0,2,159,89,78409,5,45,275.92495759415374,9.259141170018747,29.23133823923274
-671351,jenkins,639,1354710262,1354716372,1354716372,101,101,13,2,0,0,0,2,162,92,78378,17,5,274.1330475388502,9.237285973104697,29.191865064176174
+718456,jenkins,643,1354877134,1354882945,1354882945,96,96,13,1,0,0,0,2,164,89,78409,5,45,275.92495759415374,9.259141170018747,29.23133823923274
+671351,jenkins,639,1354710262,1354716372,1354716372,101,101,13,2,0,0,0,2,167,92,78378,17,5,274.1330475388502,9.237285973104697,29.191865064176174
 660480,jenkins,637,1354637989,,1354654676,278,,13,1,0,0,0,1,0,0,78377,4,3,274.13654515993215,9.23740383020529,29.192237518659812
-627060,jenkins,636,1354464957,1354486896,1354486896,365,365,13,1,0,0,0,5,170,97,78369,27,58,274.16452934195917,9.238346795288955,29.195217496714264
-611185,jenkins,635,1354308980,1354362425,1354362425,890,890,13,1,0,0,0,1,177,101,78361,27,2,274.1925192378862,9.239289952910248,29.198198083230178
+627060,jenkins,636,1354464957,1354486896,1354486896,365,365,13,1,0,0,0,5,175,97,78369,27,58,274.16452934195917,9.238346795288955,29.195217496714264
+611185,jenkins,635,1354308980,1354362425,1354362425,890,890,13,1,0,0,0,1,183,101,78361,27,2,274.1925192378862,9.239289952910248,29.198198083230178
 459846,jenkins,614,1352588264,,1354267450,27986,,13,5,2,0,2,6,0,0,78277,98,3,272.4682857033356,9.185329023851194,28.859051828761963
-521854,jenkins,627,1353503815,1353536271,1353536271,540,540,11,1,0,0,0,1,228,142,78249,4,1,274.5849787217728,9.252514409129828,29.239990287415814
-506344,jenkins,624,1353416772,1353416910,1353416910,2,2,11,1,0,0,0,2,219,136,78250,4,52,274.5814696485623,9.252396166134186,29.23961661341853
+521854,jenkins,627,1353503815,1353536271,1353536271,540,540,11,1,0,0,0,1,234,142,78249,4,1,274.5849787217728,9.252514409129828,29.239990287415814
+506344,jenkins,624,1353416772,1353416910,1353416910,2,2,11,1,0,0,0,2,223,136,78250,4,52,274.5814696485623,9.252396166134186,29.23961661341853
 498537,jenkins,607,1352191504,,1353332754,19020,,11,1,0,0,0,2,0,0,78157,8,2,272.69470424913953,9.186637153421959,28.87777166472613
 482486,jenkins,621,1353098435,,1353175287,1280,,11,4,2,0,2,0,0,0,78322,0,0,274.03539235463853,9.23112280074564,29.021220091417483
 450767,jenkins,582,1349119014,,1353164131,67358,,11,6,0,0,0,253,0,0,77525,6,290,270.26120606256046,9.0809416317317,28.442437923250562
-479697,jenkins,618,1352898599,1352901008,1352901008,40,40,10,1,0,0,0,1,227,140,78315,3,1,274.04711741045776,9.231947902700632,29.011045138223842
+479697,jenkins,618,1352898599,1352901008,1352901008,40,40,10,1,0,0,0,1,230,140,78315,3,1,274.04711741045776,9.231947902700632,29.011045138223842
 454562,jenkins,609,1352231397,,1352826917,9925,,11,1,0,0,0,2,0,0,78157,63,2,272.69470424913953,9.186637153421959,28.87777166472613
 451044,jenkins,583,1349125826,,1352734849,60090,,10,1,0,0,0,0,0,0,77525,0,0,270.26120606256046,9.0809416317317,28.442437923250562
 463664,jenkins,613,1352483829,,1352568976,1419,,10,1,0,0,0,1,0,0,78277,4,1,272.4682857033356,9.185329023851194,28.859051828761963
@@ -250,8 +41,8 @@ D, [2012-12-23T14:11:16.019323 #14689] DEBUG -- :  create mode 100644 maven-plug
 461705,jenkins,606,1352104643,,1352443977,5655,,11,44,0,0,0,158,0,0,78156,3816,15,272.698193356876,9.186754695736733,28.878141153590256
 454774,jenkins,611,1352349135,,1352389218,668,,11,1,0,0,0,1,0,0,78156,1,44,272.89011720149443,9.199549618711295,28.903730999539384
 454735,jenkins,610,1352282895,,1352314508,526,,11,1,0,0,0,0,0,0,78154,0,0,272.7051718402129,9.186989789390179,28.878880159684726
-454570,jenkins,608,1352212656,1352233701,1352233701,350,350,12,1,0,0,0,2,233,157,78157,59,46,272.69470424913953,9.186637153421959,28.87777166472613
-506793,jenkins,604,1351885330,1351886509,1351886509,19,19,13,1,0,0,0,1,222,161,78156,2,1,272.698193356876,9.186754695736733,28.878141153590256
+454570,jenkins,608,1352212656,1352233701,1352233701,350,350,12,1,0,0,0,2,234,157,78157,59,46,272.69470424913953,9.186637153421959,28.87777166472613
+506793,jenkins,604,1351885330,1351886509,1351886509,19,19,13,1,0,0,0,1,223,161,78156,2,1,272.698193356876,9.186754695736733,28.878141153590256
 454349,jenkins,601,1351744484,,1351832164,1461,,13,1,5,0,5,0,0,0,78156,0,0,272.698193356876,9.186754695736733,28.878141153590256
 454351,jenkins,602,1351752285,,1351770130,297,,13,1,0,0,0,1,0,0,78156,2,1,272.698193356876,9.186754695736733,28.878141153590256
 506787,jenkins,598,1351462647,1351579199,1351579199,1942,1942,13,1,0,0,0,1,224,166,78138,9,1,272.76101256750877,9.18887097187028,28.884793570349895

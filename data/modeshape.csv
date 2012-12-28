@@ -1,371 +1,39 @@
-Updating client properties
-GHTorrent version: 0.6
-D, [2012-12-23T13:17:11.459445 #7602] DEBUG -- : GHTorrent: User ModeShape exists
-D, [2012-12-23T13:17:11.459756 #7602] DEBUG -- : GHTorrent: Transaction committed (11 ms)
-D, [2012-12-23T13:17:11.489564 #7602] DEBUG -- : GHTorrent: User ModeShape exists
-D, [2012-12-23T13:17:11.500516 #7602] DEBUG -- : GHTorrent: Repo ModeShape/modeshape exists
-D, [2012-12-23T13:17:11.500772 #7602] DEBUG -- : GHTorrent: Transaction committed (23 ms)
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size_at_merge,num_commits,num_commit_comments,num_issue_comments,num_comments,files_changed,total_commits_last_month,main_team_commits_last_month,sloc,churn,commits_on_files_touched,test_lines_per_1000_lines,test_cases_per_1000_lines,assertions_per_1000_lines
-D, [2012-12-23T13:17:17.468243 #7602] DEBUG -- : Updating 8f2f544..dd792d1
 
-D, [2012-12-23T13:17:17.468361 #7602] DEBUG -- : Fast-forward
-
-D, [2012-12-23T13:17:17.525617 #7602] DEBUG -- :  .../modeshape/connector/git/GitBinaryValue.java    |   75 +--
-
-D, [2012-12-23T13:17:17.525716 #7602] DEBUG -- :  .../org/modeshape/connector/git/GitConnector.java  |   14 +
-
-D, [2012-12-23T13:17:17.525739 #7602] DEBUG -- :  .../java/org/modeshape/connector/git/GitTree.java  |    2 +-
-
-D, [2012-12-23T13:17:17.525762 #7602] DEBUG -- :  .../modeshape/connector/git/GitConnectorTest.java  |   13 +-
-
-D, [2012-12-23T13:17:17.525783 #7602] DEBUG -- :  .../jboss/subsystem/AbstractAddBinaryStorage.java  |   13 +
-
-D, [2012-12-23T13:17:17.525806 #7602] DEBUG -- :  .../jboss/subsystem/AddCacheBinaryStorage.java     |    5 +-
-
-D, [2012-12-23T13:17:17.525827 #7602] DEBUG -- :  .../jboss/subsystem/AddCustomBinaryStorage.java    |    5 +-
-
-D, [2012-12-23T13:17:17.525849 #7602] DEBUG -- :  .../jboss/subsystem/AddDatabaseBinaryStorage.java  |    5 +-
-
-D, [2012-12-23T13:17:17.525869 #7602] DEBUG -- :  .../jboss/subsystem/AddFileBinaryStorage.java      |    7 +-
-
-D, [2012-12-23T13:17:17.525893 #7602] DEBUG -- :  .../org/modeshape/jboss/subsystem/Attribute.java   |    1 +
-
-D, [2012-12-23T13:17:17.525914 #7602] DEBUG -- :  .../subsystem/ModeShapeSubsystemXMLReader_1_0.java |   12 +
-
-D, [2012-12-23T13:17:17.525945 #7602] DEBUG -- :  .../subsystem/ModeShapeSubsystemXMLWriter.java     |    4 +
-
-D, [2012-12-23T13:17:17.525966 #7602] DEBUG -- :  .../modeshape/jboss/subsystem/ModelAttributes.java |   28 +-
-
-D, [2012-12-23T13:17:17.525988 #7602] DEBUG -- :  .../org/modeshape/jboss/subsystem/ModelKeys.java   |    1 +
-
-D, [2012-12-23T13:17:17.526009 #7602] DEBUG -- :  .../jboss/subsystem/LocalDescriptions.properties   |   15 +-
-
-D, [2012-12-23T13:17:17.526031 #7602] DEBUG -- :  .../src/main/resources/schema/modeshape_1_0.xsd    |   17 +-
-
-D, [2012-12-23T13:17:17.526051 #7602] DEBUG -- :  .../resources/assemblies/binary-distribution.xml   |   10 +
-
-D, [2012-12-23T13:17:17.526074 #7602] DEBUG -- :  modeshape-jca/pom.xml                              |  110 +++
-
-D, [2012-12-23T13:17:17.526096 #7602] DEBUG -- :  modeshape-jca/src/main/assembly/AUTHORS.txt        |   22 +
-
-D, [2012-12-23T13:17:17.526116 #7602] DEBUG -- :  modeshape-jca/src/main/assembly/COPYRIGHT.txt      |   19 +
-
-D, [2012-12-23T13:17:17.526140 #7602] DEBUG -- :  modeshape-jca/src/main/assembly/README.txt         |    1 +
-
-D, [2012-12-23T13:17:17.526180 #7602] DEBUG -- :  .../org/modeshape/jca/JcrConnectionManager.java    |   60 +--
-
-D, [2012-12-23T13:17:17.526201 #7602] DEBUG -- :  .../modeshape/jca/JcrConnectionRequestInfo.java    |  232 ++++++
-
-D, [2012-12-23T13:17:17.526224 #7602] DEBUG -- :  .../org/modeshape/jca/JcrManagedConnection.java    |  301 ++++++++
-
-D, [2012-12-23T13:17:17.526246 #7602] DEBUG -- :  .../modeshape/jca/JcrManagedConnectionFactory.java |  214 ++++++
-
-D, [2012-12-23T13:17:17.526268 #7602] DEBUG -- :  .../jca/JcrManagedConnectionMetaData.java          |  101 +++
-
-D, [2012-12-23T13:17:17.526291 #7602] DEBUG -- :  .../org/modeshape/jca/JcrRepositoryHandle.java     |  151 ++++
-
-D, [2012-12-23T13:17:17.526313 #7602] DEBUG -- :  .../java/org/modeshape/jca/JcrResourceAdapter.java |  222 ++++++
-
-D, [2012-12-23T13:17:17.526333 #7602] DEBUG -- :  .../java/org/modeshape/jca/JcrSessionHandle.java   |  341 +++++++++
-
-D, [2012-12-23T13:17:17.526358 #7602] DEBUG -- :  .../src/main/resources/META-INF/ironjacamar.xml    |   39 +
-
-D, [2012-12-23T13:17:17.526379 #7602] DEBUG -- :  modeshape-jca/src/main/resources/META-INF/ra.xml   |   74 ++
-
-D, [2012-12-23T13:17:17.526401 #7602] DEBUG -- :  .../java/org/modeshape/jca/ConnectorTestCase.java  |   96 +++
-
-D, [2012-12-23T13:17:17.526421 #7602] DEBUG -- :  modeshape-jca/src/test/resources/jndi.properties   |    2 +
-
-D, [2012-12-23T13:17:17.526443 #7602] DEBUG -- :  .../src/test/resources/logging.properties          |   39 +
-
-D, [2012-12-23T13:17:17.526464 #7602] DEBUG -- :  .../src/test/resources/my-repository-config.json   |   15 +
-
-D, [2012-12-23T13:17:17.526486 #7602] DEBUG -- :  .../org/modeshape/jcr/api/NamespaceRegistry.java   |   71 +--
-
-D, [2012-12-23T13:17:17.526508 #7602] DEBUG -- :  .../jcr/api/federation/FederationManager.java      |   22 +-
-
-D, [2012-12-23T13:17:17.526528 #7602] DEBUG -- :  .../java/org/modeshape/jcr/AbstractJcrNode.java    |    2 +-
-
-D, [2012-12-23T13:17:17.526553 #7602] DEBUG -- :  .../main/java/org/modeshape/jcr/Connectors.java    |  264 +++++++-
-
-D, [2012-12-23T13:17:17.526573 #7602] DEBUG -- :  .../src/main/java/org/modeshape/jcr/JcrI18n.java   |    1 +
-
-D, [2012-12-23T13:17:17.526595 #7602] DEBUG -- :  .../org/modeshape/jcr/JcrNamespaceRegistry.java    |   12 +-
-
-D, [2012-12-23T13:17:17.526615 #7602] DEBUG -- :  .../main/java/org/modeshape/jcr/JcrRepository.java |    9 +-
-
-D, [2012-12-23T13:17:17.526635 #7602] DEBUG -- :  .../modeshape/jcr/ModeShapeFederationManager.java  |   35 +-
-
-D, [2012-12-23T13:17:17.526655 #7602] DEBUG -- :  .../java/org/modeshape/jcr/ModeShapeLexicon.java   |    1 +
-
-D, [2012-12-23T13:17:17.526678 #7602] DEBUG -- :  .../org/modeshape/jcr/RepositoryConfiguration.java |  139 ++++-
-
-D, [2012-12-23T13:17:17.526698 #7602] DEBUG -- :  .../main/java/org/modeshape/jcr/bus/BusI18n.java   |    1 +
-
-D, [2012-12-23T13:17:17.526720 #7602] DEBUG -- :  .../main/java/org/modeshape/jcr/bus/ChangeBus.java |   17 +-
-
-D, [2012-12-23T13:17:17.526743 #7602] DEBUG -- :  .../jcr/bus/ClusteredRepositoryChangeBus.java      |   66 +--
-
-D, [2012-12-23T13:17:17.526763 #7602] DEBUG -- :  .../org/modeshape/jcr/cache/RepositoryCache.java   |   16 +-
-
-D, [2012-12-23T13:17:17.526786 #7602] DEBUG -- :  .../jcr/cache/document/DocumentStore.java          |   23 +-
-
-D, [2012-12-23T13:17:17.526805 #7602] DEBUG -- :  .../jcr/cache/document/DocumentTranslator.java     |   99 +++-
-
-D, [2012-12-23T13:17:17.526827 #7602] DEBUG -- :  .../jcr/cache/document/LocalDocumentStore.java     |   18 +-
-
-D, [2012-12-23T13:17:17.526847 #7602] DEBUG -- :  .../jcr/cache/document/WorkspaceCache.java         |    4 +-
-
-D, [2012-12-23T13:17:17.526871 #7602] DEBUG -- :  .../jcr/cache/document/WritableSessionCache.java   |   43 +-
-
-D, [2012-12-23T13:17:17.526891 #7602] DEBUG -- :  .../jcr/clustering/DefaultChannelProvider.java     |   51 +-
-
-D, [2012-12-23T13:17:17.526912 #7602] DEBUG -- :  .../jcr/federation/FederatedDocumentStore.java     |   41 +-
-
-D, [2012-12-23T13:17:17.526935 #7602] DEBUG -- :  .../modeshape/jcr/federation/spi/Connector.java    |   12 +
-
-D, [2012-12-23T13:17:17.526956 #7602] DEBUG -- :  .../modeshape/jcr/query/lucene/basic/NodeInfo.java |    1 -
-
-D, [2012-12-23T13:17:17.526978 #7602] DEBUG -- :  .../modeshape/jcr/value/binary/AbstractBinary.java |   10 +-
-
-D, [2012-12-23T13:17:17.526997 #7602] DEBUG -- :  .../modeshape/jcr/value/binary/BinaryStore.java    |   14 +-
-
-D, [2012-12-23T13:17:17.527019 #7602] DEBUG -- :  .../jcr/value/binary/ExternalBinaryValue.java      |  130 ++++
-
-D, [2012-12-23T13:17:17.527039 #7602] DEBUG -- :  .../modeshape/jcr/value/binary/UrlBinaryValue.java |   23 +-
-
-D, [2012-12-23T13:17:17.527063 #7602] DEBUG -- :  .../resources/org/modeshape/jcr/JcrI18n.properties |    1 +
-
-D, [2012-12-23T13:17:17.527083 #7602] DEBUG -- :  .../org/modeshape/jcr/bus/BusI18n.properties       |    3 +-
-
-D, [2012-12-23T13:17:17.527104 #7602] DEBUG -- :  .../org/modeshape/jcr/modeshape_builtins.cnd       |    1 +
-
-D, [2012-12-23T13:17:17.527673 #7602] DEBUG -- :  .../modeshape/jcr/repository-config-schema.json    |   51 ++-
-
-D, [2012-12-23T13:17:17.527710 #7602] DEBUG -- :  .../connector/PreconfiguredProjectionsTest.java    |   73 ++
-
-D, [2012-12-23T13:17:17.527733 #7602] DEBUG -- :  .../filesystem/FileSystemConnectorTest.java        |    2 +-
-
-D, [2012-12-23T13:17:17.527754 #7602] DEBUG -- :  .../connector/mock/MockConnectorTest.java          |  198 ++++--
-
-D, [2012-12-23T13:17:17.527776 #7602] DEBUG -- :  .../modeshape/jcr/AbstractJcrRepositoryTest.java   |   27 +-
-
-D, [2012-12-23T13:17:17.527795 #7602] DEBUG -- :  .../org/modeshape/jcr/ClusteredRepositoryTest.java |   78 ++-
-
-D, [2012-12-23T13:17:17.527819 #7602] DEBUG -- :  .../org/modeshape/jcr/ConcurrentWriteTest.java     |  469 +++++++++++++
-
-D, [2012-12-23T13:17:17.527895 #7602] DEBUG -- :  .../org/modeshape/jcr/JcrQueryManagerTest.java     |   59 ++-
-
-D, [2012-12-23T13:17:17.527944 #7602] DEBUG -- :  .../modeshape/jcr/JcrRepositoryStartupTest.java    |   80 ++-
-
-D, [2012-12-23T13:17:17.527969 #7602] DEBUG -- :  .../modeshape/jcr/RepositoryConfigurationTest.java |   10 +
-
-D, [2012-12-23T13:17:17.527990 #7602] DEBUG -- :  .../java/org/modeshape/jcr/SequencingTest.java     |    8 +-
-
-D, [2012-12-23T13:17:17.528013 #7602] DEBUG -- :  .../org/modeshape/jcr/SingleUseAbstractTest.java   |    6 +-
-
-D, [2012-12-23T13:17:17.528032 #7602] DEBUG -- :  .../jcr/bus/ClusteredRepositoryChangeBusTest.java  |   14 +-
-
-D, [2012-12-23T13:17:17.528055 #7602] DEBUG -- :  .../modeshape/jcr/bus/RepositoryChangeBusTest.java |    6 +-
-
-D, [2012-12-23T13:17:17.528075 #7602] DEBUG -- :  ...clustered-repo-config-invalid-jgroups-file.json |   15 +
-
-D, [2012-12-23T13:17:17.528099 #7602] DEBUG -- :  .../config/clustered-repo-config-jgroups-file.json |   15 +
-
-D, [2012-12-23T13:17:17.528120 #7602] DEBUG -- :  .../config/infinispan-concurrent-persistent.xml    |   28 +
-
-D, [2012-12-23T13:17:17.528145 #7602] DEBUG -- :  .../test/resources/config/jgroups-test-config.xml  |   14 +
-
-D, [2012-12-23T13:17:17.528170 #7602] DEBUG -- :  .../config/repo-config-concurrent-tests.json       |   21 +
-
-D, [2012-12-23T13:17:17.528194 #7602] DEBUG -- :  ...repo-config-federation-invalid-projections.json |   25 +
-
-D, [2012-12-23T13:17:17.528216 #7602] DEBUG -- :  ...o-config-federation-persistent-projections.json |   22 +
-
-D, [2012-12-23T13:17:17.528238 #7602] DEBUG -- :  .../config/repo-config-federation-projections.json |   33 +
-
-D, [2012-12-23T13:17:17.528261 #7602] DEBUG -- :  .../resources/config/thorough-repo-config.json     |    3 +-
-
-D, [2012-12-23T13:17:17.528280 #7602] DEBUG -- :  modeshape-jcr/src/test/resources/log4j.properties  |    1 +
-
-D, [2012-12-23T13:17:17.528304 #7602] DEBUG -- :  .../test/resources/xmlImport/docWithTestRoot.xml   |    4 +
-
-D, [2012-12-23T13:17:17.528325 #7602] DEBUG -- :  modeshape-parent/pom.xml                           |   85 +++
-
-D, [2012-12-23T13:17:17.528347 #7602] DEBUG -- :  .../schematic/internal/CacheContext.java           |   85 +++
-
-D, [2012-12-23T13:17:17.528367 #7602] DEBUG -- :  .../schematic/internal/CacheSchematicDb.java       |    4 +-
-
-D, [2012-12-23T13:17:17.528393 #7602] DEBUG -- :  .../schematic/internal/SchematicEntryDelta.java    |   26 +-
-
-D, [2012-12-23T13:17:17.528416 #7602] DEBUG -- :  .../schematic/internal/SchematicEntryLiteral.java  |   59 +-
-
-D, [2012-12-23T13:17:17.528435 #7602] DEBUG -- :  .../schematic/internal/SchematicEntryLookup.java   |   39 +-
-
-D, [2012-12-23T13:17:17.528455 #7602] DEBUG -- :  .../schematic/internal/SchematicEntryProxy.java    |  113 ++--
-
-D, [2012-12-23T13:17:17.528475 #7602] DEBUG -- :  .../schema/JsonSchemaValidatorFactory.java         |   36 +
-
-D, [2012-12-23T13:17:17.528498 #7602] DEBUG -- :  .../schematic/AbstractSchematicDbTest.java         |   20 +-
-
-D, [2012-12-23T13:17:17.528518 #7602] DEBUG -- :  .../test/java/org/infinispan/schematic/FixFor.java |   88 ++--
-
-D, [2012-12-23T13:17:17.528541 #7602] DEBUG -- :  .../org/infinispan/schematic/SchematicDbTest.java  |  115 +++-
-
-D, [2012-12-23T13:17:17.528560 #7602] DEBUG -- :  .../schematic/SchematicDbWithBerkleyTest.java      |    9 +-
-
-D, [2012-12-23T13:17:17.528588 #7602] DEBUG -- :  .../json/schema/repository-config-schema.json      |   42 ++-
-
-D, [2012-12-23T13:17:17.528608 #7602] DEBUG -- :  .../src/test/resources/log4j.properties            |    2 +
-
-D, [2012-12-23T13:17:17.528629 #7602] DEBUG -- :  pom.xml                                            |    7 +
-
-D, [2012-12-23T13:17:17.528650 #7602] DEBUG -- :  .../org/modeshape/sequencer/teiid/TeiidI18n.java   |    2 +
-
-D, [2012-12-23T13:17:17.528670 #7602] DEBUG -- :  .../modeshape/sequencer/teiid/VdbSequencer.java    |   18 +-
-
-D, [2012-12-23T13:17:17.528695 #7602] DEBUG -- :  .../sequencer/teiid/lexicon/CoreLexicon.java       |    1 +
-
-D, [2012-12-23T13:17:17.528716 #7602] DEBUG -- :  .../lexicon/ModelExtensionDefinitionLexicon.java   |  126 ++++
-
-D, [2012-12-23T13:17:17.528744 #7602] DEBUG -- :  .../teiid/model/CoreModelObjectHandler.java        |   73 +--
-
-D, [2012-12-23T13:17:17.528766 #7602] DEBUG -- :  .../model/ModelExtensionDefinitionHelper.java      |  738 ++++++++++++++++++++
-
-D, [2012-12-23T13:17:17.528796 #7602] DEBUG -- :  .../sequencer/teiid/model/ModelNodeWriter.java     |   23 +-
-
-D, [2012-12-23T13:17:17.528819 #7602] DEBUG -- :  .../sequencer/teiid/model/ModelObjectHandler.java  |   74 ++-
-
-D, [2012-12-23T13:17:17.528840 #7602] DEBUG -- :  .../sequencer/teiid/model/ModelReader.java         |   25 +-
-
-D, [2012-12-23T13:17:17.528861 #7602] DEBUG -- :  .../sequencer/teiid/model/ModelSequencer.java      |   24 +-
-
-D, [2012-12-23T13:17:17.528882 #7602] DEBUG -- :  .../modeshape/sequencer/teiid/TeiidI18n.properties |    4 +-
-
-D, [2012-12-23T13:17:17.528907 #7602] DEBUG -- :  .../org/modeshape/sequencer/teiid/med.cnd          |   60 ++
-
-D, [2012-12-23T13:17:17.528931 #7602] DEBUG -- :  .../org/modeshape/sequencer/teiid/mmcore.cnd       |    5 +
-
-D, [2012-12-23T13:17:17.528952 #7602] DEBUG -- :  .../teiid/model/medNameMappings.properties         |   39 +
-
-D, [2012-12-23T13:17:17.528976 #7602] DEBUG -- :  .../sequencer/teiid/VdbSequencerTest.java          |   12 +-
-
-D, [2012-12-23T13:17:17.529035 #7602] DEBUG -- :  .../sequencer/teiid/model/ModelSequencerTest.java  |  253 +++++++
-
-D, [2012-12-23T13:17:17.529060 #7602] DEBUG -- :  .../src/test/resources/log4j.properties            |    1 +
-
-D, [2012-12-23T13:17:17.529082 #7602] DEBUG -- :  .../modelExtensionDefinition/ModelWithOneMed.xmi   |  256 +++++++
-
-D, [2012-12-23T13:17:17.529104 #7602] DEBUG -- :  .../modelExtensionDefinition/ModelWithTwoMeds.xmi  |  462 ++++++++++++
-
-D, [2012-12-23T13:17:17.529129 #7602] DEBUG -- :  .../src/test/resources/vdb/twitter.vdb             |  Bin 976 -> 830 bytes
-
-D, [2012-12-23T13:17:17.529154 #7602] DEBUG -- :  125 files changed, 6802 insertions(+), 782 deletions(-)
-
-D, [2012-12-23T13:17:17.529178 #7602] DEBUG -- :  create mode 100644 modeshape-jca/pom.xml
-
-D, [2012-12-23T13:17:17.529201 #7602] DEBUG -- :  create mode 100644 modeshape-jca/src/main/assembly/AUTHORS.txt
-
-D, [2012-12-23T13:17:17.529228 #7602] DEBUG -- :  create mode 100644 modeshape-jca/src/main/assembly/COPYRIGHT.txt
-
-D, [2012-12-23T13:17:17.529251 #7602] DEBUG -- :  create mode 100644 modeshape-jca/src/main/assembly/README.txt
-
-D, [2012-12-23T13:17:17.547906 #7602] DEBUG -- :  copy modeshape-jcr/src/main/java/org/modeshape/jcr/bus/MultiplexingChangeBus.java => modeshape-jca/src/main/java/org/modeshape/jca/JcrConnectionManager.java (51%)
-
-D, [2012-12-23T13:17:17.548008 #7602] DEBUG -- :  create mode 100644 modeshape-jca/src/main/java/org/modeshape/jca/JcrConnectionRequestInfo.java
-
-D, [2012-12-23T13:17:17.548040 #7602] DEBUG -- :  create mode 100644 modeshape-jca/src/main/java/org/modeshape/jca/JcrManagedConnection.java
-
-D, [2012-12-23T13:17:17.548071 #7602] DEBUG -- :  create mode 100644 modeshape-jca/src/main/java/org/modeshape/jca/JcrManagedConnectionFactory.java
-
-D, [2012-12-23T13:17:17.548112 #7602] DEBUG -- :  create mode 100644 modeshape-jca/src/main/java/org/modeshape/jca/JcrManagedConnectionMetaData.java
-
-D, [2012-12-23T13:17:17.548134 #7602] DEBUG -- :  create mode 100644 modeshape-jca/src/main/java/org/modeshape/jca/JcrRepositoryHandle.java
-
-D, [2012-12-23T13:17:17.548162 #7602] DEBUG -- :  create mode 100644 modeshape-jca/src/main/java/org/modeshape/jca/JcrResourceAdapter.java
-
-D, [2012-12-23T13:17:17.548184 #7602] DEBUG -- :  create mode 100644 modeshape-jca/src/main/java/org/modeshape/jca/JcrSessionHandle.java
-
-D, [2012-12-23T13:17:17.548204 #7602] DEBUG -- :  create mode 100644 modeshape-jca/src/main/resources/META-INF/ironjacamar.xml
-
-D, [2012-12-23T13:17:17.548226 #7602] DEBUG -- :  create mode 100644 modeshape-jca/src/main/resources/META-INF/ra.xml
-
-D, [2012-12-23T13:17:17.548245 #7602] DEBUG -- :  create mode 100644 modeshape-jca/src/test/java/org/modeshape/jca/ConnectorTestCase.java
-
-D, [2012-12-23T13:17:17.548265 #7602] DEBUG -- :  create mode 100644 modeshape-jca/src/test/resources/jndi.properties
-
-D, [2012-12-23T13:17:17.548336 #7602] DEBUG -- :  create mode 100644 modeshape-jca/src/test/resources/logging.properties
-
-D, [2012-12-23T13:17:17.548363 #7602] DEBUG -- :  create mode 100644 modeshape-jca/src/test/resources/my-repository-config.json
-
-D, [2012-12-23T13:17:17.548387 #7602] DEBUG -- :  copy modeshape-jcr/src/main/java/org/modeshape/jcr/bus/MultiplexingChangeBus.java => modeshape-jcr-api/src/main/java/org/modeshape/jcr/api/NamespaceRegistry.java (50%)
-
-D, [2012-12-23T13:17:17.548407 #7602] DEBUG -- :  create mode 100644 modeshape-jcr/src/main/java/org/modeshape/jcr/value/binary/ExternalBinaryValue.java
-
-D, [2012-12-23T13:17:17.548429 #7602] DEBUG -- :  create mode 100644 modeshape-jcr/src/test/java/org/modeshape/connector/PreconfiguredProjectionsTest.java
-
-D, [2012-12-23T13:17:17.548449 #7602] DEBUG -- :  create mode 100644 modeshape-jcr/src/test/java/org/modeshape/jcr/ConcurrentWriteTest.java
-
-D, [2012-12-23T13:17:17.548480 #7602] DEBUG -- :  create mode 100644 modeshape-jcr/src/test/resources/config/clustered-repo-config-invalid-jgroups-file.json
-
-D, [2012-12-23T13:17:17.548501 #7602] DEBUG -- :  create mode 100644 modeshape-jcr/src/test/resources/config/clustered-repo-config-jgroups-file.json
-
-D, [2012-12-23T13:17:17.548524 #7602] DEBUG -- :  create mode 100644 modeshape-jcr/src/test/resources/config/infinispan-concurrent-persistent.xml
-
-D, [2012-12-23T13:17:17.548546 #7602] DEBUG -- :  create mode 100644 modeshape-jcr/src/test/resources/config/jgroups-test-config.xml
-
-D, [2012-12-23T13:17:17.548568 #7602] DEBUG -- :  create mode 100644 modeshape-jcr/src/test/resources/config/repo-config-concurrent-tests.json
-
-D, [2012-12-23T13:17:17.548596 #7602] DEBUG -- :  create mode 100644 modeshape-jcr/src/test/resources/config/repo-config-federation-invalid-projections.json
-
-D, [2012-12-23T13:17:17.548616 #7602] DEBUG -- :  create mode 100644 modeshape-jcr/src/test/resources/config/repo-config-federation-persistent-projections.json
-
-D, [2012-12-23T13:17:17.548639 #7602] DEBUG -- :  create mode 100644 modeshape-jcr/src/test/resources/config/repo-config-federation-projections.json
-
-D, [2012-12-23T13:17:17.548659 #7602] DEBUG -- :  create mode 100644 modeshape-jcr/src/test/resources/xmlImport/docWithTestRoot.xml
-
-D, [2012-12-23T13:17:17.548686 #7602] DEBUG -- :  create mode 100644 modeshape-schematic/src/main/java/org/infinispan/schematic/internal/CacheContext.java
-
-D, [2012-12-23T13:17:17.548706 #7602] DEBUG -- :  rename modeshape-jcr/src/main/java/org/modeshape/jcr/bus/MultiplexingChangeBus.java => modeshape-schematic/src/test/java/org/infinispan/schematic/FixFor.java (50%)
-
-D, [2012-12-23T13:17:17.548726 #7602] DEBUG -- :  create mode 100644 sequencers/modeshape-sequencer-teiid/src/main/java/org/modeshape/sequencer/teiid/model/ModelExtensionDefinitionHelper.java
-
-D, [2012-12-23T13:17:17.548746 #7602] DEBUG -- :  create mode 100644 sequencers/modeshape-sequencer-teiid/src/main/resources/org/modeshape/sequencer/teiid/med.cnd
-
-D, [2012-12-23T13:17:17.548769 #7602] DEBUG -- :  create mode 100644 sequencers/modeshape-sequencer-teiid/src/main/resources/org/modeshape/sequencer/teiid/model/medNameMappings.properties
-
-D, [2012-12-23T13:17:17.548792 #7602] DEBUG -- :  create mode 100644 sequencers/modeshape-sequencer-teiid/src/test/resources/model/modelExtensionDefinition/ModelWithOneMed.xmi
-
-D, [2012-12-23T13:17:17.548816 #7602] DEBUG -- :  create mode 100644 sequencers/modeshape-sequencer-teiid/src/test/resources/model/modelExtensionDefinition/ModelWithTwoMeds.xmi
-
+751102,modeshape,624,1355488036,,1355804970,5282,,3,8,0,0,0,11,0,0,149706,393,0,492.6389055882864,29.390939574900138,85.35396042910772
+470037,modeshape,595,1352731323,,1355766059,50578,,3,3,0,0,0,109,0,0,143493,4746,0,500.18467799822986,30.161750050525114,86.63140362247636
+751326,modeshape,625,1355493268,,1355765947,4544,,3,3,0,0,0,21,0,0,149706,647,0,492.6389055882864,29.390939574900138,85.35396042910772
+757702,modeshape,626,1355760345,1355762923,1355762923,42,42,3,3,0,0,0,24,70,3,149706,1145,22,492.6389055882864,29.390939574900138,85.35396042910772
+658747,modeshape,623,1355257047,,1355760429,8389,,3,1,0,0,0,4,0,0,149706,537,0,492.6389055882864,29.390939574900138,85.35396042910772
+477126,modeshape,586,1351657441,,1355488286,63847,,3,5,0,0,0,35,0,0,143273,6452,0,499.07519211575107,30.103369092571526,86.51316019068491
 658752,modeshape,620,1354888109,,1355238491,5839,,4,5,0,0,0,30,0,0,148737,2297,0,494.9877972528692,29.53535435029616,85.81590323860236
 658749,modeshape,622,1355231616,,1355237302,94,,4,1,0,0,0,12,0,0,148743,346,0,494.96783041891047,29.534162952206152,85.81244159389013
-658750,modeshape,621,1355150193,1355234178,1355234178,1399,1399,4,4,0,0,0,33,66,2,148743,911,60,494.96783041891047,29.534162952206152,85.81244159389013
-658755,modeshape,619,1354783267,1354893708,1354893708,1840,1840,4,1,0,0,0,2,80,8,148737,22,15,494.9877972528692,29.53535435029616,85.81590323860236
+658750,modeshape,621,1355150193,1355234178,1355234178,1399,1399,4,4,0,0,0,33,71,2,148743,911,60,494.96783041891047,29.534162952206152,85.81244159389013
+658755,modeshape,619,1354783267,1354893708,1354893708,1840,1840,4,1,0,0,0,2,85,8,148737,22,15,494.9877972528692,29.53535435029616,85.81590323860236
 658730,modeshape,608,1354111980,,1354886557,12909,,4,2,0,0,0,14,0,0,143668,1831,0,501.5591502631066,30.222457332182532,87.4933875323663
 658358,modeshape,616,1354630310,,1354748875,1976,,4,2,0,0,0,10,0,0,143669,387,0,502.1055342488637,30.243128301860526,87.54846208994286
-658759,modeshape,618,1354745153,1354747451,1354747451,38,38,4,18,0,0,0,269,82,11,147993,4606,396,492.4827525626212,29.454095801828466,84.99726338407898
+658759,modeshape,618,1354745153,1354747451,1354747451,38,38,4,18,0,0,0,269,87,11,147993,4606,396,492.4827525626212,29.454095801828466,84.99726338407898
 611009,modeshape,617,1354721231,,1354742025,346,,4,4,5,0,5,59,0,0,147566,1672,120,491.7460661670032,29.451228602794682,84.7620725641408
 611987,modeshape,615,1354314481,,1354695788,6355,,4,2,0,0,0,52,0,0,143669,1960,0,502.1055342488637,30.243128301860526,87.54846208994286
-612249,modeshape,614,1354275401,1354315628,1354315628,670,670,5,2,0,0,0,31,88,16,147452,704,90,491.73290291077774,29.467216450099013,84.77334997151615
+612249,modeshape,614,1354275401,1354315628,1354315628,670,670,5,2,0,0,0,31,93,16,147452,704,90,491.73290291077774,29.467216450099013,84.77334997151615
 612013,modeshape,612,1354223822,,1354314783,1516,,5,1,0,0,0,8,0,0,143668,670,0,501.77492552273293,30.236378316674557,87.52122950135035
 658737,modeshape,613,1354227818,,1354279174,855,,6,1,0,0,0,2,0,0,143668,66,0,501.77492552273293,30.236378316674557,87.52122950135035
-658738,modeshape,611,1354212398,1354217971,1354217972,92,92,6,1,0,0,0,3,83,18,143668,34,3,501.6565971545508,30.229417824428545,87.50034802461231
-658740,modeshape,610,1354206412,1354206839,1354206839,7,7,6,1,0,0,0,1,82,18,143668,18,1,501.5591502631066,30.222457332182532,87.4933875323663
-658742,modeshape,609,1354202748,1354206481,1354206481,62,62,6,1,0,0,0,5,82,18,147454,230,14,491.7262332659677,29.466816769975722,84.77220014377365
-565553,modeshape,606,1353670947,1354026976,1354026976,5933,5933,6,4,0,0,0,31,78,18,146820,3931,118,492.9164963901376,29.56681651001226,85.14507560277892
-658727,modeshape,607,1353945366,1354019840,1354019840,1241,1241,6,2,0,0,0,5,77,18,143650,72,7,501.62199791159065,30.226244343891405,87.50435085276715
-521800,modeshape,602,1353517396,1353527032,1353527032,160,160,6,1,0,0,0,31,85,22,145886,2889,98,494.372318111402,29.701273597192326,85.69019645476605
-521797,modeshape,605,1353525735,1353525921,1353525921,3,3,6,1,0,0,0,1,85,22,143654,22,1,501.60803040639314,30.225402703718657,87.50191432191237
-521798,modeshape,604,1353524910,1353525088,1353525088,2,2,6,1,0,0,0,2,84,22,143654,8,4,501.57322455344087,30.21844153312821,87.49495315132192
-521799,modeshape,603,1353519968,1353521285,1353521285,21,21,6,1,0,0,0,2,83,22,143653,10,4,501.53494880023385,30.21169067127035,87.48163978475911
+658738,modeshape,611,1354212398,1354217971,1354217972,92,92,6,1,0,0,0,3,88,18,143668,34,3,501.6565971545508,30.229417824428545,87.50034802461231
+658740,modeshape,610,1354206412,1354206839,1354206839,7,7,6,1,0,0,0,1,87,18,143668,18,1,501.5591502631066,30.222457332182532,87.4933875323663
+658742,modeshape,609,1354202748,1354206481,1354206481,62,62,6,1,0,0,0,5,87,18,147454,230,14,491.7262332659677,29.466816769975722,84.77220014377365
+565553,modeshape,606,1353670947,1354026976,1354026976,5933,5933,6,4,0,0,0,31,83,18,146820,3931,118,492.9164963901376,29.56681651001226,85.14507560277892
+658727,modeshape,607,1353945366,1354019840,1354019840,1241,1241,6,2,0,0,0,5,82,18,143650,72,7,501.62199791159065,30.226244343891405,87.50435085276715
+521800,modeshape,602,1353517396,1353527032,1353527032,160,160,6,1,0,0,0,31,87,22,145886,2889,98,494.372318111402,29.701273597192326,85.69019645476605
+521797,modeshape,605,1353525735,1353525921,1353525921,3,3,6,1,0,0,0,1,87,22,143654,22,1,501.60803040639314,30.225402703718657,87.50191432191237
+521798,modeshape,604,1353524910,1353525088,1353525088,2,2,6,1,0,0,0,2,86,22,143654,8,4,501.57322455344087,30.21844153312821,87.49495315132192
+521799,modeshape,603,1353519968,1353521285,1353521285,21,21,6,1,0,0,0,2,85,22,143653,10,4,501.53494880023385,30.21169067127035,87.48163978475911
 471561,modeshape,596,1352749427,,1353000576,4185,,6,1,0,0,0,0,0,0,149828,0,0,624.0555837360173,36.6286675387778,113.68369063192462
 466709,modeshape,599,1352934248,,1352998461,1070,,6,6,4,0,4,49,0,0,145165,9337,103,493.9138222023215,29.77301691179003,85.75069748217545
-456991,modeshape,591,1352378171,,1352816974,7313,,6,5,7,0,7,20,0,0,143273,459,0,499.07519211575107,30.103369092571526,86.51316019068491
+456991,modeshape,591,1352378171,,1352816974,7313,,6,5,7,0,7,71,0,0,143273,1972,0,499.07519211575107,30.103369092571526,86.51316019068491
 475183,modeshape,598,1352807130,1352815078,1352815078,132,132,6,1,0,0,0,6,81,24,143493,49,6,500.18467799822986,30.161750050525114,86.63140362247636
 475152,modeshape,597,1352806844,1352813575,1352813575,112,112,6,1,0,0,0,0,81,24,143493,0,0,500.18467799822986,30.161750050525114,86.63140362247636
-465754,modeshape,594,1352561809,,1352725405,2726,,6,4,0,0,0,0,0,0,143273,0,0,499.07519211575107,30.103369092571526,86.51316019068491
-460161,modeshape,592,1352408225,,1352562001,2562,,6,1,0,0,0,0,0,0,143273,0,0,499.07519211575107,30.103369092571526,86.51316019068491
+465754,modeshape,594,1352561809,,1352725405,2726,,6,4,0,0,0,33,0,0,143273,854,28,499.07519211575107,30.103369092571526,86.51316019068491
+460161,modeshape,592,1352408225,,1352562001,2562,,6,1,0,0,0,2,0,0,143273,4,2,499.07519211575107,30.103369092571526,86.51316019068491
 464113,modeshape,587,1351867154,,1352494147,10449,,6,14,0,0,0,44,0,0,143273,1463,0,499.07519211575107,30.103369092571526,86.51316019068491
 460451,modeshape,593,1352411790,,1352494102,1371,,6,15,0,0,0,48,0,0,143273,1579,0,499.07519211575107,30.103369092571526,86.51316019068491
 477127,modeshape,590,1352229090,,1352272433,722,,6,10,0,0,0,0,0,0,143273,0,0,499.07519211575107,30.103369092571526,86.51316019068491

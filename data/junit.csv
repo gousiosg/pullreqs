@@ -1,48 +1,8 @@
-Updating client properties
-GHTorrent version: 0.6
-D, [2012-12-23T14:57:00.582538 #1149] DEBUG -- : GHTorrent: User KentBeck exists
-D, [2012-12-23T14:57:00.582817 #1149] DEBUG -- : GHTorrent: Transaction committed (1 ms)
-D, [2012-12-23T14:57:00.605082 #1149] DEBUG -- : GHTorrent: User KentBeck exists
-D, [2012-12-23T14:57:00.605790 #1149] DEBUG -- : GHTorrent: Repo KentBeck/junit exists
-D, [2012-12-23T14:57:00.606026 #1149] DEBUG -- : GHTorrent: Transaction committed (3 ms)
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size_at_merge,num_commits,num_commit_comments,num_issue_comments,num_comments,files_changed,total_commits_last_month,main_team_commits_last_month,sloc,churn,commits_on_files_touched,test_lines_per_1000_lines,test_cases_per_1000_lines,assertions_per_1000_lines
-D, [2012-12-23T14:57:02.546805 #1149] DEBUG -- : Updating fa9b88f..067ed0a
 
-D, [2012-12-23T14:57:02.546911 #1149] DEBUG -- : Fast-forward
-
-D, [2012-12-23T14:57:02.553374 #1149] DEBUG -- :  src/main/java/junit/runner/Version.java            |   20 +-
-
-D, [2012-12-23T14:57:02.553430 #1149] DEBUG -- :  .../junit/experimental/categories/Categories.java  |  317 ++++++++++++++++----
-
-D, [2012-12-23T14:57:02.553455 #1149] DEBUG -- :  .../org/junit/experimental/theories/Theories.java  |    1 +
-
-D, [2012-12-23T14:57:02.553480 #1149] DEBUG -- :  .../internal/runners/statements/FailOnTimeout.java |   28 ++-
-
-D, [2012-12-23T14:57:02.553504 #1149] DEBUG -- :  src/main/java/org/junit/rules/Stopwatch.java       |    4 +-
-
-D, [2012-12-23T14:57:02.553529 #1149] DEBUG -- :  src/test/java/org/junit/tests/AllTests.java        |    4 +
-
-D, [2012-12-23T14:57:02.553554 #1149] DEBUG -- :  .../tests/experimental/ExperimentalTests.java      |    4 +-
-
-D, [2012-12-23T14:57:02.553580 #1149] DEBUG -- :  .../org/junit/tests/experimental/MatcherTest.java  |    9 +-
-
-D, [2012-12-23T14:57:02.553603 #1149] DEBUG -- :  .../experimental/categories/CategoryTest.java      |  253 +++++++++++++++-
-
-D, [2012-12-23T14:57:02.553629 #1149] DEBUG -- :  .../tests/experimental/categories/JavadocTest.java |   78 +++++
-
-D, [2012-12-23T14:57:02.553659 #1149] DEBUG -- :  .../experimental/categories/MultiCategoryTest.java |  171 +++++++++++
-
-D, [2012-12-23T14:57:02.553687 #1149] DEBUG -- :  .../tests/experimental/rules/StopwatchTest.java    |    4 +-
-
-D, [2012-12-23T14:57:02.553711 #1149] DEBUG -- :  .../tests/experimental/rules/TimeoutRuleTest.java  |   46 +++-
-
-D, [2012-12-23T14:57:02.553737 #1149] DEBUG -- :  13 files changed, 844 insertions(+), 95 deletions(-)
-
-D, [2012-12-23T14:57:02.553762 #1149] DEBUG -- :  create mode 100644 src/test/java/org/junit/tests/experimental/categories/JavadocTest.java
-
-D, [2012-12-23T14:57:02.553788 #1149] DEBUG -- :  create mode 100644 src/test/java/org/junit/tests/experimental/categories/MultiCategoryTest.java
-
+663535,junit,572,1355339398,,1355417321,1298,,2,1,2,0,2,4,0,0,7646,34,4,1734.2401255558461,137.58828145435524,175.38582265236724
 663538,junit,571,1355338303,,1355338646,5,,2,0,0,0,0,0,0,0,7646,0,0,1734.2401255558461,137.58828145435524,175.38582265236724
+480904,junit,549,1352997990,,1355336465,38974,,2,9,24,1,25,12,0,0,7473,136,9,1687.4080021410412,129.26535527900444,168.07172487622108
 658962,junit,568,1354934122,,1355172026,3965,,2,2,0,2,2,6,0,0,7528,835,0,1696.9978746014879,129.78214665249735,170.03188097768333
 658960,junit,569,1355010668,1355152948,1355152948,2371,2371,1,1,0,3,3,2,96,14,7528,62,9,1696.9978746014879,129.78214665249735,170.03188097768333
 503736,junit,555,1353398356,,1354894935,24942,,1,17,0,3,3,16,0,0,7470,260,15,1692.6372155287818,129.58500669344042,168.40696117804552

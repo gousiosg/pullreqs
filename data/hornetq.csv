@@ -1,197 +1,18 @@
-Updating client properties
-GHTorrent version: 0.6
-D, [2012-12-23T23:33:59.057596 #14768] DEBUG -- : GHTorrent: User hornetq exists
-D, [2012-12-23T23:33:59.057893 #14768] DEBUG -- : GHTorrent: Transaction committed (13 ms)
-D, [2012-12-23T23:33:59.088953 #14768] DEBUG -- : GHTorrent: User hornetq exists
-D, [2012-12-23T23:33:59.101067 #14768] DEBUG -- : GHTorrent: Repo hornetq/hornetq exists
-D, [2012-12-23T23:33:59.101333 #14768] DEBUG -- : GHTorrent: Transaction committed (26 ms)
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size_at_merge,num_commits,num_commit_comments,num_issue_comments,num_comments,files_changed,total_commits_last_month,main_team_commits_last_month,sloc,churn,commits_on_files_touched,test_lines_per_1000_lines,test_cases_per_1000_lines,assertions_per_1000_lines
-D, [2012-12-23T23:34:06.143231 #14768] DEBUG -- : Updating 39c3c17..66868f2
-
-D, [2012-12-23T23:34:06.143384 #14768] DEBUG -- : Fast-forward
-
-D, [2012-12-23T23:34:06.165200 #14768] DEBUG -- :  docs/README.html                                   |   10 +-
-
-D, [2012-12-23T23:34:06.165276 #14768] DEBUG -- :  .../hornetq/jms/example/ClientKickoffExample.java  |    2 +-
-
-D, [2012-12-23T23:34:06.165297 #14768] DEBUG -- :  examples/jms/clustered-standalone/pom.xml          |   27 ++
-
-D, [2012-12-23T23:34:06.165319 #14768] DEBUG -- :  .../org/hornetq/common/example/HornetQExample.java |    2 +-
-
-D, [2012-12-23T23:34:06.165342 #14768] DEBUG -- :  .../java/org/hornetq/{utils => api/core}/Pair.java |    2 +-
-
-D, [2012-12-23T23:34:06.165365 #14768] DEBUG -- :  .../src/test/java/org/hornetq/utils/PairTest.java  |    1 +
-
-D, [2012-12-23T23:34:06.165385 #14768] DEBUG -- :  .../api/core/DiscoveryGroupConfiguration.java      |   60 ++++-
-
-D, [2012-12-23T23:34:06.165405 #14768] DEBUG -- :  ...overyGroupConfigurationCompatibilityHelper.java |   47 +++
-
-D, [2012-12-23T23:34:06.165427 #14768] DEBUG -- :  .../core/JGroupsBroadcastGroupConfiguration.java   |   29 ++-
-
-D, [2012-12-23T23:34:06.165446 #14768] DEBUG -- :  .../api/core/UDPBroadcastGroupConfiguration.java   |    2 +-
-
-D, [2012-12-23T23:34:06.165470 #14768] DEBUG -- :  .../core/client/impl/ClientSessionFactoryImpl.java |    2 +-
-
-D, [2012-12-23T23:34:06.165490 #14768] DEBUG -- :  .../core/client/impl/ServerLocatorImpl.java        |   55 +++-
-
-D, [2012-12-23T23:34:06.165511 #14768] DEBUG -- :  .../core/client/impl/ServerLocatorInternal.java    |    2 +-
-
-D, [2012-12-23T23:34:06.165531 #14768] DEBUG -- :  .../core/client/impl/TopologyMemberImpl.java       |    2 +-
-
-D, [2012-12-23T23:34:06.165561 #14768] DEBUG -- :  .../wireformat/ClusterTopologyChangeMessage.java   |    2 +-
-
-D, [2012-12-23T23:34:06.165582 #14768] DEBUG -- :  .../ClusterTopologyChangeMessage_V2.java           |    2 +-
-
-D, [2012-12-23T23:34:06.165602 #14768] DEBUG -- :  .../org/hornetq/utils/OrderedExecutorFactory.java  |   36 ++-
-
-D, [2012-12-23T23:34:06.165621 #14768] DEBUG -- :  .../org/hornetq/jms/client/HornetQDestination.java |    2 +-
-
-D, [2012-12-23T23:34:06.165641 #14768] DEBUG -- :  .../jms/management/impl/JMSTopicControlImpl.java   |    2 +-
-
-D, [2012-12-23T23:34:06.165666 #14768] DEBUG -- :  .../impl/journal/JMSJournalStorageManagerImpl.java |    2 +-
-
-D, [2012-12-23T23:34:06.165685 #14768] DEBUG -- :  .../TransportConfigurationEncodingSupport.java     |    2 +-
-
-D, [2012-12-23T23:34:06.165707 #14768] DEBUG -- :  .../server/recovery/HornetQRecoveryRegistry.java   |    2 +-
-
-D, [2012-12-23T23:34:06.165727 #14768] DEBUG -- :  .../jms/server/recovery/RecoveryDiscovery.java     |    2 +-
-
-D, [2012-12-23T23:34:06.165752 #14768] DEBUG -- :  .../journal/impl/AbstractJournalUpdateTask.java    |    2 +-
-
-D, [2012-12-23T23:34:06.165774 #14768] DEBUG -- :  .../core/journal/impl/JournalCompactor.java        |    2 +-
-
-D, [2012-12-23T23:34:06.165793 #14768] DEBUG -- :  .../org/hornetq/core/journal/impl/JournalImpl.java |    2 +-
-
-D, [2012-12-23T23:34:06.165813 #14768] DEBUG -- :  .../hornetq/core/journal/impl/JournalRecord.java   |    2 +-
-
-D, [2012-12-23T23:34:06.165832 #14768] DEBUG -- :  .../org/hornetq/core/journal/impl/TimedBuffer.java |  193 ++++++++++---
-
-D, [2012-12-23T23:34:06.165854 #14768] DEBUG -- :  .../org/hornetq/journal/HornetQJournalLogger.java  |    5 +
-
-D, [2012-12-23T23:34:06.165874 #14768] DEBUG -- :  .../java/org/hornetq/ra/HornetQRAProperties.java   |   24 ++-
-
-D, [2012-12-23T23:34:06.165896 #14768] DEBUG -- :  .../main/java/org/hornetq/ra/HornetQRaUtils.java   |   30 ++
-
-D, [2012-12-23T23:34:06.165922 #14768] DEBUG -- :  .../org/hornetq/ra/HornetQResourceAdapter.java     |   98 +++----
-
-D, [2012-12-23T23:34:06.165949 #14768] DEBUG -- :  .../rest/queue/QueueDestinationsResource.java      |    2 +-
-
-D, [2012-12-23T23:34:06.165969 #14768] DEBUG -- :  .../deployers/impl/AddressSettingsDeployer.java    |    2 +-
-
-D, [2012-12-23T23:34:06.165990 #14768] DEBUG -- :  .../deployers/impl/FileConfigurationParser.java    |    2 +-
-
-D, [2012-12-23T23:34:06.166010 #14768] DEBUG -- :  .../core/deployers/impl/FileDeploymentManager.java |    2 +-
-
-D, [2012-12-23T23:34:06.166031 #14768] DEBUG -- :  .../core/deployers/impl/SecurityDeployer.java      |    2 +-
-
-D, [2012-12-23T23:34:06.166054 #14768] DEBUG -- :  .../cursor/impl/PageSubscriptionCounterImpl.java   |    2 +-
-
-D, [2012-12-23T23:34:06.166074 #14768] DEBUG -- :  .../paging/cursor/impl/PageSubscriptionImpl.java   |   43 +--
-
-D, [2012-12-23T23:34:06.166095 #14768] DEBUG -- :  .../java/org/hornetq/core/paging/impl/Page.java    |    8 +-
-
-D, [2012-12-23T23:34:06.166115 #14768] DEBUG -- :  .../core/paging/impl/PageTransactionInfoImpl.java  |    2 +-
-
-D, [2012-12-23T23:34:06.166142 #14768] DEBUG -- :  .../hornetq/core/paging/impl/PagingStoreImpl.java  |    2 +-
-
-D, [2012-12-23T23:34:06.166162 #14768] DEBUG -- :  .../hornetq/core/persistence/StorageManager.java   |    2 +-
-
-D, [2012-12-23T23:34:06.166181 #14768] DEBUG -- :  .../persistence/impl/journal/DescribeJournal.java  |  300 ++++++++++++++++++++
-
-D, [2012-12-23T23:34:06.166203 #14768] DEBUG -- :  .../impl/journal/JournalStorageManager.java        |  282 +------------------
-
-D, [2012-12-23T23:34:06.166223 #14768] DEBUG -- :  .../core/persistence/impl/journal/PrintData.java   |    4 +-
-
-D, [2012-12-23T23:34:06.166246 #14768] DEBUG -- :  .../impl/nullpm/NullStorageManager.java            |    2 +-
-
-D, [2012-12-23T23:34:06.166265 #14768] DEBUG -- :  .../hornetq/core/postoffice/DuplicateIDCache.java  |    2 +-
-
-D, [2012-12-23T23:34:06.166287 #14768] DEBUG -- :  .../org/hornetq/core/postoffice/PostOffice.java    |    2 +-
-
-D, [2012-12-23T23:34:06.166309 #14768] DEBUG -- :  .../core/postoffice/impl/DuplicateIDCacheImpl.java |    2 +-
-
-D, [2012-12-23T23:34:06.166331 #14768] DEBUG -- :  .../core/postoffice/impl/PostOfficeImpl.java       |    2 +-
-
-D, [2012-12-23T23:34:06.166351 #14768] DEBUG -- :  .../protocol/core/impl/CoreProtocolManager.java    |    2 +-
-
-D, [2012-12-23T23:34:06.166370 #14768] DEBUG -- :  .../hornetq/core/protocol/stomp/StompSession.java  |    2 +-
-
-D, [2012-12-23T23:34:06.166390 #14768] DEBUG -- :  .../org/hornetq/core/server/HornetQServer.java     |    2 +-
-
-D, [2012-12-23T23:34:06.166409 #14768] DEBUG -- :  .../hornetq/core/server/HornetQServerLogger.java   |    6 +-
-
-D, [2012-12-23T23:34:06.166434 #14768] DEBUG -- :  .../org/hornetq/core/server/LiveNodeLocator.java   |    2 +-
-
-D, [2012-12-23T23:34:06.166453 #14768] DEBUG -- :  .../org/hornetq/core/server/ServerMessage.java     |    8 +
-
-D, [2012-12-23T23:34:06.166475 #14768] DEBUG -- :  .../core/server/cluster/ClusterConnection.java     |    2 +-
-
-D, [2012-12-23T23:34:06.166498 #14768] DEBUG -- :  .../server/cluster/impl/ClusterConnectionImpl.java |    2 +-
-
-D, [2012-12-23T23:34:06.166518 #14768] DEBUG -- :  .../core/server/cluster/impl/Redistributor.java    |    2 +-
-
-D, [2012-12-23T23:34:06.166540 #14768] DEBUG -- :  .../core/server/impl/AnyLiveNodeLocator.java       |    2 +-
-
-D, [2012-12-23T23:34:06.166559 #14768] DEBUG -- :  .../core/server/impl/HornetQServerImpl.java        |    2 +-
-
-D, [2012-12-23T23:34:06.166581 #14768] DEBUG -- :  .../core/server/impl/NamedLiveNodeLocator.java     |    2 +-
-
-D, [2012-12-23T23:34:06.166600 #14768] DEBUG -- :  .../hornetq/core/server/impl/QuorumManager.java    |    2 +-
-
-D, [2012-12-23T23:34:06.166623 #14768] DEBUG -- :  .../core/server/impl/ServerMessageImpl.java        |    6 +
-
-D, [2012-12-23T23:34:06.187819 #14768] DEBUG -- :  .../core/server/impl/ServerSessionImpl.java        |    2 +-
-
-D, [2012-12-23T23:34:06.187854 #14768] DEBUG -- :  .../org/hornetq/tests/util/ServiceTestBase.java    |    2 +-
-
-D, [2012-12-23T23:34:06.187885 #14768] DEBUG -- :  pom.xml                                            |    3 +-
-
-D, [2012-12-23T23:34:06.187923 #14768] DEBUG -- :  .../tests/integration/client/PagingTest.java       |   24 +-
-
-D, [2012-12-23T23:34:06.187957 #14768] DEBUG -- :  .../cluster/failover/BackupSyncJournalTest.java    |    2 +-
-
-D, [2012-12-23T23:34:06.187977 #14768] DEBUG -- :  .../cluster/failover/QuorumFailOverTest.java       |    2 +-
-
-D, [2012-12-23T23:34:06.188049 #14768] DEBUG -- :  .../integration/journal/NIOJournalCompactTest.java |    2 +-
-
-D, [2012-12-23T23:34:06.188071 #14768] DEBUG -- :  .../management/BroadcastGroupControlTest.java      |    2 +-
-
-D, [2012-12-23T23:34:06.188094 #14768] DEBUG -- :  ...SConnectionFactoryConfigurationStorageTest.java |    2 +-
-
-D, [2012-12-23T23:34:06.188114 #14768] DEBUG -- :  .../TransportConfigurationEncodingSupportTest.java |    2 +-
-
-D, [2012-12-23T23:34:06.188134 #14768] DEBUG -- :  tests/joram-tests/pom.xml                          |   15 +-
-
-D, [2012-12-23T23:34:06.188157 #14768] DEBUG -- :  .../test/java/org/hornetq/jms/HornetQAdmin.java    |   41 ++--
-
-D, [2012-12-23T23:34:06.188183 #14768] DEBUG -- :  tests/pom.xml                                      |    2 +-
-
-D, [2012-12-23T23:34:06.188205 #14768] DEBUG -- :  .../deployers/impl/FileDeploymentManagerTest.java  |    2 +-
-
-D, [2012-12-23T23:34:06.188224 #14768] DEBUG -- :  .../unit/core/journal/impl/TimedBufferTest.java    |  180 +++++++++++-
-
-D, [2012-12-23T23:34:06.188245 #14768] DEBUG -- :  .../unit/core/paging/impl/PagingStoreImplTest.java |    2 +-
-
-D, [2012-12-23T23:34:06.188265 #14768] DEBUG -- :  .../core/postoffice/impl/BindingsImplTest.java     |    8 +
-
-D, [2012-12-23T23:34:06.188287 #14768] DEBUG -- :  .../impl/DuplicateDetectionUnitTest.java           |    2 +-
-
-D, [2012-12-23T23:34:06.188307 #14768] DEBUG -- :  .../core/server/impl/fakes/FakePostOffice.java     |    2 +-
-
-D, [2012-12-23T23:34:06.188329 #14768] DEBUG -- :  .../unit/ra/ConnectionFactoryPropertiesTest.java   |    2 +
-
-D, [2012-12-23T23:34:06.188349 #14768] DEBUG -- :  .../unit/ra/HornetQResourceAdapterConfigTest.java  |   14 +-
-
-D, [2012-12-23T23:34:06.188377 #14768] DEBUG -- :  86 files changed, 1115 insertions(+), 558 deletions(-)
-
-D, [2012-12-23T23:34:06.188397 #14768] DEBUG -- :  rename hornetq-commons/src/main/java/org/hornetq/{utils => api/core}/Pair.java (98%)
-
-D, [2012-12-23T23:34:06.188417 #14768] DEBUG -- :  create mode 100644 hornetq-core-client/src/main/java/org/hornetq/api/core/DiscoveryGroupConfigurationCompatibilityHelper.java
-
-D, [2012-12-23T23:34:06.188439 #14768] DEBUG -- :  create mode 100644 hornetq-server/src/main/java/org/hornetq/core/persistence/impl/journal/DescribeJournal.java
-
-744093,hornetq,731,1355309737,1355315045,1355315045,88,88,5,2,0,0,0,21,180,60,136528,486,29,1134.3900152349702,24.2880581272706,88.29690612914567
-744179,hornetq,732,1355311916,1355315034,1355315034,51,51,5,3,0,0,0,21,180,60,274825,410,21,13.750568543618668,0.22195942872737198,2.4706631492768123
+760259,hornetq,745,1355834393,1355835157,1355835157,12,12,5,1,0,0,0,1,165,53,136887,32,1,1132.8029688721356,24.246276125563423,88.1164756331865
+759597,hornetq,744,1355816176,1355816813,1355816813,10,10,5,3,0,0,0,283,163,52,136887,582,548,1132.8029688721356,24.246276125563423,88.1164756331865
+759580,hornetq,743,1355807390,1355815854,1355815854,141,141,5,1,0,0,0,1,162,51,136880,2,1,1132.8170660432495,24.247516072472237,88.1136762127411
+759364,hornetq,742,1355801648,1355815579,1355815579,232,232,5,1,0,0,0,6,162,51,275071,55,9,13.738271209978516,0.2217609271788011,2.4684535992525567
+759365,hornetq,741,1355801640,1355815563,1355815563,232,232,5,1,0,0,0,7,162,51,136880,58,13,1132.8170660432495,24.247516072472237,88.1136762127411
+759356,hornetq,740,1355801136,1355815517,1355815517,239,239,5,1,0,0,0,6,162,51,274352,55,9,13.774275383448998,0.22234210065900742,2.4749227270076397
+757450,hornetq,739,1355755545,1355764437,1355764437,148,148,5,3,0,0,0,3,157,50,136880,18,8,1132.8170660432495,24.247516072472237,88.1136762127411
+757231,hornetq,738,1355751482,1355755478,1355755478,66,66,5,1,0,0,0,1,155,49,136871,20,3,1132.8915548216933,24.249110476287893,88.11947015803202
+684885,hornetq,735,1355433608,,1355750656,5284,,5,1,4,0,4,4,0,0,136695,401,5,1133.5089066900766,24.26570101320458,88.21829620688395
+756939,hornetq,737,1355744193,1355750439,1355750439,104,104,5,1,0,0,0,4,153,48,136774,166,4,1132.8615087662859,24.251685261818768,88.16734174623832
+684884,hornetq,736,1355480012,,1355733350,4222,,5,5,0,0,0,65,0,0,136695,518,76,1133.5089066900766,24.26570101320458,88.21829620688395
+747912,hornetq,734,1355406004,1355410757,1355410757,79,79,5,1,0,0,0,1,173,57,136695,2,1,1133.5089066900766,24.26570101320458,88.21829620688395
+744093,hornetq,731,1355309737,1355315045,1355315045,88,88,5,2,0,0,0,21,182,62,136528,486,29,1134.3900152349702,24.2880581272706,88.29690612914567
+744179,hornetq,732,1355311916,1355315034,1355315034,51,51,5,3,0,0,0,21,181,61,274825,410,21,13.750568543618668,0.22195942872737198,2.4706631492768123
 744182,hornetq,733,1355311959,1355314794,1355314794,47,47,5,3,0,0,0,21,180,60,274106,410,21,13.786637286305298,0.22254164447330596,2.4771438786454874
 684891,hornetq,728,1355281839,,1355311871,500,,5,1,0,0,0,19,0,0,274106,406,21,13.786637286305298,0.22254164447330596,2.4771438786454874
 684890,hornetq,729,1355281850,,1355311859,500,,5,1,0,0,0,19,0,0,274825,406,21,13.750568543618668,0.22195942872737198,2.4706631492768123
@@ -255,13 +76,13 @@ D, [2012-12-23T23:34:06.188439 #14768] DEBUG -- :  create mode 100644 hornetq-se
 475436,hornetq,671,1352813231,,1352814376,19,,5,1,0,0,0,0,0,0,136080,0,0,1133.913874191652,24.272486772486772,88.4920634920635
 474927,hornetq,669,1352803167,1352809082,1352809082,98,98,5,2,0,0,0,5,240,74,136080,25,21,1133.913874191652,24.272486772486772,88.4920634920635
 474834,hornetq,668,1352800624,1352801802,1352801802,19,19,5,1,0,0,0,1,239,73,136080,293,3,1134.8030570252793,24.272486772486772,88.4920634920635
-470981,hornetq,667,1352744480,1352744496,1352744496,0,0,5,2,0,0,0,0,237,72,273749,0,0,13.804616637868996,0.22283186422598805,2.4803743575318995
-470959,hornetq,665,1352744233,1352744280,1352744280,0,0,5,1,0,0,0,0,235,72,273752,0,0,13.80446535550425,0.22282942225079633,2.480347175545749
-470961,hornetq,666,1352744240,1352744270,1352744270,0,0,5,1,0,0,0,0,233,70,274428,0,0,13.77046074015771,0.22228052531082834,2.4742373227221712
+470981,hornetq,667,1352744480,1352744496,1352744496,0,0,5,2,0,0,0,8,237,72,273749,18,8,13.804616637868996,0.22283186422598805,2.4803743575318995
+470959,hornetq,665,1352744233,1352744280,1352744280,0,0,5,1,0,0,0,3,235,72,273752,27,7,13.80446535550425,0.22282942225079633,2.480347175545749
+470961,hornetq,666,1352744240,1352744270,1352744270,0,0,5,1,0,0,0,3,233,70,274428,27,7,13.77046074015771,0.22228052531082834,2.4742373227221712
 470333,hornetq,664,1352736256,1352737710,1352737710,24,24,5,1,0,0,0,1,230,69,136080,75,2,1134.7075249853026,24.272486772486772,88.4920634920635
 469499,hornetq,663,1352719629,1352719990,1352719990,6,6,5,1,0,0,0,1,238,72,136080,61,2,1134.7075249853026,24.272486772486772,88.4920634920635
 460498,hornetq,661,1352544203,1352711564,1352711564,2789,2789,5,3,1,0,1,3,240,72,136096,59,1,1135.0884669644956,24.284328709146486,88.60657183164824
-468966,hornetq,662,1352704426,,1352707899,57,,5,1,0,0,0,0,0,0,136096,0,0,1135.0884669644956,24.284328709146486,88.60657183164824
+468966,hornetq,662,1352704426,,1352707899,57,,5,1,0,0,0,1,0,0,136096,4,0,1135.0884669644956,24.284328709146486,88.60657183164824
 464425,hornetq,660,1352499902,1352705917,1352705917,3433,3433,5,1,0,0,0,6,237,70,136096,516,13,1135.0884669644956,24.284328709146486,88.60657183164824
 464242,hornetq,659,1352496450,1352497370,1352497370,15,15,5,2,0,0,0,5,267,74,136095,519,16,1134.3840699511372,24.269811528711564,88.56313604467468
 463783,hornetq,658,1352486559,,1352496427,164,,5,1,0,0,0,3,0,0,136095,201,10,1134.3840699511372,24.269811528711564,88.56313604467468

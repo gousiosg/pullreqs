@@ -1,13 +1,4 @@
-Updating client properties
-GHTorrent version: 0.6
-D, [2012-12-23T13:37:42.427327 #11859] DEBUG -- : GHTorrent: User JumpstartLab exists
-D, [2012-12-23T13:37:42.427662 #11859] DEBUG -- : GHTorrent: Transaction committed (12 ms)
-D, [2012-12-23T13:37:42.463143 #11859] DEBUG -- : GHTorrent: User JumpstartLab exists
-D, [2012-12-23T13:37:42.474667 #11859] DEBUG -- : GHTorrent: Repo JumpstartLab/reading exists
-D, [2012-12-23T13:37:42.474953 #11859] DEBUG -- : GHTorrent: Transaction committed (24 ms)
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size_at_merge,num_commits,num_commit_comments,num_issue_comments,num_comments,files_changed,total_commits_last_month,main_team_commits_last_month,sloc,churn,commits_on_files_touched,test_lines_per_1000_lines,test_cases_per_1000_lines,assertions_per_1000_lines
-D, [2012-12-23T13:37:43.298047 #11859] DEBUG -- : Already up-to-date.
-
 139786,reading,259,1338292964,1338302871,1338302871,165,165,5,1,0,0,0,1,217,111,119,41,2,0.0,0.0,0.0
 139994,reading,260,1338292986,1338302860,1338302860,164,164,5,1,0,0,0,1,217,111,119,43,1,0.0,0.0,0.0
 139787,reading,261,1338292990,1338302850,1338302850,164,164,5,1,0,0,0,1,217,111,119,30,2,0.0,0.0,0.0
