@@ -1,5 +1,4 @@
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size_at_merge,num_commits,num_commit_comments,num_issue_comments,num_comments,files_changed,total_commits_last_month,main_team_commits_last_month,sloc,churn,commits_on_files_touched,test_lines_per_1000_lines,test_cases_per_1000_lines,assertions_per_1000_lines
-<<<<<<< HEAD
 766611,scala,1810,1356389109,,1356647592,4308,,9,1,0,0,0,1,0,0,239079,6,0,0.0,0.0,0.0
 760295,scala,1786,1355835185,,1356562347,12119,,10,1,0,0,0,8,0,0,238492,87,9,0.0,0.0,0.0
 763616,scala,1801,1356198325,,1356561619,6054,,10,1,0,0,0,5,0,0,249548,124,25,0.0,0.0,0.0
@@ -51,8 +50,6 @@ pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minut
 647020,scala,1750,1355181180,,1355346739,2759,,10,1,0,6,6,6,0,0,188112,37,0,0.0,0.0,0.0
 647027,scala,1743,1355124668,,1355340465,3596,,10,6,0,20,20,40,0,0,239559,472,0,0.0,0.0,0.0
 657184,scala,1757,1355255994,,1355325466,1157,,10,70,0,5,5,547,0,0,239934,2956,500,0.0,0.0,0.0
-=======
->>>>>>> 5312b68c552c1b29b7b615e61d85e149ec558a28
 657198,scala,1756,1355249629,,1355259888,170,,10,2,0,7,7,7,0,0,249171,99,0,0.0,0.0,0.0
 647056,scala,1731,1354948091,1355185083,1355185083,3949,3949,10,1,0,7,7,1,371,5,246725,3,1,0.0,0.0,0.0
 647037,scala,1744,1355138693,1355167720,1355167720,483,483,10,1,0,9,9,3,369,7,248744,44,4,0.0,0.0,0.0
