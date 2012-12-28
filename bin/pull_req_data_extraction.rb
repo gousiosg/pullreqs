@@ -12,6 +12,7 @@ require 'java_pull_req_data'
 require 'ruby_pull_req_data'
 require 'scala'
 require 'c'
+require 'javascript'
 
 class PullReqDataExtraction < GHTorrent::Command
 
@@ -59,6 +60,11 @@ Extract data for pull requests for a given repository
   # Main command code
   def go
 
+    Signal.trap("TERM") {
+      info "pull_request_data_extraction: Received SIGTERM, exiting"
+      Trollop::die("Bye bye")
+    }
+
     @ght ||= GHTorrent::Mirror.new(settings)
 
     user_entry = @ght.transaction{@ght.ensure_user(ARGV[0], false, false)}
@@ -78,6 +84,7 @@ Extract data for pull requests for a given repository
       when "java" then self.extend(JavaData)
       when "c" then self.extend(CData)
       when "scala" then self.extend(ScalaData)
+      when "javascript" then self.extend(JavascriptData)
     end
 
     # Print file header
