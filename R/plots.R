@@ -12,30 +12,46 @@ plot.percentage.merged <- function(dfs)
     rbind(data.frame(project=unique(x[[1]][1]), status="merged", value=merged_perc),
       data.frame(project=unique(x[[1]][1]), status="unmerged", value=unmerged_perc))
   }, dfs))
-
-  ggplot(a, aes(x=project, y =value, fill = status)) + 
+  
+  ggplot(a, aes(x= project, y = value, fill = status)) + 
     geom_bar(stat="identity", colour="white") +
-    opts(axis.text.x=theme_text(angle=90, hjust = 1)) +
-    ylab("Percentage")
+    theme(axis.text.x=element_text(angle=90, hjust = 1)) +
+    ylab("Percentage") + 
+    xlab("Project")
 }
 
-# Plot various charts for selected projects 
-data.accept.lifetime <- function(dfs, projects)
+# Plot various life-time related charts for selected projects
+data.merged <- function(dfs, projects, column)
 {
   do.call(rbind, Map(function(x){
     project = toString(unique(x[[1]][1]))
     if (trim(project) %in% projects) {
       merged = subset(x, x$merged_at > 0)
-      data.frame(name=project, id=merged$github_id, lifetime=merged$lifetime_minutes)
+      data.frame(name=project, id=merged$github_id, lifetime=merged[[column]])
     } else {
       data.frame(name=c(), id=c(), lifetime=c())
     }
   }, dfs)) 
 }
 
+# Plot various life-time related charts for selected projects
+data.unmerged <- function(dfs, projects, column)
+{
+  do.call(rbind, Map(function(x){
+    project = toString(unique(x[[1]][1]))
+    if (trim(project) %in% projects) {
+      merged = subset(x, x$merged_at == -1)
+      data.frame(name=project, id=merged$github_id, lifetime=merged[[column]])
+    } else {
+      data.frame(name=c(), id=c(), lifetime=c())
+    }
+  }, dfs)) 
+}
+
+# Plot various life-time related charts for selected projects
 plot.accept.lifetime.boxplot <- function(dfs, projects)
 {
-  ggplot(data.accept.lifetime(dfs, projects), aes(factor(name), lifetime)) +
+  ggplot(data.merged(dfs, projects, 'lifetime_minutes'), aes(factor(name), lifetime)) +
     geom_boxplot() +
     ylim(0, 3000) +
     xlab("Project") +
@@ -44,7 +60,7 @@ plot.accept.lifetime.boxplot <- function(dfs, projects)
 
 plot.accept.lifetime.freq <- function(dfs, projects)
 {
-  ggplot(data.accept.lifetime(dfs, projects), aes(x=lifetime, colour = name)) + 
+  ggplot(data.merged(dfs, projects, 'lifetime_minutes'), aes(x=lifetime, colour = name)) + 
     geom_density(alpha = 0.2) + 
     xlim(0, 10000) +
     xlab("Lifetime (minutes)") + 
@@ -53,8 +69,10 @@ plot.accept.lifetime.freq <- function(dfs, projects)
 
 plot.accept.lifetime.histogram <- function(dfs, projects)
 {
-  ggplot(data.accept.lifetime(dfs, projects), aes(x=lifetime, fill = name)) + 
+  ggplot(data.merged(dfs, projects, 'lifetime_minutes'), aes(x=lifetime, fill = name)) + 
     geom_bar() +
     xlim(0, 3000) +
     xlab("Lifetime (minutes)")
 }
+
+# Plot various size-related charts for selected projects

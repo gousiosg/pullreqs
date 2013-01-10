@@ -5,7 +5,7 @@
 
 \begin{document}
 
-\title{An exploration of pull-based software development on Github}
+\title{An exploration of the pull-based software development model}
 
 \author{\IEEEauthorblockN{Georgios Gousios and Martin Pinzger and Arie van
 Deursen}
@@ -73,8 +73,6 @@ request handling and merge time. Our contributions are the following:
 
 \section{Distributed development models}
 
-
-
 \subsubsection{Shared repository} Developers share a common repository, with read
 and write permissions. To work, they clone it locally, modify its contents,
 potentially introducing new branches, and push their changes back to the central
@@ -102,9 +100,53 @@ pull requests are usually accompanied by code reviews and discussion; this is
 why they are primarily performed if the project tooling supports this kind of
 interaction.
 
+\section{Distributed development on Github}
 
+Our study of pull-request based development is based on data from the Github
+collaborative development forge, as made available through the GHTorrent
+project~\cite{GS12}. Specifically, we used a dataset slice that covered activity
+across all projects on Github from early February 2012 to end of December 2012.
+Github offers two types of data in its {\sc api}; a streaming data flow listing
+events, such as forking or creating pull requests, happening on repositories and
+a static view of entity states. To obtain references to the roots of the static
+view entities, the event stream needs to be followed.
 
-\section{Aspects of pull-based software development}
+Github is a very popular development site;
+in in its main page, Github reports more than 4 million repositories and 2 
+million users. However, the majority of those repositories are not particularity
+active: in 2012, the GHTorrent dataset captured events initiated by  
+% db.events.distinct('actor.id').count()
+users affecting 
+% db.events.distinct('repo.id').count()
+repositories. 
+Moreover, the majority of registered repositories are forks of other 
+repositories; in the GHTorrent dataset, only half
+% select (((select count(*) from forks) * 100 ) / (select count(*) from projects))
+(~53\%) of the repositories are original repositories;
+from those, only \todo{q: \% of repos that got a single commit}\% where active in the last year.
+This effect can be seen in Figure~\ref{fig:growth}. While the total number of
+repositories increases rapidly, the number of events remains 
+relatively stable.
+
+Github supports all types of distributed development outlined above;
+pull requests receive special treatment. The site is tuned to allow easy forking
+of projects by project outsiders, while automating the generation of pull
+requests through automatic comparison of project branches. Pull requests are
+submitted to the repository for review; any Github user can participate to the
+review process, although usually it is project community members that do so
+\todo{q: \% of comments by non-committers}. The
+review process consists of comments on the pull request as a whole and also
+comments on the individual commits that comprise the pull request.
+Pull requests receive comments quite frequently: on average, each pull
+requests receive 5.6 (95\% quantile: 18) discussion comments and .
+%select avg(cnt) from (select pr.id as pr, count(*)  as cnt from pull_requests, pr.pull_request_comments prc where prc.pull_request_id = pr. id group by pr.id) as a
+
+Pull requests are enabled by default on all repositories opened on Github.
+For the projects that are not forks, 
+\todo{q: \% projects that received pull reqs}
+received a pull request in 2012. For 
+
+In the following sections we examine in detail characteristics of 
 
 \subsection{Lifetime of pull requests}
 
@@ -126,21 +168,22 @@ interaction.
 \end{figure*}
 
 
-
 An important observation is that there are several pull requests whose
 lifetime is only limited to a ver
 
-\subsection{Sizes for pull requests}
-
-
+\subsection{Sizes of pull requests}
 
 \subsection{Discussion and Code review}
+
+Once a pull request has been submitted, it is open for discussion.
 
 \subsection{Team size}
 
 \subsection{Testing}
 
 \section{Acceptance and rejection}
+
+
 
 \section{Discussions and Conclusion}
 

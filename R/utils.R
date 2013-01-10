@@ -16,15 +16,21 @@ is.integer <- function(N){
 # Load all csv files in the provided dir as data frames
 load.all <- function(dir = ".") {
   lapply(list.files(path = dir, pattern = "*.csv$", full.names = T),
-         function(x){read.csv(pipe(paste("cut -f2-19 -d',' ", x)))})
+         function(x){read.csv(pipe(paste("cut -f2-22 -d',' ", x)))})
+}
+
+# Add merged column
+add.merged <- function(dfs) {
+  Map(function(df){
+    with(df, df$merged <- function(r){if(is.na(r[4])){0} else {1}})
+  }, dfs)
 }
 
 # Merge all dataframes in the provided list into one dataframe
 merge.dataframes <- function(dataframes, fields) {
   merged <- data.frame()
   for (i in 1:length(dataframes)) {
-    name <- unique(dataframes[[i]]['project_name'])
-    print(dataframes[[i]][1])
+    name <- unique(dataframes[[i]][['project_name']])
     print(sprintf("Merging dataframe %s", name))
     merged <- rbind(merged, dataframes[[i]])
   }

@@ -204,3 +204,24 @@ group by p.id
 having count(*) > 100
 order by count(*) desc
 
+# Repos that are not forks
+
+select u.login, p.name
+from projects p
+where not exists (select * from forks where forked_project_id=p.id)
+
+# Project characteristics
+
+select concat(u.login, '/', p.name) as owner,
+(select count(*) from commits c, project_commits pc where pc.project_id = p.id and pc.commit_id = c.id) as commits,
+(select count(*) from watchers where repo_id = p.id) as watchers,
+(select count(*) from pull_requests where base_repo_id = p.id) as pull_requests,
+(select count(*) from issues where repo_id = p.id) as issues,
+(select count(*) from project_members where repo_id = p.id) as project_members,
+(select count(distinct c.author_id) from commits c, project_commits pc where pc.project_id = p.id and pc.commit_id = c.id) as contributors,
+p.language
+from projects p, users u
+where not exists (select forked_from_id from forks where forked_project_id = p.id)
+and u.id = p.owner_id
+group by p.id 
+order by commits desc;
