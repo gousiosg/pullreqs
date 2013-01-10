@@ -1,5 +1,4 @@
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size_at_merge,num_commits,num_commit_comments,num_issue_comments,num_comments,files_changed,total_commits_last_month,main_team_commits_last_month,sloc,churn,commits_on_files_touched,test_lines_per_1000_lines,test_cases_per_1000_lines,assertions_per_1000_lines
-
 765812,redis,852,1356631728,,1356631924,3,,5,250,0,0,0,655,0,0,57417,99458,9,0.0,0.0,0.0
 689790,redis,825,1355394225,,1355499828,1760,,5,2,0,1,1,7,0,0,57417,37,0,0.0,0.0,0.0
 689789,redis,829,1355475109,,1355475160,0,,5,1,0,0,0,1,0,0,57401,1,0,0.0,0.0,0.0
