@@ -9,11 +9,11 @@ module ScalaData
   end
 
   def test_lines(pr_id)
-    0
+    count_sloc(test_files(pr_id))
   end
 
   def test_files(pr_id)
-    0
+    files_at_commit(pr_id, test_file_filter)
   end
 
   def src_files(pr_id)
@@ -26,6 +26,14 @@ module ScalaData
 
   def src_lines(pr_id)
     count_sloc(src_files(pr_id))
+  end
+
+  def test_file_filter
+    lambda { |f|
+      path = if f.class == Hash then f[:path] else f end
+      path.include?("/test/") and
+        (path.end_with?('.java') or path.end_with?('.scala'))
+    }
   end
 
   private

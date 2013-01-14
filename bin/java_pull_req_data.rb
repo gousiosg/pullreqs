@@ -14,12 +14,7 @@ module JavaData
   end
 
   def test_files(pr_id)
-    files_at_commit(pr_id,
-                    lambda { |f|
-                        f[:path].end_with?('.java')  and
-                        f[:path].include?("/test/")
-                    }
-    )
+    files_at_commit(pr_id, test_file_filter)
   end
 
   def test_lines(pr_id)
@@ -46,6 +41,13 @@ module JavaData
 
   def num_assertions(pr_id)
     count_lines(test_files(pr_id), lambda{|l| not l.match(/assert/).nil?})
+  end
+
+  def test_file_filter()
+    lambda { |f|
+      path = if f.class == Hash then f[:path] else f end
+      path.end_with?('.java') and path.include?("/test/")
+    }
   end
 
   private

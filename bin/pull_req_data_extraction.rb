@@ -97,7 +97,7 @@ Extract data for pull requests for a given repository
           "files_changed," <<
           #"src_files, doc_files, other_files, " <<
           "total_commits_last_month,main_team_commits_last_month," <<
-          "sloc,churn," <<
+          "sloc,src_churn,test_churn," <<
           "commits_on_files_touched," <<
           "test_lines_per_1000_lines,test_cases_per_1000_lines," <<
           "assertions_per_1000_lines\n"
@@ -180,6 +180,7 @@ Extract data for pull requests for a given repository
           commits_last_month(pr[:id], true)[0][:num_commits], ",",
           src, ",",
           stats[:lines_added] + stats[:lines_deleted], ",",
+          stats[:test_lines_added] + stats[:test_lines_deleted], ",",
           commits_on_files_touched(pr[:id], Time.at(Time.at(unless merged then pr[:closed_at] else pr[:merged_at] end).to_i - 3600 * 24 * 30)), ",",
           (test_lines(pr[:id]).to_f / src.to_f) * 1000, ",",
           (num_test_cases(pr[:id]).to_f / src.to_f) * 1000, ",",
@@ -300,10 +301,41 @@ Extract data for pull requests for a given repository
       }
     end
 
+    def lines(commit, type, action)
+      commit['files'].select do |x|
+        next unless file_type(x['filename']) == :programming
+
+        case type
+          when :test
+            true if test_file_filter.call(x['filename'])
+          when :src
+            true unless test_file_filter.call(x['filename'])
+          else
+            false
+        end
+      end.reduce(0) do |acc, y|
+        diff_start = case action
+                       when :added
+                         "+"
+                       when :deleted
+                         "-"
+                     end
+
+        acc += unless y['patch'].nil?
+                 y['patch'].lines.select{|x| x.start_with?(diff_start)}.size
+               else
+                 0
+               end
+        acc
+      end
+    end
+
     raw_commits.each{ |x|
       next if x.nil?
-      result[:lines_added] += x['stats']['additions']
-      result[:lines_deleted] += x['stats']['deletions']
+      result[:lines_added] += lines(x, :src, :added)
+      result[:lines_deleted] += lines(x, :src, :deleted)
+      result[:test_lines_added] += lines(x, :test, :added)
+      result[:test_lines_deleted] += lines(x, :test, :deleted)
       result[:files_added] += file_count(x, "added")
       result[:files_removed] += file_count(x, "removed")
       result[:files_modified] += file_count(x, "modified")
@@ -539,6 +571,12 @@ Extract data for pull requests for a given repository
   end
 
   def num_assertions(pr_id)
+    raise Exception.new("Unimplemented")
+  end
+
+  # Return a function filename -> Boolean, that determines whether a
+  # filename is a test file
+  def test_file_filter()
     raise Exception.new("Unimplemented")
   end
 end

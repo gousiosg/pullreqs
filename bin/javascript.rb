@@ -28,6 +28,10 @@ module JavascriptData
     count_sloc(src_files(pr_id))
   end
 
+  def test_file_filter
+    lambda {false}
+  end
+
   private
 
   def count_sloc(files)

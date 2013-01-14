@@ -18,8 +18,7 @@ module RubyData
   end
 
   def test_files(pr_id)
-    files_at_commit(pr_id, lambda{|f| f[:path].include?("test/") && f[:path].end_with?('.rb')}) +
-    files_at_commit(pr_id, lambda{|f| f[:path].include?("spec/") && f[:path].end_with?('.rb')})
+    files_at_commit(pr_id, test_file_filter)
   end
 
   def src_files(pr_id)
@@ -34,5 +33,13 @@ module RubyData
 
   def src_lines(pr_id)
     count_lines(src_files(pr_id), lambda{|l| l.match(/^\s*#/).nil?})
+  end
+
+  def test_file_filter()
+    lambda do |f|
+      path = if f.class == Hash then f[:path] else f end
+      (path.include?("test/") && path.end_with?('.rb')) ||
+      (path.include?("spec/") && path.end_with?('.rb'))
+    end
   end
 end
