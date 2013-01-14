@@ -223,7 +223,7 @@ Extract data for pull requests for a given repository
       and c.created_at > DATE_SUB(prh.created_at, INTERVAL #{interval_months} MONTH)
       and pr.id=?;
     QUERY
-    not_zero(if_empty(db.fetch(q, pr_id).all, :teamsize), :teamsize)
+    db.fetch(q, pr_id).all
   end
 
   # Number of commits in pull request
