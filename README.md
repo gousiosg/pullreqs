@@ -141,13 +141,16 @@ pull request
 * `main_team_commits_last_month`: Number of commits to the repository during
 the last month, excluding the commits coming from this and other pull requests
 * `sloc`: Number of executable lines of code in the main project repo
-* `churn`: Number of lines changed by the pull request
+* `src_churn`: Number of src code lines changed by the pull request
+* `test_churn`: Number of test lines changed by the pull request
 * `commits_on_files_touched`: Number of commits on the files touch by the
 pull request during the last month
 * `test_lines_per_1000_lines`: Number of test (executable) lines per 1000 executable lines
 * `test_cases_per_1000_lines`: Number of test cases per 1000 executable lines
 * `assertions_per_1000_lines`: Number of assert statements per 1000
 executable lines
+* `requester`: The developer that performed the pull request
+* `prev_pullreqs`: Number of pull requests by developer up to the specific pull request
 
 Lines reported are always executable lines (comments and whitespace have been
 stripped out). To count test case related data, the script 

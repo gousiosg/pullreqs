@@ -100,7 +100,7 @@ Extract data for pull requests for a given repository
           "sloc,src_churn,test_churn," <<
           "commits_on_files_touched," <<
           "test_lines_per_1000_lines,test_cases_per_1000_lines," <<
-          "assertions_per_1000_lines\n"
+          "assertions_per_1000_lines,requester,prev_pullreqs\n"
 
     # Process the list of merged pull requests
     pull_reqs(repo_entry).each do |pr|
@@ -184,7 +184,9 @@ Extract data for pull requests for a given repository
           commits_on_files_touched(pr[:id], Time.at(Time.at(unless merged then pr[:closed_at] else pr[:merged_at] end).to_i - 3600 * 24 * 30)), ",",
           (test_lines(pr[:id]).to_f / src.to_f) * 1000, ",",
           (num_test_cases(pr[:id]).to_f / src.to_f) * 1000, ",",
-          (num_assertions(pr[:id]).to_f / src.to_f) * 1000,
+          (num_assertions(pr[:id]).to_f / src.to_f) * 1000, ",",
+          requester(pr[:id])[0][:login], ",",
+          prev_pull_requests(pr[:id])[0][:num_pull_reqs],
           "\n"
 
     if options[:extract_diffs]
@@ -274,6 +276,29 @@ Extract data for pull requests for a given repository
       and pr.id = ?
     QUERY
     if_empty(db.fetch(q, pr_id).all, :num_followers)
+  end
+
+  # Number of followers of the person that created the pull request
+  def requester(pr_id)
+    q = <<-QUERY
+    select u.login as login
+    from users u, pull_requests pr
+    where pr.user_id = u.id
+      and pr.id = ?
+    QUERY
+    if_empty(db.fetch(q, pr_id).all, :login)
+  end
+
+  # Number of pull
+  def prev_pull_requests(pr_id)
+    q = <<-QUERY
+    select count(pullreq_id) as num_pull_reqs
+    from pull_requests pr
+    where pr.user_id = (select pr1.user_id from pull_requests pr1 where pr1.id = ?)
+    and pr.base_repo_id = (select pr1.base_repo_id from pull_requests pr1 where pr1.id = ?)
+    and pr.pullreq_id < (select pr1.pullreq_id from pull_requests pr1 where pr1.id = ?)
+    QUERY
+    if_empty(db.fetch(q, pr_id, pr_id, pr_id).all, :num_pull_reqs)
   end
 
   # Various statistics for the pull request. Returned as Hash with the following
