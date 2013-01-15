@@ -29,7 +29,7 @@ module JavascriptData
   end
 
   def test_file_filter
-    lambda {false}
+    lambda {|x| false}
   end
 
   private
