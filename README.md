@@ -100,7 +100,7 @@ scala scala scala
 scala-ide scala-ide scala
 harrah xsbt scala
 scalaz scalaz scala
-xbmc xmbc c
+xbmc xbmc c
 antirez redis c
 mruby mruby c
 libgit2 libgit2 c
@@ -132,12 +132,12 @@ the pull request
      repository directly (not through pull requests) in the period
      `(merged_at - 3 months, merged_at)`
 * `num_commits`: Number of commits included in the pull request
-* `num_commit_comments`: Number of code review comments in the pull request
-* `num_issue_comments`: Number of general discussion comments in the pull request
 * `num_comments`: Total number of comments (`num_commit_comments + num_issue_comments`)
 * `files_changed`: Total number of files changed (added, remove, deleted) by the
 pull request
-* `total_commits_last_month`: Number of commits 
+* `perc_external_contribs`: % of commits commit from pull requests up to one month
+before the start of this pull request
+* `total_commits_last_month`: Number of commits
 * `main_team_commits_last_month`: Number of commits to the repository during
 the last month, excluding the commits coming from this and other pull requests
 * `sloc`: Number of executable lines of code in the main project repo
@@ -146,11 +146,9 @@ the last month, excluding the commits coming from this and other pull requests
 * `commits_on_files_touched`: Number of commits on the files touch by the
 pull request during the last month
 * `test_lines_per_1000_lines`: Number of test (executable) lines per 1000 executable lines
-* `test_cases_per_1000_lines`: Number of test cases per 1000 executable lines
-* `assertions_per_1000_lines`: Number of assert statements per 1000
-executable lines
 * `requester`: The developer that performed the pull request
 * `prev_pullreqs`: Number of pull requests by developer up to the specific pull request
+* `requester_succ_rate`: % of merged vs unmerged pull requests for developer
 
 Lines reported are always executable lines (comments and whitespace have been
 stripped out). To count test case related data, the script 
