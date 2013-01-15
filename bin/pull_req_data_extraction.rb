@@ -91,18 +91,19 @@ Extract data for pull requests for a given repository
     # Print file header
     print "pull_req_id,project_name,github_id,"<<
           "created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes," <<
-          "team_size_at_merge,num_commits," <<
-          "num_commit_comments,num_issue_comments,num_comments," <<
+          "team_size,num_commits," <<
+          #"num_commit_comments,num_issue_comments," <<
+          "num_comments," <<
           #"files_added, files_deleted, files_modified" <<
           "files_changed," <<
           #"src_files, doc_files, other_files, " <<
-          "total_commits_last_month,main_team_commits_last_month," <<
+          #"commits_last_month,main_team_commits_last_month," <<
+          "perc_external_contribs"
           "sloc,src_churn,test_churn," <<
           "commits_on_files_touched," <<
-          "test_lines_per_1000_lines,test_cases_per_1000_lines," <<
-          "assertions_per_1000_lines,requester,prev_pullreqs\n"
+          "test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate\n"
 
-    # Process the list of merged pull requests
+    # Process pull request list
     pull_reqs(repo_entry).each do |pr|
       begin
         process_pull_request(pr)
@@ -114,7 +115,7 @@ Extract data for pull requests for a given repository
     end
   end
 
-  # Get a list of full requests that have been merged for the processed project
+  # Get a list of pull requests for the processed project
   def pull_reqs(project)
     q = <<-QUERY
     select p.name as project_name, pr.id, pr.pullreq_id as github_id,
@@ -155,6 +156,8 @@ Extract data for pull requests for a given repository
 
     if src == 0 then raise Exception.new("Bad number of lines: #{0}") end
 
+    commits_last_month = commits_last_month(pr[:id], true)[0][:num_commits]
+
     # Print line for a pull request
     print pr[:id], ",",
           pr[:project_name], ",",
@@ -164,10 +167,10 @@ Extract data for pull requests for a given repository
           Time.at(pr[:closed_at]).to_i, ",",
           pr[:lifetime_minutes], ",",
           unless merged then '' else Time.at(pr[:mergetime_minutes]).to_i end, ",",
-          team_size_at_merge(pr[:id], 3)[0][:teamsize], ",",
+          team_size_at_open(pr[:id], 3)[0][:teamsize], ",",
           num_commits(pr[:id])[0][:commit_count], ",",
-          num_comments(pr[:id])[0][:comment_count], ",",
-          num_issue_comments(pr[:id])[0][:issue_comment_count], ",",
+          #num_comments(pr[:id])[0][:comment_count], ",",
+          #num_issue_comments(pr[:id])[0][:issue_comment_count], ",",
           num_comments(pr[:id])[0][:comment_count] + num_issue_comments(pr[:id])[0][:issue_comment_count], ",",
           #stats[:files_added], ",",
           #stats[:files_deleted], ",",
@@ -176,17 +179,17 @@ Extract data for pull requests for a given repository
           #stats[:src_files], ",",
           #stats[:doc_files], ",",
           #stats[:other_files], ",",
-          commits_last_month(pr[:id], false)[0][:num_commits], ",",
-          commits_last_month(pr[:id], true)[0][:num_commits], ",",
+          ((commits_last_month - commits_last_month(pr[:id], false)[0][:num_commits]) * 100) / commits_last_month, ",",
           src, ",",
           stats[:lines_added] + stats[:lines_deleted], ",",
           stats[:test_lines_added] + stats[:test_lines_deleted], ",",
-          commits_on_files_touched(pr[:id], Time.at(Time.at(unless merged then pr[:closed_at] else pr[:merged_at] end).to_i - 3600 * 24 * 30)), ",",
+          commits_on_files_touched(pr[:id], Time.at(Time.at(pr[:created_at]).to_i - 3600 * 24 * 30)), ",",
           (test_lines(pr[:id]).to_f / src.to_f) * 1000, ",",
-          (num_test_cases(pr[:id]).to_f / src.to_f) * 1000, ",",
-          (num_assertions(pr[:id]).to_f / src.to_f) * 1000, ",",
+          #(num_test_cases(pr[:id]).to_f / src.to_f) * 1000, ",",
+          #(num_assertions(pr[:id]).to_f / src.to_f) * 1000, ",",
           requester(pr[:id])[0][:login], ",",
-          prev_pull_requests(pr[:id])[0][:num_pull_reqs],
+          prev_pull_requests(pr[:id],'opened')[0][:num_pull_reqs], ",",
+          prev_pull_requests(pr[:id],'merged')[0][:num_pull_reqs]/ prev_pull_requests(pr[:id],'opened')[0][:num_pull_reqs],
           "\n"
 
     if options[:extract_diffs]
@@ -209,8 +212,8 @@ Extract data for pull requests for a given repository
   end
 
   # Number of developers that have committed at least once in the interval
-  # between the pull request merge up to +interval_months+ back
-  def team_size_at_merge(pr_id, interval_months)
+  # between the pull request open up to +interval_months+ back
+  def team_size_at_open(pr_id, interval_months)
     q = <<-QUERY
     select count(distinct author_id) as teamsize
     from projects p, commits c, project_commits pc, pull_requests pr,
@@ -220,7 +223,7 @@ Extract data for pull requests for a given repository
       and p.id = pr.base_repo_id
       and prh.pull_request_id = pr.id
       and not exists (select * from pull_request_commits prc1 where prc1.commit_id = c.id)
-      and prh.action = IF(IFNULL((select id from pull_request_history where action='merged' and pull_request_id=pr.id), 1) <> 1, 'merged', 'closed')
+      and prh.action = 'opened'
       and c.created_at < prh.created_at
       and c.created_at > DATE_SUB(prh.created_at, INTERVAL #{interval_months} MONTH)
       and pr.id=?;
@@ -271,7 +274,7 @@ Extract data for pull requests for a given repository
     from pull_requests pr, followers f, pull_request_history prh
     where pr.user_id = f.user_id
       and prh.pull_request_id = pr.id
-      and prh.action = 'merged'
+      and prh.action = 'opened'
       and f.created_at < prh.created_at
       and pr.id = ?
     QUERY
@@ -290,15 +293,16 @@ Extract data for pull requests for a given repository
   end
 
   # Number of pull
-  def prev_pull_requests(pr_id)
+  def prev_pull_requests(pr_id, action)
     q = <<-QUERY
     select count(pullreq_id) as num_pull_reqs
     from pull_requests pr
     where pr.user_id = (select pr1.user_id from pull_requests pr1 where pr1.id = ?)
     and pr.base_repo_id = (select pr1.base_repo_id from pull_requests pr1 where pr1.id = ?)
+    and exists (select * from pull_request_history prh where prh.action = ? and prh.pull_request_id = pr.id)
     and pr.pullreq_id < (select pr1.pullreq_id from pull_requests pr1 where pr1.id = ?)
     QUERY
-    if_empty(db.fetch(q, pr_id, pr_id, pr_id).all, :num_pull_reqs)
+    if_empty(db.fetch(q, pr_id, pr_id, action, pr_id).all, :num_pull_reqs)
   end
 
   # Various statistics for the pull request. Returned as Hash with the following
@@ -373,7 +377,7 @@ Extract data for pull requests for a given repository
   end
 
   # Number of commits on the files touched by the pull request during the
-  # last month
+  # period (oldest, pull request.created_at)
   def commits_on_files_touched(pr_id, oldest)
     commits = commit_entries(pr_id)
     parent_commits = commits.map { |c|
@@ -407,7 +411,7 @@ Extract data for pull requests for a given repository
   end
 
   # Total number of commits on the project in the month before the pull request
-  # was merged. The second parameter controls whether commits from other
+  # was opened. The second parameter controls whether commits from other
   # pull requests should be accounted for
   def commits_last_month(pr_id, exclude_pull_req)
     q = <<-QUERY
@@ -418,7 +422,7 @@ Extract data for pull requests for a given repository
       and pc.commit_id = c.id
       and p.id = pr.base_repo_id
       and prh.pull_request_id = pr.id
-      and prh.action = 'merged'
+      and prh.action = 'opened'
       and c.created_at < prh.created_at
       and c.created_at > DATE_SUB(prh.created_at, INTERVAL 1 MONTH)
       and pr.id=?

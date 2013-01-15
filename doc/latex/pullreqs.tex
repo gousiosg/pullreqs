@@ -5,6 +5,8 @@
 
 \begin{document}
 
+\newcommand{\todo}[1]{\textbf{TODO}\footnote{\textbf{TODO:} #1}}
+
 \title{An exploration of the pull-based software development model}
 
 \author{\IEEEauthorblockN{Georgios Gousios and Martin Pinzger and Arie van
@@ -113,20 +115,17 @@ view entities, the event stream needs to be followed.
 
 Github is a very popular development site;
 in in its main page, Github reports more than 4 million repositories and 2 
-million users. However, the majority of those repositories are not particularity
+million users. What is interesting is that the majority of those repositories are
 active: in 2012, the GHTorrent dataset captured events initiated by  
-% db.events.distinct('actor.id').count()
-users affecting 
+% db.events.distinct('actor.id').count() 
+1,050,000 users affecting 
 % db.events.distinct('repo.id').count()
-repositories. 
-Moreover, the majority of registered repositories are forks of other 
+2,520,000 repositories. 
+The majority of registered repositories are forks of other 
 repositories; in the GHTorrent dataset, only half
 % select (((select count(*) from forks) * 100 ) / (select count(*) from projects))
 (~53\%) of the repositories are original repositories;
-from those, only \todo{q: \% of repos that got a single commit}\% where active in the last year.
-This effect can be seen in Figure~\ref{fig:growth}. While the total number of
-repositories increases rapidly, the number of events remains 
-relatively stable.
+from those, \todo{q: \% of repos that got a single commit}\% where active in the last year.
 
 Github supports all types of distributed development outlined above;
 pull requests receive special treatment. The site is tuned to allow easy forking
@@ -145,6 +144,21 @@ Pull requests are enabled by default on all repositories opened on Github.
 For the projects that are not forks, 
 \todo{q: \% projects that received pull reqs}
 received a pull request in 2012. For 
+
+Handling of pull requests
+
+\begin{itemize}
+
+  \item Merge them through Github facilities. We can then see merge events.
+
+  \item  Merge them using Git facilities. Github cannot be notified for this. Merging can occur using either cherry picking specific commits from the pull request branch or by merging the branches. In the first case, the commit sha will change, so it is not possible to track it.(netty)
+
+  \item Squash the commits in a single one (with Git rebase), then cherry-pick or merge (node.js). Different author from committer. 
+
+  \item Copy code and apply patch manually, loosing all authorship information
+    (jquery)
+
+\end{itemize}
 
 In the following sections we examine in detail characteristics of 
 
@@ -183,9 +197,77 @@ Once a pull request has been submitted, it is open for discussion.
 
 \section{Acceptance and rejection}
 
+\begin{table*}
+  \centering
+  \begin{tabular}{rp{25em}}
+    \hline
+    \bf{Feature} & \bf{Description and Justification}\\
+    \hline
+    \multicolumn{2}{l}{\bf{Pull Request Impact}}\\
+    
+    \texttt{num\_commits} & Number of commits in the pull request. A bigger
+    pull request will be slower to examine and therefore to merge.\\
+    
+    \texttt{churn} & Number of lines changed (added + deleted) by the pull request. The more lines changed, the longer a pull request will take to be
+    reviewed.\\
 
+    \texttt{files\_changed} & Number of files touched by the pull request. An
+    indication of the impact of the pull request.\\
+    
+    \texttt{num\_commit\_comments} & Number of code review comments. More pull
+    code review comments may indicate a rigorous process, therefore slowing down
+    acceptance.\\
+    
+    \texttt{num\_issue\_comments} & Pull request discussion comments.\\
+
+    \multicolumn{2}{l}{\bf{Project Characteristics}}\\
+    
+    \texttt{sloc} & Executable lines of code at pull request merge time. The
+    bigger the project, the more difficult would be to assess the impact of
+    a pull request\\
+
+    \texttt{team\_size} & Number of active core team members during the last
+    month prior the pull request merge. A big team will be faster to process a
+    pull request as each team member will have less work load to handle and
+    will be more specialized.\\
+
+    \texttt{total\_commits\_last\_month} & Number of commits in the . Overall project activity indicator.\\
+    
+    \texttt{main\_team\_commits\_last\_month} & Activity of the main team
+    members. An active main team will triage pull requests faster.\\
+
+    \texttt{commits\_on\_files\_touched} & Activity on the files that are
+    touched by the pull request. If the pull request touches files in a hotspot,
+    it will be merged faster.\\
+    
+    \multicolumn{2}{l}{\bf{Effect of Testing}}\\
+
+    \texttt{test\_churn} & Number of test lines in pull request. \\
+
+    \texttt{asserts\_per\_1000\_lines} & A proxy for test coverage. The
+    more well tested a project is, the easier and faster it will be to accept 
+    a pull request.\\
+    
+    \multicolumn{2}{l}{\bf{Developer}}\\
+    
+    \texttt{requester} & The person that initiated the pull request.\\
+
+    \texttt{num\_pullreqs} & Number of pull requests submitted by a specific
+    developer, prior to the examined pull request. The more pull requests, the
+    better the developer is known to the project.\\
+
+    \texttt{is\_main\_team\_member} & Whether the developer belongs to the
+    main repository team. Pull requests from main team members should be
+    faster to accept and merge.\\
+    \hline
+  \end{tabular}
+  \caption{Selected features}
+  \label{tab:features}
+\end{table*}
 
 \section{Discussions and Conclusion}
+
+\subsection{Threats to validity}
 
 \section{Related Work}
 
