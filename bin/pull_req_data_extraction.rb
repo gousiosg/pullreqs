@@ -156,7 +156,8 @@ Extract data for pull requests for a given repository
 
     if src == 0 then raise Exception.new("Bad number of lines: #{0}") end
 
-    commits_last_month = commits_last_month(pr[:id], true)[0][:num_commits]
+    commits_last_month = commits_last_month(pr[:id], false)[0][:num_commits]
+    prev_pull_reqs = prev_pull_requests(pr[:id],'opened')[0][:num_pull_reqs]
 
     # Print line for a pull request
     print pr[:id], ",",
@@ -179,7 +180,7 @@ Extract data for pull requests for a given repository
           #stats[:src_files], ",",
           #stats[:doc_files], ",",
           #stats[:other_files], ",",
-          ((commits_last_month - commits_last_month(pr[:id], false)[0][:num_commits]) * 100) / commits_last_month, ",",
+          ((commits_last_month - commits_last_month(pr[:id], true)[0][:num_commits]) * 100) / commits_last_month, ",",
           src, ",",
           stats[:lines_added] + stats[:lines_deleted], ",",
           stats[:test_lines_added] + stats[:test_lines_deleted], ",",
@@ -188,8 +189,8 @@ Extract data for pull requests for a given repository
           #(num_test_cases(pr[:id]).to_f / src.to_f) * 1000, ",",
           #(num_assertions(pr[:id]).to_f / src.to_f) * 1000, ",",
           requester(pr[:id])[0][:login], ",",
-          prev_pull_requests(pr[:id],'opened')[0][:num_pull_reqs], ",",
-          prev_pull_requests(pr[:id],'merged')[0][:num_pull_reqs]/ prev_pull_requests(pr[:id],'opened')[0][:num_pull_reqs],
+          prev_pull_reqs, ",",
+          if prev_pull_reqs > 0 then prev_pull_requests(pr[:id],'merged')[0][:num_pull_reqs].to_f / prev_pull_reqs.to_f else 0 end,
           "\n"
 
     if options[:extract_diffs]
