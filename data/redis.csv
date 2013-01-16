@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 765812,redis,852,1356631728,,1356631924,3,,5,250,1,655,79,57417,36534,0,9,0.0,jzawodn,2,0.5
 776786,redis,842,1356113277,,1356124982,195,,5,1,0,12,78,57417,47,0,0,0.0,ldm5180,1,0.0
 689790,redis,825,1355394225,,1355499828,1760,,5,2,1,7,67,57417,34,0,0,0.0,charsyam,16,0.125

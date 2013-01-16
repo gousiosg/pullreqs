@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 780180,katello,1358,1357381565,,1357921141,8992,,17,5,7,46,89,28297,113,71,40,715.623564335442,lzap,131,0.8091603053435115
 671718,katello,1195,1354718876,,1357918467,53326,,19,3,4,21,99,27895,302,0,0,719.8064169205951,witlessbird,23,0.6521739130434783
 791255,katello,1378,1357813315,,1357898055,1412,,14,3,0,7,86,28455,30,0,2,711.8959761026181,pitr-ch,45,0.7777777777777778

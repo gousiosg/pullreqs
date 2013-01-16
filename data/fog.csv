@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 794781,fog,1458,1357875208,,1357923150,799,,9,2,0,8,80,118619,225,0,11,0.0,westonplatter,8,0.25
 786151,fog,1445,1357310783,,1357923086,10205,,11,1,8,1,83,115705,2,0,0,0.0,vkhatri,1,0.0
 794948,fog,1460,1357882558,,1357893018,174,,9,1,2,1,80,118619,2,0,2,0.0,pmdeazeta,0,0

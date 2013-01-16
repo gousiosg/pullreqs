@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 640657,spring-integration,692,1354528258,1354539482,1354539482,187,187,9,1,0,1,48,49662,0,25,3,1621.6221658410857,artembilan,53,0.07547169811320754
 619087,spring-integration,690,1354385664,1354406087,1354406087,340,340,9,1,0,1,47,49662,0,7,2,1621.5617574805688,garyrussell,203,0.2512315270935961
 610627,spring-integration,689,1354305998,1354306923,1354306923,15,15,9,1,0,2,48,49662,0,0,5,1621.5617574805688,ghillert,102,0.20588235294117646

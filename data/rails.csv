@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 793460,rails,8883,1357847866,,1357927026,1319,,102,1,0,1,53,48796,8,0,0,2147.962947782605,goshakkk,12,0.08333333333333333
 790813,rails,8867,1357796722,,1357903398,1777,,105,1,0,2,53,49494,6,0,0,2120.3782276639595,route,25,0.6
 793407,rails,8882,1357846974,,1357899713,878,,102,1,0,1,53,48796,6,0,3,2147.962947782605,goshakkk,11,0.09090909090909091

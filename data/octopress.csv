@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 784068,octopress,929,1357666645,,1357667677,17,,4,1,4,1,73,1443,26,0,0,0.0,fzero,0,0
 776771,octopress,914,1357185418,,1357186058,10,,4,1,1,1,72,1326,5,0,1,0.0,rixth,0,0
 775545,octopress,907,1356987167,,1357185969,3313,,4,6,3,10,75,1326,78,0,0,0.0,chrisperelstein,0,0

@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 793500,jekyll,745,1357848455,,1357879451,516,,6,4,5,5,71,2249,4,32,7,585.5935971542908,erictheise,0,0
 794706,jekyll,746,1357872332,1357878923,1357878923,109,109,6,1,1,1,72,2249,0,0,1,585.5935971542908,mattr-,2,0.0
 336352,jekyll,632,1346131720,,1357861211,195431,,1,1,2,2,100,2198,0,0,0,565.5141037306643,tpo,0,0

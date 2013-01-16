@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 780499,floodlight,364,1357459214,1357596843,1357596843,2293,2293,2,1,0,2,79,37781,25,20,4,298.37749133162174,Sovietaced,9,0.4444444444444444
 776791,floodlight,363,1357186031,1357186041,1357186041,0,0,2,6,0,12,80,37768,127,38,10,298.0565558144461,kwanggithub,15,0.8
 776733,floodlight,362,1357183924,1357183930,1357183930,0,0,2,1,0,2,80,37788,152,0,16,297.89880385307504,kwanggithub,14,0.7857142857142857

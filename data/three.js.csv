@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 792651,three.js,2913,1357834959,,1357839139,69,,7,1,2,2,45,83727,4,0,21,0.0,dustbin,1,0.0
 791445,three.js,2909,1357809111,1357816994,1357816994,131,131,7,3,0,4,46,83679,26,0,16,0.0,gero3,36,0.5277777777777778
 247563,three.js,2328,1345101574,,1357800633,211590,,8,2,9,2,77,59523,10,0,0,0.0,gero3,18,0.5555555555555556

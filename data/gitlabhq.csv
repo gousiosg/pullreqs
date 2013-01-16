@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 795904,gitlabhq,2561,1357904721,,1357924824,335,,8,1,0,1,90,9683,0,0,1,580.1920892285449,MrHammy,0,0
 793101,gitlabhq,2553,1357842145,,1357918073,1265,,8,14,2,27,88,9683,521,0,30,580.1920892285449,nacengineer,1,0.0
 793453,gitlabhq,2555,1357847785,,1357848136,5,,8,1,0,1,89,9683,6,0,3,580.1920892285449,yuters,1,0.0

@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 794162,metasploit-framework,1289,1357858677,,1357886229,459,,16,2,0,5,71,724811,6,0,8,194.06438368071125,jvazquez-r7,154,0.7077922077922078
 794066,metasploit-framework,1288,1357856896,,1357858130,20,,16,2,0,2,71,724810,7,0,2,194.0646514258909,wchen-r7,135,0.725925925925926
 789660,metasploit-framework,1280,1357766953,,1357857069,1501,,16,1,0,1,70,724037,5,0,1,194.15168009369688,kernelsmith,25,0.32

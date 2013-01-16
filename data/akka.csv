@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 795252,akka,1019,1357892025,,1357907306,254,,10,2,13,2,67,31951,0,0,0,696.6918093330412,sirthias,4,0.25
 795214,akka,1018,1357891175,,1357902545,189,,10,1,0,1,67,31824,8,0,14,699.3464052287582,patriknw,231,0.645021645021645
 788175,akka,1008,1357744369,,1357900425,2600,,10,1,0,3,65,31824,14,0,4,699.3464052287582,patriknw,229,0.6506550218340611

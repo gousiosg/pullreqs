@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 784597,SpoutAPI,493,1357674628,,1357925404,4179,,13,1,6,4,24,40230,21,23,14,208.7248322147651,DDoSQc,21,0.6190476190476191
 783973,SpoutAPI,492,1357665116,1357665537,1357665537,7,7,13,1,0,1,23,40188,113,0,1,208.94296805016424,bergerkiller,100,0.87
 776026,SpoutAPI,490,1357145670,1357152737,1357152737,117,117,13,1,0,1,23,39299,16,0,3,204.99249344767043,bergerkiller,99,0.8686868686868687

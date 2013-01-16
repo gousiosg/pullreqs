@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 768224,elasticsearch,2514,1356699173,,1356703176,66,,15,1,4,1,48,199168,15,0,0,184.05065070694087,dadoonet,15,0.06666666666666667
 767729,elasticsearch,2513,1356685798,,1356695782,166,,15,1,1,1,48,199168,0,0,0,184.05065070694087,dadoonet,14,0.07142857142857142
 767724,elasticsearch,2512,1356685695,,1356685756,1,,15,93,1,207,48,199378,4076,1962,43,189.38899978934487,dadoonet,13,0.07692307692307693

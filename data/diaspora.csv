@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 786777,diaspora,3821,1357720926,,1357901951,3017,,9,3,8,9,53,14952,0,6,18,915.9309791332263,diasp,28,0.8214285714285714
 772896,diaspora,3809,1356855984,,1356867109,185,,11,2,3,3,49,14952,15,0,20,915.9309791332263,archSeer,0,0
 771402,diaspora,3802,1355868375,1356788478,1356788478,15335,15335,11,1,6,12,44,14906,375,16,41,917.751241110962,Raven24,81,0.8395061728395061

@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 350270,refinerycms,1923,1346662895,,1346666373,57,,13,1,0,1,57,4949,0,0,2,919.5797130733482,pedropaG,0,0
 411523,refinerycms,1917,1346313859,1346317441,1346317441,59,59,12,0,0,0,57,4949,0,0,0,919.5797130733482,scambra,28,0.8571428571428571
 293981,refinerycms,1904,1346059587,,1346198488,2315,,13,1,2,2,56,4950,10,0,5,919.3939393939394,ugisozols,77,0.8831168831168831

@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 776659,xsbt,627,1355872922,,1356010555,2293,,17,1,4,1,24,32078,13,0,0,97.54348774861275,Jibbers42,0,0
 705539,xsbt,624,1355462342,,1355701569,3987,,16,1,0,3,24,32067,14,12,0,97.57694826457106,gkossakowski,5,0.0
 647550,xsbt,617,1355117331,,1355148355,517,,16,1,1,5,20,31991,72,0,0,97.62120596417742,gkossakowski,1,0.0

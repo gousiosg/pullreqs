@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 795763,mruby,727,1357902167,,1357908765,109,,2,4,0,9,56,54816,43,0,18,0.0,mattn,29,0.6206896551724138
 795515,mruby,726,1357897482,,1357908718,187,,2,3,0,7,56,54816,38,0,33,0.0,mattn,28,0.6428571428571429
 795055,mruby,725,1357886561,,1357891399,80,,2,1,0,1,56,54821,39,0,1,0.0,skandhas,30,0.7666666666666667

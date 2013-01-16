@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 680440,openmicroscopy,545,1355217476,,1357894996,44625,,5,9,18,67,93,328517,394,0,26,235.55858600924762,will-moore,100,0.43
 782049,openmicroscopy,585,1357633552,,1357842877,3488,,4,1,5,1,96,329471,4,0,1,238.83133872176916,jburel,125,0.472
 778794,openmicroscopy,580,1357315549,,1357842451,8781,,4,1,3,3,96,329804,71,0,3,234.63936156019938,jburel,123,0.4796747967479675

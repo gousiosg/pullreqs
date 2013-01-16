@@ -1,5 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
-784346,scalaz,243,1357497515,,1357928395,7181,,9,1,4,1,60,24659,6,0,0,99.39575814104384,refried,3,1.0
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 803055,scalaz,245,1357921140,1357928092,1357928092,115,115,10,1,0,2,48,24661,9,1,4,99.38769717367504,S11001001,17,0.8235294117647058
 780670,scalaz,244,1357600571,,1357649618,817,,9,3,9,3,58,12850,0,0,0,74.63035019455252,gildegoma,0,0
 776883,scalaz,239,1357190320,,1357201868,192,,9,2,0,2,64,24523,4,0,0,100.43632508257554,xuwei-k,32,0.84375

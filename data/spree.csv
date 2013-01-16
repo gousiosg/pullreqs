@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 790622,spree,2416,1357789376,,1357876093,1445,,40,1,2,1,47,11485,2,0,0,1043.09969525468,camelmasa,6,0.0
 786381,spree,2411,1357712756,,1357767505,912,,40,1,1,1,42,11485,2,0,0,1043.09969525468,jdutil,78,0.07692307692307693
 743323,spree,2308,1355288842,,1357707576,40312,,48,1,20,4,56,11142,129,0,0,1042.9904864476755,huoxito,2,0.0

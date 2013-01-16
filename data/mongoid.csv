@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 794524,mongoid,2692,1357866912,,1357896461,492,,12,1,0,3,40,10426,4,0,23,5310.1860732783425,arthurnn,10,0.1
 795348,mongoid,2693,1357894400,,1357896311,31,,12,2,0,3,42,10725,1,0,3,5342.097902097902,subhashb,0,0
 785595,mongoid,2682,1357692169,,1357824723,2209,,13,2,4,4,35,10719,20,44,0,5341.822931243586,arthurnn,7,0.14285714285714285

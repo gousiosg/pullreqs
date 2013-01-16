@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 786741,junit,600,1357421341,,1357844413,7051,,3,2,6,16,81,7650,262,640,0,1735.2941176470588,amejia1,1,0.0
 784806,junit,601,1357678212,,1357837505,2654,,3,2,7,3,83,7650,6,63,4,1735.2941176470588,skazzyy,1,0.0
 776211,junit,577,1355873714,,1357787625,31898,,2,2,7,5,80,7647,227,107,0,1734.4056492742252,coreyjv,5,0.4

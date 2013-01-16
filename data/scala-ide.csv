@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 800612,scala-ide,272,1357914167,1357914673,1357914673,8,8,5,1,0,1,62,35054,0,0,4,4.222057397158669,sschaef,15,0.4
 798569,scala-ide,271,1357909994,1357910213,1357910213,3,3,5,1,0,1,64,35054,0,0,2,4.222057397158669,mads379,1,1.0
 788449,scala-ide,270,1357747932,,1357821062,1218,,5,1,0,1,67,34946,2,0,2,4.235105591484004,skyluc,44,0.75

@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 784815,brooklyn,449,1357678326,,1357906925,3809,,4,16,1,208,77,59695,3521,390,12,210.82167685735823,aledsage,130,0.6615384615384615
 775980,brooklyn,431,1356084275,,1357902411,30302,,4,3,3,6,70,56253,124,0,6,206.5134303948234,alasdairhodge,0,0
 791174,brooklyn,458,1357812153,,1357834265,368,,4,10,0,102,80,59695,3946,795,0,210.82167685735823,aledsage,131,0.6564885496183206

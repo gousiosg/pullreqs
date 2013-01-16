@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 791037,loomio,439,1357454999,,1357900722,7428,,4,20,3,150,66,6034,1255,586,265,736.4932051706994,AaronThornton00,160,0.73125
 794794,loomio,446,1357875801,,1357875814,0,,4,2,1,13,76,6445,58,0,23,701.9394879751745,rdbartlett,19,0.5263157894736842
 791026,loomio,441,1357516563,,1357803728,4786,,4,1,0,3,66,6034,21,0,6,736.4932051706994,s01us,0,0

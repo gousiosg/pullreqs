@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 788573,jquery,1125,1357749857,,1357924216,2905,,33,3,0,5,46,23281,213,0,0,0.0,orkel,61,0.01639344262295082
 788906,jquery,1126,1357755573,,1357837811,1370,,33,1,0,1,46,22230,4,0,0,0.0,jbottigliero,0,0
 786764,jquery,1124,1357720655,,1357740835,336,,33,3,2,4,45,22225,17,0,0,0.0,orkel,60,0.016666666666666666

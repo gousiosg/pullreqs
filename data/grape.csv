@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 786579,grape,310,1357717476,,1357825605,1802,,2,3,5,9,45,1865,75,17,35,2111.5281501340482,niedhui,0,0
 770203,grape,293,1356261988,,1356744409,8040,,3,1,5,1,66,1846,7,0,1,2001.6251354279523,inst,0,0
 768004,grape,302,1356693868,,1356696726,47,,3,1,1,1,54,1882,2,0,2,1995.7492029755579,ugisozols,0,0

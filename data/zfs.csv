@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 794129,zfs,1195,1357858086,,1357923704,1093,,10,1,0,2,64,161910,754,0,0,0.0,behlendorf,27,0.07407407407407407
 790016,zfs,1191,1357772772,,1357835881,1051,,10,1,1,3,62,161909,11,0,0,0.0,nedbass,15,0.06666666666666667
 776999,zfs,1160,1356130018,,1357675349,25755,,13,1,1,4,50,158960,114,0,0,0.0,behlendorf,26,0.07692307692307693

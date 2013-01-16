@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 805755,libgit2,1229,1357928619,1357929254,1357929254,10,10,9,1,0,3,78,79116,148,0,8,0.0,arrbee,83,0.7228915662650602
 805312,libgit2,1227,1357917989,1357927171,1357927171,153,153,9,5,0,10,79,79067,184,0,52,0.0,nulltoken,173,0.791907514450867
 802582,libgit2,1228,1357919799,1357920741,1357920741,15,15,9,5,0,12,78,78897,314,0,14,0.0,carlosmn,129,0.7286821705426356

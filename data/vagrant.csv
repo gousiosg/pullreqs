@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 286316,vagrant,827,1332348869,,1357878983,425501,,16,1,2,7,28,7339,12,0,0,1024.935277285734,dcolish,0,0
 780170,vagrant,1297,1357493051,1357519043,1357519043,433,433,1,1,2,1,81,10283,2,0,1,425.94573568024896,llonchj,0,0
 775676,vagrant,1292,1357161524,,1357161807,4,,1,1,1,1,86,7933,8,0,0,952.9812176982226,nicobrevin,0,0

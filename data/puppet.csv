@@ -1,4 +1,4 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate
 789968,puppet,1383,1357772144,,1357854686,1375,,20,1,0,1,67,67338,2,0,6,1177.2550417297812,Aethylred,1,0.0
 789726,puppet,1382,1357768020,,1357854164,1435,,20,1,0,66,67,67338,178,24,0,1177.2550417297812,Aethylred,0,0
 779836,puppet,1376,1357578920,,1357775844,3282,,20,1,0,2,70,67338,39,23,0,1177.2550417297812,jjperry69,1,0.0
