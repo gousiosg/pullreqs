@@ -61,8 +61,8 @@ plot.multicor <- function(dataframe, label = "")
 {
   ctab <- cor(dataframe, method = "spearman")
   colorfun <- colorRamp(c("#CC0000","white","#3366CC"), space="Lab")
-  #plotcorr(ctab, col=rgb(colorfun((ctab+1)/2), maxColorValue=255))
-  plotcorr(ctab, type = "lower", xlab = label)
+  plotcorr(ctab, col=rgb(colorfun((ctab+1)/2), maxColorValue=255))
+  #plotcorr(ctab, type = "lower", xlab = label)
 }
 
 # Plot histograms for all vars in the provided dataframe

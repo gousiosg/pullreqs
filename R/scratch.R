@@ -21,31 +21,52 @@ b <- with(a, a$merged <- function(r){if(is.na(r[4])){0} else {1}})
 
 source(file = "R/variables.R")
 source(file = "R/utils.R")
+library(ROCR) 
 dfs <- load.all(dir=data.file.location)
-a = dfs[[39]]
-a$merged <- apply(a, 1, function(r){if(is.na(r[4])){0} else {1}})
-a <- a[,c(8:22)]
-a <- a[,-c(3,4)]
+a = dfs[[37]]
+a$merged <- apply(a, 1, function(r){if(is.na(r[4])){T} else {F}})
+a <- a[,c(8:21)]
 testidx <- which(1:nrow(a)%%4 == 0)
 train <- a[-testidx,]
 test <- a[testidx,]
 
+# Trees
 library(rpart)
-treemodel <- rpart(merged~churn+files_changed, data=a, method="anova")
+a <- a[, -c(11)]
+testidx <- which(1:nrow(a)%%4 == 0)
+train <- a[testidx,]
+test <- a[-testidx,]
+
+treemodel <- rpart(merged ~., data=train, method="class")
+pred <- predict(treemodel, test)
+rfcv(pred, test$merged)
+pr <- prediction(pred, test$merged)
+perf <- performance(pr, "prec", "rec")
+plot(perf, col = "red") 
+
+table(pred, test$merged)
+
 printcp(treemodel)
-text(treemodel, use.n=T)
 plot(treemodel)
+text(treemodel, use.n=T)
 plotcp(treemodel)
 post(treemodel, file="~/tree.ps")
 
+# Random forests
 library(randomForest)
-library(ROCR) 
 # Train the classifier
-model <- randomForest(merged~. - num_commit_comments - num_issue_comments, data=train, importance = T, do.Trace = 100)
+model <- randomForest(merged~. - requester, data=a, importance = T, do.Trace = 10)
+print(model)
+varImpPlot(model, type=1)
+
+plot(model)
 
 # Use it to predict values in the training set
-predict <- predict(model, test)
-t <- table(observed = test$merged, predicted = predict)
-importance(model)
-perf <- performance(predict(predict,test$merged),"tpr","fpr")
+pred <- predict(model, test)
+pr <- prediction(pred, test$merged)
+perf <- performance(pr, "prec", "rec")
 plot(perf, col = "red") 
+importance(model)
+
+# Carrot
+

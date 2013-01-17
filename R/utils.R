@@ -26,6 +26,8 @@ add.merged <- function(dfs) {
   }, dfs)
 }
 
+
+
 # Merge all dataframes in the provided list into one dataframe
 merge.dataframes <- function(dataframes, fields) {
   merged <- data.frame()
