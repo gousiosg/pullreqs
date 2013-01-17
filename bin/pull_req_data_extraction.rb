@@ -98,7 +98,7 @@ Extract data for pull requests for a given repository
           "files_changed," <<
           #"src_files, doc_files, other_files, " <<
           #"commits_last_month,main_team_commits_last_month," <<
-          "perc_external_contribs"
+          "perc_external_contribs," <<
           "sloc,src_churn,test_churn," <<
           "commits_on_files_touched," <<
           "test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate\n"
@@ -377,39 +377,28 @@ Extract data for pull requests for a given repository
     result
   end
 
-  # Number of commits on the files touched by the pull request during the
-  # period (oldest, pull request.created_at)
   def commits_on_files_touched(pr_id, oldest)
+    pullreq = pull_req_entry(pr_id)
     commits = commit_entries(pr_id)
-    parent_commits = commits.map { |c|
-      if c.nil?
-        next
-      end
-      c['parents'].map { |x| x['sha'] }
-    }.flatten.uniq
-
-    commits.flat_map { |c| # Create sha, filename pairs
+    commits_per_file = commits.flat_map { |c|
       c['files'].map { |f|
         [c['sha'], f['filename']]
       }
-    }.group_by { |c|      # Group them by filename
+    }.group_by {|c|
       c[1]
-    }.flat_map { |k, v|
-      if v.size > 1       # Find first commit not in the pull request set
-        [v.find { |x| not parent_commits.include?(x[0])}]
-      else
-        v
-      end
-    }.map { |c|
-      if c.nil?
-        0 # File has been just added
-      else
-        repo.log(c[0], c[1]).find_all { |l| # Get all commits per file newer than +oldest+
-          l.authored_date > oldest
-        }.size
-      end
+    }
+    commits_per_file.map { |k,v|
+      commits_in_pr = commits_per_file[k].map{|x| x[0]}
+      commits_in_pr.flat_map{|x|
+        repo.log(x, k)
+      }.find_all { |l|
+        not commits_in_pr.include?(l.sha) and
+        l.authored_date > oldest and
+        l.authored_date < Time.parse(pullreq['created_at'])
+      }.size
     }.flatten.reduce(0) { |acc, x| acc + x }  # Count the total number of commits
   end
+
 
   # Total number of commits on the project in the month before the pull request
   # was opened. The second parameter controls whether commits from other
@@ -478,6 +467,22 @@ Extract data for pull requests for a given repository
   end
 
   private
+
+  def pull_req_entry(pr_id)
+    q = <<-QUERY
+    select u.login as user, p.name as name, pr.pullreq_id as pullreq_id
+    from pull_requests pr, projects p, users u
+    where pr.id = ?
+    and pr.base_repo_id = p.id
+    and u.id = p.owner_id
+    QUERY
+    pullreq = db.fetch(q, pr_id).all[0]
+
+    entry = mongo.find(:pull_requests, {:owner => pullreq[:user],
+                                        :repo => pullreq[:name],
+                                        :number => pullreq[:pullreq_id]})[0]
+    entry
+  end
 
   # JSON objects for the commits included in the pull request
   def commit_entries(pr_id)
