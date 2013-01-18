@@ -8,7 +8,7 @@ mongo = Mongo::Connection.new("dutiil", 27017)
 db = mongo.db("github")
 events = db['events'] 
 
-puts "date,forks,pull_requests,issues,stars,follows"
+puts "date,pushes,forks,pull_requests,issues,stars,follows,creates"
 
 #start_year = Time.parse("01-01-2012 00:00").to_datetime 
 #end_year =  Time.parse("01-01-2013 00:00").to_datetime
@@ -37,6 +37,12 @@ events.find({},{}).each do|e|
   if acc[d].nil? then acc[d] = {} end
 
   val = case e['type']
+        when "CreateEvent"
+          if e['payload']['ref_type'] == "repository"
+            if acc[d][t].nil? then 1 else acc[d][t] += 1 end
+          else
+            next
+          end
         when "IssuesEvent"
           if e['payload']['action'] == "opened"
             if acc[d][t].nil? then 1 else acc[d][t] += 1 end
@@ -53,7 +59,7 @@ end
 
 acc.keys.sort{|a,b| a<=>b}.each do |k|
   counts = acc[k]
-  puts "#{k},#{counts['PushEvent']},#{counts['ForkEvent']},#{counts['PullRequestEvent']},#{counts['IssuesEvent']},#{counts['WatchEvent']},#{counts['FollowEvent']}"
+  puts "#{k},#{counts['PushEvent']},#{counts['ForkEvent']},#{counts['PullRequestEvent']},#{counts['IssuesEvent']},#{counts['WatchEvent']},#{counts['FollowEvent']},#{counts['CreateEvent']}"
 end
 
 
