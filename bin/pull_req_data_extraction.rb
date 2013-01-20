@@ -271,11 +271,12 @@ Extract data for pull requests for a given repository
   end
 
   # Number of followers of the person that created the pull request
+  # TODO: FIXME: Temporarily changed user_id->follower_id to fix issue in db
   def followers(pr_id)
     q = <<-QUERY
     select count(f.follower_id) as num_followers
     from pull_requests pr, followers f, pull_request_history prh
-    where pr.user_id = f.user_id
+    where pr.user_id = f.follower_id
       and prh.pull_request_id = pr.id
       and prh.action = 'opened'
       and f.created_at < prh.created_at
