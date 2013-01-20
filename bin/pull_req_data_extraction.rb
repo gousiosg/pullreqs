@@ -100,8 +100,8 @@ Extract data for pull requests for a given repository
           #"commits_last_month,main_team_commits_last_month," <<
           "perc_external_contribs," <<
           "sloc,src_churn,test_churn," <<
-          "commits_on_files_touched," <<
-          "test_lines_per_1000_lines,requester,prev_pullreqs,requester_succ_rate\n"
+          "commits_on_files_touched,test_lines_per_1000_lines,watchers," <<
+          "requester,prev_pullreqs,requester_succ_rate,followers\n"
 
     # Process pull request list
     pull_reqs(repo_entry).each do |pr|
@@ -138,7 +138,7 @@ Extract data for pull requests for a given repository
 	    and a.created_at < b.created_at
       and p.id = ?
 	  group by pr.id
-    order by closed_at desc;
+    order by pr.pullreq_id desc;
     QUERY
     db.fetch(q, project[:id]).all
   end
@@ -188,9 +188,11 @@ Extract data for pull requests for a given repository
           (test_lines(pr[:id]).to_f / src.to_f) * 1000, ",",
           #(num_test_cases(pr[:id]).to_f / src.to_f) * 1000, ",",
           #(num_assertions(pr[:id]).to_f / src.to_f) * 1000, ",",
+          watchers(pr[:id])[0][:num_watchers], ",",
           requester(pr[:id])[0][:login], ",",
           prev_pull_reqs, ",",
-          if prev_pull_reqs > 0 then prev_pull_requests(pr[:id],'merged')[0][:num_pull_reqs].to_f / prev_pull_reqs.to_f else 0 end,
+          if prev_pull_reqs > 0 then prev_pull_requests(pr[:id],'merged')[0][:num_pull_reqs].to_f / prev_pull_reqs.to_f else 0 end, ",",
+          followers(pr[:id])[0][:num_followers],
           "\n"
 
     if options[:extract_diffs]
@@ -269,7 +271,7 @@ Extract data for pull requests for a given repository
   end
 
   # Number of followers of the person that created the pull request
-  def requester_followers(pr_id)
+  def followers(pr_id)
     q = <<-QUERY
     select count(f.follower_id) as num_followers
     from pull_requests pr, followers f, pull_request_history prh
@@ -280,6 +282,20 @@ Extract data for pull requests for a given repository
       and pr.id = ?
     QUERY
     if_empty(db.fetch(q, pr_id).all, :num_followers)
+  end
+
+  # Number of project watchers/stargazers at the time the pull request was made
+  def watchers(pr_id)
+    q = <<-QUERY
+    select count(w.user_id) as num_watchers
+    from watchers w, pull_requests pr, pull_request_history prh
+    where prh.pull_request_id = pr.id
+      and w.created_at < prh.created_at
+      and w.repo_id = pr.base_repo_id
+      and prh.action='opened'
+      and pr.id = ?
+    QUERY
+    if_empty(db.fetch(q, pr_id).all, :num_watchers)
   end
 
   # Number of followers of the person that created the pull request
