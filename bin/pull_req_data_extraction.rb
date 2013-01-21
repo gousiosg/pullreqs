@@ -151,6 +151,11 @@ Extract data for pull requests for a given repository
 
     merged = ! pr[:merged_at].nil?
 
+    if not merged
+      # Merges of pullreqs can happen outside github
+      git_merged = check_if_merged_with_git(pr[:id])
+    end
+
     # Count number of src/comment lines
     src = src_lines(pr[:id].to_f)
 
@@ -164,10 +169,10 @@ Extract data for pull requests for a given repository
           pr[:project_name], ",",
           pr[:github_id], ",",
           Time.at(pr[:created_at]).to_i, ",",
-          unless merged then '' else Time.at(pr[:merged_at]).to_i end, ",",
+          merge_time(pr, merged, git_merged), ",",
           Time.at(pr[:closed_at]).to_i, ",",
           pr[:lifetime_minutes], ",",
-          unless merged then '' else Time.at(pr[:mergetime_minutes]).to_i end, ",",
+          merge_time_minutes(pr, merged, git_merged), ",",
           team_size_at_open(pr[:id], 3)[0][:teamsize], ",",
           num_commits(pr[:id])[0][:commit_count], ",",
           #num_comments(pr[:id])[0][:comment_count], ",",
@@ -212,6 +217,26 @@ Extract data for pull requests for a given repository
       }
     end
 
+  end
+
+  def merge_time(pr, merged, git_merged)
+    if merged
+      Time.at(pr[:merged_at]).to_i
+    elsif git_merged
+      Time.at(pr[:closed_at]).to_i
+    else
+      ''
+    end
+  end
+
+  def merge_time_minutes(pr, merged, git_merged)
+    if merged
+      Time.at(pr[:mergetime_minutes]).to_i
+    elsif git_merged
+      pr[:lifetime_minutes].to_i
+    else
+      ''
+    end
   end
 
   # Number of developers that have committed at least once in the interval
@@ -533,6 +558,24 @@ Extract data for pull requests for a given repository
     files = repo.lstree(base_commit, :recursive => true)
 
     files.select{|x| filter.call(x)}
+  end
+
+  # Checks whether a merge of the pull request occurred outside Github
+  def check_if_merged_with_git(pr_id)
+    q = <<-QUERY
+	  select sha
+    from commits c, project_commits pc, pull_request_commits prc
+	  where c.id = pc.commit_id
+      and c.id = prc.commit_id
+	    and prc.pull_request_id = ?
+	    and pc.project_id = (
+          select pr.base_repo_id
+          from pull_requests pr
+          where pr.id = prc.pull_request_id
+      )
+    QUERY
+    commits = db.fetch(q, pr_id).all
+    not commits.empty?
   end
 
   def if_empty(result, field)
