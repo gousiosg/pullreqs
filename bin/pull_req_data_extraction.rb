@@ -77,7 +77,7 @@ Extract data for pull requests for a given repository
     repo_entry = @ght.transaction{@ght.ensure_repo(ARGV[0], ARGV[1], false, false, false)}
 
     if repo_entry.nil?
-      Trollop::die "Cannot find repository #{owner}/#{repo}"
+      Trollop::die "Cannot find repository #{ARGV[0]}/#{ARGV[1]}"
     end
 
     case ARGV[2]
