@@ -81,11 +81,11 @@ Extract data for pull requests for a given repository
     end
 
     case ARGV[2]
-      when "ruby" then self.extend(RubyData)
-      when "java" then self.extend(JavaData)
-      when "c" then self.extend(CData)
-      when "scala" then self.extend(ScalaData)
-      when "javascript" then self.extend(JavascriptData)
+      when /ruby/i then self.extend(RubyData)
+      when /java/i then self.extend(JavaData)
+      when /scala/i then self.extend(ScalaData)
+      when /javascript/i then self.extend(JavascriptData)
+      when /c/i then self.extend(CData)
     end
 
     # Print file header
