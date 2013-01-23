@@ -66,6 +66,7 @@ Extract data for pull requests for a given repository
       Trollop::die("Bye bye")
     }
 
+
     @ght ||= GHTorrent::Mirror.new(settings)
 
     user_entry = @ght.transaction{@ght.ensure_user(ARGV[0], false, false)}
@@ -301,7 +302,7 @@ Extract data for pull requests for a given repository
     q = <<-QUERY
     select count(f.follower_id) as num_followers
     from pull_requests pr, followers f, pull_request_history prh
-    where pr.user_id = f.follower_id
+    where pr.user_id = f.user_id
       and prh.pull_request_id = pr.id
       and prh.action = 'opened'
       and f.created_at < prh.created_at
