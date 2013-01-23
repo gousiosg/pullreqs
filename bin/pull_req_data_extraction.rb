@@ -6,7 +6,6 @@ require 'ghtorrent'
 require 'time'
 require 'linguist'
 require 'grit'
-require 'pp'
 
 require 'java_pull_req_data'
 require 'ruby_pull_req_data'
@@ -162,7 +161,7 @@ Extract data for pull requests for a given repository
 
     if src == 0 then raise Exception.new("Bad number of lines: #{0}") end
 
-    commits_last_month = commits_last_month(pr[:id], false)[0][:num_commits]
+    commits_last_3_month = commits_last_x_months(pr[:id], false, 3)[0][:num_commits]
     prev_pull_reqs = prev_pull_requests(pr[:id],'opened')[0][:num_pull_reqs]
 
     # Print line for a pull request
@@ -186,11 +185,11 @@ Extract data for pull requests for a given repository
           #stats[:src_files], ",",
           #stats[:doc_files], ",",
           #stats[:other_files], ",",
-          ((commits_last_month - commits_last_month(pr[:id], true)[0][:num_commits]) * 100) / commits_last_month, ",",
+          ((commits_last_3_month - commits_last_x_months(pr[:id], true, 3)[0][:num_commits]) * 100) / commits_last_3_month, ",",
           src, ",",
           stats[:lines_added] + stats[:lines_deleted], ",",
           stats[:test_lines_added] + stats[:test_lines_deleted], ",",
-          commits_on_files_touched(pr[:id], Time.at(Time.at(pr[:created_at]).to_i - 3600 * 24 * 30)), ",",
+          commits_on_files_touched(pr[:id], Time.at(Time.at(pr[:created_at]).to_i - 3600 * 24 * 90)), ",",
           (test_lines(pr[:id]).to_f / src.to_f) * 1000, ",",
           #(num_test_cases(pr[:id]).to_f / src.to_f) * 1000, ",",
           #(num_assertions(pr[:id]).to_f / src.to_f) * 1000, ",",
@@ -446,7 +445,7 @@ Extract data for pull requests for a given repository
   # Total number of commits on the project in the month before the pull request
   # was opened. The second parameter controls whether commits from other
   # pull requests should be accounted for
-  def commits_last_month(pr_id, exclude_pull_req)
+  def commits_last_x_months(pr_id, exclude_pull_req, months)
     q = <<-QUERY
     select count(c.id) as num_commits
     from projects p, commits c, project_commits pc, pull_requests pr,
@@ -457,7 +456,7 @@ Extract data for pull requests for a given repository
       and prh.pull_request_id = pr.id
       and prh.action = 'opened'
       and c.created_at < prh.created_at
-      and c.created_at > DATE_SUB(prh.created_at, INTERVAL 1 MONTH)
+      and c.created_at > DATE_SUB(prh.created_at, INTERVAL #{months} MONTH)
       and pr.id=?
     QUERY
 
