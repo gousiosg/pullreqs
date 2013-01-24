@@ -50,67 +50,11 @@ where:
 * `owner` is the project owner
 * `repo` is the name of the repository
 * `lang` is the main repository language as reported by Github. At the moment,
-only `ruby` and `java` are supported arguments.
+only `ruby`, `java` and `scala` projects can produce fully compatible data
+files. In the paper we used 2 project lists:
 
-Here are some examples of projects you may want to try:
-
-```bash
-rails rails ruby
-puppetlabs puppet ruby
-Katello katello ruby
-rapid7 metasploit-framework ruby
-spree spree ruby
-gitlabhq gitlabhq ruby
-diaspora diaspora ruby
-mongoid mongoid ruby
-fog fog ruby
-resolve refinerycms ruby
-enspiral loomio ruby
-opscode chef ruby
-mitchellh vagrant ruby
-Shopify active_merchant ruby
-sanger sequencescape ruby
-JumpstartLab reading ruby
-mojombo jekyll ruby
-puppetlabs facter ruby
-imathis octopress ruby
-jbossas jboss-as java
-hornetq hornetq java
-infinispan infinispan java
-neo4j community java
-sakaiproject nakamura java
-openmicroscopy openmicroscopy java
-sonatype nexus java
-elasticsearch elasticsearch java
-SpringSource spring-integration java
-cgeo c-geo-opensource java
-dana-i2cat opennaas java
-brooklyncentral brooklyn java
-SpoutDev SpoutAPI java
-ModeShape modeshape java
-jenkinsci jenkins java
-floodlight floodlight java
-KentBeck junit java
-netty netty java
-SpringSource spring-framework java
-intridea grape ruby
-eventmachine eventmachine ruby
-akka akka scala
-scala scala scala
-scala-ide scala-ide scala
-harrah xsbt scala
-scalaz scalaz scala
-xbmc xbmc c
-antirez redis c
-mruby mruby c
-libgit2 libgit2 c
-zfsonlinux zfs c
-ajaxorg cloud9 javascript
-joyent node javascript
-jquery jquery javascript
-mrdoob three.js javascript
-mbostock d3 javascript
-```
+* [A list of hand-picked projects](projects.txt)
+* [A list of (semi-)randomly selected projects](random-projects.txt)
 
 The data extraction script extracts several variables
 for each pull request and prints to `STDOUT` a comma-separated
