@@ -1,4 +1,4 @@
-\documentclass[conference]{IEEEtran}
+\documentclass{sig-alternate}
 \usepackage{url}
 \usepackage{graphicx}
 \usepackage{subfigure}
@@ -7,15 +7,26 @@
 
 \newcommand{\todo}[1]{\textbf{TODO}\footnote{\textbf{TODO:} #1}}
 
-\title{An exploration of the pull-based software development model}
 
-\author{\IEEEauthorblockN{Georgios Gousios and Martin Pinzger and Arie van
-Deursen}
-\IEEEauthorblockA{
-Software Engineering Research Group\\
-Delft University of Technology\\
-Delft, The Netherlands\\
-Email: \{g.gousios, m.pinzger, a.vandeursen\}@tudelft.nl}
+\title{An exploration of the pull-based software development model}
+\numberofauthors{3}
+
+\author{
+\alignauthor
+Georgios Gousios\\
+       \affaddr{Delft University of Technology}\\
+       \affaddr{Delft, The Netherlands}\\
+       \email{G.Gousios@tudelft.nl}
+\alignauthor
+Martin Pinzger\\
+       \affaddr{Delft University of Technology}\\
+       \affaddr{Delft, The Netherlands}\\
+       \email{M.Pinzger@tudelft.nl}
+\alignauthor
+Arie van Deursen\\
+       \affaddr{Delft University of Technology}\\
+       \affaddr{Delft, The Netherlands}\\       
+       \email{Arie.vandeursen@tudelft.nl}
 }
 
 \maketitle
@@ -24,9 +35,14 @@ Email: \{g.gousios, m.pinzger, a.vandeursen\}@tudelft.nl}
 Foo
 \end{abstract}
 
-\begin{IEEEkeywords}
-Git, pull request, collaborative development
-\end{IEEEkeywords}
+% A category with the (minimum) three required fields
+\category{H.4}{Information Systems Applications}{Miscellaneous}
+%A category including the fourth, optional field follows...
+\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
+
+\terms{Theory}
+
+\keywords{pull-based development, pull request, collaborative development}
 
 \section{Introduction}
 
@@ -265,7 +281,38 @@ Once a pull request has been submitted, it is open for discussion.
   \label{tab:features}
 \end{table*}
 
+
+\begin{table}[htb] \centering 
+  \caption{} 
+\footnotesize 
+
+\begin{tabular}{@{\extracolsep{5pt}}l c c c c c } 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+Statistic & \multicolumn{1}{c}{\textit{N}} & \multicolumn{1}{c}{\textit{Mean}} & \multicolumn{1}{c}{\textit{St. Dev.}} & \multicolumn{1}{c}{\textit{Min}} & \multicolumn{1}{c}{\textit{Max}} \\ 
+\hline \\[-1.8ex] 
+team\_size & 1,178 & 30.389 & 19.066 & 4 & 83 \\ 
+num\_commits & 1,178 & 2.831 & 11.196 & 0 & 175 \\ 
+num\_comments & 1,178 & 2.508 & 5.668 & 0 & 134 \\ 
+files\_changed & 1,178 & 46.216 & 596.808 & 0 & 18,037 \\ 
+perc\_external\_contribs & 1,178 & 31.789 & 25.083 & 1 & 100 \\ 
+sloc & 1,178 & 10,995.860 & 4,756.711 & 2,469 & 15,496 \\ 
+src\_churn & 1,178 & 446.183 & 7,440.412 & 0 & 243,104 \\ 
+test\_churn & 1,178 & 64.429 & 536.843 & 0 & 11,237 \\ 
+commits\_on\_files\_touched & 1,178 & 80.784 & 668.901 & 0 & 10,753 \\ 
+test\_lines\_per\_1000\_lines & 1,178 & 897.874 & 86.798 & 658.886 & 1,021.269 \\ 
+prev\_pullreqs & 1,178 & 11.895 & 21.063 & 0 & 112 \\ 
+requester\_succ\_rate & 1,178 & 0.426 & 0.378 & 0.000 & 1.000 \\ 
+watchers & 1,178 & 5,764.477 & 1,402.234 & 3,452 & 15,770 \\ 
+followers & 1,178 & 11.611 & 26.335 & 0 & 281 \\ 
+\hline \\[-1.8ex] 
+\normalsize 
+\end{tabular} 
+\end{table}
+
 \section{Discussions and Conclusion}
+
+
 
 \subsection{Threats to validity}
 
