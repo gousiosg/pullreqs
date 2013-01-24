@@ -18,14 +18,14 @@ store.pdf(p, "~/Desktop/", "github-growth.pdf")
 
 b <- with(a, a$merged <- function(r){if(is.na(r[4])){0} else {1}})
 
-
 source(file = "R/variables.R")
 source(file = "R/utils.R")
 library(ROCR) 
 dfs <- load.all(dir=data.file.location)
-a = dfs[[37]]
-a$merged <- apply(a, 1, function(r){if(is.na(r[4])){T} else {F}})
-a <- a[,c(8:21)]
+a <- class.project(dfs, "rails")
+b <- class.project(dfs, "")
+
+a <- prepare.project.df(merge.dataframes(dfs))
 testidx <- which(1:nrow(a)%%4 == 0)
 train <- a[-testidx,]
 test <- a[testidx,]
@@ -34,10 +34,10 @@ test <- a[testidx,]
 library(rpart)
 a <- a[, -c(11)]
 testidx <- which(1:nrow(a)%%4 == 0)
-train <- a[testidx,]
-test <- a[-testidx,]
+train <- a[-testidx,]
+test <- a[testidx,]
 
-treemodel <- rpart(merged ~., data=train, method="class")
+treemodel <- rpart(merged~. - requester - num_comments - watchers - followers - sloc, data=a, method="class")
 pred <- predict(treemodel, test)
 rfcv(pred, test$merged)
 pr <- prediction(pred, test$merged)
@@ -54,19 +54,37 @@ post(treemodel, file="~/tree.ps")
 
 # Random forests
 library(randomForest)
-# Train the classifier
-model <- randomForest(merged~. - requester, data=a, importance = T, do.Trace = 10)
+
+model <- randomForest(merged~. - requester - num_comments - watchers - followers - sloc, data=a, importance = T)
 print(model)
 varImpPlot(model, type=1)
+varImpPlot(model, type=2)
 
 plot(model)
 
 # Use it to predict values in the training set
-pred <- predict(model, test)
-pr <- prediction(pred, test$merged)
-perf <- performance(pr, "prec", "rec")
-plot(perf, col = "red") 
-importance(model)
+# Plot ROC, recall-precision, calibration curves
+OOB.votes <- predict (model, b, type="prob")
+OOB.pred <- OOB.votes[,2]
+pred.obj <- prediction (OOB.pred, b$merged)
 
-# Carrot
+OOB.pred <- predict (model, b$merged)
+pred.obj <- prediction (OOB.pred, b$merged)
 
+ROC.perf <- performance(pred.obj, "tpr","fpr")
+plot (ROC.perf, colorize = T)
+
+RP.perf <- performance(pred.obj, "rec","prec")
+plot (RP.perf, colorize = T)
+
+ROC.acc <- performance(pred.obj, "acc")
+plot (ROC.acc, colorize = T)
+
+# AUC, precision, recall
+as.numeric(performance(pred.obj,"auc")@y.values)
+as.numeric(performance(pred.obj,"acc")@y.values)
+as.numeric(performance(pred.obj,"rec")@y.values)
+
+plot  (RP.perf@alpha.values[[1]],RP.perf@x.values[[1]]);
+lines (RP.perf@alpha.values[[1]],RP.perf@y.values[[1]]);
+lines (ROC.perf@alpha.values[[1]],ROC.perf@x.values[[1]]);

@@ -15,25 +15,62 @@ is.integer <- function(N){
 
 # Load all csv files in the provided dir as data frames
 load.all <- function(dir = ".") {
+  
+#  read.file <- function(init, x) {
+#    a = read.csv(pipe(paste("cut -f2-23 -d',' ", x)))
+#    if (nrow(a) != 0){
+#      print(sprintf("Loading file %s", x))
+#      print(sprintf("class of init %s, length: %d", class(init), length(init)))
+#      init[[length(init) + 1]] <- a
+#      print(sprintf("class of init %s, length: %d", class(init), length(init)))
+#    } else {
+#      print(sprintf("Ignoring empty file %s", x))
+#    }
+#    init
+#  }
+  
+#  Reduce(read.file,
+#        list.files(path = dir, pattern = "*.csv$", full.names = T),
+#        c(), accumulate = TRUE)
   lapply(list.files(path = dir, pattern = "*.csv$", full.names = T),
-         function(x){read.csv(pipe(paste("cut -f2-22 -d',' ", x)))})
+         function(x){
+           print(sprintf("Reading file %s", x))
+           read.csv(pipe(paste("cut -f2-23 -d',' ", x)))
+         })
 }
 
 # Add merged column
-add.merged <- function(dfs) {
-  Map(function(df){
-    with(df, df$merged <- function(r){if(is.na(r[4])){0} else {1}})
-  }, dfs)
+addcol.merged <- function(dfs) {
+  newdfs = c()
+  for (i in 1:length(dfs)) {
+    print(sprintf("Adding column merged to dataframe %s", (project.name(dfs[[i]]))))
+    dfs[[i]]$merged <- apply(dfs[[i]], 1, function(r){if(is.na(r[4])){T} else {F}})
+    dfs[[i]]$merged <- as.factor(dfs[[i]]$merged)
+    newdfs = c(newdfs, dfs[[i]])
+  }
+  newdfs
 }
 
+# Name of a project in a dataframe
+project.name <- function(dataframe) {
+  as.character(unique(dataframe[['project_name']]))
+}
 
+# Name of all projects in the provided dataframe list
+project.names <- function(dfs) {
+  lapply(dfs, project.name)
+}
+
+# Get a project dataframe from the provided data frame list whose name is dfs
+get.project <- function(dfs, name) {
+  Find(function(x){if(project.name(x) == name){T} else {F} }, dfs)
+}
 
 # Merge all dataframes in the provided list into one dataframe
-merge.dataframes <- function(dataframes, fields) {
+merge.dataframes <- function(dataframes) {
   merged <- data.frame()
   for (i in 1:length(dataframes)) {
-    name <- unique(dataframes[[i]][['project_name']])
-    print(sprintf("Merging dataframe %s", name))
+    print(sprintf("Merging dataframe %s", project.name(dataframes[[i]])))    
     merged <- rbind(merged, dataframes[[i]])
   }
   merged

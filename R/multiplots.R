@@ -2,8 +2,7 @@ library(ggplot2)
 library(grid)
 library(reshape)
 library(ellipse)
-
-options(error=traceback)
+source(file = "R/variables.R")
 
 # Plot a list of plots using n columns
 multiplot <- function(plots, cols=1, title = "") {
@@ -56,20 +55,13 @@ plot.histogram <- function(data, var, title = var)
   p
 }
 
-# Plot a correlation matrix
-plot.multicor <- function(dataframe, label = "")
+# Plot a cross-correlation matrix
+plot.crosscor <- function(dataframe, label = "")
 {
   ctab <- cor(dataframe, method = "spearman")
   colorfun <- colorRamp(c("#CC0000","white","#3366CC"), space="Lab")
-  plotcorr(ctab, col=rgb(colorfun((ctab+1)/2), maxColorValue=255))
-  #plotcorr(ctab, type = "lower", xlab = label)
-}
-
-# Plot histograms for all vars in the provided dataframe
-plot.hist.all_vars <- function(data, skip = 1)
-{
-  lapply(colnames(data)[skip:length(colnames(data))],
-         function(x){plot.histogram(data, x)})
+  #plotcorr(ctab, col=rgb(colorfun((ctab+1)/2), maxColorValue=255))
+  plotcorr(ctab, type = "lower", xlab = label, col=rgb(colorfun((ctab+1)/2), maxColorValue=255))
 }
 
 # Plot histograms for all files/variables combinations in the provided dataframe
