@@ -83,17 +83,19 @@ forked_repos <- fetch(res, n = -1)
 print(sprintf("Perc forked repos: %f", (forked_repos/repos) * 100))
 
 # Drive-by commits pull reqs
-
+res <- dbSendQuery(con, "select count(*) as cnt from pull_requests pr, pull_request_history prh where prh.action = 'opened' and prh.pull_request_id = pr.id and year(prh.created_at) = 2012 and not exists (select c.author_id from commits c, project_commits pc where pc.project_id = pr.base_repo_id and c.created_at < prh.created_at and c.author_id = pr.user_id) and 1 = (select count(*) from pull_request_commits prc where prc.pull_request_id = pr.id)")
+drive_by_pr <- fetch(res, n = -1)$cnt
+print(sprintf("Perc drive by pull requests: %d", drive_by_pr/opened_pullreqs)
+      
 # Repos created just for one pull request
 res <- dbSendQuery(con, "select count(*) as cnt from (select head_repo_id, count(*) as num_pr from pull_requests pr, projects p where pr.intra_branch is false and p.id = pr.head_repo_id and year(p.created_at) = 2012 and pr.head_repo_id is not null group by head_repo_id having count(*) = 1) as foo")
 one_pr_repos <- fetch(res, n = -1)$cnt
 print(sprintf("Perc one pull req repos: %f", (one_pr_repos/forked_repos) * 100))
 
 # Pull req size stats: number of commits
-res <- dbSendQuery(con, "select pr.id, count(*) as num from pull_requests pr, pull_request_comments prc where prc.pull_request_id = pr.id group by pr.id")
-pr_stats <- fetch(res, n = -1)$cnt
-print(sprintf("Perc one pull req repos: %f", (one_pr_repos/forked_repos) * 100))
-      
+res <- dbSendQuery(con, "select pr.id, count(*) as cnt from pull_requests pr, pull_request_commits prc where prc.pull_request_id = pr.id group by pr.id")
+pr_stats_num_commit <- fetch(res, n = -1)
+
       
 # Overall project statistics
 if (file.exists(overall.dataset.stats)) {
