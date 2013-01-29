@@ -10,7 +10,6 @@ ushis silo Ruby
 otwcode otwarchive Ruby
 jnicklas carrierwave Ruby
 Shopify active_merchant Ruby
-exoplatform cs Java
 ddfreyne nanoc Ruby
 mongoid moped Ruby
 codahale dropwizard Java
@@ -45,6 +44,5 @@ github linguist Ruby
 exoplatform platform Java
 jnunemaker httparty Ruby
 jenkinsci jenkins Java
-exoplatform ecms Java
 belaban JGroups Java
 sferik twitter Ruby
