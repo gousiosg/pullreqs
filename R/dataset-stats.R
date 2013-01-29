@@ -1,16 +1,100 @@
 library(RMySQL)
+library(ggplot2)
+
 source(file = "R/variables.R")
 source(file = "R/mysql.R")
 
 print("Running database queries...")
 con <- dbConnect(dbDriver("MySQL"), user = mysql.user, password = mysql.passwd, 
                  dbname = mysql.db, host = mysql.host)
+# Total repos
+res <- dbSendQuery(con, "select count(*) as cnt from projects")
+repos <- fetch(res, n = -1)
+print(sprintf("Total repos: %d",repos$cnt))
 
-res <- dbSendQuery(con, "select pr.id as pr, count(*) as cnt from pull_requests pr, pull_request_comments prc where prc.pull_request_id = pr.id group by pr.id")
+# Total users
+res <- dbSendQuery(con, "select count(*) as cnt from users")
+users <- fetch(res, n = -1)
+print(sprintf("Total repos: %d",repos$cnt))
+
+# Original repos
+res <- dbSendQuery(con, "select count(*) as cnd from projects where forked_from is null and name not regexp '^.*\.github\.com$' and name <> 'try_git' and name <> 'dotfiles'")
+orig_repos <- fetch(res, n = -1)
+print(sprintf("Original repos: %f",orig_repos$cnt))
+
+# % of original repos 
+print(sprintf("Original repos: %f",(orig_repos$cnt/repos$cnt) * 100)
+
+# Original repositories that received a single commit
+res <- dbSendQuery(con, "select count(*) as cnt from projects p where forked_from is null and name not regexp "^.*\.github\.com$" and name <> 'try_git' and name <> 'dotfiles' and exists ( select * from project_commits pc, commits c where  pc.project_id = p.id and  c.id = pc.commit_id and year(c.created_at) = 2012)")
+repos_with_commits <- fetch(res, n = -1)
+print(sprintf("Original repos with commits: %f", repos_with_commits$cnt)
+
+# % of active repos (original repos with a commit in 2012)
+print(sprintf("Original repos with commits: %f",(repos_with_commits$cnt/repos$cnt) * 100)
+
+# Total pull requests
+res <- dbSendQuery(con, "select count(*) from pull_requests as cnt")
+pullreqs <- fetch(res, n = -1)
+print(sprintf("Total pull requests: %f",pullreqs$cnt))
+
+
+# % of pull req comments by non-repo members 
+res <- dbSendQuery(con, "select count(pr.id) as cnt from pull_requests pr, pull_request_comments prc where pr.id = prc.pull_request_id and not exists (select * from project_commits pc, commits c where pc.commit_id = c.id and pc.project_id = pr.base_repo_id and c.author_id = prc.user_id);")
+prc_non_members <- fetch(res, n = -1)
+print(sprintf("Pull request comments by non project members: %f", prc_non_members$cnt)
+
+# % of pull req comments by non-repo members 
+print(sprintf("% comments from non-repo members: %f",(prc_non_members$cnt/pullreqs$cnt) * 100)
+
+# Pull req comments
+res <- dbSendQuery(con, "select i.pr_id, ic_cnt + prc_cnt as cnt from (select pr.id as pr_id, count(*) as ic_cnt from projects p, pull_requests pr, issues i, issue_comments ic where p.forked_from is null and pr.base_repo_id = p.id and i.id = ic.issue_id and pr.id = i.pull_request_id group by pr.id) as i, (select pr.id as pr_id, count(*) as prc_cnt  from projects p, pull_requests pr, pull_request_comments prc  where p.forked_from is null and p.id = pr.base_repo_id and prc.pull_request_id = pr.id  group by pr.id) as pr where pr.pr_id = i.pr_id")
 prs <- fetch(res, n = -1)
 print(sprintf("Num discussion comments per pulreq (mean): %f", mean(prs$cnt)))
-print(sprintf("Num discussion comments per pulreq (95th perc): %d", quantile(prs$cnt, 0.95)))
+print(sprintf("Num discussion comments per pulreq (95 perc): %d", quantile(prs$cnt, 0.95)))
+print(sprintf("Num discussion comments per pulreq (5 perc): %d", quantile(prs$cnt, 0.05)))
 
+# Original repos that received a pullreq in 2012
+res <- dbSendQuery(con, "select count(*) as cnt from projects p where p.forked_from is null  and p.name not regexp '^.*\.github\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles' and exists (select pr.id from pull_requests pr, pull_request_history prh where pr.base_repo_id = p.id and prh.pull_request_id = pr.id and year(prh.created_at)=2012)")
+orig_repos_pullreqs <- fetch(res, n = -1)
+print(sprintf("Repos that received a pull request in 2012: %s", orig_repos_pullreqs$cnt))
+print(sprintf("% repos that received a pull request in 2012: %s", orig_repos_pullreqs$cnt/orig_repos$cnt) * 100)
+
+# Pull request statistics and histogram for pull reqs in 2012
+res <- dbSendQuery(con, "select pr.base_repo_id as repoid, count(*) as cnt from projects p, pull_requests pr  where p.forked_from is null and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles'  and pr.base_repo_id = p.id and exists (select prh.created_at from pull_request_history prh where prh.pull_request_id = pr.id and prh.action='opened' and year(prh.created_at)=2012)  group by pr.base_repo_id order by count(*) desc")
+pullreqs <- fetch(res, n = -1)
+print(sprintf("Pullreqs per project (mean): %f", mean(pullreqs$cnt)))
+print(sprintf("Pullreqs per project (95 perc): %d", quantile(pullreqs$cnt, 0.95)))
+print(sprintf("Pullreqs per project (5 perc): %d", quantile(pullreqs$cnt, 0.05)))
+store.pdf(qplot(cnt, data = subset(pullreqs, cnt > 10), geom = "histogram", log = "x", ylab = "Number of projects", xlab = "Number of pull requests (log)"), plot.location, "pull-req-freq.pdf")
+      
+# Overall pull req stats - opened
+res <- dbSendQuery(con, "select count(*) as cnt from projects p, pull_requests pr  where p.forked_from is null and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles'  and pr.base_repo_id = p.id and exists (select prh.created_at from pull_request_history prh where prh.pull_request_id = pr.id and prh.action='opened' and year(prh.created_at)=2012)")
+opened_pullreqs <- fetch(res, n = -1)$cnt
+res <- dbSendQuery(con, "select count(*) as cnt from projects p, pull_requests pr  where p.forked_from is null and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles'  and pr.base_repo_id = p.id and exists (select prh.created_at from pull_request_history prh where prh.pull_request_id = pr.id and prh.action='closed' and year(prh.created_at)=2012)")
+closed_pullreqs <- fetch(res, n = -1)$cnt
+res <- dbSendQuery(con, "select count(*) as cnt from projects p, pull_requests pr  where p.forked_from is null and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles'  and pr.base_repo_id = p.id and exists (select prh.created_at from pull_request_history prh where prh.pull_request_id = pr.id and prh.action='merged' and year(prh.created_at)=2012)")
+merged_pullreqs <- fetch(res, n = -1)$cnt
+print(sprintf("Perc merged pull requests: %f", (merged_pullreqs/opened_pullreqs) * 100))
+
+# Forked repos
+res <- dbSendQuery(con, "select count(*) as cnt from projects where forked_from is not null")
+forked_repos <- fetch(res, n = -1)
+print(sprintf("Perc forked repos: %f", (forked_repos/repos) * 100))
+
+# Drive-by commits pull reqs
+
+# Repos created just for one pull request
+res <- dbSendQuery(con, "select count(*) as cnt from (select head_repo_id, count(*) as num_pr from pull_requests pr, projects p where pr.intra_branch is false and p.id = pr.head_repo_id and year(p.created_at) = 2012 and pr.head_repo_id is not null group by head_repo_id having count(*) = 1) as foo")
+one_pr_repos <- fetch(res, n = -1)$cnt
+print(sprintf("Perc one pull req repos: %f", (one_pr_repos/forked_repos) * 100))
+
+# Pull req size stats: number of commits
+res <- dbSendQuery(con, "select pr.id, count(*) as num from pull_requests pr, pull_request_comments prc where prc.pull_request_id = pr.id group by pr.id")
+pr_stats <- fetch(res, n = -1)$cnt
+print(sprintf("Perc one pull req repos: %f", (one_pr_repos/forked_repos) * 100))
+      
+      
 # Overall project statistics
 if (file.exists(overall.dataset.stats)) {
   print(sprintf("%s file found", overall.dataset.stats))

@@ -2,6 +2,7 @@
 \usepackage{url}
 \usepackage{graphicx}
 \usepackage{subfigure}
+\usepackage{url}
 
 \begin{document}
 
@@ -32,7 +33,19 @@ Arie van Deursen\\
 \maketitle
 
 \begin{abstract}
-Foo
+
+  The advent of distributed version control systems has led to the development
+  of a new paradigm for distributed software development; instead of pushing
+  changes to a central repository, developers pull them from other repositories
+  and merge them locally. Various code hosting sites, notably Github, have
+  tapped on the opportunity to facilitate pull based development by offering
+  workflow support tools, such as code reviewing systems and integrated issue
+  trackers. In this work, we provide an exploration of how pull-based software
+  development works. By quantitatively analysing a hundred projects, we
+  identify the factors that affect pull request processing speed and
+  create a classifier able of predicting whether pull requests will be accepted
+  with 85\% accuracy.  
+
 \end{abstract}
 
 % A category with the (minimum) three required fields
@@ -46,18 +59,19 @@ Foo
 
 \section{Introduction}
 
-Since its appearance in 2005, the Git version control system has revolutionized
-the way distributed software development has been carried out. Driven by
-pragmatic needs, Git was designed from scratch to work as an advanced patch
-management system, rather than a versioned file system, the then dominant
-version control system ({\sc vcs}) paradigm. In Git, a file is an ordered set of
-changes, the serial application of which lead to the current file, and
-consequently file tree, state. The changesets can originate from a local
-filesystem or a remote host; Git tools facilitate the acquisition and
-application of changesets on a local Git datastore. The distributed nature
-of Git enables a pull-based development model, where changes are offered
-to a project repository through a network of project forks; it is up to the
-project repository owner to accept or reject the incoming pull requests.
+Since their appearance in 2005, the distributed version control systems ({\sc
+dvcs}), notably Git, have revolutionized the way distributed software
+development is carried out. Driven by pragmatic needs, {\sc dvs}s were designed
+from scratch to work as an advanced patch management systems, rather than a
+versioned file system, the then dominant version control system ({\sc vcs})
+paradigm. In most {\sc dvcs}s, a file is an ordered set of changes, the serial
+application of which lead to the current file, and consequently file tree,
+state. The changesets can originate from a local filesystem or a remote host;
+tools facilitate the acquisition and application of changesets on a local
+mirror. The distributed nature of {\sc dvcs}) enables a pull-based development
+model, where changes are offered to a project repository through a network of
+project forks; it is up to the repository owner to accept or reject the incoming
+pull requests.
 
 Several code hosting sites, including Github and BitBucket, tapped on the
 opportunity to make the pull-based development model more accessible to
@@ -70,111 +84,252 @@ mentioned earlier, pull requests are not unique to code hosting sites; in fact,
 the Git software distribution includes the \textsf{git-request-pull} utility
 which provides the same functionality at the command line. Github
 improved\footnote{Not everyone agrees:
-https://github.com/torvalds/linux/pull/17} this process significantly by
+\url{https://github.com/torvalds/linux/pull/17}} this process significantly by
 integrating code reviews, discussions and issues, thus effectively lowering the
 entry barrier for casual contributions. Combined, cloning and pull requests
 create a new development model, where changes are pushed to the project
 maintainers and go through code review by the community before being integrated. 
 
-In this paper, we provide a quantitative exploration of the way the pull-based
-distributed software development model works on Github. Specifically, we examine
-50 large Ruby and Java projects and identify common factors that affect pull
-request handling and merge time. Our contributions are the following:
+Pull-based development is an emerging paradigm for distributed software
+development. As more developers appreciate the perceived benefits of isolated
+development and branching~\cite{Bird12}, more projects, both closed source and,
+especially, open source are being migrated to code hosting sites with support
+for pull based development~\cite{Barr12}. Our work investigates the following
+research questions:
 
-\begin{itemize}
+\begin{description}
+  
+  \item[RQ1] How widespread is the use of the pull-based development model? What
+    are its characteristics?
+  
+  \item[RQ2] What are the factors that affect the decision to merge of a pull request?
 
-  \item We define the pull-based contribution model
+  \item[RQ3] Can we predict whether a pull request will be merged to a
+    repository?
 
-  \item We provide 
+\end{description}
 
-\end{itemize}
-
-\section{Distributed development models}
-
-\subsubsection{Shared repository} Developers share a common repository, with read
-and write permissions. To work, they clone it locally, modify its contents,
-potentially introducing new branches, and push their changes back to the central
-one. To cope with multiple versions and multiple developers, larger projects
-usually adopt a {\em branching model}. While the exact details depend on the
-project requirements, usually branching models include feature branches, where
-developers implement new features and fix bugs, and release branches, which
-store the state of each project release. After the work has finished on the
-feature branch its contents are merged appropriately to release branches and the
-project master branch.
-
-\subsubsection{Pull requests} The project repository is not shared among
-developers; instead, developers fork (create an identical copy of) the
-repository and make their changes independent of each other. When a set of
-changes is ready to merge with the main repository, they create a pull request,
-which specifies a branch and a list of commits to merge with a branch in the
-main repository. The main repository owner is responsible to test the changes
-and pull them to the project's master branch. 
-
-\subsubsection{Intra-branch pull requests} As pull requests only specify branches
-from which certain commits can be pulled, there is nothing that forbids their
-use in the shared repository approach. In such cases, developers specify as the
-source branch a branch in the same repository as the target one. Intra-branch
-pull requests are usually accompanied by code reviews and discussion; this is
-why they are primarily performed if the project tooling supports this kind of
-interaction.
-
-\section{Distributed development on Github}
-
-Our study of pull-request based development is based on data from the Github
+To answer the above questions, we conducted a quantitative exploration of the
+way the pull-based distributed software development model works.
+Our study is based on data from the Github
 collaborative development forge, as made available through the GHTorrent
 project~\cite{GS12}. Specifically, we used a dataset slice that covered activity
-across all projects on Github from early February 2012 to end of December 2012.
-Github offers two types of data in its {\sc api}; a streaming data flow listing
-events, such as forking or creating pull requests, happening on repositories and
-a static view of entity states. To obtain references to the roots of the static
-view entities, the event stream needs to be followed.
+across all projects on Github from early February 2012 to early Feb 2013.
+Github offers two types of data through its {\sc api}; a streaming data flow
+listing events, such as forking or creating pull requests, happening on
+repositories and a static view of entity states. To obtain references to the
+roots of the static view entities, the event stream needs to be followed. From
+there, a recursive dependency-based parsing approach can yield all data
+offered through the {\sc api}. 
+The GHTorrent dataset covers a broad range of development activities on Github,
+including pull requests and issues. On Feb 2013, more than a million 
+pull requests from more that a hundred thousand projects have been collected by the project.
 
-Github is a very popular development site;
-in in its main page, Github reports more than 4 million repositories and 2 
-million users. What is interesting is that the majority of those repositories are
-active: in 2012, the GHTorrent dataset captured events initiated by  
-% db.events.distinct('actor.id').count() 
-1,050,000 users affecting 
-% db.events.distinct('repo.id').count()
-2,520,000 repositories. 
-The majority of registered repositories are forks of other 
-repositories; in the GHTorrent dataset, only half
-% select (((select count(*) from forks) * 100 ) / (select count(*) from projects))
-(~53\%) of the repositories are original repositories;
-from those, \todo{q: \% of repos that got a single commit}\% where active in the last year.
+Using the GHTorrent dataset, we explore the use of pull requests among projects
+in Github to answer {\sc rq1}. Based on our observations, we develop a theory
+of pull request adoption.
+To answer {\sc rq2} and {\sc rq3}, we examined a hand selected group of 50 Ruby, Java and Scala projects,
+(\todo{Add number of pullreqs} pull requests), and identified, using machine
+learning tools, common factors that affect pull request lifetime and merging. We
+then applied the extracted models on another group of 50 randomly selected
+projects in order to validate them. The results show that it is
+possible to predict, with a high accuracy, whether a pull request will be
+merged.
 
-Github supports all types of distributed development outlined above;
+In the following section, we briefly describe the pull-based development model
+and present an overview of how pull based development works on Github.
+Then, we examine pull requests from various view points and develop
+a theory of how pull requests are processed. In Section~\ref{sec:accrej},
+we test the developed theory against statistical models and discuss our
+findings in Section~\ref{sec:discussion}.
+
+\section{Pull-based development}
+
+\subsection{Development models with DVCs}
+
+The development models afforded by {\sc dvcs}s are a superset of 
+those in centralized version control environments~\cite{Shiha12,Bird09}. 
+With respect to receiving and processing external contributions,
+the following strategies can be employed:
+
+\begin{description}
+
+  \item[Shared repository] Developers share a common repository, with read and
+    write permissions. To work, they clone it locally, modify its contents,
+    potentially introducing new branches, and push their changes back to the
+    central one. To cope with multiple versions and multiple developers, larger
+    projects usually adopt a {\em branching model}, i.e. an organized way to
+    accept and test contributions before those are merged to the main
+    development branch~\cite{Bird12}. While the exact details depend on the
+    project requirements, usually branching models include feature branches,
+    where developers implement new features and fix bugs, and release branches,
+    which store the state of each project release. After the work has finished
+    on the feature branch its contents are merged appropriately to release
+    branches and the project master branch.
+
+  \item[Pull requests] The project repository is not shared among developers;
+    instead, developers clone the repository and make their changes independent
+    of each other. When a set of changes is ready to be submitted with the main
+    repository, they create a pull request, which specifies a branch and a list
+    of commits to merge with a branch in the main repository. The main
+    repository owner is responsible to test the changes and pull them to the
+    project's master branch. On larger projects, such as the Linux kernel,
+    there are several layers of merge repositories before a contributed 
+    pull request reaches the main tree~\cite{Cornf10}.
+
+  \item[Intra-branch pull requests] As pull requests only specify branches from
+    which certain commits can be pulled, there is nothing that forbids their use
+    in the shared repository approach. In such cases, developers specify as the
+    source a branch in the same repository as the target one.
+    Intra-branch pull requests are usually accompanied by code reviews and
+    discussion; this is why they are primarily performed if the project tooling
+    supports this kind of interaction.
+
+\end{description}
+
+The use of branches in the shared repository model has been found to allow
+developers to collaborate on tasks in highly cohesive branches, while enjoying
+reduced interference from developers working on other tasks, even if those tasks
+are strongly coupled to theirs~\cite{Barr12}. On the other hand, non-frugal
+use of branching can lead to measurable, but not significant, delays in 
+projects~\cite{Bird12}. In this work, we only consider pull-based development
+as our investigation target.
+
+\subsection{Pull-based development on Github}
+
+Github is a very popular development site; in in its main page, Github reports
+more than 5 million repositories and 3 million users. However,  not all those
+projects are active: in 2012, the GHTorrent dataset captured events initiated by
+(approximately) 1,260,000 users affecting 2,088,000 repositories. The majority
+of registered repositories are forks of other repositories, special repositories
+hosting user web pages (named as \texttt{<name>.github.com}), program
+configuration files (\texttt{dotfiles}) and temporary repositories for
+evaluating Git (\texttt{try\_git}). In the GHTorrent dataset, less than half
+(905,400 or 42\%) of the active repositories are original repositories. From
+those, only 587,800 (or 28\% in total) received a commit in 2012.
+
+Github supports all types of distributed development outlined above; however,
 pull requests receive special treatment. The site is tuned to allow easy forking
-of projects by project outsiders, while automating the generation of pull
-requests through automatic comparison of project branches. Pull requests are
-submitted to the repository for review; any Github user can participate to the
-review process, although usually it is project community members that do so
-\todo{q: \% of comments by non-committers}. The
-review process consists of comments on the pull request as a whole and also
-comments on the individual commits that comprise the pull request.
+of projects by external users, while automating the generation of pull
+requests through automatic comparison of project branches. In common to
+Git-based pull requests, a Github pull request contains a list of commits
+to be merged. In addition, the list of commits is automatically updated when newer commits have been added to the forked repository after the pull request
+has been created. Each Github pull request has an attached implicit state
+machine (see Figure~\ref{fig:state}), which is automatically updated by
+Github as users manipulate the pull request.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[scale=0.5]{pr-state-machine.pdf}
+  \end{center}
+  \caption{States into which a Github pull request can be into}
+  \label{fig:state}
+\end{figure}
+
+By default, pull requests are submitted to the base repository for review.
+Reviews can either target the pull as whole or the individual commits,
+thereby resembling a code review. 
+Even though any Github user can participate to the
+review process, usually it is project community members that do so:
+only 0.011\% of pull request comments come from users that have not
+committed to the project repository.
 Pull requests receive comments quite frequently: on average, each pull
-requests receive 5.6 (95\% quantile: 18) discussion comments and .
-%select avg(cnt) from (select pr.id as pr, count(*)  as cnt from pull_requests, pr.pull_request_comments prc where prc.pull_request_id = pr. id group by pr.id) as a
+request receives 12 (quantiles: 5\%: 2, 95\%: 35) discussion comments.
 
-Pull requests are enabled by default on all repositories opened on Github.
-For the projects that are not forks, 
-\todo{q: \% projects that received pull reqs}
-received a pull request in 2012. For 
+As a result of the discussion, pull requests can be updated with new commits or
+be closed as redundant or uninteresting. To merge a pull request, a user must
+be part of the main project team. The versatility of the Git tool suite enables
+pull requests to be merged in various ways, presented below ordered by
+the amount of preservation of the original source code properties:
 
-Handling of pull requests
+\begin{description}
 
-\begin{itemize}
+  \item[Through Github facilities] Github can automatically verify whether a
+    pull request can be merged without conflicts to the base repository. When a
+    merge is requested, Github will automatically apply the commits in the pull
+    request and record the merge event. All authorship and history information
+    is maintained in the merged commits.
 
-  \item Merge them through Github facilities. We can then see merge events.
+  \item[Git merge] When a pull request cannot be applied cleanly or when
+    project-related policies do not permit automatic merging, a pull request
+    can be merged using plain Git utilities, using the following
+    techniques: 
 
-  \item  Merge them using Git facilities. Github cannot be notified for this. Merging can occur using either cherry picking specific commits from the pull request branch or by merging the branches. In the first case, the commit sha will change, so it is not possible to track it.(netty)
+    \begin{itemize}
 
-  \item Squash the commits in a single one (with Git rebase), then cherry-pick or merge (node.js). Different author from committer. 
+      \item \emph{Branch merging:} The remote branch containing the pull
+        request commits is added as a source to a local repository. The remote 
+        branch is merged to a local upstream branch, which is then pushed to
+        the central repository or published for further pulling by other
+        developers. Both history and authorship information are maintained,
+        but Github cannot detect the merge in order to record a merge. 
 
-  \item Copy code and apply patch manually, loosing all authorship information
-    (jquery)
+      \item \emph{Cherry-picking:} Instead of merging all commits, the merger
+        picks specific commits from the remote branch, which then applies to the
+        upstream branch. The commit unique identifier changes, so exact history
+        cannot be maintained, but authorship is preserved.
+    
+    \end{itemize}
 
-\end{itemize}
+    A technique that complements both of the above is \emph{commit
+    squashing}: when the full history is not of interest to the project,
+    several consecutive commits are merged into a single one on the pull request
+    branch, which can them be merged or cherry-picked to the upstream branch. In
+    this case, the author of the commit is different from the person that
+    applied the commit.
+
+  \item [Committing the patch] Through this technique, the merger creates a
+    textual difference between the upstream and the pull request branch, which
+    then applies to the upstream branch. Both history and authorship information
+    is lost.
+
+\end{description}
+
+Pull requests are enabled by default on all repositories opened on Github.  From
+the set of original repositories as described above, 88.000 (or 14\%) received
+at least one pull request in 2012.  While the mean number of pull requests per
+project is relatively low at 6.5 (percentiles: 5\%: 2, 95\%: 19), the
+distribution of pull requests in projects is highly skewed, as shown in
+Figure~\ref{fig:prfreq}.  A few large projects (such as the Homebrew package
+manager and the Ruby on Rails web application framework) receive the vast
+majority of pull requests. From the pull requests that have been opened in 2012,
+60,45\% have been merged, thereby indicating that pull requests in principle can
+work as a medium for obtaining external contributions.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[scale=0.4]{pull-req-freq}
+  \end{center}
+  \caption{Histogram of pull request frequencies for projects with more than
+  10 pull requests.}
+  \label{fig:prfreq}
+\end{figure}
+
+Issues and pull requests are dual on Github; for each pull request, an
+issue is opened automatically. Commits can also be attached to issues to
+convert them to pull requests (albeit with external tools). This duality
+enables project administrators to treat pull requests as work items,
+which can be managed using the same facilities used for issues. However,
+as issues are not enabled by default for all projects on Github, 
+
+A phenomenon related to pull requests is that of ``drive-by'' commits. As the
+relative cost to fork a repository is negligible on Github (54\% of the
+repositories are forks), it is not uncommon for developers to fork other
+repositories to perform casual commits, such as fixes to spelling mistakes or
+indentation issues~\cite{Pham13}. In addition, Github provides web based editors for various
+file formats, using which any user can edit a file in another repository; behind
+the scenes, Github will fork the repository and ask the user to create a pull
+request to the original one. Such commits might be identified as pull requests
+that contain a few commits from users that are not yet part of the project's
+community. As such, they form a
+significant part of pull request activity; in 2012, they constituted
+about~\todo{write query}
+of the total pull request activity. Moreover, 12\% of forked repositories
+were created for the sole purpose of creating a drive-by commit.
+More work needs to be done for the accurate definition and assesment of
+the implications of drive-by commits, which we defer in future work.
+
+\section{Characteristics of pull requests}
 
 In the following sections we examine in detail characteristics of 
 
@@ -187,7 +342,7 @@ In the following sections we examine in detail characteristics of
   \label{fig:perc-merged}
 }
 \subfigure[Frequency distribution of lifetime for merged pull requests]{
-\includegraphics[scale=0.3]{lifetime-freq.pdf}
+%\includegraphics[scale=0.3]{lifetime-freq.pdf}
 \label{fig:lifetime-freq}
 }
 \subfigure[Lifetime statistics for merged pull requests]{
@@ -203,6 +358,8 @@ lifetime is only limited to a ver
 
 \subsection{Sizes of pull requests}
 
+
+
 \subsection{Discussion and Code review}
 
 Once a pull request has been submitted, it is open for discussion.
@@ -212,8 +369,10 @@ Once a pull request has been submitted, it is open for discussion.
 \subsection{Testing}
 
 \section{Acceptance and rejection}
+\label{sec:accrej}
 
 \begin{table*}
+  \begin{small}
   \centering
   \begin{tabular}{rp{25em}}
     \hline
@@ -279,6 +438,7 @@ Once a pull request has been submitted, it is open for discussion.
   \end{tabular}
   \caption{Selected features}
   \label{tab:features}
+  \end{small}
 \end{table*}
 
 
@@ -310,11 +470,23 @@ followers & 1,178 & 11.611 & 26.335 & 0 & 281 \\
 \end{tabular} 
 \end{table}
 
-\section{Discussions and Conclusion}
+\section{Discussion}
+\label{sec:discussion}
 
-
+\subsection{Practical Implications}
 
 \subsection{Threats to validity}
+
+\subsection{On Replication}
+
+During the execution of this study, we invested significant effort to
+make it replicable.  This study has been conducted using the GHTorrent dataset
+and a custom set of Ruby and R tools. We share the tools, original data sources
+and extracted data files on the Github repository \texttt{gousiosg/pullreqs}.
+The Ruby portion of the tool set is also offered through the RubyGems library
+collection. The execution of all tools is scripted and it is possible to run it
+in sequence automatically. We invite other researchers to use the tools and data
+to replicate the study or create new studies based on it.
 
 \section{Related Work}
 
@@ -328,7 +500,13 @@ followers & 1,178 & 11.611 & 26.335 & 0 & 281 \\
 \cite{Shiha12}
 
 Global software development
-\section{Conclusions}
+\section{Conclusions and Future Work}
+
+In this work, we only described briefly some aspects of pull request activity.
+In further work, it would be interesting to investigate in depth how drive-by
+commits contribute to project evolution (both in terms source code and in
+terms of community) and how code proliferates among project
+forks in software ecosystems.
 
 \section*{Acknowledgements}
 This work is partially supported by Marie Curie {\sc ief} 298930 -- {\sc sefunc}.
