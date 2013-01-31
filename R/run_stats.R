@@ -1,3 +1,11 @@
+#install.packages("randomForest")
+#install.packages("ggplot2")
+#install.packages("ROCR")
+#install.packages("stargazer")
+#install.packages("ellipse")
+#install.packages("cvTools")
+
+# 1. first run this
 library(ggplot2)
 library(randomForest)
 library(ROCR) 
@@ -5,6 +13,8 @@ library(stargazer)
 source(file = "R/variables.R")
 source(file = "R/utils.R")
 source(file = "R/multiplots.R")
+source(file = "R/classification.R")
+# end 1.
 
 print(sprintf("Current directory is: %s", getwd()))
 
@@ -14,19 +24,19 @@ if(length(list.files(pattern="R")) == 0) {
   quit()
 }
 
-# The following will run database-related statistics
-source(file = "R/dataset-stats.R")
+# The following will compute some basic project statistics
+#source(file = "R/dataset-stats.R")
 
 # Take a random sample of projects to analyze
-print("Sampling projects to analyze")
-set.seed(1)
-smpl <- projectstats[sample(which(
-  (projectstats$language=="Ruby" | projectstats$language=="Java" | projectstats$language=="Scala") & 
-    projectstats$contributors > projectstats$project_members & 
-    projectstats$project_members > 0 & 
-    projectstats$pull_requests > 50), 50, replace = FALSE), ]
-write.table(smpl[,c(1,8)], file = "random-projects.txt", sep = " ", row.names=FALSE, col.names=FALSE)
-system("cat random-projects.txt|tr '/' ' '|tr -d '\"' > foo; mv foo random-projects.txt")
+#print("Sampling projects to analyze")
+#set.seed(1)
+#smpl <- projectstats[sample(which(
+#  (projectstats$language=="Ruby" | projectstats$language=="Java" | projectstats$language=="Scala") & 
+#    projectstats$contributors > projectstats$project_members & 
+#    projectstats$project_members > 0 & 
+#    projectstats$pull_requests > 50), 50, replace = FALSE), ]
+#write.table(smpl[,c(1,8)], file = "random-projects.txt", sep = " ", row.names=FALSE, col.names=FALSE)
+#system("cat random-projects.txt|tr '/' ' '|tr -d '\"' > foo; mv foo random-projects.txt")
 
 print("Producing the data files...")
 # Produce the datafiles
@@ -34,7 +44,7 @@ print("Producing the data files...")
 # system("bin/all_projects.sh -p 4 -d data projects.txt")
 # system("bin/all_projects.sh -p 4 -d data random-projects.txt")
 
-# Load the data from the data files
+# 2. Load the data from the data files
 print("Loading data files..")
 dfs <- load.all(dir=data.file.location)
 
@@ -43,6 +53,7 @@ dfs <- addcol.merged(dfs)
 
 # Merge all dataframes in a single dataframe
 merged <- merge.dataframes(dfs)
+# end 2.
 
 # Plot cross-correlation plots for variables in datafiles
 columns = c("team_size", "num_commits", "num_comments", "files_changed", "perc_external_contribs", "sloc", "src_churn",
