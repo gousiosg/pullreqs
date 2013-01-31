@@ -54,6 +54,7 @@ post(treemodel, file="~/tree.ps")
 
 # Random forests
 library(randomForest)
+a <- prepare.project.df(merge.dataframes(dfs))
 
 model <- randomForest(merged~. - requester - num_comments - watchers - followers - sloc, data=a, importance = T)
 print(model)
