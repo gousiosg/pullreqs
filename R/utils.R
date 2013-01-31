@@ -41,14 +41,12 @@ load.all <- function(dir = ".") {
 
 # Add merged column
 addcol.merged <- function(dfs) {
-  newdfs = c()
-  for (i in 1:length(dfs)) {
-    print(sprintf("Adding column merged to dataframe %s", (project.name(dfs[[i]]))))
-    dfs[[i]]$merged <- apply(dfs[[i]], 1, function(r){if(is.na(r[4])){T} else {F}})
-    dfs[[i]]$merged <- as.factor(dfs[[i]]$merged)
-    newdfs = c(newdfs, dfs[[i]])
-  }
-  newdfs
+  lapply(dfs, function(x){
+    print(sprintf("Adding column merged to dataframe %s", (project.name(x))))
+    x$merged <- apply(x, 1, function(r){if(is.na('merged_at')){F} else {T}})
+    x$merged <- as.factor(x$merged)
+    x
+  })
 }
 
 # Name of a project in a dataframe

@@ -1,16 +1,18 @@
 library(ggplot2)
 library(igraph)
 
+source(file = "R/utils.R")
+
 # Plot a stacked barchart displaying the proportion of merged/unmerged pull requests
 plot.percentage.merged <- function(dfs) 
 {
-  a <- do.call(rbind, Map(function(x){
+  a <- do.call(rbind, Map(function(x) {
     total = nrow(x)
-    merged = nrow(subset(x, x$merged_at > 0))
+    merged = nrow(subset(x, merged_at > 0))
     unmerged_perc = (100 * (total - merged))/total
     merged_perc = 100 - unmerged_perc
-    rbind(data.frame(project=unique(x[[1]][1]), status="merged", value=merged_perc),
-      data.frame(project=unique(x[[1]][1]), status="unmerged", value=unmerged_perc))
+    rbind(data.frame(project=project.name(x), status="merged", value=merged_perc),
+          data.frame(project=unique(x[[1]][1]), status="unmerged", value=unmerged_perc))
   }, dfs))
   
   ggplot(a, aes(x= project, y = value, fill = status)) + 

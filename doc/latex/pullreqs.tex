@@ -292,9 +292,13 @@ project is relatively low at 6.5 (percentiles: 5\%: 2, 95\%: 19), the
 distribution of pull requests in projects is highly skewed, as shown in
 Figure~\ref{fig:prfreq}.  A few large projects (such as the Homebrew package
 manager and the Ruby on Rails web application framework) receive the vast
-majority of pull requests. From the pull requests that have been opened in 2012,
-60,45\% have been merged, thereby indicating that pull requests in principle can
-work as a medium for obtaining external contributions.
+majority of pull requests. From the pull requests that have been opened in
+2012, 60,45\% have been merged, thereby indicating that pull requests in
+principle can work as a medium for obtaining external contributions.  Moreover,
+even though one might expect that it is the well known projects that receive
+most pull requests, this is not supported by our data: the Kendall rank
+correlation between the number of watchers of a project and the number of pull
+requests it has received in total is 0.32 ($p < 0.001, n = 63335$).
 
 \begin{figure}
   \begin{center}
@@ -309,8 +313,8 @@ Issues and pull requests are dual on Github; for each pull request, an
 issue is opened automatically. Commits can also be attached to issues to
 convert them to pull requests (albeit with external tools). This duality
 enables project administrators to treat pull requests as work items,
-which can be managed using the same facilities used for issues. However,
-as issues are not enabled by default for all projects on Github, 
+which can be managed using the same facilities used for issues.
+Across projects that received pull requests in 2012, 
 
 A phenomenon related to pull requests is that of ``drive-by'' commits. As the
 relative cost to fork a repository is negligible on Github (54\% of the
@@ -322,17 +326,56 @@ repository; behind the scenes, Github will fork the repository and ask the user
 to create a pull request to the original one. Such commits might be identified
 as pull requests that contain a single commit from users that are not yet part
 of the project's community. Even under this na\"ive definition, 7\% of pull
-requests in 2012 can be classified as drive by commits.  Moreover, 3.5\% of the
+requests in 2012 can be classified as drive by commits. Moreover, 3.5\% of the
 forks were created for the sole purpose of creating a drive-by commit.  More
 work needs to be done for the accurate definition and assessment of the
 implications of drive-by commits, which we defer for future work.
 
-\section{Characteristics of pull requests}
+\section{Theory}
 
-In the following sections we examine in detail characteristics of 
-pull requests
+\section{Data Preparation}
+
+In the previous section, we defined pull based development, and presented an
+overview of how it works across all projects on Github. While an overview of the
+activity in 2012 can be safely extracted from the dataset, several limitations
+would not allow us to apply our detailed analysis across all projects.
+Specifically, due to the incremental nature of the GHTorrent dataset collection,
+only data that are linked from events (and their dependencies) are being
+collected. Projects worth analyzing have a history longer than a year, so it is
+important to retrieve all information available during the project's life. To
+make the data collection, and subsequent analysis, practical, we restricted our
+input data to two datasets, a \textsf{handpicked} and a \textsf{random} one. 
+Both datasets contain 50 projects of different sizes each. The 
+\textsf{handpicked} dataset was 
+
+
+To build the datasets, we set forth the following requirements when selecting
+projects to include:
+
+\begin{itemize}
+
+  \item Adequate number of pull requests. For the \textsf{handpicked} dataset,
+    we wanted to 
+
+  \item Projects should include tests. To measure the effect of testing on pull
+    request acceptance, we could only use projects that include tests which we
+    could measure reliably. For that, we exploited the convention-based project
+    layout in the Ruby (Gem), Java and Scala (both Maven) language ecosystems,
+    so our project selection was limited to those languages. 
+
+  \item 
+
+\end{itemize}
+
+The \textsf{handpicked} dataset was constructed by manually browsing Github
+and selecting projects with the above characteristics.  
+
+\section{Characteristics of pull requests}
+In this section, we focus on the characteristics of pull requests. 
 
 \subsection{Lifetime of pull requests}
+
+
 
 \begin{figure*}
 \centering

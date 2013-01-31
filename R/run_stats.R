@@ -14,7 +14,7 @@ if(length(list.files(pattern="R")) == 0) {
   quit()
 }
 
-# The following will 
+# The following will run database-related statistics
 source(file = "R/dataset-stats.R")
 
 # Take a random sample of projects to analyze
@@ -48,8 +48,6 @@ merged <- merge.dataframes(dfs)
 columns = c("team_size", "num_commits", "num_comments", "files_changed", "perc_external_contribs", "sloc", "src_churn",
             "test_churn", "commits_on_files_touched", "test_lines_per_1000_lines", "prev_pullreqs", "requester_succ_rate",
             "watchers", "followers")
-project = "diaspora"
-plot.crosscor(subset(get.project(dfs, project), select=columns), project)
 plot.crosscor(subset(merged, select=columns), "Cross correlation among measured variables")
 
 store.multi(plot.multicor.all_dataframes, dfs, colnames(dfs[[1]]), "multicorrelations")
