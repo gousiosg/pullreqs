@@ -43,7 +43,8 @@ a$merged_fast <- cut2(a$mergetime_minutes, g=bins)
 a.train <- a[1:floor(nrow(a)*.75), ]
 a.test <- a[(floor(nrow(a)*.75)+1):nrow(a), ]
 
-# Random Forest
+#
+### Random Forest
 #model <- randomForest(merged_fast~. - mergetime_minutes - requester - num_comments - watchers - followers - sloc, data=a, importance = T)
 #rfmodel <- randomForest(mergedtime_minutes~. - merge_mergetime_minutes - num_comments - requester, data=a, importance = T)
 rfmodel <- randomForest(merged_fast~. - mergetime_minutes - num_comments - requester - watchers - followers, data=a.train, importance = T)
@@ -60,7 +61,8 @@ perf <- performance(pred.obj, "tpr","fpr")
 plot (perf, main="ROC random forest", colorize = T)
 as.numeric(performance(pred.obj,"auc")@y.values)
 
-# SVM - first tune and then run it with 10-fold cross validation
+#
+### SVM - first tune and then run it with 10-fold cross validation
 tobj <- tune.svm(merged_fast~. - mergetime_minutes - requester, data=a[1:500, ], gamma = 10^(-6:-3), cost = 10^(1:2))
 summary(tobj)
 bestGamma <- tobj$best.parameters[[1]]
@@ -68,14 +70,32 @@ bestCost <- tobj$best.parameters[[2]]
 svmmodel <- svm(merged_fast~. - mergetime_minutes - num_comments - requester - watchers - followers, data=a.train, gamma=bestGamma, cost = bestCost, cross=10, probability=TRUE)
 summary(svmmodel)
 
-# ROC AUC
+# ROC AUC for SVM
 predictions <- predict(svmmodel, newdata=a.test, type="prob", probability=TRUE)
 pred.obj <- prediction(attr(predictions, "probabilities")[,2], a.test$merged_fast)
 perf <- performance(pred.obj, "tpr","fpr")
 plot (perf, main="ROC SVM", colorize = T)
 as.numeric(performance(pred.obj,"auc")@y.values)
 
-# Linear regression model
+#
+### Binary logistic regression
+logmodel <- glm(merged_fast ~ sloc + test_lines_per_1000_lines + num_commits + src_churn + test_churn + files_changed + 
+  perc_external_contribs + requester_succ_rate + team_size + prev_pullreqs + commits_on_files_touched, data=a.train, family = binomial(logit));
+summary(logmodel)
+
+predictions <- predict(logmodel, newdata=a.test)
+pred.obj <- prediction(predictions, a.test$merged_fast)
+perf <- performance(pred.obj, "tpr","fpr")
+plot (perf, main="ROC Log Regression", colorize = T)
+as.numeric(performance(pred.obj,"auc")@y.values)
+
+# RP.perf <- performance(pred.obj, "rec","prec")
+# plot (RP.perf, colorize = T)
+# ROC.acc <- performance(pred.obj, "acc")
+# plot (ROC.acc, colorize = T)
+
+#
+### Linear regression model
 a <- a[a$mergetime_minutes > 0, ]
 a["log_mergetime"] <- log(a$mergetime_minutes)
 
