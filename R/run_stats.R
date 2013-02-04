@@ -46,7 +46,7 @@ print("Producing the data files...")
 
 # 2. Load the data from the data files
 print("Loading data files..")
-dfs <- load.all(dir=data.file.location)
+dfs <- load.all(dir=data.file.location, pattern="*.csv$")
 
 # Add derived columns
 dfs <- addcol.merged(dfs)
@@ -59,6 +59,8 @@ merged <- merge.dataframes(dfs)
 columns = c("team_size", "num_commits", "num_comments", "files_changed", "perc_external_contribs", "sloc", "src_churn",
             "test_churn", "commits_on_files_touched", "test_lines_per_1000_lines", "prev_pullreqs", "requester_succ_rate",
             "watchers", "followers")
+project = "diaspora"
+plot.crosscor(subset(get.project(dfs, project), select=columns), project)
 plot.crosscor(subset(merged, select=columns), "Cross correlation among measured variables")
 
 store.multi(plot.multicor.all_dataframes, dfs, colnames(dfs[[1]]), "multicorrelations")

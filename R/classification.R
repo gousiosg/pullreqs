@@ -52,7 +52,7 @@ class.project <- function(dfs, name) {
 prepare.project.df <- function(a) {
   a$merged <- apply(a, 1, function(r){if(is.na(r[4])){F} else {T}})
   a$merged <- as.factor(a$merged)
-  a <- a[,c(8:23)]
+  a <- a[,c(7:23)]
   a
 }
 

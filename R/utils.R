@@ -14,7 +14,7 @@ is.integer <- function(N){
 }
 
 # Load all csv files in the provided dir as data frames
-load.all <- function(dir = ".") {
+load.all <- function(dir = ".", pattern = "*.csv$") {
   
 #  read.file <- function(init, x) {
 #    a = read.csv(pipe(paste("cut -f2-23 -d',' ", x)))
@@ -32,7 +32,7 @@ load.all <- function(dir = ".") {
 #  Reduce(read.file,
 #        list.files(path = dir, pattern = "*.csv$", full.names = T),
 #        c(), accumulate = TRUE)
-  lapply(list.files(path = dir, pattern = "*.csv$", full.names = T),
+  lapply(list.files(path = dir, pattern = pattern, full.names = T),
          function(x){
            print(sprintf("Reading file %s", x))
            read.csv(pipe(paste("cut -f2-23 -d',' ", x)))

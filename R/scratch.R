@@ -56,7 +56,23 @@ post(treemodel, file="~/tree.ps")
 library(randomForest)
 a <- prepare.project.df(merge.dataframes(dfs))
 
-model <- randomForest(merged~. - requester - num_comments - watchers - followers - sloc, data=a, importance = T)
+model <- randomForest(merged~. - mergetime_minutes - requester - num_comments - watchers - followers - sloc, data=a, importance = T)
+print(model)
+varImpPlot(model, type=1)
+varImpPlot(model, type=2)
+
+plot(model)
+
+# filter pull-requests that have not been merged
+a <- a[a$merged == "TRUE", ]
+
+# add column to classify requests into short/long
+#hist(log(aMerged$lifetime_minutes))
+meanMergeTime <- median(a$mergetime_minutes)
+a["merged_fast"] <- a$mergetime_minutes <= meanMergeTime
+a$merged_fast <- as.factor(a$merged_fast)
+
+model <- randomForest(merged_fast~. - mergetime_minutes - requester - num_comments - watchers - followers - sloc, data=a, importance = T)
 print(model)
 varImpPlot(model, type=1)
 varImpPlot(model, type=2)
