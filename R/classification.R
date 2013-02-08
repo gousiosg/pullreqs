@@ -57,13 +57,12 @@ prepare.project.df <- function(a) {
 }
 
 kfolds <- function(df, numruns) {
-  folds <- cvFolds(NROW(df), K=numruns)
-  result = c()
-  for (i in 1:numruns) {
-    train <- df[folds$subsets[folds$which != i], ]
-    validation <- df[folds$subsets[folds$which == i], ]
-    print(sprintf("sizes: train: %d, validation: %d", length(train), length(validation)))
-    result = c(result, list(train=train, validation=validation))
-  }
-  result
+
+  lapply(cvFolds(NROW(df), K=numruns),
+         function(x) {
+           train <- df[folds$subsets[folds$which != i], ]
+           validation <- df[folds$subsets[folds$which == i], ]
+           print(sprintf("sizes: train: %d, validation: %d", length(train), length(validation)))
+           result = c(result, list(train=train, validation=validation))
+         }
 }

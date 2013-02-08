@@ -298,7 +298,7 @@ principle can work as a medium for obtaining external contributions.  Moreover,
 even though one might expect that it is the well known projects that receive
 most pull requests, this is not supported by our data: the Kendall rank
 correlation between the number of watchers of a project and the number of pull
-requests it has received in total is 0.32 ($p < 0.001, n = 63335$).
+requests it has received is 0.32 ($p < 0.001, n = 63335$).
 
 \begin{figure}
   \begin{center}
@@ -316,7 +316,7 @@ enables project administrators to treat pull requests as work items,
 which can be managed using the same facilities used for issues.
 Across projects that received pull requests in 2012, 
 
-A phenomenon related to pull requests is that of ``drive-by'' commits. As the
+A phenomenon related to pull requests is ``drive-by'' pull requests. As the
 relative cost to fork a repository is negligible on Github (54\% of the
 repositories are forks), it is not uncommon for developers to fork other
 repositories to perform casual commits, such as fixes to spelling mistakes or
@@ -331,7 +331,23 @@ forks were created for the sole purpose of creating a drive-by commit.  More
 work needs to be done for the accurate definition and assessment of the
 implications of drive-by commits, which we defer for future work.
 
+Pull requests are an important medium for collaborative software development.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[scale=0.5]{num-commiters-after-pr}
+  \end{center}
+  \caption{Number of committers before and after the introduction of pull
+  requests by Github. The lines are smoothed using the local polynomial
+  regression fitting method, to omit minor monthly fluctuations.}
+  \label{fig:}
+\end{figure}
+
 \section{Theory}
+
+Collaborative software development 
+\cite{Smite10}
+\cite{Magnu93}
 
 \section{Data Preparation}
 

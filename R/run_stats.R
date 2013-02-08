@@ -37,6 +37,14 @@ if(length(list.files(pattern="R")) == 0) {
 #    projectstats$pull_requests > 50), 50, replace = FALSE), ]
 #write.table(smpl[,c(1,8)], file = "random-projects.txt", sep = " ", row.names=FALSE, col.names=FALSE)
 #system("cat random-projects.txt|tr '/' ' '|tr -d '\"' > foo; mv foo random-projects.txt")
+set.seed(11)
+smpl <- projectstats[sample(which(
+   (projectstats$language=="Ruby" | projectstats$language=="Java" | projectstats$language=="Scala") & 
+    #projectstats$contributors > projectstats$project_members & 
+    projectstats$project_members > 0 & 
+    projectstats$pull_requests > 10), 100, replace = FALSE), ]
+write.table(smpl[,c(1,11)], file = "random-projects.txt", sep = " ", row.names=FALSE, col.names=FALSE)
+system("cat random-projects.txt|tr '/' ' '|tr -d '\"' > foo; mv foo rnd-projects.txt")
 
 print("Producing the data files...")
 # Produce the datafiles
