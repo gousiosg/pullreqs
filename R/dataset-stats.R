@@ -1,6 +1,7 @@
 library(RMySQL)
 library(ggplot2)
 
+source(file = "R/utils.R")
 source(file = "R/variables.R")
 source(file = "R/mysql.R")
 
@@ -117,20 +118,25 @@ res <- dbSendQuery(con, "select pr.id, count(*) as cnt from pull_requests pr, pu
 pr_stats_num_commit <- fetch(res, n = -1)
 
 # Commiter raise due to pull requests
-# res <- dbSendQuery(con, "select p.id, u.login, p.name , p.created_at, count(c.id) from projects p, users u, commits c, project_commits pc where p.forked_from is null and u.id = p.owner_id and pc.commit_id = c.id and pc.project_id = p.id and exists (select c.id from project_commits pc, commits c where year(c.created_at) = 2012 and month (c.created_at)=12 and pc.commit_id = c.id and pc.project_id = p.id ) and exists (select pr.id from pull_requests pr, pull_request_history prh where prh.pull_request_id = pr.id and pr.base_repo_id = p.id and prh.action='opened' and year(prh.created_at) = 2010) group by p.id having count(c.id) > 1000 order by p.created_at asc limit 200")
-# Run the above query and handpicked projects (rails, jquery, spree, mongodb, chef) 
-res <- dbSendQuery(con, "select p.name as project, last_day(c.created_at) as timestamp, count(distinct c.author_id) as num_authors from commits c, project_commits pc, projects p where pc.commit_id = c.id and pc.project_id = p.id and year(c.created_at) < 2013 and p.id in (7608, 2668, 6313, 9427, 284, 2668, 489) group by p.id, month(c.created_at), year(c.created_at) order by p.name, year(c.created_at), month(c.created_at)")
+# res <- dbSendQuery(con, "select p.id from projects p, users u, commits c, project_commits pc where p.forked_from is null and u.id = p.owner_id and pc.commit_id = c.id and pc.project_id = p.id  and exists (select c.id from project_commits pc, commits c where year(c.created_at) = 2012 and month (c.created_at)=12 and pc.commit_id = c.id and pc.project_id = p.id )  and exists (select c.id from project_commits pc, commits c where year(c.created_at) < 2007 and pc.commit_id = c.id and pc.project_id = p.id )  and exists (select pr.id from pull_requests pr, pull_request_history prh where prh.pull_request_id = pr.id and pr.base_repo_id = p.id and prh.action='opened' and year(prh.created_at) = 2010)  group by p.id having count(c.id) > 1000 order by p.created_at asc limit 200")
+# Run the above query and handpick projects 
+#      1334	rails	rails
+#      3189	junit	KentBeck
+#      6313	jquery	jquery
+#      4367	phpbb3	phpbb
+#      18716	rubygems	rubygems
+#      9316	cakephp	cakephp
+#      2602	monodevelop	mono
+#      847	puppet	puppetlabs
+#      5591	facter	puppetlabs
+res <- dbSendQuery(con, "select p.name as project, last_day(c.created_at) as timestamp, count(distinct c.author_id) as num_authors from commits c, project_commits pc, projects p where pc.commit_id = c.id and pc.project_id = p.id and year(c.created_at) < 2013 and p.id in (3189, 6313, 4367, 18716, 9316, 2602, 847, 5591) group by p.id, month(c.created_at), year(c.created_at) order by p.name, year(c.created_at), month(c.created_at)")
 devs_per_month <- fetch(res, n = -1)
 devs_per_month$month <- as.POSIXct(devs_per_month$timestamp, origin = "1970-01-01")
 store.pdf(ggplot(devs_per_month, aes(x = month, y = num_authors, colour = project)) + 
         scale_x_datetime() + 
-        stat_smooth(method = "loess", formula = y~x, size = 1, alpha = 0) +
-        annotate("pointrange", x = as.POSIXct(1283174614, origin = "1970-01-01"), ymin = 0, ymax = 30, y = 30) +
-        annotate("text", x = as.POSIXct(1283174614, origin = "1970-01-01"), y = 31, label ="Github introduces pull requests", size = 4) +
-        ylim(0, 33) + 
+        stat_smooth(method = "loess", formula = y ~ x^2, size = 1, alpha = 0) +
+        annotate("pointrange", x = as.POSIXct(1283174614, origin = "1970-01-01"), ymin = 0, ymax = 20, y = 20) +
+        annotate("text", x = as.POSIXct(1283174614, origin = "1970-01-01"), y = 20, label ="Github introduces pull requests", size = 4) +
+        ylim(0, 22) + 
         xlab("Date") + 
-        ylab("Number of committers"), plot.location,"num-commiters-after-pr.pdf")
-
-res <- dbSendQuery(con, "select p.id from projects p, users u, commits c, project_commits pc where p.forked_from is null and u.id = p.owner_id and pc.commit_id = c.id and pc.project_id = p.id  and exists (select c.id from project_commits pc, commits c where year(c.created_at) = 2012 and month (c.created_at)=12 and pc.commit_id = c.id and pc.project_id = p.id )  and exists (select c.id from project_commits pc, commits c where year(c.created_at) < 2007 and pc.commit_id = c.id and pc.project_id = p.id )  and exists (select pr.id from pull_requests pr, pull_request_history prh where prh.pull_request_id = pr.id and pr.base_repo_id = p.id and prh.action='opened' and year(prh.created_at) = 2010)  group by p.id having count(c.id) > 1000 order by p.created_at asc limit 200")
-devs_per_month <- fetch(res, n = -1)
-devs_per_month$month <- as.POSIXct(devs_per_month$timestamp, origin = "1970-01-01")
+        ylab("Number of active committers per month"), plot.location,"num-commiters-after-pr.pdf")
