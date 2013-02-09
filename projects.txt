@@ -43,14 +43,3 @@ scala scala scala
 scala-ide scala-ide scala
 harrah xsbt scala
 scalaz scalaz scala
-xbmc xmbc c
-antirez redis c
-mruby mruby c
-libgit2 libgit2 c
-zfsonlinux zfs c
-ajaxorg cloud9 javascript
-joyent node javascript
-jquery jquery javascript
-mrdoob three.js javascript
-mbostock d3 javascript
-
