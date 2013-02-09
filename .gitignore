@@ -1,4 +1,6 @@
-config.yaml
+data/project-statistics.txt
+config.yaml*
+config-*
 .RHistory
 .RData
 mysql.R
