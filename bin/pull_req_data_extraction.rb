@@ -101,7 +101,8 @@ Extract data for pull requests for a given repository
           "perc_external_contribs," <<
           "sloc,src_churn,test_churn," <<
           "commits_on_files_touched,test_lines_per_1000_lines,watchers," <<
-          "requester,prev_pullreqs,requester_succ_rate,followers\n"
+          'requester,prev_pullreqs,requester_succ_rate,followers,' <<
+          "intra_branch,main_team_member\n"
 
     # Process pull request list
     pull_reqs(repo_entry).each do |pr|
@@ -165,39 +166,41 @@ Extract data for pull requests for a given repository
     prev_pull_reqs = prev_pull_requests(pr[:id],'opened')[0][:num_pull_reqs]
 
     # Print line for a pull request
-    print pr[:id], ",",
-          pr[:project_name], ",",
-          pr[:github_id], ",",
-          Time.at(pr[:created_at]).to_i, ",",
-          merge_time(pr, merged, git_merged), ",",
-          Time.at(pr[:closed_at]).to_i, ",",
-          pr[:lifetime_minutes], ",",
-          merge_time_minutes(pr, merged, git_merged), ",",
-          team_size_at_open(pr[:id], 3)[0][:teamsize], ",",
-          num_commits(pr[:id])[0][:commit_count], ",",
-          #num_comments(pr[:id])[0][:comment_count], ",",
-          #num_issue_comments(pr[:id])[0][:issue_comment_count], ",",
-          num_comments(pr[:id])[0][:comment_count] + num_issue_comments(pr[:id])[0][:issue_comment_count], ",",
-          #stats[:files_added], ",",
-          #stats[:files_deleted], ",",
-          #stats[:files_modified], ",",
-          stats[:files_added] + stats[:files_modified] + stats[:files_deleted], ",",
-          #stats[:src_files], ",",
-          #stats[:doc_files], ",",
-          #stats[:other_files], ",",
-          ((commits_last_3_month - commits_last_x_months(pr[:id], true, 3)[0][:num_commits]) * 100) / commits_last_3_month, ",",
-          src, ",",
-          stats[:lines_added] + stats[:lines_deleted], ",",
-          stats[:test_lines_added] + stats[:test_lines_deleted], ",",
-          commits_on_files_touched(pr[:id], Time.at(Time.at(pr[:created_at]).to_i - 3600 * 24 * 90)), ",",
-          (test_lines(pr[:id]).to_f / src.to_f) * 1000, ",",
-          #(num_test_cases(pr[:id]).to_f / src.to_f) * 1000, ",",
-          #(num_assertions(pr[:id]).to_f / src.to_f) * 1000, ",",
-          watchers(pr[:id])[0][:num_watchers], ",",
-          requester(pr[:id])[0][:login], ",",
-          prev_pull_reqs, ",",
-          if prev_pull_reqs > 0 then prev_pull_requests(pr[:id],'merged')[0][:num_pull_reqs].to_f / prev_pull_reqs.to_f else 0 end, ",",
-          followers(pr[:id])[0][:num_followers],
+    print pr[:id], ',',
+          pr[:project_name], ',',
+          pr[:github_id], ',',
+          Time.at(pr[:created_at]).to_i, ',',
+          merge_time(pr, merged, git_merged), ',',
+          Time.at(pr[:closed_at]).to_i, ',',
+          pr[:lifetime_minutes], ',',
+          merge_time_minutes(pr, merged, git_merged), ',',
+          team_size_at_open(pr[:id], 3)[0][:teamsize], ',',
+          num_commits(pr[:id])[0][:commit_count], ',',
+          #num_comments(pr[:id])[0][:comment_count], ',',
+          #num_issue_comments(pr[:id])[0][:issue_comment_count], ',',
+          num_comments(pr[:id])[0][:comment_count] + num_issue_comments(pr[:id])[0][:issue_comment_count], ',',
+          #stats[:files_added], ',',
+          #stats[:files_deleted], ',',
+          #stats[:files_modified], ',',
+          stats[:files_added] + stats[:files_modified] + stats[:files_deleted], ',',
+          #stats[:src_files], ',',
+          #stats[:doc_files], ',',
+          #stats[:other_files], ',',
+          ((commits_last_3_month - commits_last_x_months(pr[:id], true, 3)[0][:num_commits]) * 100) / commits_last_3_month, ',',
+          src, ',',
+          stats[:lines_added] + stats[:lines_deleted], ',',
+          stats[:test_lines_added] + stats[:test_lines_deleted], ',',
+          commits_on_files_touched(pr[:id], Time.at(Time.at(pr[:created_at]).to_i - 3600 * 24 * 90)), ',',
+          (test_lines(pr[:id]).to_f / src.to_f) * 1000, ',',
+          #(num_test_cases(pr[:id]).to_f / src.to_f) * 1000, ',',
+          #(num_assertions(pr[:id]).to_f / src.to_f) * 1000, ',',
+          watchers(pr[:id])[0][:num_watchers], ',',
+          requester(pr[:id])[0][:login], ',',
+          prev_pull_reqs, ',',
+          if prev_pull_reqs > 0 then prev_pull_requests(pr[:id],'merged')[0][:num_pull_reqs].to_f / prev_pull_reqs.to_f else 0 end, ',',
+          followers(pr[:id])[0][:num_followers], ',' ,
+          if intra_branch?(pr[:id])[0][:intra_branch] == 1 then true else false end, ',',
+          if main_team_member?(pr[:id])[0][:main_team_member] == 1 then true else false end,
           "\n"
 
     if options[:extract_diffs]
@@ -207,7 +210,7 @@ Extract data for pull requests for a given repository
         num = 0
         repo.log(f[:latest], f[:filename])[0..f[:num_versions]].map{|x| x.sha}.each { |sha|
           d = repo.tree(sha, f[:filename]).blobs[0].data
-          filename = f[:filename].gsub("/","-") + "-" + sha[0..10] + "." + num.to_s
+          filename = f[:filename].gsub("/','-") + "-" + sha[0..10] + "." + num.to_s
           file = File.open(File.join(options[:diff_dir],
                                   pr[:github_id].to_s, filename), "w")
           file.write(d)
@@ -348,6 +351,28 @@ Extract data for pull requests for a given repository
     if_empty(db.fetch(q, pr_id, pr_id, action, pr_id).all, :num_pull_reqs)
   end
 
+  # Check if the pull request is intra_branch
+  def intra_branch?(pr_id)
+    q = <<-QUERY
+    select IF(base_repo_id = head_repo_id, true, false) as intra_branch
+    from pull_requests where id = ?
+    QUERY
+    if_empty(db.fetch(q, pr_id).all, :intra_branch)
+  end
+
+  # Check if the requester is part of the project's main team
+  def main_team_member?(pr_id)
+    q = <<-QUERY
+    select exists(select *
+          from project_members
+          where user_id = u.id and repo_id = pr.base_repo_id) as main_team_member
+    from users u, pull_requests pr
+    where pr.user_id = u.id
+    and pr.id = ?
+    QUERY
+    if_empty(db.fetch(q, pr_id).all, :main_team_member)
+  end
+
   # Various statistics for the pull request. Returned as Hash with the following
   # keys: :lines_added, :lines_deleted, :files_added, :files_removed,
   # :files_modified, :files_touched, :src_files, :doc_files, :other_files.
@@ -461,9 +486,9 @@ Extract data for pull requests for a given repository
     QUERY
 
     if exclude_pull_req
-      q << " and not exists (select * from pull_request_commits prc1 where prc1.commit_id = c.id)"
+      q << ' and not exists (select * from pull_request_commits prc1 where prc1.commit_id = c.id)'
     end
-    q << ";"
+    q << ';'
 
     if_empty(db.fetch(q, pr_id).all, :num_commits)
   end
