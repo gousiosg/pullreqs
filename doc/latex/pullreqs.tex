@@ -59,7 +59,7 @@ Arie van Deursen\\
 
 \section{Introduction}
 
-Since their appearance in 2005, the distributed version control systems ({\sc
+Since their appearance in 2001, distributed version control systems ({\sc
 dvcs}), notably Git, have revolutionized the way distributed software
 development is carried out. Driven by pragmatic needs, {\sc dvs}s were designed
 from scratch to work as an advanced patch management systems, rather than a
@@ -343,11 +343,42 @@ Pull requests are an important medium for collaborative software development.
   \label{fig:}
 \end{figure}
 
-\section{Theory}
+\section{Collaboration through pull requests}
 
-Collaborative software development 
-\cite{Smite10}
-\cite{Magnu93}
+Software development can be distributed across various dimensions~\cite{Gumm06};
+among them, physical distribution distributes programming tasks across people
+collaborating remotely, while temporal distribution distributes tasks to people
+working in different time zones. Distribution of development activities has been
+initially thought to hinder collaboration~\cite{Herbs99, Batti01}, even though
+subsequent studies have shown that it does not pose significant threats to
+project quality~\cite{Spine06, Nguye08, Bird09a}. Access to online collaboration
+tools such as {\sc vcs} and bug databases have been identified as a necessary
+requirement for collaborative software development~\cite{Knuds76,Pilat06,
+Catal06}. Distributed collaboration on software artifacts can be facilitated
+through awareness building tools: 
+
+We advocate that pull requests as a distributed development model in general,
+and as are implemented by Github in particular, form a new method of
+collaboration for distributed software development. The novelty lays on
+the decoupling of the development effort from the decision to incorporate
+the results of the development in the code base. 
+By separating the concerns of building artifacts and incorporating
+changes, work is cleanly distributed among a core team which is responsible
+to perform the merges and a peripheral team that submits, often occasional,
+changes to be considered for merging. 
+The review mechanism that Github incorporates has the additional effect of
+improving awareness~\cite{Dabbi12}; core team developers can 
+
+A question that emerges is what are the factors that affect the efficiency
+of the collaboration in pull-based development. Intuitively, a pull request
+based collaboration is effective when the suitability of the pull request for
+a project can be assessed and merged (or rejected) fast. 
+
+Based on prior work~\cite{Weiss08}, we expect small pull requests to be easier to accept that larger ones. Similarly, pull requests that affect an active
+area of the project would be easier to process~\todo{ref?}
+In reference ~\cite{Bird07}, Bird et al. presented evidence that social
+reputation has an impact on whether a
+
 
 \section{Data Preparation}
 
@@ -391,8 +422,6 @@ In this section, we focus on the characteristics of pull requests.
 
 \subsection{Lifetime of pull requests}
 
-
-
 \begin{figure*}
 \centering
 \subfigure[Percentage of pull requests that have been merged before being closed]{
@@ -417,10 +446,9 @@ lifetime is only limited to a ver
 \subsection{Sizes of pull requests}
 
 
-
 \subsection{Discussion and Code review}
 
-Once a pull request has been submitted, it is open for discussion.
+Once a pull request has been submitted, it is open for discussion. 
 
 \subsection{Team size}
 
