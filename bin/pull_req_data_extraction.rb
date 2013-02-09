@@ -588,16 +588,13 @@ Extract data for pull requests for a given repository
   # Checks whether a merge of the pull request occurred outside Github
   def check_if_merged_with_git(pr_id)
     q = <<-QUERY
-	  select sha
-    from commits c, project_commits pc, pull_request_commits prc
-	  where c.id = pc.commit_id
-      and c.id = prc.commit_id
-	    and prc.pull_request_id = ?
-	    and pc.project_id = (
-          select pr.base_repo_id
-          from pull_requests pr
-          where pr.id = prc.pull_request_id
-      )
+	  select prc.commit_id
+    from pull_requests pr, project_commits pc, pull_request_commits prc
+	  where pc.commit_id = prc.commit_id
+		  and prc.pull_request_id = pr.id
+		  and pr.id = ?
+		  and pr.base_repo_id = pc.project_id
+		  and pr.base_repo_id <> pr.head_repo_id
     QUERY
     commits = db.fetch(q, pr_id).all
     not commits.empty?
