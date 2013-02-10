@@ -29,7 +29,7 @@ a <- prepare.project.df(merged)
 
 # sample filter pull-requests that have not been merged
 a <- a[a$merged == "TRUE", ]
-a <- a[sample(nrow(a), size=10000), ]
+#a <- a[sample(nrow(a), size=10000), ]
 
 # binning - add column to classify requests into short/long
 #hist(log(aMerged$lifetime_minutes))
@@ -47,7 +47,8 @@ a.test <- a[(floor(nrow(a)*.75)+1):nrow(a), ]
 ### Random Forest
 #model <- randomForest(merged_fast~. - mergetime_minutes - requester - num_comments - watchers - followers - sloc, data=a, importance = T)
 #rfmodel <- randomForest(mergedtime_minutes~. - merge_mergetime_minutes - num_comments - requester, data=a, importance = T)
-rfmodel <- randomForest(merged_fast~. - mergetime_minutes - num_comments - requester - watchers - followers, data=a.train, importance = T)
+rfmodel <- randomForest(merged_fast~. - mergetime_minutes - num_comments - requester - watchers 
+                        - followers - main_team_member - intra_branch, data=a.train, importance = T)
 print(rfmodel)
 #summary(rfmodel)
 varImpPlot(rfmodel, type=1)

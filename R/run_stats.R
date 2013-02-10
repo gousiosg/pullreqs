@@ -4,6 +4,9 @@
 #install.packages("stargazer")
 #install.packages("ellipse")
 #install.packages("cvTools")
+#install.packages("e1071")
+#install.packages("pls")
+#install.packages("Hmisc")
 
 # 1. first run this
 library(ggplot2)

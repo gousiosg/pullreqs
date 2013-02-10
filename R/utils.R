@@ -35,7 +35,7 @@ load.all <- function(dir = ".", pattern = "*.csv$") {
   lapply(list.files(path = dir, pattern = pattern, full.names = T),
          function(x){
            print(sprintf("Reading file %s", x))
-           read.csv(pipe(paste("cut -f2-23 -d',' ", x)))
+           read.csv(pipe(paste("cut -f2-25 -d',' ", x)))
          })
 }
 
