@@ -21,7 +21,6 @@ jbossas jboss-as java
 hornetq hornetq java
 infinispan infinispan java
 neo4j community java
-sakaiproject nakamura java
 openmicroscopy openmicroscopy java
 sonatype nexus java
 elasticsearch elasticsearch java
@@ -41,5 +40,10 @@ eventmachine eventmachine ruby
 akka akka scala
 scala scala scala
 scala-ide scala-ide scala
-harrah xsbt scala
+sbt sbt scala
 scalaz scalaz scala
+twitter finagle
+codahale metrics java
+nathanmarz storm java
+scalatra scalatra scala
+Atmosphere athmosphere java

@@ -3,9 +3,6 @@ forge core Java
 jboss-switchyard components Java
 sferik rails_admin Ruby
 Bukkit Bukkit Java
-111minutes 111-pod-specs Ruby
-bbatsov ruby-style-guide Ruby
-travis-ci travis-ci.github.com Ruby
 ushis silo Ruby
 otwcode otwarchive Ruby
 jnicklas carrierwave Ruby
@@ -46,3 +43,8 @@ jnunemaker httparty Ruby
 jenkinsci jenkins Java
 belaban JGroups Java
 sferik twitter Ruby
+twitter gizzard scala
+twitter flockdb scala
+vert-x vert.x java
+voldemort voldemort java
+codahale dropwizard java
