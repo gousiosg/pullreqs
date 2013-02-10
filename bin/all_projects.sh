@@ -1,20 +1,22 @@
 #!/bin/bash
 
+parallel=1
+dir='.'
+ip=`/sbin/ifconfig |grep "inet add"|grep -v "127.0.0"|head -n 1|cut -f2 -d':'|cut -f1 -d' '`
+
 usage()
 {
   echo ""
 	echo "Usage: $0 [-p num_processes] [-d output_dir] file"
   echo "Runs pull_req_data_extraction for an input file using multiple processes"
   echo "Options:"
-  echo "  -p Number of processes to run in parallel (default: 1)"
-  echo "  -d Output directory (default: .)"
-	exit 1
+  echo "  -p Number of processes to run in parallel (default: $parallel)"
+  echo "  -d Output directory (default: $dir)"
+  echo "  -a IP address to use for outgoing requests (default: $ip)"
+  exit 1
 }
 
-parallel=1
-dir='.'
-
-while getopts "p:d:" o
+while getopts "p:d:a:" o
 do
 	case $o in
 	p) 	
@@ -25,7 +27,11 @@ do
     dir=$OPTARG ; 
     echo "Using $dir for output"; 
     ;;
-	\?) 
+  a)
+    ip=$OPTARG ;
+    echo "Using $ip for requests";
+    ;;
+  \?) 
     echo "Invalid option: -$OPTARG" >&2 ; 
     usage 
     ;;
@@ -49,6 +55,6 @@ grep -v "^#"|
 while read pr; do 
   name=`echo $pr|cut -f2 -d' '`
   
-  echo "(ruby -Ibin bin/pull_req_data_extraction.rb -c config.yaml $pr |grep -v '^[DUG]' |grep -v '^$') 1>$dir/$name.csv 2>$dir/$name.err"
-done | xargs -P $parallel -Istr bash -c str
+  echo "ruby -Ibin bin/pull_req_data_extraction.rb -a $ip -c config.yaml $pr |grep -v '^[DUG]' |grep -v '^$' 1>$dir/$name.csv 2>$dir/$name.err"
+done | xargs -P $parallel -Istr sh -c str 
 
