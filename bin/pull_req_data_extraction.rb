@@ -119,7 +119,7 @@ Extract data for pull requests for a given repository
   # Get a list of pull requests for the processed project
   def pull_reqs(project)
     q = <<-QUERY
-    select p.name as project_name, pr.id, pr.pullreq_id as github_id,
+    select u.login as login, p.name as project_name, pr.id, pr.pullreq_id as github_id,
            a.created_at as created_at, b.created_at as closed_at,
 			     (select created_at
             from pull_request_history prh1
@@ -130,13 +130,14 @@ Extract data for pull requests for a given repository
                                            from pull_request_history prh1
                                            where prh1.pull_request_id = pr.id and prh1.action='merged' limit 1)
       ) as mergetime_minutes
-    from pull_requests pr, projects p,
+    from pull_requests pr, projects p, users u,
          pull_request_history a, pull_request_history b
     where p.id = pr.base_repo_id
 	    and a.pull_request_id = pr.id
       and a.pull_request_id = b.pull_request_id
       and a.action='opened' and b.action='closed'
 	    and a.created_at < b.created_at
+      and p.owner_id = u.id
       and p.id = ?
 	  group by pr.id
     order by pr.pullreq_id desc;
@@ -167,7 +168,7 @@ Extract data for pull requests for a given repository
 
     # Print line for a pull request
     print pr[:id], ',',
-          pr[:project_name], ',',
+          "#{pr[:login]}/#{pr[:project_name]}", ',',
           pr[:github_id], ',',
           Time.at(pr[:created_at]).to_i, ',',
           merge_time(pr, merged, git_merged), ',',
