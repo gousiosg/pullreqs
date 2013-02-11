@@ -1,3 +1,4 @@
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 942600,vert-x/vert.x,503,1359617832,1359620763,1359620763,48,48,2,1,0,1,0,19161,0,0,1,552.1110589217682,3464,rhuss,0,0,26,false,false
 792134,vert-x/vert.x,490,1357828026,,1358065837,3963,,2,1,1,2,0,18928,37,0,0,577.292899408284,3462,jannehietamaki,4,1.0,66,false,false
 909506,vert-x/vert.x,481,1357143137,1357220497,1357220497,1289,1289,2,1,0,1,0,18843,2,0,3,576.606697447328,1731,winash,0,0,5,false,false

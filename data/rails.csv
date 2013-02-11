@@ -1,3 +1,4 @@
+pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 976862,rails/rails,9234,1360437433,1360442266,1360442266,80,80,113,1,1,2,38,49238,2,12,23,2157.114423819002,18098,senny,93,0.7849462365591398,58,false,true
 976865,rails/rails,9233,1360426871,1360441458,1360441458,243,243,113,1,0,3,39,49238,2,1,64,2157.094114301962,18098,rahul100885,15,0.6666666666666666,4,false,false
 976866,rails/rails,9232,1360426739,1360426948,1360426948,3,3,113,1,0,1,39,49238,2,0,8,2157.094114301962,18098,robertomiranda,12,0.8333333333333334,26,false,false

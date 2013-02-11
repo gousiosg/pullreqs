@@ -29,7 +29,7 @@ a <- prepare.project.df(merged)
 
 # sample filter pull-requests that have not been merged
 a <- a[a$merged == "TRUE", ]
-#a <- a[sample(nrow(a), size=10000), ]
+a <- a[sample(nrow(a), size=10000), ]
 
 # binning - add column to classify requests into short/long
 #hist(log(aMerged$lifetime_minutes))
@@ -47,8 +47,8 @@ a.test <- a[(floor(nrow(a)*.75)+1):nrow(a), ]
 ### Random Forest
 #model <- randomForest(merged_fast~. - mergetime_minutes - requester - num_comments - watchers - followers - sloc, data=a, importance = T)
 #rfmodel <- randomForest(mergedtime_minutes~. - merge_mergetime_minutes - num_comments - requester, data=a, importance = T)
-rfmodel <- randomForest(merged_fast~. - mergetime_minutes - num_comments - requester - watchers 
-                        - followers - main_team_member - intra_branch, data=a.train, importance = T)
+rfmodel <- randomForest(merged_fast~. - mergetime_minutes - num_comments - requester - watchers - merged
+                        - followers, data=a.train, importance = T)
 print(rfmodel)
 #summary(rfmodel)
 varImpPlot(rfmodel, type=1)
@@ -64,11 +64,11 @@ as.numeric(performance(pred.obj,"auc")@y.values)
 
 #
 ### SVM - first tune and then run it with 10-fold cross validation
-tobj <- tune.svm(merged_fast~. - mergetime_minutes - requester, data=a[1:500, ], gamma = 10^(-6:-3), cost = 10^(1:2))
+tobj <- tune.svm(merged_fast~. - mergetime_minutes - num_comments - requester- watchers - followers - intra_branch - main_team_member, data=a[1:500, ], gamma = 10^(-6:-3), cost = 10^(1:2))
 summary(tobj)
 bestGamma <- tobj$best.parameters[[1]]
 bestCost <- tobj$best.parameters[[2]]
-svmmodel <- svm(merged_fast~. - mergetime_minutes - num_comments - requester - watchers - followers, data=a.train, gamma=bestGamma, cost = bestCost, cross=10, probability=TRUE)
+svmmodel <- svm(merged_fast~. - mergetime_minutes - num_comments - requester- watchers - followers - intra_branch - main_team_member, data=a.train, gamma=bestGamma, cost = bestCost, cross=10, probability=TRUE)
 summary(svmmodel)
 
 # ROC AUC for SVM

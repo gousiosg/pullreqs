@@ -15,38 +15,38 @@ is.integer <- function(N){
 
 # Load all csv files in the provided dir as data frames
 load.all <- function(dir = ".", pattern = "*.csv$") {
-  
-#  read.file <- function(init, x) {
-#    a = read.csv(pipe(paste("cut -f2-23 -d',' ", x)))
-#    if (nrow(a) != 0){
-#      print(sprintf("Loading file %s", x))
-#      print(sprintf("class of init %s, length: %d", class(init), length(init)))
-#      init[[length(init) + 1]] <- a
-#      print(sprintf("class of init %s, length: %d", class(init), length(init)))
-#    } else {
-#      print(sprintf("Ignoring empty file %s", x))
-#    }
-#    init
-#  }
-  
-#  Reduce(read.file,
-#        list.files(path = dir, pattern = "*.csv$", full.names = T),
-#        c(), accumulate = TRUE)
   lapply(list.files(path = dir, pattern = pattern, full.names = T),
          function(x){
            print(sprintf("Reading file %s", x))
-           read.csv(pipe(paste("cut -f2-25 -d',' ", x)))
+           read.csv(pipe(paste("cut -f2-25 -d',' ", x)), check.names = T)
          })
+}
+
+load.some <- function(dir = ".", pattern = "*.csv$", howmany = -1) {
+  n = 0
+  merged <- data.frame()
+  for (file in list.files(path = dir, pattern = pattern, full.names = T)) {
+    n = n + 1
+    if (howmany < n) {
+      return(merged)
+    }
+    print(sprintf("Reading file %s", file))
+    df = read.csv(pipe(paste("cut -f2-25 -d',' ", file)), check.names = T)
+    merged <- rbind(merged, df)
+  }
+  merged
 }
 
 # Add merged column
 addcol.merged <- function(dfs) {
-  lapply(dfs, function(x){
-    print(sprintf("Adding column merged to dataframe %s", (project.name(x))))
-    x$merged <- apply(x, 1, function(r){if(is.na('merged_at')){F} else {T}})
-    x$merged <- as.factor(x$merged)
-    x
-  })
+  lapply(dfs, addcol.merged.df)
+}
+
+addcol.merged.df <- function(x) {
+  print(sprintf("Adding column merged to dataframe %s", (project.name(x))))
+  x$merged <- apply(x, 1, function(r){if(is.na(r[['merged_at']])){F} else {T}})
+  x$merged <- as.factor(x$merged)
+  x
 }
 
 # Name of a project in a dataframe
