@@ -1,4 +1,3 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 974947,xsbt,633,1357388991,,1357562569,2892,,15,1,0,1,1,32123,0,0,0,97.40684244933537,1407,fernandezpablo85,0,0,102,false,false
 772036,xsbt,631,1356811756,,1356986279,2908,,15,1,0,5,1,32110,0,0,0,97.44627841793833,1407,xuwei-k,4,0.0,108,false,false
 776659,xsbt,627,1355872922,,1356010555,2293,,17,1,4,1,1,32078,13,0,0,97.54348774861275,2792,Jibbers42,0,0,0,false,false
