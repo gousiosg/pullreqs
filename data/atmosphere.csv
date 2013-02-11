@@ -1,4 +1,3 @@
-pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 945652,atmosphere,882,1359671356,1359723210,1359723210,864,864,2,1,0,2,1,33257,57,0,4,209.5498692004691,970,toddwest,1,1.0,1,false,false
 945650,atmosphere,881,1359671299,1359723235,1359723235,865,865,2,1,2,2,1,20365,57,0,4,290.0073655781979,1940,toddwest,0,0,2,false,false
 931150,atmosphere,861,1359349003,1359377298,1359377298,471,471,2,1,0,1,2,19815,1,0,17,278.8796366389099,970,nite23,9,1.0,0,false,false
