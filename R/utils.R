@@ -74,6 +74,12 @@ merge.dataframes <- function(dataframes) {
   merged
 }
 
+# Prints a list of column along with a boolean value. If the value is FALSE, then
+# the column contains at least one NA value
+column.contains.na <- function(df) {
+  for (b in colnames(df)){print(sprintf("%s %s", b, all(!is.na(a.train[[b]]))))}
+}
+
 # Saving plots as PDFs
 
 # Store multiple plots on the same PDF

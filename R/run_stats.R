@@ -10,12 +10,11 @@
 
 # 1. first run this
 library(ggplot2)
-library(randomForest)
-library(ROCR) 
 library(stargazer)
 source(file = "R/variables.R")
 source(file = "R/utils.R")
 source(file = "R/multiplots.R")
+source(file = "R/plots.R")
 source(file = "R/classification.R")
 # end 1.
 
@@ -86,10 +85,4 @@ store.pdf(plot.accept.lifetime.boxplot(dfs, projects), plot.location, "lifetime-
 
 projects = c("akka", "scala", "junit", "scala-ide", "scalaz")
 store.pdf(plot.accept.lifetime.freq(dfs, projects), plot.location, "lifetime-scala-freq.pdf")
-
-# Train a model to predict whether a pull request will be merged or not
-# a. Load the data
-
-dfs <- load.all(dir=data.file.location)
-
 

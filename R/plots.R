@@ -15,7 +15,7 @@ plot.percentage.merged <- function(dfs)
           data.frame(project=unique(x[[1]][1]), status="unmerged", value=unmerged_perc))
   }, dfs))
   
-  ggplot(a, aes(x= project, y = value, fill = status)) + 
+  ggplot(a[with(a, order(status, -value)),], aes(x= project, y = value, fill = status)) + 
     geom_bar(stat="identity", colour="white") +
     theme(axis.text.x=element_text(angle=90, hjust = 1)) +
     ylab("Percentage") + 
