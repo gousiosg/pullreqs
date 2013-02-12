@@ -18,6 +18,19 @@ prepare.project.df <- function(a) {
   a[,c(7:25)]
 }
 
+classification.perf.metrics <- function(classif, pred.obj) {
+  p1 <- performance(pred.obj, "acc")
+  p2 <- performance(pred.obj, "prec", "rec")
+  result = list(classifier = classif,
+                auc  = as.numeric(performance(pred.obj,"auc")@y.values),
+                acc  = median(Filter(function(x){is.finite(x)}, unlist(p1@y.values))),
+                prec = median(Filter(function(x){is.finite(x)}, unlist(p2@y.values))),
+                rec  = median(Filter(function(x){is.finite(x)}, unlist(p2@x.values))))
+  print(sprintf("%s: AUC %f, ACC %f, PREC %f, REC %f", result$classif, result$auc, result$acc,
+                result$prec, result$rec))
+  result
+}
+
 find.file.err <- function() {
   for (file in list.files(data.file.location, pattern="*.csv$", full.names = T)) { 
     data <- read.csv(pipe(paste("cut -f2-25 -d',' ", file)))
