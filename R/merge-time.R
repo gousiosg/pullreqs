@@ -150,7 +150,7 @@ results <- run.classifiers.mergetime(model, data$train, data$test, "10k-full")
 
 #n = all rows
 data <- prepare.data.mergetime(merged, nrow(merged))
-results <- run.classifiers.mergetime(data$train, data$test, "all-full")
+results <- run.classifiers.mergetime(model, data$train, data$test, "all-full")
 
 #
 ### Linear regression model
