@@ -6,8 +6,7 @@ rm(list = ls(all = TRUE))
 # Include libs and helper scripts
 library(ggplot2)
 library(randomForest)
-library(ROCR) 
-library(stargazer)
+library(ROCR)
 library(randomForest)
 library(e1071) # naiveBayes
 library(pls)
@@ -79,7 +78,7 @@ run.classifiers.mergetime <- function(model, train, test, uniq = "") {
   # ROC AUC for SVM
   predictions <- predict(svmmodel, newdata=test, type="prob", probability=TRUE)
   pred.obj <- prediction(attr(predictions, "probabilities")[,2], test$merged_fast)
-  metrics <- classification.perf.metrics("randomforest", pred.obj)
+  metrics <- classification.perf.metrics("svm", pred.obj)
   results[2,] <- c("svm", metrics$auc, metrics$acc, metrics$prec, metrics$rec)
   svmperf <- performance(pred.obj, "tpr","fpr")
   
@@ -91,7 +90,7 @@ run.classifiers.mergetime <- function(model, train, test, uniq = "") {
   # AUC for binary logistic regression 
   predictions <- predict(logmodel, newdata=test)
   pred.obj <- prediction(predictions, test$merged_fast)
-  metrics <- classification.perf.metrics("randomforest", pred.obj)
+  metrics <- classification.perf.metrics("binlogregr", pred.obj)
   results[3,] <- c("binlogregr", metrics$auc, metrics$acc, metrics$prec, metrics$rec)
   logperf <- performance(pred.obj, "tpr","fpr")
 
@@ -104,12 +103,12 @@ run.classifiers.mergetime <- function(model, train, test, uniq = "") {
   # AUC for naive bayes
   predictions <- predict(bayesModel, newdata=test, type="raw")
   pred.obj <- prediction(predictions[,2], test$merged_fast)
-  metrics <- classification.perf.metrics("randomforest", pred.obj)
+  metrics <- classification.perf.metrics("naive bayes", pred.obj)
   results[4,] <- c("naive bayes", metrics$auc, metrics$acc, metrics$prec, metrics$rec)
   bayesperf <- performance(pred.obj, "tpr","fpr")
   
   # Plot classification performance
-  pdf(file=sprintf("%s/%s-%s.pdf", plot.location, "classif-perf-merge-time", uniq))
+  pdf(file=sprintf("%s/%s-%s.pdf", plot.location, "classif-perf-merge-decision", uniq))
   plot (rfperf, col = 1, main = "Classifier performance for pull request merge time")
   plot (svmperf, col = 2, add = TRUE)
   plot (logperf, col = 3, add = TRUE)
