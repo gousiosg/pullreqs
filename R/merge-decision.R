@@ -3,19 +3,17 @@
 # Clean up workspace
 rm(list = ls(all = TRUE))
 
+source(file = "R/packages.R")
+source(file = "R/variables.R")
+source(file = "R/utils.R")
+source(file = "R/classification.R")
+
 # Include libs and helper scripts
 library(ggplot2)
 library(randomForest)
 library(ROCR) 
 library(randomForest)
 library(e1071) # naiveBayes
-library(pls)
-library(Hmisc) # cut2
-
-source(file = "R/variables.R")
-source(file = "R/utils.R")
-source(file = "R/multiplots.R")
-source(file = "R/classification.R")
 
 # Returns a list l where 
 # l[1] training dataset
@@ -125,13 +123,16 @@ all <- merge.dataframes(dfs)
 data <- prepare.data.mergedecision(all, 1000)
 run.classifiers.mergedecision(model, data$train, data$test, "1k")
 cvResult1k <- cross.validation(model, run.classifiers.mergedecision, prepare.data.mergedecision, all, 1000, 10)
+write.csv(cvResult1k, file = "merge-decision-cv-1k.csv")
 
 #n = 10000
 data <- prepare.data.mergedecision(all, 10000)
 results <- run.classifiers.mergedecision(model, data$train, data$test, "10k")
 cvResult10k <- cross.validation(model, run.classifiers.mergedecision, prepare.data.mergedecision, all, 10000, 10)
+write.csv(cvResult10k, file = "merge-decision-cv-10k.csv")
 
 #n = all rows
 data <- prepare.data.mergedecision(all, nrow(all))
 results <- run.classifiers.mergedecision(model, data$train, data$test, "All")
 cvResultAll <- cross.validation.mergedecision(model, all, nrow(merged), 10)
+write.csv(cvResultAll, file = "merge-decision-cv-all.csv")

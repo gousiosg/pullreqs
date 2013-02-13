@@ -129,13 +129,13 @@ all <- merge.dataframes(dfs)
 data <- prepare.data.mergetime(all, 1000)
 results <- run.classifiers.mergetime(model, data$train, data$test, "1k")
 cvResult1k <- cross.validation(model, run.classifiers.mergetime, prepare.data.mergetime, all, 1000, 10)
-write.csv(cvResultAll, file = "merge-time-cv-1k.csv")
+write.csv(cvResult1k, file = "merge-time-cv-1k.csv")
 
 #n = 10000
 data <- prepare.data.mergetime(all, 10000)
 results <- run.classifiers.mergetime(model, data$train, data$test, "10k")
 cvResult10k <- cross.validation(model, run.classifiers.mergetime, prepare.data.mergetime, all, 10000, 10)
-write.csv(cvResultAll, file = "merge-time-cv-10k.csv")
+write.csv(cvResult10k, file = "merge-time-cv-10k.csv")
 
 #n = all rows
 data <- prepare.data.mergetime(all, nrow(all))

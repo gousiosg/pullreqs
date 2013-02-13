@@ -1,0 +1,9 @@
+if (!"randomForest" %in% installed.packages()) install.packages("randomForest")
+if (!"ggplot2" %in% installed.packages()) install.packages("ggplot2")
+if (!"ROCR" %in% installed.packages()) install.packages("ROCR")
+if (!"ellipse" %in% installed.packages()) install.packages("ellipse")
+if (!"e1071" %in% installed.packages()) install.packages("e1071")
+if (!"pls" %in% installed.packages()) install.packages("pls")
+if (!"Hmisc" %in% installed.packages()) install.packages("Hmisc")
+if (!"reshape" %in% installed.packages()) install.packages("reshape")
+
