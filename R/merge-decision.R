@@ -1,4 +1,4 @@
-# Predicting merge_time of pull requests
+# Predicting whether pull requests will be merged
 
 # Clean up workspace
 rm(list = ls(all = TRUE))
@@ -39,6 +39,7 @@ prepare.data.mergedecision <- function(df, num_samples) {
 # Returns a dataframe with the AUC, PREC, REC values per classifier
 # Plots classification ROC curves
 run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
+  print(sprintf("Prior propability: %f", nrow(subset(data$train, merged == TRUE))/nrow(data$train)))
   sample_size = nrow(train) + nrow(test)
   results = data.frame(classifier = rep(NA, 4), auc = rep(0, 4), acc = rep(0,4),
                        prec = rep(0, 4), rec = rep(0, 4), stringsAsFactors=FALSE)
@@ -50,10 +51,7 @@ run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
   varImpPlot(rfmodel, type=1)
   varImpPlot(rfmodel, type=2)
   plot(rfmodel)
-  # Cross validation for variable selection, doesn't seem to work
-  #with(rfcv(train[c(2:10, 11, 14, 20)], train$merged), plot(n.var, error.cv))
-  
-  # Random forest ROC AUC
+
   predictions <- predict(rfmodel, test, type="prob")
   pred.obj <- prediction(predictions[,2], test$merged)
   metrics <- classification.perf.metrics("randomforest", pred.obj)
@@ -68,8 +66,7 @@ run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
   bestCost <- tobj$best.parameters[[2]]
   svmmodel <- svm(model, data=train, gamma=bestGamma, cost = bestCost, probability=TRUE)
   print(summary(svmmodel))
-  
-  # ROC AUC for SVM
+
   predictions <- predict(svmmodel, newdata=test, type="prob", probability=TRUE)
   pred.obj <- prediction(attr(predictions, "probabilities")[,2], test$merged)
   metrics <- classification.perf.metrics("svm", pred.obj)
@@ -80,8 +77,7 @@ run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
   ### Binary logistic regression
   logmodel <- glm(model, data=train, family = binomial(logit));
   print(summary(logmodel))
-  
-  # AUC for binary logistic regression 
+
   predictions <- predict(logmodel, newdata=test)
   pred.obj <- prediction(predictions, test$merged)
   metrics <- classification.perf.metrics("binlogreg", pred.obj)
@@ -93,8 +89,7 @@ run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
   bayesModel <- naiveBayes(model, data = train)
   print(summary(bayesModel))
   print(bayesModel)
-  
-  # AUC for naive bayes
+
   predictions <- predict(bayesModel, newdata=test, type="raw")
   pred.obj <- prediction(predictions[,2], test$merged)
   metrics <- classification.perf.metrics("naive bayes", pred.obj)
@@ -113,15 +108,6 @@ run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
   results
 }
 
-cross.validation.mergedecision <- function(model, df, num_samples, num_runs = 10) {
-  lapply(c(1:num_runs),
-         function(n) {
-           data <- prepare.data.mergedecision(df, num_samples)
-           print(sprintf("Prior propability: %f", nrow(subset(data$train, merged == TRUE))/nrow(data$train)))
-           run.classifiers.mergedecision(model, data$train, data$test)
-         })
-}
-
 model <- merged ~ team_size + num_commits + files_changed + perc_external_contribs + 
   sloc + src_churn + test_churn + commits_on_files_touched +  test_lines_per_1000_lines + 
   prev_pullreqs + requester_succ_rate
@@ -137,14 +123,15 @@ all <- merge.dataframes(dfs)
 
 #n = 1000
 data <- prepare.data.mergedecision(all, 1000)
-print(sprintf("Prior propability: %f", nrow(subset(data$train, merged == TRUE))/nrow(data$train)))
-results <- run.classifiers.mergedecision(model, data$train, data$test, "1k")
+run.classifiers.mergedecision(model, data$train, data$test, "1k")
+cvResult1k <- cross.validation(model, run.classifiers.mergedecision, prepare.data.mergedecision, all, 1000, 10)
 
 #n = 10000
 data <- prepare.data.mergedecision(all, 10000)
-print(sprintf("Prior propability: %f", nrow(subset(data$train, merged == TRUE))/nrow(data$train)))
 results <- run.classifiers.mergedecision(model, data$train, data$test, "10k")
+cvResult10k <- cross.validation(model, run.classifiers.mergedecision, prepare.data.mergedecision, all, 10000, 10)
 
 #n = all rows
-data <- prepare.data.mergedecision(all, nrow(merged))
-results <- run.classifiers.mergedecision(model, data$train, data$test, "all-full")
+data <- prepare.data.mergedecision(all, nrow(all))
+results <- run.classifiers.mergedecision(model, data$train, data$test, "All")
+cvResultAll <- cross.validation.mergedecision(model, all, nrow(merged), 10)

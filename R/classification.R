@@ -18,6 +18,30 @@ prepare.project.df <- function(a) {
   a[,c(7:25)]
 }
 
+# Run a cross validation round, return a dataframe with all results added
+# sampler is f: data.frame -> Int -> list
+# classifier is f: data.frame -> Int -> list
+cross.validation <- function(model, classifier, sampler, df, num_samples, num_runs = 10) {
+  result = lapply(c(1:num_runs),
+                  function(n) {
+                    dataset <- sampler(df, num_samples)
+                    print(sprintf("Prior propability: %f", nrow(subset(dataset$train, merged == TRUE))/nrow(dataset$train)))
+                    interm = classifier(model, dataset$train, dataset$test)
+                    interm$run <- n
+                    interm
+                  })
+  result = merge.dataframes(result)
+  
+  # Somewhere along the way, numbers are converted to characters. 
+  # Too busy to investigate why
+  result$auc <- as.numeric(result$auc)
+  result$acc <- as.numeric(result$acc)
+  result$prec <- as.numeric(result$prec)
+  result$rec <- as.numeric(result$rec)
+  result
+}
+
+# Extract classification metrics from a ROCR prediction object
 classification.perf.metrics <- function(classif, pred.obj) {
   p1 <- performance(pred.obj, "acc")
   p2 <- performance(pred.obj, "prec", "rec")
@@ -29,6 +53,15 @@ classification.perf.metrics <- function(classif, pred.obj) {
   print(sprintf("%s: AUC %f, ACC %f, PREC %f, REC %f", result$classif, result$auc, result$acc,
                 result$prec, result$rec))
   result
+}
+
+# Calculate mean results after cross validation runs
+cross.validation.means <- function(cvResult) {
+  aggregate(. ~ classifier, data = cvResult, mean)
+}
+
+cross.validation.plot <- function(cvResult, metric) {
+  ggplot(cvResult, aes(x = run, y = metric, colour = classifier)) + geom_line(size = 1)
 }
 
 find.file.err <- function() {

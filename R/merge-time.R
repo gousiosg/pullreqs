@@ -56,10 +56,7 @@ run.classifiers.mergetime <- function(model, train, test, uniq = "") {
   varImpPlot(rfmodel, type=1)
   varImpPlot(rfmodel, type=2)
   plot(rfmodel)
-  # Cross validation for variable selection, doesn't seem to work
-  #with(rfcv(train[c(2:10, 11, 14, 20)], train$merged_fast), plot(n.var, error.cv))
-  
-  # Random forest ROC AUC
+
   predictions <- predict(rfmodel, test, type="prob")
   pred.obj <- prediction(predictions[,2], test$merged_fast)
   metrics <- classification.perf.metrics("randomforest", pred.obj)
@@ -73,9 +70,8 @@ run.classifiers.mergetime <- function(model, train, test, uniq = "") {
   bestGamma <- tobj$best.parameters[[1]]
   bestCost <- tobj$best.parameters[[2]]
   svmmodel <- svm(model, data=train, gamma=bestGamma, cost = bestCost, probability=TRUE)
-  print(summary(svmmodel))
-  
-  # ROC AUC for SVM
+  print(svmmodel)
+
   predictions <- predict(svmmodel, newdata=test, type="prob", probability=TRUE)
   pred.obj <- prediction(attr(predictions, "probabilities")[,2], test$merged_fast)
   metrics <- classification.perf.metrics("svm", pred.obj)
@@ -85,9 +81,8 @@ run.classifiers.mergetime <- function(model, train, test, uniq = "") {
   #
   ### Binary logistic regression
   logmodel <- glm(model, data=train, family = binomial(logit));
-  print(summary(logmodel))
-  
-  # AUC for binary logistic regression 
+  print(logmodel)
+
   predictions <- predict(logmodel, newdata=test)
   pred.obj <- prediction(predictions, test$merged_fast)
   metrics <- classification.perf.metrics("binlogregr", pred.obj)
@@ -97,10 +92,8 @@ run.classifiers.mergetime <- function(model, train, test, uniq = "") {
   #
   ### Naive Bayes
   bayesModel <- naiveBayes(model, data = train)
-  #print(summary(bayesModel))
   print(bayesModel)
-  
-  # AUC for naive bayes
+
   predictions <- predict(bayesModel, newdata=test, type="raw")
   pred.obj <- prediction(predictions[,2], test$merged_fast)
   metrics <- classification.perf.metrics("naive bayes", pred.obj)
@@ -108,7 +101,7 @@ run.classifiers.mergetime <- function(model, train, test, uniq = "") {
   bayesperf <- performance(pred.obj, "tpr","fpr")
   
   # Plot classification performance
-  pdf(file=sprintf("%s/%s-%s.pdf", plot.location, "classif-perf-merge-decision", uniq))
+  pdf(file=sprintf("%s/%s-%s.pdf", plot.location, "classif-perf-merge-time", uniq))
   plot (rfperf, col = 1, main = "Classifier performance for pull request merge time")
   plot (svmperf, col = 2, add = TRUE)
   plot (logperf, col = 3, add = TRUE)
@@ -117,14 +110,6 @@ run.classifiers.mergetime <- function(model, train, test, uniq = "") {
   dev.off()
 
   results
-}
-
-cross.validation.mergetime <- function(model, df, num_samples, num_runs = 10) {
-  lapply(c(1:num_runs),
-    function(n) {
-      data <- prepare.data.mergetime(df, num_samples)
-      run.classifiers.mergetime(model, data$train, data$test)
-    })
 }
 
 model = merged_fast ~ team_size + num_commits + files_changed + perc_external_contribs + 
@@ -138,19 +123,25 @@ dfs <- load.all(dir=data.file.location, pattern="*.csv$")
 dfs <- addcol.merged(dfs)
 
 # Merge all dataframes in a single dataframe
-merged <- merge.dataframes(dfs)
+all <- merge.dataframes(dfs)
 
 #n = 1000
-data <- prepare.data.mergetime(merged, 1000)
-results <- run.classifiers.mergetime(model, data$train, data$test, "1k-full")
+data <- prepare.data.mergetime(all, 1000)
+results <- run.classifiers.mergetime(model, data$train, data$test, "1k")
+cvResult1k <- cross.validation(model, run.classifiers.mergetime, prepare.data.mergetime, all, 1000, 10)
+write.csv(cvResultAll, file = "merge-time-cv-1k.csv")
 
 #n = 10000
-data <- prepare.data.mergetime(merged, 10000)
-results <- run.classifiers.mergetime(model, data$train, data$test, "10k-full")
+data <- prepare.data.mergetime(all, 10000)
+results <- run.classifiers.mergetime(model, data$train, data$test, "10k")
+cvResult10k <- cross.validation(model, run.classifiers.mergetime, prepare.data.mergetime, all, 10000, 10)
+write.csv(cvResultAll, file = "merge-time-cv-10k.csv")
 
 #n = all rows
-data <- prepare.data.mergetime(merged, nrow(merged))
-results <- run.classifiers.mergetime(model, data$train, data$test, "all-full")
+data <- prepare.data.mergetime(all, nrow(all))
+results <- run.classifiers.mergetime(model, data$train, data$test, "all")
+cvResultAll <- cross.validation(model, run.classifiers.mergetime, prepare.data.mergetime, all, nrow(all), 10)
+write.csv(cvResultAll, file = "merge-time-cv-all.csv")
 
 #
 ### Linear regression model
