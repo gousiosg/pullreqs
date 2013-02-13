@@ -3,19 +3,17 @@
 # Clean up workspace
 rm(list = ls(all = TRUE))
 
+source(file = "R/packages.R")
+source(file = "R/variables.R")
+source(file = "R/utils.R")
+source(file = "R/classification.R")
+
 # Include libs and helper scripts
-library(ggplot2)
-library(randomForest)
 library(ROCR)
 library(randomForest)
 library(e1071) # naiveBayes
 library(pls)
 library(Hmisc) # cut2
-
-source(file = "R/variables.R")
-source(file = "R/utils.R")
-source(file = "R/multiplots.R")
-source(file = "R/classification.R")
 
 # Returns a list l where 
 # l[1] training dataset
@@ -23,9 +21,15 @@ source(file = "R/classification.R")
 prepare.data.mergetime <- function(df, num_samples) {
   # Prepare the data for prediction
   a <- prepare.project.df(df)
+  all_rows = nrow(a)
   
   # sample filter pull-requests that have not been merged
   a <- a[a$merged == "TRUE", ]
+
+  if (num_samples == all_rows) {
+    num_samples = nrow(a)
+  }
+
   a <- a[sample(nrow(a), size=num_samples), ]
   
   # binning - add column to classify requests into short/long
@@ -52,7 +56,7 @@ run.classifiers.mergetime <- function(model, train, test, uniq = "") {
   ### Random Forest
   rfmodel <- randomForest(model, data=train, importance = T)
   print(rfmodel)
-  importance(rfmodel)
+  print(importance(rfmodel))
   varImpPlot(rfmodel, type=1)
   varImpPlot(rfmodel, type=2)
   plot(rfmodel)

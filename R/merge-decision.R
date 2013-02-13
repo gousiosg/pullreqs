@@ -9,11 +9,9 @@ source(file = "R/utils.R")
 source(file = "R/classification.R")
 
 # Include libs and helper scripts
-library(ggplot2)
-library(randomForest)
 library(ROCR) 
 library(randomForest)
-library(e1071) # naiveBayes
+library(e1071)
 
 # Returns a list l where 
 # l[1] training dataset
@@ -134,5 +132,5 @@ write.csv(cvResult10k, file = "merge-decision-cv-10k.csv")
 #n = all rows
 data <- prepare.data.mergedecision(all, nrow(all))
 results <- run.classifiers.mergedecision(model, data$train, data$test, "All")
-cvResultAll <- cross.validation.mergedecision(model, all, nrow(merged), 10)
+cvResult10k <- cross.validation(model, run.classifiers.mergedecision, prepare.data.mergedecision, all, nrow(all), 10)
 write.csv(cvResultAll, file = "merge-decision-cv-all.csv")
