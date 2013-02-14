@@ -10,7 +10,7 @@ source(file = "R/classification.R")
 source(file = "R/merge-time.R")
 source(file = "R/merge-decision.R")
 
-library(ggplot)
+library(ggplot2)
 
 run.rf.varimp <- function(classifname, model, sampler, data, smpl_size, runs) {
   varimp <- rf.varimp(model, sampler, data, smpl_size, runs)
