@@ -1,8 +1,5 @@
 # Predicting whether pull requests will be merged
 
-# Clean up workspace
-rm(list = ls(all = TRUE))
-
 source(file = "R/packages.R")
 source(file = "R/variables.R")
 source(file = "R/utils.R")
@@ -25,7 +22,7 @@ prepare.data.mergedecision <- function(df, num_samples) {
 
   # Remove column mergetime_minutes as it contains NAs
   a <- a[-c(1)]
-  
+
   # split data into training and test data
   a.train <- a[1:floor(nrow(a)*.75), ]
   a.test <- a[(floor(nrow(a)*.75)+1):nrow(a), ]
@@ -104,33 +101,7 @@ run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
   results
 }
 
-model <- merged ~ team_size + num_commits + files_changed + perc_external_contribs + 
-  sloc + src_churn + test_churn + commits_on_files_touched +  test_lines_per_1000_lines + 
-  prev_pullreqs + requester_succ_rate
-
-# Loading data files
-dfs <- load.all(dir=data.file.location, pattern="*.csv$")
-
-# Add derived columns
-dfs <- addcol.merged(dfs)
-
-# Merge all dataframes in a single dataframe
-all <- merge.dataframes(dfs)
-
-#n = 1000
-data <- prepare.data.mergedecision(all, 1000)
-run.classifiers.mergedecision(model, data$train, data$test, "1k")
-cvResult1k <- cross.validation(model, run.classifiers.mergedecision, prepare.data.mergedecision, all, 1000, 10)
-write.csv(cvResult1k, file = "merge-decision-cv-1k.csv")
-
-#n = 10000
-data <- prepare.data.mergedecision(all, 10000)
-results <- run.classifiers.mergedecision(model, data$train, data$test, "10k")
-cvResult10k <- cross.validation(model, run.classifiers.mergedecision, prepare.data.mergedecision, all, 10000, 10)
-write.csv(cvResult10k, file = "merge-decision-cv-10k.csv")
-
-#n = all rows
-data <- prepare.data.mergedecision(all, nrow(all))
-results <- run.classifiers.mergedecision(model, data$train, data$test, "All")
-cvResult10k <- cross.validation(model, run.classifiers.mergedecision, prepare.data.mergedecision, all, nrow(all), 10)
-write.csv(cvResultAll, file = "merge-decision-cv-all.csv")
+merge.decision.model <- merged ~ team_size + num_commits + files_changed + 
+  perc_external_contribs + sloc + src_churn + test_churn + 
+  commits_on_files_touched +  test_lines_per_1000_lines + prev_pullreqs + 
+  requester_succ_rate

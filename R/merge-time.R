@@ -1,8 +1,5 @@
 # Predicting merge_time of pull requests
 
-# Clean up workspace
-rm(list = ls(all = TRUE))
-
 source(file = "R/packages.R")
 source(file = "R/variables.R")
 source(file = "R/utils.R")
@@ -30,8 +27,6 @@ prepare.data.mergetime <- function(df, num_samples) {
     num_samples = nrow(a)
   }
 
-  a <- a[sample(nrow(a), size=num_samples), ]
-  
   # binning - add column to classify requests into short/long
   #hist(log(aMerged$lifetime_minutes))
   bins <- 2
@@ -39,7 +34,9 @@ prepare.data.mergetime <- function(df, num_samples) {
   # a["merged_fast"] <- a$mergetime_minutes <= meanMergeTime
   # a$merged_fast <- as.factor(a$merged_fast)
   a$merged_fast <- cut2(a$mergetime_minutes, g=bins)
-  
+
+  a <- a[sample(nrow(a), size=num_samples), ]
+
   # split data into training and test data
   a.train <- a[1:floor(nrow(a)*.75), ]
   a.test <- a[(floor(nrow(a)*.75)+1):nrow(a), ]
@@ -116,36 +113,9 @@ run.classifiers.mergetime <- function(model, train, test, uniq = "") {
   results
 }
 
-model = merged_fast ~ team_size + num_commits + files_changed + perc_external_contribs + 
+merge.time.model = merged_fast ~ team_size + num_commits + files_changed + perc_external_contribs + 
   sloc + src_churn + test_churn + commits_on_files_touched +  test_lines_per_1000_lines + 
   prev_pullreqs +  requester_succ_rate + main_team_member
-
-# Loading data files
-dfs <- load.all(dir=data.file.location, pattern="*.csv$")
-
-# Add derived columns
-dfs <- addcol.merged(dfs)
-
-# Merge all dataframes in a single dataframe
-all <- merge.dataframes(dfs)
-
-#n = 1000
-data <- prepare.data.mergetime(all, 1000)
-results <- run.classifiers.mergetime(model, data$train, data$test, "1k")
-cvResult1k <- cross.validation(model, run.classifiers.mergetime, prepare.data.mergetime, all, 1000, 10)
-write.csv(cvResult1k, file = "merge-time-cv-1k.csv")
-
-#n = 10000
-data <- prepare.data.mergetime(all, 10000)
-results <- run.classifiers.mergetime(model, data$train, data$test, "10k")
-cvResult10k <- cross.validation(model, run.classifiers.mergetime, prepare.data.mergetime, all, 10000, 10)
-write.csv(cvResult10k, file = "merge-time-cv-10k.csv")
-
-#n = all rows
-data <- prepare.data.mergetime(all, nrow(all))
-results <- run.classifiers.mergetime(model, data$train, data$test, "all")
-cvResultAll <- cross.validation(model, run.classifiers.mergetime, prepare.data.mergetime, all, nrow(all), 10)
-write.csv(cvResultAll, file = "merge-time-cv-all.csv")
 
 #
 ### Linear regression model
