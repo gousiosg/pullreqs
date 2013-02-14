@@ -24,8 +24,8 @@ prepare.data.mergedecision <- function(df, num_samples) {
   a <- a[-c(1)]
 
   # split data into training and test data
-  a.train <- a[1:floor(nrow(a)*.75), ]
-  a.test <- a[(floor(nrow(a)*.75)+1):nrow(a), ]
+  a.train <- a[1:floor(nrow(a)*.90), ]
+  a.test <- a[(floor(nrow(a)*.90)+1):nrow(a), ]
   list(train=a.train, test=a.test)
 }
 

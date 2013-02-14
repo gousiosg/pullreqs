@@ -38,8 +38,8 @@ prepare.data.mergetime <- function(df, num_samples) {
   a <- a[sample(nrow(a), size=num_samples), ]
 
   # split data into training and test data
-  a.train <- a[1:floor(nrow(a)*.75), ]
-  a.test <- a[(floor(nrow(a)*.75)+1):nrow(a), ]
+  a.train <- a[1:floor(nrow(a)*.90), ]
+  a.test <- a[(floor(nrow(a)*.90)+1):nrow(a), ]
   list(train=a.train, test=a.test)
 }
 
