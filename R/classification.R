@@ -61,3 +61,23 @@ cross.validation.means <- function(cvResult) {
 cross.validation.plot <- function(cvResult, metric) {
   ggplot(cvResult, aes(x = run, y = metric, colour = classifier)) + geom_line(size = 1)
 }
+
+rf.varimp <- function(model, df, num_samples = 5000, runs = 50) {
+  result = lapply(c(1:runs), 
+                  function(n) {
+                    df <- df[sample(nrow(df), size=num_samples), ]
+                    rfmodel <- randomForest(model, data=data$train, importance = T, 
+                                            type = "classification", mtry = 5, 
+                                            ntree = 2000)
+                    #print(importance(rfmodel))
+                    i <- data.frame(importance(rfmodel))
+                    i$var <- row.names(i)
+                    i$var <- as.factor(i$var)
+                    i$run <- n
+                    i
+                  })
+  result = merge.dataframes(result)
+  result = aggregate(. ~ var, data = result, mean)
+  result = result[with(result, order(-MeanDecreaseAccuracy)),]
+  result[c('var', 'MeanDecreaseAccuracy')]
+}
