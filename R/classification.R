@@ -62,14 +62,14 @@ cross.validation.plot <- function(cvResult, metric) {
   ggplot(cvResult, aes(x = run, y = metric, colour = classifier)) + geom_line(size = 1)
 }
 
-rf.varimp <- function(model, df, num_samples = 5000, runs = 50) {
+rf.varimp <- function(model, sampler, data, num_samples = 5000, runs = 50) {
   result = lapply(c(1:runs), 
                   function(n) {
-                    df <- df[sample(nrow(df), size=num_samples), ]
-                    rfmodel <- randomForest(model, data=data$train, importance = T, 
+                    df <- sampler(data, num_samples)
+                    rfmodel <- randomForest(model, data=df$train, importance = T, 
                                             type = "classification", mtry = 5, 
                                             ntree = 2000)
-                    #print(importance(rfmodel))
+                    print(importance(rfmodel))
                     i <- data.frame(importance(rfmodel))
                     i$var <- row.names(i)
                     i$var <- as.factor(i$var)
