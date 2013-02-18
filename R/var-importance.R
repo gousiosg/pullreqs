@@ -12,11 +12,11 @@ source(file = "R/merge-decision.R")
 
 library(ggplot2)
 
-run.rf.varimp <- function(classifname, model, sampler, data, smpl_size, runs) {
+run.rf.varimp <- function(expname, model, sampler, data, smpl_size, runs) {
   varimp <- rf.varimp(model, sampler, data, smpl_size, runs)
-
+  name.for.file <- gsub(" ", "-", tolower(expname))
   chart.title = sprintf("%s variable importance\n(n = %d, ntree = 2000, mtry = 5, runs = %d)",
-                        classifname, smpl_size, runs)
+                        expname, smpl_size, runs)
 
   p <- ggplot(varimp, aes(y = reorder(MeanDecreaseAccuracy, var), x = MeanDecreaseAccuracy)) +
     geom_point(size = 3) +
@@ -24,7 +24,7 @@ run.rf.varimp <- function(classifname, model, sampler, data, smpl_size, runs) {
     xlab("Mean Decrease in Accuracy") +
     ggtitle(chart.title)
 
-  store.pdf(p, plot.location, sprintf("varimp-%s-%d-%d.pdf", classifname, smpl_size, runs))
+  store.pdf(p, plot.location, sprintf("varimp-%s-%d-%d.pdf", name.for.file, smpl_size, runs))
   print(varimp)
 }
 
@@ -46,4 +46,4 @@ run.rf.varimp("Merge decision", merge.decision.model, prepare.data.mergedecision
 run.rf.varimp("Merge time", merge.time.model, prepare.data.mergetime, all, 10000, 100)
 
 run.rf.varimp("Merge decision", merge.decision.model, prepare.data.mergedecision, all, 40000, 50)
-run.rf.varimp("Merge time", merge.time.model, prepare.data.mergetime, all, 4000, 50)
+run.rf.varimp("Merge time", merge.time.model, prepare.data.mergetime, all, 40000, 50)
