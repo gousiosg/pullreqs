@@ -18,13 +18,12 @@ library(Hmisc) # cut2
 prepare.data.mergetime <- function(df, num_samples) {
   # Prepare the data for prediction
   a <- prepare.project.df(df)
-  all_rows = nrow(a)
   
   # sample filter pull-requests that have not been merged
   a <- a[a$merged == "TRUE", ]
 
-  if (num_samples == all_rows) {
-    num_samples = nrow(a)
+  if (num_samples >= nrow(a)) {
+    num_samples = nrow(a) - 1
   }
 
   # binning - add column to classify requests into short/long
