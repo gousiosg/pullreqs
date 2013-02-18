@@ -6,4 +6,5 @@ if (!"e1071" %in% installed.packages()) install.packages("e1071")
 if (!"pls" %in% installed.packages()) install.packages("pls")
 if (!"Hmisc" %in% installed.packages()) install.packages("Hmisc")
 if (!"reshape" %in% installed.packages()) install.packages("reshape")
+if (!"RMySQL" %in% installed.packages()) install.packages("RMySQL")
 
