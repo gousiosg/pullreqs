@@ -122,14 +122,14 @@ roots of the static view entities, the event stream needs to be followed. From
 there, a recursive dependency-based parsing approach can yield all data
 offered through the {\sc api}. 
 The GHTorrent dataset covers a broad range of development activities on Github,
-including pull requests and issues. On Feb 2013, more than a million 
+including pull requests and issues. Up to Feb 2013, more than a million 
 pull requests from more that a hundred thousand projects have been collected by the project.
 
 Using the GHTorrent dataset, we explore the use of pull requests among projects
 in Github to answer {\sc rq1}. Based on our observations, we develop a theory
 of pull request adoption.
-To answer {\sc rq2} and {\sc rq3}, we examined a hand selected group of 50 Ruby, Java and Scala projects,
-(\todo{Add number of pullreqs} pull requests), and identified, using machine
+To answer {\sc rq2} and {\sc rq3}, we examined 100 Ruby, Java and Scala projects,
+(pull requests), and identified, using machine
 learning tools, common factors that affect pull request lifetime and merging. We
 then applied the extracted models on another group of 50 randomly selected
 projects in order to validate them. The results show that it is
@@ -309,15 +309,41 @@ requests it has received is 0.32 ($p < 0.001, n = 63335$).
   \label{fig:prfreq}
 \end{figure}
 
-Issues and pull requests are dual on Github; for each pull request, an
-issue is opened automatically. Commits can also be attached to issues to
-convert them to pull requests (albeit with external tools). This duality
-enables project administrators to treat pull requests as work items,
-which can be managed using the same facilities used for issues.
-Across projects that received pull requests in 2012,
-\todo{}
-also
-used Github's issue tracker, indicating a 
+Issues and pull requests are dual on Github; for each pull request, an issue is
+opened automatically. Commits can also be attached to issues to convert them to
+pull requests (albeit with external tools). This duality enables project
+administrators to treat pull requests as work items, which can be managed using
+the same facilities used for issues. Across projects that received pull
+requests in 2012, 35\% also received a bug report (not pull-request based) 
+on the Github issue tracker, indicating a strong use of Github's collaboration
+facilities by both the project and the project community.
+
+Pull requests are initially 
+As can be seen in Figure~\ref{fig:before-after-pr}, on certain
+long lived projects, the introduction of pull requests has significantly
+increased the number of contributors per month. To investigate whether the
+introduction of pull requests had a measurable effect on projects that used
+them, we calculated the mean number of active developers per month for a period
+of 12 months before and after the introduction of pull requests. We filtered out
+projects that begun using pull requests only after September 2011 and those
+whose average number of developers is less than two (indicating self-submission
+and acceptance of pull requests). We performed a paired Mann-Whitney test
+across the means for each project, which indicated a statistically significant
+difference ($n = 362, V = 56690, p < 0.001$). We also calculated the effect size
+using Cliff's delta metric at 0.42. This indicates a significant increase in the
+mean number of developers per month after the introduction of pull requests,
+even though this does not necessarily mean that pull requests are indeed the
+reason.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[scale=0.5]{num-commiters-after-pr}
+  \end{center}
+  \caption{Number of committers before and after the introduction of pull
+  requests by Github. The lines are smoothed using the local polynomial
+  regression fitting method, to account for monthly fluctuations.}
+  \label{fig:before-after-pr}
+\end{figure}
 
 A phenomenon related to pull requests is ``drive-by'' pull requests. As the
 relative cost to fork a repository is negligible on Github (54\% of the
@@ -330,21 +356,9 @@ to create a pull request to the original one. Such commits might be identified
 as pull requests that contain a single commit from users that are not yet part
 of the project's community. Even under this na\"ive definition, 7\% of pull
 requests in 2012 can be classified as drive by commits. Moreover, 3.5\% of the
-forks were created for the sole purpose of creating a drive-by commit.  More
+forks were created for the sole purpose of creating a drive-by commit. More
 work needs to be done for the accurate definition and assessment of the
 implications of drive-by commits, which we defer for future work.
-
-THe use of pull requests drives external contributions. As 
-
-\begin{figure}
-  \begin{center}
-    \includegraphics[scale=0.5]{num-commiters-after-pr}
-  \end{center}
-  \caption{Number of committers before and after the introduction of pull
-  requests by Github. The lines are smoothed using the local polynomial
-  regression fitting method, to omit minor monthly fluctuations.}
-  \label{fig:}
-\end{figure}
 
 \section{Collaboration through pull requests}
 
@@ -382,7 +396,6 @@ area of the project would be easier to process~\todo{ref?}
 In reference ~\cite{Bird07}, Bird et al. presented evidence that social
 reputation has an impact on whether a
 
-
 \section{Data Preparation}
 
 In the previous section, we defined pull based development, and presented an
@@ -396,8 +409,7 @@ important to retrieve all information available during the project's life. To
 make the data collection, and subsequent analysis, practical, we restricted our
 input data to two datasets, a \textsf{handpicked} and a \textsf{random} one. 
 Both datasets contain 50 projects of different sizes each. The 
-\textsf{handpicked} dataset was 
-
+\textsf{handpicked} dataset was created by browsing 
 
 To build the datasets, we set forth the following requirements when selecting
 projects to include:
@@ -413,7 +425,7 @@ projects to include:
     layout in the Ruby (Gem), Java and Scala (both Maven) language ecosystems,
     so our project selection was limited to those languages. 
 
-  \item 
+  \item  
 
 \end{itemize}
 

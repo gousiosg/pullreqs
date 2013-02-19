@@ -1,9 +1,11 @@
-library(RMySQL)
-library(ggplot2)
-
+source(file = "R/packages.R")
 source(file = "R/utils.R")
 source(file = "R/variables.R")
 source(file = "R/mysql.R")
+
+library(RMySQL)
+library(ggplot2)
+library(orddom)
 
 print("Running database queries...")
 con <- dbConnect(dbDriver("MySQL"), user = mysql.user, password = mysql.passwd, 
@@ -82,7 +84,7 @@ print(sprintf("Pullreqs per project (mean): %f", mean(pullreqs$cnt)))
 print(sprintf("Pullreqs per project (95 perc): %d", quantile(pullreqs$cnt, 0.95)))
 print(sprintf("Pullreqs per project (5 perc): %d", quantile(pullreqs$cnt, 0.05)))
 store.pdf(qplot(cnt, data = subset(pullreqs, cnt > 10), geom = "histogram", log = "x", ylab = "Number of projects", xlab = "Number of pull requests (log)"), plot.location, "pull-req-freq.pdf")
-      
+
 # Overall pull req stats - opened
 res <- dbSendQuery(con, "select count(*) as cnt from projects p, pull_requests pr  where p.forked_from is null and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles' and p.name <> 'vimfiles'and pr.base_repo_id = p.id and exists (select prh.created_at from pull_request_history prh where prh.pull_request_id = pr.id and prh.action='opened' and year(prh.created_at)=2012)")
 opened_pullreqs <- fetch(res, n = -1)$cnt
@@ -109,18 +111,8 @@ print(sprintf("Perc forked repos: %f", (forked_repos/repos) * 100))
 # Issue tracker % usage for projects 
 res <- dbSendQuery(con, "select count(*) as cnt from projects p where p.forked_from is null and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles' and p.name <> 'vimfiles' and exists (select pr.id from pull_requests pr, pull_request_history prh where pr.base_repo_id = p.id and prh.pull_request_id = pr.id and year(prh.created_at)=2012) and exists (select i.id from issues i where i.repo_id = p.id and year(i.created_at)=2012)")
 issue_pr_repos <- fetch(res, n = -1)
-print(sprintf("Perc projects with pull reqs and issues (overall): %f", (issue_pr_repos/repos) * 100))
+print(sprintf("Perc projects with pull reqs and issues (overall): %f", (issue_pr_repos/orig_repos) * 100))
 print(sprintf("Perc projects with pull reqs and issues: %f", (issue_pr_repos/orig_repos_pullreqs) * 100))
-
-# Drive-by commits pull reqs
-res <- dbSendQuery(con, "select count(*) as cnt from pull_requests pr, pull_request_history prh where prh.action = 'opened' and prh.pull_request_id = pr.id and year(prh.created_at) = 2012 and not exists (select c.author_id from commits c, project_commits pc where pc.project_id = pr.base_repo_id and c.created_at < prh.created_at and c.author_id = pr.user_id) and 1 = (select count(*) from pull_request_commits prc where prc.pull_request_id = pr.id)")
-drive_by_pr <- fetch(res, n = -1)$cnt
-print(sprintf("Perc drive by pull requests: %f", (drive_by_pr/opened_pullreqs) * 100))
-print(sprintf("Perc one pull req repos: %f", (drive_by_pr/forked_repos) * 100))
-      
-# Pull req size stats: number of commits
-res <- dbSendQuery(con, "select pr.id, count(*) as cnt from pull_requests pr, pull_request_commits prc where prc.pull_request_id = pr.id group by pr.id")
-pr_stats_num_commit <- fetch(res, n = -1)
 
 # Commiter raise due to pull requests
 # res <- dbSendQuery(con, "select p.id from projects p, users u, commits c, project_commits pc where p.forked_from is null and u.id = p.owner_id and pc.commit_id = c.id and pc.project_id = p.id  and exists (select c.id from project_commits pc, commits c where year(c.created_at) = 2012 and month (c.created_at)=12 and pc.commit_id = c.id and pc.project_id = p.id )  and exists (select c.id from project_commits pc, commits c where year(c.created_at) < 2007 and pc.commit_id = c.id and pc.project_id = p.id )  and exists (select pr.id from pull_requests pr, pull_request_history prh where prh.pull_request_id = pr.id and pr.base_repo_id = p.id and prh.action='opened' and year(prh.created_at) = 2010)  group by p.id having count(c.id) > 1000 order by p.created_at asc limit 200")
@@ -145,3 +137,20 @@ store.pdf(ggplot(devs_per_month, aes(x = month, y = num_authors, colour = projec
         ylim(0, 22) + 
         xlab("Date") + 
         ylab("Number of active committers per month"), plot.location,"num-commiters-after-pr.pdf")
+
+res <- dbSendQuery(con, "select a.project as project, avg(a.num_authors) as avg_after, avg(b.num_authors) as avg_before from (select p.id as project, last_day(c.created_at) as timestamp_after_pr, count(distinct c.author_id) as num_authors  from commits c, project_commits pc, projects p  where pc.commit_id = c.id and pc.project_id = p.id  and exists(select pc1.* from project_commits pc1, commits c1 where pc1.commit_id = c1.id and year(c1.created_at) = 2010 and month(c1.created_at) < 9 and pc1.project_id = p.id)   and c.created_at between makedate(2010, 213) and makedate(2011, 244) and p.forked_from is null group by p.id, month(c.created_at), year(c.created_at)) as a,  (select p.id as project, last_day(c.created_at) as timestamp_before_pr, count(distinct c.author_id) as num_authors from commits c, project_commits pc, projects p  where pc.commit_id = c.id and pc.project_id = p.id and exists(select pc1.* from project_commits pc1, commits c1 where pc1.commit_id = c1.id and year(c1.created_at) = 2010 and month(c1.created_at) < 9 and pc1.project_id = p.id) and c.created_at between makedate(2009, 244) and makedate(2010, 212) and p.forked_from is null group by p.id, month(c.created_at), year(c.created_at)) as b where a.project = b.project and exists(select pr.id from pull_requests pr, pull_request_history prh where pr.base_repo_id = a.project and prh.pull_request_id = pr.id and prh.created_at between makedate(2010, 213) and makedate(2011, 244)) group by a.project")
+mean_commiters_per_month <- fetch(res, n = -1)
+a <- subset(mean_commiters_per_month, avg_after > 2)
+w <- wilcox.test(a$avg_after, a$avg_before, paired = TRUE)
+
+cliffs.d <- function(x, y) {
+  mean(rowMeans(sign(outer(x, y, FUN="-"))))
+}
+print(sprintf("Wilcox: mean devs before/after pullreqs: n = %d, V = %f, p < %f", nrow(a), w$statistic, w$p.value))
+print(sprintf("Cliff's delta on number of avg number of committers before/after pullreqs: %f", cliffs.d(a$avg_after, a$avg_before)))
+
+# Drive-by commits pull reqs
+res <- dbSendQuery(con, "select count(*) as cnt from pull_requests pr, pull_request_history prh where prh.action = 'opened' and prh.pull_request_id = pr.id and year(prh.created_at) = 2012 and not exists (select c.author_id from commits c, project_commits pc where pc.project_id = pr.base_repo_id and c.created_at < prh.created_at and c.author_id = pr.user_id) and 1 = (select count(*) from pull_request_commits prc where prc.pull_request_id = pr.id)")
+drive_by_pr <- fetch(res, n = -1)$cnt
+print(sprintf("Perc drive by pull requests: %f", (drive_by_pr/opened_pullreqs) * 100))
+print(sprintf("Perc one pull req repos: %f", (drive_by_pr/forked_repos) * 100))    

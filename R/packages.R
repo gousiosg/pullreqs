@@ -7,4 +7,4 @@ if (!"pls" %in% installed.packages()) install.packages("pls")
 if (!"Hmisc" %in% installed.packages()) install.packages("Hmisc")
 if (!"reshape" %in% installed.packages()) install.packages("reshape")
 if (!"RMySQL" %in% installed.packages()) install.packages("RMySQL")
-
+if (!"orddom" %in% installed.packages()) install.packages("orddom")
