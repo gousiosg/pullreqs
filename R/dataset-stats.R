@@ -1,3 +1,5 @@
+rm(list = ls(all = TRUE))
+
 source(file = "R/packages.R")
 source(file = "R/utils.R")
 source(file = "R/variables.R")
@@ -143,9 +145,6 @@ mean_commiters_per_month <- fetch(res, n = -1)
 a <- subset(mean_commiters_per_month, avg_after > 2)
 w <- wilcox.test(a$avg_after, a$avg_before, paired = TRUE)
 
-cliffs.d <- function(x, y) {
-  mean(rowMeans(sign(outer(x, y, FUN="-"))))
-}
 print(sprintf("Wilcox: mean devs before/after pullreqs: n = %d, V = %f, p < %f", nrow(a), w$statistic, w$p.value))
 print(sprintf("Cliff's delta on number of avg number of committers before/after pullreqs: %f", cliffs.d(a$avg_after, a$avg_before)))
 

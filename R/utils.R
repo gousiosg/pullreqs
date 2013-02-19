@@ -80,6 +80,11 @@ column.contains.na <- function(df) {
   for (b in colnames(df)){print(sprintf("%s %s", b, all(!is.na(a.train[[b]]))))}
 }
 
+# Simple method to calculate Cliff's delta
+cliffs.d <- function(x, y) {
+  mean(rowMeans(sign(outer(x, y, FUN="-"))))
+}
+
 # Saving plots as PDFs
 
 # Store multiple plots on the same PDF

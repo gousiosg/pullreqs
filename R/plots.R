@@ -1,5 +1,4 @@
 library(ggplot2)
-library(igraph)
 
 source(file = "R/utils.R")
 
@@ -17,7 +16,7 @@ plot.percentage.merged <- function(dfs)
   
   ggplot(a[with(a, order(status, -value)),], aes(x= project, y = value, fill = status)) + 
     geom_bar(stat="identity", colour="white") +
-    theme(axis.text.x=element_text(angle=90, hjust = 1)) +
+    theme(axis.text.x=element_blank()) +
     ylab("Percentage") + 
     xlab("Project")
 }
@@ -56,6 +55,7 @@ plot.accept.lifetime.boxplot <- function(dfs, projects)
   ggplot(data.merged(dfs, projects, 'lifetime_minutes'), aes(factor(name), lifetime)) +
     geom_boxplot() +
     ylim(0, 3000) +
+    theme(axis.text.x=element_blank()) +
     xlab("Project") +
     ylab("Lifetime (minutes)")
 }

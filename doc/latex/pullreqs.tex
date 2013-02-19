@@ -129,19 +129,19 @@ Using the GHTorrent dataset, we explore the use of pull requests among projects
 in Github to answer {\sc rq1}. Based on our observations, we develop a theory
 of pull request adoption.
 To answer {\sc rq2} and {\sc rq3}, we examined 100 Ruby, Java and Scala projects,
-(pull requests), and identified, using machine
-learning tools, common factors that affect pull request lifetime and merging. We
-then applied the extracted models on another group of 50 randomly selected
-projects in order to validate them. The results show that it is
-possible to predict, with a high accuracy, whether a pull request will be
-merged.
+(46,023 pull requests), and identified, using machine
+learning tools, common factors that affect pull request lifetime and merging.
+The results show that it is
+possible to predict, with a high accuracy (>90\%), whether a pull request will be
+merged. Using the same features, it is also possible, with an accuracy of 70\%, to predict whether a pull request will take a ``long'' or ``short'' time to
+be merged. Both results 
 
 In the following section, we briefly describe the pull-based development model
 and present an overview of how pull based development works on Github.
 Then, we examine pull requests from various view points and develop
-a theory of how pull requests are processed. In Section~\ref{sec:accrej},
-we test the developed theory against statistical models and discuss our
-findings in Section~\ref{sec:discussion}.
+a theoretical foundation of how pull requests help developers collaborate. 
+
+
 
 \section{Pull-based development}
 
@@ -398,6 +398,7 @@ reputation has an impact on whether a
 
 \section{Data Preparation}
 
+\subsection{Case Selection}
 In the previous section, we defined pull based development, and presented an
 overview of how it works across all projects on Github. While an overview of the
 activity in 2012 can be safely extracted from the dataset, several limitations
@@ -408,16 +409,13 @@ collected. Projects worth analyzing have a history longer than a year, so it is
 important to retrieve all information available during the project's life. To
 make the data collection, and subsequent analysis, practical, we restricted our
 input data to two datasets, a \textsf{handpicked} and a \textsf{random} one. 
-Both datasets contain 50 projects of different sizes each. The 
-\textsf{handpicked} dataset was created by browsing 
-
-To build the datasets, we set forth the following requirements when selecting
-projects to include:
+Both datasets contain 50 projects of different sizes each. 
+To build the datasets, we used the following criteria when selecting projects to include:
 
 \begin{itemize}
 
-  \item Adequate number of pull requests. For the \textsf{handpicked} dataset,
-    we wanted to 
+  \item Projects should have more than 10 pull requests in total. This is
+    to ensure that projects are indeed using pull requests and.
 
   \item Projects should include tests. To measure the effect of testing on pull
     request acceptance, we could only use projects that include tests which we
@@ -425,58 +423,65 @@ projects to include:
     layout in the Ruby (Gem), Java and Scala (both Maven) language ecosystems,
     so our project selection was limited to those languages. 
 
-  \item  
+  \item Projects should have a committer count larger than the main team member
+    count, to ensure that the project is open to external contributions and that
+    pull requests are indeed used by developers outside the project.
 
 \end{itemize}
 
-The \textsf{handpicked} dataset was constructed by manually browsing Github
-and selecting projects with the above characteristics.  
+The \textsf{handpicked} dataset was created by browsing Github's top projects
+per language for projects that met the criteria. The \textsf{random} dataset
+was created by performing a random selection in the GHTorrent database. In
+cases were the randomly selected projects did not match the criteria (existence
+of tests could not be evaluated automatically) or overlapped with the
+\textsf{handpicked} dataset, the non-matching projects where replaced with
+other random projects. 
 
-\section{Characteristics of pull requests}
-In this section, we focus on the characteristics of pull requests. 
+After selection, the datasets where merged, the full
+history (including pull requests, issues and commits) of the included projects
+was downloaded and features were extracted through GHTorrent database
+queries and analysis of each project's Git directory.
+The latter was required to extract information regarding the testing 
+infrastructure of the project.
+To compensate for pull requests that are merged using Git facilities, 
+we examined whether at least one of the commits associated with the pull
+request appears in the list of commits of the target project. In case
+commit squashing or patch-based merge has occured, the merge could not
+be detected, therefore the pull request is marked as unmerged.
+In our final data files,
+each data point corresponded to a single pull request.
 
-\subsection{Lifetime of pull requests}
+\subsection{Feature Selection}
 
-\begin{figure*}
-\centering
-\subfigure[Percentage of pull requests that have been merged before being closed]{
-  \includegraphics[scale=0.4]{perc-merged.pdf} 
-  \label{fig:perc-merged}
-}
-\subfigure[Frequency distribution of lifetime for merged pull requests]{
-%\includegraphics[scale=0.3]{lifetime-freq.pdf}
-\label{fig:lifetime-freq}
-}
-\subfigure[Lifetime statistics for merged pull requests]{
-\includegraphics[scale=0.3]{lifetime-boxplot.pdf}
-\label{fig:lifetime-boxplot}
-}
-\caption{Plots of pull request life time.}
-\end{figure*}
+For each pull request, we collected the features indicated in
+Table~\ref{tab:features}. The features are split among three
+categories:
 
+\begin{description}
 
-An important observation is that there are several pull requests whose
-lifetime is only limited to a ver
+  \item[Pull request impact] features attempt to quantify the impact of
+    the pull request on
 
-\subsection{Sizes of pull requests}
+  \item[Project Characteristics] attempt to quantify how receptive to
+    pull requests the project is at the time the pull request was done.
 
-Pull requests contain 
+  \item[Developer] 
 
-\subsection{Discussion and Code review}
+\end{description}
 
-Once a pull request has been submitted, it is open for discussion. 
-
-\subsection{Team size}
-
-\subsection{Testing}
-
-\section{Acceptance and rejection}
-\label{sec:accrej}
+To check whether the selected features are independent enough, and therefore
+have strong explanatory power, we conducted a pair-wise correlation analysis
+using the Spearman rank correlation ($\rho$) metric accross all features.  The
+result can be seen in Figure~\ref{fig:crosscor}.  In general, very few
+variables are correlated at a value $\rho > 0.2$, while only two,
+\texttt{src\_churn} and \texttt{files\_changed}, are strongly correlated at
+$\rho = 0.71$. While the correlation is strong, it is not definite and therefore
+we do not remove either feature from the dataset. All results are statistically significant ($n = 46,093, p < 0.001$).
 
 \begin{table*}
   \begin{small}
   \centering
-  \begin{tabular}{rp{25em}}
+  \begin{tabular}{rp{40em}}
     \hline
     \bf{Feature} & \bf{Description and Justification}\\
     \hline
@@ -485,57 +490,55 @@ Once a pull request has been submitted, it is open for discussion.
     \texttt{num\_commits} & Number of commits in the pull request. A bigger
     pull request will be slower to examine and therefore to merge.\\
     
-    \texttt{churn} & Number of lines changed (added + deleted) by the pull request. The more lines changed, the longer a pull request will take to be
+    \texttt{src\_churn} & Number of lines changed (added + deleted) by the pull
+    request. The more lines changed, the longer a pull request will take to be
     reviewed.\\
 
+    \texttt{test\_churn} & Number of test lines in pull request. Pull requests
+    that include tests should be easier to merge, as testing would increase
+    confidence for merger.\\
+    
     \texttt{files\_changed} & Number of files touched by the pull request. An
     indication of the impact of the pull request.\\
     
-    \texttt{num\_commit\_comments} & Number of code review comments. More pull
-    code review comments may indicate a rigorous process, therefore slowing down
-    acceptance.\\
-    
-    \texttt{num\_issue\_comments} & Pull request discussion comments.\\
+    \texttt{num\_comments} & The total number of comments (discussion and code
+    review). More pull code review comments may indicate a rigorous process,
+    therefore slowing down acceptance.\\
 
     \multicolumn{2}{l}{\bf{Project Characteristics}}\\
     
     \texttt{sloc} & Executable lines of code at pull request merge time. The
     bigger the project, the more difficult would be to assess the impact of
-    a pull request\\
+    a pull request. \\
 
     \texttt{team\_size} & Number of active core team members during the last
-    month prior the pull request merge. A big team will be faster to process a
+    3 months prior the pull request creation. A big team will be faster to process a
     pull request as each team member will have less work load to handle and
     will be more specialized.\\
 
-    \texttt{total\_commits\_last\_month} & Number of commits in the . Overall project activity indicator.\\
-    
-    \texttt{main\_team\_commits\_last\_month} & Activity of the main team
-    members. An active main team will triage pull requests faster.\\
+    \texttt{perc\_external\_contribs} & The ratio of commits from external
+    members over core team members in the last 3 months prior to pull request
+    creation. A higher ratio indicates a more open
+    process, which may lead to more accepted pull requests.\\
 
-    \texttt{commits\_on\_files\_touched} & Activity on the files that are
-    touched by the pull request. If the pull request touches files in a hotspot,
-    it will be merged faster.\\
-    
-    \multicolumn{2}{l}{\bf{Effect of Testing}}\\
-
-    \texttt{test\_churn} & Number of test lines in pull request. \\
-
-    \texttt{asserts\_per\_1000\_lines} & A proxy for test coverage. The
-    more well tested a project is, the easier and faster it will be to accept 
-    a pull request.\\
-    
+    \texttt{commits\_on\_files\_touched} & Number of total commits on files
+    touched by the pull request 3 months before the pull request creation time.
+    If the pull request touches files in a hotspot, it will be merged faster.\\
+ 
     \multicolumn{2}{l}{\bf{Developer}}\\
     
     \texttt{requester} & The person that initiated the pull request.\\
 
-    \texttt{num\_pullreqs} & Number of pull requests submitted by a specific
+    \texttt{prev\_pullreqs} & Number of pull requests submitted by a specific
     developer, prior to the examined pull request. The more pull requests, the
     better the developer is known to the project.\\
 
-    \texttt{is\_main\_team\_member} & Whether the developer belongs to the
+    \texttt{requester\_succ\_rate} & The percentage of the developer's pull requests that have been merged up to the creation of the examined pull
+    request. A high success rate indicates a developer trusted by the project.\\
+
+    \texttt{main\_team\_member} & Whether the developer belongs to the
     main repository team. Pull requests from main team members should be
-    faster to accept and merge.\\
+    faster to accept and merge due to increased confidence.\\
     \hline
   \end{tabular}
   \caption{Selected features}
@@ -543,8 +546,7 @@ Once a pull request has been submitted, it is open for discussion.
   \end{small}
 \end{table*}
 
-
-\begin{table*}[htb] \centering 
+\begin{table*} \centering 
   \caption{Descriptive statistics of the examined dataset} 
 \footnotesize 
 \begin{tabular}{@{\extracolsep{5pt}}l c c c c c c } 
@@ -556,7 +558,6 @@ lifetime\_minutes & 46,093 & 15,541.840 & 57,947.680 & 0 & 806 & 1,211,940 \\
 mergetime\_minutes & 28,393 & 6,840.924 & 29,358.100 & 0 & 363 & 809,307 \\ 
 team\_size & 46,093 & 30.494 & 38.646 & 0 & 14 & 178 \\ 
 num\_commits & 46,093 & 4.528 & 21.276 & 0 & 1 & 1,379 \\ 
-num\_comments & 46,093 & 2.286 & 5.446 & 0 & 0 & 192 \\ 
 files\_changed & 46,093 & 42.657 & 341.695 & 0 & 3 & 18,450 \\ 
 perc\_external\_contribs & 46,093 & 46.042 & 27.256 & 0 & 45 & 100 \\ 
 sloc & 46,093 & 97,443.830 & 139,809.200 & 26 & 43,867 & 730,109 \\ 
@@ -564,14 +565,100 @@ src\_churn & 46,093 & 631.171 & 4,577.060 & 0 & 13 & 301,094 \\
 test\_churn & 46,093 & 171.579 & 1,360.882 & 0 & 0 & 85,535 \\ 
 commits\_on\_files\_touched & 46,093 & 92.025 & 675.993 & 0 & 1 & 35,806 \\ 
 test\_lines\_per\_1000\_lines & 46,093 & 804.886 & 827.935 & 0.000 & 568.358 & 5,357.608 \\ 
-watchers & 46,093 & 3,258.588 & 6,196.100 & 2 & 873 & 52,065 \\ 
 prev\_pullreqs & 46,093 & 35.299 & 56.809 & 0 & 10 & 405 \\ 
 requester\_succ\_rate & 46,093 & 0.479 & 0.407 & 0.000 & 0.550 & 1.000 \\ 
-followers & 46,093 & 25.940 & 121.731 & 0 & 7 & 18,914 \\ 
 \hline \\[-1.8ex] 
 \normalsize 
 \end{tabular} 
 \end{table*} 
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[scale=0.6]{cross-cor.pdf}
+  \end{center}
+  \caption{Cross correlation matrix (Spearman) for selected features. The more elliptical a point is, the strongest the correlation. A right slant indicates
+  a positive correlation.}
+  \label{fig:crosscor}
+\end{figure}
+
+\subsection{Pull Request Characteristics}
+
+\paragraph*{Lifetime of pull requests}
+
+Pull requests 
+
+\begin{figure*}
+\centering
+\subfigure[Percentage of pull requests that have been merged per project.
+Project names are ommitted for clarity]{
+  \includegraphics[scale=0.4]{perc-merged.pdf} 
+  \label{fig:perc-merged}
+}
+\subfigure[Time to merge pull requests]{
+\includegraphics[scale=0.4]{pr-lifetime-hist.pdf}
+\label{fig:pull-req-merge-time}
+}
+\subfigure[Size of pull request patch]{
+\includegraphics[scale=0.4]{pr-size-hist.pdf}
+\label{fig:pull-req-patch}
+}
+\subfigure[Number of files changed by pull request]{
+\includegraphics[scale=0.4]{pr-size-files-changed-hist.pdf}
+\label{fig:pull-req-files}
+}
+\subfigure[Number of comments]{
+\includegraphics[scale=0.4]{pr-num-comments-hist.pdf}
+\label{fig:pull-num-comments}
+}
+\subfigure[Merges of pull requests for internal vs external team members.]{
+\includegraphics[scale=0.4]{merge-internal-external.pdf}
+\label{fig:lifetime-boxplot}
+}
+\caption{Dataset characteristics}
+\end{figure*}
+
+
+An important observation is that there are several pull requests whose
+lifetime is only limited to a ver
+
+\paragraph*{Sizes of pull requests}
+
+Pull requests contain 
+
+\paragraph*{Discussion and Code review}
+
+Once a pull request has been submitted, it is open for discussion. 
+
+\paragraph*{Team size}
+
+
+
+
+external vs internal $n1 = 15091, n2 = 13302, V = 87667255, p < 0.001$
+
+
+
+\paragraph*{Testing}
+
+\section{Acceptance and rejection}
+\label{sec:accrej}
+
+
+
+
+\begin{figure*}
+\centering
+\subfigure {
+  \includegraphics[scale=0.4]{varimp-merge-decision-40000-50.pdf} 
+  \label{fig:varimp-merge-decision}
+}
+\subfigure{
+\includegraphics[scale=0.4]{varimp-merge-time-40000-50.pdf}
+  \label{fig:varimp-merge-time}
+}
+\caption{Random forest feature importance for predicting merge decision (a) and merge time (b)}
+\end{figure*}
+
 
 \section{Discussion}
 \label{sec:discussion}

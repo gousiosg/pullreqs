@@ -1,10 +1,13 @@
+rm(list = ls(all = TRUE))
+
+source(file = "R/multiplots.R")
 source(file = "R/variables.R")
 source(file = "R/utils.R")
-source(file = "R/multiplots.R")
-source(file = "R/plots.R")
 
 library(ggplot2)
 library(stargazer)
+library(ellipse)
+library(scales)
 
 print(sprintf("Current directory is: %s", getwd()))
 
@@ -51,9 +54,25 @@ dfs <- addcol.merged(dfs)
 # Merge all dataframes in a single dataframe
 all <- merge.dataframes(dfs)
 
-# Descriptive statistics accross all projects
-stargazer(all, median = TRUE, caption = "Descriptive statistics of the examined dataset")
+# Columns used in building models
+columns = c("team_size", "num_commits", "files_changed", 
+            "perc_external_contribs", "sloc", "src_churn", "test_churn", 
+            "commits_on_files_touched", "test_lines_per_1000_lines", 
+            "prev_pullreqs", "requester_succ_rate")
 
+merged <- subset(all, merged == TRUE)
+used <- subset(all, select=columns)
+
+# Descriptive statistics accross all projects
+stargazer(used, median = TRUE, caption = "Descriptive statistics of the examined dataset")
+
+# Cross correlation matrix accross all model variables
+ctab <- cor(used, method = "spearman")
+colorfun <- colorRamp(c("#ff0000","white","#3366CC"), space="Lab")
+store.pdf(plotcorr(ctab, 
+                   col=rgb(colorfun((ctab+1)/2), maxColorValue=255), 
+                   outline = FALSE), plot.location, 
+          "cross-cor.pdf")
 
 # Box plot of merge time between main and external team members
 main.team.mergetimes <- subset(all, !is.na(merged_at) & main_team_member == "true", c(mergetime_minutes))
@@ -63,30 +82,44 @@ main.team.mergetimes$team <- "main"
 ext.team.mergetimes$team <- "external"
 teams <- rbind(main.team.mergetimes, ext.team.mergetimes)
 teams$team <- as.factor(teams$team)
-ggplot(teams, aes(x = team, y = mergetime_minutes)) + 
-  geom_boxplot()  + scale_y_log10() + 
+p <- ggplot(teams, aes(x = team, y = mergetime_minutes)) + 
+  geom_boxplot()  + scale_y_log10() + xlab("Team") + 
+  ylab("Time to merge in minutes (log))")
+store.pdf(p, plot.location, "merge-internal-external.pdf")
 
 # Rank correlation to see whether the populations differ significantly
 mergetimes <- list(main = main.team.mergetimes$mergetime_minutes, ext = ext.team.mergetimes$mergetime_minutes)
-test <- wilcox.test(x = mergetimes$main, y = mergetimes$ext, paired = FALSE)
-printf("Merges by ")
+w <- wilcox.test(x = mergetimes$main, y = mergetimes$ext, paired = FALSE)
+print(sprintf("Wilcox: pullreq merge main/external team: n1 = %d, n2 = %d V = %f, p < %f", length(mergetimes$main), length(mergetimes$ext), w$statistic, w$p.value))
+print(sprintf("Cliff's delta pullreq merge main/external team :%f", cliffs.d(mergetimes$main, mergetimes$ext)))
 
-
-
+# Percentage of merged vs unmerged pull requests accross projects
 store.pdf(plot.percentage.merged(dfs), plot.location, "perc-merged.pdf")
 
-projects = c("junit", "puppet", "netty", 
-             "akka", "chef", "jekyll", "jenkins", "libgit")
-store.pdf(plot.accept.lifetime.freq(dfs, projects), plot.location, "lifetime-freq.pdf")
-store.pdf(plot.accept.lifetime.boxplot(dfs, projects), plot.location, "lifetime-boxplot.pdf")
+# Time to merge pull request box plots histogram
+p <- ggplot(merged, aes(x = mergetime_minutes)) +  
+  geom_histogram() + scale_x_log10(labels=comma) + xlab("Merge time in minutes (log)") +
+  ylab("Number of pull requests")
+store.pdf(p, plot.location, "pr-lifetime-hist.pdf")
 
-projects = c("akka", "scala", "junit", "scala-ide", "scalaz")
-store.pdf(plot.accept.lifetime.freq(dfs, projects), plot.location, "lifetime-scala-freq.pdf")
+# Size of pull request patch 
+all$size <- all$src_churn + all$test_churn
+p <- ggplot(all, aes(x = size)) +  
+  geom_histogram() + scale_x_log10(labels=comma) + 
+  xlab("Lines of code changed in pull request (log)") +
+  ylab("Number of pull requests")
+store.pdf(p, plot.location, "pr-size-hist.pdf")
 
-# Plot cross-correlation plots for variables in datafiles
-columns = c("team_size", "num_commits", "num_comments", "files_changed", "perc_external_contribs", "sloc", "src_churn",
-            "test_churn", "commits_on_files_touched", "test_lines_per_1000_lines", "prev_pullreqs", "requester_succ_rate",
-            "watchers", "followers")
-plot.crosscor(subset(all, select=columns), "Cross correlation among measured variables")
+# Size of pull request - files touched
+p <- ggplot(all, aes(x = files_changed)) +  
+  geom_histogram(binwidth = 0.2) + scale_x_log10(labels=comma) + 
+  xlab("Number of files changed by the pull request (log)") +
+  ylab("Number of pull requests")
+store.pdf(p, plot.location, "pr-size-files-changed-hist.pdf")
 
-store.multi(plot.multicor.all_dataframes, dfs, colnames(dfs[[1]]), "multicorrelations")
+# Size of pull request comments
+p <- ggplot(all, aes(x = num_comments)) +  
+  geom_histogram(binwidth = 0.2) + scale_x_log10(labels=comma) + 
+  xlab("Number of code review and discussion comments (log)") +
+  ylab("Number of pull requests")
+store.pdf(p, plot.location, "pr-num-comments.pdf")
