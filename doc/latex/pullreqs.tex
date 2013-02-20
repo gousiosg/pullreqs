@@ -446,7 +446,7 @@ infrastructure of the project.
 To compensate for pull requests that are merged using Git facilities, 
 we examined whether at least one of the commits associated with the pull
 request appears in the list of commits of the target project. In case
-commit squashing or patch-based merge has occured, the merge could not
+commit squashing or patch-based merge has occurred, the merge could not
 be detected, therefore the pull request is marked as unmerged.
 In our final data files,
 each data point corresponded to a single pull request.
@@ -454,26 +454,55 @@ each data point corresponded to a single pull request.
 \subsection{Feature Selection}
 
 For each pull request, we collected the features indicated in
-Table~\ref{tab:features}. The features are split among three
-categories:
+Table~\ref{tab:features}.  The feature selection was based on prior work in the
+areas of patch submission and
+acceptance~\cite{Nagap05,Bird07a,Weiss08,Jeong09}, bug triaging~\cite{} and
+also on the semi-structured interviews of Github developers in Pham et
+al.~\cite{Pham13}.  All features that contain a temporal dimension in their
+calculation (e.g.  \texttt{team\_size} or \texttt{commits\_on\_files\_touched})
+are calculated in a time window of $t - 3$ months, where $t$ is the time the
+pull request has been submitted.  The presented list of 13 features has been
+already pre-processed; the initial selection included more a more fine grained
+list of 23 features, which we trimmed through cross-correlation analysis. For
+example, we removed the features \texttt{asserts\_per\_kloc} and
+\texttt{test\_cases\_per\_kloc} as they where very strongly correlated ($\rho >
+0.92$) with the included \texttt{test\_lines\_per\_kloc} feature.  The features
+are split among three categories:
 
 \begin{description}
 
-  \item[Pull request impact] features attempt to quantify the impact of
-    the pull request on
+  \item[Pull request impact] features attempt to quantify the impact of the
+    pull request on the affected code base. When examining external code
+    contributions, the size of the patch is affecting both acceptance and
+    acceptance time~\cite{Weiss08}. There are various metrics to determine the
+    size of a patch that have been used by researchers: code
+    churn~\cite{Nagap05, Ratzi07}, changed files~\cite{Nagap05} and number of
+    commits.\todo{Refs} In the particular case of pull requests, developers
+    reported that tests in a pull request increases their confidence to merge
+    it~\cite{Pham13}. To investigate this, we split the churn feature to two
+    features, namely \texttt{src\_churn} and \texttt{test\_churn}.
 
-  \item[Project Characteristics] attempt to quantify how receptive to
-    pull requests the project is at the time the pull request was done.
+  \item[Project characteristics] features quantify how receptive to pull
+    requests is the project at the time the pull request was done.
+    If the project's process is open to external contributions, 
+    Testing 
 
-  \item[Developer] 
+  \item[Developer] based features quantify the influence that the person that
+    created the pull request has on the decision to merge a pull request and
+    the time to process it. In particular, the developer that created the patch
+    has been shown to influence the patch acceptance decision~\cite{Jeong09}. To
+    abstract the results across projects with different developers, we also
+    include features that quantify the developer's track record, namely then
+    number of previous pull requests and their acceptance rate; the former has
+    been indicated as a strong indicator of pull request quality~\cite{Pham13}.
 
 \end{description}
 
 To check whether the selected features are independent enough, and therefore
 have strong explanatory power, we conducted a pair-wise correlation analysis
-using the Spearman rank correlation ($\rho$) metric accross all features.  The
-result can be seen in Figure~\ref{fig:crosscor}.  In general, very few
-variables are correlated at a value $\rho > 0.2$, while only two,
+using the Spearman rank correlation ($\rho$) metric across all features.  The
+result can be seen in Figure~\ref{fig:crosscor}. In general, very few
+features are correlated at a value $\rho > 0.2$, while only two,
 \texttt{src\_churn} and \texttt{files\_changed}, are strongly correlated at
 $\rho = 0.71$. While the correlation is strong, it is not definite and therefore
 we do not remove either feature from the dataset. All results are statistically significant ($n = 46,093, p < 0.001$).
@@ -494,9 +523,9 @@ we do not remove either feature from the dataset. All results are statistically 
     request. The more lines changed, the longer a pull request will take to be
     reviewed.\\
 
-    \texttt{test\_churn} & Number of test lines in pull request. Pull requests
+    \texttt{test\_churn} & Number of test lines changed in the pull request. Pull requests
     that include tests should be easier to merge, as testing would increase
-    confidence for merger.\\
+    confidence for the merger.\\
     
     \texttt{files\_changed} & Number of files touched by the pull request. An
     indication of the impact of the pull request.\\
@@ -525,10 +554,12 @@ we do not remove either feature from the dataset. All results are statistically 
     touched by the pull request 3 months before the pull request creation time.
     If the pull request touches files in a hotspot, it will be merged faster.\\
  
+    \texttt{tests\_per\_1000\_lines} & A proxy for the project's test
+    coverage. The more well tested a project is, the faster a pull request
+    could be merged, as applying it and testing its impact would be faster. \\
+
     \multicolumn{2}{l}{\bf{Developer}}\\
     
-    \texttt{requester} & The person that initiated the pull request.\\
-
     \texttt{prev\_pullreqs} & Number of pull requests submitted by a specific
     developer, prior to the examined pull request. The more pull requests, the
     better the developer is known to the project.\\
@@ -541,7 +572,7 @@ we do not remove either feature from the dataset. All results are statistically 
     faster to accept and merge due to increased confidence.\\
     \hline
   \end{tabular}
-  \caption{Selected features}
+  \caption{Selected features and justification}
   \label{tab:features}
   \end{small}
 \end{table*}
@@ -581,16 +612,17 @@ requester\_succ\_rate & 46,093 & 0.479 & 0.407 & 0.000 & 0.550 & 1.000 \\
   \label{fig:crosscor}
 \end{figure}
 
-\subsection{Pull Request Characteristics}
+\subsection{Dataset Characteristics}
+
 
 \paragraph*{Lifetime of pull requests}
 
-Pull requests 
+Pull requests either get merged or 
 
 \begin{figure*}
 \centering
 \subfigure[Percentage of pull requests that have been merged per project.
-Project names are ommitted for clarity]{
+Project names are omitted for clarity]{
   \includegraphics[scale=0.4]{perc-merged.pdf} 
   \label{fig:perc-merged}
 }
@@ -619,7 +651,7 @@ Project names are ommitted for clarity]{
 
 
 An important observation is that there are several pull requests whose
-lifetime is only limited to a ver
+lifetime is limited to less that a minute. 
 
 \paragraph*{Sizes of pull requests}
 
@@ -629,22 +661,87 @@ Pull requests contain
 
 Once a pull request has been submitted, it is open for discussion. 
 
+
 \paragraph*{Team size}
 
-
-
-
+An important question that emerges is whether pull 
 external vs internal $n1 = 15091, n2 = 13302, V = 87667255, p < 0.001$
-
-
-
-\paragraph*{Testing}
 
 \section{Acceptance and rejection}
 \label{sec:accrej}
 
+To answer both our research questions, we conducted a set of prediction
+experiments using the dataset presented in the previous section.
+The purpose of the experiments was not to create accurate prediction
+models, but rather to evaluate the importance of each feature
+in the pull request handling process. Therefore, in our discussion, 
+we skip some details on the configuration of the various
+prediction algorithms we used.
 
+Prior to running the classification algorithms, we labeled each data point with
+a binary attribute; in the case of the merge decision problem, the attribute
+signified whether the pull request has been merged. For the merge time problem,
+we first filtered out pull requests that have not been merged and then split
+the remaining data points in two bins, slow and fast, using the mean time to
+merge (6613 minutes, as calculated above) as the split point. The dataset
+sizes were 35,466 and 26,779 points for the merge decision and merge time
+classification task, respectively.
 
+At a high level, the process to retrieve the dominant features for both
+problems consisted of two steps: i) we run each dataset through 4 well known
+classification algorithms, namely Random Forests (\texttt{randomforest}),
+Support Vector Machines (\texttt{svm}), Binary Logistic Regression
+(\texttt{binlogregr}) and Na\"ive Bayes (\texttt{naivebayes}), ii) we select
+the best classifier and apply a classifier specific process to extract the
+feature importance. In all cases, we used the full set of features and
+trained the classifier against the applicable binary attribute.
+
+To select the appropriate classification algorithm, we run a 10-fold random
+selection cross-validation and aggregated the mean values for each
+classification metric. At each iteration, the algorithm would randomly sample
+10,000 data points from the whole dataset, train a classifier with 90\% percent
+of the input and use it to predict the remaining 10\%.  The 10-fold run results
+also allowed us to evaluate the metric stability across runs.  To evaluate the
+classification performance, we used the Accuracy ({\sc acc}) and Area Under the
+receiver operating characteristic Curve ({\sc auc}) metrics.  We them as
+opposed to the more popular Precision ({\sc prec}) and Recall ({\sc rec}) ones,
+following advice in reference~\cite{Lessm08}. We did not perform any additional
+tuning to the classification algorithms. The implementations of the R
+statistics language were used for running the experiments.
+
+\begin{table}
+  \centering
+  \begin{tabular}{lcccc}
+    \hline
+    {\bf classifier} & {\sc auc} & {\sc acc} & {\sc prec} & {\sc rec} \\
+    \hline
+    \multicolumn{4}{l}{\textsf{merge time task}($n = 26,779$)} \\
+    binlogregr    & 0.60 & 0.55 & 0.56 & 0.57  \\
+    naivebayes    & 0.58 & 0.54 & 0.54 & 0.57  \\
+    randomforest  & 0.73 & 0.61 & 0.65 & 0.70  \\
+    svm           & 0.54 & 0.49 & 0.45 & 0.45  \\
+    \hline
+    \multicolumn{4}{l}{\textsf{merge decision task}($n = 35,466$)} \\
+    binlogregr    & 0.73 & 0.63 & 0.87 & 0.58  \\
+    naivebayes    & 0.69 & 0.61 & 0.85 & 0.57  \\
+    randomforest  & 0.94 & 0.87 & 0.93 & 0.93  \\
+    svm           & 0.52 & 0.48 & 0.72 & 0.48  \\
+    \hline
+  \end{tabular}
+  \caption{Classifier performance for the merge decision and merge time
+  classification tasks. The results are means of 10-fold random selection
+  cross validation (sample size 10,000), with 90\% train and 10\% test data.}
+  \label{tab:classif-perf}
+\end{table}
+
+Based on the results as presented in Table~\ref{tab:classif-perf},
+we selected the \texttt{randomforest} classification algorithm for
+both our experiments. For the \textsf{mergetime} task, \texttt{randomforest}
+achieved an {\sc auc} of 0.73, with a prior probability of 50\%. For 
+the \textsf{mergedecision} task, the prior probability was 74\% which
+allowed the algorithm to achieve near perfect scores. In both cases,
+the stability of the {\sc auc} metric across folds was good 
+($\sigma_{auc-mergetime} = 0.019$, ($\sigma_{auc-mergedecision} = 0.008$).
 
 \begin{figure*}
 \centering
@@ -657,7 +754,18 @@ external vs internal $n1 = 15091, n2 = 13302, V = 87667255, p < 0.001$
   \label{fig:varimp-merge-time}
 }
 \caption{Random forest feature importance for predicting merge decision (a) and merge time (b)}
+\label{fig:varimp}
 \end{figure*}
+
+To extract the features that are important for each classification task, we
+used the process suggested in reference~\cite{Genue10}. Specifically, we run
+the algorithm 50 times on the full dataset for each experiment, using a large
+number of generated trees (2000) and trying 5 random variables per split. We
+then used the mean across 50 runs of the  Mean Decrease in Accuracy metric, as
+reported by the {\sc r} implementation of the random forest algorithm, to
+evaluate the importance of each feature. The results can be seen in
+Figure~\ref{fig:varimp}.
+
 
 
 \section{Discussion}
