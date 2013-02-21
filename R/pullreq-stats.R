@@ -9,6 +9,7 @@ library(ggplot2)
 library(stargazer)
 library(ellipse)
 library(scales)
+library(orddom)
 
 print(sprintf("Current directory is: %s", getwd()))
 
@@ -75,25 +76,6 @@ store.pdf(plotcorr(ctab,
                    outline = FALSE), plot.location, 
           "cross-cor.pdf")
 
-# Box plot of merge time between main and external team members
-main.team.mergetimes <- subset(all, !is.na(merged_at) & main_team_member == "true", c(mergetime_minutes))
-ext.team.mergetimes <- subset(all, !is.na(merged_at) & main_team_member == "false", c(mergetime_minutes))
-
-main.team.mergetimes$team <- "main"
-ext.team.mergetimes$team <- "external"
-teams <- rbind(main.team.mergetimes, ext.team.mergetimes)
-teams$team <- as.factor(teams$team)
-p <- ggplot(teams, aes(x = team, y = mergetime_minutes)) + 
-  geom_boxplot()  + scale_y_log10() + xlab("Team") + 
-  ylab("Time to merge in minutes (log))")
-store.pdf(p, plot.location, "merge-internal-external.pdf")
-
-# Rank correlation to see whether the populations differ significantly
-mergetimes <- list(main = main.team.mergetimes$mergetime_minutes, ext = ext.team.mergetimes$mergetime_minutes)
-w <- wilcox.test(x = mergetimes$main, y = mergetimes$ext, paired = FALSE)
-print(sprintf("Wilcox: pullreq merge main/external team: n1 = %d, n2 = %d V = %f, p < %f", length(mergetimes$main), length(mergetimes$ext), w$statistic, w$p.value))
-print(sprintf("Cliff's delta pullreq merge main/external team :%f", cliffs.d(mergetimes$main, mergetimes$ext)))
-
 # Percentage of merged vs unmerged pull requests accross projects
 store.pdf(plot.percentage.merged(dfs), plot.location, "perc-merged.pdf")
 
@@ -125,4 +107,91 @@ p <- ggplot(all, aes(x = num_comments)) +
   ylab("Number of pull requests")
 store.pdf(p, plot.location, "pr-num-comments-hist.pdf")
 
+# Merge % overall
+print(sprintf("Avg pullreq merged: %f", (nrow(merged)/nrow(all))*100))
 
+# Merge % mean
+a <- do.call(rbind, Map(function(x) {
+  total = nrow(x)
+  merged = nrow(subset(x, merged_at > 0))
+  unmerged_perc = (100 * (total - merged))/total
+  merged_perc = 100 - unmerged_perc
+  rbind(data.frame(project=project.name(x), status="merged", value=merged_perc),
+        data.frame(project=unique(x[[1]][1]), status="unmerged", value=unmerged_perc))
+}, dfs))
+
+print(sprintf("Mean of pullreq merged: %f", mean(subset(a, status == "merged")$value)))
+print(sprintf("Shapiro-Wilkes pullreq merged perc pvalue: %f", shapiro.test(subset(a, status == "merged")$value)$p.value))
+
+# Merged pull reqs quantiles
+to.days <- function(x) {
+  x / 60 / 24
+}
+print(sprintf("Merged pull reqs quantiles: 95: %f, 90: %f, 80: %f", 
+              to.days(quantile(merged$mergetime_minutes, 0.95)), 
+              to.days(quantile(merged$mergetime_minutes, 0.90)), 
+              to.days(quantile(merged$mergetime_minutes, 0.80))))
+
+merged.fast <- subset(merged, mergetime_minutes < 61)
+print(sprintf("Perc pull reqs merged in an hour: %f", 
+              nrow(merged.fast)/nrow(merged)))
+
+print(sprintf("Perc fast pull reqs merged from main team members: %f", 
+              nrow(subset(merged.fast,main_team_member == "true"))/nrow(merged.fast)))
+
+fast.pr.vs.slow <- wilcox.test(x = subset(merged, mergetime_minutes < 61, c('src_churn'))$src_churn, 
+                               y = subset(merged, mergetime_minutes >= 61, c('src_churn'))$src_churn)
+orddom <- orddom(subset(merged, mergetime_minutes < 61, c('src_churn'))$src_churn, 
+                 subset(merged, mergetime_minutes > 61, c('src_churn'))$src_churn) 
+
+printf(sprintf("Src churn in fast vs slow pull reqs: wilcox: %f, p %f, effect: %f"))
+
+# Pull requests merge time at the proejct level
+print("Cross correlation table for mean time to merge vs other variables")
+col1 <- c(columns, 'mergetime_minutes')
+cor(subset(aggregate(merged, list(merged$project_name), mean), select = col1), 
+    method = "spearman")
+
+mean.mergetime.per.project <- aggregate(merged, list(merged$project_name), mean)[c('Group.1','mergetime_minutes')]
+
+print(sprintf("Perc projects with mean mergetime < 1 week: %f", 
+              nrow(subset(mean.mergetime.per.project, mergetime_minutes < 10080))/
+                nrow(mean.mergetime.per.project)))
+
+pullreqs.per.project <- aggregate(merged, list(merged$project_name), length)[c('Group.1','mergetime_minutes')]
+a <- merge(x = mean.mergetime.per.project, y = pullreqs.per.project, by = 'Group.1')
+
+print(sprintf("Cor between num(pull_reqs), mean(time_to_merge) %f", 
+              cor.test(a$mergetime_minutes.x, a$mergetime_minutes.y, 
+              method = "spearman")$estimate))
+
+# Pull request sizes
+
+
+
+# Pull request discusion
+
+print(sprintf("Merged pull reqs quantiles: 95: %f, 90: %f, 80: %f", 
+              quantile(all$num_comments, 0.95), 
+              quantile(all$num_comments, 0.90), 
+              quantile(all$num_comments, 0.80)))
+
+# Team size
+# Box plot of merge time between main and external team members
+main.team.mergetimes <- subset(all, !is.na(merged_at) & main_team_member == "true", c(mergetime_minutes))
+ext.team.mergetimes <- subset(all, !is.na(merged_at) & main_team_member == "false", c(mergetime_minutes))
+
+main.team.mergetimes$team <- "main"
+ext.team.mergetimes$team <- "external"
+teams <- rbind(main.team.mergetimes, ext.team.mergetimes)
+teams$team <- as.factor(teams$team)
+p <- ggplot(teams, aes(x = team, y = mergetime_minutes)) + 
+  geom_boxplot()  + scale_y_log10() + xlab("Team") + 
+  ylab("Time to merge in minutes (log))")
+store.pdf(p, plot.location, "merge-internal-external.pdf")
+
+# Rank correlation to see whether the populations differ significantly
+mergetimes <- list(main = main.team.mergetimes$mergetime_minutes, ext = ext.team.mergetimes$mergetime_minutes)
+w <- wilcox.test(x = mergetimes$main, y = mergetimes$ext, paired = FALSE)
+print(sprintf("Wilcox: pullreq merge main/external team: n1 = %d, n2 = %d V = %f, p < %f", length(mergetimes$main), length(mergetimes$ext), w$statistic, w$p.value))
+print(sprintf("Cliff's delta pullreq merge main/external team :%f", cliffs.d(mergetimes$main, mergetimes$ext)))

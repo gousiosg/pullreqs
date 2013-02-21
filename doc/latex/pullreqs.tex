@@ -312,7 +312,7 @@ whose average number of developers is less than two (indicating self-submission
 and acceptance of pull requests). We performed a paired Mann-Whitney test
 across the means for each project, which indicated a statistically significant
 difference ($n = 362, V = 56690, p < 0.001$). We also calculated the effect size
-using Cliff's delta metric at 0.42. This indicates a significant increase in the
+using Cliff's $\delta = 0.42$. This indicates a significant increase in the
 mean number of developers per month after the introduction of pull requests,
 even though this does not necessarily mean that pull requests are indeed the
 reason.
@@ -502,10 +502,14 @@ are split among three categories:
     requests is the project at the time the pull request was initiated.
     If the project's process is open to external contributions, then
     we expect to see an increased ratio of external contributors over
-    team members.
-  
-
-    Testing also plays a role in speed of processing; according
+    team members. The project's size may be a detrimental
+    factor to the speed of processing a pull request, as its impact maybe
+    more difficult to assess~\todo{ref}.
+    Also, incoming changes tend to cluster over time (the ``Yesterday's
+    weather'' change pattern~\cite{Girba04}), so it natural to assume
+    that pull requests affecting a part of the system that is under
+    active development will be more likely to merge.
+    Testing plays a role in speed of processing; according
     to~\cite{Pham13}, projects struggling with constant flux of contributors 
     use testing, manual or preferably automated, a safety net to handle
     contributions from unknown developers.
@@ -643,12 +647,49 @@ feature from the dataset. All results are statistically significant ($n =
   \label{fig:crosscor}
 \end{figure}
 
-\subsection{Dataset Characteristics}
+\subsection{Pull Request Characteristics}
 
+In this section, we analyse the 
 
 \paragraph*{Lifetime of pull requests}
 
-Pull requests either get merged or 
+After being submitted, pull requests can be in two states: merged or closed
+(and therefore not-merged).~\footnote{Intermediate states shown in
+Figure~\ref{fig:state} are added by the Github pull request handling process.} 
+Figure~\ref{fig:perc-merged} shows the distribution of merged vs unmerged
+pull requests across projects in our dataset. What we can see is that
+in most projects, most pull requests (75,5\%, mean: 74.5\%) are getting
+merged. This result is slightly higher than the overall we calculated for
+Github, but this can be attributed to the fact that the dataset was cleaned
+from projects for which we could not detect merges accurately. 
+The merged pull request percentage is almost normally distributed among projects (Shapiro-Wilkes test: $n = 82, p > 0.06$) with a standard deviation $\sigma = 14.68$. This means than we can expect that more than half pull requests will be merged, across any project, with a 66\% probability. \todo{Slightly extrapolating here, but still\ldots}
+
+For merged pull requests, an important property is the time required to process
+and merge them. The time to merge distribution is highly skewed
+(Figure~\ref{fig:pull-req-patch} displays a log transformed histogram), with
+the great majority of merges happening very fast. Measured in days, 95\% of the
+pull requests are merged in 19, 90\% in 8 and 80\% in only 2.8 days. An
+interesting observation is that there are many (8525 or 30\%) pull requests
+which are merged in under one hour; the majority of such pull requests (60\%)
+come from core team members, while their source code churn is significantly
+lower than that of the remaining pull requests.
+Based on this observation, a question that emerges is whether the pull
+requests originating from main team members are treated faster that those
+from external contributors. To answer it, we performed an unpaired Mann-Witney
+test among the times to merge pull requests from each group. The result
+is that while the two groups differ in a statistically significant manner ($n1 = 14316, n2 = 12463, p < 0.001$), the apparent difference
+is very small (Cliff's $\delta: -0.11$, see also Figure~\ref{fig:lifetime-boxplot}). This means that merged
+pull requests received no special treatment, even if they came from core
+team members.
+
+On a per project basis, if we calculate the mean time to merge a pull request,
+we see that in the majority of projects (72\%), the time to merge a pull
+request is less than 7 days. The mean time to merge a pull request per project
+is not directly correlated to the project's size ($\rho = -0.23$) nor to the
+project's test coverage ($\rho = 0.34$) Moreover, projects are not getting
+faster by processing more pull requests; the correlation between the average
+time to merge and the number of pull requests is very weak ($\rho = -0.33, n =
+82, p < 0.01$).
 
 \begin{figure*}
 \centering
@@ -673,16 +714,12 @@ Project names are omitted for clarity]{
 \includegraphics[scale=0.4]{pr-num-comments-hist.pdf}
 \label{fig:pull-num-comments}
 }
-\subfigure[Merges of pull requests for internal vs external team members.]{
+\subfigure[Time to merge pull requests for internal vs external team members.]{
 \includegraphics[scale=0.4]{merge-internal-external.pdf}
 \label{fig:lifetime-boxplot}
 }
 \caption{Dataset characteristics}
 \end{figure*}
-
-
-An important observation is that there are several pull requests whose
-lifetime is limited to less that a minute. 
 
 \paragraph*{Sizes of pull requests}
 
@@ -690,15 +727,11 @@ Pull requests contain
 
 \paragraph*{Discussion and Code review}
 
-Once a pull request has been submitted, it is open for discussion. 
+Once a pull request has been submitted, it is open for discussion until
+it is merged or closed. The discussion is usually brief: 95\% of pull
+requests receive less than 10 comments
 
-
-\paragraph*{Team size}
-
-An important question that emerges is whether pull 
-external vs internal $n1 = 15091, n2 = 13302, V = 87667255, p < 0.001$
-
-\section{Acceptance and rejection}
+\section{Acceptance and Processing Speed}
 \label{sec:accrej}
 
 To answer both our research questions, we conducted a set of prediction
@@ -777,11 +810,11 @@ the stability of the {\sc auc} metric across folds was good
 \begin{figure*}
 \centering
 \subfigure {
-  \includegraphics[scale=0.4]{varimp-merge-decision-40000-50.pdf} 
+  \includegraphics[scale=0.4]{varimp-merge-decision-all-50.pdf} 
   \label{fig:varimp-merge-decision}
 }
 \subfigure{
-\includegraphics[scale=0.4]{varimp-merge-time-40000-50.pdf}
+\includegraphics[scale=0.4]{varimp-merge-time-all-50.pdf}
   \label{fig:varimp-merge-time}
 }
 \caption{Random forest feature importance for predicting merge decision (a) and merge time (b)}
@@ -797,6 +830,17 @@ reported by the {\sc r} implementation of the random forest algorithm, to
 evaluate the importance of each feature. The results can be seen in
 Figure~\ref{fig:varimp}.
 
+\paragraph{Merge Decision}
+
+For the \textsf{mergedecision} task, the feature importance result is dominated
+by the \textsf{commits\_on\_files\_touched} feature. 
+
+\paragraph{Merge Time}
+
+For the \textsf{mergetime} task, many variables offer similar support to the
+prediction model built by the random forest algorithm. From the results, we can
+conclude that the size of the project and its test coverage play a significant
+role on how fast pull requests are processed.  
 
 
 \section{Discussion}
@@ -838,6 +882,7 @@ terms of community) and how code proliferates among project
 forks in software ecosystems.
 
 \section*{Acknowledgements}
+
 This work is partially supported by Marie Curie {\sc ief} 298930 -- {\sc sefunc}.
 
 \bibliographystyle{ieeetr}
