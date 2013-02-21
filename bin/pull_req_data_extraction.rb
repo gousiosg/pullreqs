@@ -279,10 +279,8 @@ Extract data for pull requests for a given repository
   def num_comments(pr_id)
     q = <<-QUERY
     select count(*) as comment_count
-    from pull_requests pr, pull_request_comments prc
-    where pr.id = prc.pull_request_id
-	    and pr.id = ?
-    group by prc.pull_request_id
+    from pull_request_comments prc
+    where prc.pull_request_id = ?
     QUERY
     if_empty(db.fetch(q, pr_id).all, :comment_count)
   end
@@ -293,7 +291,6 @@ Extract data for pull requests for a given repository
     select count(*) as issue_comment_count
     from issue_comments ic, issues i
     where ic.issue_id=i.id
-    and pull_request_id is not null
     and i.pull_request_id=?;
     QUERY
     if_empty(db.fetch(q, pr_id).all, :issue_comment_count)
