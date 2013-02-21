@@ -3,6 +3,7 @@ rm(list = ls(all = TRUE))
 source(file = "R/multiplots.R")
 source(file = "R/variables.R")
 source(file = "R/utils.R")
+source(file = "R/plots.R")
 
 library(ggplot2)
 library(stargazer)
@@ -122,4 +123,6 @@ p <- ggplot(all, aes(x = num_comments)) +
   geom_histogram(binwidth = 0.2) + scale_x_log10(labels=comma) + 
   xlab("Number of code review and discussion comments (log)") +
   ylab("Number of pull requests")
-store.pdf(p, plot.location, "pr-num-comments.pdf")
+store.pdf(p, plot.location, "pr-num-comments-hist.pdf")
+
+
