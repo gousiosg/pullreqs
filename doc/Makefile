@@ -119,7 +119,6 @@ $(BUILD)/$(MASTERTEX).pdf: $(BUILD)/$(MASTERTEX).aux $(BUILD)/$(MASTERTEX).bbl
 
 clean:
 	rm -Rf build
-	-rm thesis.pdf
 
 distclean: clean
 	-rm $(PICTURES_SRC)

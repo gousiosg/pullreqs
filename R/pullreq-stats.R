@@ -66,7 +66,7 @@ merged <- subset(all, merged == TRUE)
 used <- subset(all, select=columns)
 
 # Descriptive statistics accross all projects
-stargazer(used, median = TRUE, caption = "Descriptive statistics of the examined dataset")
+#stargazer(used, median = TRUE, caption = "Descriptive statistics of the examined dataset")
 
 # Cross correlation matrix accross all model variables
 ctab <- cor(used, method = "spearman")
@@ -81,7 +81,8 @@ store.pdf(plot.percentage.merged(dfs), plot.location, "perc-merged.pdf")
 
 # Time to merge pull request box plots histogram
 p <- ggplot(merged, aes(x = mergetime_minutes)) +  
-  geom_histogram(fill="white") + scale_x_log10(labels=comma) + xlab("Merge time in minutes (log)") +
+  geom_histogram() + scale_x_log10(labels=comma) +
+  xlab("Merge time in minutes (log)") +
   ylab("Number of pull requests")
 store.pdf(p, plot.location, "pr-lifetime-hist.pdf")
 
