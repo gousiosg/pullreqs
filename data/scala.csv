@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1168490,scala/scala,2137,1361236200,1361286045,1361286045,830,830,10,1,0,4,93,257226,25,0,0,3.666036870300825,1942,huitseeker,1,1.0,2,false,false
 1162462,scala/scala,2132,1361022499,,1361084143,1027,,10,1,1,6,93,257205,43,0,12,3.66633619097607,971,u-abramchuk,1,0.0,0,false,false
@@ -1214,4 +1213,3 @@ pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minut
 204832,scala/scala,897,1342175327,1342431760,1342431760,4273,4273,11,1,3,4,58,237803,10,0,18,3.9654672144590273,749,lrytz,38,0.7894736842105263,14,false,true
 204829,scala/scala,896,1342175242,1342175301,1342175301,0,0,11,1,1,4,58,237898,10,0,18,3.96388368124154,749,lrytz,37,0.8108108108108109,14,false,true
 203826,scala/scala,895,1342125432,,1342163394,632,,11,1,8,12,58,238112,508,0,0,3.9603211933879856,748,axel22,77,0.8311688311688312,22,false,false
-62273,scala/scala,894,1342125368,1342803179,13428

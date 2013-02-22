@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 975003,puppetlabs/hiera,115,1360182728,,1360360745,2966,,7,2,0,4,24,590,32,9,0,1279.6610169491526,298,pcarlisle,5,0.2,2,false,true
 840012,puppetlabs/hiera,111,1357508109,1357508149,1357508149,0,0,8,1,0,4,32,569,21,0,1,1286.4674868189807,149,jeffmccune,3,0.6666666666666666,42,false,true

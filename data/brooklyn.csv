@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1164152,brooklyncentral/brooklyn,544,1361141350,1361198319,1361198319,949,949,4,2,4,5,69,65219,455,104,4,248.79252978426533,66,grkvlt,24,0.4583333333333333,2,false,false
 1159539,brooklyncentral/brooklyn,542,1360973587,1361182542,1361182542,3482,3482,4,3,4,5,69,65219,0,38,2,248.79252978426533,33,grkvlt,23,0.4782608695652174,1,false,false

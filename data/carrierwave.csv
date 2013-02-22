@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1165401,jnicklas/carrierwave,985,1361182605,,1361199755,285,,2,1,0,1,32,1965,2,0,0,2387.2773536895675,943,Pepan,0,0,0,false,false
 1163273,jnicklas/carrierwave,983,1361116938,,1361119764,47,,2,2,4,2,32,1965,164,0,0,2387.2773536895675,943,timsly,0,0,0,false,false

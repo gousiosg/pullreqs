@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1165567,hornetq/hornetq,864,1361186485,,1361188195,28,,5,3,0,120,62,136729,0,0,11,1137.7249888465503,63,andytaylor,119,0.9495798319327731,6,false,true
 1162952,hornetq/hornetq,862,1361107229,,1361170459,1053,,5,1,0,1,62,136729,7,0,0,1137.7249888465503,124,chamacie,2,0.0,2,false,false

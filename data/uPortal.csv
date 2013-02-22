@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 975044,Jasig/uPortal,112,1360174102,1360174126,1360174126,0,0,9,1,0,1,12,99226,4,0,1,168.5344566948179,136,waymirec,9,0.2222222222222222,0,false,false
 949032,Jasig/uPortal,111,1359749780,,1361202789,24216,,9,2,0,10,11,99175,0,0,0,168.62112427527097,136,jameswennmacher,10,0.7,0,false,false

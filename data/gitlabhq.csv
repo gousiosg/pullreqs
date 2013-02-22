@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1162624,gitlabhq/gitlabhq,3017,1361091884,,1361106934,250,,12,1,2,2,87,11549,0,0,13,533.1197506277599,12394,jojosch,14,0.5,4,false,false
 1162027,gitlabhq/gitlabhq,3015,1361062701,1361107022,1361107022,738,738,12,3,1,3,87,11549,0,0,41,533.1197506277599,12394,jdelgado7,0,0,0,false,false

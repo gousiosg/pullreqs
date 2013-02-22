@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 951506,twitter/finagle,132,1359818968,,1360110692,4862,,29,1,3,5,0,21414,14,4,0,1276.221163724666,3018,okapies,0,0,24,false,false
 933024,twitter/finagle,131,1359396005,,1359579836,3063,,29,1,2,3,0,21288,70,51,0,1281.7549793310784,3016,mosesn,5,0.0,88,false,true

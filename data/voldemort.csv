@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 713810,voldemort/voldemort,121,1354857938,1360646255,1360646255,96471,96471,6,3,7,3,1,113038,32,0,0,20.479838638334012,2100,baepiff,2,0.0,6,false,false
 425514,voldemort/voldemort,109,1348102535,1349213063,1348607859,8422,18508,9,1,5,1,11,98499,6,0,1,23.502776677935817,1031,brentdmiller,0,0,1,false,false

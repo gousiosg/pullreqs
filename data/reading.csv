@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 139993,JumpstartLab/reading,264,1338293561,1338302798,1338302798,153,153,5,1,0,1,50,119,0,0,1,0.0,72,Andrewglass1,11,0.8181818181818182,0,false,false
 139792,JumpstartLab/reading,263,1338293262,1338302811,1338302811,159,159,5,1,0,1,50,119,0,0,1,0.0,36,MikeSilvis,13,0.9230769230769231,9,false,false

@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1151923,CocoaPods/CocoaPods,797,1360805583,,1360805815,3,,5,1,1,1,31,4606,21,0,0,1087.2774641771603,3990,madninja,0,0,0,false,false
 1150578,CocoaPods/CocoaPods,796,1360776270,,1360901844,2092,,5,9,0,21,29,4606,186,48,0,1087.2774641771603,3990,dillonlucente,0,0,0,false,false

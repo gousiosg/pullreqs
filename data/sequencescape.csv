@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1166483,sanger/sequencescape,741,1361202933,1361358865,1361358865,2598,2598,2,2,0,10,61,49401,37,0,0,290.4799497985871,21,JamesGlover,104,0.7980769230769231,0,false,true
 1166474,sanger/sequencescape,740,1361202819,1361358856,1361358856,2600,2600,2,1,0,1,61,49401,2,0,2,290.4799497985871,42,JamesGlover,103,0.7961165048543689,0,false,true

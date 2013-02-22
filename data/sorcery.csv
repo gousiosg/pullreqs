@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1147001,NoamB/sorcery,406,1360678747,1360835045,1360835045,2604,2604,1,1,0,1,26,2363,1,0,0,1441.8112568768515,2650,banyan,4,1.0,106,false,false
 829125,NoamB/sorcery,398,1358781676,1359098092,1359098092,5273,5273,1,1,0,1,48,2363,4,0,2,1441.8112568768515,2642,RyanonRails,1,1.0,36,false,false

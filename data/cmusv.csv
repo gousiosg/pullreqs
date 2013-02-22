@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 962848,professor/cmusv,164,1360140333,1360276783,1360276784,2274,2274,2,5,2,4,67,23948,0,0,17,391.93252046099883,40,kaushikgopal,6,0.6666666666666666,6,false,true
 962385,professor/cmusv,163,1360128417,1360139491,1360139491,184,184,2,4,2,3,66,23948,0,0,10,391.93252046099883,20,kaushikgopal,5,0.6,3,false,true

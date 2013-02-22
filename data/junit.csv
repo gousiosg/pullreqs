@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 932205,KentBeck/junit,622,1359381269,,1359391052,163,,2,1,8,2,79,7677,178,115,0,1740.9144196951934,1300,francescomari,1,0.0,2,false,false
 817084,KentBeck/junit,614,1358414472,1359407281,1359407281,16546,16546,2,17,28,20,78,7666,0,0,0,1737.6728411166189,1299,stephenc,1,0.0,16,false,false

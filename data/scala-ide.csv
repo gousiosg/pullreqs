@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1168632,scala-ide/scala-ide,323,1361374253,1361451529,1361451529,1287,1287,5,0,16,0,48,37107,0,0,0,3.9884657881262293,246,dotta,78,0.5128205128205128,11,false,true
 1167058,scala-ide/scala-ide,321,1361220678,1361437119,1361437119,3607,3607,5,4,1,44,49,36551,1934,0,47,4.049136822521956,492,dotta,77,0.5064935064935064,22,false,true

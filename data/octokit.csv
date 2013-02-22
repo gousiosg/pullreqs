@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1147177,pengwynn/octokit,222,1360682542,1360684614,1360684614,34,34,3,1,2,1,31,1540,2,0,12,1884.4155844155844,862,patcon,0,0,52,false,false
 1142140,pengwynn/octokit,221,1360445726,1360517313,1360517313,1193,1193,3,1,0,1,35,1562,35,0,10,1857.874519846351,431,andrew,6,0.8333333333333334,146,false,false

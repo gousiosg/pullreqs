@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 818685,lshift/diffa,283,1358433237,1358438669,1358438669,90,90,1,28,0,207,79,10447,9264,8597,941,1217.5744232794104,12,anthonyls,41,0.8536585365853658,1,false,false
 840077,lshift/diffa,282,1355937609,1355939566,1355939566,32,32,1,2,0,9,79,14599,210,103,40,1178.0943900267143,12,0x6e6562,59,0.9661016949152542,18,true,true

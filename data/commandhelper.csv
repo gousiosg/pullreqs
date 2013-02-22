@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1164268,sk89q/commandhelper,87,1361145375,,1361147112,28,,4,1,0,3,31,55836,60,0,32,98.80722114764667,47,jb-aero,18,0.9444444444444444,0,false,false
 1163352,sk89q/commandhelper,86,1361119183,1361161985,1361161985,713,713,4,8,4,54,31,55836,1711,0,36,98.80722114764667,94,EntityReborn,30,0.9666666666666667,4,false,false

@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 960575,rails/arel,161,1360084020,1360085109,1360085109,18,18,3,2,0,2,50,2884,10,21,0,1489.5977808599168,1538,Noemj,1,1.0,14,false,false
 950541,rails/arel,160,1359597011,1359646674,1359646674,827,827,3,1,1,2,44,2884,2,2,0,1489.5977808599168,769,t0m,0,0,0,false,false

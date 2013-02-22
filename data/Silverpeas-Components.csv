@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1152755,Silverpeas/Silverpeas-Components,171,1360834704,1360877682,1360877682,716,716,5,1,1,1,28,111621,8,0,0,123.61473199487553,40,SilverYoCha,17,0.8823529411764706,0,false,false
 975042,Silverpeas/Silverpeas-Components,170,1360336012,,1360872327,8938,,5,1,0,2,28,112030,513,0,2,127.08203159867892,20,SilverYoCha,16,0.9375,0,false,false

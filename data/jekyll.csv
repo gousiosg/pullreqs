@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1142812,mojombo/jekyll,806,1360506153,1360508732,1360508732,42,42,2,1,2,1,96,1447,0,0,2,985.4872149274361,18000,scribu,1,0.0,568,false,false
 974706,mojombo/jekyll,801,1360266136,,1360524999,4314,,1,1,0,1,97,1447,0,0,1,985.4872149274361,18000,kevinSuttle,0,0,66,false,false

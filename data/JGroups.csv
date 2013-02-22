@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 948773,belaban/JGroups,73,1359744736,1359786984,1359786984,704,704,1,1,0,1,1,104959,49,0,0,0.0,292,nickmbailey,2,1.0,16,false,false
 939609,belaban/JGroups,72,1359553374,1359555561,1359555561,36,36,1,2,0,6,0,104697,285,0,8,0.0,146,rvansa,1,1.0,0,false,false

@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1163912,codahale/dropwizard,266,1361134011,,1361180888,781,,1,4,3,10,80,8629,158,99,0,567.273148684668,1590,tomakehurst,1,0.0,12,false,false
 1146980,codahale/dropwizard,261,1360678383,,1360985650,5121,,1,2,0,3,88,8592,18,0,1,569.7160148975792,1588,nicktelford,12,0.75,12,false,false

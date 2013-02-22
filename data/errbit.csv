@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1147153,errbit/errbit,402,1360682018,1360686606,1360686606,76,76,2,1,4,6,97,2878,19,15,2,1068.4503127171647,2602,boblail,14,0.6428571428571429,20,false,false
 1144940,errbit/errbit,400,1360608961,1360608990,1360608990,0,0,1,1,2,2,98,2878,2,0,23,1068.4503127171647,1301,rdlugosz,0,0,0,false,false

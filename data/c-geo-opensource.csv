@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1156178,cgeo/c-geo-opensource,2488,1360913176,,1361132005,3647,,12,2,1,2,55,40251,15,0,0,22.65782216590892,504,Portree-Kid,35,0.7142857142857143,2,false,false
 1154804,cgeo/c-geo-opensource,2485,1360873825,,1360914659,680,,12,1,1,1,56,40223,0,0,17,22.67359470949457,252,triakcz,26,0.5384615384615384,0,false,false

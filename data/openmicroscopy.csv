@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1166213,openmicroscopy/openmicroscopy,762,1361199321,1361282784,1361282784,1391,1391,3,2,0,5,52,322100,50,0,99,245.97019559143124,92,mtbc,23,0.5652173913043478,4,false,true
 1165660,openmicroscopy/openmicroscopy,757,1361189898,,1361194573,77,,3,1,2,1,53,330743,15,0,16,234.32695476548258,46,bpindelski,32,0.71875,3,false,true

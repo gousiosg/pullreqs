@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1164413,enspiral/loomio,478,1361151226,1361151233,1361151233,0,0,6,1,0,15,66,6889,39,0,106,798.2290608215997,200,jonlemmon,94,0.9787234042553191,12,true,true
 1160046,enspiral/loomio,475,1360993314,,1361163032,2828,,6,1,0,1,66,6889,11,0,31,798.2290608215997,196,AaronThornton00,175,0.8,2,true,true

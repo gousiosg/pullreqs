@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1168343,akka/akka,1161,1361363315,1361466133,1361466133,1713,1713,9,0,3,0,69,29645,0,0,0,713.7797267667397,1490,patriknw,272,0.9375,19,true,true
 1168230,akka/akka,1157,1361353504,1361475677,1361475677,2036,2036,9,0,4,0,69,34398,0,0,0,701.6396302110588,1490,patriknw,271,0.9372693726937269,19,true,true

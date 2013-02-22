@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 956552,javan/whenever,315,1359997943,,1360501481,8392,,1,1,1,1,55,569,2,0,0,2743.409490333919,6470,bwlang,0,0,8,false,false
 818654,javan/whenever,300,1358438109,,1360415924,32963,,1,1,4,1,57,569,11,0,0,2743.409490333919,6466,jeroenj,0,0,16,false,false

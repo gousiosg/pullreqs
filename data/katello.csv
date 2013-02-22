@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1166666,Katello/katello,1614,1361205581,1361297765,1361297765,1536,1536,16,2,0,16,92,31459,108,0,92,693.0608093073524,124,ehelms,122,0.9262295081967213,6,false,true
 1166661,Katello/katello,1613,1361205541,1361209253,1361209253,61,61,16,1,0,1,92,31459,10,0,1,693.0608093073524,124,thomasmckay,81,0.8271604938271605,8,false,true

@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 678155,opscode/knife-ec2,89,1351008870,,1351170017,2685,,0,2,0,2,100,646,6,0,0,369.96904024767804,210,marcantonio,0,0,4,false,false
 678157,opscode/knife-ec2,85,1349510832,,1349959111,7471,,2,1,0,2,89,777,2,19,0,308.88030888030886,209,ranjibd,0,0,5,false,false

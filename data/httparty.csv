@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 975053,jnunemaker/httparty,190,1360244244,1360251083,1360251083,113,113,1,1,0,4,39,1253,12,11,17,1511.5722266560256,3590,ronyv89,1,1.0,2,false,false
 950916,jnunemaker/httparty,189,1359792891,1359820038,1359820039,452,452,1,1,1,2,38,1253,2,6,7,1507.5818036711892,3588,sullman,0,0,2,false,false

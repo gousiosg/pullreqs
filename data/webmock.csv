@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1152434,bblimke/webmock,253,1360827279,,1361121527,4904,,1,3,1,4,44,2667,2,8,0,1967.0041244844394,1606,i0rek,2,1.0,52,false,false
 1144128,bblimke/webmock,251,1360585101,,1361121261,8936,,1,1,1,1,44,2667,1,0,0,1967.0041244844394,1606,jordimassaguerpla,0,0,2,false,false
