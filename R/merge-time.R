@@ -112,9 +112,10 @@ run.classifiers.mergetime <- function(model, train, test, uniq = "") {
   results
 }
 
-merge.time.model = merged_fast ~ team_size + num_commits + files_changed + perc_external_contribs + 
-  sloc + src_churn + test_churn + commits_on_files_touched +  test_lines_per_1000_lines + 
-  prev_pullreqs +  requester_succ_rate + main_team_member
+merge.time.model = merged_fast ~ team_size + num_commits + files_changed + 
+  perc_external_contribs + sloc + src_churn + test_churn + 
+  commits_on_files_touched +  test_lines_per_1000_lines + prev_pullreqs +  
+  requester_succ_rate + main_team_member + num_comments
 
 #
 ### Linear regression model

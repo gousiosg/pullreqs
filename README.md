@@ -110,6 +110,25 @@ statements.
 test files. Test cases are recognized by "grepping" for `test*` (RUnit),
 `should .* do` (Shoulda) and `it .* do` (RSpec) in the source file lines.
 
+####Projects that have been removed
+````
+Shopify/active_merchant
+Bukkit/Bukkit
+opscode/chef
+elasticsearch/elasticsearch
+twitter/finagle
+infinispan/infinispan
+jbossas/jboss-as
+opscode/knife-ec2
+mongoid/mongoid
+imathis/octopress
+exoplatform/platform
+ruby/ruby
+spree/spree
+SpringSource/spring-framework
+SpringSource/spring-integration
+mitchellh/vagrant
+xsbt
+````
 ####Processing data with R
-
 
