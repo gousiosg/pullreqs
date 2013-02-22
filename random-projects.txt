@@ -2,7 +2,6 @@ professor cmusv Ruby
 forge core Java
 jboss-switchyard components Java
 sferik rails_admin Ruby
-Bukkit Bukkit Java
 ushis silo Ruby
 otwcode otwarchive Ruby
 jnicklas carrierwave Ruby
@@ -27,7 +26,6 @@ sleuthkit autopsy Java
 errbit errbit Ruby
 nicolasgramlich AndEngine Java
 meskyanichi backup Ruby
-ruby ruby Ruby
 NoamB sorcery Ruby
 pengwynn octokit Ruby
 sk89q commandhelper Java

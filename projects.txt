@@ -2,29 +2,20 @@ rails rails ruby
 puppetlabs puppet ruby
 Katello katello ruby
 rapid7 metasploit-framework ruby
-spree spree ruby
 gitlabhq gitlabhq ruby
 diaspora diaspora ruby
-mongoid mongoid ruby
 fog fog ruby
 resolve refinerycms ruby
 enspiral loomio ruby
-opscode chef ruby
 mitchellh vagrant ruby
-Shopify active_merchant ruby
 sanger sequencescape ruby
 JumpstartLab reading ruby
 mojombo jekyll ruby
 puppetlabs facter ruby
-imathis octopress ruby
-jbossas jboss-as java
 hornetq hornetq java
-infinispan infinispan java
 neo4j community java
 openmicroscopy openmicroscopy java
 sonatype nexus java
-elasticsearch elasticsearch java
-SpringSource spring-integration java
 cgeo c-geo-opensource java
 dana-i2cat opennaas java
 brooklyncentral brooklyn java
@@ -34,7 +25,6 @@ jenkinsci jenkins java
 floodlight floodlight java
 KentBeck junit java
 netty netty java
-SpringSource spring-framework java
 intridea grape ruby
 eventmachine eventmachine ruby
 akka akka scala
@@ -42,7 +32,7 @@ scala scala scala
 scala-ide scala-ide scala
 sbt sbt scala
 scalaz scalaz scala
-twitter finagle
+twitter finagle scala
 codahale metrics java
 nathanmarz storm java
 scalatra scalatra scala

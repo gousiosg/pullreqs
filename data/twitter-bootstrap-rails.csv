@@ -1,6 +1,17 @@
+Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
-975010,seyhunak/twitter-bootstrap-rails,513,1360327756,1360388268,1360388268,1008,1008,2,3,0,45,60,374,268,0,55,181.8181818181818,2609,benlovell,2,1.0,5,false,false
-975011,seyhunak/twitter-bootstrap-rails,512,1360274257,1360307726,1360307726,557,557,1,3,0,4,61,368,13,0,12,184.78260869565216,2609,toadkicker,9,1.0,10,false,false
+1160716,seyhunak/twitter-bootstrap-rails,530,1361021712,,1361088739,1117,,2,1,0,1,52,378,2,0,5,179.89417989417987,5218,lucasefe,1,1.0,56,false,false
+1155746,seyhunak/twitter-bootstrap-rails,528,1360895795,,1360913645,297,,2,1,6,1,53,378,2,0,4,179.89417989417987,2609,kobaltz,0,0,1,false,false
+1147552,seyhunak/twitter-bootstrap-rails,526,1360691115,1360700445,1360700445,155,155,2,1,6,1,54,376,4,0,5,180.85106382978725,5218,rsamoilov,0,0,0,false,false
+1147139,seyhunak/twitter-bootstrap-rails,525,1360681720,1360682145,1360682145,7,7,2,2,0,4,55,376,2,0,3,180.85106382978725,5218,toadkicker,11,1.0,20,false,false
+1145840,seyhunak/twitter-bootstrap-rails,522,1360640000,,1361131302,8188,,2,1,2,1,56,376,0,0,0,180.85106382978725,2609,jormon,0,0,0,false,false
+1145670,seyhunak/twitter-bootstrap-rails,521,1360631887,1360652105,1360652106,336,336,2,1,1,3,56,376,0,0,0,180.85106382978725,5218,znz,2,1.0,72,false,false
+1145645,seyhunak/twitter-bootstrap-rails,520,1360630793,1360652050,1360652050,354,354,2,1,0,1,56,376,0,0,1,180.85106382978725,2609,znz,1,1.0,36,false,false
+1144946,seyhunak/twitter-bootstrap-rails,519,1360609249,1360609428,1360609428,2,2,2,1,0,1,57,377,6,0,4,180.3713527851459,2609,pjaspers,1,1.0,27,false,false
+1144290,seyhunak/twitter-bootstrap-rails,517,1360590693,1360594321,1360594321,60,60,2,1,2,1,58,374,15,0,3,181.8181818181818,5218,pjaspers,0,0,54,false,false
+1142936,seyhunak/twitter-bootstrap-rails,515,1360514291,1360564474,1360564474,836,836,2,1,0,1,59,374,2,0,2,181.8181818181818,2609,toadkicker,10,1.0,10,false,false
+975010,seyhunak/twitter-bootstrap-rails,513,1360327756,1360388268,1360388268,1008,1008,2,3,3,45,60,374,268,0,55,181.8181818181818,5218,benlovell,2,1.0,10,false,false
+975011,seyhunak/twitter-bootstrap-rails,512,1360274257,1360307726,1360307726,557,557,1,3,0,4,61,368,13,0,12,184.78260869565216,5218,toadkicker,9,1.0,20,false,false
 975012,seyhunak/twitter-bootstrap-rails,511,1360272770,1360307787,1360307787,583,583,1,2,0,2,60,368,3,0,15,184.78260869565216,2609,toadkicker,8,1.0,10,false,false
 975013,seyhunak/twitter-bootstrap-rails,510,1360228393,1360241242,1360241242,214,214,1,1,0,1,59,367,6,0,2,185.28610354223432,5218,trusche,0,0,0,false,false
 958425,seyhunak/twitter-bootstrap-rails,505,1360037884,1360046206,1360046206,138,138,1,1,0,2,60,367,0,0,4,185.28610354223432,2609,darkbaby123,0,0,0,false,false
