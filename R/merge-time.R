@@ -12,13 +12,13 @@ library(e1071) # naiveBayes
 library(pls)
 library(Hmisc) # cut2
 
-# Returns a list l where 
+# Returns a list l with
 # l[1] training dataset
 # l[2] testing dataset
 prepare.data.mergetime <- function(df, num_samples) {
   # Prepare the data for prediction
   a <- prepare.project.df(df)
-  
+
   # sample filter pull-requests that have not been merged
   a <- a[a$merged == "TRUE", ]
 
@@ -36,6 +36,26 @@ prepare.data.mergetime <- function(df, num_samples) {
 
   a <- a[sample(nrow(a), size=num_samples), ]
 
+  # split data into training and test data
+  a.train <- a[1:floor(nrow(a)*.90), ]
+  a.test <- a[(floor(nrow(a)*.90)+1):nrow(a), ]
+  list(train=a.train, test=a.test)
+}
+
+# Bining to 1 hour, 1 day, 1 week and rest
+prepare.data.mergetime.4bins <- function(df, num_samples) {
+  # Prepare the data for prediction
+  a <- prepare.project.df(df)
+
+  # sample filter pull-requests that have not been merged
+  a <- a[a$merged == "TRUE", ]
+
+  if (num_samples >= nrow(a)) {
+    num_samples = nrow(a) - 1
+  }
+
+  a$merged_fast <- cut2(a$mergetime_minutes, c(60, 1440, 10080))
+  a <- a[sample(nrow(a), size=num_samples), ]
   # split data into training and test data
   a.train <- a[1:floor(nrow(a)*.90), ]
   a.test <- a[(floor(nrow(a)*.90)+1):nrow(a), ]

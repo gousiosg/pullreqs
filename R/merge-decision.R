@@ -17,6 +17,10 @@ prepare.data.mergedecision <- function(df, num_samples) {
   # Prepare the data for prediction
   a <- prepare.project.df(df)
 
+  if (num_samples >= nrow(a)) {
+    num_samples = nrow(a) - 1
+  }
+
   # Take sample
   a <- a[sample(nrow(a), size=num_samples), ]
 

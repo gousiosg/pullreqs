@@ -60,7 +60,7 @@ all <- merge.dataframes(dfs)
 columns = c("team_size", "num_commits", "files_changed", 
             "perc_external_contribs", "sloc", "src_churn", "test_churn", 
             "commits_on_files_touched", "test_lines_per_1000_lines", 
-            "prev_pullreqs", "requester_succ_rate")
+            "prev_pullreqs", "requester_succ_rate", "num_comments")
 
 merged <- subset(all, merged == TRUE)
 used <- subset(all, select=columns)
@@ -81,7 +81,7 @@ store.pdf(plot.percentage.merged(dfs), plot.location, "perc-merged.pdf")
 
 # Time to merge pull request box plots histogram
 p <- ggplot(merged, aes(x = mergetime_minutes)) +  
-  geom_histogram() + scale_x_log10(labels=comma) + xlab("Merge time in minutes (log)") +
+  geom_histogram(fill="white") + scale_x_log10(labels=comma) + xlab("Merge time in minutes (log)") +
   ylab("Number of pull requests")
 store.pdf(p, plot.location, "pr-lifetime-hist.pdf")
 
