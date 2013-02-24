@@ -388,10 +388,20 @@ Extract data for pull requests for a given repository
     raw_commits = commit_entries(pr_id)
     result = Hash.new(0)
 
-    def file_count(commit, status)
-      commit['files'].reduce(0) { |acc, y|
-        if y['status'] == status then acc + 1 else acc end
-      }
+    def file_count(commits, status)
+      commits.map do |c|
+        c['files'].reduce(Array.new) do |acc, y|
+          if y['status'] == status then acc << y['filename'] else acc end
+        end
+      end.flatten.uniq.size
+    end
+
+    def files_touched(commits)
+      commits.map do |c|
+        c['files'].map do |y|
+          y['filename']
+        end
+      end.flatten.uniq.size
     end
 
     def file_type(f)
@@ -399,10 +409,12 @@ Extract data for pull requests for a given repository
       if lang.nil? then :data else lang.type end
     end
 
-    def file_type_count(commit, type)
-      commit['files'].reduce(0) { |acc, y|
-        if file_type(y['filename']) == type then acc + 1 else acc end
-      }
+    def file_type_count(commits, type)
+      commits.map do |c|
+        c['files'].reduce(Array.new) do |acc, y|
+          if file_type(y['filename']) == type then acc << y['filename'] else acc end
+        end
+      end.flatten.uniq.size
     end
 
     def lines(commit, type, action)
@@ -440,14 +452,17 @@ Extract data for pull requests for a given repository
       result[:lines_deleted] += lines(x, :src, :deleted)
       result[:test_lines_added] += lines(x, :test, :added)
       result[:test_lines_deleted] += lines(x, :test, :deleted)
-      result[:files_added] += file_count(x, "added")
-      result[:files_removed] += file_count(x, "removed")
-      result[:files_modified] += file_count(x, "modified")
-      result[:files_touched] += (file_count(x, "modified") + file_count(x, "added") + file_count(x, "removed"))
-      result[:src_files] += file_type_count(x, :programming)
-      result[:doc_files] += file_type_count(x, :markup)
-      result[:other_files] += file_type_count(x, :data)
     }
+
+    result[:files_added] += file_count(raw_commits, "added")
+    result[:files_removed] += file_count(raw_commits, "removed")
+    result[:files_modified] += file_count(raw_commits, "modified")
+    result[:files_touched] += files_touched(raw_commits)
+
+    result[:src_files] += file_type_count(raw_commits, :programming)
+    result[:doc_files] += file_type_count(raw_commits, :markup)
+    result[:other_files] += file_type_count(raw_commits, :data)
+
     result
   end
 
