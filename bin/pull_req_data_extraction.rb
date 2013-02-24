@@ -282,7 +282,7 @@ Extract data for pull requests for a given repository
     from pull_request_comments prc
     where prc.pull_request_id = ?
     and prc.created_at < (
-      select created_at
+      select max(created_at)
       from pull_request_history
       where action = 'closed' and pull_request_id = ?)
     QUERY
@@ -298,7 +298,7 @@ Extract data for pull requests for a given repository
     and i.issue_id=pr.pullreq_id
     and pr.id = ?
     and ic.created_at < (
-      select created_at
+      select max(created_at)
       from pull_request_history
       where action = 'closed' and pull_request_id = ?)
     QUERY
