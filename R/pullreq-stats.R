@@ -168,11 +168,30 @@ print(sprintf("Cor between num(pull_reqs), mean(time_to_merge) %f",
 
 # Pull request sizes
 
+print(sprintf("Pullreqs commits quantiles: 95: %f, 90: %f, 80: %f", 
+              quantile(all$num_commits, 0.95), 
+              quantile(all$num_commits, 0.90), 
+              quantile(all$num_commits, 0.80)))
 
+
+print(sprintf("Merged pull reqs lines quantiles: 95: %f, 90: %f, 80: %f", 
+              quantile(all$src_churn + all$test_churn, 0.95), 
+              quantile(all$src_churn + all$test_churn, 0.90), 
+              quantile(all$src_churn + all$test_churn, 0.80)))
+
+print(sprintf("Merged pull reqs lines quantiles: 95: %f, 90: %f, 80: %f", 
+              quantile(all$src_churn, 0.95), 
+              quantile(all$src_churn, 0.90), 
+              quantile(all$src_churn, 0.80)))
+
+print(sprintf("Perc pull reqs modifying non-code: %f", 1 - nrow(subset(all, src_churn > 0 | test_churn >0))/nrow(all)))
+print(sprintf("Perc Pull reqs modifying test code: %f", nrow(subset(all, test_churn > 0))/nrow(all)))
+print(sprintf("Perc Pull reqs modifying test code: %f", nrow(subset(all, test_churn > 0 & src_churn == 0))/nrow(all)))
+print(sprintf("Perc test pull reqs merged: %f", nrow(subset(all, test_churn > 0 & merged == TRUE))/nrow(subset(all, test_churn > 0))))
 
 # Pull request discusion
 
-print(sprintf("Merged pull reqs quantiles: 95: %f, 90: %f, 80: %f", 
+print(sprintf("Merged pull reqs comments quantiles: 95: %f, 90: %f, 80: %f", 
               quantile(all$num_comments, 0.95), 
               quantile(all$num_comments, 0.90), 
               quantile(all$num_comments, 0.80)))

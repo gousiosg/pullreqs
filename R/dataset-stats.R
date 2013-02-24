@@ -67,7 +67,7 @@ print(sprintf("Pull request comments by non project members: %f", prc_non_member
 print(sprintf("% comments from non-repo members: %f",(prc_non_members$cnt/pullreqs$cnt) * 100))
 
 # Pull req comments
-res <- dbSendQuery(con, "select i.pr_id, ic_cnt + prc_cnt as cnt from (select pr.id as pr_id, count(*) as ic_cnt from pull_requests pr, issues i, issue_comments ic where i.id = ic.issue_id and pr.id = i.pull_request_id group by pr.id) as i, (select pr.id as pr_id, count(*) as prc_cnt from projects p, pull_requests pr, pull_request_comments prc   where p.forked_from is null and p.id = pr.base_repo_id and prc.pull_request_id = pr.id  group by pr.id) as pr  where pr.pr_id = i.pr_id")
+res <- dbSendQuery(con, "select i.pr_id, ic_cnt + prc_cnt as cnt from (select pr.id as pr_id, count(ic.comment_id) as ic_cnt from pull_requests pr left outer join issues i on pr.id = i.pull_request_id left outer join issue_comments ic on i.id = ic.issue_id  group by pr.id) as i,  (select pr.id as pr_id, count(prc.comment_id) as prc_cnt from projects p join pull_requests pr on p.id = pr.base_repo_id left outer join pull_request_comments prc on prc.pull_request_id = pr.id  where p.forked_from is null  group by pr.id) as pr  where pr.pr_id = i.pr_id;")
 prs <- fetch(res, n = -1)
 print(sprintf("Num discussion comments per pulreq (mean): %f", mean(prs$cnt)))
 print(sprintf("Num discussion comments per pulreq (95 perc): %d", quantile(prs$cnt, 0.95)))
