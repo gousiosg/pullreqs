@@ -281,19 +281,28 @@ Extract data for pull requests for a given repository
     select count(*) as comment_count
     from pull_request_comments prc
     where prc.pull_request_id = ?
+    and prc.created_at < (
+      select created_at
+      from pull_request_history
+      where action = 'closed' and pull_request_id = ?)
     QUERY
-    if_empty(db.fetch(q, pr_id).all, :comment_count)
+    if_empty(db.fetch(q, pr_id, pr_id).all, :comment_count)
   end
 
   # Number of pull request discussion comments
   def num_issue_comments(pr_id)
     q = <<-QUERY
     select count(*) as issue_comment_count
-    from issue_comments ic, issues i
+    from pull_requests pr, issue_comments ic, issues i
     where ic.issue_id=i.id
-    and i.pull_request_id=?;
+    and i.issue_id=pr.pullreq_id
+    and pr.id = ?
+    and ic.created_at < (
+      select created_at
+      from pull_request_history
+      where action = 'closed' and pull_request_id = ?)
     QUERY
-    if_empty(db.fetch(q, pr_id).all, :issue_comment_count)
+    if_empty(db.fetch(q, pr_id, pr_id).all, :issue_comment_count)
   end
 
   # Number of followers of the person that created the pull request
