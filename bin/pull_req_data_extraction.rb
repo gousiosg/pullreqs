@@ -296,6 +296,7 @@ Extract data for pull requests for a given repository
     from pull_requests pr, issue_comments ic, issues i
     where ic.issue_id=i.id
     and i.issue_id=pr.pullreq_id
+    and pr.base_repo_id = i.repo_id
     and pr.id = ?
     and ic.created_at < (
       select max(created_at)
@@ -588,7 +589,7 @@ Extract data for pull requests for a given repository
       a = mongo.find(:commits, {:sha => x[:sha]})[0]
       acc << a unless a.nil?
       acc
-    }
+    }.select{|c| c['parents'].size <= 1}
   end
 
   # List of files in a project checkout. Filter is an optional binary function
