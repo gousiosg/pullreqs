@@ -173,6 +173,10 @@ print(sprintf("Pullreqs commits quantiles: 95: %f, 90: %f, 80: %f",
               quantile(all$num_commits, 0.90), 
               quantile(all$num_commits, 0.80)))
 
+print(sprintf("Pullreqs num_files quantiles: 95: %f, 90: %f, 80: %f", 
+              quantile(all$files_changed, 0.95), 
+              quantile(all$files_changed, 0.90), 
+              quantile(all$files_changed, 0.80)))
 
 print(sprintf("Merged pull reqs lines quantiles: 95: %f, 90: %f, 80: %f", 
               quantile(all$src_churn + all$test_churn, 0.95), 

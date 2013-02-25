@@ -67,12 +67,17 @@ print(sprintf("Pull request comments by non project members: %f", prc_non_member
 print(sprintf("% comments from non-repo members: %f",(prc_non_members$cnt/pullreqs$cnt) * 100))
 
 # Pull req comments
-res <- dbSendQuery(con, "select i.pr_id, ic_cnt + prc_cnt as cnt from (select pr.id as pr_id, count(ic.comment_id) as ic_cnt from pull_requests pr left outer join issues i on pr.id = i.pull_request_id left outer join issue_comments ic on i.id = ic.issue_id  group by pr.id) as i,  (select pr.id as pr_id, count(prc.comment_id) as prc_cnt from projects p join pull_requests pr on p.id = pr.base_repo_id left outer join pull_request_comments prc on prc.pull_request_id = pr.id  where p.forked_from is null  group by pr.id) as pr  where pr.pr_id = i.pr_id;")
+# The following takes a while, so here are the latest results
+# [1] "Num discussion comments per pulreq (mean): 2.314321"
+# [1] "Num discussion comments per pulreq (95 perc): 9"
+# 80% = 3
+# [1] "Num discussion comments per pulreq (5 perc): 0"         
+res <- dbSendQuery(con, "select i.pr_id, ic_cnt + prc_cnt as cnt, i.issue_id from (select pr.id as pr_id, i.issue_id as issue_id, count(ic.comment_id) as ic_cnt from pull_requests pr left outer join issues i on pr.pullreq_id = i.issue_id left outer join issue_comments ic on i.id = ic.issue_id   where pr.base_repo_id = i.repo_id group by pr.id) as i, (select pr.id as pr_id, count(prc.comment_id) as prc_cnt  from projects p join pull_requests pr on p.id = pr.base_repo_id left outer join pull_request_comments prc on prc.pull_request_id = pr.id   where p.forked_from is null group by pr.id) as pr  where pr.pr_id = i.pr_id;")
 prs <- fetch(res, n = -1)
 print(sprintf("Num discussion comments per pulreq (mean): %f", mean(prs$cnt)))
 print(sprintf("Num discussion comments per pulreq (95 perc): %d", quantile(prs$cnt, 0.95)))
 print(sprintf("Num discussion comments per pulreq (5 perc): %d", quantile(prs$cnt, 0.05)))
-
+      
 # Original repos that received a pullreq in 2012
 res <- dbSendQuery(con, "select count(*) as cnt from projects p where p.forked_from is null  and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles' and exists (select pr.id from pull_requests pr, pull_request_history prh where pr.base_repo_id = p.id and prh.pull_request_id = pr.id and year(prh.created_at)=2012)")
 orig_repos_pullreqs <- fetch(res, n = -1)

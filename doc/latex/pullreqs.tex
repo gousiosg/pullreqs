@@ -59,6 +59,113 @@ Arie van Deursen\\
 
 \section{Introduction}
 
+%Several code hosting sites, including Github and BitBucket, tapped on the
+%opportunity to make the pull-based development model more accessible to
+%programmers. A unique characteristic of such sites is that they allow any user
+%to fork any public repository. The clone creates a public project that belongs
+%to user that cloned it, so the user can modify the repository without being part
+%of the development team. What is more important is they automate the selective
+%contribution of commits from the clone to the source, through pull requests. As
+%mentioned earlier, pull requests are not unique to code hosting sites; in fact,
+%the Git software distribution includes the \textsf{git-request-pull} utility
+%which provides the same functionality at the command line. Github
+%improved\footnote{Not everyone agrees:
+%\url{https://github.com/torvalds/linux/pull/17}} this process significantly by
+%integrating code reviews, discussions and issues, thus effectively lowering the
+%entry barrier for casual contributions. Combined, cloning and pull requests
+%create a new development model, where changes are pushed to the project
+%maintainers and go through code review by the community before being integrated. 
+%
+
+
+Software development can be distributed across various
+dimensions~\cite{Gumm06}; among them, physical distribution distributes
+programming tasks across people collaborating remotely, while temporal
+distribution distributes tasks to people working in different time zones.
+Distribution of development activities has been initially thought to hinder
+collaboration~\cite{Herbs99, Batti01}, even though subsequent studies have
+shown that it does not pose significant threats to project
+quality~\cite{Spine06, Nguye08, Bird09a}. Access to online collaboration tools
+such as {\sc vcs} and bug databases have been identified as a necessary
+requirement for collaborative software development~\cite{Knuds76,Pilat06,
+Catal06}. Moreover, distributed collaboration on software artifacts can be
+facilitated through awareness building tools~\cite{Dabbi12, Treud12, Lanza10}. 
+
+Pull-based development is an emerging paradigm for distributed software
+development. As more developers appreciate the perceived benefits of isolated
+development and branching~\cite{Bird12}, more projects, both closed source and,
+especially, open source are being migrated to code hosting sites with support
+for pull based development~\cite{Barr12}.
+
+We advocate that pull requests as a distributed development model in general,
+and as are implemented by Github in particular, form a new method of
+collaboration for distributed software development. The novelty lays on
+the decoupling of the development effort from the decision to incorporate
+the results of the development in the code base. 
+By separating the concerns of building artifacts and incorporating
+changes, work is cleanly distributed among a core team which is responsible
+to perform the merges and a peripheral team that submits, often occasional,
+changes to be considered for merging.
+
+Previous work has identified the processes of collaboration in open source
+through patch submission and acceptance~\cite{MOCKU02, Bird07, Weiss08}.  There
+are many similarities to the way pull requests work; for example, similar work
+team structures emerge (the ``onion'' model~\cite{Crow05}) while the process to
+accept a patch goes through a similar assessment process.  What pull requests
+bring in addition is process automation and centralization of information.
+With pull requests, the code does not have to leave the revision control
+system, and therefore it can be versioned across repositories, while authorship
+information is effortlessly maintained. Communication is context-specific
+(revolving around a single pull request) while .  Moreover, the review
+mechanism that Github incorporates has the additional effect of improving
+awareness~\cite{Dabbi12}; core developers can access in an efficient way all
+information that relates to an application patch/pull request and solicit the
+opinions of the community (``crowd-source'') about the merging decision.
+
+The goal of the paper is to analyze the factors that affect the efficiency
+of the pull-based software development model. Specifically, the questions we are trying to answer are: 
+%Intuitively, a pull
+%request based collaboration is effective when the suitability of the pull
+%request for a project can be assessed fast. 
+
+\begin{description}
+
+  \item[RQ1] What factors affect the decision to merge a pull request?
+
+  \item[RQ2] What factors affect the time required to process a pull request,
+    until it is merged?
+
+\end{description}
+
+Our study is based on data from the Github collaborative development forge, as
+made available through the GHTorrent project~\cite{GS12}. Using it, we first
+explore the use of pull requests across all projects in Github.  We then examine
+82 carefully selected Ruby, Java and Scala projects, (35,466 pull requests), and
+identify, using machine learning tools, common factors that affect pull request
+lifetime and merging. The results show that pull requests \emph{acceptance}
+can be predicted with high accuracy (> 90\%), while it is mostly dependent on
+what parts of the system does the pull request affect.  On the other hand, pull
+request \emph{merge time} can be predicted with reasonable accuracy (> 70\%),
+while it is mostly dependent on the ensuing discussion and the test coverage of
+the target project.  Both results can be exploited to assist developers to
+submit better pull requests, project managers to prioritize pull requests, while
+it opens new opportunities for research, such as building automated tools for
+pull request triaging.
+
+This work makes the following concrete contributions:
+
+\begin{itemize}
+
+  \item Descriptive statistics on the use of pull requests in github, demonstrating, e.g., a significant increase in the involvement of external collaborators since the introduction of the github pull request in 2010 
+
+  \item We identify the factors that affect pull request acceptance and
+    speed of processing
+
+\end{itemize}
+
+
+\section{Background}
+
 Since their appearance in 2001, distributed version control systems ({\sc
 dvcs}), notably Git, have revolutionized the way distributed software
 development is carried out. Driven by pragmatic needs, {\sc dvs}s were designed
@@ -72,62 +179,6 @@ mirror. The distributed nature of {\sc dvcs}) enables a pull-based development
 model, where changes are offered to a project repository through a network of
 project forks; it is up to the repository owner to accept or reject the incoming
 pull requests.
-
-Several code hosting sites, including Github and BitBucket, tapped on the
-opportunity to make the pull-based development model more accessible to
-programmers. A unique characteristic of such sites is that they allow any user
-to fork any public repository. The clone creates a public project that belongs
-to user that cloned it, so the user can modify the repository without being part
-of the development team. What is more important is they automate the selective
-contribution of commits from the clone to the source, through pull requests. As
-mentioned earlier, pull requests are not unique to code hosting sites; in fact,
-the Git software distribution includes the \textsf{git-request-pull} utility
-which provides the same functionality at the command line. Github
-improved\footnote{Not everyone agrees:
-\url{https://github.com/torvalds/linux/pull/17}} this process significantly by
-integrating code reviews, discussions and issues, thus effectively lowering the
-entry barrier for casual contributions. Combined, cloning and pull requests
-create a new development model, where changes are pushed to the project
-maintainers and go through code review by the community before being integrated. 
-
-Pull-based development is an emerging paradigm for distributed software
-development. As more developers appreciate the perceived benefits of isolated
-development and branching~\cite{Bird12}, more projects, both closed source and,
-especially, open source are being migrated to code hosting sites with support
-for pull based development~\cite{Barr12}. 
-
-In this work, we attempt a first evaluation of pull based development.  Our
-study is based on data from the Github collaborative development forge, as made
-available through the GHTorrent project~\cite{GS12}. Using it, we explore the
-use of pull requests among projects in Github. Based on our observations,
-we develop a theory of collaboration through pull requests, through
-which we attempt to explain . We then examine 100 Ruby, Java
-and Scala projects, (46,023 pull requests), and identify, using machine
-learning tools, common factors that affect pull request lifetime and merging.
-The results show that it is possible to predict, with a high accuracy (>90\%),
-whether a pull request will be merged. Using the same features, it is also
-possible, with an accuracy of 70\%, to predict whether a pull request will take
-a ``long'' or ``short'' time to be merged. Both results can be exploited to
-build automated tools that can help developers triage pull requests in
-a semi (or fully) automated manner.
-
-This work makes the following concrete contributions:
-
-\begin{itemize}
-
-  \item We present evidence that pull requests may drive external contributions 
-
-  \item We identify the factors that affect pull request acceptance and
-    speed of processing.
-
-\end{itemize}
-
-\section{Pull-based development}
-
-In this section, we defined pull based development and explore its use
-on Github.
-
-\subsection{Development models with DVCs}
 
 The development models afforded by {\sc dvcs}s are a superset of 
 those in centralized version control environments~\cite{Shiha12,Bird09}. 
@@ -177,7 +228,9 @@ use of branching can lead to measurable, but not significant, delays in
 projects~\cite{Bird12}. In this work, we only consider pull-based development
 as our investigation target.
 
-\subsection{Pull-based development on Github}
+\section{Experimental Design}
+
+\section{Pull-based development on Github}
 
 Github is a very popular development site; in in its main page, Github reports
 more than 5 million repositories and 3 million users. However,  not all those
@@ -326,76 +379,6 @@ reason.
   regression fitting method, to account for monthly fluctuations.}
   \label{fig:before-after-pr}
 \end{figure}
-
-A phenomenon related to pull requests is ``drive-by'' pull requests. As the
-relative cost to fork a repository is negligible on Github (54\% of the
-repositories are forks), it is not uncommon for developers to fork other
-repositories to perform casual commits, such as fixes to spelling mistakes or
-indentation issues~\cite{Pham13}. In addition, Github provides web based editors
-for various file formats, using which any user can edit a file in another
-repository; behind the scenes, Github will fork the repository and ask the user
-to create a pull request to the original one. Such commits might be identified
-as pull requests that contain a single commit from users that are not yet part
-of the project's community. Even under this na\"ive definition, 7\% of pull
-requests in 2012 can be classified as drive by commits. Moreover, 3.5\% of the
-forks were created for the sole purpose of creating a drive-by commit. More
-work needs to be done for the accurate definition and assessment of the
-implications of drive-by commits, which we defer for future work.
-
-\section{Collaboration through pull requests}
-
-Software development can be distributed across various
-dimensions~\cite{Gumm06}; among them, physical distribution distributes
-programming tasks across people collaborating remotely, while temporal
-distribution distributes tasks to people working in different time zones.
-Distribution of development activities has been initially thought to hinder
-collaboration~\cite{Herbs99, Batti01}, even though subsequent studies have
-shown that it does not pose significant threats to project
-quality~\cite{Spine06, Nguye08, Bird09a}. Access to online collaboration tools
-such as {\sc vcs} and bug databases have been identified as a necessary
-requirement for collaborative software development~\cite{Knuds76,Pilat06,
-Catal06}. Moreover, distributed collaboration on software artifacts can be
-facilitated through awareness building tools~\cite{Dabbi12, Treud12, Lanza10}. 
-
-We advocate that pull requests as a distributed development model in general,
-and as are implemented by Github in particular, form a new method of
-collaboration for distributed software development. The novelty lays on
-the decoupling of the development effort from the decision to incorporate
-the results of the development in the code base. 
-By separating the concerns of building artifacts and incorporating
-changes, work is cleanly distributed among a core team which is responsible
-to perform the merges and a peripheral team that submits, often occasional,
-changes to be considered for merging.
-
-Previous work has identified the processes of collaboration in open source
-through patch submission and acceptance~\cite{MOCKU02, Bird07, Weiss08}.  There
-are many similarities to the way pull requests work; for example, similar work
-team structures emerge (the ``onion'' model~\cite{Crow05}) while the process to
-accept a patch goes through a similar assessment process.  What pull requests
-bring in addition is process automation and centralization of information.
-With pull requests, the code does not have to leave the revision control
-system, and therefore it can be versioned across repositories, while authorship
-information is effortlessly maintained. Communication is context-specific
-(revolving around a single pull request) while .  Moreover, the review
-mechanism that Github incorporates has the additional effect of improving
-awareness~\cite{Dabbi12}; core developers can access in an efficient way all
-information that relates to an application patch/pull request and solicit the
-opinions of the community (``crowd-source'') about the merging decision.
-
-Assessment of pull based development can have various aspects.In this work we
-focus on the efficiency of the collaboration it affords. Intuitively, a pull
-request based collaboration is effective when the suitability of the pull
-request for a project can be assessed fast. The questions we
-are trying to answer are the following:
-
-\begin{description}
-
-  \item[RQ1] What factors affect the decision to merge a pull request?
-
-  \item[RQ2] What factors affect the time required to process a pull request,
-    until it is merged?
-
-\end{description}
 
 \section{Data Preparation}
 
@@ -866,16 +849,72 @@ a further experiment, with four bins:
 
 
 \section{Discussion}
+
 \label{sec:discussion}
 
-\paragraph{Development turnaround time} 
+\paragraph{Development turnover} One of the promises of the pull request model
+is that of fast development turnover, i.e. the time between submission of a pull
+request and acceptance in the project's main repository.  In various studies of
+the patch submission process in projects such as Apache and Mozilla, the
+researchers found that the time to commit 50\% of the contributions to the main
+project repository ranges from a few hours~\cite{Rigby08} to a less than 3
+days~\cite{Weiss08, Baysal12}. Our findings show that the majority (80\%) of
+pull requests are merged within 3 days, while a very significant number (30\%)
+are merged within one hour. These numbers are significantly faster indicating
+that pull requests are more efficient than traditional email-based patches.
+What's more important is that it is project-related factors that affect the
+turnover time, rather than characteristics of the pull request. This means that
+it is mostly up to the project to tune its processes (notably, reviewing and
+testing) for faster turnover.  
 
 \paragraph{Attracting contributions}
+In our study, we have shown that after pull requests have been introduced
+by Github, several projects have seen a measurable increase in the number
+of committers per month. But why is it that so? One possible explanation
+is presented by Pham et al.: in reference~\cite{Pham13}, they mention
+that pull requests make casual contributions straightforward through
+a mechanism often referred to as ``drive-by commits''. As the
+relative cost to fork a repository is negligible on Github (54\% of the
+repositories are forks), it is not uncommon for developers to fork other
+repositories to perform casual commits, such as fixes to spelling mistakes or
+indentation issues. In addition, Github provides web based editors
+for various file formats, using which any user can edit a file in another
+repository; behind the scenes, Github will fork the repository and ask the user
+to create a pull request to the original one. Such commits might be identified
+as pull requests that contain a single commit from users that are not yet part
+of the project's community. Even under this na\"ive definition, 7\% of pull
+requests in 2012 can be classified as drive by commits. Moreover, 3.5\% of the
+forks were created for the sole purpose of creating a drive-by commit. More
+work needs to be done for the accurate definition and assessment of the
+implications of drive-by commits, which we defer for future work.
 
 \paragraph{Crowd sourcing the code review}
 
-\paragraph{Development equality}
+An important part of the contribution process to an open source project is the
+review of the provided code. In reference~\cite{Rigby06}, Rigby and German
+report that 80\% of the core team members are also participating in the code
+reviews for patches, a number that is also in line with earlier findings by
+Mockus et al.~\cite{MOCKU02}. 
 
+ratio between core team members / code reviewers
+
+This means that 
+
+\paragraph{Democratizing development}
+One of the findings of this work is that pull requests are not treated
+differently based on their origin; both core team members and external
+developers have equal chances to get their pull request accepted within
+the same time boundaries. In our
+opinion, this is a radical change in the way open source development
+is being carried out. Before pull requests, most projects employed 
+membership promotion strategies to promote interested third party
+developers to the core team, where they could commit directly to the
+repository. With pull requests developers can contribute to any repository, without loss of authorship information, with better chances of having
+their contribution accepted. Specialized sites such as Ohloh 
+and CoderWall track developer activity and help developers advertise
+their expertise. We believe that the democratization of the development
+effort will lead to a substantially stronger ``commons'' ecosystem; this
+remains to be verified in further studies.
 
 \subsection{Implications}
 
@@ -887,6 +926,7 @@ Include test lines in the project, demand tests in project guidelines
 Have a team size
 
 \paragraph{Researchers} 
+
 
 \subsection{Threats to validity}
 Here we analyse the threats to validity of our study.

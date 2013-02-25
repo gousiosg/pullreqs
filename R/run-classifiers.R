@@ -80,10 +80,10 @@ all <- merge.dataframes(dfs)
 # write.csv(cvResult1k, file = "merge-time-4bins-cv-1k.csv")
 
 #n = 10000
-# data <- prepare.data.mergetime.4bins(all, 10000)
-# results <- run.classifiers.mergetime(merge.time.model, data$train, data$test, "10k")
-# cvResult10k <- cross.validation(merge.time.model, run.classifiers.mergetime, prepare.data.mergetime.4bins , all, 10000, 10)
-# write.csv(cvResult10k, file = "merge-time-4bins-cv-10k.csv")
+data <- prepare.data.mergetime.4bins(all, 10000)
+results <- run.classifiers.mergetime(merge.time.model, data$train, data$test, "10k")
+cvResult10k <- cross.validation(merge.time.model, run.classifiers.mergetime, prepare.data.mergetime.4bins , all, 10000, 10)
+write.csv(cvResult10k, file = "merge-time-4bins-cv-10k.csv")
 
 #n = all rows
 data <- prepare.data.mergetime.4bins(all, nrow(all))
