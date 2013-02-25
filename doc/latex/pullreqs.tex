@@ -868,7 +868,7 @@ it is mostly up to the project to tune its processes (notably, reviewing and
 testing) for faster turnover.  
 
 \paragraph{Attracting contributions}
-In our study, we have shown that after pull requests have been introduced
+In our study, we have shown that after pull requests were introduced
 by Github, several projects have seen a measurable increase in the number
 of committers per month. But why is it that so? One possible explanation
 is presented by Pham et al.: in reference~\cite{Pham13}, they mention
@@ -889,7 +889,6 @@ work needs to be done for the accurate definition and assessment of the
 implications of drive-by commits, which we defer for future work.
 
 \paragraph{Crowd sourcing the code review}
-
 An important part of the contribution process to an open source project is the
 review of the provided code. In reference~\cite{Rigby06}, Rigby and German
 report that 80\% of the core team members are also participating in the code
@@ -900,36 +899,71 @@ ratio between core team members / code reviewers
 
 This means that 
 
-\paragraph{Democratizing development}
-One of the findings of this work is that pull requests are not treated
-differently based on their origin; both core team members and external
-developers have equal chances to get their pull request accepted within
-the same time boundaries. In our
-opinion, this is a radical change in the way open source development
-is being carried out. Before pull requests, most projects employed 
-membership promotion strategies to promote interested third party
-developers to the core team, where they could commit directly to the
-repository. With pull requests developers can contribute to any repository, without loss of authorship information, with better chances of having
-their contribution accepted. Specialized sites such as Ohloh 
-and CoderWall track developer activity and help developers advertise
-their expertise. We believe that the democratization of the development
-effort will lead to a substantially stronger ``commons'' ecosystem; this
-remains to be verified in further studies.
+\paragraph{Democratizing development} One of the findings of this work is that
+pull requests are not treated differently based on their origin; both core team
+members and external developers have equal chances to get their pull request
+accepted within the same time boundaries. Indeed, even the classification
+models we build assign to the corresponding feature the least importance.
+In our opinion, this is a radical
+change in the way open source development is being carried out. Before pull
+requests, most projects employed membership promotion strategies~\cite{Jense07}
+to promote interested third party developers to the core team. With pull
+requests, developers can contribute to any repository, without loss of authorship
+information. The changes that those contributions will get accepted are higher
+with pull requests; in our sample, and also across Github, more than 70\% of external
+contributions are merged (40\% in other studies~\cite{Rigby06, Weiss08}).
+Specialized sites such as Ohloh and CoderWall track developer activity and help
+developers advertise their expertise. We believe that the democratization of the
+development effort will lead to a substantially stronger ``commons'' ecosystem;
+this remains to be verified in further studies.
 
 \subsection{Implications}
 
-\paragraph{Contributors} Pull requests containing tests get merged more often.
-If the purpose it to contribute  
+\paragraph{Contributors} 
 
-\paragraph{Project Owners} Restrict discussion to absolutely necessary
-Include test lines in the project, demand tests in project guidelines
-Have a team size
+Our research shows that pull requests that affect parts of the project
+that are hot are very likely to get merged. Also, most pull requests that
+include test code are accepted, while 80\% of merged pull requests modify
+3 or less files and include patches less than 100 lines long. Therefore,
+the advice to prospective contributors would simply be ``keep it short and
+include tests''.
 
-\paragraph{Researchers} 
+\paragraph{Project Owners} The primary job of the project owner, or owning team,
+is to evaluate a list of pull requests and decide whether to apply them or not.
+To make sure pull requests are processed on time, the obvious strategy would be
+to enforce limits on the discussion as it does not seem to affect the decision
+to merge a pull request significantly and only adds time overhead; however, this
+may have adverse effects on the quality of the submitted contributions. A more
+comprehensive strategy would include a clear articulation of what is expected
+from a pull request, for example tests or localized changes, on a prominent
+location in the project's Github page.  \footnote{Surprisingly a quick
+investigation revealed that no project in our sample, had such information in
+the top-level {\sc readme}.md file.} Moreover, a project owner can invest in a
+comprehensive test suite; this will improve the time to process a pull request,
+especially if used with an automated continuous integration system.
 
+% cd /cache && find . -type f -maxdepth 3|grep README.md|while read f; do if [ ! -z "`grep -i "pull request" $f`" ]; then echo $f; fi; done
+
+\paragraph{Researchers}
+
+A direct application of our results would be the construction of tools that
+would help busy project owners to prioritize their work; since we can predict
+with very high accuracy whether a pull request will be merged or not, a
+potential tool might suggest which pull requests can be merged without further
+examination by the time they arrive. Other tools might examine the quality of
+the pull request at the contributor's site, and based on the base repository's
+profile, would provide suggestions for improvement (e.g. more tests,
+documentation). 
+
+This work, while comprehensive, is not complete. Further research
+on the field can include the role and consequences of drive-by commits, 
+the formation of teams and management hierarchies in a seemingly flat
+workspace, the role of testing in assessing pull request impact,
+and replications
+of this work in more rigid work environments (e.g. companies).
 
 \subsection{Threats to validity}
-Here we analyse the threats to validity of our study.
+Here we analyse the threats to validity in our study.
 
 \noindent\emph{Construct validity:} Our statistical analysis uses random forests as a
 way to identify and rank cross-factor importance on two response variables.
