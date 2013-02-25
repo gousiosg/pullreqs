@@ -411,7 +411,7 @@ issues. Up to Feb 2013, more than a million pull requests from more that a
 hundred thousand projects have been collected.
 
 \subsection{Case Selection}
-
+\label{sec:caseselection}
 In the previous section, we defined pull based development, and presented an
 overview of how it works across all projects on Github. While an overview of
 the activity in 2012 can be safely extracted from the dataset, several
@@ -694,42 +694,56 @@ time to merge and the number of pull requests is very weak ($\rho = -0.33, n =
 \begin{figure*}
 \centering
 \subfigure[Percentage of pull requests that have been merged per project.
-Project names are omitted for clarity]{
-  \includegraphics[scale=0.4]{perc-merged.pdf} 
+Project names are omitted for clarity.]{
+  \includegraphics[scale=0.3]{perc-merged.pdf} 
   \label{fig:perc-merged}
 }
 \subfigure[Time to merge pull requests]{
-\includegraphics[scale=0.4]{pr-lifetime-hist.pdf}
+\includegraphics[scale=0.3]{pr-lifetime-hist.pdf}
 \label{fig:pull-req-merge-time}
 }
+\subfigure[Time to merge pull requests for internal vs external team members.]{
+\includegraphics[scale=0.3]{merge-internal-external.pdf}
+\label{fig:lifetime-boxplot}
+}
 \subfigure[Size of pull request patch]{
-\includegraphics[scale=0.4]{pr-size-hist.pdf}
+\includegraphics[scale=0.3]{pr-size-hist.pdf}
 \label{fig:pull-req-patch}
 }
 \subfigure[Number of files changed by pull request]{
-\includegraphics[scale=0.4]{pr-size-files-changed-hist.pdf}
+\includegraphics[scale=0.3]{pr-size-files-changed-hist.pdf}
 \label{fig:pull-req-files}
 }
 \subfigure[Number of comments]{
-\includegraphics[scale=0.4]{pr-num-comments-hist.pdf}
+\includegraphics[scale=0.3]{pr-num-comments-hist.pdf}
 \label{fig:pull-num-comments}
-}
-\subfigure[Time to merge pull requests for internal vs external team members.]{
-\includegraphics[scale=0.4]{merge-internal-external.pdf}
-\label{fig:lifetime-boxplot}
 }
 \caption{Dataset characteristics}
 \end{figure*}
 
 \paragraph*{Sizes of pull requests}
 
-Pull requests contain 
+%Pull requests are essentially an organized way to submit patches.
+A pull request bundles together a set of commits; the number of 
+commits on a pull request is generally less than 10 (95\% percentile 11,
+90\% percentile 6, 80\% percentile 3). Similarly, the number of 
+files that have changed 
+
+
+
+Except from the project's source code, pull requests also modify test
+code. In our sample, 33\% of the pull requests included modifications
+in test code, while 4\% modified test code exclusively. Of those
+pull requests, 72\% was merged; this result is inline with the findings by
+Pham et al.~\cite{Pham13} where interviewed developers identified 
+the presence of tests as a major factor for the acceptance of pull requests.
 
 \paragraph*{Discussion and Code review}
 
 Once a pull request has been submitted, it is open for discussion until
 it is merged or closed. The discussion is usually brief: 95\% of pull
-requests receive less than 10 comments
+requests receive 10 comments or less (80\% less than 4 comments). 
+
 
 \section{Acceptance and Processing Speed}
 \label{sec:accrej}
@@ -810,11 +824,15 @@ the stability of the {\sc auc} metric across folds was good
 \begin{figure*}
 \centering
 \subfigure {
-  \includegraphics[scale=0.4]{varimp-merge-decision-all-50.pdf} 
+  \includegraphics[scale=0.3]{varimp-merge-decision-40000-50.pdf} 
   \label{fig:varimp-merge-decision}
 }
 \subfigure{
-\includegraphics[scale=0.4]{varimp-merge-time-all-50.pdf}
+\includegraphics[scale=0.3]{varimp-merge-time-(2-bins)-40000-50.pdf}
+  \label{fig:varimp-merge-time}
+}
+\subfigure{
+\includegraphics[scale=0.3]{varimp-merge-time-(4-bins)-40000-50.pdf}
   \label{fig:varimp-merge-time}
 }
 \caption{Random forest feature importance for predicting merge decision (a) and merge time (b)}
@@ -850,7 +868,7 @@ a further experiment, with four bins:
 \section{Discussion}
 \label{sec:discussion}
 
-\paragraph{Development turnaround time}
+\paragraph{Development turnaround time} 
 
 \paragraph{Attracting contributions}
 
@@ -858,7 +876,66 @@ a further experiment, with four bins:
 
 \paragraph{Development equality}
 
+
+\subsection{Implications}
+
+\paragraph{Contributors} Pull requests containing tests get merged more often.
+If the purpose it to contribute  
+
+\paragraph{Project Owners} Restrict discussion to absolutely necessary
+Include test lines in the project, demand tests in project guidelines
+Have a team size
+
+\paragraph{Researchers} 
+
 \subsection{Threats to validity}
+Here we analyse the threats to validity of our study.
+
+\noindent\emph{Construct validity:} Our statistical analysis uses random forests as a
+way to identify and rank cross-factor importance on two response variables.
+While this is a valid approach~\cite{}, we 've yet to find other studies in
+empirical software engineering that follow it. Moreover, the classification
+scores in the \textsf{mergetime} case are not perfect, so feature ranking may
+not be exactly the same given a different dataset. Further work on validating
+the models we have built on data from different data sources (e.g. manual pull
+request handling in the Linux kernel) or projects in different languages on the
+GHTorrent dataset.
+
+\noindent\emph{Internal validity:}
+To analyze the projects, we extracted data from i) the GHTorrent relational
+database ii) The GHTorrent raw database iii) each project's Git repository.
+Differences in the data abstraction afforded by each data source may
+lead to different results in the following cases: 
+
+\begin{itemize}
+
+  \item Intra-repository merging: GHTorrent currently does not record the source
+    and target branch names that are affected by a pull request. Therefore, it
+    is not possible to use the heuristics presented in
+    Section~\ref{sec:caseselection} to identify a merged branch (if the project
+    does not use Github facilities to merge), as the source and target branches,
+    and therefore their commits, are in the same repository. In those cases, we
+    report the pull request as non-merged. In our dataset, 810 (or 2\% in total)
+    pull requests are label as non-merged and intra-repository; some of them may
+    actually be merged.
+
+  \item Number of files and commits on touched files: The commits reported
+    in a pull request also contain commits that merge branches, which the
+    developer may have merged prior to performing his changes. These commits
+    may contain several files not related to the pull request itself, which
+    in turn usually affects our results heavily. Therefore, we decided to 
+    filter out those commits.
+
+\end{itemize}
+
+\noindent\emph{External validity:}
+In our study, we used merged data from several projects. The statistical
+analysis treated all projects as equal, even though differences do exist.
+For example, the larger project in our dataset, Ruby on Rails, 
+has more than 8,000 pull requests while the smaller one just ~\todo{measure}.
+While we believe the uniform treatment of the samples led to more robust
+results in the classification experiment, variations in pull request
+handling among projects with smaller core teams may be ironed out.
 
 \subsection{On Replication}
 
@@ -866,8 +943,7 @@ During the execution of this study, we invested significant effort to
 make it replicable.  This study has been conducted using the GHTorrent dataset
 and a custom set of Ruby and R tools. We share the tools, original data sources
 and extracted data files on the Github repository \texttt{gousiosg/pullreqs}.
-The Ruby portion of the tool set is also offered through the RubyGems library
-collection. The execution of all tools is scripted and it is possible to run it
+The execution of all tools is scripted and it is possible to run it
 in sequence automatically. We invite other researchers to use the tools and data
 to replicate the study or create new studies based on it.
 

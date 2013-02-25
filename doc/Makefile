@@ -93,7 +93,7 @@ $(TEXFILES_DEST) : $(TEXFILES_SRC) $(BUILD)
 	cp $(LATEXDIR)/$(@F) $@
 
 $(PICTURES_DEST): $(PICTURES_SRC) $(BUILD)
-	cp $(PICS)/$(@F) $@
+	cp "$(PICS)/$(@F)" "$@"
 
 copy: $(TEXFILES_DEST) $(PICTURES_DEST)
 
