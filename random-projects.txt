@@ -2,7 +2,6 @@ professor cmusv Ruby
 forge core Java
 jboss-switchyard components Java
 sferik rails_admin Ruby
-ushis silo Ruby
 otwcode otwarchive Ruby
 jnicklas carrierwave Ruby
 Shopify active_merchant Ruby
@@ -24,7 +23,6 @@ Sage-Bionetworks Synapse-Repository-Services Java
 javan whenever Ruby
 sleuthkit autopsy Java
 errbit errbit Ruby
-nicolasgramlich AndEngine Java
 meskyanichi backup Ruby
 NoamB sorcery Ruby
 pengwynn octokit Ruby
@@ -46,3 +44,5 @@ twitter flockdb scala
 vert-x vert.x java
 voldemort voldemort java
 codahale dropwizard java
+mperham sidekiq ruby
+travis-ci travis-ci ruby
