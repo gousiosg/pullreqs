@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1185573,thinkaurelius/titan,162,1361578153,1361782662,1361782665,3408,3408,5,1,0,5,14,21299,303,0,14,122.0714587539321,741,xedin,6,1.0,19,true,true
 1161735,thinkaurelius/titan,157,1361052887,1361053363,1361053363,7,7,5,1,0,1,13,21293,17,0,3,122.05889259381017,1482,xedin,5,1.0,38,true,true

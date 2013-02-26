@@ -1,4 +1,3 @@
-Overriding configuration attach_ip= with cmd line 130.161.159.244
 pull_req_id,project_name,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_1000_lines,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1192092,mperham/sidekiq,735,1361752610,1361806563,1361806563,899,899,2,1,0,1,91,2223,2,0,0,871.7948717948718,2060,brandonhilkert,24,0.9583333333333334,10,true,true
 1174550,mperham/sidekiq,721,1361362733,1361367639,1361367639,81,81,1,1,1,1,95,2220,12,0,12,872.9729729729729,2060,rymai,0,0,24,false,false
