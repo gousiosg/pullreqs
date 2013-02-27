@@ -63,6 +63,7 @@ columns = c("team_size", "num_commits", "files_changed",
             "prev_pullreqs", "requester_succ_rate", "num_comments")
 
 merged <- subset(all, merged == TRUE)
+non_merged <- subset(all, merged == FALSE)
 used <- subset(all, select=columns)
 
 # Descriptive statistics accross all projects
@@ -147,58 +148,21 @@ orddom <- orddom(subset(merged, mergetime_minutes < 61, c('src_churn'))$src_chur
 
 printf(sprintf("Src churn in fast vs slow pull reqs: wilcox: %f, p %f, effect: %f"))
 
-# Pull requests merge time at the proejct level
-print("Cross correlation table for mean time to merge vs other variables")
-col1 <- c(columns, 'mergetime_minutes')
-cor(subset(aggregate(merged, list(merged$project_name), mean), select = col1), 
-    method = "spearman")
+# Unmerged pull request lifetime vs merged
+non_merged$type <- "unmerged"
+merged$type <- "merged"
+lifetimes <- rbind(non_merged, merged)
 
-mean.mergetime.per.project <- aggregate(merged, list(merged$project_name), mean)[c('Group.1','mergetime_minutes')]
+p <-  ggplot(lifetimes, aes(x = type, y = lifetime_minutes)) + 
+  geom_boxplot()  + scale_y_log10() + xlab("Pull request") + 
+  ylab("Time to close in minutes (log))")
+store.pdf(p, plot.location, "close-merged-unmerged.pdf")
 
-print(sprintf("Perc projects with mean mergetime < 1 week: %f", 
-              nrow(subset(mean.mergetime.per.project, mergetime_minutes < 10080))/
-                nrow(mean.mergetime.per.project)))
-
-pullreqs.per.project <- aggregate(merged, list(merged$project_name), length)[c('Group.1','mergetime_minutes')]
-a <- merge(x = mean.mergetime.per.project, y = pullreqs.per.project, by = 'Group.1')
-
-print(sprintf("Cor between num(pull_reqs), mean(time_to_merge) %f", 
-              cor.test(a$mergetime_minutes.x, a$mergetime_minutes.y, 
-              method = "spearman")$estimate))
-
-# Pull request sizes
-
-print(sprintf("Pullreqs commits quantiles: 95: %f, 90: %f, 80: %f", 
-              quantile(all$num_commits, 0.95), 
-              quantile(all$num_commits, 0.90), 
-              quantile(all$num_commits, 0.80)))
-
-print(sprintf("Pullreqs num_files quantiles: 95: %f, 90: %f, 80: %f", 
-              quantile(all$files_changed, 0.95), 
-              quantile(all$files_changed, 0.90), 
-              quantile(all$files_changed, 0.80)))
-
-print(sprintf("Merged pull reqs lines quantiles: 95: %f, 90: %f, 80: %f", 
-              quantile(all$src_churn + all$test_churn, 0.95), 
-              quantile(all$src_churn + all$test_churn, 0.90), 
-              quantile(all$src_churn + all$test_churn, 0.80)))
-
-print(sprintf("Merged pull reqs lines quantiles: 95: %f, 90: %f, 80: %f", 
-              quantile(all$src_churn, 0.95), 
-              quantile(all$src_churn, 0.90), 
-              quantile(all$src_churn, 0.80)))
-
-print(sprintf("Perc pull reqs modifying non-code: %f", 1 - nrow(subset(all, src_churn > 0 | test_churn >0))/nrow(all)))
-print(sprintf("Perc Pull reqs modifying test code: %f", nrow(subset(all, test_churn > 0))/nrow(all)))
-print(sprintf("Perc Pull reqs modifying test code: %f", nrow(subset(all, test_churn > 0 & src_churn == 0))/nrow(all)))
-print(sprintf("Perc test pull reqs merged: %f", nrow(subset(all, test_churn > 0 & merged == TRUE))/nrow(subset(all, test_churn > 0))))
-
-# Pull request discusion
-
-print(sprintf("Merged pull reqs comments quantiles: 95: %f, 90: %f, 80: %f", 
-              quantile(all$num_comments, 0.95), 
-              quantile(all$num_comments, 0.90), 
-              quantile(all$num_comments, 0.80)))
+closetimes <- list(closed = non_merged$lifetime_minutes, 
+                   merged = merged$lifetime_minutes)
+w <- wilcox.test(x = closetimes$closed, y = closetimes$merged, paired = FALSE)
+print(sprintf("Wilcox: pullreq merge main/external team: n_1 = %d, n_2 = %d V = %f, p < %f", length(closetimes$closed), length(closetimes$merged), w$statistic, w$p.value))
+print(sprintf("Cliff's delta pullreq merge main/external team :%f", cliffs.d(closetimes$closed, closetimes$merged)))
 
 # Team size
 # Box plot of merge time between main and external team members
@@ -219,3 +183,69 @@ mergetimes <- list(main = main.team.mergetimes$mergetime_minutes, ext = ext.team
 w <- wilcox.test(x = mergetimes$main, y = mergetimes$ext, paired = FALSE)
 print(sprintf("Wilcox: pullreq merge main/external team: n1 = %d, n2 = %d V = %f, p < %f", length(mergetimes$main), length(mergetimes$ext), w$statistic, w$p.value))
 print(sprintf("Cliff's delta pullreq merge main/external team :%f", cliffs.d(mergetimes$main, mergetimes$ext)))
+
+
+# Pull requests merge time at the proejct level
+print("Cross correlation table for mean time to merge vs other variables")
+col1 <- c(columns, 'mergetime_minutes')
+cor(subset(aggregate(merged, list(merged$project_name), mean), select = col1), 
+    method = "spearman")
+
+mean.mergetime.per.project <- aggregate(merged, list(merged$project_name), mean)[c('Group.1','mergetime_minutes')]
+
+print(sprintf("Perc projects with mean mergetime < 1 week: %f", 
+              nrow(subset(mean.mergetime.per.project, mergetime_minutes < 10080))/
+                nrow(mean.mergetime.per.project)))
+
+pullreqs.per.project <- aggregate(merged, list(merged$project_name), length)[c('Group.1','mergetime_minutes')]
+a <- merge(x = mean.mergetime.per.project, y = pullreqs.per.project, by = 'Group.1')
+
+print(sprintf("Cor between num(pull_reqs), mean(time_to_merge) %f", 
+              cor.test(a$mergetime_minutes.x, a$mergetime_minutes.y, 
+              method = "spearman")$estimate))
+
+# Rank correlation to see whether the populations differ significantly
+mergetimes <- list(main = main.team.mergetimes$mergetime_minutes, ext = ext.team.mergetimes$mergetime_minutes)
+w <- wilcox.test(x = mergetimes$main, y = mergetimes$ext, paired = FALSE)
+print(sprintf("Wilcox: pullreq merge main/external team: n1 = %d, n2 = %d V = %f, p < %f", length(mergetimes$main), length(mergetimes$ext), w$statistic, w$p.value))
+print(sprintf("Cliff's delta pullreq merge main/external team :%f", cliffs.d(mergetimes$main, mergetimes$ext)))
+
+# Pull request sizes
+
+print(sprintf("Pullreqs commits quantiles: 95: %f, 90: %f, 80: %f", 
+              quantile(all$num_commits, 0.95), 
+              quantile(all$num_commits, 0.90), 
+              quantile(all$num_commits, 0.80)))
+
+print(sprintf("Median commits %f", median(all$num_commits)))
+
+print(sprintf("Pullreqs num_files quantiles: 95: %f, 90: %f, 80: %f", 
+              quantile(all$files_changed, 0.95), 
+              quantile(all$files_changed, 0.90), 
+              quantile(all$files_changed, 0.80)))
+
+print(sprintf("Median commits %f", median(all$files_changed)))
+
+print(sprintf("Merged pull reqs lines quantiles: 95: %f, 90: %f, 80: %f", 
+              quantile(all$src_churn + all$test_churn, 0.95), 
+              quantile(all$src_churn + all$test_churn, 0.90), 
+              quantile(all$src_churn + all$test_churn, 0.80)))
+
+print(sprintf("Median commits %f", median(all$src_churn + all$test_churn)))
+
+print(sprintf("Perc pull reqs modifying non-code: %f", 1 - nrow(subset(all, src_churn > 0 | test_churn >0))/nrow(all)))
+print(sprintf("Perc Pull reqs modifying test code: %f", nrow(subset(all, test_churn > 0))/nrow(all)))
+print(sprintf("Perc Pull reqs modifying test code: %f", nrow(subset(all, test_churn > 0 & src_churn == 0))/nrow(all)))
+print(sprintf("Perc test pull reqs merged: %f", nrow(subset(all, test_churn > 0 & merged == TRUE))/nrow(subset(all, test_churn > 0))))
+
+# Pull request discusion
+
+print(sprintf("Merged pull reqs comments quantiles: 95: %f, 90: %f, 80: %f", 
+              quantile(all$num_comments, 0.95), 
+              quantile(all$num_comments, 0.90), 
+              quantile(all$num_comments, 0.80)))
+
+cor.test(all$lifetime_minutes, all$num_comments, method = "spearman")
+cor.test(merged$lifetime_minutes, merged$num_comments, method = "spearman")
+cor.test(non_merged$lifetime_minutes, non_merged$num_comments, method = "spearman")
+fast <- subset(merged, mergetime_minutes < 6600)

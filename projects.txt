@@ -36,3 +36,8 @@ scalatra scalatra scala
 mojombo grit ruby
 thinkaurelius titan java
 carlhuda bundler ruby
+Netflix curator java
+hector-client hector java
+jhy jsoup java
+webbit webbit java
+twitter scalding

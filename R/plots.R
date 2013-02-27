@@ -14,9 +14,12 @@ plot.percentage.merged <- function(dfs)
           data.frame(project=unique(x[[1]][1]), status="unmerged", value=unmerged_perc))
   }, dfs))
   
-  ggplot(a[with(a, order(status, -value)),], aes(x= project, y = value, fill = status)) + 
+  a <- subset(a, status == "merged")
+  a$order <- match(a$value[a$status == "merged"], sort(a$value[a$status == "merged"]))
+  a$order <- as.factor(a$order)
+  ggplot(a, aes(x= order, y = value, fill = status)) + 
     geom_bar(stat="identity", colour="white") +
-    theme(axis.text.x=element_blank()) +
+    theme(axis.text.x=element_blank(), legend.position = c(0.1, 0.85)) +
     ylab("Percentage") + 
     xlab("Project")
 }

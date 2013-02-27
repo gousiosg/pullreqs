@@ -8,6 +8,8 @@ source(file = "R/mysql.R")
 library(RMySQL)
 library(ggplot2)
 library(orddom)
+library(reshape)
+library(sqldf)
 
 print("Running database queries...")
 con <- dbConnect(dbDriver("MySQL"), user = mysql.user, password = mysql.passwd, 
@@ -43,7 +45,7 @@ orig_repos <- fetch(res, n = -1)
 print(sprintf("Original repos: %f",orig_repos$cnt))
 
 # % of original repos 
-print(sprintf("Original repos: %f",(orig_repos$cnt/repos$cnt) * 100)
+print(sprintf("Original repos: %f",(orig_repos$cnt/repos$cnt) * 100))
 
 # Original repositories that received a single commit in 2012
 res <- dbSendQuery(con, "select count(*) as cnt from projects p where forked_from is null and name not regexp '^.*\\.github\\.com$' and name <> 'try_git' and name <> 'dotfiles' and name <> 'vimfiles' and exists ( select * from project_commits pc, commits c where  pc.project_id = p.id and  c.id = pc.commit_id and year(c.created_at) = 2012)")
@@ -158,3 +160,49 @@ res <- dbSendQuery(con, "select count(*) as cnt from pull_requests pr, pull_requ
 drive_by_pr <- fetch(res, n = -1)$cnt
 print(sprintf("Perc drive by pull requests: %f", (drive_by_pr/opened_pullreqs) * 100))
 print(sprintf("Perc one pull req repos: %f", (drive_by_pr/forked_repos) * 100))    
+
+      
+# Discussion comments from internal vs externals
+# project_ids: 1334,847,312,853,6026,2812,2093,354,24761,6815,50918,1707,5591,4627,15966,67874,14363,20985,56538,13191,10720,6468,15870,3083,3189,340,310,10045,4135,8248,1953978,1648,1372,663,25334,16462,6075,5461,171070,9615,8612,12885,21603,4739,489,27502,53383,21289,12193,6570,4114,9259,146460,18571,5162,1337,1107,65399,853,7511,411,5562,608,3510,3671,23509,4237,47738,934,17042,18358,70480,23623,24397,10083,10972,15870,68610,5245,85313,17827,15385,4563,21289,2719,14915,7148,66412,6974,1182,170689
+comments <- data.frame()
+for (pid in c(1334,847,312,853,6026,2812,2093,354,24761,6815,50918,1707,5591,4627,15966,67874,14363,20985,56538,13191,10720,6468,15870,3083,3189,340,310,10045,4135,8248,1953978,1648,1372,663,25334,16462,6075,5461,171070,9615,8612,12885,21603,4739,489,27502,53383,21289,12193,6570,4114,9259,146460,18571,5162,1337,1107,65399,853,7511,411,5562,608,3510,3671,23509,4237,47738,934,17042,18358,70480,23623,24397,10083,10972,15870,68610,5245,85313,17827,15385,4563,21289,2719,14915,7148,66412,6974,1182,170689)) {
+  res <- dbSendQuery(con, sprintf("select a.p_id, concat(u.login, '/', p.name) as project_name, (select count(pm.user_id) from project_members pm where pm.user_id = a.user_id and pm.repo_id = a.p_id) as is_member,  count(distinct user_id) as num_users, sum(a.cnt) as num_comments  from (  (select pr.base_repo_id as p_id, ic.user_id as user_id, count(ic.comment_id) as cnt   from projects p join pull_requests pr on p.id = pr.base_repo_id left outer join issues i on pr.pullreq_id = i.issue_id left outer join issue_comments ic on i.id = ic.issue_id where p.forked_from is null and p.id = %d and pr.base_repo_id = i.repo_id group by pr.base_repo_id, ic.user_id)  union (select pr.base_repo_id as p_id, prc.user_id as user_id, count(prc.comment_id) as cnt    from projects p join pull_requests pr on p.id = pr.base_repo_id left outer join pull_request_comments prc on prc.pull_request_id = pr.id where p.forked_from is null and p.id = %d group by pr.base_repo_id, prc.user_id) ) as a, users u, projects p where p.owner_id = u.id and p.id = a.p_id group by a.p_id, is_member", pid, pid))
+  d <- fetch(res, n = -1)
+  print(sprintf("Running for project %d %d results", pid, nrow(d)))
+  comments <- rbind(comments, d)
+  comments
+}
+      
+comments <- subset(comments, num_users > 0 & num_comments >0)
+processed_comments <- sqldf("select project_name, (select c1.num_users from comments c1 where c1.p_id = c.p_id and c1.is_member = 0)/sum(c.num_users) as commenters, (select c2.num_comments from comments c2 where c2.p_id = c.p_id and c2.is_member = 0)/sum(c.num_comments) as comments from comments c group by c.p_id", drv="SQLite")
+processed_comments <- melt(processed_comments, 'project_name', na.rm = TRUE)
+processed_comments$project_name <- as.factor(processed_comments$project_name)
+processed_comments$value <- processed_comments$value * 100   
+
+#processed_comments$foo <- match(processed_comments$value[processed_comments$variable == "comments"], sort(processed_comments$value[processed_comments$variable == "comments"]))
+processed_comments$foo <- match(processed_comments$value[processed_comments$variable == "commenters"], sort(processed_comments$value[processed_comments$variable == "commenters"]))
+processed_comments$foo <- as.factor(processed_comments$foo)
+p <- ggplot(processed_comments, aes(x = foo, y = value, fill = variable)) + 
+        scale_x_discrete() + xlab("Project") + ylab("%") +
+        geom_bar(position="dodge") + 
+        #theme(axis.text.x=element_text(angle = 90, size = 6), legend.position="none") +
+        theme(axis.text.x=element_blank(), legend.position="none") +
+        #ggtitle("% of external commenters/comments per project") +
+        facet_grid(. ~ variable)
+        
+store.pdf(p, plot.location, "perc-external-commenters-comments.pdf")
+
+dfs <- load.all(dir=data.file.location, pattern="*.csv$")
+dfs <- addcol.merged(dfs)
+all <- merge.dataframes(dfs)
+mean_external_contribs <- aggregate(perc_external_contribs ~ project_name, all, mean)
+joined <- merge(mean_external_contribs, processed_comments, by = "project_name")
+a <- subset(joined, variable == "commenters", perc_external_contribs)
+b <- subset(joined, variable == "comments", value)
+cor.test(a$perc_external_contribs, b$value, method="spearman")
+      
+b <- subset(joined, variable == "commenters", value)
+cor.test(a$perc_external_contribs, b$value, method="spearman")
+      
+nrow(subset(processed_comments, variable == "commenters" & value > 50))
+      
