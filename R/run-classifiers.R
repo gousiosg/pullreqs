@@ -30,6 +30,10 @@ results <- run.classifiers.mergetime(merge.time.model, data$train, data$test, "a
 cvResultAll <- cross.validation(merge.time.model, run.classifiers.mergetime, prepare.data.mergetime, all, nrow(all), 10)
 write.csv(cvResultAll, file = "merge-time-cv-all.csv")
 
+data <- prepare.data.mergetime(all, nrow(all))
+new_model <- merged_fast ~ num_comments + sloc
+run.classifiers.mergetime(new_model, data$train, data$test, "all")
+
 #
 # Merge decision classifiers
 
@@ -60,6 +64,10 @@ data <- prepare.data.mergedecision(all, nrow(all))
 results <- run.classifiers.mergedecision(merge.decision.model, data$train, data$test, "All")
 cvResult10k <- cross.validation(merge.decision.model, run.classifiers.mergedecision, prepare.data.mergedecision, all, nrow(all), 10)
 write.csv(cvResultAll, file = "merge-decision-cv-all.csv")
+
+data <- prepare.data.mergedecision(all, nrow(all))
+new_model <- merged ~ commits_on_files_touched + sloc + files_changed 
+run.classifiers.mergedecision(new_model, data$train, data$test, "All")
 
 #
 # Merge time classifiers -- 4 bins
