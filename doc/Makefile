@@ -44,7 +44,7 @@ TEXFILES_SRC:=$(wildcard $(LATEXDIR)/*.tex) $(wildcard $(LATEXDIR)/*.cls) $(wild
 TEXFILES_DEST := $(addprefix $(BUILD)/, $(notdir $(TEXFILES_SRC)))
 
 # Bib file
-BIB=$(patsubst %.tex,%,${TEXFILE})
+BIB=$(LATEXDIR)/$(MASTERTEX).bib
 
 # Latex aux file
 AUXFILE=$(patsubst %.tex,%.aux,${TEXFILE})
@@ -96,6 +96,7 @@ $(PICTURES_DEST): $(PICTURES_SRC) $(BUILD)
 	cp "$(PICS)/$(@F)" "$@"
 
 copy: $(TEXFILES_DEST) $(PICTURES_DEST)
+	cp $(BIB) $(BUILD)
 
 # Produce the aux file
 $(BUILD)/$(MASTERTEX).aux: $(TEXFILES_DEST) $(PICTURES_DEST)
@@ -104,8 +105,8 @@ $(BUILD)/$(MASTERTEX).aux: $(TEXFILES_DEST) $(PICTURES_DEST)
 
 # Bibliography
 $(BUILD)/$(MASTERTEX).bib: $(BUILD)/$(MASTERTEX).aux
-	cd $(BUILD) && \
-	$(PYBCOMPACT) $(MASTERTEX).aux $(PAPERPATH) > `basename $(BUILD)/$(MASTERTEX).bib`
+	cd $(BUILD) #&& \
+	#$(PYBCOMPACT) $(MASTERTEX).aux $(PAPERPATH) > `basename $(BUILD)/$(MASTERTEX).bib`
 
 $(BUILD)/$(MASTERTEX).bbl: $(BUILD)/$(MASTERTEX).bib $(BUILD)/$(MASTERTEX).aux
 	cd $(BUILD) && \

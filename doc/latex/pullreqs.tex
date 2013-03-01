@@ -39,13 +39,15 @@ Arie van Deursen\\
   of a new paradigm for distributed software development; instead of pushing
   changes to a central repository, developers pull them from other repositories
   and merge them locally. Various code hosting sites, notably Github, have
-  tapped on the opportunity to facilitate pull based development by offering
+  tapped on the opportunity to facilitate pull-based development by offering
   workflow support tools, such as code reviewing systems and integrated issue
-  trackers. In this work, we provide an exploration of how pull-based software
-  development works. By quantitatively analysing 88 projects, we
-  identify the factors that affect the efficiency of the pull request
-  development model. We find that it is possible to predict whether 
-  pull requests will be 
+  trackers. In this work, we explore how pull-based software development works,
+  first the {\sc ght}orrent corpus and then on a carefully selected sample of 88
+  projects. We find that the pull request model offers fast turnaround,
+  increased opportunities for community engagement and significantly decreased
+  time to incorporate contributions. Moreover, we have shown that a relatively
+  small number of factors, affect both the decision to merge a pull request and
+  the time to process it.
 
 \end{abstract}
 
@@ -102,7 +104,7 @@ merging.
 Previous work has identified the processes of collaboration in open source
 software development through patch submission and acceptance~\cite{MOCKU02,
 Bird07, Weiss08}. There are many similarities to the way pull requests work; for
-example, similar work team structures emerge (the ``onion''
+example, identical work team structures emerge (the ``onion''
 model~\cite{Crows05}), while pull requests go through a similar assessment
 process. What pull requests offer in addition is process automation and
 centralization of information. With pull requests, the code does not have to
@@ -114,11 +116,12 @@ effect of improving awareness~\cite{Dabbi12}; core developers can access in an
 efficient way all information that relates to a pull request and solicit the
 opinions of the community (``crowd-source'') about the merging decision.
 
-The goal of this work is to analyze the factors that affect the efficiency
-of the pull-based software development model. Specifically, the questions we are trying to answer are: 
-%Intuitively, a pull
-%request based collaboration is effective when the suitability of the pull
-%request for a project can be assessed fast. 
+As the goal of distributed development is to successfully integrate
+contributions towards a common product, a pull request based collaboration is
+effective when the suitability of a pull request can be assessed
+fast. The goal of this work is to investigate pull request usage and to analyze the
+factors that affect the efficiency of the pull-based software development model.
+Specifically, the questions we are trying to answer are: 
 
 \begin{description}
 
@@ -968,7 +971,7 @@ project's test coverage.}
 \section{Discussion}
 \label{sec:discussion}
 
-\subsection{The pull based development model}
+\subsection{The pull-based development model}
 
 \textbf{Development turnover.} One of the promises of the pull request model
 is fast development turnover, i.e., the time between the submission of a pull
@@ -1084,12 +1087,6 @@ the pull request at the contributor's site, and based on the base repository's
 profile, would provide suggestions for improvement (e.g., more tests,
 documentation). 
 
-This work, while comprehensive, is not complete. Further research
-on the field can include the role and consequences of drive-by commits, 
-the formation of teams and management hierarchies in a seemingly flat
-workspace, the role of testing in assessing pull request impact,
-and replications in more rigid work environments (e.g., companies).
-
 \subsection{Threats to validity}
 
 \textbf{Construct validity.} Our statistical analysis uses random forests as a way
@@ -1145,9 +1142,6 @@ replicate the study or create new studies based on it.
 
 \section{Related Work}
 
-In this section, we summarize the related work items scattered around
-the text for completeness.
-
 Software development can be distributed across various
 di\-men\-sions~\cite{Gumm06}; among them, physical distribution distributes
 programming tasks across people collaborating remotely, while temporal
@@ -1185,16 +1179,27 @@ code repository, a number much lower than our finding for pull requests (74\%).
 
 \section{Conclusion}
 
-We have presented an empirical investigation of how the pull based development
+We have presented an empirical investigation of how the pull-based development
 model works in practice. We first explored its use on the Github source code
-hosting site and then focused on the factors that affect pull request acceptance and processing time. We find that pull request 
-We find that pull requests are a faster alternative
-to manual (email-based) patch submission and 
+hosting site and then focused on the factors that affect pull request acceptance
+and processing time. We find that the pull request model offers fast turnaround,
+increased opportunities for community engagement and significantly decreased
+time to incorporate contributions.  Moreover, we have shown that a relatively
+small number of factors, which can be optimized by the project or the
+contributor, affect both the decision to merge a pull request and the time to
+process it. 
+
+This work is the first to explore the emerging paradigm of pull-based
+distributed software development. As such, while comprehensive, is not complete.
+Further research on the field can include the role and consequences of drive-by
+commits, the formation of teams and management hierarchies in a seemingly flat
+workspace, the role of testing in assessing pull request impact, and
+replications in more rigid work environments (e.g., companies).
 
 \section*{Acknowledgements}
 
 The authors would like to thank Efthimia Aivaloglou for her help with 
-optimizing {\sc sql} queries and to Panos Louridas for reviewing the 
+optimizing {\sc sql} queries and Panos Louridas for reviewing the 
 statistical analysis parts of the paper.
 This work is partially supported by Marie Curie {\sc ief} 298930 --- {\sc sefunc}.
 
