@@ -1,0 +1,37 @@
+.PS
+copy "sequence.pic";
+
+# Object definition
+actor(I,"Integrator");
+object(M, "Project");
+object(F, "Fork");
+actor(C,"Contributor");
+step();
+
+# Message exchange
+active(I);
+active(C);
+message(I,M,"create");
+active(M);
+
+message(C,M,"fork");
+active(F);
+
+async();
+message(C,F,"commit(1)");
+message(C,F,"commit(2)");
+message(C,M,"pull_request(1,2)");
+
+message(I,M,"inspect_pr");
+message(I,F,"pull_commits(1,2)");
+return_message(F,M)
+message(I,M,"merge_pr");
+
+
+step();
+complete(I);
+complete(C);
+complete(M);
+complete(F);
+
+.PE
