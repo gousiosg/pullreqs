@@ -187,18 +187,17 @@ the following strategies can be employed:
     %branches and to the project master branch.
 
 \textbf{Pull requests} The project's main repository is not shared among
-developers; instead, developers clone the repository and make their changes
-independent of each other. When a set of changes is ready to be submitted to the
-main repository, they create a \emph{pull request}, which specifies a local
-branch and a list of commits to be merged with a branch in the main repository.
-The main repository owner is responsible to inspect the changes and pull them to
-the project's master branch. If changes are considered unsatisfactory, more
-changes may be requested; in that case, developers need to update their pull
-requests with more commits.  On larger projects, such as the Linux kernel, there
-are several layers of merge repositories before a contributed pull request
-reaches the main tree~\cite{Cornf10}.  Furthermore, as pull requests only
-specify branches from which certain commits can be pulled, there is nothing that
-forbids their use in the shared repository approach.
+developers; instead, developers clone (``fork'') the repository and make their
+changes independent of each other. When a set of changes is ready to be
+submitted to the main repository, they create a \emph{pull request}, which
+specifies a local branch and a list of commits to be merged with a branch in the
+main repository. The main repository owner is responsible to inspect the
+changes and pull them to the project's master branch. If changes are considered
+unsatisfactory, more changes may be requested; in that case, developers need to
+update their pull requests with more commits. Furthermore, as
+pull requests only specify branches from which certain commits can be pulled,
+there is nothing that forbids their use in the shared repository approach. An
+overview of the pull request process can be seen in Figure~\ref{fig:pullreq-process}.
 
 \subsection{Pull requests on Github}
 
@@ -212,12 +211,17 @@ has been created. Each Github pull request has an attached implicit state
 machine (see Figure~\ref{fig:state}), which is automatically updated by
 Github as users manipulate the pull request.
 
-\begin{figure}
-  \begin{center}
-    \includegraphics[scale=0.5]{pr-state-machine.pdf}
-  \end{center}
-  \caption{The different states of a pull request on Github}
+\begin{figure}[t]
+  \centering
+\subfigure[The pull request process.]{
+\includegraphics[scale=0.7]{pullreq}
+\label{fig:pullreq-process}
+}
+\subfigure[The different states of a pull request on Github.]{
+    \includegraphics[scale=0.5]{pr-state-machine.pdf}  
   \label{fig:state}
+}
+\caption{Processing pull requests}
 \end{figure}
 
 By default, pull requests are submitted to the base repository for review.
