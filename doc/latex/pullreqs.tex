@@ -81,15 +81,15 @@ Arie van Deursen\\
 Pull-based development is an emerging paradigm for distributed software
 development. As more developers appreciate the perceived benefits of isolated
 development and branching~\cite{Bird12}, more projects, both closed source and,
-especially, open source are being migrated to code hosting sites such as Github
-and Bitbucket with support for pull based development~\cite{Barr12}. A unique
+especially, open source, are being migrated to code hosting sites such as Github
+and Bitbucket with support for pull-based development~\cite{Barr12}. A unique
 characteristic of such sites is that they allow any user to fork any public
 repository. The clone creates a public project that belongs to the user that
 cloned it, so the user can modify the repository without being part of the
-development team. What is more important is they automate the selective
+development team. What is more important is that they automate the selective
 contribution of commits from the clone to the source through pull requests. 
 
-In this paper, we advocate that pull requests as a distributed development model
+Pull requests as a distributed development model
 in general, and as are implemented by Github in particular,
 form a new method for collaborating on distributed software development. The
 novelty lays on the decoupling of the development effort from the decision to
@@ -134,19 +134,19 @@ of the pull-based software development model. Specifically, the questions we are
 Our study is based on data from the Github collaborative development forge, as
 made available through the {\sc ght}orrent project~\cite{GS12}. Using it, we first
 explore the use of pull requests across all projects in Github. We then examine
-88 carefully selected Ruby, Java and Scala projects, (37,492 pull requests), and
+88 carefully selected Ruby, Java and Scala projects (in total, 37,492 pull requests), and
 identify, using machine learning tools, common factors that affect pull request
 lifetime and merging. The results show that pull request \emph{acceptance}
 can be predicted with high accuracy (> 90\%), while it is mostly dependent on
-what parts of the system does the pull request affect. On the other hand, pull
+on the parts of the system affected by the pull request. On the other hand, pull
 request \emph{merge time} can be predicted with reasonable accuracy (> 70\%),
 while it is mostly dependent on the ensuing discussion, the size of the project
-and its test coverage. Both results can be exploited to assist developers to
-submit better pull requests, project managers to prioritize pull requests, while
+and its test coverage. Both results can be utilized by developers to
+submit better pull requests and project managers to prioritize pull requests, while
 it opens new opportunities for research, such as building automated tools for
 pull request triaging.
 
-This work makes the following concrete contributions:
+This work makes the following contributions:
 
 \begin{itemize}
 
@@ -163,10 +163,10 @@ This work makes the following concrete contributions:
 \section{Background} \label{sec:bg} Since their appearance in 2001, distributed
 version control systems ({\sc dvcs}), notably Git, have revolutionized the way
 distributed software development is carried out. Driven by pragmatic needs, {\sc
-dvs}s were designed from scratch to work as an advanced patch management
+dvcs}s were designed from scratch to work as advanced patch management
 systems, rather than versioned file systems, the then dominant version control
 paradigm. In most {\sc dvcs}s, a file is an ordered set of changes, the serial
-application of which lead to the current file state. The changesets can
+application of which leads to the current file state. The changesets can
 originate from a local filesystem or a remote host; tools facilitate the
 acquisition and application of changesets on a local mirror. The distributed
 nature of {\sc dvcs} enables a pull-based development model, where changes are
@@ -186,14 +186,14 @@ the following strategies can be employed:
     write permissions. To work, they clone it locally, modify its contents,
     potentially introducing new branches, and push their changes back to the
     central one. To cope with multiple versions and multiple developers, larger
-    projects usually adopt a {\em branching model}, i.e. an organized way to
+    projects usually adopt a {\em branching model} i.e., an organized way to
     accept and test contributions before those are merged to the main
     development branch~\cite{Bird12}. While the exact details depend on the
     project requirements, usually branching models include feature branches,
     where developers implement new features and fix bugs, and release branches,
     which store the state of each project release. After the work has finished
-    on the feature branch its contents are merged appropriately to release
-    branches and the project master branch.
+    on a feature branch its contents are merged appropriately to release
+    branches and to the project master branch.
 
 %  \item[Pull requests] 
 \textbf{Pull requests}
@@ -223,7 +223,7 @@ In this work, we only consider pull-requests as our investigation target.
 
 \section{Experimental Design}
 
-In this section, we present the research protocols and datasets we use to 
+In this section, we present the research approach and datasets we use to 
 answer the research questions.
 
 \subsection{Process}
@@ -232,20 +232,22 @@ answer the research questions.
 First, we need to determine the popularity of pull requests; how
 common are they, how are they treated by projects and what types of 
 interactions they enable? We answer this question by performing an
-exploration of pull request usage on the {\sc ght}orrent data set. 
+exploration of pull request usage on the {\sc ght}orrent data set 
+(Section~\ref{sec:github}).
 
-The central question we are trying to answer is what factors can be used as
-indicators for predicting whether a pull request will be merged or not. To
-answer this question, we determine a set of suitable candidate
-features by consulting related work in the fields of patch submission and
-bug triaging. Then, we clean it up through cross-correlation analysis to obtain
-a set of features with maximum predictive power (Section~\ref{sec:featureselection}).
+Based on the results of the exploration, we then investigate the answer of what
+factors can be used as indicators for predicting whether a pull request will be
+merged or not. To answer this question, we determine a set of suitable candidate
+features by consulting related work in the fields of patch submission and bug
+triaging. Then, we clean it up through cross-correlation analysis to obtain a
+set of features with maximum predictive power
+(Section~\ref{sec:featureselection}).
 
 Using the identified features, we build prediction models, one per research
 question, which we use to train a set of classification algorithms to retrieve
 the dominant ones. Prior to running the classification algorithms, we labeled
-each data point with a binary attribute; in the case of the \textsf{merge
-decision} classification task, the attribute signified whether the pull request
+each pull request with a binary attribute; in the case of the \textsf{merge
+decision} classification task, the attribute signifies whether the pull request
 has been merged. For the \textsf{merge time} task, we first filter out pull
 requests that have not been merged and then split the remaining data points in
 two bins, slow and fast, using the mean time to merge, so that we get two
@@ -255,7 +257,7 @@ At a high level, the process to retrieve the dominant features for both
 problems consists of two steps: i) we run each dataset through 4 well known
 classification algorithms, namely Random Forests (\texttt{randomforest}),
 Support Vector Machines (\texttt{svm}), Binary Logistic Regression
-(\texttt{binlogregr}) and Na\"ive Bayes (\texttt{naivebayes}), ii) we select
+(\texttt{binlogregr}) and Na\"ive Bayes (\texttt{naivebayes}), and ii) we select
 the best classifier and apply a classifier-specific process to extract the
 feature importance. 
 
@@ -269,37 +271,38 @@ metric.\footnote{For the \texttt{randomforest} classifier, cross validation is
 considered redundant~\cite{Breim01}. Nevertheless, we did it for consistency
 across our experiment. The stability of the results across cross validation runs
 confirm the redundancy of cross-validation.} At each iteration, the algorithm
-would randomly sample 10,000 data points from the whole dataset, train a
+randomly samples 10,000 data points from the whole dataset, train a
 classifier with 90\% percent of the input and use it to predict the remaining
 10\%. The 10-fold run results also allowed us to evaluate the metric stability
 across runs. We did not perform any additional tuning to the classification
 algorithms (Section~\ref{sec:accrej}).
 
-The implementations of the R statistics language were used for running the experiments.
+We used {\sc r} to implement and run the experiments.
 
 \subsection{Data}
 \label{sec:expdata} 
 
 We use data from the {\sc ght}orrent dataset, an off-line mirror of the data
-offered throught the Github {\sc api}. The data come in two forms; a streaming
+offered through the Github {\sc api}. The data come in two forms; a streaming
 data flow lists events, such as forking or creating pull requests, happening on
-repositories in real time, while a static view . To obtain references to the
-roots of the static view entities, the {\sc ght}orrent project follows the event
-stream. From there, it applies a recursive dependency-based parsing approach to
-yield all data offered through the {\sc api}. The {\sc ght}orrent dataset covers
-a broad range of development activities on Github, including pull requests and
-issues. Up to February 2013, more than a million pull requests from more that a
-hundred thousand projects have been collected.
+repositories in real time, while a static view contains the current state of
+entities. To obtain references to the roots of the static view entities, the
+{\sc ght}orrent project follows the event stream. From there, it applies a
+recursive dependency-based parsing approach to yield all data offered through
+the {\sc api}. The {\sc ght}orrent dataset covers a broad range of development
+activities on Github, including pull requests and issues. Up to February 2013,
+more than a million pull requests from more that a hundred thousand projects
+have been collected.
 
 While an overview of pull request activity can be safely extracted from the {\sc
-ght}orrent dataset, several limitations would not allow us to apply our detailed
+ght}orrent dataset, several limitations do not allow us to apply our detailed
 analysis across all projects. Specifically, projects worth analyzing have a
 history longer than one year, and it is important to retrieve all information
 available during the project's life. To make the data collection and subsequent
 analysis practical, we restrict our input data to two lists of projects, a
 \textsf{handpicked} and a \textsf{random} one. Both lists contain 50 projects
 of different sizes and languages. To build them, we use the following
-criteria when selecting projects to include:
+inclusion criteria:
 
 \begin{itemize}
 
@@ -321,7 +324,7 @@ criteria when selecting projects to include:
 The \textsf{handpicked} list was created by browsing Github's most starred projects
 per language for projects that met the criteria. The \textsf{random} list
 was created by performing a random selection in the {\sc ght}orrent database. In
-cases were the randomly selected projects did not match the criteria (existence
+cases were the randomly selected projects did not match the criteria (the existence
 of tests could not be evaluated automatically) or overlapped with the
 \textsf{handpicked} list, the projects where replaced with
 other random projects. 
@@ -331,7 +334,7 @@ requests, issues and commits) of the included projects was downloaded and
 features were extracted by querying the {\sc ght}orrent database and analysing
 each project's Git directory.
 To compensate for pull requests that are merged
-using Git facilities, we examined whether at least one of the commits associated
+outside Github, we examined whether at least one of the commits associated
 with the pull request appears in the list of commits of the target project. In
 case commit squashing or patch-based merge has occurred, the merge could not be
 detected, and therefore the pull request was marked as unmerged.
@@ -371,9 +374,9 @@ those, 587,800 (or 28\% in total) received a commit in 2012.
 Github supports all types of distributed development outlined above; however,
 pull requests receive special treatment. The site is tuned to allow easy forking
 of projects by external users, while automating the generation of pull
-requests through automatic comparison of project branches. In common to
+requests through automatic comparison of project branches. Similarly to
 Git-based pull requests, a Github pull request contains a list of commits
-to be merged. In addition, the list of commits is automatically updated when newer commits have been added to the forked repository after the pull request
+to be merged. The list of commits is automatically updated when newer commits have been added to the forked repository after the pull request
 has been created. Each Github pull request has an attached implicit state
 machine (see Figure~\ref{fig:state}), which is automatically updated by
 Github as users manipulate the pull request.
@@ -382,7 +385,7 @@ Github as users manipulate the pull request.
   \begin{center}
     \includegraphics[scale=0.5]{pr-state-machine.pdf}
   \end{center}
-  \caption{States into which a Github pull request can be into}
+  \caption{The different states of a pull request on Github}
   \label{fig:state}
 \end{figure}
 
@@ -434,22 +437,22 @@ the amount of preservation of the original source code properties:
     A technique that complements both of the above is \emph{commit
     squashing}: when the full history is not of interest to the project,
     several consecutive commits are merged into a single one on the pull request
-    branch, which can them be merged or cherry-picked to the upstream branch. In
+    branch, which can then be merged or cherry-picked to the upstream branch. In
     this case, the author of the commit can be different from the person that
     applied the commit.
 
-  \item [Committing the patch] Through this technique, the merger creates a
+  \item [Committing the patch] The merger creates a
     textual difference between the upstream and the pull request branch, which
     then applies to the upstream branch. Both history and authorship information
     are lost.
 
 \end{description}
 
-Pull requests are enabled by default on all repositories opened on Github.  In
-Figure~\ref{fig:pullreq-per-month}, we see that the total number of pull
-requests per is increasing. From the set of original repositories as described
-above, 92,600 received at least one pull request in 2012. During the same
-period, 525,900 original repositories used the shared repository approach,
+Pull requests are enabled by default on all repositories opened on Github. On a
+monthly basis, pull request usage is increasing
+(Figure~\ref{fig:pullreq-per-month}). From the set of original repositories as
+described above, 92,600 received at least one pull request in 2012. During the
+same period, 525,900 original repositories used the shared repository approach,
 having received commits by more than one developers and no pull requests. The
 situation is similar during the first two months of 2013; 42,400 repositories
 received a pull request while 222,967 used the shared repository approach
@@ -470,7 +473,7 @@ supported by our data: the Kendall rank correlation between the number of
 watchers of a project and the number of pull requests it has received is 0.32
 ($p < 0.001, n = 63335$).
 
-\begin{figure}
+\begin{figure}[t]
   \centering
 \subfigure[Number of pull requests per month]{
 \includegraphics[scale=0.35]{num-pullreqs-month}
@@ -551,34 +554,30 @@ in three categories:
     features, namely \texttt{src\_churn} and \texttt{test\_churn}.
 
   %\item[Project characteristics] 
-  \textbf{Project characteristics}
-    features quantify how receptive to pull
-    requests the project is at the time the pull request was initiated.
-    If the project's process is open to external contributions, then
-    we expect to see an increased ratio of external contributors over
-    team members. The project's size may be a detrimental
-    factor to the speed of processing a pull request, as its impact maybe
-    more difficult to assess.
-    Also, incoming changes tend to cluster over time (the ``yesterday's
-    weather'' change pattern~\cite{Girba04}), so it natural to assume
-    that pull requests affecting a part of the system that is under
-    active development will be more likely to merge.
-    Testing plays a role in speed of processing; according
-    to~\cite{Pham13}, projects struggling with constant flux of contributors 
-    use testing, manual or preferably automated, a safety net to handle
-    contributions from unknown developers.
+  \textbf{Project characteristics} features quantify how receptive to pull
+  requests the project is.  If the project's process is open to external
+  contributions, then we expect to see an increased ratio of external
+  contributors over team members. The project's size may be a detrimental factor
+  to the speed of processing a pull request, as its impact may be more difficult
+  to assess. Also, incoming changes tend to cluster over time (the
+  ``yesterday's weather'' change pattern~\cite{Girba04}), so it natural to
+  assume that pull requests affecting a part of the system that is under active
+  development will be more likely to merge.  Testing plays a role in speed of
+  processing; according to~\cite{Pham13}, projects struggling with constant flux
+  of contributors use testing, manual or preferably automated, a safety net to
+  handle contributions from unknown developers.
 
   %\item[Developer] 
   \textbf{Developer}  
     based features quantify the influence that the person that
-    created the pull request has on the decision to merge a pull request and
+    created the pull request has on the decision to merge it and
     the time to process it. In particular, the developer that created the patch
     has been shown to influence the patch acceptance decision~\cite{Jeong09}. To
     abstract the results across projects with different developers, we
-    include features that quantify the developer's track record, namely then
+    include features that quantify the developer's track record, namely the
     number of previous pull requests and their acceptance rate; the former has
     been indicated as a strong indicator of pull request quality~\cite{Pham13}.
-    Finally, Bird et al.~\cite{Bird07}, presented evidence that social
+    Bird et al.~\cite{Bird07}, presented evidence that social
     reputation has an impact on whether a patch will be merged; in our dataset,
     the number of followers on Github is an interesting proxy for
     reputation.
@@ -598,7 +597,7 @@ conducted a pair-wise correlation analysis using the Spearman rank correlation
 which we eliminated features that are strongly correlated. Using this cutoff, we
 removed 2 features, \texttt{asserts\_per\_kloc} and
 \texttt{test\_cases\_per\_kloc} as they where very strongly correlated ($\rho >
-0.92$) with the included \texttt{test\_lines\_per\_kloc} feature. We also
+0.92$) with the included \texttt{test\_lines\_per\_1000\_lines} feature. We also
 removed features that could not be calculated reliably at the time a pull
 request was done (\texttt{followers} and \texttt{stars}).\footnote{The Github
 {\sc api} does not report a timestamp on when a user followed another user, or
@@ -663,7 +662,7 @@ statistically significant ($n = 37,492, p < 0.001$).
     touched by the pull request 3 months before the pull request creation time.
     If the pull request touches files in a hotspot, it will be merged faster.\\
  
-    \texttt{tests\_per\_1000\_lines} & A proxy for the project's test
+    \texttt{test\_lines\_per\_1000\_lines} & A proxy for the project's test
     coverage. The more well tested a project is, the faster a pull request
     could be merged, as applying it and testing its impact would be faster. \\
 
@@ -738,13 +737,13 @@ means that merged pull requests received no special treatment, irrespective
 whether they came from core team members or from the community.
 
 On a per project basis, if we calculate the mean time to merge a pull request,
-we see that in the majority of projects (72\%), the time to merge a pull
-request is less than 7 days. The mean time to merge a pull request per project
-is not directly correlated to the project's size ($\rho = -0.23$) nor to the
-project's test coverage ($\rho = 0.34$) Moreover, projects are not getting
-faster by processing more pull requests; the correlation between the average
-time to merge and the number of pull requests is weak ($\rho = -0.33, n =
-88, p < 0.01$).
+we see that in the majority of projects (72\%), the time to merge a pull request
+is less than 7 days. The mean time to merge a pull request per project is not
+directly correlated to the project's size ($\rho = -0.23$) nor to the project's
+test coverage ($\rho = 0.34$) Moreover, projects are not getting faster at pull
+request processing by processing more; the correlation between the average time
+to merge and the number of pull requests is weak ($\rho = -0.33, n = 88, p <
+0.01$).
 
 \begin{figure}
 \centering
@@ -791,12 +790,17 @@ files that are changed by a pull request is generally less than 20
 (95\% percentile: 36, 90\% percentile: 17, 80\% percentile: 7), with 
 median number of 2. 
 
-Except from the project's source code, pull requests also modify test
-code. In our sample, 33\% of the pull requests included modifications
-in test code, while 4\% modified test code exclusively. Of those
-pull requests, 72\% was merged; this result is inline with the findings by
-Pham et al.~\cite{Pham13} where interviewed developers identified 
-the presence of tests as a major factor for the acceptance of pull requests.
+Except from the project's source code, pull requests also modify test code. In
+our sample, 33\% of the pull requests included modifications in test code, while
+4\% modified test code exclusively. Of the pull requests that included tests,
+72\% were merged, which is similar to the average. The presence of tests in a
+pull request does not seem to affect the merge time either: an unpaired
+Mann-Witney test shows that while there is a difference in the means of the pull
+request merge time for pull requests that include tests ($tests = 8831, no\_tests
+= 19061, p < 0.001$), the effect size is very small ($\delta = 0.07$). This
+result contradicts the findings by Pham et al.~\cite{Pham13}, where
+interviewed developers identified the presence of tests as a major factor for
+the acceptance of pull requests.
 
 \paragraph*{Discussion and Code review}
 
@@ -859,7 +863,7 @@ achieved an {\sc auc} of 0.73, with a prior probability of 50\%. For
 the \textsf{mergedecision} task, the prior probability was 74\% which
 allowed the algorithm to achieve near perfect scores. In both cases,
 the stability of the {\sc auc} metric across folds was good 
-(\textsf{mergetime}: $\sigma_{auc} = 0.019$, \textsf{mergedecision}: ($\sigma_{auc} = 0.008$).
+(\textsf{mergetime}: $\sigma_{auc} = 0.019$, \textsf{mergedecision}: $\sigma_{auc} = 0.008$).
 
 \begin{figure*}
 \centering
@@ -936,8 +940,8 @@ project's test coverage}
 \subsection{The pull based development model}
 
 \textbf{Development turnover} One of the promises of the pull request model
-is fast development turnover, i.e. the time between submission of a pull
-request and acceptance in the project's main repository. In various studies of
+is fast development turnover, i.e. the time between the submission of a pull
+request and its acceptance in the project's main repository. In various studies of
 the patch submission process in projects such as Apache and Mozilla, the
 researchers found that the time to commit 50\% of the contributions to the main
 project repository ranges from a few hours~\cite{Rigby08} to a less than 3
@@ -988,7 +992,7 @@ that pull requests are not treated differently based on their origin; both core
 team members and external developers have equal chances to get their pull
 request accepted within the same time boundaries. Indeed, even the
 classification models we build assign to the corresponding feature the least
-importance.  In our opinion, this is a radical change in the way open source
+importance. In our opinion, this is a radical change in the way open source
 development is being carried out. Before pull requests, most projects employed
 membership promotion strategies~\cite{Jense07} to promote interested third party
 developers to the core team. With pull requests, developers can contribute to
@@ -1020,11 +1024,10 @@ is to evaluate a list of pull requests and decide whether to apply them or not.
 To make sure pull requests are processed on time, the obvious strategy would be
 to enforce limits on the discussion as it does not seem to affect the decision
 to merge a pull request significantly and only adds time overhead; however, this
-may have adverse effects on the quality of the submitted contributions
-(pending verification). A more
+may have adverse effects on the quality of the submitted contributions. A more
 comprehensive strategy would include a clear articulation of what is expected
 from a pull request, for example tests or localized changes, on a prominent
-location in the project's Github page. \footnote{Surprisingly, a quick
+location in the project's Github page.\footnote{Surprisingly, a quick
 investigation revealed that no project in our sample had such information in
 the top-level {\sc readme}.md file.} Moreover, a project owner can invest in a
 comprehensive test suite; this will improve the time to process a pull request,
@@ -1034,7 +1037,7 @@ especially if used with an automated continuous integration system.
 
 \textbf{Researchers}
 A direct application of our results would be the construction of tools that
-would help busy project owners to prioritize their work; since we can predict
+would help project owners to prioritize their work; since we can predict
 with very high accuracy whether a pull request will be merged or not, a
 potential tool might suggest which pull requests can be merged without further
 examination by the time they arrive. Other tools might examine the quality of
@@ -1052,12 +1055,12 @@ and replications in more rigid work environments (e.g. companies).
 
 \textbf{Construct validity} Our statistical analysis uses random forests as a way
 to identify and rank cross-factor importance on two response variables. While
-this is a valid approach~\cite{Genue10}, we 've yet to find other studies in
+this is a valid approach~\cite{Genue10}, we have yet to find other studies in
 empirical software engineering that follow it. Moreover, the classification
 scores in the \textsf{mergetime} case are not perfect, so feature ranking may
 not be exactly the same given a different dataset. Further work is needed on
-validating the models on data from different data sources (e.g. manual pull
-request handling in the Linux kernel) or projects in different languages 
+validating the models on data from different sources (e.g. manual pull
+request handling in the Linux kernel) or projects in different languages. 
 
 \textbf{Internal validity}
 To analyze the projects, we extracted data from i) the {\sc ght}orrent relational
@@ -1076,7 +1079,7 @@ ii) Number of files and commits on touched files: The commits reported
     in a pull request also contain commits that merge branches, which the
     developer may have merged prior to performing his changes. These commits
     may contain several files not related to the pull request itself, which
-    in turn usually affects our results heavily. Therefore, we  
+    in turn affects our results heavily. Therefore, we  
     filtered out those commits, but this may not reflect the contents of 
     certain pull requests.
 
@@ -1085,7 +1088,7 @@ In our study, we used merged data from several projects. The statistical
 analysis treated all projects as equal, even though differences do exist.
 For example, the larger project in our dataset, Ruby on Rails, 
 has more than 5,000 pull requests while the smaller one, \textsf{titan}, just 24.
-While we believe the uniform treatment of the samples led to more robust
+While we believe that the uniform treatment of the samples led to more robust
 results in the classification experiment, variations in pull request
 handling among projects with smaller core teams may be ironed out.
 The fact that we performed random selection cross-validation (instead
@@ -1114,7 +1117,7 @@ Distribution of development activities has been initially thought to hinder
 collaboration~\cite{Herbs99, Batti01}, even though subsequent studies have
 shown that it does not pose significant threats to project
 quality~\cite{Spine06, Nguye08, Bird09a}. Access to online collaboration tools
-such as {\sc vcs} and bug databases have been identified as a necessary
+such as version control systems and bug databases have been identified as a necessary
 requirement for collaborative software development~\cite{Knuds76,Pilat06,
 Catal06}. Moreover, distributed collaboration on software artifacts can be
 facilitated through awareness building tools~\cite{Dabbi12, Treud12, Lanza10}. 
@@ -1126,20 +1129,20 @@ developer's contributions. Bird and Zimmermann~\cite{Bird12} investigated the
 use of branches in {\sc dvcs} (in Section~\ref{sec:bg}, we refer to this {\sc
 dvcs} use as ``shared repository'') and found that excessive use of branching
 may have a measurable, but minimal, effect on the project's time planning.
-On the other hand, Barr et al.~\cite{Barr12} find that branches afford developers
+On the other hand, Barr et al.~\cite{Barr12} find that branches offer developers
 increased isolation, even if they are working on inter-related tasks.
 Finally, Shihab et al.~\cite{Shiha12} investigate the effect of branching on
 software quality; they find that misalignment of branching structure and organizational structure is associated with higher post-release failure rates.
 
 This work builds upon a long line of work on patch submission and acceptance.
-In reference~\cite{MOCKU02} presented one of the first studies of how developers
-interact on large open source projects in terms of bug reporting. Bird et
-al~\cite{Bird07a} introduced tools to detect patch submission and acceptance in
-open source projects. Wei\ss gerber et al. presented an analysis of patch
-submission, where they find that small patches are processed faster and have
-higher change to be accepted into the repository. Baysal et al.~\cite{Baysa12}
-find that 47\% of the total patches make it into the source code repository, a
-number much lower than our finding for pull requests (74\%).
+In reference~\cite{MOCKU02}, Mockus et al. presented one of the first studies of
+how developers interact on large open source projects in terms of bug reporting.
+Bird et al~\cite{Bird07a} introduced tools to detect patch submission and
+acceptance in open source projects. Wei\ss gerber et al. presented an analysis
+of patch submission, where they find that small patches are processed faster and
+have higher change to be accepted into the repository. Baysal et
+al.~\cite{Baysa12} find that 47\% of the total patches make it into the source
+code repository, a number much lower than our finding for pull requests (74\%).
 
 \section{Conclusion}
 
@@ -1152,10 +1155,10 @@ to manual
 
 \section*{Acknowledgements}
 
-The authors would like to thank Efthymia Aivaloglou for her help with 
+The authors would like to thank Efthimia Aivaloglou for her help with 
 optimizing {\sc sql} queries and to Panos Louridas for reviewing the 
 statistical analysis parts of the paper.
-This work is partially supported by Marie Curie {\sc ief} 298930 -- {\sc sefunc}.
+This work is partially supported by Marie Curie {\sc ief} 298930 --- {\sc sefunc}.
 
 \bibliographystyle{abbrv}
 \balance

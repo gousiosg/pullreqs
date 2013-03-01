@@ -236,7 +236,14 @@ print(sprintf("Median commits %f", median(all$src_churn + all$test_churn)))
 print(sprintf("Perc pull reqs modifying non-code: %f", 1 - nrow(subset(all, src_churn > 0 | test_churn >0))/nrow(all)))
 print(sprintf("Perc Pull reqs modifying test code: %f", nrow(subset(all, test_churn > 0))/nrow(all)))
 print(sprintf("Perc Pull reqs modifying test code: %f", nrow(subset(all, test_churn > 0 & src_churn == 0))/nrow(all)))
-print(sprintf("Perc test pull reqs merged: %f", nrow(subset(all, test_churn > 0 & merged == TRUE))/nrow(subset(all, test_churn > 0))))
+print(sprintf("Perc test pull reqs merged: %f", nrow(subset(all, test_churn > 0 & merged == TRUE))/subset(all, merged == TRUE))))
+
+time_tests <- subset(merged, test_churn > 0, c(mergetime_minutes))$mergetime_minutes
+time_no_tests <- subset(merged, test_churn == 0, c(mergetime_minutes))$mergetime_minutes
+w <- wilcox.test(time_tests, time_no_tests)
+
+print(sprintf("Wilcox: pullreq merge time : tests = %d, no_tests = %d V = %f, p < %f", length(time_tests), length(time_no_tests), w$statistic, w$p.value))
+print(sprintf("Cliff's delta pullreq merge test/no test :%f", cliffs.d(time_tests, time_no_tests)))
 
 # Pull request discusion
 
