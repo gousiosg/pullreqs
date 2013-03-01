@@ -45,8 +45,8 @@ Arie van Deursen\\
   first on the {\sc ght}orrent corpus and then on a carefully selected sample of 88
   projects. We find that the pull request model offers fast turnaround,
   increased opportunities for community engagement and significantly decreased
-  time to incorporate contributions. Moreover, we have shown that a relatively
-  small number of factors, affect both the decision to merge a pull request and
+  time to incorporate contributions. Moreover, we show that a relatively
+  small number of factors affect both the decision to merge a pull request and
   the time to process it.
 
 \end{abstract}
@@ -79,7 +79,7 @@ Arie van Deursen\\
 %
 
 Pull-based development is an emerging paradigm for distributed software
-development. As more developers appreciate the perceived benefits of isolated
+development. As more developers appreciate isolated
 development and branching~\cite{Bird12}, more projects, both closed source and,
 especially, open source, are being migrated to code hosting sites such as Github
 and Bitbucket with support for pull-based development~\cite{Barr12}. A unique
@@ -90,7 +90,7 @@ development team. What is more important is that they automate the selective
 contribution of commits from the clone to the source through pull requests. 
 
 Pull requests as a distributed development model
-in general, and as are implemented by Github in particular,
+in general, and as implemented by Github in particular,
 form a new method for collaborating on distributed software development. The
 novelty lays on the decoupling of the development effort from the decision to
 incorporate the results of the development in the code base. By separating the
@@ -99,11 +99,11 @@ distributed among a core team which is responsible to perform the merges and a
 peripheral team that submits, often occasional, changes to be considered for
 merging.
 
-Previous work has identified the processes of collaboration in open source
-software development through patch submission and acceptance~\cite{MOCKU02,
+Previous work has identified the processes of collaboration in
+distributed development through patch submission and acceptance~\cite{MOCKU02,
 Bird07, Weiss08}. There are many similarities to the way pull requests work; for
-example, identical work team structures emerge (the ``onion''
-model~\cite{Crows05}), while pull requests go through a similar assessment
+example, identical work team structures emerge, 
+while pull requests go through a similar assessment
 process. What pull requests offer in addition is process automation and
 centralization of information. With pull requests, the code does not have to
 leave the revision control system, and therefore it can be versioned across
@@ -146,27 +146,6 @@ and its test coverage. Both results can be utilized by developers to
 submit better pull requests and project managers to prioritize pull requests, while
 it opens new opportunities for research, such as building automated tools for
 pull request triaging.
-
-This work makes the following contributions:
-
-\begin{itemize}
-
-  \item A statistical analysis of pull request usage on Github.
-    We find increasing usage of pull requests through time.
-
-  \item A statistical analysis of several characteristics of pull requests.
-    We find that pull requests are treated equally irrespective of whether they
-    originate from the project's main team or the community, that projects
-    are not getting faster at processing pull requests and that the inclusion of
-    tests in a pull request does not directly affect whether it will be merged or not.
-
-  \item The main factors that affect pull request acceptance and
-    processing time. 
-
-  \item A carefully constructed dataset and a statistical toolkit for
-    performing analysis of pull request usage.
-
-\end{itemize}
 
 \section{Background} \label{sec:bg}
 \subsection{Pull-based development}
@@ -1178,14 +1157,29 @@ code repository, a number much lower than our finding for pull requests (74\%).
 \section{Conclusion}
 
 We have presented an empirical investigation of how the pull-based development
-model works in practice. We first explored its use on the Github source code
+model works in practice. We explored its use on the Github source code
 hosting site and then focused on the factors that affect pull request acceptance
-and processing time. We find that the pull request model offers fast turnaround,
-increased opportunities for community engagement and significantly decreased
-time to incorporate contributions.  Moreover, we have shown that a relatively
-small number of factors, which can be optimized by the project or the
-contributor, affect both the decision to merge a pull request and the time to
-process it. 
+and processing time. This work makes the following contributions:
+
+\begin{itemize}
+
+  \item A statistical analysis of pull request usage on Github.
+    We find increasing usage of pull requests through time.
+
+  \item A statistical analysis of several characteristics of pull requests.
+    We find that pull requests are treated equally irrespective of whether they
+    originate from the project's main team or the community, that projects
+    are not getting faster at processing pull requests and that the inclusion of
+    tests in a pull request does not directly affect whether it will be merged or not.
+
+  \item The main factors that affect pull request acceptance and
+    processing time. 
+
+  \item A carefully constructed dataset and a statistical toolkit for
+    performing analysis of pull request usage.
+
+\end{itemize}
+
 
 This work is the first to explore the emerging paradigm of pull-based
 distributed software development. As such, while comprehensive, is not complete.
