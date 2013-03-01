@@ -4,6 +4,7 @@
 \usepackage{subfigure}
 \usepackage{url}
 \usepackage{times}
+\usepackage{balance}
 
 \begin{document}
 
@@ -583,10 +584,12 @@ in three categories:
     reputation.
 %\end{description}
 
-All features that contain a temporal dimension in their
-calculation (e.g. \texttt{team\_size} or \texttt{commits\_on\_files\_touched})
-are calculated in a time window of $t - 3$ months, where $t$ is the time the
-pull request has been submitted. 
+All features are calculated at the time a pull request has been closed or
+merged, to evaluate the effect of intermediate updates to the pull request as a
+result of the ensuing discussion. Features that contain a temporal dimension in
+their calculation (e.g. \texttt{team\_size} or
+\texttt{commits\_on\_files\_touched}) are calculated in a time window of $t - 3$
+months, where $t$ is the time the pull request has been closed. 
 
 The initial selection contained 23 features. To check whe\-ther the selected
 features are independent enough, and therefore have strong explanatory power, we
@@ -1154,7 +1157,8 @@ optimizing {\sc sql} queries and to Panos Louridas for reviewing the
 statistical analysis parts of the paper.
 This work is partially supported by Marie Curie {\sc ief} 298930 -- {\sc sefunc}.
 
-\bibliographystyle{ieeetr}
+\bibliographystyle{abbrv}
+\balance
 \bibliography{pullreqs}
 
 \end{document}
