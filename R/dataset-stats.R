@@ -131,6 +131,8 @@ store.pdf(ggplot(pullreqs_per_month, aes(x = month)) +
 have.pr = subset(projectstats, pull_requests >0 & watchers > 0)
 cor_pr_watch <- cor.test(have.pr$pull_requests, have.pr$watchers, method="kendall")
 print(sprintf("Kendall correlation pullreqs-watchers: %f (n = %d, p = %f)", cor_pr_watch$estimate, length(have.pr$pull_requests), cor_pr_watch$p.value))
+cor_pr_watch <- cor.test(have.pr$pull_requests, have.pr$watchers, method="spearman")
+print(sprintf("Spearman correlation pullreqs-watchers: %f (n = %d, p = %f)", cor_pr_watch$estimate, length(have.pr$pull_requests), cor_pr_watch$p.value))
       
 # Forked repos
 res <- dbSendQuery(con, "select count(*) as cnt from projects where forked_from is not null")
