@@ -5,10 +5,14 @@
 \usepackage{url}
 \usepackage{times}
 \usepackage{balance}
+\usepackage{xspace}
 
 \begin{document}
 
 \newcommand{\todo}[1]{\textbf{TODO}\footnote{\textbf{TODO:} #1}}
+
+\newcommand{\ghtorrent}{ \textsc{ght}orrent\xspace}
+\newcommand{\api}{\textsc{api}\xspace}
 
 \title{An Exploratory Study of the Pull-based Software Development Model}
 \numberofauthors{3}
@@ -287,19 +291,69 @@ the amount of preservation of the original source code properties:
 In this section, we present the research approach and datasets we use to 
 answer the research questions.
 
-\subsection{Process}
+To answer our research questions, we distinguish two phases.
+The first phase primarily aims at answering RQ1, addressing the use of the pull-based development model among users
+of distributed version control systems. 
+In the second phase, we use the lessons learned from answering RQ1 to understand which factors affect the 
+decision and time required to merge.
+
+\subsection{Github Data}
+
+For both phases, we use data obtained through the Github \api.
+In particular, we do this by means of the \ghtorrent
+dataset~\cite{GS12}.
+%
+\ghtorrent is  an off-line mirror of the data
+offered through the Github {\sc api}. The Github {\sc api} 
+data come in two forms; a streaming
+data flow lists events, such as forking or creating pull requests, happening on
+repositories in real time, while a static view contains the current state of
+entities. To obtain references to the roots of the static view entities, the
+{\sc ght}orrent project follows the event stream. From there, it applies a
+recursive dependency-based parsing approach to yield all data offered through
+the {\sc api}. The data is stored in unprocessed format, in a Mongo{\sc db}
+database, while metadata is extracted and stored in a My{\sc sql} relational
+database. The {\sc ght}orrent dataset covers a broad range of development
+activities on Github, including pull requests and issues. Up to February 2013,
+more than a million pull requests from more that a hundred thousand projects
+have been collected.
+
+\subsection{Phase I: Pull Request Usage}
+
+To asses the popularity of the pull-based development model (RQ1), we collect descriptive statistics on the use of pull request in Github. 
+In particular, we investigate such questions as how many projects actually make use of
+pull requests, how many of the projects are original repositories
+(versus, e.g., clones), and what the relation is to Github's issue
+tracking facilities. The outcomes are in Section~\ref{sec:github}.
+
+\subsection{Phase II: Pull Request Acceptance}
 \label{sec:expprocess}
 
-First, we need to determine the popularity of pull requests; how
-common are they, how are they treated by projects and what types of 
-interactions they enable? We answer this question by performing an
-exploration of pull request usage on the {\sc ght}orrent data set,
-using descriptive statistics and correlation analysis as necessary.
-(Section~\ref{sec:github}).
+The insights obtained from the analysis for RQ1 can be used to address
+RQ2 and RQ3. 
 
-Based on the results of the exploration, we then investigate the answer of what
-factors can be used as indicators for predicting whether a pull request will be
-merged or not. To answer this question, we determine a set of suitable candidate
+Answering RQ2 and RQ3 first of all requires a dedicated dataset of
+projects that have a sufficiently long history of using pull requests.
+This dataset is described in Section~\ref{sec:expdata}.
+
+
+
+% \subsection{Process}
+% 
+
+% First, we need to determine the popularity of pull requests; how
+% common are they, how are they treated by projects and what types of 
+% interactions they enable? We answer this question by performing an
+% exploration of pull request usage on the {\sc ght}orrent data set,
+% using descriptive statistics and correlation analysis as necessary.
+
+
+% Based on the results of the exploration, we then investigate the answer of what
+% factors can be used as indicators for predicting whether a pull request will be
+% merged or not.
+
+Given this dataset, we answer RQ2 and RQ3 by determining
+a set of suitable candidate
 features by consulting related work in the fields of patch submission and bug
 triaging. Then, we clean it up through cross-correlation analysis to obtain a
 set of features with maximum predictive power
@@ -342,87 +396,6 @@ across runs. We did not perform any additional tuning to the classification
 algorithms (Section~\ref{sec:accrej}).
 
 We used {\sc r} to implement and run the experiments.
-
-\subsection{Data}
-\label{sec:expdata} 
-
-We use data from the {\sc ght}orrent dataset, an off-line mirror of the data
-offered through the Github {\sc api}. The Github {\sc api} 
-data come in two forms; a streaming
-data flow lists events, such as forking or creating pull requests, happening on
-repositories in real time, while a static view contains the current state of
-entities. To obtain references to the roots of the static view entities, the
-{\sc ght}orrent project follows the event stream. From there, it applies a
-recursive dependency-based parsing approach to yield all data offered through
-the {\sc api}. The data is stored in unprocessed format, in a Mongo{\sc db}
-database, while metadata is extracted and stored in a My{\sc sql} relational
-database. The {\sc ght}orrent dataset covers a broad range of development
-activities on Github, including pull requests and issues. Up to February 2013,
-more than a million pull requests from more that a hundred thousand projects
-have been collected.
-
-While an overview of pull request activity can be safely extracted from the {\sc
-ght}orrent dataset, several limitations do not allow us to apply our detailed
-analysis across all projects. Specifically, projects worth analyzing have a
-history longer than one year, and it is important to retrieve all information
-available during the project's life. To make the data collection and subsequent
-analysis practical, we restrict our input data to two lists of projects, a
-\textsf{handpicked} and a \textsf{random} one. Both lists contain 50 projects
-of different sizes and languages. To build them, we use the following
-inclusion criteria:
-
-\begin{itemize}
-
-  \item Projects should have more than 10 pull requests in total. This is
-    to filter out toy projects. 
-
-  \item Projects should include tests. To measure the effect of testing on pull
-    request acceptance, we could only use projects that include tests which we
-    could measure reliably. For that, we exploited the convention-based project
-    layout in the Ruby (Gem), Java and Scala (both Maven) language ecosystems,
-    so our project selection was limited to those languages. 
-
-  \item Projects should have a committer count larger than the main team member
-    count, to ensure that the project is open to external contributions and that
-    pull requests are indeed used by developers outside the project.
-
-\end{itemize}
-
-The \textsf{handpicked} list was created by browsing Github's most starred projects
-per language for projects that met the criteria. The \textsf{random} list
-was created by performing a random selection in the {\sc ght}orrent database. In
-cases were the randomly selected projects did not match the criteria (the existence
-of tests could not be evaluated automatically) or overlapped with the
-\textsf{handpicked} list, the projects where replaced with
-other random projects. 
-
-After selection, the datasets where merged, the full history (including pull
-requests, issues and commits) of the included projects was downloaded and
-features were extracted by querying the {\sc ght}orrent database and analysing
-each project's Git directory.
-To compensate for pull requests that are merged
-outside Github, we examined whether at least one of the commits associated
-with the pull request appears in the list of commits of the target project. In
-case commit squashing or patch-based merge has occurred, the merge could not be
-detected, and therefore the pull request was marked as unmerged.
-After creating the data files, we investigated
-cases where the pull request merge ratio was significantly less (in some cases,
-as small as 10\%) than the one we calculated across Github (73\%), as this might
-mean that non-authorship preserving merges occurred (see Section~\ref{sec:github}). This way, we filtered out 12 projects, which we did not replace. 
-
-The final dataset on which we run the prediction experiments consisted of 88
-projects (43 Ruby, 34 Java, 11 Scala) and 37,452 data points (pull requests).
-%Figure~\ref{fig:wordcloud} presents the project names in relative size to the
-%pull requests included per project in the dataset. 
-%
-%\begin{figure}
-%  \begin{center}
-%    \includegraphics[scale=0.7]{wordcloud.pdf}
-%  \end{center}
-%  \caption{Projects in our dataset. Text size is relative to the number of
-%  included pull requests.}
-%  \label{fig:wordcloud}
-%\end{figure}
 
 \section{Descriptive statistics of pull request usage on Github}
 \label{sec:github}
@@ -528,6 +501,75 @@ facilities by both the project and the project community.
 \emph{RQ1: 14\% of repositories are using pull requests on Github. Pull request usage is increasing, even though the proportion of
 repositories using them is relatively stable.}
 \end{minipage}}
+
+
+\section{Data: Pull Request Project Sample}
+\label{sec:expdata} 
+
+While an overview of pull request activity can be safely extracted from the {\sc
+ght}orrent dataset, several limitations do not allow us to apply our detailed
+analysis across all projects. Specifically, projects worth analyzing have a
+history longer than one year, and it is important to retrieve all information
+available during the project's life. To make the data collection and subsequent
+analysis practical, we restrict our input data to two lists of projects, a
+\textsf{handpicked} and a \textsf{random} one. Both lists contain 50 projects
+of different sizes and languages. To build them, we use the following
+inclusion criteria:
+
+\begin{itemize}
+
+  \item Projects should have more than 10 pull requests in total. This is
+    to filter out toy projects. 
+
+  \item Projects should include tests. To measure the effect of testing on pull
+    request acceptance, we could only use projects that include tests which we
+    could measure reliably. For that, we exploited the convention-based project
+    layout in the Ruby (Gem), Java and Scala (both Maven) language ecosystems,
+    so our project selection was limited to those languages. 
+
+  \item Projects should have a committer count larger than the main team member
+    count, to ensure that the project is open to external contributions and that
+    pull requests are indeed used by developers outside the project.
+
+\end{itemize}
+
+The \textsf{handpicked} list was created by browsing Github's most starred projects
+per language for projects that met the criteria. The \textsf{random} list
+was created by performing a random selection in the {\sc ght}orrent database. In
+cases were the randomly selected projects did not match the criteria (the existence
+of tests could not be evaluated automatically) or overlapped with the
+\textsf{handpicked} list, the projects where replaced with
+other random projects. 
+
+After selection, the datasets where merged, the full history (including pull
+requests, issues and commits) of the included projects was downloaded and
+features were extracted by querying the {\sc ght}orrent database and analysing
+each project's Git directory.
+To compensate for pull requests that are merged
+outside Github, we examined whether at least one of the commits associated
+with the pull request appears in the list of commits of the target project. In
+case commit squashing or patch-based merge has occurred, the merge could not be
+detected, and therefore the pull request was marked as unmerged.
+After creating the data files, we investigated
+cases where the pull request merge ratio was significantly less (in some cases,
+as small as 10\%) than the one we calculated across Github (73\%), as this might
+mean that non-authorship preserving merges occurred (see Section~\ref{sec:github}). This way, we filtered out 12 projects, which we did not replace. 
+
+The final dataset on which we run the prediction experiments consisted of 88
+projects (43 Ruby, 34 Java, 11 Scala) and 37,452 data points (pull requests).
+%Figure~\ref{fig:wordcloud} presents the project names in relative size to the
+%pull requests included per project in the dataset. 
+%
+%\begin{figure}
+%  \begin{center}
+%    \includegraphics[scale=0.7]{wordcloud.pdf}
+%  \end{center}
+%  \caption{Projects in our dataset. Text size is relative to the number of
+%  included pull requests.}
+%  \label{fig:wordcloud}
+%\end{figure}
+
+
 
 \section{Feature Selection}
 \label{sec:featureselection}
