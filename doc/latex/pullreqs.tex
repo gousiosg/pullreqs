@@ -114,16 +114,18 @@ effect of improving awareness~\cite{Dabbi12}; core developers can access in an
 efficient way all information that relates to a pull request and solicit the
 opinions of the community (``crowd-source'') about the merging decision.
 
-As the goal of distributed development is to successfully integrate
-contributions towards a common product, a pull request based collaboration is
-effective when the suitability of a pull request can be assessed
-fast. The goal of this work is to investigate pull request usage and to analyze the
+A distributed development workflow is effective if
+pull requests are eventually accepted, and it is efficient if the time this
+takes is as short as possible. Advancing our insight in the effectiveness and
+efficiency of pull request handling is of direct interest to contributors 
+and developers alike.
+The goal of this work is to investigate pull request usage and to analyze the
 factors that affect the efficiency of the pull-based software development model.
 Specifically, the questions we are trying to answer are: 
 
 \begin{description}
 
-  \item[RQ1] How popular is the pull-based development model?
+  \item[RQ1] How popular is the pull-based development model among users of distributed version control systems?
 
   \item[RQ2] What factors affect the decision to merge a pull request?
 
@@ -168,9 +170,6 @@ those in centralized version control environments~\cite{Shiha12,Bird09}.
 With respect to receiving and processing external contributions,
 the following strategies can be employed:
 
-%\begin{description}
-
-%  \item[Shared repository] 
 \textbf{Shared resporitory}
     Developers share a common repository, with read and
     write permissions. To work, they clone it locally, modify its contents,
@@ -178,38 +177,28 @@ the following strategies can be employed:
     central one. To cope with multiple versions and multiple developers, larger
     projects usually adopt a {\em branching model} i.e., an organized way to
     accept and test contributions before those are merged to the main
-    development branch~\cite{Bird12}. While the exact details depend on the
-    project requirements, usually branching models include feature branches,
-    where developers implement new features and fix bugs, and release branches,
-    which store the state of each project release. After the work has finished
-    on a feature branch its contents are merged appropriately to release
-    branches and to the project master branch.
+    development branch~\cite{Bird12}. 
+    
+    %While the exact details depend on the
+    %project requirements, usually branching models include feature branches,
+    %where developers implement new features and fix bugs, and release branches,
+    %which store the state of each project release. After the work has finished
+    %on a feature branch its contents are merged appropriately to release
+    %branches and to the project master branch.
 
-%  \item[Pull requests] 
-\textbf{Pull requests}
-    The project repository is not shared among developers;
-    instead, developers clone the repository and make their changes independent
-    of each other. When a set of changes is ready to be submitted to the main
-    repository, they create a \emph{pull request}, which specifies a local
-    branch and a list of commits to be merged with a branch in the main
-    repository. The main repository owner is responsible to test the changes and
-    pull them to the project's master branch. On larger projects, such as the
-    Linux kernel, there are several layers of merge repositories before a
-    contributed pull request reaches the main tree~\cite{Cornf10}.
-
-%  \item[Intra-branch pull requests] 
-\textbf{Intra-branch pull requests}
-    As pull requests only specify branches from
-    which certain commits can be pulled, there is nothing that forbids their use
-    in the shared repository approach. In such cases, developers specify as the
-    source a branch in the same repository as the target one.
-    Intra-branch pull requests are usually accompanied by code reviews and
-    discussion; this is why they are primarily performed if the project tooling
-    supports this kind of interaction.
-
-%\end{description}
-
-In this work, we only consider pull-requests as our investigation target.
+\textbf{Pull requests} The project's main repository is not shared among
+developers; instead, developers clone the repository and make their changes
+independent of each other. When a set of changes is ready to be submitted to the
+main repository, they create a \emph{pull request}, which specifies a local
+branch and a list of commits to be merged with a branch in the main repository.
+The main repository owner is responsible to inspect the changes and pull them to
+the project's master branch. If changes are considered unsatisfactory, more
+changes may be requested; in that case, developers need to update their pull
+requests with more commits.  On larger projects, such as the Linux kernel, there
+are several layers of merge repositories before a contributed pull request
+reaches the main tree~\cite{Cornf10}.  Furthermore, as pull requests only
+specify branches from which certain commits can be pulled, there is nothing that
+forbids their use in the shared repository approach.
 
 \subsection{Pull requests on Github}
 
@@ -1081,11 +1070,11 @@ To analyze the projects, we extracted data from i) the {\sc ght}orrent relationa
 database ii) The {\sc ght}orrent raw database iii) each project's Git repository.
 Differences in the data abstraction afforded by each data source may
 lead to different results in the following cases: 
-i) Intra-repository merging: {\sc ght}orrent currently does not record the source
+i) Intra-branch merges: {\sc ght}orrent currently does not record the source
     and target branch names that are affected by a pull request. Therefore, it
     is not possible to use the heuristics presented in
-    Section~\ref{sec:expdata} to identify a merged branch (if the project
-    does not use Github facilities to merge). In those cases, we
+    Section~\ref{sec:expdata} to identify a merged branch, if the project
+    does not use Github facilities to merge. In those cases, we
     report the pull request as non-merged. In our dataset, 810 (or 2\% in total)
     pull requests are label as non-merged and intra-repository; some of them may
     actually be merged.
