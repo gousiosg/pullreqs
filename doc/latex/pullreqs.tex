@@ -151,24 +151,27 @@ This work makes the following contributions:
 
 \begin{itemize}
 
-  \item We perform a statistical analysis of pull request usage on Github.
+  \item A statistical analysis of pull request usage on Github.
     We find increasing usage of pull requests through time.
 
-  \item We analyze statistically several characteristics of pull requests.
+  \item A statistical analysis of several characteristics of pull requests.
     We find that pull requests are treated equally irrespective of whether they
     originate from the project's main team or the community, that projects
-    are not getting faster at processing pull requests, that the inclusion of
+    are not getting faster at processing pull requests and that the inclusion of
     tests in a pull request does not directly affect whether it will be merged or not.
 
-  \item We identify the main factors that affect pull request acceptance and
+  \item The main factors that affect pull request acceptance and
     processing time. 
 
-  \item We provide a carefully constructed dataset and a statistical toolkit for
+  \item A carefully constructed dataset and a statistical toolkit for
     performing analysis of pull request usage.
 
 \end{itemize}
 
-\section{Background} \label{sec:bg} Since their appearance in 2001, distributed
+\section{Background} \label{sec:bg}
+\subsection{Pull-based development}
+
+Since their appearance in 2001, distributed
 version control systems ({\sc dvcs}), notably Git, have revolutionized the way
 distributed software development is carried out. Driven by pragmatic needs, {\sc
 dvcs}s were designed from scratch to work as advanced patch management
@@ -228,6 +231,77 @@ the following strategies can be employed:
 %\end{description}
 
 In this work, we only consider pull-requests as our investigation target.
+
+\subsection{Pull requests on Github}
+
+Github supports all types of distributed development outlined above; however,
+pull requests receive special treatment. The site is tuned to allow easy forking
+of projects by external users, while automating the generation of pull
+requests through automatic comparison of project branches. Similarly to
+Git-based pull requests, a Github pull request contains a list of commits
+to be merged. The list of commits is automatically updated when newer commits have been added to the forked repository after the pull request
+has been created. Each Github pull request has an attached implicit state
+machine (see Figure~\ref{fig:state}), which is automatically updated by
+Github as users manipulate the pull request.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[scale=0.5]{pr-state-machine.pdf}
+  \end{center}
+  \caption{The different states of a pull request on Github}
+  \label{fig:state}
+\end{figure}
+
+By default, pull requests are submitted to the base repository for review.
+As a result of the discussion, pull requests can be updated with new commits or
+be closed as redundant or uninteresting. To merge a pull request, a user must
+be part of the main project team. The versatility of the Git tool suite enables
+pull requests to be merged in various ways, presented below sorted by
+the amount of preservation of the original source code properties:
+
+\textbf{Through Github facilities.}
+    Github can automatically verify whether a
+    pull request can be merged without conflicts to the base repository. When a
+    merge is requested, Github will automatically apply the commits in the pull
+    request and record the merge event. All authorship and history information
+    is maintained in the merged commits.
+
+    \textbf{Using Git merge.} When a pull request cannot be applied cleanly or when
+    project-related policies do not permit automatic merging, a pull request
+    can be merged using plain Git utilities, using the following
+    techniques: 
+
+    \begin{itemize}
+
+      \item \emph{Branch merging:} The remote branch containing the pull
+        request commits is added as a source to a local repository. The remote 
+        branch is merged to a local upstream branch, which is then pushed to
+        the central repository or published for further pulling by other
+        developers. Both history and authorship information are maintained,
+        but Github cannot detect the merge in order to record a merge event. 
+
+      \item \emph{Cherry-picking:} Instead of merging all commits, the merger
+        picks specific commits from the remote branch, which then applies to the
+        upstream branch. The commit unique identifier changes, so exact history
+        cannot be maintained, but authorship is preserved.
+    
+    \end{itemize}
+
+    A technique that complements both of the above is \emph{commit
+    squashing}: when the full history is not of interest to the project,
+    several consecutive commits are merged into a single one on the pull request
+    branch, which can then be merged or cherry-picked to the upstream branch. In
+    this case, the author of the commit can be different from the person that
+    applied the commit.
+
+%  \item [Committing the patch] 
+    \textbf{Committing the patch.}
+    The merger creates a
+    textual difference between the upstream and the pull request branch, which
+    then applies to the upstream branch. Both history and authorship information
+    are lost.
+
+%\end{description}
 
 \section{Experimental Design}
 
@@ -385,89 +459,6 @@ evaluating Git (\texttt{try\_git}). In the {\sc ght}orrent dataset, less than ha
 (1,177,000 or 45\%) of the active repositories are original repositories. From
 those, 587,800 (or 28\% in total) received a commit in 2012.
 
-Github supports all types of distributed development outlined above; however,
-pull requests receive special treatment. The site is tuned to allow easy forking
-of projects by external users, while automating the generation of pull
-requests through automatic comparison of project branches. Similarly to
-Git-based pull requests, a Github pull request contains a list of commits
-to be merged. The list of commits is automatically updated when newer commits have been added to the forked repository after the pull request
-has been created. Each Github pull request has an attached implicit state
-machine (see Figure~\ref{fig:state}), which is automatically updated by
-Github as users manipulate the pull request.
-
-\begin{figure}
-  \begin{center}
-    \includegraphics[scale=0.5]{pr-state-machine.pdf}
-  \end{center}
-  \caption{The different states of a pull request on Github}
-  \label{fig:state}
-\end{figure}
-
-By default, pull requests are submitted to the base repository for review.
-Reviews can either target the pull as whole or the individual commits,
-thereby resembling a code review. 
-Even though any Github user can participate to the
-review process, usually it is the project community members that do so:
-only 0.011\% of pull request comments come from users that have not
-committed to the project repository.
-Pull requests receive comments quite frequently: on average, each pull
-request receives 12 (quantiles: 5\%: 2, 95\%: 35) discussion comments.
-
-As a result of the discussion, pull requests can be updated with new commits or
-be closed as redundant or uninteresting. To merge a pull request, a user must
-be part of the main project team. The versatility of the Git tool suite enables
-pull requests to be merged in various ways, presented below sorted by
-the amount of preservation of the original source code properties:
-
-%\begin{description}
-
-%  \item[Through Github facilities]
-\textbf{Through Github facilities.}
-    Github can automatically verify whether a
-    pull request can be merged without conflicts to the base repository. When a
-    merge is requested, Github will automatically apply the commits in the pull
-    request and record the merge event. All authorship and history information
-    is maintained in the merged commits.
-
-%   \item[Git merge] 
-    
-    \textbf{Using Git merge.} When a pull request cannot be applied cleanly or when
-    project-related policies do not permit automatic merging, a pull request
-    can be merged using plain Git utilities, using the following
-    techniques: 
-
-    \begin{itemize}
-
-      \item \emph{Branch merging:} The remote branch containing the pull
-        request commits is added as a source to a local repository. The remote 
-        branch is merged to a local upstream branch, which is then pushed to
-        the central repository or published for further pulling by other
-        developers. Both history and authorship information are maintained,
-        but Github cannot detect the merge in order to record a merge event. 
-
-      \item \emph{Cherry-picking:} Instead of merging all commits, the merger
-        picks specific commits from the remote branch, which then applies to the
-        upstream branch. The commit unique identifier changes, so exact history
-        cannot be maintained, but authorship is preserved.
-    
-    \end{itemize}
-
-    A technique that complements both of the above is \emph{commit
-    squashing}: when the full history is not of interest to the project,
-    several consecutive commits are merged into a single one on the pull request
-    branch, which can then be merged or cherry-picked to the upstream branch. In
-    this case, the author of the commit can be different from the person that
-    applied the commit.
-
-%  \item [Committing the patch] 
-    \textbf{Committing the patch.}
-    The merger creates a
-    textual difference between the upstream and the pull request branch, which
-    then applies to the upstream branch. Both history and authorship information
-    are lost.
-
-%\end{description}
-
 Pull requests are enabled by default on all repositories opened on Github. On a
 monthly basis, pull request usage is increasing
 (Figure~\ref{fig:pullreq-per-month}). From the set of original repositories as
@@ -506,6 +497,16 @@ watchers of a project and the number of pull requests it has received is $\rho =
 }
 \caption{Pull requests on Github}
 \end{figure}
+
+
+Reviews on a pull request can either target the pull as whole or the individual commits,
+thereby resembling a code review. 
+Even though any Github user can participate to the
+review process, usually it is the project community members that do so:
+only 0.011\% of pull request comments come from users that have not
+committed to the project repository.
+Pull requests receive comments quite frequently: on average, each pull
+request receives 12 (quantiles: 5\%: 2, 95\%: 35) discussion comments.
 
 Issues and pull requests are dual on Github; for each pull request, an issue is
 opened automatically. Commits can also be attached to issues to convert them to
