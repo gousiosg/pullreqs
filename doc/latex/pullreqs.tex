@@ -1070,7 +1070,7 @@ of the project that  have been changed often lately (are ``hot'') are very
 likely to get merged. Also, most pull requests that include test code are
 accepted, while 80\% of the merged pull requests modify three or less files and include
 patches less than 100 lines long. Therefore, our advice to contributors seeking
-to add a particular feature or fix a bug would simply be ``keep it short''. If the contribution's purpose is to make the contributor known
+to add a particular feature or fix a bug is to ``keep it short''. If the contribution's purpose is to make the contributor known
 to the project community, it is also beneficial to affect a project area that is
 hot.
 
@@ -1091,8 +1091,7 @@ especially if used with an automated continuous integration system.
 % cd /cache && find . -type f -maxdepth 3|grep README.md|while read f; do if [ ! -z "`grep -i "pull request" $f`" ]; then echo $f; fi; done
 
 %\textbf{Researchers.}
-A direct application of our results would be the construction of tools that
-would help project owners to prioritize their work; since we can predict
+A direct application of our results is the construction of tools to help project owners to prioritize their work; since we can predict
 with very high accuracy whether a pull request will be merged or not, a
 potential tool might suggest which pull requests can be merged without further
 examination by the time they arrive. Other tools might examine the quality of
