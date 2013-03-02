@@ -773,9 +773,10 @@ whether they came from core team members or from the community.
 On a per project basis, if we calculate the mean time to merge a pull request,
 we see that in the majority of projects (72\%), the time to merge a pull request
 is less than 7 days. The mean time to merge a pull request per project is not
-directly correlated to the project's size, as indicated by a low Spearman
-correlation value ($\rho = -0.23$), nor to the project's test coverage ($\rho =
-0.34$). Moreover, projects are not getting faster at pull request processing by
+correlated with the project's size, as indicated by a low Spearman
+correlation value ($\rho = -0.23$) or the project's test coverage ($\rho =
+0.34$). 
+Moreover, projects are not getting faster at pull request processing by
 processing more pull requests; the correlation between the average time to merge
 and the number of pull requests is weak ($\rho = -0.33, n = 88, p < 0.01$).
 
@@ -1147,7 +1148,8 @@ results is, nevertheless, encouraging.
 During the execution of this study, we invested significant effort to make it
 replicable. This study has been conducted using the {\sc ght}orrent dataset and
 custom-built Ruby and R tools. We share the tools, original data sources and
-extracted data files on the Github repository \texttt{gousiosg/pullreqs}.  The
+extracted data files on the Github repository
+\texttt{gousiosg/pullreqs}\footnote{Note to reviewers: To be available online after acceptance}. The
 execution of all tools is scripted and it is possible to run it in sequence
 automatically. We invite other researchers to use the tools and data to
 replicate the study or create new studies based on it.

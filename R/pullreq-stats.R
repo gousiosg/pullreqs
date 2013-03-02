@@ -204,6 +204,14 @@ print(sprintf("Cor between num(pull_reqs), mean(time_to_merge) %f",
               cor.test(a$mergetime_minutes.x, a$mergetime_minutes.y, 
               method = "spearman")$estimate))
 
+mean.size.pp <- subset(aggregate(merged, list(merged$project_name), mean), select=c(Group.1, src_lines))
+a <- merge(mean.mergetime.per.project, mean.size.pp, by = 'Group.1')
+
+print(sprintf("Cor between num(pull_reqs), mean(time_to_merge) %f", 
+              cor.test(a$mergetime_minutes.x, a$mergetime_minutes.y, 
+                       method = "spearman")$estimate))
+
+
 # Rank correlation to see whether the populations differ significantly
 mergetimes <- list(main = main.team.mergetimes$mergetime_minutes, ext = ext.team.mergetimes$mergetime_minutes)
 w <- wilcox.test(x = mergetimes$main, y = mergetimes$ext, paired = FALSE)
