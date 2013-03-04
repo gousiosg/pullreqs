@@ -204,6 +204,14 @@ print(sprintf("Cor between num(pull_reqs), mean(time_to_merge) %f",
               cor.test(a$mergetime_minutes.x, a$mergetime_minutes.y, 
               method = "spearman")$estimate))
 
+mean.size.pp <- subset(aggregate(merged, list(merged$project_name), mean), select=c(Group.1, src_lines))
+a <- merge(mean.mergetime.per.project, mean.size.pp, by = 'Group.1')
+
+print(sprintf("Cor between num(pull_reqs), mean(time_to_merge) %f", 
+              cor.test(a$mergetime_minutes.x, a$mergetime_minutes.y, 
+                       method = "spearman")$estimate))
+
+
 # Rank correlation to see whether the populations differ significantly
 mergetimes <- list(main = main.team.mergetimes$mergetime_minutes, ext = ext.team.mergetimes$mergetime_minutes)
 w <- wilcox.test(x = mergetimes$main, y = mergetimes$ext, paired = FALSE)
@@ -236,7 +244,14 @@ print(sprintf("Median commits %f", median(all$src_churn + all$test_churn)))
 print(sprintf("Perc pull reqs modifying non-code: %f", 1 - nrow(subset(all, src_churn > 0 | test_churn >0))/nrow(all)))
 print(sprintf("Perc Pull reqs modifying test code: %f", nrow(subset(all, test_churn > 0))/nrow(all)))
 print(sprintf("Perc Pull reqs modifying test code: %f", nrow(subset(all, test_churn > 0 & src_churn == 0))/nrow(all)))
-print(sprintf("Perc test pull reqs merged: %f", nrow(subset(all, test_churn > 0 & merged == TRUE))/nrow(subset(all, test_churn > 0))))
+print(sprintf("Perc test pull reqs merged: %f", nrow(subset(all, test_churn > 0 & merged == TRUE))/subset(all, merged == TRUE))))
+
+time_tests <- subset(merged, test_churn > 0, c(mergetime_minutes))$mergetime_minutes
+time_no_tests <- subset(merged, test_churn == 0, c(mergetime_minutes))$mergetime_minutes
+w <- wilcox.test(time_tests, time_no_tests)
+
+print(sprintf("Wilcox: pullreq merge time : tests = %d, no_tests = %d V = %f, p < %f", length(time_tests), length(time_no_tests), w$statistic, w$p.value))
+print(sprintf("Cliff's delta pullreq merge test/no test :%f", cliffs.d(time_tests, time_no_tests)))
 
 # Pull request discusion
 
