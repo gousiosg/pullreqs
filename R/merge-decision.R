@@ -94,7 +94,7 @@ run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
   bayesperf <- performance(pred.obj, "tpr","fpr")
   
   # Plot classification performance
-  pdf(file=sprintf("%s/%s-%s.pdf", plot.location, "classif-perf-merge-time", uniq))
+  pdf(file=sprintf("%s/%s-%s.pdf", plot.location, "classif-perf-merge-decision", uniq))
   plot (rfperf, col = 1, main = "Classifier performance for pull request merge decision")
   plot (svmperf, col = 2, add = TRUE)
   plot (logperf, col = 3, add = TRUE)
