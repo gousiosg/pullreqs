@@ -30,7 +30,7 @@ results <- run.classifiers.mergetime(merge.time.model, data$train, data$test, "a
 cvResultAll <- cross.validation(merge.time.model, run.classifiers.mergetime, prepare.data.mergetime, all, nrow(all), 10)
 write.csv(cvResultAll, file = "merge-time-cv-all.csv")
 
-#
+
 # Merge decision classifiers
 
 # Clean up workspace
@@ -58,14 +58,14 @@ write.csv(cvResult10k, file = "merge-decision-cv-10k.csv")
 #n = all rows
 data <- prepare.data.mergedecision(all, nrow(all))
 results <- run.classifiers.mergedecision(merge.decision.model, data$train, data$test, "All")
-cvResult10k <- cross.validation(merge.decision.model, run.classifiers.mergedecision, prepare.data.mergedecision, all, nrow(all), 10)
+cvResultAll <- cross.validation(merge.decision.model, run.classifiers.mergedecision, prepare.data.mergedecision, all, nrow(all), 10)
 write.csv(cvResultAll, file = "merge-decision-cv-all.csv")
 
 #
 # Merge time classifiers -- 4 bins
 # Clean up workspace
 rm(list = ls(all = TRUE))
-
+#
 source(file = "R/merge-time.R")
 
 # Loading data files
@@ -74,10 +74,10 @@ dfs <- addcol.merged(dfs)
 all <- merge.dataframes(dfs)
 
 #n = 1000
-# data <- prepare.data.mergetime.4bins(all, 1000)
-# results <- run.classifiers.mergetime(merge.time.model, data$train, data$test, "1k")
-# cvResult1k <- cross.validation(merge.time.model, run.classifiers.mergetime, prepare.data.mergetime.4bins , all, 1000, 10)
-# write.csv(cvResult1k, file = "merge-time-4bins-cv-1k.csv")
+data <- prepare.data.mergetime.4bins(all, 1000)
+results <- run.classifiers.mergetime(merge.time.model, data$train, data$test, "1k")
+cvResult1k <- cross.validation(merge.time.model, run.classifiers.mergetime, prepare.data.mergetime.4bins , all, 1000, 10)
+write.csv(cvResult1k, file = "merge-time-4bins-cv-1k.csv")
 
 #n = 10000
 data <- prepare.data.mergetime.4bins(all, 10000)

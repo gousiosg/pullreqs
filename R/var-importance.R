@@ -38,18 +38,18 @@ run.rf.varimp("Merge time", merge.time.model, prepare.data.mergetime, all, 1000,
 run.rf.varimp("Merge time (4 bins)", merge.time.model, prepare.data.mergetime.4bins, all, 1000, 50)
 
 run.rf.varimp("Merge decision", merge.decision.model, prepare.data.mergedecision, all, 1000, 100)
-run.rf.varimp("Merge time (2 bins)", merge.time.model, prepare.data.mergetime, all, 1000, 100)
+run.rf.varimp("Merge time", merge.time.model, prepare.data.mergetime, all, 1000, 100)
 run.rf.varimp("Merge time (4 bins)", merge.time.model, prepare.data.mergetime.4bins, all, 1000, 100)
 
 run.rf.varimp("Merge decision", merge.decision.model, prepare.data.mergedecision, all, 10000, 50)
-run.rf.varimp("Merge time (2 bins)", merge.time.model, prepare.data.mergetime, all, 10000, 50)
+run.rf.varimp("Merge time", merge.time.model, prepare.data.mergetime, all, 10000, 50)
 run.rf.varimp("Merge time (4 bins)", merge.time.model, prepare.data.mergetime.4bins, all, 10000, 50)
 
 run.rf.varimp("Merge decision", merge.decision.model, prepare.data.mergedecision, all, 10000, 100)
-run.rf.varimp("Merge time (2 bins)", merge.time.model, prepare.data.mergetime, all, 10000, 100)
+run.rf.varimp("Merge time", merge.time.model, prepare.data.mergetime, all, 10000, 100)
 run.rf.varimp("Merge time (4 bins)", merge.time.model, prepare.data.mergetime.4bins, all, 10000, 100)
 
-run.rf.varimp("Merge decision", merge.decision.model, prepare.data.mergedecision, all, 40000, 50)
-run.rf.varimp("Merge time (2 bins)", merge.time.model, prepare.data.mergetime, all, 40000, 50)
+run.rf.varimp("Merge decision", merge.decision.model, prepare.data.mergedecision, all, 37492, 50)
+run.rf.varimp("Merge time", merge.time.model, prepare.data.mergetime, all, 27892, 50)
 run.rf.varimp("Merge time (4 bins)", merge.time.model, prepare.data.mergetime.4bins, all, 40000, 50)
 
