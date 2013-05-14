@@ -1,0 +1,181 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{se-report}
+   [2006/06/20 v0.7 Technical Report Style for 
+    TU Delft Software Engineering Research Group 
+    <Leon.Moonen@computer.org>]
+
+% Check if we are compiling under latex or pdflatex.
+\ifx\pdftexversion\undefined
+  \RequirePackage[dvips]{graphicx}
+  \RequirePackage{times,fancyhdr,color}
+\else
+  \input supp-pdf.tex
+  \RequirePackage[pdftex]{graphicx}
+  \RequirePackage{times,pdfpages,hyperref,fancyhdr,color}
+  \PassOptionsToPackage{pdftex,colorlinks=true,linkcolor=black}{hyperref}
+  \PassOptionsToPackage{pdftex}{graphicx,color}
+\fi
+
+% set page size that suits both letter and A4 format
+\setlength{\textwidth}{150mm}
+\setlength{\textheight}{225mm}
+\setlength{\topmargin}{-12mm}
+\setlength{\headsep}{10mm}
+\setlength{\marginparsep}{0mm}
+\setlength{\marginparwidth}{0mm}
+\setlength{\oddsidemargin}{5.5mm}
+\setlength{\evensidemargin}{5.5mm}
+
+
+%---------------------------------------------------------------------%
+%                     Define header and footer                        %    
+%---------------------------------------------------------------------%
+
+\setlength{\headheight}{16pt}
+
+\definecolor{grey}{gray}{0.9}
+\definecolor{dgrey}{gray}{0.6}
+
+\newcommand{\hs}{\rule[-3pt]{0pt}{11pt}} %% header height strut
+\newcommand{\greybox}[1]{\colorbox{grey}{#1}}
+\newcommand{\whitebox}[1]{\colorbox{white}{#1}}
+\newcommand{\logobox}{\raisebox{-.6em}[0pt][0pt]{\whitebox{\small~\includegraphics[height=18pt]{serg-logo}~}}}
+
+\newcommand{\setthepagestyle}{%
+\setlength{\fboxsep}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhfoffset{1.2cm}
+\fancyhf{}
+\fancyhead[LO]{\greybox{\hs\makebox[\headwidth][l]{\logobox}}}
+\fancyhead[RO]{\begingroup\small\@headertitle{}~\endgroup}
+\fancyhead[LE]{\greybox{\hs\makebox[\headwidth][l]{\small~\@headertitle}}}
+\fancyhead[RE]{\logobox}
+\fancyfoot[LO]{\greybox{\hs\makebox[\headwidth][l]{\small~\@reportnumber}}}
+\fancyfoot[RO]{\begingroup\small\thepage{}~\endgroup}
+\fancyfoot[LE]{\greybox{\hs\makebox[\headwidth][l]{\small~\thepage}}}
+\fancyfoot[RE]{\begingroup\small\@reportnumber{}~\endgroup}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\headrulewidth}{0pt}
+}
+
+\pagestyle{fancy}
+\setthepagestyle{}
+\fancypagestyle{plain}{\setthepagestyle{}}
+
+
+%---------------------------------------------------------------------%
+%                     Define new variables                            %    
+%---------------------------------------------------------------------%
+
+\gdef\@copyrightmessage{\copyright{} copyright \@year{}, by the authors of this report. Software Engineering
+Research Group, Department of Software Technology, Faculty of
+Electrical Engineering, Mathematics and Computer Science, Delft
+University of Technology. All rights reserved. No part of this series
+may be reproduced in any form or by any means without prior written
+permission of the authors.}
+\gdef\@authoremail{}
+\gdef\@reportnumber{TUD-SERG-\@year-000}
+\gdef\@year{2006}
+\gdef\@issnnumber{ISSN 1872-5392}
+\gdef\@headertitle{\@title}
+\gdef\@pdfauthor{\@author}
+\gdef\@pdftitle{\@title}
+\gdef\@note{}
+
+\def\authoremail#1{\gdef\@authoremail{#1}}
+\def\headertitle#1{\gdef\@headertitle{#1}}
+
+\def\pdfauthor#1{\gdef\@pdfauthor{#1}}
+\def\pdftitle#1{\gdef\@pdftitle{#1}}
+
+\def\report#1{\gdef\@reportnumber{TUD-SERG-\@year-#1}}
+\def\year#1{\gdef\@year{#1}}
+\def\copyrightmessage#1{\gdef\@copyrightmessage{#1}}
+\def\note#1{\gdef\@note{Note: #1}}
+
+%---------------------------------------------------------------------%
+%                     Title page                                      %    
+%---------------------------------------------------------------------%
+
+\def\maketitle{\dohypersetup{}
+\thispagestyle{empty}\setcounter{page}{1}
+\begin{titlepage}\setlength{\fboxsep}{0pt}
+    \begin{flushright}    
+      {\LARGE Delft University of Technology \\}
+      {\LARGE Software Engineering Research Group\\}
+      {\LARGE Technical Report Series\\[2ex]}
+      \colorbox{dgrey}{\makebox[\headwidth][l]{\rule{0pt}{5pt}}}\\
+      \vspace*{1ex}
+      \vfill
+      {\Huge \@title{}\\}
+      \vspace*{6ex}
+      {\LARGE \@author{} \\}
+      \vspace*{2ex}
+      {\Large \texttt{\@authoremail} \\}
+      \vfill
+      {\LARGE Report \@reportnumber{}\\[2ex]}
+      \colorbox{dgrey}{\makebox[\headwidth][l]{\rule{0pt}{5pt}}}\\[3ex]
+      \includegraphics[height=2cm]{tudelft_logo_bw}
+      \hfill 
+      \includegraphics[height=1.8cm]{serg-logo}
+    \end{flushright}
+\end{titlepage}
+\thispagestyle{empty}\setcounter{page}{1}
+\begin{titlepage}
+\noindent \@reportnumber{}\\[2ex]
+Published, produced and distributed by:\\[1ex]
+Software Engineering Research Group\\
+Department of Software Technology \\
+Faculty of Electrical Engineering, Mathematics and Computer Science\\
+Delft University of Technology\\
+Mekelweg 4\\
+2628 CD Delft\\
+The Netherlands\\[3ex]
+\@issnnumber \\[3ex]
+Software Engineering Research Group Technical Reports:\\
+\texttt{http://www.se.ewi.tudelft.nl/techreports/}\\[2ex]
+For more information about the Software Engineering Research Group:\\
+\texttt{http://www.se.ewi.tudelft.nl/}\\[2ex]
+\@note\\[2ex]
+\vfill
+\noindent \@copyrightmessage
+\end{titlepage}
+\setcounter{page}{1}
+}
+
+\def\makebackpage{
+\cleardoublepage
+\thispagestyle{empty}\setcounter{page}{1}
+\begin{titlepage}\mbox{ }\end{titlepage}
+\thispagestyle{empty}\setcounter{page}{1}
+\begin{titlepage}
+    \begin{flushright}
+      \mbox{ }
+      \vfill
+      \@reportnumber{} \hfill \mbox {} \\
+      \@issnnumber{} \hfill \raisebox{-1em}[0pt][0pt]{\includegraphics[height=1.8cm]{serg-logo}}
+      
+    \end{flushright}
+\end{titlepage}
+}
+
+
+
+%---------------------------------------------------------------------%
+% PDF fields    
+%---------------------------------------------------------------------%
+
+\ifx\pdftexversion\undefined
+  \newcommand{\dohypersetup}{} % empty
+\else
+  \includepdfset{pages=-,pagecommand={},frame=false}
+  \newcommand{\dohypersetup}{\hypersetup{
+pdfauthor = {\@pdfauthor},
+pdftitle = {\@pdftitle},
+pdfsubject = {SERG Technical Report \@reportnumber},
+pdfkeywords = {},
+pdfcreator = {wordproc},  % to mislead arxiv LaTeX detection
+pdfproducer = {pdfproc}   % to mislead arxiv LaTeX detection
+}}
+\fi
