@@ -16,6 +16,10 @@ report:
 	-rm -f /tmp/$(REPORT).pdf 
 
 
+clean:
+	-rm $(REPORT).aux $(REPORT).log $(REPORT).out $(REPORT).pdf
+	-rm *~
+
 VERSION=0.4
 NAME=se-report-$(VERSION)
 STYLE_FILES=Makefile.report se-report.sty TUD-SERG-2006-009.tex submitted_for_review.pdf serg-logo.pdf serg-logo.ps tudelft_logo_bw.pdf tudelft_logo_bw.ps ChangeLog
