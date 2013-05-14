@@ -120,9 +120,12 @@ $(BUILD)/$(MASTERTEX).pdf: $(BUILD)/$(MASTERTEX).aux $(BUILD)/$(MASTERTEX).bbl
 
 clean:
 	rm -Rf build
+	cd techreport && make clean
 
 distclean: clean
 	-rm $(PICTURES_SRC)
 	-find . -type f -name .DS_Store |xargs rm
 	-find . -type f |grep *~|xargs rm
 
+techreport: $(BUILD)/$(MASTERTEX).pdf
+	cd techreport && make
