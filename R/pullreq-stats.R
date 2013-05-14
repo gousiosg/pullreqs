@@ -204,10 +204,11 @@ print(sprintf("Cor between num(pull_reqs), mean(time_to_merge) %f",
               cor.test(a$mergetime_minutes.x, a$mergetime_minutes.y, 
               method = "spearman")$estimate))
 
-mean.size.pp <- subset(aggregate(merged, list(merged$project_name), mean), select=c(Group.1, src_lines))
+mean.size.pp <- subset(aggregate(merged, list(merged$project_name), mean), 
+                       select=c(Group.1, sloc))
 a <- merge(mean.mergetime.per.project, mean.size.pp, by = 'Group.1')
 
-print(sprintf("Cor between num(pull_reqs), mean(time_to_merge) %f", 
+print(sprintf("Cor between mean(sloc), mean(time_to_merge) %f", 
               cor.test(a$mergetime_minutes.x, a$mergetime_minutes.y, 
                        method = "spearman")$estimate))
 
