@@ -12,7 +12,7 @@ report:
 	pdflatex $(REPORT).tex
 	pdflatex $(REPORT).tex
 	perl -p -e 's|^\/PTEX.*$$||g' < $(REPORT).pdf > /tmp/$(REPORT).pdf
-	pdfopt /tmp/$(REPORT).pdf $(REPORT).pdf >& /dev/null
+	#pdfopt /tmp/$(REPORT).pdf $(REPORT).pdf >& /dev/null
 	-rm -f /tmp/$(REPORT).pdf 
 
 
