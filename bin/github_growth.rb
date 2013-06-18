@@ -4,7 +4,7 @@ require 'mongo'
 require 'time'
 require 'date'
 
-mongo = Mongo::Connection.new("dutiil", 27017)
+mongo = Mongo::Connection.new("dutihr", 27017)
 db = mongo.db("github")
 events = db['events'] 
 
@@ -26,8 +26,12 @@ puts "date,pushes,forks,pull_requests,issues,stars,follows,creates"
 #    acc
 #  end
 
+processed = 0
 acc = Hash.new()
 events.find({},{}).each do|e|
+  processed += 1
+  print "\r Processed #{processed} events"
+
   next if e.nil?
   next if e.empty?
 
