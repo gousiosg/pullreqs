@@ -97,5 +97,3 @@ plot.multicor.all_dataframes <- function(dataframes, columns = NUL)
     plot.multicor(dataframes[[i]][5:18], as.character(dataframes[[i]]$project_name[1]))
   }
 }
-
-
