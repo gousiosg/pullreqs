@@ -7,8 +7,8 @@ require 'time'
 require 'linguist'
 require 'grit'
 
-require 'java_pull_req_data'
-require 'ruby_pull_req_data'
+require 'java'
+require 'ruby'
 require 'scala'
 require 'c'
 require 'javascript'
@@ -34,7 +34,7 @@ Extract data for pull requests for a given repository
 
   def validate
     super
-    Trollop::die "Three arguments required" unless !args[2].nil?
+    Trollop::die 'Three arguments required' unless !args[2].nil?
   end
 
   def logger
@@ -61,8 +61,8 @@ Extract data for pull requests for a given repository
 
     Signal.trap("TERM") {
       mongo.close
-      info "pull_request_data_extraction: Received SIGTERM, exiting"
-      Trollop::die("Bye bye")
+      info 'pull_request_data_extraction: Received SIGTERM, exiting'
+      Trollop::die('Bye bye')
     }
 
 
@@ -89,19 +89,19 @@ Extract data for pull requests for a given repository
     end
 
     # Print file header
-    print "pull_req_id,project_name,github_id,"<<
-          "created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes," <<
-          "team_size,num_commits," <<
+    print 'pull_req_id,project_name,github_id,'<<
+          'created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,' <<
+          'team_size,num_commits,' <<
           #"num_commit_comments,num_issue_comments," <<
-          "num_comments," <<
+          'num_comments,' <<
           #"files_added, files_deleted, files_modified" <<
-          "files_changed," <<
+          'files_changed,' <<
           #"src_files, doc_files, other_files, " <<
           #"commits_last_month,main_team_commits_last_month," <<
-          "perc_external_contribs," <<
-          "sloc,src_churn,test_churn," <<
-          "commits_on_files_touched,test_lines_per_1000_lines,watchers," <<
-          'requester,prev_pullreqs,requester_succ_rate,followers,' <<
+          'perc_external_contribs,' <<
+          'sloc,src_churn,test_churn,commits_on_files_touched,' <<
+          'test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,' <<
+          'watchers,requester,prev_pullreqs,requester_succ_rate,followers,' <<
           "intra_branch,main_team_member\n"
 
     # Process pull request list
@@ -193,8 +193,8 @@ Extract data for pull requests for a given repository
           stats[:test_lines_added] + stats[:test_lines_deleted], ',',
           commits_on_files_touched(pr[:id], Time.at(Time.at(pr[:created_at]).to_i - 3600 * 24 * 90)), ',',
           (test_lines(pr[:id]).to_f / src.to_f) * 1000, ',',
-          #(num_test_cases(pr[:id]).to_f / src.to_f) * 1000, ',',
-          #(num_assertions(pr[:id]).to_f / src.to_f) * 1000, ',',
+          (num_test_cases(pr[:id]).to_f / src.to_f) * 1000, ',',
+          (num_assertions(pr[:id]).to_f / src.to_f) * 1000, ',',
           watchers(pr[:id])[0][:num_watchers], ',',
           requester(pr[:id])[0][:login], ',',
           prev_pull_reqs, ',',

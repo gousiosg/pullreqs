@@ -10,7 +10,11 @@ module RubyData
   end
 
   def num_assertions(pr_id)
-    count_lines(test_files(pr_id), lambda{|l| not l.match(/assert/).nil?})
+    count_lines(test_files(pr_id), lambda { |l|
+      (not l.match(/assert/).nil?) or        # RUnit assertions
+          (not l.match(/\.should/).nil? ) or # RSpec assertions
+          (not l.match(/\.expect/).nil? )    # RSpec expectations
+    })
   end
 
   def test_lines(pr_id)

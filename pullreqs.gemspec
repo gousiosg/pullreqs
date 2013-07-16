@@ -15,11 +15,9 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = 0.1
 
-  gem.add_dependency "mongo", ['>= 1.6']
-  gem.add_dependency "bson_ext", ['>= 1.6']
-  gem.add_dependency "json", ['>= 1.6']
-  gem.add_dependency "trollop", ['>= 1.16']
   gem.add_dependency "sequel", ['>= 3.35']
   gem.add_dependency "github-linguist", ['>= 2.3.4']
   gem.add_dependency "grit", ['>= 2.5.0']
+  gem.add_dependency 'ghtorrent', ['>= 0.7.3']
+  gem.add_dependency 'parallel', ['>= 0.7.1']
 end
