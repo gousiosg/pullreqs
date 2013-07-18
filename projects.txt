@@ -220,6 +220,7 @@ codahale dropwizard Java
 jbosstm narayana Java
 geotools geotools Java
 otwcode otwarchive Ruby
+rightscale right_link Ruby
 pculture miro Python
 justinfrench formtastic Ruby
 facebook tornado Python
@@ -334,6 +335,7 @@ railsforcharity spokenvote Ruby
 autotest virt-test Python
 dianping phoenix Java
 dkomanov fizteh-java-task Java
+mozilla webpay Python
 jbosstools jbosstools-integration-tests Java
 scikit-image scikit-image Python
 openshift origin-server Ruby
