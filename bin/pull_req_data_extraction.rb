@@ -12,6 +12,7 @@ require 'ruby'
 require 'scala'
 require 'c'
 require 'javascript'
+require 'python'
 
 class PullReqDataExtraction < GHTorrent::Command
 
@@ -71,7 +72,7 @@ Extract data for pull requests for a given repository
     user_entry = @ght.transaction{@ght.ensure_user(ARGV[0], false, false)}
 
     if user_entry.nil?
-      Trollop::die "Cannot find user #{owner}"
+      Trollop::die "Cannot find user #{ARGV[0]}"
     end
 
     repo_entry = @ght.transaction{@ght.ensure_repo(ARGV[0], ARGV[1], false, false, false)}
@@ -86,6 +87,7 @@ Extract data for pull requests for a given repository
       when /scala/i then self.extend(ScalaData)
       when /javascript/i then self.extend(JavascriptData)
       when /c/i then self.extend(CData)
+      when /python/i then self.extend(PythonData)
     end
 
     # Print file header
@@ -639,16 +641,29 @@ Extract data for pull requests for a given repository
     end
   end
 
-  def count_lines(files, exclude_filter = lambda{true})
+  def count_lines(files, include_filter = lambda{|x| true})
     files.map{ |f|
-      count_file_lines(repo.blob(f[:sha]).data.lines, exclude_filter)
+      repo.blob(f[:sha]).data.lines.select{|x| not include_filter.call(x)}.size
     }.reduce(0){|acc,x| acc + x}
   end
 
-  def count_file_lines(buff, exclude_filter = lambda{true})
-    buff.select {|l|
-      not l.strip.empty? and exclude_filter.call(l)
-    }.size
+  def count_sloc(files)
+    files.map{ |f|
+      #puts f[:path]
+      sloc(repo.blob(f[:sha]).data)
+    }.reduce(0){|acc,x| acc + x}
+  end
+
+  # [buff] is an array of file lines, with empty lines stripped
+  def sloc(buff)
+    all = buff.lines.map{|x| x}
+    non_empty = all.select{|x| not x.strip.empty?}
+    empty = all.size - non_empty.size
+    slc = count_single_line_comments(non_empty, sl_comment_regexp)
+    mlc = count_multiline_comments(non_empty, ml_comment_regexps)
+    sloc = all.size - empty - slc - mlc
+    #puts "all=#{all.size}, empty=#{empty}, single_line=#{slc}, multiline=#{mlc}, source=#{sloc}"
+    sloc
   end
 
   # Clone or update, if already cloned, a git repository
@@ -678,16 +693,24 @@ Extract data for pull requests for a given repository
     end
   end
 
-  def count_multiline_comments(file_str, comment_regexp)
-    file_str.scan(comment_regexp).map { |x|
-      x.lines.count
-    }.reduce(0){|acc, x| acc + x}
+  # [buff] is an array of file lines, with empty lines stripped
+  # [regexp] is a regexp or an array of regexps to match multiline comments
+  def count_multiline_comments(buff, regexp)
+    unless regexp.is_a?(Array) then regexp = [regexp] end
+
+    regexp.reduce(0) do |acc, regexp|
+      acc + buff.reduce(''){|acc,x| acc + x}.scan(regexp).map { |x|
+        x.map{|y| y.lines.count}.reduce(0){|acc,y| acc + y}
+      }.reduce(0){|acc, x| acc + x}
+    end
   end
 
-  def count_single_line_comments(file_str, comment_regexp)
-    file_str.split("\n").select {|l|
-      l.match(comment_regexp)
+  # [buff] is an array of file lines, with empty lines stripped
+  def count_single_line_comments(buff, comment_regexp)
+    a = buff.select { |l|
+      not l.match(comment_regexp).nil?
     }.size
+    a
   end
 
   def src_files(pr_id)
@@ -719,6 +742,17 @@ Extract data for pull requests for a given repository
   def test_file_filter()
     raise Exception.new("Unimplemented")
   end
+
+  def ml_comment_regexps
+    # Defaults to C style comments, as most languages support those
+    [/\/\*((?:.|[\r\n])*?)\*\//]
+  end
+
+  def sl_comment_regexp
+    # Defaults to C style comments, as most languages support those
+    /^\s*\/\//
+  end
+
 end
 
 PullReqDataExtraction.run

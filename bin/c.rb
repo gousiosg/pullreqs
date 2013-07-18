@@ -39,8 +39,8 @@ module CData
       buff = repo.blob(f[:sha]).data
       # Count lines except empty ones
       count_file_lines(buff.lines, lambda{|l| not l.strip.empty?}) -
-        count_single_line_comments(buff, /^\s*\/\//) -
-        count_multiline_comments(buff, /\/\*(?:.|[\r\n])*?\*\//)
+        count_single_line_comments(buff.lines, /^\s*\/\//) -
+        count_multiline_comments(buff.lines, /\/\*(?:.|[\r\n])*?\*\//)
     }.reduce(0){|acc, x| acc + x}
   end
 end
