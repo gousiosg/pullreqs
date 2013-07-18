@@ -30,7 +30,7 @@ processed = 0
 acc = Hash.new()
 events.find({},{}).each do|e|
   processed += 1
-  print "\r Processed #{processed} events"
+  STDERR.write "\r Processed #{processed} events"
 
   next if e.nil?
   next if e.empty?
