@@ -48,7 +48,7 @@ module PythonData
       cases = repo.blob(f[:sha]).data.lines.select{|l| not l.match(/assert/).nil?}
       acc + cases.size
     end
-    @ds_cache ||= {} # Hacky optimization to avoid memory problems
+    @ds_cache = {} # Hacky optimization to avoid memory problems
     ds_tests + normal_tests
   end
 
