@@ -57,7 +57,7 @@ cucumber cucumber Ruby
 cylc cylc Python
 cython cython Python
 dana-i2cat opennaas Java
-defunkt resque Ruby
+resque resque Ruby
 delving culture-hub Scala
 dianping phoenix Java
 diaspora diaspora Ruby
@@ -123,7 +123,7 @@ hornetq hornetq Java
 hotsh rstat.us Ruby
 hpcugent easybuild-easyconfigs Python
 hpcugent easybuild-framework Python
-hudson hudson Java
+jenkinsci jenkins Java
 imathis octopress Ruby
 infinispan infinispan Java
 intridea grape Ruby
@@ -161,7 +161,7 @@ karmi tire Ruby
 Katello katello Ruby
 kennethreitz python-guide Python
 kennethreitz requests Python
-KentBeck junit Java
+#KentBeck junit Java
 kevinweil elephant-bird Java
 kivy kivy Python
 kliment Printrun Python
@@ -190,7 +190,7 @@ mne-tools mne-python Python
 ModeShape modeshape Java
 modilabs formhub Python
 mojombo jekyll Ruby
-molgenis molgenis_apps Java
+#molgenis molgenis_apps Java
 molgenis molgenis Java
 #mongodb docs Python
 mongodb mongo-ruby-driver Ruby
@@ -237,7 +237,7 @@ openMF mifosx Java
 openmicroscopy bioformats Java
 #openmicroscopy ome-documentation Python
 openmicroscopy openmicroscopy Java
-openshift crankcase Ruby
+#openshift crankcase Ruby
 openshift origin-server Ruby
 openshift rhc Ruby
 OpenSlides OpenSlides Python
@@ -259,7 +259,7 @@ plataformatec devise Ruby
 plataformatec simple_form Ruby
 playframework Play20 Scala
 playframework play Python
-powerbot RSBot-API Java
+#powerbot RSBot-API Java
 praekelt vumi-go Python
 praekelt vumi Python
 presidentbeef brakeman Ruby
@@ -279,8 +279,8 @@ pydata pandas Python
 Pylons pyramid Python
 pypa pip Python
 qiime qiime Python
-rackspace atom-hopper Java
-rackspace repose Java
+#rackspace atom-hopper Java
+#rackspace repose Java
 rails-api active_model_serializers Ruby
 railsforcharity spokenvote Ruby
 rails rails Ruby
@@ -314,7 +314,7 @@ scala scala Scala
 scalaz scalaz Scala
 scieloorg SciELO-Manager Python
 scikit-image scikit-image Python
-scikits-image scikits-image Python
+#scikits-image scikits-image Python
 SciTools iris Python
 scrapy scrapy Python
 sensu sensu-community-plugins Ruby
@@ -325,7 +325,7 @@ Shopify active_merchant Ruby
 sightmachine SimpleSeer Python
 Silverpeas Silverpeas-Components Java
 Silverpeas Silverpeas-Core Java
-SirSengir BuildCraft Java
+#SirSengir BuildCraft Java
 sonatype nexus Java
 sourcefabric Superdesk Python
 SpoutDev SpoutAPI Java
@@ -366,7 +366,7 @@ weld core Java
 wherebot omg Ruby
 wildfly wildfly Java
 yahoo oozie Java
-yahoo Openstack-Anvil Python
+#yahoo Openstack-Anvil Python
 yammer sched.do Ruby
 yast ycp-killer Ruby
 Yelp mrjob Python
