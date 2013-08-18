@@ -57,18 +57,18 @@ run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
   
   #
   ### SVM - first tune and then run it with 10-fold cross validation
-  tobj <- tune.svm(model, data=train[1:500, ], gamma = 10^(-6:-3), cost = 10^(1:2))
-  summary(tobj)
-  bestGamma <- tobj$best.parameters[[1]]
-  bestCost <- tobj$best.parameters[[2]]
-  svmmodel <- svm(model, data=train, gamma=bestGamma, cost = bestCost, probability=TRUE)
-  print(summary(svmmodel))
-
-  predictions <- predict(svmmodel, newdata=test, type="prob", probability=TRUE)
-  pred.obj <- prediction(attr(predictions, "probabilities")[,2], test$merged)
-  metrics <- classification.perf.metrics("svm", pred.obj)
-  results[2,] <- c("svm", metrics$auc, metrics$acc, metrics$prec, metrics$rec)
-  svmperf <- performance(pred.obj, "tpr","fpr")
+#   tobj <- tune.svm(model, data=train[1:500, ], gamma = 10^(-6:-3), cost = 10^(1:2))
+#   summary(tobj)
+#   bestGamma <- tobj$best.parameters[[1]]
+#   bestCost <- tobj$best.parameters[[2]]
+#   svmmodel <- svm(model, data=train, gamma=bestGamma, cost = bestCost, probability=TRUE)
+#   print(summary(svmmodel))
+# 
+#   predictions <- predict(svmmodel, newdata=test, type="prob", probability=TRUE)
+#   pred.obj <- prediction(attr(predictions, "probabilities")[,2], test$merged)
+#   metrics <- classification.perf.metrics("svm", pred.obj)
+#   results[2,] <- c("svm", metrics$auc, metrics$acc, metrics$prec, metrics$rec)
+#   svmperf <- performance(pred.obj, "tpr","fpr")
   
   #
   ### Binary logistic regression
@@ -96,7 +96,7 @@ run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
   # Plot classification performance
   pdf(file=sprintf("%s/%s-%s.pdf", plot.location, "classif-perf-merge-decision", uniq))
   plot (rfperf, col = 1, main = "Classifier performance for pull request merge decision")
-  plot (svmperf, col = 2, add = TRUE)
+#   plot (svmperf, col = 2, add = TRUE)
   plot (logperf, col = 3, add = TRUE)
   plot (bayesperf, col = 4, add = TRUE)
   legend(0.6, 0.6, c('random forest', 'svm', 'binlog regression', 'naive bayes'), 1:5, title = sprintf("n=%d",sample_size))
@@ -108,4 +108,4 @@ run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
 merge.decision.model <- merged ~ team_size + num_commits + files_changed + 
   perc_external_contribs + sloc + src_churn + test_churn + 
   commits_on_files_touched +  test_lines_per_kloc + prev_pullreqs + 
-  requester_succ_rate + main_team_member + num_comments + + test_cases_per_kloc
+  requester_succ_rate + main_team_member + num_comments + test_cases_per_kloc
