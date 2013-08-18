@@ -5,6 +5,9 @@ hist_x_axis_max <- function(dfs, var) {
 
 ### Data conversions
 
+# printf for R
+printf <- function(...) invisible(print(sprintf(...)))
+
 # Trim whitespace from strings
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 
@@ -18,7 +21,12 @@ load.all <- function(dir = ".", pattern = "*.csv$") {
   lapply(list.files(path = dir, pattern = pattern, full.names = T),
          function(x){
            print(sprintf("Reading file %s", x))
-           read.csv(pipe(paste("cut -f2-25 -d',' ", x)), check.names = T)
+           #a <- load.filter(pipe(paste("cut -f2-25 -d',' ", x)))
+           a <- load.filter(x)
+           if (nrow(a) == 0) {
+            printf("Warning - No rows in file %s", x)
+           }
+           a
          })
 }
 
@@ -37,6 +45,20 @@ load.some <- function(dir = ".", pattern = "*.csv$", howmany = -1) {
   merged
 }
 
+load.filter <- function(path) {
+  setAs("character", "POSIXct", function(from){as.POSIXct(from, origin = "1970-01-01")})
+  a <- read.csv(path, check.names = T, 
+                colClasses = c("integer","factor", rep("integer", 15),
+                               rep("double", 3), "integer",  "factor",
+                               "integer", "double", "integer",
+                               "factor", "factor"))
+
+  # Take care of cases where csv file production was interupted, so the last
+  # line has wrong fields
+  a <- subset(a, !is.na(intra_branch))
+  a
+}
+
 # Add merged column
 addcol.merged <- function(dfs) {
   lapply(dfs, addcol.merged.df)
@@ -44,14 +66,14 @@ addcol.merged <- function(dfs) {
 
 addcol.merged.df <- function(x) {
   print(sprintf("Adding column merged to dataframe %s", (project.name(x))))
-  x$merged <- apply(x, 1, function(r){if(is.na(r[['merged_at']])){F} else {T}})
+  x$merged <- !is.na(x$merged_at)
   x$merged <- as.factor(x$merged)
   x
 }
 
 # Name of a project in a dataframe
 project.name <- function(dataframe) {
-  as.character(unique(dataframe[['project_name']]))
+  as.character(dataframe$project_name[[1]])
 }
 
 # Name of all projects in the provided dataframe list
@@ -64,14 +86,12 @@ get.project <- function(dfs, name) {
   Find(function(x){if(project.name(x) == name){T} else {F} }, dfs)
 }
 
-# Merge all dataframes in the provided list into one dataframe
-merge.dataframes <- function(dataframes) {
-  merged <- data.frame()
-  for (i in 1:length(dataframes)) {
-    print(sprintf("Merging dataframe %s", project.name(dataframes[[i]])))    
-    merged <- rbind(merged, dataframes[[i]])
-  }
-  merged
+# Merge dataframes functionally
+merge.dataframes <- function(dfs) {
+  Reduce(function(acc, x){
+      printf("Merging dataframe %s", project.name(x))
+      rbind(acc, x)
+    }, dfs)
 }
 
 # Prints a list of column along with a boolean value. If the value is FALSE, then
