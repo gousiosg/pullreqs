@@ -13,7 +13,7 @@ class.project <- function(dfs, name) {
 
 # Strip a project data frame from unused columns
 prepare.project.df <- function(a) {
-  a[,c(7:25)]
+  a[,c(7:28)]
 }
 
 # Run a cross validation round, return a dataframe with all results added

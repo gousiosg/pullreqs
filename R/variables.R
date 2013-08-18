@@ -1,7 +1,7 @@
 platform.sep = "/"
 
 data.file.location = "data"
-plot.location = "doc/figs"
+plot.location = "figs"
 
 overall.dataset.stats = paste(data.file.location, "project-statistics.txt", sep = platform.sep)
 

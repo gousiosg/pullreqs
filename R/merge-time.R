@@ -86,10 +86,12 @@ run.classifiers.mergetime <- function(model, train, test, uniq = "") {
   #
   ### SVM - first tune and then run it with 10-fold cross validation
   tobj <- tune.svm(model, data=train[1:500, ], gamma = 10^(-6:-3), cost = 10^(1:2))
+  #tobj <- tune.svm(merge.time.model, data = data$train[1:500, ], gamma = 10^(-6:-3), cost = 10^(1:2))
   summary(tobj)
   bestGamma <- tobj$best.parameters[[1]]
   bestCost <- tobj$best.parameters[[2]]
   svmmodel <- svm(model, data=train, gamma=bestGamma, cost = bestCost, probability=TRUE)
+  #svmmodel <- svm(merge.time.model, data=data$train, gamma=bestGamma, cost = bestCost, probability=TRUE)
   print(svmmodel)
 
   predictions <- predict(svmmodel, newdata=test, type="prob", probability=TRUE)
@@ -97,7 +99,7 @@ run.classifiers.mergetime <- function(model, train, test, uniq = "") {
   metrics <- classification.perf.metrics("svm", pred.obj)
   results[2,] <- c("svm", metrics$auc, metrics$acc, metrics$prec, metrics$rec)
   svmperf <- performance(pred.obj, "tpr","fpr")
-  
+
   #
   ### Binary logistic regression
   logmodel <- glm(model, data=train, family = binomial(logit));
@@ -134,8 +136,8 @@ run.classifiers.mergetime <- function(model, train, test, uniq = "") {
 
 merge.time.model = merged_fast ~ team_size + num_commits + files_changed + 
   perc_external_contribs + sloc + src_churn + test_churn + 
-  commits_on_files_touched +  test_lines_per_1000_lines + prev_pullreqs +  
-  requester_succ_rate + main_team_member + num_comments
+  commits_on_files_touched +  test_lines_per_kloc + prev_pullreqs +  
+  requester_succ_rate + main_team_member + num_comments + test_cases_per_kloc
 
 #
 ### Linear regression model
