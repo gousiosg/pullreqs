@@ -1,4 +1,8 @@
+require 'comment_stripper'
+
 module PythonData
+
+  include CommentStripper
 
   def num_test_cases(pr_id)
       ds_tests = docstrings(pr_id).reduce(0) do |acc, docstring|
@@ -53,7 +57,7 @@ module PythonData
   end
 
   def test_lines(pr_id)
-    count_sloc(test_files(pr_id))
+    count_lines(test_files(pr_id))
   end
 
   def test_files(pr_id)
@@ -72,7 +76,7 @@ module PythonData
   end
 
   def src_lines(pr_id)
-    count_sloc(src_files(pr_id))
+    count_lines(src_files(pr_id))
   end
 
   def test_file_filter
@@ -84,12 +88,28 @@ module PythonData
     }
   end
 
-  def ml_comment_regexps
-    [/["']{3}(.+?)["']{3}/m]
+  def strip_comments(buff)
+    strip_python_multiline_comments(strip_shell_style_comments(buff))
   end
 
-  def sl_comment_regexp
-    /^\s*#/
+  def strip_python_multiline_comments(buff)
+    out = []
+    in_comment = false
+    buff.lines.each do |line|
+      if line.match(/^\s*["']{3}/)
+        in_comment = !in_comment
+        next
+      end
+
+      unless in_comment
+        out << line
+      end
+    end
+    out.flatten.reduce(''){|acc, x| acc + x}
+  end
+
+  def ml_comment_regexps
+    [/["']{3}(.+?)["']{3}/m]
   end
 
   private

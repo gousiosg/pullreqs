@@ -1,4 +1,8 @@
+require 'comment_stripper'
+
 module JavaData
+
+  include CommentStripper
 
   def src_files(pr_id)
     files_at_commit(pr_id,
@@ -10,7 +14,7 @@ module JavaData
   end
 
   def src_lines(pr_id)
-    count_sloc(src_files(pr_id))
+    count_lines(src_files(pr_id))
   end
 
   def test_files(pr_id)
@@ -18,7 +22,7 @@ module JavaData
   end
 
   def test_lines(pr_id)
-    count_sloc(test_files(pr_id))
+    count_lines(test_files(pr_id))
   end
 
   def num_test_cases(pr_id)
@@ -43,11 +47,15 @@ module JavaData
     count_lines(test_files(pr_id), lambda{|l| not l.match(/assert/).nil?})
   end
 
-  def test_file_filter()
+  def test_file_filter
     lambda { |f|
       path = if f.class == Hash then f[:path] else f end
-      path.end_with?('.java') and path.include?("/test/")
+      path.end_with?('.java') and path.include?('/test/')
     }
+  end
+
+  def strip_comments(buff)
+    strip_c_style_comments(buff)
   end
 
 end

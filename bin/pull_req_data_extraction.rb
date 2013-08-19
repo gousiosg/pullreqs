@@ -91,7 +91,7 @@ Extract data for pull requests for a given repository
     end
 
     # Print file header
-    print 'pull_req_id,project_name,github_id,'<<
+    print 'pull_req_id,project_name,lang,github_id,'<<
           'created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,' <<
           'team_size,num_commits,' <<
           #"num_commit_comments,num_issue_comments," <<
@@ -109,7 +109,7 @@ Extract data for pull requests for a given repository
     # Process pull request list
     pull_reqs(repo_entry).each do |pr|
       begin
-        process_pull_request(pr)
+        process_pull_request(pr, ARGV[2].downcase)
       rescue Exception => e
         STDERR.puts "Error processing pull_request #{pr[:github_id]}: #{e.message}"
         STDERR.puts e.backtrace
@@ -148,7 +148,7 @@ Extract data for pull requests for a given repository
   end
 
   # Process a single pull request
-  def process_pull_request(pr)
+  def process_pull_request(pr, lang)
 
     # Statistics across pull request commits
     stats = pr_stats(pr[:id])
@@ -171,6 +171,7 @@ Extract data for pull requests for a given repository
     # Print line for a pull request
     print pr[:id], ',',
           "#{pr[:login]}/#{pr[:project_name]}", ',',
+          lang, ',',
           pr[:github_id], ',',
           Time.at(pr[:created_at]).to_i, ',',
           merge_time(pr, merged, git_merged), ',',
@@ -643,27 +644,12 @@ Extract data for pull requests for a given repository
 
   def count_lines(files, include_filter = lambda{|x| true})
     files.map{ |f|
-      repo.blob(f[:sha]).data.lines.select{|x| not include_filter.call(x)}.size
+      strip_comments(repo.blob(f[:sha]).data).lines.select{|x|
+        not x.strip.empty?
+      }.select{ |x|
+        include_filter.call(x)
+      }.size
     }.reduce(0){|acc,x| acc + x}
-  end
-
-  def count_sloc(files)
-    files.map{ |f|
-      #puts f[:path]
-      sloc(repo.blob(f[:sha]).data)
-    }.reduce(0){|acc,x| acc + x}
-  end
-
-  # [buff] is an array of file lines, with empty lines stripped
-  def sloc(buff)
-    all = buff.lines.map{|x| x}
-    non_empty = all.select{|x| not x.strip.empty?}
-    empty = all.size - non_empty.size
-    slc = count_single_line_comments(non_empty, sl_comment_regexp)
-    mlc = count_multiline_comments(non_empty, ml_comment_regexps)
-    sloc = all.size - empty - slc - mlc
-    #puts "all=#{all.size}, empty=#{empty}, single_line=#{slc}, multiline=#{mlc}, source=#{sloc}"
-    sloc
   end
 
   # Clone or update, if already cloned, a git repository
@@ -739,18 +725,12 @@ Extract data for pull requests for a given repository
 
   # Return a function filename -> Boolean, that determines whether a
   # filename is a test file
-  def test_file_filter()
+  def test_file_filter
     raise Exception.new("Unimplemented")
   end
 
-  def ml_comment_regexps
-    # Defaults to C style comments, as most languages support those
-    [/\/\*((?:.|[\r\n])*?)\*\//]
-  end
-
-  def sl_comment_regexp
-    # Defaults to C style comments, as most languages support those
-    /^\s*\/\//
+  def strip_comments(buff)
+    raise Exception.new("Unimplemented")
   end
 
 end
