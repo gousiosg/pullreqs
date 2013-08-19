@@ -23,8 +23,7 @@ module PythonData
       end
 
     normal_tests = test_files(pr_id).reduce(0) do |acc, f|
-      buff = repo.blob(f[:sha]).data
-      cases = buff.scan(/\s*def\s* test_(.*)\(.*\):/).size
+      cases = stripped(f).scan(/\s*def\s* test_(.*)\(.*\):/).size
       acc + cases
     end
     ds_tests + normal_tests
@@ -49,7 +48,7 @@ module PythonData
     end
 
     normal_tests = test_files(pr_id).reduce(0) do |acc, f|
-      cases = repo.blob(f[:sha]).data.lines.select{|l| not l.match(/assert/).nil?}
+      cases = stripped(f).lines.select{|l| not l.match(/assert/).nil?}
       acc + cases.size
     end
     @ds_cache = {} # Hacky optimization to avoid memory problems

@@ -27,10 +27,6 @@ Extract data for pull requests for a given repository
 #{command_name} owner repo lang
 
     BANNER
-    options.opt :extract_diffs,
-                'Extract file diffs for modified files'
-    options.opt :diff_dir,
-                'Base directory to store file diffs', :default => "diffs"
   end
 
   def validate
@@ -55,6 +51,17 @@ Extract data for pull requests for a given repository
   def repo
     @repo ||= clone(ARGV[0], ARGV[1])
     @repo
+  end
+
+  # Read a source file from the repo and strip its comments
+  # The argument f is the result of Grit.lstree
+  # Memoizes result per f
+  def stripped(f)
+    @stripped ||= Hash.new
+    unless @stripped.has_key? f
+      @stripped[f] = strip_comments(repo.blob(f[:sha]).data)
+    end
+    @stripped[f]
   end
 
   # Main command code
@@ -206,24 +213,6 @@ Extract data for pull requests for a given repository
           if intra_branch?(pr[:id])[0][:intra_branch] == 1 then true else false end, ',',
           if main_team_member?(pr[:id])[0][:main_team_member] == 1 then true else false end,
           "\n"
-
-    if options[:extract_diffs]
-      FileUtils.mkdir_p(File.join(options[:diff_dir], pr[:project_name], pr[:github_id].to_s))
-
-      file_diffs(pr[:id]).each {|f|
-        num = 0
-        repo.log(f[:latest], f[:filename])[0..f[:num_versions]].map{|x| x.sha}.each { |sha|
-          d = repo.tree(sha, f[:filename]).blobs[0].data
-          filename = f[:filename].gsub("/','-") + "-" + sha[0..10] + "." + num.to_s
-          file = File.open(File.join(options[:diff_dir],
-                                  pr[:github_id].to_s, filename), "w")
-          file.write(d)
-          file.close
-          num += 1
-        }
-      }
-    end
-
   end
 
   def merge_time(pr, merged, git_merged)
@@ -644,7 +633,7 @@ Extract data for pull requests for a given repository
 
   def count_lines(files, include_filter = lambda{|x| true})
     files.map{ |f|
-      strip_comments(repo.blob(f[:sha]).data).lines.select{|x|
+      stripped(f).lines.select{|x|
         not x.strip.empty?
       }.select{ |x|
         include_filter.call(x)

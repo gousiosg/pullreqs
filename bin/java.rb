@@ -27,7 +27,7 @@ module JavaData
 
   def num_test_cases(pr_id)
     test_files(pr_id).map {|f|
-      buff = repo.blob(f[:sha]).data
+      buff = stripped(f)
 
       junit4 = buff.lines.select{|l| not l.match(/@Test/).nil?}.size
 
