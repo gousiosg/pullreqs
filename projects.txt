@@ -37,7 +37,7 @@ c00w bitHopper Python
 caktus django-timepiece Python
 candlepin candlepin Java
 candlepin subscription-manager Python
-carlhuda bundler Ruby
+#carlhuda bundler Ruby
 carrierwaveuploader carrierwave Ruby
 Catrobat Catroid Java
 celery celery Python
@@ -130,7 +130,7 @@ intridea grape Ruby
 intridea omniauth Ruby
 ippontech tatami Java
 ipython ipython Python
-#irstv orbisgis Java
+irstv orbisgis Java
 isenseDev iSENSE-Hardware Java
 isenseDev rSENSE Ruby
 JakeWharton ActionBarSherlock Java
@@ -152,7 +152,7 @@ jnicklas capybara Ruby
 jnicklas carrierwave Ruby
 jordansissel fpm Ruby
 josegonzalez homebrew-php Ruby
-jruby jruby Ruby
+#jruby jruby Ruby
 #JumpstartLab reading Ruby
 junit-team junit Java
 justinfrench formtastic Ruby
@@ -291,8 +291,7 @@ rapid7 metasploit-framework Ruby
 reddit reddit Python
 reddmetrics forma-clj Java
 refinery refinerycms Ruby
-resolve refinerycms Ruby
-#resteasy Resteasy Java
+resteasy Resteasy Java
 rg3 youtube-dl Python
 rightscale right_link Ruby
 RiotGames berkshelf Ruby
@@ -310,7 +309,7 @@ saltstack salt Python
 sanger sequencescape Ruby
 sbt sbt Scala
 scala-ide scala-ide Scala
-scala scala Scala
+#scala scala Scala
 scalaz scalaz Scala
 scieloorg SciELO-Manager Python
 scikit-image scikit-image Python
@@ -330,7 +329,7 @@ Silverpeas Silverpeas-Core Java
 sourcefabric Superdesk Python
 SpoutDev SpoutAPI Java
 SpoutDev Spout Java
-spree spree_i18n Ruby
+#spree spree_i18n Ruby
 spree spree Ruby
 SpringSource spring-framework Java
 SpringSource spring-integration Java
