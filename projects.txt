@@ -29,8 +29,8 @@ boto boto Python
 BrightcoveOS Diamond Python
 brooklyncentral brooklyn Java
 buildbot buildbot Python
-Bukkit Bukkit Java
-Bukkit CraftBukkit Java
+#Bukkit Bukkit Java
+#Bukkit CraftBukkit Java
 bundler bundler Ruby
 c00w bitHopper Python
 #cakephp docs Python
@@ -362,7 +362,7 @@ vmw-tmpst heroapp-LetsHire Ruby
 wajam nrv Scala
 webbukkit dynmap Java
 weld core Java
-wherebot omg Ruby
+#wherebot omg Ruby
 wildfly wildfly Java
 yahoo oozie Java
 #yahoo Openstack-Anvil Python
