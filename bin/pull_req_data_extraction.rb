@@ -100,6 +100,7 @@ Extract data for pull requests for a given repository
     # Print file header
     print 'pull_req_id,project_name,lang,github_id,'<<
           'created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,' <<
+          'git_merged,' <<
           'team_size,num_commits,' <<
           #"num_commit_comments,num_issue_comments," <<
           'num_comments,' <<
@@ -112,6 +113,36 @@ Extract data for pull requests for a given repository
           'test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,' <<
           'watchers,requester,prev_pullreqs,requester_succ_rate,followers,' <<
           "intra_branch,main_team_member\n"
+
+    # Get commits that close issues/pull requests
+    # Index them by issue/pullreq id, as a sha might close multiple issues
+    # see: https://help.github.com/articles/closing-issues-via-commit-messages
+    q = <<-QUERY
+    select c.sha
+    from commits c, project_commits pc
+    where pc.project_id = ?
+    and pc.commit_id = c.id
+    QUERY
+
+    commits = mongo.get_underlying_connection['commits']
+    fixre = /(?:fixe[sd]?|close[sd]?|resolve[sd]?)(?:[^\/]*?|and)#([0-9]+)/mi
+
+    @closed_by_commit = db.fetch(q, repo_entry[:id]).reduce({}) do |acc, x|
+      sha = x[:sha]
+      commits.find({:sha => sha},
+                   {:fields => {'commit.message' => 1, '_id' => 0}}).each do |x|
+        comment = x['commit']['message']
+        comment.match(fixre) do |m|
+          (1..(m.size - 1)).map do |y|
+            acc[m[y].to_i] = sha[0..6]
+          end
+        end
+      end
+      acc
+    end
+
+    # Store all commits abbreviated SHA-1s for later comparisons
+    @all_commits = repo.commits('master', 50000).map{|x| x.id_abbrev}.sort
 
     # Process pull request list
     pull_reqs(repo_entry).each do |pr|
@@ -161,10 +192,18 @@ Extract data for pull requests for a given repository
     stats = pr_stats(pr[:id])
 
     merged = ! pr[:merged_at].nil?
+    git_merged = false
 
     if not merged
-      # Merges of pullreqs can happen outside github
-      git_merged = check_if_merged_with_git(pr[:id])
+      # Check if PR was closed by a commit while this commit is in master
+      # This usually indicates a merge (perhaps following a rebase)
+      commit_merged = unless @closed_by_commit[pr[:github_id]].nil?
+                        sha = @closed_by_commit[pr[:github_id]]
+                        @all_commits.bsearch { |x| x.start_with? sha }.nil?
+                      else
+                        false
+                      end
+      git_merged = commit_merged || check_if_merged_with_git(pr[:id])
     end
 
     # Count number of src/comment lines
@@ -185,6 +224,7 @@ Extract data for pull requests for a given repository
           Time.at(pr[:closed_at]).to_i, ',',
           pr[:lifetime_minutes], ',',
           merge_time_minutes(pr, merged, git_merged), ',',
+          git_merged, ',',
           team_size_at_open(pr[:id], 3)[0][:teamsize], ',',
           num_commits(pr[:id])[0][:commit_count], ',',
           #num_comments(pr[:id])[0][:comment_count], ',',
@@ -682,6 +722,39 @@ Extract data for pull requests for a given repository
     raise Exception.new("Unimplemented")
   end
 
+end
+
+unless Array.method_defined? :bsearch
+  class Array
+    def bsearch
+      return to_enum(__method__) unless block_given?
+      from = 0
+      to   = size - 1
+      satisfied = nil
+      while from <= to do
+        midpoint = (from + to).div(2)
+        result = yield(cur = self[midpoint])
+        case result
+          when Numeric
+            return cur if result == 0
+            result = result < 0
+          when true
+            satisfied = cur
+          when nil, false
+            # nothing to do
+          else
+            raise TypeError, "wrong argument type #{result.class} (must be numeric, true, false or nil)"
+        end
+
+        if result
+          to = midpoint - 1
+        else
+          from = midpoint + 1
+        end
+      end
+      satisfied
+    end
+  end
 end
 
 PullReqDataExtraction.run
