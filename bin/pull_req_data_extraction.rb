@@ -100,7 +100,7 @@ Extract data for pull requests for a given repository
     # Print file header
     print 'pull_req_id,project_name,lang,github_id,'<<
           'created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,' <<
-          'git_merged,' <<
+          'git_merged,conflict,' <<
           'team_size,num_commits,' <<
           #"num_commit_comments,num_issue_comments," <<
           'num_comments,' <<
@@ -225,6 +225,7 @@ Extract data for pull requests for a given repository
           pr[:lifetime_minutes], ',',
           merge_time_minutes(pr, merged, git_merged), ',',
           git_merged, ',',
+          conflict?(pr[:login], pr[:project_name], pr[:github_id]), ',',
           team_size_at_open(pr[:id], 3)[0][:teamsize], ',',
           num_commits(pr[:id])[0][:commit_count], ',',
           #num_comments(pr[:id])[0][:comment_count], ',',
@@ -272,6 +273,15 @@ Extract data for pull requests for a given repository
       pr[:lifetime_minutes].to_i
     else
       ''
+    end
+  end
+
+  def conflict?(owner, repo, pr_id)
+    issue_comments = mongo.get_underlying_connection['issue_comments']
+
+    issue_comments.find( {'owner' => owner, 'repo' => repo, 'issue_id' => pr_id.to_i},
+                 {:fields => {'body' => 1, '_id' => 0}}).reduce(false) do |acc, x|
+      acc || (not x['body'].match(/conflict/i).nil?)
     end
   end
 
