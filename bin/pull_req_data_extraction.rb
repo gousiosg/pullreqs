@@ -508,46 +508,6 @@ Extract data for pull requests for a given repository
     if_empty(db.fetch(q, pr_id).all, :num_commits)
   end
 
-  def file_diffs(pr_id)
-    commit_entries(pr_id).map { |c|
-      # For each commit
-      c['files'].select { |f|
-        # Select modified files
-        f['status']=="modified"
-      }.flatten.\
-      # Create a tuple of the form [sha, filename]
-      map { |x|
-        [c['sha'], x['filename']]
-      }
-    }.\
-    # Flatten tuples across commits
-    reduce([]) { |acc, x| acc += x }.
-    # Create a hash of commits per filename indexed by filename
-    group_by{|e| e[1]}.\
-    # Map result to a Hash
-    map { |k,v|
-      commits = v.map{|x| x[0]}#.unshift("master")
-      # Find the latest point in the commit log that contains
-      # all commits to a file
-      latest = commits.find{|sha|
-        l = repo.log(sha, k).map{|x| x.sha}
-        a = commits.reduce(true){|acc,x| acc &= l.include?(x)}
-        a
-      }
-
-      # Find the latest commit that in
-      #latest = log.find{|e| not v.find{|x| x[0] == e.sha}.nil?}
-      if latest.nil?
-        fail
-      end
-      {
-          :latest  => latest,
-          :num_versions => v.size,
-          :filename => k
-      }
-    }
-  end
-
   private
 
   def pull_req_entry(pr_id)
