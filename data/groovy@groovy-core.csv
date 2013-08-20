@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1908919,groovy/groovy-core,java,239,1375961294,1375961397,1375961397,1,1,10,67,0,76,31,124012,2591,0,141,84.95952004644712,5.975228203722221,12.353643195819759,200,bura,9,0.2222222222222222,8,false,false
 1895889,groovy/groovy-core,java,238,1375781032,1375786584,1375786584,92,92,10,2,0,2,32,124042,465,0,45,84.93897228358136,5.973783073475113,12.350655423163122,200,blackdrag,1,0.0,4,false,false

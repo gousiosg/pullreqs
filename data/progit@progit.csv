@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1913725,progit/progit,ruby,480,1376044702,1376072328,1376072328,460,460,1,2,1,2,95,24,0,0,13,0.0,0.0,0.0,1354,sekaiya,1,0.0,0,false,false
 1913699,progit/progit,ruby,479,1376044140,1376044583,1376044583,7,7,1,1,0,1,95,24,0,0,13,0.0,0.0,0.0,1354,sekaiya,0,0,0,false,false

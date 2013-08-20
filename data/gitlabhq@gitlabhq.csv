@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1945276,gitlabhq/gitlabhq,ruby,4801,1376738819,1376896093,1376896093,2621,2621,4,1,1,1,96,14212,0,0,23,3115.536166619758,49.53560371517028,138.12271320011257,17392,Rovanion,2,0.0,8,false,false
 1945170,gitlabhq/gitlabhq,ruby,4799,1376736101,,1376766841,512,,4,1,1,1,96,14212,0,0,0,3115.536166619758,49.53560371517028,138.12271320011257,8696,Rovanion,0,0,4,false,false

@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1908509,hector-client/hector,java,631,1375955348,1375980369,1375980369,417,417,2,1,0,1,46,21109,20,0,0,464.6833104363068,15.91738121180539,52.82107158084229,645,woolfel,7,0.7142857142857143,1,false,false
 1776411,hector-client/hector,java,627,1373934915,1374072597,1374072597,2294,2294,4,1,0,2,43,21070,55,0,0,465.54342667299477,15.946843853820596,52.9188419553868,1288,awoodbury,0,0,0,false,false

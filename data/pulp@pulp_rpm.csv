@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1953536,pulp/pulp_rpm,python,309,1376937101,,1376937546,7,,8,2,1,2,55,11557,18,46,17,829.6270658475383,49.23423033659254,175.04542701393095,4,rbarlow,84,0.42857142857142855,2,true,false
 1953482,pulp/pulp_rpm,python,308,1376936486,,1376936603,1,,8,1,0,2,55,11557,18,22,12,829.6270658475383,49.23423033659254,175.04542701393095,2,rbarlow,83,0.43373493975903615,1,true,false

@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1910948,mozilla-services/android-sync,java,347,1375986982,,1376323900,5615,,5,7,3,6,48,55977,435,321,1,481.01898994229776,15.417046286867821,60.88214802508173,23,ncalexan,140,0.5714285714285714,2,true,true
 1899134,mozilla-services/android-sync,java,346,1375818787,1375820052,1375820052,21,21,5,1,2,2,46,55944,0,0,5,471.77534677534675,15.22951522951523,60.66781066781067,23,mcomella,11,0.2727272727272727,11,false,false

@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1942451,ProjectMeniscus/meniscus,python,352,1376669326,1376669364,1376669364,0,0,6,1,0,1,64,3266,2,0,4,1127.679118187385,69.81016533986528,129.51622780159215,37,stevendgonzales,101,0.42574257425742573,5,false,false
 1942305,ProjectMeniscus/meniscus,python,351,1376667687,1376667760,1376667760,1,1,6,1,0,2,64,3262,9,0,23,1129.0619251992641,69.89576946658492,129.67504598405884,37,stevendgonzales,100,0.43,5,false,false

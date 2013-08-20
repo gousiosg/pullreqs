@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1948217,OpenMDAO/OpenMDAO-Framework,python,1429,1376852990,1376896711,1376896711,728,728,7,7,0,14,68,37494,233,224,101,451.27220355256844,16.402624419907188,63.690190430468874,94,swryan,78,0.9102564102564102,14,false,true
 1941359,OpenMDAO/OpenMDAO-Framework,python,1428,1376656952,1376661017,1376661017,67,67,7,2,0,5,69,37494,361,73,22,451.19219075052007,16.402624419907188,63.690190430468874,47,setowns1,143,0.9020979020979021,5,false,true

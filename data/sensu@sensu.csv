@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1933780,sensu/sensu,ruby,598,1376525688,1376525946,1376525946,4,4,1,1,0,2,49,2883,2,0,15,747.485258411377,37.11411723898716,117.23898716614637,164,portertech,406,0.8891625615763546,67,false,false
 1933760,sensu/sensu,ruby,597,1376525200,1376525249,1376525249,0,0,1,1,0,1,49,2883,0,0,9,747.485258411377,37.11411723898716,117.23898716614637,164,joemiller,4,0.75,50,false,false

@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1953068,ets-berkeley-edu/calcentral,ruby,1474,1376931723,1376939132,1376939132,123,123,6,3,4,9,54,9267,626,76,90,673.6808028488184,29.027732815366356,98.08999676270638,9,yuhunglin,318,0.5786163522012578,2,false,false
 1944140,ets-berkeley-edu/calcentral,ruby,1473,1376693228,1376696316,1376696316,51,51,6,1,1,2,54,9267,0,0,3,673.6808028488184,29.027732815366356,98.08999676270638,18,christianv,422,0.7085308056872038,96,false,false

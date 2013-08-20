@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1951052,opf/openproject,ruby,337,1376911339,,1376914224,48,,16,1,0,1,63,46097,10,0,1,904.8745037638024,63.30129943380264,173.98095320736707,33,meeee,31,0.12903225806451613,34,true,false
 1950103,opf/openproject,ruby,336,1376897684,,1376921192,391,,16,2,0,1,63,46097,47,0,13,904.8745037638024,63.30129943380264,173.98095320736707,33,sschu,36,0.2777777777777778,1,true,false

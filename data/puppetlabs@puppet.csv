@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1952874,puppetlabs/puppet,ruby,1843,1376929768,1376930245,1376930245,7,7,26,1,0,6,63,88760,50,18,51,1264.375844975214,124.97746732762506,212.47183415953134,2796,zaphod42,98,0.7244897959183674,44,false,true
 1943359,puppetlabs/puppet,ruby,1840,1376679759,1376681593,1376681593,30,30,26,8,0,38,63,88650,355,403,139,1264.7941342357587,125.07614213197971,212.69035532994923,1398,zaphod42,97,0.7319587628865979,21,false,true

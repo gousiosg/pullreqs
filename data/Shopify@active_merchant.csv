@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1937828,Shopify/active_merchant,ruby,805,1376583710,,1376584108,6,,12,1,0,1,69,29761,5,0,0,2097.1405530728134,123.24854675582138,452.1017438930143,2301,duff,41,0.0975609756097561,20,false,false
 1926105,Shopify/active_merchant,ruby,799,1376413818,1376417546,1376417546,62,62,13,1,1,4,70,29729,39,10,6,2096.908742305493,123.24666150896431,451.9492751185711,4602,melari,24,0.4583333333333333,8,true,true

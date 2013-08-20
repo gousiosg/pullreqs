@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1951300,sferik/rails_admin,ruby,1718,1376913729,1376960057,1376960057,772,772,3,1,1,1,75,4784,2,0,2,4170.9866220735785,114.13043478260869,256.27090301003346,7440,drubin,0,0,16,false,false
 1755835,sferik/rails_admin,ruby,1695,1373485056,1373525853,1373525853,679,679,2,1,3,1,92,4800,4,0,2,4153.333333333333,113.54166666666667,255.20833333333331,3720,evanbeard,0,0,12,false,false

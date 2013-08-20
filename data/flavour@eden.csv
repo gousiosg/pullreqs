@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1901404,flavour/eden,python,569,1375855953,1375865654,1375865654,161,161,5,1,0,7,16,212877,0,0,94,2.677602559224341,0.16911174058258993,0.33822348116517986,198,davidcatalpa,12,0.25,0,false,false
 1900862,flavour/eden,python,568,1375845713,1375860396,1375860396,244,244,5,1,0,9,16,212877,111,0,190,2.677602559224341,0.16911174058258993,0.33822348116517986,198,michaelhowden,128,0.5625,20,false,false

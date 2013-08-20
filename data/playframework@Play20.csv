@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1783099,playframework/Play20,scala,1348,1374031799,1374101550,1374101550,1162,1162,7,1,1,4,62,31513,5,0,4,332.2121029416431,18.817630819027066,37.952590994192875,5332,jroper,103,0.6407766990291263,146,false,true
 1783005,playframework/Play20,scala,1346,1374028661,1374106992,1374106992,1305,1305,7,1,1,6,62,31513,51,532,28,332.2121029416431,18.817630819027066,37.952590994192875,5332,jroper,102,0.6470588235294118,146,false,true

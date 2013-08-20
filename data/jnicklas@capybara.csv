@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1953350,jnicklas/capybara,ruby,1145,1376934834,,1376941008,102,,4,1,1,1,46,1661,0,0,0,9148.705599036726,522.576760987357,834.4370860927153,3965,tomprats,0,0,0,false,false
 1911713,jnicklas/capybara,ruby,1139,1375997845,1375999468,1375999468,27,27,4,1,1,3,48,1661,8,28,2,9137.868753762794,518.9644792293799,830.8248043347381,3965,carols10cents,3,0.6666666666666666,55,false,false

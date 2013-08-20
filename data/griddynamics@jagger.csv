@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1928516,griddynamics/jagger,java,242,1376396140,1376462443,1376462443,1105,1105,5,1,0,9,52,33831,46,4,20,65.53161301764654,2.6898406786674944,7.064526617599244,13,nmusienko,76,0.40789473684210525,1,false,false
 1924021,griddynamics/jagger,java,241,1376306967,1376367807,1376367807,1014,1014,5,1,0,1,52,33487,2,0,6,65.69713620210828,2.687610117358975,7.077373309045301,26,amikryukov,22,0.2727272727272727,4,false,false

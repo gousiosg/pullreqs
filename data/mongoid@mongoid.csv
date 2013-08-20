@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1947058,mongoid/mongoid,ruby,3222,1376820558,1376875304,1376875304,912,912,8,1,1,1,7,10849,2,0,2,5401.511660060835,540.2341229606416,561.1577103880542,2501,nicolasleger,0,0,3,false,false
 1912600,mongoid/mongoid,ruby,3209,1376022050,,1376178036,2599,,9,3,3,2,13,10819,15,0,0,5417.3213790553655,541.6397079212496,562.5288843700896,5000,mrjlynch,0,0,0,false,false

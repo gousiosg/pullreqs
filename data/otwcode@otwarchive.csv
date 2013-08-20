@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1921429,otwcode/otwarchive,ruby,1300,1376250442,1376250543,1376250543,1,1,2,1,0,1,63,30746,0,0,0,1559.6500357770115,22.70214011578742,84.88909126390425,97,CristinaRO,128,0.890625,6,false,true
 1920859,otwcode/otwarchive,ruby,1299,1376236266,1376245581,1376245581,155,155,1,1,0,1,65,30746,0,0,0,1559.6500357770115,22.70214011578742,84.88909126390425,97,elzj,189,0.9206349206349206,6,false,true

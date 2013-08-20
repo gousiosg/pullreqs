@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 466031,hmarr/mongoengine,python,575,1352571183,,1357214303,77385,,1,1,0,1,3,2881,0,0,0,1663.311350225616,73.93266227004513,328.01110725442555,880,lardissone,0,0,10,false,false
 702364,hmarr/mongoengine,python,574,1351273527,,1352110307,13886,,2,1,1,1,28,2898,11,0,0,1667.0117322291235,74.53416149068323,327.4672187715666,879,wpjunior,30,0.7333333333333333,9,false,false

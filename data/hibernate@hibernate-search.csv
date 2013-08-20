@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1924653,hibernate/hibernate-search,java,469,1376314811,1376316850,1376316850,33,33,6,5,0,6,58,35272,0,39,27,1335.7904286686323,18.711726014969383,66.31322295305057,31,Sanne,259,0.5714285714285714,37,false,false
 1924461,hibernate/hibernate-search,java,468,1376312519,1376313321,1376313321,13,13,6,5,0,6,58,35272,0,39,18,1335.7904286686323,18.711726014969383,66.31322295305057,62,Sanne,258,0.5736434108527132,74,false,false

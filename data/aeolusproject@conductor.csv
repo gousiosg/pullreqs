@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1334303,aeolusproject/conductor,ruby,438,1365093046,1365437374,1365437374,5738,5738,15,17,0,130,55,18108,2829,105,254,473.6580516898609,29.655400927766735,69.25115970841617,72,sseago,1,0.0,0,false,true
 1275670,aeolusproject/conductor,ruby,435,1363696098,,1363868578,2874,,14,1,0,1,55,18027,9,0,1,473.12364786154103,29.566760969656627,68.78571032340379,34,ifarkas,35,0.5714285714285714,1,false,true

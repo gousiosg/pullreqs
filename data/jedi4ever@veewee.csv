@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1946603,jedi4ever/veewee,ruby,776,1376793901,,1376854633,1012,,2,1,0,9,52,13308,18,0,0,20.889690411782386,1.8785692816351067,1.8785692816351067,2263,c0state,0,0,0,false,false
 1943042,jedi4ever/veewee,ruby,775,1376676193,1376842397,1376842397,2770,2770,2,1,0,1,52,13308,2,0,0,20.889690411782386,1.8785692816351067,1.8785692816351067,2263,mnaser,0,0,0,false,false

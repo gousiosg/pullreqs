@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1928667,jordansissel/fpm,ruby,522,1376464556,1376497086,1376497086,542,542,1,1,0,1,39,2750,0,28,0,398.1818181818182,37.81818181818182,8.0,575,hatt,5,0.4,2,false,false
 1922506,jordansissel/fpm,ruby,521,1376330999,1376497110,1376497110,2768,2768,1,1,0,1,39,2750,4,0,3,398.1818181818182,37.81818181818182,8.0,575,nhuff,0,0,1,false,false

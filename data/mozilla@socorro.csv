@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1952413,mozilla/socorro,python,1410,1376924397,1376935095,1376935095,178,178,12,1,0,1,65,45998,2,0,4,450.8456889429975,14.761511370059567,45.26283751467455,102,twobraids,132,0.5681818181818182,1,false,true
 1942171,mozilla/socorro,python,1407,1376666078,1376941984,1376941984,4598,4598,13,2,7,4,65,45998,20,18,27,450.8456889429975,14.761511370059567,45.26283751467455,102,brandonsavage,33,0.7878787878787878,15,false,true

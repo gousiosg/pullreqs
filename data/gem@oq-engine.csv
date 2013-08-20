@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1928948,gem/oq-engine,python,1245,1376468436,1376480720,1376480720,204,204,4,7,0,17,83,10685,100,19,151,789.7987833411324,27.98315395414132,70.47262517547964,20,matley,91,0.43956043956043955,4,false,false
 1923175,gem/oq-engine,python,1244,1376292879,1376294425,1376294425,25,25,4,3,0,1,83,10685,25,0,84,789.7987833411324,27.98315395414132,70.47262517547964,10,nastasi-oq,12,0.5833333333333334,2,true,false

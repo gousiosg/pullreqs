@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1934435,alibaba/druid,java,433,1376543249,1376543304,1376543304,0,0,1,1,0,1,99,100250,1,0,26,758.8827930174563,31.960099750623446,99.78054862842893,0,cquptlujianbo,5,0.8,0,false,false
 1931519,alibaba/druid,java,432,1376495010,1376517786,1376517786,379,379,0,2,0,1,100,100238,0,0,10,758.5346874438835,31.95394959995211,99.7426125820547,0,jacking124,0,0,0,false,false

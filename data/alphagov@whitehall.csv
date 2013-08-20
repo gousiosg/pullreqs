@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1950918,alphagov/whitehall,ruby,767,1376910089,1376916673,1376916673,109,109,13,4,1,5,54,34516,77,0,83,1260.6617220998958,0.7243017730907405,229.429829644223,200,ElliotJH,11,0.09090909090909091,2,false,false
 1941797,alphagov/whitehall,ruby,766,1376661456,,1376911980,4175,,13,2,2,4,54,34506,0,0,0,1260.1866342085434,0.7245116791282675,229.43835854633977,200,russellthorn,60,0.4666666666666667,6,true,true

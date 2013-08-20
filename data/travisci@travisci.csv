@@ -1,3 +1,0 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
-W, [2013-08-19T13:33:24.703419 #1954]  WARN -- : APIClient: https://api.github.com/repos/travisci/travisci: Not Found
-W, [2013-08-19T13:33:24.703512 #1954]  WARN -- : Repo travisci/travisci does not exist

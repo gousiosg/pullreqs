@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1511581,cgeo/c-geo-opensource,java,2769,1369323847,1369323853,1369323853,0,0,10,1,0,1,63,41910,13,0,7,21.904080171796707,0.190885230255309,1.0021474588403723,514,marco-jacob,65,0.6615384615384615,0,false,true
 1512999,cgeo/c-geo-opensource,java,2763,1369290839,1369292822,1369292822,33,33,10,0,0,0,63,41888,0,0,0,21.724598930481285,0.16711229946524064,0.9788006111535524,257,campbeb,94,0.7659574468085106,0,false,true

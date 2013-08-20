@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1952865,scikit-image/scikit-image,python,698,1376929662,1376945469,1376945469,263,263,9,2,1,1,83,13553,6,0,52,493.91278683686267,65.07784254408618,130.59839150003688,10,mrterry,1,0.0,5,false,false
 1946068,scikit-image/scikit-image,python,696,1376765791,,1376766209,6,,9,1,1,1,83,13410,3,0,1,496.8680089485459,65.24981357196121,130.79791200596569,10,ahojnnes,106,0.6226415094339622,1,false,false

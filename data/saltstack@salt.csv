@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1955058,saltstack/salt,python,6796,1376962005,1376967751,1376967751,95,95,65,1,0,18,61,61177,1294,0,157,68.08114160550534,3.579776713470749,9.317227062458114,2072,terminalmage,212,0.46226415094339623,6,false,false
 1954634,saltstack/salt,python,6793,1376951461,1376951999,1376951999,8,8,65,1,0,1,61,61177,0,0,7,68.08114160550534,3.579776713470749,9.317227062458114,1036,stp-ip,0,0,1,false,false

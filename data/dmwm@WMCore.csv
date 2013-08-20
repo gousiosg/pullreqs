@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1835677,dmwm/WMCore,python,4733,1374772263,1375105182,1375105182,5548,5548,8,1,1,2,44,163198,13,0,2,1.4889888356474958,0.06127526072623438,0.13480557359771564,40,dballesteros7,170,0.6588235294117647,2,false,true
 1826502,dmwm/WMCore,python,4732,1374675322,1374675897,1374675897,9,9,8,1,0,4,44,163198,16,0,9,1.4889888356474958,0.06127526072623438,0.13480557359771564,20,tsarangi,5,0.0,1,false,false

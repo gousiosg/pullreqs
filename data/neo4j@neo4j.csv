@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1950047,neo4j/neo4j,java,1088,1376896756,1376896939,1376896939,3,3,18,2,0,14,69,171481,372,59,201,752.1941206314402,19.384071704736968,47.39300563910871,168,apcj,11,0.45454545454545453,24,false,false
 1942440,neo4j/neo4j,java,1084,1376669221,1376908409,1376908409,3986,3986,18,44,0,86,68,171481,1928,7159,178,752.1941206314402,19.384071704736968,47.39300563910871,168,boggle,44,0.25,34,false,false

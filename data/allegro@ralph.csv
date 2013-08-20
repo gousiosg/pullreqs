@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1924049,allegro/ralph,python,617,1376307330,1376896042,1376896042,9811,9811,6,31,11,22,69,57252,1520,763,172,109.51582477468035,1.8689303430447843,4.943058757772654,204,deshipu,126,0.7380952380952381,6,false,true
 1922589,allegro/ralph,python,616,1376283886,1376378242,1376378242,1572,1572,6,6,3,2,68,57252,30,0,1,109.51582477468035,1.8689303430447843,4.943058757772654,204,wmatyskiewicz,96,0.4895833333333333,2,false,false

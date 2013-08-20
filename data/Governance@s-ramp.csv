@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1942472,Governance/s-ramp,java,307,1376669492,1376669500,1376669500,0,0,2,1,0,1,50,37092,3,0,4,205.67777418311226,3.9900787231748085,35.695028577590854,6,EricWittmann,190,0.8947368421052632,1,false,false
 1941772,Governance/s-ramp,java,306,1376661192,1376661200,1376661200,0,0,2,1,0,6,50,37092,104,0,19,205.67777418311226,3.9900787231748085,35.695028577590854,6,EricWittmann,189,0.8941798941798942,1,false,false

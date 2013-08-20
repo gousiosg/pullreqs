@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1911855,forcedotcom/SalesforceMobileSDK-Android,java,366,1376001014,1376063992,1376063992,1049,1049,1,33,2,58,98,7567,1957,607,71,422.49240121580544,29.998678472313994,83.38839698691687,190,wmathurin,107,0.8878504672897196,18,false,true
 1911549,forcedotcom/SalesforceMobileSDK-Android,java,365,1375994945,,1375999857,81,,1,1,0,4,98,7567,2,0,0,422.49240121580544,29.998678472313994,83.38839698691687,95,bhariharan,140,0.7642857142857142,3,false,true

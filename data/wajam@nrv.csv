@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1929787,wajam/nrv,scala,221,1376332405,,1376488523,2601,,5,5,4,3,74,14011,148,0,86,431.87495539219185,23.767040182713583,77.86738990792949,6,mlaflamm,123,0.6097560975609756,0,true,false
 1925176,wajam/nrv,scala,220,1376321109,1376391596,1376391596,1174,1174,5,1,2,1,74,14011,3,0,2,431.87495539219185,23.767040182713583,77.86738990792949,12,jnblanchet,11,0.18181818181818182,0,true,false

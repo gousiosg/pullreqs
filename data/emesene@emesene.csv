@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1256036,emesene/emesene,python,1576,1363258582,1363262670,1363262670,68,68,2,1,0,1,33,48028,14,0,1,84.59648538352629,1.7906221370866995,6.954276671941368,68,joshf,24,0.9166666666666666,0,false,false
 1229617,emesene/emesene,python,1575,1362688200,1362781396,1362781396,1553,1553,2,1,0,3,25,48028,19,0,0,84.59648538352629,1.7906221370866995,6.954276671941368,68,joshf,23,0.9565217391304348,0,false,false

@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1953459,pentaho/pentaho-platform,java,809,1376936281,1376938593,1376938593,38,38,26,1,0,2,43,144061,4,0,6,172.579671111543,3.2972143744663716,13.251331033381692,17,wseyler,24,0.625,0,false,false
 1953155,pentaho/pentaho-platform,java,808,1376932525,1376932848,1376932848,5,5,26,1,0,5,43,144061,2,0,19,172.579671111543,3.2972143744663716,13.251331033381692,34,krivera-pentaho,61,0.5081967213114754,0,false,false

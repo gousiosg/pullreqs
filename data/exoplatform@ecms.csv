@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1922272,exoplatform/ecms,java,445,1376277069,1376277083,1376277083,0,0,18,135,0,570,57,114488,5138,110,108,114.66703934036755,4.7341206065264485,12.621410104115716,11,anhvurz90,31,0.03225806451612903,0,false,false
 1922266,exoplatform/ecms,java,444,1376276984,,1376277021,0,,18,80,0,510,57,114278,3969,110,0,114.59773534713594,4.734069549694604,12.600850557412626,22,anhvurz90,30,0.03333333333333333,0,false,false

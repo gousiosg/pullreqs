@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1954797,wildfly/wildfly,java,4939,1376955269,1376967564,1376967564,204,204,63,2,4,1,50,364330,0,0,214,558.842258392117,11.871105865561441,39.812807070512996,0,dfj,0,0,1,false,false
 1953582,wildfly/wildfly,java,4938,1376937476,,1376953122,260,,63,1,3,3,50,364272,70,0,0,558.8735889664865,11.864760398822856,39.81365572978434,0,stuartwdouglas,59,0.05084745762711865,80,false,false

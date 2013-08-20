@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1953782,stephenmcd/mezzanine,python,762,1376796457,1376939644,1376939644,2386,2386,1,1,1,1,98,14674,7,0,1,0.0,0.0,0.0,967,nebrybledu,0,0,0,false,false
 1945245,stephenmcd/mezzanine,python,761,1376738065,,1376782036,732,,0,2,1,2,100,14674,9,0,0,0.0,0.0,0.0,1934,harmo,0,0,6,false,false

@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1950946,openMF/mifosx,java,529,1376910311,1376920550,1376920550,170,170,8,1,0,1,50,73003,2,0,1,4.328589236058792,0.027396134405435393,0.027396134405435393,9,pramodn02,16,0.1875,0,false,false
 1950844,openMF/mifosx,java,528,1376909261,1376920635,1376920635,189,189,8,1,0,3,50,73003,38,0,36,4.328589236058792,0.027396134405435393,0.027396134405435393,18,mifoscontributer,48,0.3125,0,false,false

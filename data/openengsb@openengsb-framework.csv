@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1524115,openengsb/openengsb-framework,java,837,1369666518,1369670930,1369670930,73,73,3,4,0,7,50,32683,4,544,18,766.5758957256065,28.271578496466056,57.522259278524004,52,thrau,3,0.3333333333333333,1,false,false
 1495106,openengsb/openengsb-framework,java,836,1368866471,1368985005,1368985005,1975,1975,3,1,0,1,50,32653,6,0,8,758.2151716534469,28.14442777080207,56.31948059902613,104,frenzqse,21,0.3333333333333333,0,false,true

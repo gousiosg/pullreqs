@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1949260,intridea/grape,ruby,460,1376880512,1376880529,1376880529,0,0,3,1,1,4,72,2124,0,26,11,2259.8870056497176,204.33145009416197,348.39924670433146,2987,karayusuf,0,0,3,false,false
 1948906,intridea/grape,ruby,459,1376870665,1376922054,1376922054,856,856,3,1,0,4,72,2124,73,0,1,2259.8870056497176,204.33145009416197,348.39924670433146,2987,siong1987,0,0,37,false,false

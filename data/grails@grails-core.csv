@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1883325,grails/grails-core,java,384,1375464259,1375464990,1375464990,12,12,6,1,0,0,4,74735,0,0,0,101.46517695858701,4.107847728641199,14.986284873218706,753,kenliu,0,0,2,false,false
 1864290,grails/grails-core,java,383,1375179739,1375181150,1375181150,23,23,6,1,0,1,4,67467,2,0,18,109.93522759274904,4.535550713682245,16.12640253753687,1506,bobbywarner,83,0.7108433734939759,58,false,false

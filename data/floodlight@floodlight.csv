@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1786245,floodlight/floodlight,java,415,1374077585,1374509668,1374509668,7201,7201,2,1,1,1,74,70485,0,0,8,262.7509399162942,5.646591473363126,28.03433354614457,258,Sovietaced,16,0.8125,22,false,false
 1676841,floodlight/floodlight,java,412,1372710429,,1372711576,19,,3,2,0,3,72,70485,144,0,0,262.7509399162942,5.646591473363126,28.03433354614457,258,yamt,1,0.0,16,false,false

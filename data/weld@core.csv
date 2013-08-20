@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1891548,weld/core,java,347,1375702842,1375762787,1375762787,999,999,11,3,0,14,18,32750,51,86,9,1010.1374045801527,19.72519083969466,52.76335877862595,27,luksa,95,0.25263157894736843,5,false,false
 1881814,weld/core,java,346,1375445723,,1375508875,1052,,11,2,0,3,17,44451,20,0,0,1149.8279003846933,22.519178421182875,66.79264808440755,54,jharting,8,0.375,10,false,false

@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1923176,BaseXdb/basex,java,743,1376292869,1376293740,1376293740,14,14,2,1,0,1,11,87824,0,0,0,157.55374385133905,10.65767899435234,10.395791583166332,82,dirkk,5,0.4,4,false,false
 1890305,BaseXdb/basex,java,742,1375681881,1375709576,1375709576,461,461,2,1,0,1,11,87814,0,12,2,157.59446101988294,10.65889265948482,10.396975425330814,82,LukasK,25,0.72,8,false,false

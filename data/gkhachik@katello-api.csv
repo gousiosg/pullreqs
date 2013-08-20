@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1941220,gkhachik/katello-api,java,486,1376655607,1376656807,1376656807,20,20,4,1,0,6,47,24473,253,0,23,0.0,0.0,0.0,5,hhovsepy,148,0.7364864864864865,1,false,true
 1940261,gkhachik/katello-api,java,485,1376642099,1376650371,1376650371,137,137,4,2,0,2,46,24433,6,0,77,0.0,0.0,0.0,5,tkolhar,29,0.3103448275862069,0,false,false

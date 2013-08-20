@@ -1,4 +1,3 @@
-Overriding configuration attach_ip=0.0.0.0 with cmd line 130.161.159.244
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 1954010,rapid7/metasploit-framework,ruby,2256,1376942138,1376965492,1376965492,389,389,16,1,1,5,71,505611,16,0,1,44.494680693260236,2.4208334075010236,5.901770333319489,2466,wchen-r7,254,0.65748031496063,96,false,true
 1953890,rapid7/metasploit-framework,ruby,2253,1376940908,1376941911,1376941911,16,16,16,1,1,5,71,505611,10,0,4,44.494680693260236,2.4208334075010236,5.901770333319489,2466,wchen-r7,253,0.6600790513833992,96,false,true
