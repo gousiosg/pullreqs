@@ -114,6 +114,13 @@ Extract data for pull requests for a given repository
           'watchers,requester,prev_pullreqs,requester_succ_rate,followers,' <<
           "intra_branch,main_team_member\n"
 
+    # Store all commits abbreviated SHA-1s for later comparisons
+    #@all_commits = repo.commits('master', 50000).map{|x| x.id_abbrev}.sort
+
+    @all_commits = (1..50).reduce(['master']) do |acc, x|
+      acc + repo.commits(acc.last, 1000).map{|x| x.id_abbrev}
+    end.flatten.sort.uniq[1..-1]
+
     # Get commits that close issues/pull requests
     # Index them by issue/pullreq id, as a sha might close multiple issues
     # see: https://help.github.com/articles/closing-issues-via-commit-messages
@@ -140,9 +147,6 @@ Extract data for pull requests for a given repository
       end
       acc
     end
-
-    # Store all commits abbreviated SHA-1s for later comparisons
-    @all_commits = repo.commits('master', 50000).map{|x| x.id_abbrev}.sort
 
     # Process pull request list
     pull_reqs(repo_entry).each do |pr|
@@ -763,6 +767,19 @@ unless Array.method_defined? :bsearch
         end
       end
       satisfied
+    end
+  end
+end
+
+# Monkey patch grit to fix bug in commits containing signed patches
+# see: http://alexdo.de/2013/03/25/how-i-fixed-grits-gpg-weakness/
+class Grit::Commit
+  class << self
+    alias_method :original_list_from_string, :list_from_string
+
+    def list_from_string(repo, text)
+      text.gsub!(/gpgsig -----BEGIN PGP SIGNATURE-----[\n\r](.*[\n\r])*? -----END PGP SIGNATURE-----[\n\r]/, "")
+      original_list_from_string(repo, text)
     end
   end
 end
