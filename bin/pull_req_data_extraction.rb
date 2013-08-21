@@ -141,7 +141,7 @@ Extract data for pull requests for a given repository
         comment = x['commit']['message']
         comment.match(fixre) do |m|
           (1..(m.size - 1)).map do |y|
-            acc[m[y].to_i] = sha[0..6]
+            acc[m[y].to_i] = sha
           end
         end
       end
@@ -201,13 +201,13 @@ Extract data for pull requests for a given repository
     if not merged
       # Check if PR was closed by a commit while this commit is in master
       # This usually indicates a merge (perhaps following a rebase)
-      commit_merged = unless @closed_by_commit[pr[:github_id]].nil?
+      rebase_merged = unless @closed_by_commit[pr[:github_id]].nil?
                         sha = @closed_by_commit[pr[:github_id]]
-                        @all_commits.bsearch { |x| x.start_with? sha }.nil?
+                        not @all_commits.select { |x| sha.start_with? x }.empty?
                       else
                         false
                       end
-      git_merged = commit_merged || check_if_merged_with_git(pr[:id])
+      git_merged = rebase_merged || merged_with_git?(pr[:id])
     end
 
     # Count number of src/comment lines
@@ -615,18 +615,21 @@ Extract data for pull requests for a given repository
   end
 
   # Checks whether a merge of the pull request occurred outside Github
-  def check_if_merged_with_git(pr_id)
+  # This will only discover clean merges; rebases and force-pushes override
+  # the commit history, so they are impossible to detect.
+  def merged_with_git?(pr_id)
     q = <<-QUERY
-	  select prc.commit_id
-    from pull_requests pr, project_commits pc, pull_request_commits prc
-	  where pc.commit_id = prc.commit_id
-		  and prc.pull_request_id = pr.id
-		  and pr.id = ?
-		  and pr.base_repo_id = pc.project_id
-		  and pr.base_repo_id <> pr.head_repo_id
+	  select c.sha
+    from pull_request_commits prc, commits c
+	  where prc.commit_id = c.id
+		  and prc.pull_request_id = ?
     QUERY
-    commits = db.fetch(q, pr_id).all
-    not commits.empty?
+    db.fetch(q, pr_id).each do |x|
+      unless @all_commits.select{|y| x[:sha].start_with? y}.empty?
+        return true
+      end
+    end
+    false
   end
 
   def if_empty(result, field)
@@ -736,39 +739,6 @@ Extract data for pull requests for a given repository
     raise Exception.new("Unimplemented")
   end
 
-end
-
-unless Array.method_defined? :bsearch
-  class Array
-    def bsearch
-      return to_enum(__method__) unless block_given?
-      from = 0
-      to   = size - 1
-      satisfied = nil
-      while from <= to do
-        midpoint = (from + to).div(2)
-        result = yield(cur = self[midpoint])
-        case result
-          when Numeric
-            return cur if result == 0
-            result = result < 0
-          when true
-            satisfied = cur
-          when nil, false
-            # nothing to do
-          else
-            raise TypeError, "wrong argument type #{result.class} (must be numeric, true, false or nil)"
-        end
-
-        if result
-          to = midpoint - 1
-        else
-          from = midpoint + 1
-        end
-      end
-      satisfied
-    end
-  end
 end
 
 # Monkey patch grit to fix bug in commits containing signed patches
