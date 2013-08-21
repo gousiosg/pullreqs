@@ -54,6 +54,6 @@ cat $input |
 grep -v "^#"|
 while read pr; do 
   name=`echo $pr|cut -f1,2 -d' '|tr ' ' '@'` 
-  echo "ruby -Ibin bin/pull_req_data_extraction.rb -a $ip -c config.yaml $pr |grep -v '^[DUG]' |grep -v '^$' 1>$dir/$name.csv 2>$dir/$name.err"
+  echo "ruby -Ibin bin/pull_req_data_extraction.rb -a $ip -c config.yaml $pr |grep -v '^[DUG]' |grep -v Overrid|grep -v 'unknown header'|grep -v '^$' 1>$dir/$name.csv 2>$dir/$name.err"
 done | xargs -P $parallel -Istr sh -c str 
 
