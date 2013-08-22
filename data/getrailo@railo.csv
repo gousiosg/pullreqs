@@ -1,4 +1,5 @@
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,git_merged,conflict,team_size,num_commits,num_comments,files_changed,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
+1967689,getrailo/railo,java,237,1377137910,,1377143238,88,,false,false,3,1,0,2,25,254388,8,0,31,0.13365410318096765,0.0,0.0,150,igal-getrailo,125,0.352,2,false,false
 1960893,getrailo/railo,java,236,1377042337,,1377076214,564,,false,false,3,1,0,2,25,254271,34,0,4,0.1337156026444227,0.0,0.0,150,igal-getrailo,124,0.3548387096774194,2,false,false
 1927977,getrailo/railo,java,234,1376402413,1376454627,1376454627,870,870,false,false,3,1,0,2,26,254074,0,0,3,0.13381928099687493,0.0,0.0,150,igal-getrailo,122,0.3524590163934426,2,false,false
 1928021,getrailo/railo,java,233,1376400599,1376455455,1376455455,914,914,false,false,3,1,0,1,26,254074,2,0,14,0.13381928099687493,0.0,0.0,150,igal-getrailo,121,0.34710743801652894,2,false,false
