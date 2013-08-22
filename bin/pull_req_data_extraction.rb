@@ -66,13 +66,12 @@ Extract data for pull requests for a given repository
 
   # Main command code
   def go
+    interrupted = false
 
-    Signal.trap("TERM") {
-      mongo.close
-      info 'pull_request_data_extraction: Received SIGTERM, exiting'
-      Trollop::die('Bye bye')
+    trap("INT") {
+      STDERR.puts "pull_req_data_extraction(#{Process.pid}): Received SIGINT, exiting"
+      interrupted = true
     }
-
 
     @ght ||= GHTorrent::Mirror.new(settings)
 
@@ -152,6 +151,9 @@ Extract data for pull requests for a given repository
     pull_reqs(repo_entry).each do |pr|
       begin
         process_pull_request(pr, ARGV[2].downcase)
+        if interrupted
+          return
+        end
       rescue Exception => e
         STDERR.puts "Error processing pull_request #{pr[:github_id]}: #{e.message}"
         STDERR.puts e.backtrace
