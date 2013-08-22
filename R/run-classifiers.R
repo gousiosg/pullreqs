@@ -10,7 +10,7 @@ source(file = "R/merge-time.R")
 # Loading data files
 dfs <- load.all(dir=data.file.location, pattern="*.csv$")
 dfs <- addcol.merged(dfs)
-all <- merge.dataframes(dfs)
+all <- merge.dataframes(dfs, 200)
 
 #n = 1000
 data <- prepare.data.mergetime(all, 1000)

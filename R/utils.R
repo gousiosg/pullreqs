@@ -21,7 +21,6 @@ load.all <- function(dir = ".", pattern = "*.csv$") {
   lapply(list.files(path = dir, pattern = pattern, full.names = T),
          function(x){
            print(sprintf("Reading file %s", x))
-           #a <- load.filter(pipe(paste("cut -f2-25 -d',' ", x)))
            a <- load.filter(x)
            if (nrow(a) == 0) {
             printf("Warning - No rows in file %s", x)
@@ -48,11 +47,20 @@ load.some <- function(dir = ".", pattern = "*.csv$", howmany = -1) {
 load.filter <- function(path) {
   setAs("character", "POSIXct", function(from){as.POSIXct(from, origin = "1970-01-01")})
   a <- read.csv(path, check.names = T, 
-                colClasses = c("integer","factor", rep("integer", 15),
+                colClasses = c("integer","factor","factor", rep("integer", 6), 
+                               rep("factor", 2), rep("integer", 9),
                                rep("double", 3), "integer",  "factor",
                                "integer", "double", "integer",
                                "factor", "factor"))
 
+  a$git_merged <- a$git_merged == "true"
+  a$git_merged <- as.factor(a$git_merged)
+  a$conflict <- a$conflict == "true"
+  a$conflict <- as.factor(a$conflict)
+  a$main_team_member <- a$main_team_member == "true"
+  a$main_team_member <- as.factor(a$main_team_member)
+  a$intra_branch <- a$intra_branch == "true"
+  a$intra_branch <- as.factor(a$intra_branch)
   # Take care of cases where csv file production was interupted, so the last
   # line has wrong fields
   a <- subset(a, !is.na(intra_branch))
@@ -86,11 +94,16 @@ get.project <- function(dfs, name) {
   Find(function(x){if(project.name(x) == name){T} else {F} }, dfs)
 }
 
-# Merge dataframes functionally
-merge.dataframes <- function(dfs) {
+# Merge dataframes
+merge.dataframes <- function(dfs, min_num_rows = 1) {
   Reduce(function(acc, x){
       printf("Merging dataframe %s", project.name(x))
-      rbind(acc, x)
+      if (nrow(x) >= min_num_rows) {
+        rbind(acc, x)
+      } else {
+        printf("Warning: %s has less than %d rows (%d), skipping", project.name(x), min_num_rows, nrow(x))
+        acc
+      }
     }, dfs)
 }
 
