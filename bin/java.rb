@@ -50,7 +50,7 @@ module JavaData
   def test_file_filter
     lambda { |f|
       path = if f.class == Hash then f[:path] else f end
-      path.end_with?('.java') and path.include?('/test/')
+      path.end_with?('.java') and not path.match(/tests?\//).nil?
     }
   end
 
