@@ -82,8 +82,17 @@ module PythonData
     lambda { |f|
       path = if f.class == Hash then f[:path] else f end
       # http://pytest.org/latest/goodpractises.html#conventions-for-python-test-discovery
-      path.end_with?('.py') and
-          (not path.match(/test_.+\.py/i).nil? or not path.match(/.+_test.py/i).nil?)
+      # Path points to a python file named as foo_test.py or test_foo.py or test.py
+      # or it contains a test directory
+      path.end_with?('.py') and(
+          (
+            not path.match(/test_.+/i).nil? or
+            not path.match(/.+_test/i).nil? or
+            not path.match(/tests?/i).nil?
+          ) or (
+            not path.match(/test\//).nil?
+          )
+      )
     }
   end
 

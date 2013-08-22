@@ -21,10 +21,10 @@ BaseXdb basex Java
 #basho basho_docs Ruby
 bbatsov rubocop Ruby
 bigbluebutton bigbluebutton Java
-binaryage totalfinder-i18n Ruby
+#binaryage totalfinder-i18n Ruby
 Bitmessage PyBitmessage Python
 #blasv DineOn Java
-bobuk addmeto.cc Python
+#bobuk addmeto.cc Python
 boto boto Python
 BrightcoveOS Diamond Python
 brooklyncentral brooklyn Java
@@ -151,7 +151,7 @@ JetBrains kotlin Java
 jnicklas capybara Ruby
 jnicklas carrierwave Ruby
 jordansissel fpm Ruby
-josegonzalez homebrew-php Ruby
+#josegonzalez homebrew-php Ruby
 #jruby jruby Ruby
 #JumpstartLab reading Ruby
 junit-team junit Java
@@ -159,7 +159,7 @@ justinfrench formtastic Ruby
 k9mail k-9 Java
 karmi tire Ruby
 Katello katello Ruby
-kennethreitz python-guide Python
+#kennethreitz python-guide Python
 kennethreitz requests Python
 #KentBeck junit Java
 kevinweil elephant-bird Java
@@ -217,7 +217,7 @@ MrMasochism Pixelmon Java
 #mxcl homebrew Ruby
 mysociety alaveteli Ruby
 naparuba shinken Python
-nathanmarz storm Java
+#nathanmarz storm Java
 neo4j community Java
 neo4j neo4j Java
 netty netty Java
@@ -244,7 +244,7 @@ OpenSlides OpenSlides Python
 #openSUSE open-build-service Ruby
 opf openproject Ruby
 opscode chef Ruby
-opscode cookbooks Ruby
+#opscode cookbooks Ruby
 osmandapp Osmand Java
 otwcode otwarchive Ruby
 overviewer Minecraft-Overviewer Python
@@ -263,7 +263,7 @@ playframework play Python
 praekelt vumi-go Python
 praekelt vumi Python
 presidentbeef brakeman Ruby
-progit progit Ruby
+#progit progit Ruby
 ProjectMeniscus meniscus Python
 projectwonder wonder Java
 pulp pulp Python
@@ -289,7 +289,7 @@ rapid7 metasploit-framework Ruby
 #rcbops chef-cookbooks Ruby
 #rcbops-cookbooks nova Ruby
 reddit reddit Python
-reddmetrics forma-clj Java
+#reddmetrics forma-clj Java
 refinery refinerycms Ruby
 resteasy Resteasy Java
 rg3 youtube-dl Python
@@ -337,8 +337,8 @@ statsmodels statsmodels Python
 stephenmcd mezzanine Python
 sunpy sunpy Python
 sunspot sunspot Ruby
-svenfuchs rails-i18n Ruby
-swcarpentry website Python
+#svenfuchs rails-i18n Ruby
+#swcarpentry website Python
 #symfony-fr symfony-docs-fr Python
 sympy sympy Python
 tangentlabs django-oscar Python
