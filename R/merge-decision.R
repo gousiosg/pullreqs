@@ -10,6 +10,11 @@ library(ROCR)
 library(randomForest)
 library(e1071)
 
+merge.decision.model <- merged ~ team_size + num_commits + files_changed +
+  perc_external_contribs + sloc + src_churn + test_churn +
+  commits_on_files_touched +  test_lines_per_kloc + prev_pullreqs +
+  requester_succ_rate + main_team_member
+
 # Returns a list l where 
 # l[1] training dataset
 # l[2] testing dataset
@@ -33,6 +38,39 @@ prepare.data.mergedecision <- function(df, num_samples) {
   list(train=a.train, test=a.test)
 }
 
+rf.train <- function(model, train.set) {
+  rfmodel <- randomForest(model, data=train.set, importance = T)
+  print(rfmodel)
+  print(importance(rfmodel))
+  varImpPlot(rfmodel, type=1)
+  varImpPlot(rfmodel, type=2)
+  plot(rfmodel)
+  rfmodel
+}
+
+svm.train <- function(model, train.set) {
+  tobj <- tune.svm(model, data=train.set[1:500, ], gamma = 10^(-6:-3), cost = 10^(1:2))
+  summary(tobj)
+  bestGamma <- tobj$best.parameters[[1]]
+  bestCost <- tobj$best.parameters[[2]]
+  svmmodel <- svm(model, data=train, gamma=bestGamma, cost = bestCost, probability=TRUE)
+  print(summary(svmmodel))
+  svmmodel
+}
+
+binlog.train <- function(model, train.set) {
+  binlog <- glm(model, data=train.set, family = binomial(logit));
+  print(summary(binlog))
+  binlog
+}
+
+bayes.train <- function(model, train.set) {
+  bayesModel <- naiveBayes(model, data = train.set)
+  print(summary(bayesModel))
+  print(bayesModel)
+  bayesModel
+}
+
 # Returns a dataframe with the AUC, PREC, REC values per classifier
 # Plots classification ROC curves
 run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
@@ -42,27 +80,17 @@ run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
                        prec = rep(0, 4), rec = rep(0, 4), stringsAsFactors=FALSE)
   #
   ### Random Forest
-  rfmodel <- randomForest(model, data=train, importance = T)
-  print(rfmodel)
-  print(importance(rfmodel))
-  varImpPlot(rfmodel, type=1)
-  varImpPlot(rfmodel, type=2)
-  plot(rfmodel)
-
+  rfmodel <- rf.train(model, train)
   predictions <- predict(rfmodel, test, type="prob")
   pred.obj <- prediction(predictions[,2], test$merged)
   metrics <- classification.perf.metrics("randomforest", pred.obj)
   results[1,] <- c("randomforest", metrics$auc, metrics$acc, metrics$prec, metrics$rec)
   rfperf <- performance(pred.obj, "tpr","fpr")
   
+
   #
-  ### SVM - first tune and then run it with 10-fold cross validation
-#   tobj <- tune.svm(model, data=train[1:500, ], gamma = 10^(-6:-3), cost = 10^(1:2))
-#   summary(tobj)
-#   bestGamma <- tobj$best.parameters[[1]]
-#   bestCost <- tobj$best.parameters[[2]]
-#   svmmodel <- svm(model, data=train, gamma=bestGamma, cost = bestCost, probability=TRUE)
-#   print(summary(svmmodel))
+  ### SVM
+#   svmmodel <-  svm.train(train)
 # 
 #   predictions <- predict(svmmodel, newdata=test, type="prob", probability=TRUE)
 #   pred.obj <- prediction(attr(predictions, "probabilities")[,2], test$merged)
@@ -72,8 +100,7 @@ run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
   
   #
   ### Binary logistic regression
-  logmodel <- glm(model, data=train, family = binomial(logit));
-  print(summary(logmodel))
+  logmodel <- binlog.train(model, train)
 
   predictions <- predict(logmodel, newdata=test)
   pred.obj <- prediction(predictions, test$merged)
@@ -83,9 +110,7 @@ run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
   
   #
   ### Naive Bayes
-  bayesModel <- naiveBayes(model, data = train)
-  print(summary(bayesModel))
-  print(bayesModel)
+  bayesModel <- bayes.train(model, train)
 
   predictions <- predict(bayesModel, newdata=test, type="raw")
   pred.obj <- prediction(predictions[,2], test$merged)
@@ -105,7 +130,24 @@ run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
   results
 }
 
-merge.decision.model <- merged ~ team_size + num_commits + files_changed + 
-  perc_external_contribs + sloc + src_churn + test_churn + 
-  commits_on_files_touched +  test_lines_per_kloc + prev_pullreqs + 
-  requester_succ_rate + main_team_member + num_comments + test_cases_per_kloc
+merge.decision.missclassif.rate <- function(# Response variable and predictors
+                                            formula,
+                                            # A dataframe with all data
+                                            df = data.frame(),
+                                            # Number of rows to use for training
+                                            train.size = nrow(df)/2) {
+  data <- prepare.data.mergedecision(df, train.size)
+  rfmodel <- rf.train(formula, data$train)
+  projects <- unique(df$project_name)
+  print(projects)
+  class.metrics <- lapply(projects, function(project) {
+    project.data <- subset(df, project_name == project)
+    pred.response <- predict(rfmodel, project.data, type = "response")
+    rf.result = data.frame(actual = project.data$merged, predicted = pred.response)
+    rf.result$correct <- rf.result$actual == rf.result$predicted
+    err = nrow(subset(rf.result, correct == FALSE)) / nrow(rf.result)
+    printf("Project: %s, Error rate: %f", project, err)
+    data.frame(project=c(project), err=c(err))
+  })
+  merge.dataframes(class.metrics)
+}

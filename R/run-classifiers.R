@@ -40,13 +40,16 @@ source(file = "R/merge-decision.R")
 # Loading data files
 dfs <- load.all(dir=data.file.location, pattern="*.csv$")
 dfs <- addcol.merged(dfs)
-all <- merge.dataframes(dfs)
+all <- merge.dataframes(dfs, 200)
 
 #n = 1000
 data <- prepare.data.mergedecision(all, 1000)
 run.classifiers.mergedecision(merge.decision.model, data$train, data$test, "1k")
 cvResult1k <- cross.validation(merge.decision.model, run.classifiers.mergedecision, prepare.data.mergedecision, all, 1000, 10)
 write.csv(cvResult1k, file = "merge-decision-cv-1k.csv")
+
+# Missclassification rate
+metrics <- missclassification.rate(merge.decision.model, all, 20000)
 
 #n = 10000
 data <- prepare.data.mergedecision(all, 10000)

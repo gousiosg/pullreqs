@@ -3,6 +3,7 @@ config.yaml*
 config-*
 .RHistory
 .RData
+build/
 mysql.R
 *.err
 *.gem
