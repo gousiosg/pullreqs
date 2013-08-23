@@ -40,8 +40,8 @@ PICS=figs
 PDFFILE=$(patsubst %.tex,%.pdf,${TEXFILE})
 
 # Latex files in output directory
-TEXFILES_SRC:=$(wildcard $(LATEXDIR)/*.tex) $(wildcard $(LATEXDIR)/*.cls) $(wildcard $(LATEXDIR)/*.bst)
-TEXFILES_DEST := $(addprefix $(BUILD)/, $(notdir $(TEXFILES_SRC)))
+TEXFILES_SRC=$(wildcard $(LATEXDIR)/*.tex) $(wildcard $(LATEXDIR)/*.cls) $(wildcard $(LATEXDIR)/*.bst)
+TEXFILES_DEST=$(addprefix $(BUILD)/, $(notdir $(TEXFILES_SRC)))
 
 # Bib file
 BIB=$(LATEXDIR)/$(MASTERTEX).bib
@@ -50,22 +50,22 @@ BIB=$(LATEXDIR)/$(MASTERTEX).bib
 AUXFILE=$(patsubst %.tex,%.aux,${TEXFILE})
 
 # Files for figures, in EPS format
-EPSFILES :=	$(foreach dir,$(PICS),$(wildcard $(dir)/*.eps))
-EPSFILES_PDF:= $(EPSFILES:.eps=.pdf)
+EPSFILES=$(foreach dir,$(PICS),$(wildcard $(dir)/*.eps))
+EPSFILES_PDF=$(EPSFILES:.eps=.pdf)
 $(EPSFILES_PDF): $(EPSFILES)
 
 # Gnuplot output files
-PLOT_SRC_FILES := $(foreach dir,$(PICS),$(wildcard $(dir)/*.plot))
-PLOT_DATA_FILES := $(foreach dir,$(PICS),$(wildcard $(dir)/*.dat))
-PLOT_PDFS := $(PLOT_SRC_FILES:.plot=.pdf)
+PLOT_SRC_FILES=$(foreach dir,$(PICS),$(wildcard $(dir)/*.plot))
+PLOT_DATA_FILES=$(foreach dir,$(PICS),$(wildcard $(dir)/*.dat))
+PLOT_PDFS= $(PLOT_SRC_FILES:.plot=.pdf)
 $(PLOT_PDFS) : $(PLOT_SRC_FILES) $(PLOT_DATA_FILES) 
 
 # Files for figures, in PDF format
-PDFFILES := $(foreach dir,$(PICS),$(wildcard $(dir)/*.pdf))
+PDFFILES=$(foreach dir,$(PICS),$(wildcard $(dir)/*.pdf))
 
 # Figure names in build dir
-PICTURES_SRC := $(EPSFILES_PDF) $(PLOT_PDFS)
-PICTURES_DEST := $(addprefix $(BUILD)/, $(notdir $(PICTURES_SRC) $(PDFFILES) $(PNGFILES))) 
+PICTURES_SRC=$(EPSFILES_PDF) $(PLOT_PDFS)
+PICTURES_DEST=$(addprefix $(BUILD)/, $(notdir $(PICTURES_SRC) $(PDFFILES) $(PNGFILES))) 
 
 # Implicit rules for various file conversions
 .SUFFIXES: .eps .pdf .dat .dot
@@ -83,10 +83,13 @@ PICTURES_DEST := $(addprefix $(BUILD)/, $(notdir $(PICTURES_SRC) $(PDFFILES) $(P
 .PHONY=all copy
 .DEFAULT_GOAL=all
 
-all: copy $(BUILD)/$(MASTERTEX).pdf
+all: figs copy $(BUILD)/$(MASTERTEX).pdf
+
+figs:
+	ln -s ../../figs figs
 
 # Copy all files to build directory
-$(BUILD):
+$(BUILD): 
 	mkdir -p $(BUILD)
 
 $(TEXFILES_DEST) : $(TEXFILES_SRC) $(BUILD)
