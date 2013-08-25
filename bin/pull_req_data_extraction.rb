@@ -99,7 +99,7 @@ Extract data for pull requests for a given repository
     # Print file header
     print 'pull_req_id,project_name,lang,github_id,'<<
           'created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,' <<
-          'git_merged,conflict,' <<
+          'git_merged,conflict,forward_links,' <<
           'team_size,num_commits,' <<
           #"num_commit_comments,num_issue_comments," <<
           'num_comments,' <<
@@ -232,6 +232,7 @@ Extract data for pull requests for a given repository
           merge_time_minutes(pr, merged, git_merged), ',',
           git_merged, ',',
           conflict?(pr[:login], pr[:project_name], pr[:github_id]), ',',
+          forward_links?(pr[:login], pr[:project_name], pr[:github_id]), ',',
           team_size_at_open(pr[:id], 3)[0][:teamsize], ',',
           num_commits(pr[:id])[0][:commit_count], ',',
           #num_comments(pr[:id])[0][:comment_count], ',',
@@ -291,7 +292,34 @@ Extract data for pull requests for a given repository
     end
   end
 
-  # Number of developers that have committed at least once in the interval
+  def forward_links?(owner, repo, pr_id)
+    issue_comments = mongo.get_underlying_connection['issue_comments']
+
+    issue_comments.find({'owner' => owner, 'repo' => repo, 'issue_id' => pr_id.to_i},
+                        {:fields => {'body' => 1, '_id' => 0}}).reduce(false) do |acc, x|
+      # Try to find pull_requests numbers referenced in each comment
+      a = x['body'].scan(/\#([0-9]+)/m).reduce(false) do |acc1, m|
+        if m[0].to_i > pr_id.to_i
+          # See if it is a pull request (if not the number is an issue)
+          q = <<-QUERY
+            select *
+            from pull_requests pr, projects p, users u
+            where u.id = p.owner_id
+              and pr.base_repo_id = p.id
+              and u.login = ?
+              and p.name = ?
+              and pr.pullreq_id = ?
+          QUERY
+          acc1 || db.fetch(q, owner, repo, m[0]).all.size > 0
+        else
+          acc1
+        end
+      end
+      acc || a
+    end
+  end
+
+# Number of developers that have committed at least once in the interval
   # between the pull request open up to +interval_months+ back
   def team_size_at_open(pr_id, interval_months)
     q = <<-QUERY
