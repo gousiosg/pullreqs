@@ -55,15 +55,6 @@ plot.histogram <- function(data, var, title = var)
   p
 }
 
-# Plot a cross-correlation matrix
-plot.crosscor <- function(dataframe, label = "")
-{
-  ctab <- cor(dataframe, method = "spearman")
-  colorfun <- colorRamp(c("#CC0000","white","#3366CC"), space="Lab")
-  #plotcorr(ctab, col=rgb(colorfun((ctab+1)/2), maxColorValue=255))
-  plotcorr(ctab, type = "lower", xlab = label, col=rgb(colorfun((ctab+1)/2), maxColorValue=255))
-}
-
 # Plot histograms for all files/variables combinations in the provided dataframe
 # Each entry in the dataframe is expected to have equal amount of columns
 # Specify columns to print as a vector of column indices (c(4:7, 8)).

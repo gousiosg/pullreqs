@@ -2,28 +2,6 @@ library(ggplot2)
 
 source(file = "R/utils.R")
 
-# Plot a stacked barchart displaying the proportion of merged/unmerged pull requests
-plot.percentage.merged <- function(dfs) 
-{
-  a <- do.call(rbind, Map(function(x) {
-    total = nrow(x)
-    merged = nrow(subset(x, merged_at > 0))
-    unmerged_perc = (100 * (total - merged))/total
-    merged_perc = 100 - unmerged_perc
-    rbind(data.frame(project=project.name(x), status="merged", value=merged_perc),
-          data.frame(project=unique(x[[1]][1]), status="unmerged", value=unmerged_perc))
-  }, dfs))
-  
-  a <- subset(a, status == "merged")
-  a$order <- match(a$value[a$status == "merged"], sort(a$value[a$status == "merged"]))
-  a$order <- as.factor(a$order)
-  ggplot(a, aes(x= order, y = value, fill = status)) + 
-    geom_bar(stat="identity", colour="white") +
-    theme(axis.text.x=element_blank(), legend.position = c(0.1, 0.85)) +
-    ylab("Percentage") + 
-    xlab("Project")
-}
-
 # Plot various life-time related charts for selected projects
 data.merged <- function(dfs, projects, column)
 {

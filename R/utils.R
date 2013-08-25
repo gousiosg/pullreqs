@@ -113,12 +113,14 @@ column.contains.na <- function(df) {
   for (b in colnames(df)){print(sprintf("%s %s", b, all(!is.na(a.train[[b]]))))}
 }
 
-# Simple method to calculate Cliff's delta
-cliffs.d <- function(x, y) {
-  mean(rowMeans(sign(outer(x, y, FUN="-"))))
+# Run the Matt-Whitney test on input vectors a and b and report relevant metrics
+ranksum <- function (a, b, title = "") {
+  w <- wilcox.test(a, b)
+  d <- cliffs.d(a, b)
+  printf("%s sizes: a: %d b: %d, medians a: %f b: %f, wilcox: %f, p: %f, d: %f", 
+         title, length(a), length(b), median(a), median(b), w$statistic, 
+         w$p.value, d)
 }
-
-# Saving plots as PDFs
 
 # Store multiple plots on the same PDF
 store.multi <- function(printer, data, cols, name, where = "~/")
