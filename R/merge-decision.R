@@ -6,7 +6,7 @@ source(file = "R/utils.R")
 source(file = "R/classification.R")
 
 merge.decision.model <- merged ~ team_size + num_commits + files_changed +
-  perc_external_contribs + sloc + src_churn + test_churn + num_comments 
+  perc_external_contribs + sloc + src_churn + test_churn + num_comments +
   commits_on_files_touched +  test_lines_per_kloc + prev_pullreqs +
   requester_succ_rate + main_team_member + conflict # + forward_links
 
@@ -38,8 +38,8 @@ prepare.data.mergedecision <- function(df, num_samples) {
 run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
   print(sprintf("Prior propability: %f", nrow(subset(data$train, merged == TRUE))/nrow(data$train)))
   sample_size = nrow(train) + nrow(test)
-  results = data.frame(classifier = rep(NA, 4), auc = rep(0, 4), acc = rep(0,4),
-                       prec = rep(0, 4), rec = rep(0, 4), stringsAsFactors=FALSE)
+  results = data.frame(classifier = rep(NA, 3), auc = rep(0, 3), acc = rep(0,3),
+                       prec = rep(0, 3), rec = rep(0, 3), stringsAsFactors=FALSE)
   #
   ### Random Forest
   rfmodel <- rf.train(model, train)
@@ -85,7 +85,7 @@ run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
   legend(0.6, 0.6, c('random forest', 'svm', 'binlog regression', 'naive bayes'), 1:5, title = sprintf("n=%d",sample_size))
   dev.off()
   
-  results
+  subset(results, auc > 0)
 }
 
 merge.decision.missclassif.rate <- function(# Response variable and predictors

@@ -100,12 +100,14 @@ cross.validation.means <- function(cvResult) {
   aggregate(. ~ classifier, data = cvResult, mean)
 }
 
-cross.validation.plot <- function(cvResult, fname = "cv.pdf") {
-    cvResult <- melt(cvResult, id=c('classifier', 'run'))
-    p <- ggplot(cvResult, aes(x = run, y = value, colour = classifier)) +
-      geom_line(size = 1) +
-      facet_wrap(~variable)
-    store.pdf(p, plot.location, fname)
+# Plot classifier performance accross cross validation runs for the metrics
+# returned by cross.validation
+cross.validation.plot <- function(cvResult, title = "" ,fname = "cv.pdf") {
+  cvResult <- melt(cvResult, id=c('classifier', 'run'))
+  cvResult$value <- as.numeric(cvResult$value)
+  p <- ggplot(cvResult, aes(x = run, y = value, colour = classifier)) +
+    geom_line(size = 1) + facet_wrap(~variable) + labs(title =title)
+  store.pdf(p, plot.location, fname)
 }
 
 rf.varimp <- function(model, sampler, data, num_samples = 5000, runs = 50) {
