@@ -11,7 +11,6 @@ library(xtable)
 library(ellipse)
 library(reshape)
 library(scales)
-library(orddom)
 library(cliffsd)
 
 print(sprintf("Current directory is: %s", getwd()))

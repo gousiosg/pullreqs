@@ -7,7 +7,6 @@ source(file = "R/mysql.R")
 
 library(RMySQL)
 library(ggplot2)
-library(orddom)
 library(reshape)
 library(sqldf)
 
@@ -227,4 +226,3 @@ b <- subset(joined, variable == "commenters", value)
 cor.test(a$perc_external_contribs, b$value, method="spearman")
       
 nrow(subset(processed_comments, variable == "commenters" & value > 50))
-      

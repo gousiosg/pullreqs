@@ -4,7 +4,11 @@ source(file = "R/packages.R")
 source(file = "R/variables.R")
 source(file = "R/utils.R")
 
-library(ROCR) 
+library(ROCR)
+library(randomForest)
+library(e1071)
+library(nnet)
+library(ggplot2)
 
 # Get a project with the appropriate fields by name to run through a classification task
 class.project <- function(dfs, name) {
@@ -16,6 +20,45 @@ prepare.project.df <- function(a) {
   a[,c(7:31)]
 }
 
+rf.train <- function(model, train.set) {
+  rfmodel <- randomForest(model, data=train.set, importance = T)
+  print(rfmodel)
+  print(importance(rfmodel))
+  varImpPlot(rfmodel, type=1)
+  varImpPlot(rfmodel, type=2)
+  plot(rfmodel)
+  rfmodel
+}
+
+svm.train <- function(model, train.set) {
+  tobj <- tune.svm(model, data=train.set[1:500, ], gamma = 10^(-6:-3), cost = 10^(1:2))
+  summary(tobj)
+  bestGamma <- tobj$best.parameters[[1]]
+  bestCost <- tobj$best.parameters[[2]]
+  svmmodel <- svm(model, data=train, gamma=bestGamma, cost = bestCost, probability=TRUE)
+  print(summary(svmmodel))
+  svmmodel
+}
+
+binlog.train <- function(model, train.set) {
+  binlog <- glm(model, data=train.set, family = binomial(logit));
+  print(summary(binlog))
+  binlog
+}
+
+multinom.train <- function(model, train.set) {
+  trained <- multinom(model, train.set)
+  #print(summary(trained))
+  trained
+}
+
+bayes.train <- function(model, train.set) {
+  bayesModel <- naiveBayes(model, data = train.set)
+  print(summary(bayesModel))
+  print(bayesModel)
+  bayesModel
+}
+
 # Run a cross validation round, return a dataframe with all results added
 # sampler is f: data.frame -> Int -> list
 # classifier is f: data.frame -> Int -> list
@@ -23,7 +66,6 @@ cross.validation <- function(model, classifier, sampler, df, num_samples, num_ru
   result = lapply(c(1:num_runs),
                   function(n) {
                     dataset <- sampler(df, num_samples)
-                    print(sprintf("Prior propability: %f", nrow(subset(dataset$train, merged == TRUE))/nrow(dataset$train)))
                     interm = classifier(model, dataset$train, dataset$test)
                     interm$run <- n
                     interm
@@ -34,8 +76,8 @@ cross.validation <- function(model, classifier, sampler, df, num_samples, num_ru
   # Too busy to investigate why
   result$auc <- as.numeric(result$auc)
   result$acc <- as.numeric(result$acc)
-  result$prec <- as.numeric(result$prec)
-  result$rec <- as.numeric(result$rec)
+  #result$prec <- as.numeric(result$prec)
+  #result$rec <- as.numeric(result$rec)
   result
 }
 
@@ -58,8 +100,12 @@ cross.validation.means <- function(cvResult) {
   aggregate(. ~ classifier, data = cvResult, mean)
 }
 
-cross.validation.plot <- function(cvResult, metric) {
-  ggplot(cvResult, aes(x = run, y = metric, colour = classifier)) + geom_line(size = 1)
+cross.validation.plot <- function(cvResult, fname = "cv.pdf") {
+    cvResult <- melt(cvResult, id=c('classifier', 'run'))
+    p <- ggplot(cvResult, aes(x = run, y = value, colour = classifier)) +
+      geom_line(size = 1) +
+      facet_wrap(~variable)
+    store.pdf(p, plot.location, fname)
 }
 
 rf.varimp <- function(model, sampler, data, num_samples = 5000, runs = 50) {
