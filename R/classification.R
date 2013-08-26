@@ -7,6 +7,8 @@ source(file = "R/utils.R")
 library(ROCR)
 library(randomForest)
 library(e1071)
+library(nnet)
+library(ggplot2)
 
 # Get a project with the appropriate fields by name to run through a classification task
 class.project <- function(dfs, name) {
@@ -44,6 +46,12 @@ binlog.train <- function(model, train.set) {
   binlog
 }
 
+multinom.train <- function(model, train.set) {
+  trained <- multinom(model, train.set)
+  #print(summary(trained))
+  trained
+}
+
 bayes.train <- function(model, train.set) {
   bayesModel <- naiveBayes(model, data = train.set)
   print(summary(bayesModel))
@@ -69,8 +77,8 @@ cross.validation <- function(model, classifier, sampler, df, num_samples, num_ru
   # Too busy to investigate why
   result$auc <- as.numeric(result$auc)
   result$acc <- as.numeric(result$acc)
-  result$prec <- as.numeric(result$prec)
-  result$rec <- as.numeric(result$rec)
+  #result$prec <- as.numeric(result$prec)
+  #result$rec <- as.numeric(result$rec)
   result
 }
 
@@ -93,8 +101,12 @@ cross.validation.means <- function(cvResult) {
   aggregate(. ~ classifier, data = cvResult, mean)
 }
 
-cross.validation.plot <- function(cvResult, metric) {
-  ggplot(cvResult, aes(x = run, y = metric, colour = classifier)) + geom_line(size = 1)
+cross.validation.plot <- function(cvResult, fname = "cv.pdf") {
+    cvResult <- melt(cvResult, id=c('classifier', 'run'))
+    p <- ggplot(cvResult, aes(x = run, y = value, colour = classifier)) +
+      geom_line(size = 1) +
+      facet_wrap(~variable)
+    store.pdf(p, plot.location, fname)
 }
 
 rf.varimp <- function(model, sampler, data, num_samples = 5000, runs = 50) {
