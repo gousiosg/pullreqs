@@ -17,11 +17,10 @@ run.mergetime.classifiers <- function(df, cases = c(1000, 10000, nrow(df)/2, nro
                                          data$test, nrow(data))
     cvResult <- cross.validation(merge.time.model,
                                  run.classifiers.mergetime,
-                                 prepare.data.mergetime.4bins, df, i, 3)
+                                 prepare.data.mergetime.4bins, df, i, 10)
     write.csv(cvResult, file = sprintf("merge-time-cv-%i.csv", i))
     cross.validation.plot(cvResult, sprintf("merge-time-cv-%i.pdf", i))
   }
 }
 
 run.mergetime.classifiers(all)
-cvResult <- run.mergetime.classifiers(all, c(5000))

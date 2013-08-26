@@ -62,12 +62,18 @@ prepare.data.mergetime.4bins <- function(df, num_samples = nrow(df)) {
 format.results <- function(name, test, predictions) {
   metrics = data.frame(actual = test$merge_time, 
                        predicted = as.ordered(predictions))
-  metrics$correct <- metrics$actual == metrics$predicted
-  metric.stats <- sqldf("select a.actual, a.incor, b.cor, b.cor * 1.0/(a.incor + b.cor) as accuracy from (select actual, count(*) as incor from metrics m where correct = 0 group by actual) a, (select actual, count(*) as cor from metrics m where correct = 1 group by actual) b where a.actual = b.actual")
-  roc <- multiclass.roc(predictions, test$merge_time)
-  auc <- as.numeric(roc$auc)
-  printf("%s auc: %f, acc: %f", name, auc, mean(metric.stats$accuracy))
-  c(name, auc, mean(metric.stats$accuracy))
+  if (length(levels(metrics$actual)) == length(levels(metrics$predicted))) {
+    metrics$correct <- metrics$actual == metrics$predicted
+    metric.stats <- sqldf("select a.actual, a.incor, b.cor, b.cor * 1.0/(a.incor + b.cor) as accuracy from (select actual, count(*) as incor from metrics m where correct = 0 group by actual) a, (select actual, count(*) as cor from metrics m where correct = 1 group by actual) b where a.actual = b.actual")
+    roc <- multiclass.roc(predictions, test$merge_time)
+    auc <- as.numeric(roc$auc)
+    printf("%s auc: %f, acc: %f", name, auc, mean(metric.stats$accuracy))
+    c(name, auc, mean(metric.stats$accuracy))
+  } else {
+    printf("%s failed to classify all levels", name)
+    # Classifier ailed to predict at least one item to some level
+    c(name, 0, 0)
+  }
 }
 
 # Returns a dataframe with the AUC, PREC, REC values per classifier
@@ -94,7 +100,7 @@ run.classifiers.mergetime <- function(model, train, test, uniq = "") {
   predictions <- predict(bayesModel, test)
   results[3,] <- format.results("naivebayes", test, predictions)
 
-  results
+  subset(results, auc > 0)
 }
 
 #
