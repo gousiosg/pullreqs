@@ -36,7 +36,7 @@ prepare.data.mergedecision <- function(df, num_samples) {
 # Returns a dataframe with the AUC, PREC, REC values per classifier
 # Plots classification ROC curves
 run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
-  print(sprintf("Prior propability: %f", nrow(subset(data$train, merged == TRUE))/nrow(data$train)))
+  printf("Prior propability: %f", nrow(subset(train, merged == T))/nrow(train))
   sample_size = nrow(train) + nrow(test)
   results = data.frame(classifier = rep(NA, 3), auc = rep(0, 3), acc = rep(0,3),
                        prec = rep(0, 3), rec = rep(0, 3), stringsAsFactors=FALSE)

@@ -8,6 +8,7 @@ library(ROCR)
 library(randomForest)
 library(e1071)
 library(nnet)
+library(reshape)
 library(ggplot2)
 
 # Get a project with the appropriate fields by name to run through a classification task
