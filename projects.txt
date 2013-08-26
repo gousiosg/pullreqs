@@ -326,7 +326,7 @@ Silverpeas Silverpeas-Components Java
 Silverpeas Silverpeas-Core Java
 #SirSengir BuildCraft Java
 #sonatype nexus Java
-sourcefabric Superdesk Python
+#sourcefabric Superdesk Python
 SpoutDev SpoutAPI Java
 SpoutDev Spout Java
 #spree spree_i18n Ruby
