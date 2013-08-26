@@ -1,7 +1,7 @@
 #
 # Merge time classifiers 2 bins
 # Clean up workspace
-rm(list = ls(all = TRUE))
+#rm(list = ls(all = TRUE))
 
 source(file = "R/merge-time.R")
 
@@ -10,20 +10,18 @@ dfs <- load.all(dir=data.file.location, pattern="*.csv$")
 dfs <- addcol.merged(dfs)
 all <- merge.dataframes(dfs)
 
-#n = 1000
-data <- prepare.data.mergetime(all, 1000)
-results <- run.classifiers.mergetime(merge.time.model, data$train, data$test, "1k")
-cvResult1k <- cross.validation(merge.time.model, run.classifiers.mergetime, prepare.data.mergetime, all, 1000, 10)
-write.csv(cvResult1k, file = "merge-time-cv-1k.csv")
+run.mergetime.classifiers <- function(df, cases = c(1000, 10000, nrow(df)/2, nrow(df))) {
+  for (i in cases) {
+    data <- prepare.data.mergetime.4bins(df, i)
+    results <- run.classifiers.mergetime(merge.time.model, data$train,
+                                         data$test, nrow(data))
+    cvResult <- cross.validation(merge.time.model,
+                                 run.classifiers.mergetime,
+                                 prepare.data.mergetime.4bins, df, i, 3)
+    write.csv(cvResult, file = sprintf("merge-time-cv-%i.csv", i))
+    cross.validation.plot(cvResult, sprintf("merge-time-cv-%i.pdf", i))
+  }
+}
 
-#n = 10000
-data <- prepare.data.mergetime(all, 10000)
-results <- run.classifiers.mergetime(merge.time.model, data$train, data$test, "10k")
-cvResult10k <- cross.validation(merge.time.model, run.classifiers.mergetime, prepare.data.mergetime, all, 10000, 10)
-write.csv(cvResult10k, file = "merge-time-cv-10k.csv")
-
-#n = all rows
-data <- prepare.data.mergetime(all, nrow(all))
-results <- run.classifiers.mergetime(merge.time.model, data$train, data$test, "all")
-cvResultAll <- cross.validation(merge.time.model, run.classifiers.mergetime, prepare.data.mergetime, all, nrow(all), 10)
-write.csv(cvResultAll, file = "merge-time-cv-all.csv")
+run.mergetime.classifiers(all)
+cvResult <- run.mergetime.classifiers(all, c(5000))

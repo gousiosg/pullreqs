@@ -59,6 +59,17 @@ prepare.data.mergetime.4bins <- function(df, num_samples = nrow(df)) {
   list(train=a.train, test=a.test)
 }
 
+format.results <- function(name, test, predictions) {
+  metrics = data.frame(actual = test$merge_time, 
+                       predicted = as.ordered(predictions))
+  metrics$correct <- metrics$actual == metrics$predicted
+  metric.stats <- sqldf("select a.actual, a.incor, b.cor, b.cor * 1.0/(a.incor + b.cor) as accuracy from (select actual, count(*) as incor from metrics m where correct = 0 group by actual) a, (select actual, count(*) as cor from metrics m where correct = 1 group by actual) b where a.actual = b.actual")
+  roc <- multiclass.roc(predictions, test$merge_time)
+  auc <- as.numeric(roc$auc)
+  printf("%s auc: %f, acc: %f", name, auc, mean(metric.stats$accuracy))
+  c(name, auc, mean(metric.stats$accuracy))
+}
+
 # Returns a dataframe with the AUC, PREC, REC values per classifier
 # Plots classification ROC curves
 run.classifiers.mergetime <- function(model, train, test, uniq = "") {
@@ -69,48 +80,19 @@ run.classifiers.mergetime <- function(model, train, test, uniq = "") {
   ### Random Forest
   rfmodel <- rf.train(model, train)
   predictions <- predict(rfmodel, test, type="response")
-  metrics = data.frame(actual = test$merge_time, predicted = as.ordered(predictions))
-  metrics$correct <- metrics$actual == metrics$predicted
-  metric.stats <- sqldf("select a.actual, a.incor, b.cor, b.cor * 1.0/(a.incor + b.cor) as accuracy from (select actual, count(*) as incor from metrics m where correct = 0 group by actual) a, (select actual, count(*) as cor from metrics m where correct = 1 group by actual) b where a.actual = b.actual")
-  roc <- multiclass.roc(predictions, test$merge_time)
-  auc <- as.numeric(roc$auc)
-  printf("randomforest auc: %f, acc: %f", auc, mean(metric.stats$accuracy))
-  results[1,] <- c("randomforest", auc, mean(metric.stats$accuracy))
-
-  #
-  ### SVM - first tune and then run it with 10-fold cross validation
-#   svmmodel <-  svm.train(train)
-#   predictions <- predict(svmmodel, newdata=test, type="prob", probability=TRUE)
-#   pred.obj <- prediction(attr(predictions, "probabilities")[,2], test$merged_fast)
-#   metrics <- classification.perf.metrics("svm", pred.obj)
-#   results[2,] <- c("svm", metrics$auc, metrics$acc, metrics$prec, metrics$rec)
-#   svmperf <- performance(pred.obj, "tpr","fpr")
+  results[1,] <- format.results("randomforest", test, predictions)
 
   #
   ### Multinomial regression
   multinommodel <- multinom.train(model, train)
   predictions <- predict(multinommodel, test, type="class")
-  metrics = data.frame(actual = test$merge_time, predicted = as.ordered(predictions))
-  metrics$correct <- metrics$actual == metrics$predicted
-  metric.stats <- sqldf("select a.actual, a.incor, b.cor, b.cor * 1.0/(a.incor + b.cor) as accuracy from (select actual, count(*) as incor from metrics m where correct = 0 group by actual) a, (select actual, count(*) as cor from metrics m where correct = 1 group by actual) b where a.actual = b.actual")
-
-  roc <- multiclass.roc(predictions, test$merge_time)
-  auc <- as.numeric(roc$auc)
-  printf("multinomregr auc: %f, acc: %f", auc, mean(metric.stats$accuracy))
-  results[2,] <- c("multinomregr", auc, mean(metric.stats$accuracy))
+  results[2,] <- format.results("multinomregr", test, predictions)
 
   #
   ### Naive Bayes
   bayesModel <- bayes.train(model, train)
   predictions <- predict(bayesModel, test)
-  metrics = data.frame(actual = test$merge_time, predicted = as.ordered(predictions))
-  metrics$correct <- metrics$actual == metrics$predicted
-  metric.stats <- sqldf("select a.actual, a.incor, b.cor, b.cor * 1.0/(a.incor + b.cor) as accuracy from (select actual, count(*) as incor from metrics m where correct = 0 group by actual) a, (select actual, count(*) as cor from metrics m where correct = 1 group by actual) b where a.actual = b.actual")
-  
-  roc <- multiclass.roc(predictions, test$merge_time)
-  auc <- as.numeric(roc$auc)
-  printf("naive bayes auc: %f, acc: %f", auc, mean(metric.stats$accuracy))
-  results[3,] <- c("naive bayes", auc, mean(metric.stats$accuracy))
+  results[3,] <- format.results("naivebayes", test, predictions)
 
   results
 }

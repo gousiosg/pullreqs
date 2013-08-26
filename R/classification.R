@@ -66,7 +66,6 @@ cross.validation <- function(model, classifier, sampler, df, num_samples, num_ru
   result = lapply(c(1:num_runs),
                   function(n) {
                     dataset <- sampler(df, num_samples)
-                    print(sprintf("Prior propability: %f", nrow(subset(dataset$train, merged == TRUE))/nrow(dataset$train)))
                     interm = classifier(model, dataset$train, dataset$test)
                     interm$run <- n
                     interm
