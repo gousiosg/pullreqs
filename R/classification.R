@@ -4,7 +4,9 @@ source(file = "R/packages.R")
 source(file = "R/variables.R")
 source(file = "R/utils.R")
 
-library(ROCR) 
+library(ROCR)
+library(randomForest)
+library(e1071)
 
 # Get a project with the appropriate fields by name to run through a classification task
 class.project <- function(dfs, name) {
@@ -14,6 +16,39 @@ class.project <- function(dfs, name) {
 # Strip a project data frame from unused columns
 prepare.project.df <- function(a) {
   a[,c(7:31)]
+}
+
+rf.train <- function(model, train.set) {
+  rfmodel <- randomForest(model, data=train.set, importance = T)
+  print(rfmodel)
+  print(importance(rfmodel))
+  varImpPlot(rfmodel, type=1)
+  varImpPlot(rfmodel, type=2)
+  plot(rfmodel)
+  rfmodel
+}
+
+svm.train <- function(model, train.set) {
+  tobj <- tune.svm(model, data=train.set[1:500, ], gamma = 10^(-6:-3), cost = 10^(1:2))
+  summary(tobj)
+  bestGamma <- tobj$best.parameters[[1]]
+  bestCost <- tobj$best.parameters[[2]]
+  svmmodel <- svm(model, data=train, gamma=bestGamma, cost = bestCost, probability=TRUE)
+  print(summary(svmmodel))
+  svmmodel
+}
+
+binlog.train <- function(model, train.set) {
+  binlog <- glm(model, data=train.set, family = binomial(logit));
+  print(summary(binlog))
+  binlog
+}
+
+bayes.train <- function(model, train.set) {
+  bayesModel <- naiveBayes(model, data = train.set)
+  print(summary(bayesModel))
+  print(bayesModel)
+  bayesModel
 }
 
 # Run a cross validation round, return a dataframe with all results added
