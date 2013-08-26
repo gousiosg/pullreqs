@@ -1,5 +1,4 @@
 if (! "devtools" %in% installed.packages()) install.packages("devtools")
-
 library(devtools)
 
 if (!"randomForest" %in% installed.packages()) install.packages("randomForest")
@@ -7,11 +6,9 @@ if (!"ggplot2" %in% installed.packages()) install.packages("ggplot2")
 if (!"ROCR" %in% installed.packages()) install.packages("ROCR")
 if (!"ellipse" %in% installed.packages()) install.packages("ellipse")
 if (!"e1071" %in% installed.packages()) install.packages("e1071")
-if (!"pls" %in% installed.packages()) install.packages("pls")
-if (!"Hmisc" %in% installed.packages()) install.packages("Hmisc")
 if (!"reshape" %in% installed.packages()) install.packages("reshape")
 if (!"RMySQL" %in% installed.packages()) install.packages("RMySQL")
-if (!"orddom" %in% installed.packages()) install.packages("orddom")
 if (!"sqldf" %in% installed.packages()) install.packages("sqldf")
 if (!"xtable" %in% installed.packages()) install.packages("xtable")
+if (!"pROC" %in% installed.packages()) install.packages("pROC")
 if (!"cliffsd" %in% installed.packages()) install_github("cliffs.d", "gousiosg")
