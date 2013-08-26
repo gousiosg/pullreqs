@@ -15,7 +15,7 @@ run.mergetime.classifiers <- function(df, cases = c(1000, 10000, nrow(df)/4,
   for (i in cases) {
     data <- prepare.data.mergetime.4bins(df, i)
     results <- run.classifiers.mergetime(merge.time.model, data$train,
-                                         data$test, nrow(data))
+                                         data$test)
     cvResult <- cross.validation(merge.time.model,
                                  run.classifiers.mergetime,
                                  prepare.data.mergetime.4bins, df, i, 10)

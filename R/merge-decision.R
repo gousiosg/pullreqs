@@ -8,7 +8,7 @@ source(file = "R/classification.R")
 merge.decision.model <- merged ~ team_size + num_commits + files_changed +
   perc_external_contribs + sloc + src_churn + test_churn + num_comments +
   commits_on_files_touched +  test_lines_per_kloc + prev_pullreqs +
-  requester_succ_rate + main_team_member + conflict # + forward_links
+  requester_succ_rate + main_team_member + conflict + forward_links
 
 # Returns a list l where 
 # l[1] training dataset

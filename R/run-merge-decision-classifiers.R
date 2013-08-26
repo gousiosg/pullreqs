@@ -13,7 +13,7 @@ run.mergedecision.classifiers <- function(df, cases = c(1000, 10000, nrow(df)/4,
   for (i in cases) {
     data <- prepare.data.mergedecision(df, i)
     results <- run.classifiers.mergedecision(merge.decision.model, data$train,
-                                         data$test, nrow(data))
+                                         data$test, i)
     cvResult <- cross.validation(merge.decision.model,
                                  run.classifiers.mergedecision,
                                  prepare.data.mergedecision, df, i, 10)

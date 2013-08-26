@@ -48,7 +48,7 @@ load.filter <- function(path) {
   setAs("character", "POSIXct", function(from){as.POSIXct(from, origin = "1970-01-01")})
   a <- read.csv(path, check.names = T, 
                 colClasses = c("integer","factor","factor", rep("integer", 6), 
-                               rep("factor", 2), rep("integer", 9),
+                               rep("factor", 3), rep("integer", 9),
                                rep("double", 3), "integer",  "factor",
                                "integer", "double", "integer",
                                "factor", "factor"))
@@ -57,6 +57,8 @@ load.filter <- function(path) {
   a$git_merged <- as.factor(a$git_merged)
   a$conflict <- a$conflict == "true"
   a$conflict <- as.factor(a$conflict)
+  a$forward_links <- a$forward_links == "true"
+  a$forward_links <- as.factor(a$forward_links)
   a$main_team_member <- a$main_team_member == "true"
   a$main_team_member <- as.factor(a$main_team_member)
   a$intra_branch <- a$intra_branch == "true"

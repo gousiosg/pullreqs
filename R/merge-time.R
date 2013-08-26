@@ -11,7 +11,7 @@ library(sqldf)
 merge.time.model = merge_time ~ team_size + num_commits + files_changed +
   perc_external_contribs + sloc + src_churn + test_churn +
   commits_on_files_touched +  test_lines_per_kloc + prev_pullreqs +
-  requester_succ_rate + main_team_member + conflict # + forward_links
+  requester_succ_rate + main_team_member + conflict + forward_links
 
 # Binning in FAST and SLOW pull requests based on median merge time
 prepare.data.mergetime <- function(df, num_samples) {
@@ -78,7 +78,7 @@ format.results <- function(name, test, predictions) {
 
 # Returns a dataframe with the AUC, PREC, REC values per classifier
 # Plots classification ROC curves
-run.classifiers.mergetime <- function(model, train, test, uniq = "") {
+run.classifiers.mergetime <- function(model, train, test) {
   sample_size = nrow(train) + nrow(test)
   results = data.frame(classifier = rep(NA, 3), auc = rep(0, 3), acc = rep(0, 3),
                        stringsAsFactors=FALSE)
