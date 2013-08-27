@@ -20,7 +20,7 @@ run.mergedecision.classifiers <- function(df, cases = c(1000, 10000, nrow(df)/4,
     write.csv(cvResult, file = sprintf("merge-decision-cv-%i.csv", i))
     cross.validation.plot(cvResult,
                           sprintf("Merge decision task (%d items)", i),
-                          sprintf("merge-decision-cv-%i.pdf", i))
+                          sprintf("merge-decision-cv-%d.pdf", i))
   }
 }
 
