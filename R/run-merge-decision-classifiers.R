@@ -8,8 +8,10 @@ dfs <- load.all(dir=data.file.location, pattern="*.csv$")
 dfs <- addcol.merged(dfs)
 all <- merge.dataframes(dfs)
 
-run.mergedecision.classifiers <- function(df, cases = c(1000, 10000, nrow(df)/4,
-                                                        nrow(df)/2, nrow(df))) {
+run.mergedecision.classifiers <- function(df, cases = c(1000, 10000,
+                                                        floor(nrow(df)/4),
+                                                        floor(nrow(df)/2),
+                                                        nrow(df))) {
   for (i in cases) {
     data <- prepare.data.mergedecision(df, i)
     results <- run.classifiers.mergedecision(merge.decision.model, data$train,

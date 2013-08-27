@@ -10,8 +10,10 @@ dfs <- load.all(dir=data.file.location, pattern="*.csv$")
 dfs <- addcol.merged(dfs)
 all <- merge.dataframes(dfs)
 
-run.mergetime.classifiers <- function(df, cases = c(1000, 10000, nrow(df)/4,
-                                                    nrow(df)/2, nrow(df))) {
+run.mergetime.classifiers <- function(df, cases = c(1000, 10000,
+                                                    floor(nrow(df)/4),
+                                                    floor(nrow(df)/2),
+                                                    nrow(df))) {
   for (i in cases) {
     data <- prepare.data.mergetime.4bins(df, i)
     results <- run.classifiers.mergetime(merge.time.model, data$train,
@@ -27,3 +29,4 @@ run.mergetime.classifiers <- function(df, cases = c(1000, 10000, nrow(df)/4,
 }
 
 run.mergetime.classifiers(all)
+
