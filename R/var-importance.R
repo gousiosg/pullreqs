@@ -33,23 +33,5 @@ dfs <- load.all(dir=data.file.location, pattern="*.csv$")
 dfs <- addcol.merged(dfs)
 all <- merge.dataframes(dfs)
 
-run.rf.varimp("Merge decision", merge.decision.model, prepare.data.mergedecision, all, 1000, 50)
-run.rf.varimp("Merge time", merge.time.model, prepare.data.mergetime, all, 1000, 50)
-run.rf.varimp("Merge time (4 bins)", merge.time.model, prepare.data.mergetime.4bins, all, 1000, 50)
-
-run.rf.varimp("Merge decision", merge.decision.model, prepare.data.mergedecision, all, 1000, 100)
-run.rf.varimp("Merge time", merge.time.model, prepare.data.mergetime, all, 1000, 100)
-run.rf.varimp("Merge time (4 bins)", merge.time.model, prepare.data.mergetime.4bins, all, 1000, 100)
-
-run.rf.varimp("Merge decision", merge.decision.model, prepare.data.mergedecision, all, 10000, 50)
-run.rf.varimp("Merge time", merge.time.model, prepare.data.mergetime, all, 10000, 50)
-run.rf.varimp("Merge time (4 bins)", merge.time.model, prepare.data.mergetime.4bins, all, 10000, 50)
-
-run.rf.varimp("Merge decision", merge.decision.model, prepare.data.mergedecision, all, 10000, 100)
-run.rf.varimp("Merge time", merge.time.model, prepare.data.mergetime, all, 10000, 100)
-run.rf.varimp("Merge time (4 bins)", merge.time.model, prepare.data.mergetime.4bins, all, 10000, 100)
-
-run.rf.varimp("Merge decision", merge.decision.model, prepare.data.mergedecision, all, 37492, 50)
-run.rf.varimp("Merge time", merge.time.model, prepare.data.mergetime, all, 27892, 50)
-run.rf.varimp("Merge time (4 bins)", merge.time.model, prepare.data.mergetime.4bins, all, 40000, 50)
-
+run.rf.varimp("Merge decision", merge.decision.model, prepare.data.mergedecision, all, nrow(all)/2, 50)
+run.rf.varimp("Merge time (4 bins)", merge.time.model, prepare.data.mergetime.4bins, all, nrow(all)/2, 50)
