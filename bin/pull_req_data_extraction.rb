@@ -127,7 +127,7 @@ Extract data for pull requests for a given repository
     format = [
         :pull_req_id, :project_name, :lang, :github_id,
         :created_at, :merged_at, :closed_at, :lifetime_minutes, :mergetime_minutes,
-        :git_merged, :conflict, :forward_links,
+        :merged_using, :conflict, :forward_links,
         :team_size, :num_commits,
         #:num_commit_comments,:num_issue_comments,
         :num_comments,
@@ -246,17 +246,10 @@ Extract data for pull requests for a given repository
 
     merged = ! pr[:merged_at].nil?
     git_merged = false
+    merge_reason = :github
 
     if not merged
-      # Check if PR was closed by a commit while this commit is in master
-      # This usually indicates a merge (perhaps following a rebase)
-      rebase_merged = unless @closed_by_commit[pr[:github_id]].nil?
-                        sha = @closed_by_commit[pr[:github_id]]
-                        not @all_commits.select { |x| sha.start_with? x }.empty?
-                      else
-                        false
-                      end
-      git_merged = rebase_merged || merged_with_git?(pr[:id])
+      git_merged, merge_reason = merged_with_git?(pr)
     end
 
     # Count number of src/comment lines
@@ -278,7 +271,7 @@ Extract data for pull requests for a given repository
         :closed_at                => Time.at(pr[:closed_at]).to_i,
         :lifetime_minutes         => pr[:lifetime_minutes],
         :mergetime_minutes        => merge_time_minutes(pr, merged, git_merged),
-        :git_merged               => git_merged,
+        :merged_using             => merge_reason.to_s,
         :conflict                 => conflict?(pr[:login], pr[:project_name], pr[:github_id]),
         :forward_links            => forward_links?(pr[:login], pr[:project_name], pr[:github_id]),
         :team_size                => team_size_at_open(pr[:id], 3)[0][:teamsize],
@@ -331,20 +324,67 @@ Extract data for pull requests for a given repository
     end
   end
 
-  def conflict?(owner, repo, pr_id)
-    issue_comments = mongo.get_underlying_connection['issue_comments']
+  # Checks whether a merge of the pull request occurred outside Github
+  # This will only discover clean merges; rebases and force-pushes override
+  # the commit history, so they are impossible to detect.
+  def merged_with_git?(pr)
 
-    issue_comments.find( {'owner' => owner, 'repo' => repo, 'issue_id' => pr_id.to_i},
-                 {:fields => {'body' => 1, '_id' => 0}}).reduce(false) do |acc, x|
+    #1. Commits from the pull request appear in the master branch
+    q = <<-QUERY
+	  select c.sha
+    from pull_request_commits prc, commits c
+	  where prc.commit_id = c.id
+		  and prc.pull_request_id = ?
+    QUERY
+    db.fetch(q, pr[:id]).each do |x|
+      unless @all_commits.select { |y| x[:sha].start_with? y }.empty?
+        return [true, :commits_in_master]
+      end
+    end
+
+    #2. The PR was closed by a commit (using the Fixes: convention).
+    # Check whether the commit that closes the PR is in the project's
+    # master branch
+    unless @closed_by_commit[pr[:github_id]].nil?
+      sha = @closed_by_commit[pr[:github_id]]
+      if not @all_commits.select { |x| sha.start_with? x }.empty?
+        return [true, :fixes_in_commit]
+      end
+    end
+
+    comments = issue_comments(pr[:login], pr[:project_name], pr[:github_id])
+
+    comments.reverse.take(3).map { |x| x['body'] }.uniq.each do |last|
+      # 3. Last comment contains a commit number
+      last.scan(/([0-9a-f]{6,40})/m).each do |x|
+        # Commit is identified as merged
+        if last.match(/merg(?:ing|ed)/i) or last.match(/appl(?:ying|ed)/i)
+          return [true, :commit_sha_in_comments]
+        else
+          # Commit appears in master branch
+          unless @all_commits.select { |y| x[0].start_with? y }.empty?
+            return [true, :commit_sha_in_comments]
+          end
+        end
+      end
+
+      # 4. Merg[ing|ed] or appl[ing|ed] as last comment of pull request
+      if last.match(/merg(?:ing|ed)/i) or last.match(/appl(?:ying|ed)/i)
+        return [true, :merged_in_comments]
+      end
+    end
+
+    [false, :unknown]
+  end
+
+  def conflict?(owner, repo, pr_id)
+    issue_comments(owner, repo, pr_id).reduce(false) do |acc, x|
       acc || (not x['body'].match(/conflict/i).nil?)
     end
   end
 
   def forward_links?(owner, repo, pr_id)
-    issue_comments = mongo.get_underlying_connection['issue_comments']
-
-    issue_comments.find({'owner' => owner, 'repo' => repo, 'issue_id' => pr_id.to_i},
-                        {:fields => {'body' => 1, '_id' => 0}}).reduce(false) do |acc, x|
+    issue_comments(owner, repo, pr_id).reduce(false) do |acc, x|
       # Try to find pull_requests numbers referenced in each comment
       a = x['body'].scan(/\#([0-9]+)/m).reduce(false) do |acc1, m|
         if m[0].to_i > pr_id.to_i
@@ -692,22 +732,25 @@ Extract data for pull requests for a given repository
     files.select{|x| filter.call(x)}
   end
 
-  # Checks whether a merge of the pull request occurred outside Github
-  # This will only discover clean merges; rebases and force-pushes override
-  # the commit history, so they are impossible to detect.
-  def merged_with_git?(pr_id)
-    q = <<-QUERY
-	  select c.sha
-    from pull_request_commits prc, commits c
-	  where prc.commit_id = c.id
-		  and prc.pull_request_id = ?
-    QUERY
-    db.fetch(q, pr_id).each do |x|
-      unless @all_commits.select{|y| x[:sha].start_with? y}.empty?
-        return true
-      end
+  # Returns all comments for the issue sorted by creation date ascending
+  def issue_comments(owner, repo, pr_id)
+    Thread.current[:issue_id] ||= pr_id
+
+    if pr_id != Thread.current[:issue_id]
+      Thread.current[:issue_id] = pr_id
+      Thread.current[:issue_cmnt] = nil
     end
-    false
+
+    Thread.current[:issue_cmnt] ||= Proc.new {
+      issue_comments = mongo.get_underlying_connection['issue_comments']
+      ic = issue_comments.find(
+          {'owner' => owner, 'repo' => repo, 'issue_id' => pr_id.to_i},
+          {:fields => {'body' => 1, 'created_at' => 1, '_id' => 0},
+           :sort => {'created_at' => :asc}}
+      ).map {|x| x}
+
+    }.call
+    Thread.current[:issue_cmnt]
   end
 
   def if_empty(result, field)
