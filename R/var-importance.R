@@ -34,4 +34,5 @@ dfs <- addcol.merged(dfs)
 all <- merge.dataframes(dfs)
 
 run.rf.varimp("Merge decision", merge.decision.model, prepare.data.mergedecision, all, nrow(all)/2, 50)
-run.rf.varimp("Merge time (4 bins)", merge.time.model, prepare.data.mergetime.4bins, all, nrow(all)/2, 50)
+run.rf.varimp("Merge time (3 classes)", merge.time.model, prepare.data.mergetime.3bins, all, nrow(all)/2, 50)
+run.rf.varimp("Merge time (4 classes)", merge.time.model, prepare.data.mergetime.4bins, all, nrow(all)/2, 50)
