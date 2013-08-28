@@ -51,7 +51,7 @@ module PythonData
       cases = stripped(f).lines.select{|l| not l.match(/assert/).nil?}
       acc + cases.size
     end
-    @ds_cache = {} # Hacky optimization to avoid memory problems
+    Thread.current[:ds_cache] = {} # Hacky optimization to avoid memory problems
     ds_tests + normal_tests
   end
 
@@ -123,14 +123,14 @@ module PythonData
   private
 
   def docstrings(pr_id)
-    @ds_cache ||= {}
-    if @ds_cache[pr_id].nil?
+    Thread.current[:ds_cache] ||= {}
+    if Thread.current[:ds_cache][pr_id].nil?
       docstr = (src_files(pr_id) + test_files(pr_id)).flat_map do |f|
           buff = repo.blob(f[:sha]).data
           buff.scan(ml_comment_regexps[0])
           end
-      @ds_cache[pr_id] = docstr.flatten
+      Thread.current[:ds_cache][pr_id] = docstr.flatten
     end
-    @ds_cache[pr_id]
+    Thread.current[:ds_cache][pr_id]
   end
 end

@@ -117,6 +117,9 @@ Extract data for pull requests for a given repository
       when /python/i then self.extend(PythonData)
     end
 
+    # Update the repo
+    clone(ARGV[0], ARGV[1], true)
+
     unless ARGV[3].nil?
       @threads = ARGV[3].to_i
     end
@@ -734,10 +737,10 @@ Extract data for pull requests for a given repository
   end
 
   # Clone or update, if already cloned, a git repository
-  def clone(user, repo)
+  def clone(user, repo, update = false)
 
     def spawn(cmd)
-      proc = IO.popen(cmd, "r")
+      proc = IO.popen(cmd, 'r')
 
       proc_out = Thread.new {
         while !proc.eof
@@ -752,7 +755,9 @@ Extract data for pull requests for a given repository
 
     begin
       repo = Grit::Repo.new(checkout_dir)
-      spawn("cd #{checkout_dir} && git pull")
+      if update
+        spawn("cd #{checkout_dir} && git pull")
+      end
       repo
     rescue
       spawn("git clone git://github.com/#{user}/#{repo}.git #{checkout_dir}")
