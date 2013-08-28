@@ -27,3 +27,4 @@ run.mergedecision.classifiers <- function(df, cases = c(1000, 10000,
 }
 
 run.mergedecision.classifiers(all)
+# run.mergedecision.classifiers(all, c(1000))

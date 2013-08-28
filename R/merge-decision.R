@@ -47,7 +47,6 @@ run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
   pred.obj <- prediction(predictions[,2], test$merged)
   metrics <- classification.perf.metrics("randomforest", pred.obj)
   results[1,] <- c("randomforest", metrics$auc, metrics$acc, metrics$prec, metrics$rec)
-  rfperf <- performance(pred.obj, "tpr","fpr")
 
   #
   ### SVM
@@ -65,7 +64,6 @@ run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
   pred.obj <- prediction(predictions, test$merged)
   metrics <- classification.perf.metrics("binlogreg", pred.obj)
   results[3,] <- c("binlogregr", metrics$auc, metrics$acc, metrics$prec, metrics$rec)
-  logperf <- performance(pred.obj, "tpr","fpr")
   
   #
   ### Naive Bayes
@@ -74,16 +72,6 @@ run.classifiers.mergedecision <- function(model, train, test, uniq = "") {
   pred.obj <- prediction(predictions[,2], test$merged)
   metrics <- classification.perf.metrics("naive bayes", pred.obj)
   results[4,] <- c("naive bayes", metrics$auc, metrics$acc, metrics$prec, metrics$rec)
-  bayesperf <- performance(pred.obj, "tpr","fpr")
-  
-  # Plot classification performance
-  pdf(file=sprintf("%s/%s-%s.pdf", plot.location, "classif-perf-merge-decision", uniq))
-  plot (rfperf, col = 1, main = "Classifier performance for pull request merge decision")
-#   plot (svmperf, col = 2, add = TRUE)
-  plot (logperf, col = 3, add = TRUE)
-  plot (bayesperf, col = 4, add = TRUE)
-  legend(0.6, 0.6, c('random forest', 'svm', 'binlog regression', 'naive bayes'), 1:5, title = sprintf("n=%d",sample_size))
-  dev.off()
   
   subset(results, auc > 0)
 }
