@@ -13,20 +13,19 @@ all <- merge.dataframes(dfs)
 run.mergetime.classifiers <- function(df, cases = c(1000, 10000,
                                                     floor(nrow(df)/4),
                                                     floor(nrow(df)/2),
-                                                    nrow(df))) {
+                                                    nrow(df)),
+                                      bins = 3) {
+  splitter <- get(sprintf("prepare.data.mergetime.%dbins", bins))
   for (i in cases) {
-    data <- prepare.data.mergetime.4bins(df, i)
-    results <- run.classifiers.mergetime(merge.time.model, data$train,
-                                         data$test)
     cvResult <- cross.validation(merge.time.model,
                                  run.classifiers.mergetime,
-                                 prepare.data.mergetime.4bins, df, i, 10)
-    write.csv(cvResult, file = sprintf("merge-time-cv-%d.csv", i))
+                                 splitter, df, i, 5)
+    write.csv(cvResult, file = sprintf("merge-time-cv-%dbins-%d.csv", bins, i))
     cross.validation.plot(cvResult,
-                          sprintf("Merge time task, 4 bins (%d items)", i),
-                          sprintf("merge-time-cv-%d.pdf", i))
+                          sprintf("Merge time task cross validation (%d bins, %d items)",bins, i),
+                          sprintf("merge-time-cv-%dbins-%d.pdf",bins, i))
   }
 }
 
 run.mergetime.classifiers(all)
-
+run.mergetime.classifiers(all, c(20000))
