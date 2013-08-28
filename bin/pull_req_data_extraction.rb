@@ -6,6 +6,8 @@ require 'ghtorrent'
 require 'time'
 require 'linguist'
 require 'grit'
+require 'thread'
+require 'parallel'
 
 require 'java'
 require 'ruby'
@@ -34,32 +36,50 @@ Extract data for pull requests for a given repository
     Trollop::die 'Three arguments required' unless !args[2].nil?
   end
 
+  def ght
+    Thread.current[:ght] ||= GHTorrent::Mirror.new(settings)
+    Thread.current[:ght]
+  end
+
   def logger
-    @ght.logger
+    ght.logger
   end
 
   def db
-    @db ||= @ght.get_db
-    @db
+    Thread.current[:sql_db] ||= ght.get_db
+    Thread.current[:sql_db]
   end
 
   def mongo
-    @mongo ||= connect(:mongo, settings)
-    @mongo
+    Thread.current[:mongo_db] ||= connect(:mongo, settings)
+    Thread.current[:mongo_db]
   end
 
   def repo
-    @repo ||= clone(ARGV[0], ARGV[1])
-    @repo
+    Thread.current[:repo] ||= clone(ARGV[0], ARGV[1])
+    Thread.current[:repo]
+  end
+
+  def threads
+    @threads ||= 1
+    @threads
   end
 
   # Read a source file from the repo and strip its comments
   # The argument f is the result of Grit.lstree
   # Memoizes result per f
+  def semaphore
+    @semaphore ||= Mutex.new
+    @semaphore
+  end
   def stripped(f)
     @stripped ||= Hash.new
     unless @stripped.has_key? f
-      @stripped[f] = strip_comments(repo.blob(f[:sha]).data)
+      semaphore.synchronize do
+        unless @stripped.has_key? f
+          @stripped[f] = strip_comments(repo.blob(f[:sha]).data)
+        end
+      end
     end
     @stripped[f]
   end
@@ -73,15 +93,16 @@ Extract data for pull requests for a given repository
       interrupted = true
     }
 
-    @ght ||= GHTorrent::Mirror.new(settings)
+    # Init the semaphore
+    semaphore
 
-    user_entry = @ght.transaction{@ght.ensure_user(ARGV[0], false, false)}
+    user_entry = ght.transaction{ght.ensure_user(ARGV[0], false, false)}
 
     if user_entry.nil?
       Trollop::die "Cannot find user #{ARGV[0]}"
     end
 
-    repo_entry = @ght.transaction{@ght.ensure_repo(ARGV[0], ARGV[1], false, false, false)}
+    repo_entry = ght.transaction{ght.ensure_repo(ARGV[0], ARGV[1], false, false, false)}
 
     if repo_entry.nil?
       Trollop::die "Cannot find repository #{ARGV[0]}/#{ARGV[1]}"
@@ -96,25 +117,32 @@ Extract data for pull requests for a given repository
       when /python/i then self.extend(PythonData)
     end
 
+    unless ARGV[3].nil?
+      @threads = ARGV[3].to_i
+    end
+
+    format = [
+        :pull_req_id, :project_name, :lang, :github_id,
+        :created_at, :merged_at, :closed_at, :lifetime_minutes, :mergetime_minutes,
+        :git_merged, :conflict, :forward_links,
+        :team_size, :num_commits,
+        #:num_commit_comments,:num_issue_comments,
+        :num_comments,
+        #:files_added, :files_deleted, :files_modified,
+        :files_changed,
+        #:src_files, :doc_files, :other_files,
+        #:commits_last_month, :main_team_commits_last_month,
+        :perc_external_contribs,
+        :sloc,:src_churn,:test_churn,:commits_on_files_touched,
+        :test_lines_per_kloc,:test_cases_per_kloc,:asserts_per_kloc,
+        :watchers,:requester,:prev_pullreqs,:requester_succ_rate,:followers,
+        :intra_branch,:main_team_member
+      ]
+
     # Print file header
-    print 'pull_req_id,project_name,lang,github_id,'<<
-          'created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,' <<
-          'git_merged,conflict,forward_links,' <<
-          'team_size,num_commits,' <<
-          #"num_commit_comments,num_issue_comments," <<
-          'num_comments,' <<
-          #"files_added, files_deleted, files_modified" <<
-          'files_changed,' <<
-          #"src_files, doc_files, other_files, " <<
-          #"commits_last_month,main_team_commits_last_month," <<
-          'perc_external_contribs,' <<
-          'sloc,src_churn,test_churn,commits_on_files_touched,' <<
-          'test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,' <<
-          'watchers,requester,prev_pullreqs,requester_succ_rate,followers,' <<
-          "intra_branch,main_team_member\n"
+    puts format.map{|x| x.to_s}.join(',')
 
     # Store all commits abbreviated SHA-1s for later comparisons
-    #@all_commits = repo.commits('master', 50000).map{|x| x.id_abbrev}.sort
 
     @all_commits = (1..50).reduce(['master']) do |acc, x|
       acc + repo.commits(acc.last, 1000).map{|x| x.id_abbrev}
@@ -133,6 +161,7 @@ Extract data for pull requests for a given repository
     commits = mongo.get_underlying_connection['commits']
     fixre = /(?:fixe[sd]?|close[sd]?|resolve[sd]?)(?:[^\/]*?|and)#([0-9]+)/mi
 
+    @closed_by_commit ={}
     @closed_by_commit = db.fetch(q, repo_entry[:id]).reduce({}) do |acc, x|
       sha = x[:sha]
       commits.find({:sha => sha},
@@ -148,16 +177,31 @@ Extract data for pull requests for a given repository
     end
 
     # Process pull request list
-    pull_reqs(repo_entry).each do |pr|
+    do_pr = Proc.new {|pr|
       begin
-        process_pull_request(pr, ARGV[2].downcase)
+        r = process_pull_request(pr, ARGV[2].downcase)
         if interrupted
           return
         end
+        r
       rescue Exception => e
         STDERR.puts "Error processing pull_request #{pr[:github_id]}: #{e.message}"
         STDERR.puts e.backtrace
         #raise e
+      end
+    }
+    prs = pull_reqs(repo_entry)
+
+    if threads > 1
+      Parallel.map(prs, :in_threads => threads) do |pr|
+        do_pr.call(pr)
+      end.select{|x| !x.nil?}.sort{|a,b| b[:github_id]<=>a[:github_id]}.each{|x| puts x.values.join(',')}
+    else
+      prs.each do |pr|
+        a = do_pr.call(pr);
+        unless a.nil?
+          puts a.values.join(',')
+        end
       end
     end
   end
@@ -220,47 +264,48 @@ Extract data for pull requests for a given repository
     commits_last_3_month = commits_last_x_months(pr[:id], false, 3)[0][:num_commits]
     prev_pull_reqs = prev_pull_requests(pr[:id],'opened')[0][:num_pull_reqs]
 
-    # Print line for a pull request
-    print pr[:id], ',',
-          "#{pr[:login]}/#{pr[:project_name]}", ',',
-          lang, ',',
-          pr[:github_id], ',',
-          Time.at(pr[:created_at]).to_i, ',',
-          merge_time(pr, merged, git_merged), ',',
-          Time.at(pr[:closed_at]).to_i, ',',
-          pr[:lifetime_minutes], ',',
-          merge_time_minutes(pr, merged, git_merged), ',',
-          git_merged, ',',
-          conflict?(pr[:login], pr[:project_name], pr[:github_id]), ',',
-          forward_links?(pr[:login], pr[:project_name], pr[:github_id]), ',',
-          team_size_at_open(pr[:id], 3)[0][:teamsize], ',',
-          num_commits(pr[:id])[0][:commit_count], ',',
-          #num_comments(pr[:id])[0][:comment_count], ',',
-          #num_issue_comments(pr[:id])[0][:issue_comment_count], ',',
-          num_comments(pr[:id])[0][:comment_count] + num_issue_comments(pr[:id])[0][:issue_comment_count], ',',
-          #stats[:files_added], ',',
-          #stats[:files_deleted], ',',
-          #stats[:files_modified], ',',
-          stats[:files_added] + stats[:files_modified] + stats[:files_deleted], ',',
-          #stats[:src_files], ',',
-          #stats[:doc_files], ',',
-          #stats[:other_files], ',',
-          ((commits_last_3_month - commits_last_x_months(pr[:id], true, 3)[0][:num_commits]) * 100) / commits_last_3_month, ',',
-          src, ',',
-          stats[:lines_added] + stats[:lines_deleted], ',',
-          stats[:test_lines_added] + stats[:test_lines_deleted], ',',
-          commits_on_files_touched(pr[:id], Time.at(Time.at(pr[:created_at]).to_i - 3600 * 24 * 90)), ',',
-          (test_lines(pr[:id]).to_f / src.to_f) * 1000, ',',
-          (num_test_cases(pr[:id]).to_f / src.to_f) * 1000, ',',
-          (num_assertions(pr[:id]).to_f / src.to_f) * 1000, ',',
-          watchers(pr[:id])[0][:num_watchers], ',',
-          requester(pr[:id])[0][:login], ',',
-          prev_pull_reqs, ',',
-          if prev_pull_reqs > 0 then prev_pull_requests(pr[:id],'merged')[0][:num_pull_reqs].to_f / prev_pull_reqs.to_f else 0 end, ',',
-          followers(pr[:id])[0][:num_followers], ',' ,
-          if intra_branch?(pr[:id])[0][:intra_branch] == 1 then true else false end, ',',
-          if main_team_member?(pr[:id])[0][:main_team_member] == 1 then true else false end,
-          "\n"
+    # Create line for a pull request
+    {
+        :pull_req_id              => pr[:id],
+        :project_name             => "#{pr[:login]}/#{pr[:project_name]}",
+        :lang                     => lang,
+        :github_id                => pr[:github_id],
+        :created_at               => Time.at(pr[:created_at]).to_i,
+        :merged_at                => merge_time(pr, merged, git_merged),
+        :closed_at                => Time.at(pr[:closed_at]).to_i,
+        :lifetime_minutes         => pr[:lifetime_minutes],
+        :mergetime_minutes        => merge_time_minutes(pr, merged, git_merged),
+        :git_merged               => git_merged,
+        :conflict                 => conflict?(pr[:login], pr[:project_name], pr[:github_id]),
+        :forward_links            => forward_links?(pr[:login], pr[:project_name], pr[:github_id]),
+        :team_size                => team_size_at_open(pr[:id], 3)[0][:teamsize],
+        :num_commits              => num_commits(pr[:id])[0][:commit_count],
+        #:num_commit_comments     => num_comments(pr[:id])[0][:comment_count],
+        #:num_issue_comments      => num_issue_comments(pr[:id])[0][:issue_comment_count],
+        :num_comments             => num_comments(pr[:id])[0][:comment_count] + num_issue_comments(pr[:id])[0][:issue_comment_count],
+        #:files_added             => stats[:files_added],
+        #:files_deleted           => stats[:files_deleted],
+        #:files_modified          => stats[:files_modified],
+        :files_changed            => stats[:files_added] + stats[:files_modified] + stats[:files_deleted],
+        #:src_files               => stats[:src_files],
+        #:doc_files               => stats[:doc_files],
+        #:other_files             => stats[:other_files],
+        :perc_external_contribs   => ((commits_last_3_month - commits_last_x_months(pr[:id], true, 3)[0][:num_commits]) * 100) / commits_last_3_month,
+        :sloc                     => src,
+        :src_churn                => stats[:lines_added] + stats[:lines_deleted],
+        :test_churn               => stats[:test_lines_added] + stats[:test_lines_deleted],
+        :commits_on_files_touched => commits_on_files_touched(pr[:id], Time.at(Time.at(pr[:created_at]).to_i - 3600 * 24 * 90)),
+        :test_lines_per_kloc      => (test_lines(pr[:id]).to_f / src.to_f) * 1000,
+        :test_cases_per_kloc      => (num_test_cases(pr[:id]).to_f / src.to_f) * 1000,
+        :asserts_per_kloc         => (num_assertions(pr[:id]).to_f / src.to_f) * 1000,
+        :watchers                 => watchers(pr[:id])[0][:num_watchers],
+        :requester                => requester(pr[:id])[0][:login],
+        :prev_pullreqs            => prev_pull_reqs,
+        :requester_succ_rate      => if prev_pull_reqs > 0 then prev_pull_requests(pr[:id], 'merged')[0][:num_pull_reqs].to_f / prev_pull_reqs.to_f else 0 end,
+        :followers                => followers(pr[:id])[0][:num_followers],
+        :intra_branch             => if intra_branch?(pr[:id])[0][:intra_branch] == 1 then true else false end,
+        :main_team_member         => if main_team_member?(pr[:id])[0][:main_team_member] == 1 then true else false end
+    }
   end
 
   def merge_time(pr, merged, git_merged)
