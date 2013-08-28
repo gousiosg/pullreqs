@@ -8,7 +8,7 @@ source(file = "R/classification.R")
 library(pROC)
 library(sqldf)
 
-merge.time.model = merge_time ~ team_size + num_commits + files_changed +
+merge.time.model = merge_time ~ team_size + files_changed +
   perc_external_contribs + sloc + src_churn + test_churn +
   commits_on_files_touched +  test_lines_per_kloc + prev_pullreqs +
   requester_succ_rate + main_team_member + conflict + forward_links

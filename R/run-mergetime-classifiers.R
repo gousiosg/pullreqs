@@ -22,7 +22,7 @@ run.mergetime.classifiers <- function(df, cases = c(1000, 10000,
                                  splitter, df, i, 5)
     write.csv(cvResult, file = sprintf("merge-time-cv-%dbins-%d.csv", bins, i))
     cross.validation.plot(cvResult,
-                          sprintf("Merge time task cross validation (%d bins, %d items)",bins, i),
+                          sprintf("Merge time task cross validation (%d classes, %d items)",bins, i),
                           sprintf("merge-time-cv-%dbins-%d.pdf",bins, i))
   }
 }
