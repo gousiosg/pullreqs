@@ -90,8 +90,8 @@ orig_repos_pullreqs <- fetch(res, n = -1)
 print(sprintf("Repos that received a pull request in 2012: %s", orig_repos_pullreqs$cnt))
 print(sprintf("Perc repos that received a pull request in 2012: %f", (orig_repos_pullreqs$cnt/repos_with_commits$cnt) * 100))
 
-# Pull request statistics and histogram for pull reqs in 2012
-res <- dbSendQuery(con, "select pr.base_repo_id as repoid, count(*) as cnt from projects p, pull_requests pr  where p.forked_from is null and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles' and p.name <> 'vimfiles'  and pr.base_repo_id = p.id and exists (select prh.created_at from pull_request_history prh where prh.pull_request_id = pr.id and prh.action='opened' and year(prh.created_at)=2012)  group by pr.base_repo_id order by count(*) desc")
+# Pull request statistics and histogram for pull reqs
+res <- dbSendQuery(con, "select pr.base_repo_id as repoid, count(*) as cnt from projects p, pull_requests pr  where p.forked_from is null and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles' and p.name <> 'vimfiles'  and pr.base_repo_id = p.id and exists (select prh.created_at from pull_request_history prh where prh.pull_request_id = pr.id and prh.action='opened' and year(prh.created_at) > 2010)  group by pr.base_repo_id order by count(*) desc")
 pullreqs <- fetch(res, n = -1)
 print(sprintf("Pullreqs per project (mean): %f", mean(pullreqs$cnt)))
 print(sprintf("Pullreqs per project (95 perc): %d", quantile(pullreqs$cnt, 0.95)))
@@ -112,7 +112,7 @@ merged_pullreqs <- fetch(res, n = -1)$cnt
 print(sprintf("Perc merged pull requests: %f", (merged_pullreqs/opened_pullreqs) * 100))
 
 # Pull reqs per month plot
-res <- dbSendQuery(con, "select concat(year(prh.created_at), '-', month(prh.created_at), '-', '1') as timestamp, count(*) as cnt from pull_requests pr, pull_request_history prh where prh.pull_request_id = pr.id and prh.action = 'opened' and prh.created_at < from_unixtime(1362009600) group by  month(prh.created_at), year(prh.created_at) order by prh.created_at")
+res <- dbSendQuery(con, "select concat(year(prh.created_at), '-', month(prh.created_at), '-', '1') as timestamp, count(*) as cnt from pull_requests pr, pull_request_history prh where prh.pull_request_id = pr.id and prh.action = 'opened' group by  month(prh.created_at), year(prh.created_at) order by prh.created_at")
 pullreqs_per_month <- fetch(res, n = -1)
 pullreqs_per_month$month <- as.POSIXct(pullreqs_per_month$timestamp, origin = "1970-01-01")
 
@@ -175,6 +175,8 @@ w <- wilcox.test(a$avg_after, a$avg_before, paired = TRUE)
 
 print(sprintf("Wilcox: mean devs before/after pullreqs: n = %d, V = %f, p < %f", nrow(a), w$statistic, w$p.value))
 print(sprintf("Cliff's delta on number of avg number of committers before/after pullreqs: %f", cliffs.d(a$avg_after, a$avg_before)))
+
+ranksum(a$avg_after, a$avg_before)
 
 # Drive-by commits pull reqs
 res <- dbSendQuery(con, "select count(*) as cnt from pull_requests pr, pull_request_history prh where prh.action = 'opened' and prh.pull_request_id = pr.id and year(prh.created_at) = 2012 and not exists (select c.author_id from commits c, project_commits pc where pc.project_id = pr.base_repo_id and c.created_at < prh.created_at and c.author_id = pr.user_id) and 1 = (select count(*) from pull_request_commits prc where prc.pull_request_id = pr.id)")
