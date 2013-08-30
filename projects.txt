@@ -82,9 +82,9 @@ essentials Essentials Java
 ets-berkeley-edu calcentral Ruby
 everzet capifony Ruby
 excilys gatling Scala
-exoplatform ecms Java
-exoplatform ks Java
-exoplatform platform Java
+#exoplatform ecms Java
+#exoplatform ks Java
+#exoplatform platform Java
 facebook tornado Python
 filipg amu_automata_2011 Java
 flavour eden Python
@@ -136,7 +136,7 @@ isenseDev rSENSE Ruby
 JakeWharton ActionBarSherlock Java
 Jasig cas Java
 jayway maven-android-plugin Java
-jbossas jboss-as Java
+#jbossas jboss-as Java
 #jboss-jdf jboss-as-quickstart Java
 #jboss-switchyard components Java
 #jboss-switchyard core Java
@@ -257,8 +257,8 @@ pentaho pentaho-platform Java
 pivotal pivotal_workstation Ruby
 plataformatec devise Ruby
 plataformatec simple_form Ruby
-playframework Play20 Scala
-playframework play Python
+playframework playframework Scala
+playframework play1 Java
 #powerbot RSBot-API Java
 praekelt vumi-go Python
 praekelt vumi Python

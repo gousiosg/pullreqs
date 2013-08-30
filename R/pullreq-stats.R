@@ -84,7 +84,7 @@ print(xtable(ctab,
              label="tab:crosscor"),
          type = "latex",
          size = "small",
-         file = "doc/icse/latex/cross-cor.tex")
+         file = paste(latex.location, "cross-cor.tex", "/"))
 
 ctab.m <- melt(ctab)
 p <- ggplot(ctab.m, aes(X1, X2, fill = value)) +

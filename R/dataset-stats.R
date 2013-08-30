@@ -9,6 +9,8 @@ library(RMySQL)
 library(ggplot2)
 library(reshape)
 library(sqldf)
+library(digest)
+library(xtable)
 
 print("Running database queries...")
 con <- dbConnect(dbDriver("MySQL"), user = mysql.user, password = mysql.passwd, 
@@ -241,8 +243,9 @@ nrow(subset(processed_comments, variable == "commenters" & value > 50))
 # Overall statistics table
 cache <- new.env()
 
-data <- data.frame(
-  description = c('Number of participants', 'Number of comments', 'Number of commits', 'Time to merge', 'Time to close'),
+overall.stats <- data.frame(
+  description = c('Number of participants', 'Number of comments',
+                  'Number of commits', 'Time to merge', 'Time to close'),
   query = c(
     "select (select count(distinct(prh.actor_id)) from pull_request_history prh where prh.pull_request_id = pr.id) +  (select count(distinct(ie.actor_id)) from issue_events ie, issues i where i.id = ie.issue_id and i.pull_request_id = pr.id) as participants from pull_requests pr group by id;",
     "select (select count(*)  from issue_comments ic, issues i where ic.issue_id = i.id and i.pull_request_id = pr.id) +  (select count(*) from pull_request_comments prc where prc.pull_request_id = pr.id ) as num_comments from pull_requests pr group by pr.id;",
@@ -253,7 +256,6 @@ data <- data.frame(
 )
 
 do.query <- function(con, cache, x) {
-  library(digest)
   print(x)
   md5 <- digest(x)
   if (is.null(cache[[md5]])) {
@@ -264,18 +266,34 @@ do.query <- function(con, cache, x) {
   cache[[md5]]
 }
 
-fix <- function(x) {
-  if(x < 0) {
-    0
-  } else {
-    x
-  }
-}
+fix <- function(x) { if(x < 0) {0} else {x}}
 
-data$min <- lapply(data$query, function(x){fix(min(do.query(con, cache, as.character(x))))})
-data$quant_5 <- lapply(data$query, function(x){fix(quantile(do.query(con, cache, as.character(x)),0.05))})
-data$quant_50 <- lapply(data$query, function(x){fix(quantile(do.query(con, cache, as.character(x)),0.50))})
-data$median <- lapply(data$query, function(x){fix(median(do.query(con, cache, as.character(x))))})
-data$mean <- lapply(data$query, function(x){fix(mean(do.query(con, cache, as.character(x))))})
-data$quant_95 <- lapply(data$query, function(x){fix(quantile(do.query(con, cache, as.character(x)),0.95))})
-data$max <- lapply(data$query, function(x){fix(max(do.query(con, cache, as.character(x))))})
+overall.stats$min <- lapply(overall.stats$query, function(x){fix(min(do.query(con, cache, as.character(x))))})
+overall.stats$quant_5 <- lapply(overall.stats$query, function(x){fix(quantile(do.query(con, cache, as.character(x)),0.05))})
+overall.stats$quant_50 <- lapply(overall.stats$query, function(x){fix(quantile(do.query(con, cache, as.character(x)),0.50))})
+overall.stats$median <- lapply(overall.stats$query, function(x){fix(median(do.query(con, cache, as.character(x))))})
+overall.stats$mean <- lapply(overall.stats$query, function(x){fix(mean(do.query(con, cache, as.character(x))))})
+overall.stats$quant_95 <- lapply(overall.stats$query, function(x){fix(quantile(do.query(con, cache, as.character(x)),0.95))})
+overall.stats$max <- lapply(overall.stats$query, function(x){fix(max(do.query(con, cache, as.character(x))))})
+overall.stats$histogram <- lapply(overall.stats$query, function(x){
+  data <- do.query(con, cache, as.character(x))
+  fname <- paste(plot.location, sprintf("hist-%s.pdf",digest(as.character(x))), sep="/")
+  par(mar=c(0,0,0,0))
+  plot.window(c(0,1),c(0,1),  xaxs='i', yaxs='i')
+  pdf(file = fname , width = 6, height = 3)
+  hist(log(data), probability = TRUE, col = "red", border = "white",
+       breaks = 10, xlab = "", ylab = "", axes = F, main = NULL)
+  dev.off()
+  sprintf("\\includegraphics[scale = 0.1, clip = true, trim= 50px 50px 50px 60px]{hist-%s.pdf}", digest(as.character(x)))
+})
+
+
+table <- xtable(overall.stats[,-c(2)], label="tab.overall.stats", 
+       caption="Statics for pull requests across all projects in the GHTorrent dataset (1.8M). Historgrams are in log scale.",
+       align = c("r","r", rep("c", 8)))
+print.xtable(table, file = paste(latex.location, "overall-stats.tex", sep = "/"),
+             floating.environment = "table*",
+             include.rownames = F, size = c(-1),
+             sanitize.text.function = function(str)gsub("_","\\_",str,fixed=TRUE))
+
+
