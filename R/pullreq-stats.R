@@ -105,6 +105,22 @@ p <- ggplot(merged.perc, aes(x = order, y = ratio_merged)) +
   ylab("Percentage") +
   xlab("Project")
 store.pdf(p, plot.location, 'perc-merged.pdf')
+
+# This is to check very low scores in merge % is due to the lack 
+# of data as a result of the project not having an activated issue tracker
+# check.has.bugs(df, credentials = "username:password") {
+#   has.bugs <- function(x) {
+#     library(RCurl)
+#     printf("Checking %s", x)
+#     h = basicHeaderGatherer()
+#     getURI(sprintf("https://api.github.com/repos/%s/issues", x),
+#            userpwd=credentials,  httpauth = 1L, headerfunction = h$update)
+#     h$value()['status'] == 200
+#   }
+#   df$has_bugs <- lapply(df$project_name, has_bugs)
+# }
+#
+# check.has.bugs(merged.perc)
 rm(a)
 
 # Time to merge pull request box plots histogram
