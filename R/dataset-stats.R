@@ -184,14 +184,24 @@ drive_by_pr <- fetch(res, n = -1)$cnt
 print(sprintf("Perc drive by pull requests: %f", (drive_by_pr/opened_pullreqs) * 100))
 print(sprintf("Perc one pull req repos: %f", (drive_by_pr/forked_repos) * 100))    
 
-      
+# Load CSV files
+dfs <- load.all(dir=data.file.location, pattern="*.csv$")
+dfs <- addcol.merged(dfs)
+all <- merge.dataframes(dfs)
+
 # Discussion comments from internal vs externals
-# project_ids: 1334,847,312,853,6026,2812,2093,354,24761,6815,50918,1707,5591,4627,15966,67874,14363,20985,56538,13191,10720,6468,15870,3083,3189,340,310,10045,4135,8248,1953978,1648,1372,663,25334,16462,6075,5461,171070,9615,8612,12885,21603,4739,489,27502,53383,21289,12193,6570,4114,9259,146460,18571,5162,1337,1107,65399,853,7511,411,5562,608,3510,3671,23509,4237,47738,934,17042,18358,70480,23623,24397,10083,10972,15870,68610,5245,85313,17827,15385,4563,21289,2719,14915,7148,66412,6974,1182,170689
+project_ids <- lapply(unique(all$project_name), function(x) {
+  printf("Aquiring id for project %s", x)
+  details <- strsplit(as.character(x),'/')[[1]]
+  res <- dbSendQuery(con, sprintf("select p.id from projects p, users u where u.id = p.owner_id and u.login = '%s' and p.name = '%s'", details[1], details[2]))
+  fetch(res, n = -1)$id
+})
+
 comments <- data.frame()
-for (pid in c(1334,847,312,853,6026,2812,2093,354,24761,6815,50918,1707,5591,4627,15966,67874,14363,20985,56538,13191,10720,6468,15870,3083,3189,340,310,10045,4135,8248,1953978,1648,1372,663,25334,16462,6075,5461,171070,9615,8612,12885,21603,4739,489,27502,53383,21289,12193,6570,4114,9259,146460,18571,5162,1337,1107,65399,853,7511,411,5562,608,3510,3671,23509,4237,47738,934,17042,18358,70480,23623,24397,10083,10972,15870,68610,5245,85313,17827,15385,4563,21289,2719,14915,7148,66412,6974,1182,170689)) {
+for (pid in project_ids) {
+  printf("Running for project %d ", pid)
   res <- dbSendQuery(con, sprintf("select a.p_id, concat(u.login, '/', p.name) as project_name, (select count(pm.user_id) from project_members pm where pm.user_id = a.user_id and pm.repo_id = a.p_id) as is_member,  count(distinct user_id) as num_users, sum(a.cnt) as num_comments  from (  (select pr.base_repo_id as p_id, ic.user_id as user_id, count(ic.comment_id) as cnt   from projects p join pull_requests pr on p.id = pr.base_repo_id left outer join issues i on pr.pullreq_id = i.issue_id left outer join issue_comments ic on i.id = ic.issue_id where p.forked_from is null and p.id = %d and pr.base_repo_id = i.repo_id group by pr.base_repo_id, ic.user_id)  union (select pr.base_repo_id as p_id, prc.user_id as user_id, count(prc.comment_id) as cnt    from projects p join pull_requests pr on p.id = pr.base_repo_id left outer join pull_request_comments prc on prc.pull_request_id = pr.id where p.forked_from is null and p.id = %d group by pr.base_repo_id, prc.user_id) ) as a, users u, projects p where p.owner_id = u.id and p.id = a.p_id group by a.p_id, is_member", pid, pid))
   d <- fetch(res, n = -1)
-  print(sprintf("Running for project %d %d results", pid, nrow(d)))
   comments <- rbind(comments, d)
   comments
 }
