@@ -225,16 +225,57 @@ p <- ggplot(processed_comments, aes(x = foo, y = value, fill = variable)) +
         
 store.pdf(p, plot.location, "perc-external-commenters-comments.pdf")
 
-dfs <- load.all(dir=data.file.location, pattern="*.csv$")
-dfs <- addcol.merged(dfs)
-all <- merge.dataframes(dfs)
+# Various statistics on comments from community
 mean_external_contribs <- aggregate(perc_external_contribs ~ project_name, all, mean)
 joined <- merge(mean_external_contribs, processed_comments, by = "project_name")
 a <- subset(joined, variable == "commenters", perc_external_contribs)
 b <- subset(joined, variable == "comments", value)
 cor.test(a$perc_external_contribs, b$value, method="spearman")
-      
+
 b <- subset(joined, variable == "commenters", value)
 cor.test(a$perc_external_contribs, b$value, method="spearman")
-      
+
 nrow(subset(processed_comments, variable == "commenters" & value > 50))
+
+###
+# Overall statistics table
+cache <- new.env()
+
+data <- data.frame(
+  description = c('Number of participants', 'Number of comments', 'Number of commits', 'Time to merge', 'Time to close'),
+  query = c(
+    "select (select count(distinct(prh.actor_id)) from pull_request_history prh where prh.pull_request_id = pr.id) +  (select count(distinct(ie.actor_id)) from issue_events ie, issues i where i.id = ie.issue_id and i.pull_request_id = pr.id) as participants from pull_requests pr group by id;",
+    "select (select count(*)  from issue_comments ic, issues i where ic.issue_id = i.id and i.pull_request_id = pr.id) +  (select count(*) from pull_request_comments prc where prc.pull_request_id = pr.id ) as num_comments from pull_requests pr group by pr.id;",
+    "select count(*) as number_of_commits from pull_request_commits group by pull_request_id;",
+    "select timestampdiff(minute, a.created_at, b.created_at) as mergetime_minutes from pull_request_history a, pull_request_history b where a.action = 'opened' and b.action ='merged' and a.pull_request_id = b.pull_request_id group by a.pull_request_id;",
+    "select timestampdiff(minute, a.created_at, b.created_at) as lifetime_minutes from pull_request_history a, pull_request_history b where a.action = 'opened' and b.action ='closed'  and not exists (select * from pull_request_history c where c.pull_request_id = a.pull_request_id and c.action = 'merged') and a.pull_request_id = b.pull_request_id group by a.pull_request_id;"
+  )
+)
+
+do.query <- function(con, cache, x) {
+  library(digest)
+  print(x)
+  md5 <- digest(x)
+  if (is.null(cache[[md5]])) {
+    res <- dbSendQuery(con, x)
+    r <- fetch(res, n = -1)[[1]]
+    cache[[md5]] <- r
+  }
+  cache[[md5]]
+}
+
+fix <- function(x) {
+  if(x < 0) {
+    0
+  } else {
+    x
+  }
+}
+
+data$min <- lapply(data$query, function(x){fix(min(do.query(con, cache, as.character(x))))})
+data$quant_5 <- lapply(data$query, function(x){fix(quantile(do.query(con, cache, as.character(x)),0.05))})
+data$quant_50 <- lapply(data$query, function(x){fix(quantile(do.query(con, cache, as.character(x)),0.50))})
+data$median <- lapply(data$query, function(x){fix(median(do.query(con, cache, as.character(x))))})
+data$mean <- lapply(data$query, function(x){fix(mean(do.query(con, cache, as.character(x))))})
+data$quant_95 <- lapply(data$query, function(x){fix(quantile(do.query(con, cache, as.character(x)),0.95))})
+data$max <- lapply(data$query, function(x){fix(max(do.query(con, cache, as.character(x))))})
