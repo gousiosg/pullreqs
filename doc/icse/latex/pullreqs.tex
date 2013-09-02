@@ -87,7 +87,7 @@ development. As more developers appreciate isolated
 development and branching~\cite{Bird12}, more projects, both closed source and,
 especially, open source, are being migrated to code hosting sites such as Github
 and Bitbucket with support for pull-based development~\cite{Barr12}. A unique
-characteristic of such sites is that they allow any user to fork any public
+characteristic of such sites is that they allow any user to clone any public
 repository. The clone creates a public project that belongs to the user that
 cloned it, so the user can modify the repository without being part of the
 development team. What is more important is that they automate the selective
@@ -103,20 +103,20 @@ distributed among a core team which is responsible to perform the merges and a
 peripheral team that submits, often occasional, changes to be considered for
 merging.
 
-Previous work has identified the processes of collaboration in
-distributed development through patch submission and acceptance~\cite{MOCKU02,
-Bird07, Weiss08}. There are many similarities to the way pull requests work; for
-example, identical work team structures emerge, 
-while pull requests go through a similar assessment
-process. What pull requests offer in addition is process automation and
-centralization of information. With pull requests, the code does not have to
-leave the revision control system, and therefore it can be versioned across
-repositories, while authorship information is effortlessly maintained.
-Communication is context-specific, being rooted on a single pull request.
-Moreover, the review mechanism that Github incorporates has the additional
-effect of improving awareness~\cite{Dabbi12}; core developers can access in an
-efficient way all information that relates to a pull request and solicit the
-opinions of the community (``crowd-source'') about the merging decision.
+Previous work has identified the processes of collaboration in distributed
+development through patch submission and acceptance~\cite{MOCKU02, Bird07,
+Weiss08}. There are many similarities to the way pull requests work; for
+example, identical work team structures emerge, while pull requests go through a
+similar assessment process. What pull requests offer in addition is process
+automation and centralization of information. With pull requests, the code does
+not have to leave the revision control system, and therefore it can be versioned
+across repositories, while authorship information is effortlessly maintained.
+Communication about the change is context-specific, being rooted on a single
+pull request.  Moreover, the review mechanism that Github incorporates has the
+additional effect of improving awareness~\cite{Dabbi12}; core developers can
+access in an efficient way all information that relates to a pull request and
+solicit the opinions of the community (``crowd-source'') about the merging
+decision.
 
 A distributed development workflow is effective if
 pull requests are eventually accepted, and it is efficient if the time this
@@ -158,11 +158,11 @@ pull request triaging.
 
 Since their appearance in 2001, distributed
 version control systems ({\sc dvcs}), notably Git, have revolutionized the way
-distributed software development is carried out. Driven by pragmatic needs, {\sc
-dvcs}s were designed from scratch to work as advanced patch management
+distributed software development is carried out. Driven by pragmatic needs,
+most {\sc dvcs}s were designed from scratch to work as advanced patch management
 systems, rather than versioned file systems, the then dominant version control
 paradigm. In most {\sc dvcs}s, a file is an ordered set of changes, the serial
-application of which leads to the current file state. The changesets can
+application of which leads to the current state. The change sets can
 originate from a local filesystem or a remote host; tools facilitate the
 acquisition and application of changesets on a local mirror. The distributed
 nature of {\sc dvcs} enables a pull-based development model, where changes are
@@ -204,6 +204,8 @@ there is nothing that forbids their use in the shared repository approach. An
 overview of the pull request process can be seen in Figure~\ref{fig:pullreq-process}.
 
 \subsection{Pull requests on Github}
+
+\input{overall-stats.tex}
 
 Github supports all types of distributed development outlined above; however,
 pull requests receive special treatment. The site is tuned to allow easy forking

@@ -114,20 +114,26 @@ merged_pullreqs <- fetch(res, n = -1)$cnt
 print(sprintf("Perc merged pull requests: %f", (merged_pullreqs/opened_pullreqs) * 100))
 
 # Pull reqs per month plot
-res <- dbSendQuery(con, "select concat(year(prh.created_at), '-', month(prh.created_at), '-', '1') as timestamp, count(*) as cnt from pull_requests pr, pull_request_history prh where prh.pull_request_id = pr.id and prh.action = 'opened' group by  month(prh.created_at), year(prh.created_at) order by prh.created_at")
+res <- dbSendQuery(con, "select last_day(prh.created_at) as cdate, count(*) as pull_reqs from pull_requests pr, pull_request_history prh where prh.pull_request_id = pr.id and prh.action = 'opened' group by  month(prh.created_at), year(prh.created_at) order by prh.created_at")
 pullreqs_per_month <- fetch(res, n = -1)
-pullreqs_per_month$month <- as.POSIXct(pullreqs_per_month$timestamp, origin = "1970-01-01")
+
+res <- dbSendQuery(con, "select cdate, count(repo) as repos from (select last_day(prh.created_at) as cdate, pr.base_repo_id as repo from pull_requests pr, pull_request_history prh where pr.id = prh.pull_request_id and prh.action = 'opened' group by pr.base_repo_id, month(prh.created_at), year(prh.created_at)  order by cdate) as a group by cdate")
+repos_with_pullreqs_per_month <- fetch(res, n = -1)
+
+pullreqs_per_month <- merge(pullreqs_per_month, repos_with_pullreqs_per_month, by = "cdate")
+
+pullreqs_per_month$month <- as.POSIXct(pullreqs_per_month$cdate, origin = "1970-01-01")
+pullreqs_per_month$ratio <- pullreqs_per_month$pull_reqs / pullreqs_per_month$repos
 
 store.pdf(ggplot(pullreqs_per_month, aes(x = month)) + 
   scale_x_datetime() + 
-  geom_line(aes(y = cnt, colour = "1")) +
-  stat_smooth(aes(y = cnt, color = "2"), method = "loess", formula = y ~ x^2, size = 1, alpha = 0) +
+  geom_line(aes(y = ratio, colour = "1")) +
+  stat_smooth(aes(y = ratio, color = "2"), method = "loess", formula = y ~ x^2, size = 1, alpha = 0) +
   xlab("Date") + 
-  ylab("Number of pull requests per month")+
+  ylab("Number of pull requests per repo per month")+
   scale_colour_manual(values=c("red", "blue"), labels = c("actual", "trend")) +
   theme(legend.title=element_blank()), plot.location,"num-pullreqs-month.pdf")
   
-
 # Correlation between pull requests and watchers
 have.pr = subset(projectstats, pull_requests >0 & watchers > 0)
 cor_pr_watch <- cor.test(have.pr$pull_requests, have.pr$watchers, method="kendall")
@@ -245,10 +251,11 @@ cache <- new.env()
 
 overall.stats <- data.frame(
   description = c('Number of participants', 'Number of comments',
-                  'Number of commits', 'Time to merge', 'Time to close'),
+                  'Number of commits', 'Time to merge (min)', 
+                  'Time to close (min)'),
   query = c(
     "select (select count(distinct(prh.actor_id)) from pull_request_history prh where prh.pull_request_id = pr.id) +  (select count(distinct(ie.actor_id)) from issue_events ie, issues i where i.id = ie.issue_id and i.pull_request_id = pr.id) as participants from pull_requests pr group by id;",
-    "select (select count(*)  from issue_comments ic, issues i where ic.issue_id = i.id and i.pull_request_id = pr.id) +  (select count(*) from pull_request_comments prc where prc.pull_request_id = pr.id ) as num_comments from pull_requests pr group by pr.id;",
+    "select (select count(*) from issue_comments ic, issues i where ic.issue_id = i.id and i.pull_request_id = pr.id) +  (select count(*) from pull_request_comments prc where prc.pull_request_id = pr.id ) as num_comments from pull_requests pr group by pr.id;",
     "select count(*) as number_of_commits from pull_request_commits group by pull_request_id;",
     "select timestampdiff(minute, a.created_at, b.created_at) as mergetime_minutes from pull_request_history a, pull_request_history b where a.action = 'opened' and b.action ='merged' and a.pull_request_id = b.pull_request_id group by a.pull_request_id;",
     "select timestampdiff(minute, a.created_at, b.created_at) as lifetime_minutes from pull_request_history a, pull_request_history b where a.action = 'opened' and b.action ='closed'  and not exists (select * from pull_request_history c where c.pull_request_id = a.pull_request_id and c.action = 'merged') and a.pull_request_id = b.pull_request_id group by a.pull_request_id;"
@@ -270,7 +277,6 @@ fix <- function(x) { if(x < 0) {0} else {x}}
 
 overall.stats$min <- lapply(overall.stats$query, function(x){fix(min(do.query(con, cache, as.character(x))))})
 overall.stats$quant_5 <- lapply(overall.stats$query, function(x){fix(quantile(do.query(con, cache, as.character(x)),0.05))})
-overall.stats$quant_50 <- lapply(overall.stats$query, function(x){fix(quantile(do.query(con, cache, as.character(x)),0.50))})
 overall.stats$median <- lapply(overall.stats$query, function(x){fix(median(do.query(con, cache, as.character(x))))})
 overall.stats$mean <- lapply(overall.stats$query, function(x){fix(mean(do.query(con, cache, as.character(x))))})
 overall.stats$quant_95 <- lapply(overall.stats$query, function(x){fix(quantile(do.query(con, cache, as.character(x)),0.95))})
@@ -284,16 +290,15 @@ overall.stats$histogram <- lapply(overall.stats$query, function(x){
   hist(log(data), probability = TRUE, col = "red", border = "white",
        breaks = 10, xlab = "", ylab = "", axes = F, main = NULL)
   dev.off()
-  sprintf("\\includegraphics[scale = 0.1, clip = true, trim= 50px 50px 50px 60px]{hist-%s.pdf}", digest(as.character(x)))
+  sprintf("\\includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-%s.pdf}", digest(as.character(x)))
 })
 
 
 table <- xtable(overall.stats[,-c(2)], label="tab.overall.stats", 
-       caption="Statics for pull requests across all projects in the GHTorrent dataset (1.8M). Historgrams are in log scale.",
-       align = c("r","r", rep("c", 8)))
+       caption="Descriptive statisticcs for pull requests across all projects in the GHTorrent dataset (1.8M). Historgrams are in log scale.",
+       align = c("r","r", rep("c", 7)))
 print.xtable(table, file = paste(latex.location, "overall-stats.tex", sep = "/"),
              floating.environment = "table*",
              include.rownames = F, size = c(-1),
              sanitize.text.function = function(str)gsub("_","\\_",str,fixed=TRUE))
-
 
