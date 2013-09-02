@@ -93,29 +93,29 @@ cloned it, so the user can modify the repository without being part of the
 development team. What is more important is that they automate the selective
 contribution of commits from the clone to the source through pull requests. 
 
-Pull requests as a distributed development model
-in general, and as implemented by Github in particular,
-form a new method for collaborating on distributed software development. The
-novelty lays on the decoupling of the development effort from the decision to
-incorporate the results of the development in the code base. By separating the
-concerns of building artifacts and incorporating changes, work is cleanly
-distributed among a core team which is responsible to perform the merges and a
-peripheral team that submits, often occasional, changes to be considered for
-merging.
+Pull requests as a distributed development model in general, and as implemented
+by Github in particular, form a new method for collaborating on distributed
+software development. The novelty lays on the decoupling of the development
+effort from the decision to incorporate the results of the development in the
+code base. By separating the concerns of building artifacts and integrating
+changes, work is cleanly distributed a peripheral team that submits, often
+occasional, changes to be considered for merging and a core team that oversees
+the merge process, providing feedback, conducting tests, requesting changes, and
+finally accepting the pull request.
 
 Previous work has identified the processes of collaboration in distributed
 development through patch submission and acceptance~\cite{MOCKU02, Bird07,
 Weiss08}. There are many similarities to the way pull requests work; for
-example, identical work team structures emerge, while pull requests go through a
-similar assessment process. What pull requests offer in addition is process
-automation and centralization of information. With pull requests, the code does
-not have to leave the revision control system, and therefore it can be versioned
-across repositories, while authorship information is effortlessly maintained.
-Communication about the change is context-specific, being rooted on a single
-pull request.  Moreover, the review mechanism that Github incorporates has the
-additional effect of improving awareness~\cite{Dabbi12}; core developers can
-access in an efficient way all information that relates to a pull request and
-solicit the opinions of the community (``crowd-source'') about the merging
+example, identical work team structures emerge, since typically pull requests go
+through a similar assessment process. What pull requests offer in addition is
+process automation and centralization of information. With pull requests, the
+code does not have to leave the revision control system, and therefore it can be
+versioned across repositories, while authorship information is effortlessly
+maintained. Communication about the change is context-specific, being rooted on
+a single pull request. Moreover, the review mechanism that Github incorporates
+has the additional effect of improving awareness~\cite{Dabbi12}; core developers
+can access in an efficient way all information that relates to a pull request
+and solicit the opinions of the community (``crowd-source'') about the merging
 decision.
 
 A distributed development workflow is effective if
@@ -154,7 +154,6 @@ it opens new opportunities for research, such as building automated tools for
 pull request triaging.
 
 \section{Background} \label{sec:bg}
-\subsection{Pull-based development}
 
 Since their appearance in 2001, distributed
 version control systems ({\sc dvcs}), notably Git, have revolutionized the way
@@ -169,19 +168,21 @@ nature of {\sc dvcs} enables a pull-based development model, where changes are
 offered to a project repository through a network of project forks; it is up to
 the repository owner to accept or reject the incoming pull requests.
 
-The development models afforded by {\sc dvcs}s are a superset of 
-those in centralized version control environments~\cite{Shiha12,Bird09}. 
-With respect to receiving and processing external contributions,
-the following strategies can be employed:
+The purpose of distributed development is to enable a potential
+\emph{contributor} to submit a set of changes to a software project managed by a
+\emph{core team}. The development models afforded by {\sc dvcs}s are a superset
+of those in centralized version control environments~\cite{Shiha12,Bird09}.
+With respect to receiving and processing external contributions, the following
+strategies can be employed with {\sc dvc}s:
 
 \textbf{Shared resporitory}
-    Developers share a common repository, with read and
-    write permissions. To work, they clone it locally, modify its contents,
-    potentially introducing new branches, and push their changes back to the
-    central one. To cope with multiple versions and multiple developers, larger
-    projects usually adopt a {\em branching model} i.e., an organized way to
-    accept and test contributions before those are merged to the main
-    development branch~\cite{Bird12}. 
+    The core team shares the project's repository, with read and write
+    permissions, with the contributors. To work, contributors clone it locally,
+    modify its contents, potentially introducing new branches, and push their
+    changes back to the central one. To cope with multiple versions and multiple
+    developers, larger projects usually adopt a {\em branching model} i.e., an
+    organized way to accept and test contributions before those are merged to
+    the main development branch~\cite{Bird12}. 
     
     %While the exact details depend on the
     %project requirements, usually branching models include feature branches,
@@ -190,18 +191,21 @@ the following strategies can be employed:
     %on a feature branch its contents are merged appropriately to release
     %branches and to the project master branch.
 
-\textbf{Pull requests} The project's main repository is not shared among
-developers; instead, developers clone (``fork'') the repository and make their
-changes independent of each other. When a set of changes is ready to be
-submitted to the main repository, they create a \emph{pull request}, which
-specifies a local branch and a list of commits to be merged with a branch in the
-main repository. The main repository owner is responsible to inspect the
-changes and pull them to the project's master branch. If changes are considered
-unsatisfactory, more changes may be requested; in that case, developers need to
-update their pull requests with more commits. Furthermore, as
-pull requests only specify branches from which certain commits can be pulled,
-there is nothing that forbids their use in the shared repository approach. An
-overview of the pull request process can be seen in Figure~\ref{fig:pullreq-process}.
+\textbf{Pull requests} 
+
+    The project's main repository is not shared among potential contributors;
+    instead, contributors \emph{fork} (clone) the repository and make their
+    changes independent of each other. When a set of changes is ready to be
+    submitted to the main repository, they create a \emph{pull request}, which
+    specifies a local branch to be merged with a branch in the main repository.
+    A member of the project's core team is then responsible to inspect the
+    changes and pull them to the project's master branch. If changes are
+    considered unsatisfactory, more changes may be requested; in that case,
+    contributors need to update their local branches with new commits.
+    Furthermore, as pull requests only specify branches from which certain
+    commits can be pulled, there is nothing that forbids their use in the shared
+    repository approach (\emph{cross-branch pull requests}). An overview of the
+    pull request process can be seen in Figure~\ref{fig:pullreq-process}.
 
 \subsection{Pull requests on Github}
 
@@ -209,31 +213,44 @@ overview of the pull request process can be seen in Figure~\ref{fig:pullreq-proc
 
 Github supports all types of distributed development outlined above; however,
 pull requests receive special treatment. The site is tuned to allow easy forking
-of projects by external users, while automating the generation of pull
-requests through automatic comparison of project branches. Similarly to
-Git-based pull requests, a Github pull request contains a list of commits
-to be merged. The list of commits is automatically updated when newer commits have been added to the forked repository after the pull request
-has been created. Each Github pull request has an attached implicit state
-machine (see Figure~\ref{fig:state}), which is automatically updated by
-Github as users manipulate the pull request.
+of projects by contributors, while automating the generation of pull requests
+through automatic comparison of project branches. Similarly to Git-based pull
+requests, a Github pull request contains a branch from which the main repository
+owner should pull commits from. An example pull request on Github can be seen 
+in Figure~\ref{fig:pullreq-scr}.
 
 \begin{figure}[t]
   \centering
 \subfigure[The pull request process.]{
-\includegraphics[scale=0.7]{pullreq}
+\includegraphics[scale=0.5]{pullreq}
 \label{fig:pullreq-process}
 }
-\subfigure[The different states of a pull request on Github.]{
-    \includegraphics[scale=0.5]{pr-state-machine.pdf}  
-  \label{fig:state}
+%\subfigure[The different states of a pull request.]{
+%    \includegraphics[scale=0.5]{pr-state-machine.pdf}  
+%  \label{fig:state}
+%}
+\subfigure[An example Github cross-branch pull request (edited for space). The
+participants first interact in a code review, the result of which is the update
+of the pull request through a commit. A second reviewer then approves the pull
+request, which is merged by the first author.]{
+   \includegraphics[scale=0.23]{pullreq-scr.png}
+   \label{fig:pullreq-scr}
 }
-\caption{Processing pull requests}
+\caption{Processing pull requests on Github}
 \end{figure}
 
-By default, pull requests are submitted to the base repository for review.
+By default, pull requests are submitted to the base repository for inspection.
+When 
+
+The list of commits is automatically updated when newer
+commits have been added to the forked repository after the pull request has been
+created.
+
+
+
 As a result of the discussion, pull requests can be updated with new commits or
 be closed as redundant or uninteresting. To merge a pull request, a user must
-be part of the main project team. The versatility of the Git tool suite enables
+be part of the main project team. The versatility of  Git suite enables
 pull requests to be merged in various ways, presented below sorted by
 the amount of preservation of the original source code properties:
 
@@ -244,9 +261,9 @@ the amount of preservation of the original source code properties:
     request and record the merge event. All authorship and history information
     is maintained in the merged commits.
 
-    \textbf{Using Git merge.} When a pull request cannot be applied cleanly or when
-    project-related policies do not permit automatic merging, a pull request
-    can be merged using plain Git utilities, using the following
+\textbf{Using Git merge.} When a pull request cannot be applied cleanly or
+    when project-related policies do not permit automatic merging, a pull
+    request can be merged using plain Git utilities, using the following
     techniques: 
 
     \begin{itemize}
@@ -272,19 +289,14 @@ the amount of preservation of the original source code properties:
     this case, the author of the commit can be different from the person that
     applied the commit.
 
-%  \item [Committing the patch] 
-    \textbf{Committing the patch.}
-    The merger creates a
-    textual difference between the upstream and the pull request branch, which
-    then applies to the upstream branch. Both history and authorship information
-    are lost.
+\textbf{Committing the patch.} 
+  The merger creates a textual difference between the upstream and the pull
+  request branch, which then applies to the upstream branch. Both history and
+  authorship information are lost.
 
-%\end{description}
+
 
 \section{Experimental Design}
-
-In this section, we present the research approach and datasets we use to 
-answer the research questions.
 
 To answer our research questions, we distinguish two phases.
 The first phase primarily aims at answering RQ1, addressing the use of the pull-based development model among users
@@ -315,11 +327,12 @@ have been collected.
 
 \subsection{Phase I: Pull Request Usage}
 
-To asses the popularity of the pull-based development model (RQ1), we collect descriptive statistics on the use of pull request in Github. 
-In particular, we investigate such questions as how many projects actually make use of
-pull requests, how many of the projects are original repositories
-(versus, e.g., clones), and what the relation is to Github's issue
-tracking facilities. The outcomes are in Section~\ref{sec:github}.
+To asses the popularity of the pull-based development model (RQ1), we provide
+and analyze descriptive statistics on the use of pull request in Github. In
+particular, we investigate such questions as how many projects actually make use
+of pull requests, how many of the projects are original repositories (versus,
+e.g., clones), and what the relation is to Github's issue tracking facilities.
+The outcomes are in Section~\ref{sec:github}.
 
 \subsection{Phase II: Pull Request Acceptance}
 \label{sec:expprocess}
@@ -356,8 +369,7 @@ set of features with maximum predictive power
 extracted features, we perform a detailed statistical analysis of pull request
 characteristics (Section~\ref{sec:pullreqchar}).
 
-Using the identified features, we build prediction models, one per research
-question, which we use to train a set of classification algorithms to retrieve
+Using the identified features, we use machine learning to retrieve
 the dominant ones. Prior to running the classification algorithms, we labeled
 each pull request with a binary attribute; in the case of the \textsf{merge
 decision} classification task, the attribute signifies whether the pull request
@@ -375,9 +387,7 @@ the best classifier and apply a classifier-specific process to extract the
 feature importance. 
 
 To evaluate the classification performance, we used the Accuracy ({\sc acc}) and
-Area Under the receiver operating characteristic Curve ({\sc auc}) metrics. We
-chose those as opposed to the more popular Precision ({\sc prec}) and Recall
-({\sc rec}) ones, following advice in reference~\cite{Lessm08}. To select the
+Area Under the receiver operating characteristic Curve ({\sc auc}) metrics. To select the
 appropriate classification algorithm, we run a 10-fold random selection
 cross-validation and aggregate the mean values for each classification
 metric.\footnote{For the \texttt{randomforest} classifier, cross validation is
@@ -390,7 +400,12 @@ classifier with 90\% percent of the input and use it to predict the remaining
 across runs. We did not perform any additional tuning to the classification
 algorithms (Section~\ref{sec:accrej}).
 
-We used {\sc r} to implement and run the experiments.
+\subsection{Replication Information} 
+This study has been conducted using the {\sc ght}orrent
+dataset and custom-built Ruby and R tools. We share the tools, original data
+sources and extracted data files on the Github repository
+\texttt{gousiosg\-/\-pullreqs}. The execution of all tools is scripted and it is
+possible to run it in sequence automatically.
 
 \section{Descriptive statistics of pull request usage on Github}
 \label{sec:github}
@@ -592,14 +607,14 @@ in three categories:
 
   %\item[Project characteristics] 
   \textbf{Project characteristics.} These features quantify how receptive to pull
-  requests the project is.  If the project's process is open to external
+  requests the project is. If the project's process is open to external
   contributions, then we expect to see an increased ratio of external
   contributors over team members. The project's size may be a detrimental factor
   to the speed of processing a pull request, as its impact may be more difficult
   to assess. Also, incoming changes tend to cluster over time (the
   ``yesterday's weather'' change pattern~\cite{Girba04}), so it is natural to
   assume that pull requests affecting a part of the system that is under active
-  development will be more likely to merge.  Testing plays a role in speed of
+  development will be more likely to merge. Testing plays a role in speed of
   processing; according to~\cite{Pham13}, projects struggling with constant flux
   of contributors use testing, manual or preferably automated, a safety net to
   handle contributions from unknown developers.
@@ -999,7 +1014,7 @@ researchers found that the time to commit 50\% of the contributions to the main
 project repository ranges from a few hours~\cite{Rigby08} to less than 3
 days~\cite{Weiss08, Baysa12}. Our findings show that the majority (80\%) of
 pull requests are merged within 3 days, while a very significant number (30\%)
-are merged within one hour (independent of project size).  These numbers are significantly faster indicating
+are merged within one hour (independent of project size). These numbers are significantly faster indicating
 that pull requests are more efficient than traditional email-based patches.
 What's more important is that it is project-related factors that affect the
 turnover time, rather than characteristics of the pull request. This means that
@@ -1060,7 +1075,7 @@ developers to the core team. With pull requests, developers can contribute to
 any repository, without loss of authorship information. The changes that those
 contributions will get accepted are higher with pull requests; in our sample,
 and also across Github, more than 70\% of external contributions are merged
-(40\% in other studies~\cite{Rigby06, Weiss08}).  Specialized sites such as
+(40\% in other studies~\cite{Rigby06, Weiss08}). Specialized sites such as
 Ohloh and CoderWall track developer activity and help developers advertise their
 expertise. We believe that the democratization of the development effort will
 lead to a substantially stronger shared ecosystem; this remains to be
@@ -1147,16 +1162,6 @@ handling among projects with smaller core teams may be ironed out.
 The fact that we performed random selection cross-validation (instead
 of the more common sliding window version) and obtained very stable prediction
 results is, nevertheless, encouraging.
-
-\subsection{On Replication}
-During the execution of this study, we invested significant effort to make it
-replicable. This study has been conducted using the {\sc ght}orrent dataset and
-custom-built Ruby and R tools. We share the tools, original data sources and
-extracted data files on the Github repository
-\texttt{gousiosg/pullreqs}.\footnote{Note to reviewers: To be available online after acceptance} The
-execution of all tools is scripted and it is possible to run it in sequence
-automatically. We invite other researchers to use the tools and data to
-replicate the study or create new studies based on it.
 
 \section{Related Work}
 

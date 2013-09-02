@@ -63,8 +63,11 @@ $(PLOT_PDFS) : $(PLOT_SRC_FILES) $(PLOT_DATA_FILES)
 # Files for figures, in PDF format
 PDFFILES=$(foreach dir,$(PICS),$(wildcard $(dir)/*.pdf))
 
+# Files for figures, in PNG format
+PNGFILES=$(foreach dir,$(PICS),$(wildcard $(dir)/*.png))
+
 # Figure names in build dir
-PICTURES_SRC=$(EPSFILES_PDF) $(PLOT_PDFS)
+PICTURES_SRC=$(EPSFILES_PDF) $(PLOT_PDFS) $(PLOT_PNGS)
 PICTURES_DEST=$(addprefix $(BUILD)/, $(notdir $(PICTURES_SRC) $(PDFFILES) $(PNGFILES))) 
 
 # Implicit rules for various file conversions

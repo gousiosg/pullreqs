@@ -2,8 +2,10 @@
 copy "sequence.pic";
 
 # Object definition
-actor(I,"Integrator");
+actor(I,"Core Team");
 object(M, "Project");
+#object(PR, "Pull Request");
+placeholder_object(PR);
 object(F, "Fork");
 actor(C,"Contributor");
 step();
@@ -18,15 +20,24 @@ message(C,M,"fork");
 active(F);
 
 async();
-message(C,F,"commit(1)");
-message(C,F,"commit(2)");
-message(C,M,"pull_request(1,2)");
+message(C,F,"commit");
+message(C,F,"commit");
+#message(C,PR,"create");
+create_message(C,PR,"Pullreq")
+active(PR);
 
-message(I,M,"inspect_pr");
-message(I,F,"pull_commits(1,2)");
-return_message(F,M)
-message(I,M,"merge_pr");
+message(I,PR,"inspect");
+message(I,PR,"comment");
 
+message(C,F,"commit");
+comment(C,CO, down 0 right, wid 1 ht 0.7 "optional" "as a result" "of inspection");
+message(C,PR,"comment");
+#connect_to_comment(C,CO)
+
+message(I,PR,"merge");
+rmessage(F,M,"commits are pulled");
+message(I,PR,"close");
+complete(PR);
 
 step();
 complete(I);
