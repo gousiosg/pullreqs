@@ -155,18 +155,20 @@ pull request triaging.
 
 \section{Background} \label{sec:bg}
 
-Since their appearance in 2001, distributed
-version control systems ({\sc dvcs}), notably Git, have revolutionized the way
-distributed software development is carried out. Driven by pragmatic needs,
-most {\sc dvcs}s were designed from scratch to work as advanced patch management
-systems, rather than versioned file systems, the then dominant version control
-paradigm. In most {\sc dvcs}s, a file is an ordered set of changes, the serial
-application of which leads to the current state. The change sets can
-originate from a local filesystem or a remote host; tools facilitate the
-acquisition and application of changesets on a local mirror. The distributed
-nature of {\sc dvcs} enables a pull-based development model, where changes are
-offered to a project repository through a network of project forks; it is up to
-the repository owner to accept or reject the incoming pull requests.
+Since their appearance in 2001, distributed version control systems ({\sc
+dvcs}), notably Git~\cite{Chaco09}, have revolutionized the way distributed
+software development is carried out. Driven by pragmatic needs, most {\sc dvcs}s
+were designed from scratch to work as advanced patch management systems, rather
+than versioned file systems, the then dominant version control paradigm. In most
+{\sc dvcs}s, a file is an ordered set of changes, the serial application of
+which leads to the current state. Changes are stamped by globally unique
+identifiers, which can be used to track the commit's content across
+repositories. When integrating changes, the change sets can originate from a
+local filesystem or a remote host; tools facilitate the acquisition and
+application of change sets on a local mirror. The distributed nature of {\sc
+dvcs} enables a pull-based development model, where changes are offered to a
+project repository through a network of project forks; it is up to the
+repository owner to accept or reject the incoming pull requests.
 
 The purpose of distributed development is to enable a potential
 \emph{contributor} to submit a set of changes to a software project managed by a
@@ -191,21 +193,28 @@ strategies can be employed with {\sc dvc}s:
     %on a feature branch its contents are merged appropriately to release
     %branches and to the project master branch.
 
-\textbf{Pull requests} 
-
+\textbf{Pull requests}
     The project's main repository is not shared among potential contributors;
     instead, contributors \emph{fork} (clone) the repository and make their
     changes independent of each other. When a set of changes is ready to be
     submitted to the main repository, they create a \emph{pull request}, which
-    specifies a local branch to be merged with a branch in the main repository.
-    A member of the project's core team is then responsible to inspect the
-    changes and pull them to the project's master branch. If changes are
-    considered unsatisfactory, more changes may be requested; in that case,
+    specifies a local branch to be merged with a commit in a branch in the main
+    repository. A member of the project's core team is then responsible to
+    inspect the changes and pull them to the project's master branch. If changes
+    are considered unsatisfactory, more changes may be requested; in that case,
     contributors need to update their local branches with new commits.
     Furthermore, as pull requests only specify branches from which certain
     commits can be pulled, there is nothing that forbids their use in the shared
     repository approach (\emph{cross-branch pull requests}). An overview of the
     pull request process can be seen in Figure~\ref{fig:pullreq-process}.
+
+    \begin{figure}[t]
+      \begin{center}
+        \includegraphics[scale=0.5]{pullreq}
+      \end{center}
+      \caption{The pull request process.}
+      \label{fig:pullreq-process}
+    \end{figure}
 
 \subsection{Pull requests on Github}
 
@@ -214,45 +223,41 @@ strategies can be employed with {\sc dvc}s:
 Github supports all types of distributed development outlined above; however,
 pull requests receive special treatment. The site is tuned to allow easy forking
 of projects by contributors, while automating the generation of pull requests
-through automatic comparison of project branches. Similarly to Git-based pull
-requests, a Github pull request contains a branch from which the main repository
-owner should pull commits from. An example pull request on Github can be seen 
-in Figure~\ref{fig:pullreq-scr}.
+through automatic comparison of project branches.
+Github's pull request model follows the generic pattern presented above; in
+addition it provides tools for contextual discussions and in-line code reviews.
+An example pull request on Github can be seen in Figure~\ref{fig:pullreq-scr}.
 
 \begin{figure}[t]
   \centering
-\subfigure[The pull request process.]{
-\includegraphics[scale=0.5]{pullreq}
-\label{fig:pullreq-process}
-}
-%\subfigure[The different states of a pull request.]{
-%    \includegraphics[scale=0.5]{pr-state-machine.pdf}  
-%  \label{fig:state}
-%}
-\subfigure[An example Github cross-branch pull request (edited for space). The
-participants first interact in a code review, the result of which is the update
-of the pull request through a commit. A second reviewer then approves the pull
-request, which is merged by the first author.]{
    \includegraphics[scale=0.23]{pullreq-scr.png}
    \label{fig:pullreq-scr}
-}
-\caption{Processing pull requests on Github}
+
+   \caption{An example Github cross-branch pull request (edited for space). The
+   participants first interact in several code reviews, the result of which is
+   the update of the pull request. The second reviewer then approves the pull
+   request, which is merged by the author.}
+
 \end{figure}
 
-By default, pull requests are submitted to the base repository for inspection.
-When 
+A Github pull request contains a branch (local or in another repository) from
+which a core team member should pull commits from. Github automatically
+discovers the commits to be merged and presents them in the pull request. By
+default, pull requests are submitted to the base repository for inspection. The
+inspection is either a code review of the commits submitted with the pull
+request or a discussion about the features introduced by the pull request. Any
+Github user can participate to both types of inspection. As a result of the
+inspection, pull requests can be updated with new commits or be closed as
+redundant, uninteresting or duplicate. In case of an update, the pull request
+creator creates new commits in the forked repository, while Github automatically
+updates the displayed commits. The code inspection can then be repeated on the
+refreshed commits.
 
-The list of commits is automatically updated when newer
-commits have been added to the forked repository after the pull request has been
-created.
-
-
-
-As a result of the discussion, pull requests can be updated with new commits or
-be closed as redundant or uninteresting. To merge a pull request, a user must
-be part of the main project team. The versatility of  Git suite enables
-pull requests to be merged in various ways, presented below sorted by
-the amount of preservation of the original source code properties:
+When the inspection process finishes and the pull requests are deemed
+satisfactory, the pull request can be merged. A pull request can only be merged
+by core team members. The versatility of Git enables pull requests to be
+merged in various ways, presented below sorted by the amount of preservation of
+the original source code properties:
 
 \textbf{Through Github facilities.}
     Github can automatically verify whether a
@@ -273,12 +278,14 @@ the amount of preservation of the original source code properties:
         branch is merged to a local upstream branch, which is then pushed to
         the central repository or published for further pulling by other
         developers. Both history and authorship information are maintained,
-        but Github cannot detect the merge in order to record a merge event. 
+        but Github cannot detect the merge in order to record a merge
+        event~\cite[Chapter 3.2]{Chaco09}. 
 
       \item \emph{Cherry-picking:} Instead of merging all commits, the merger
         picks specific commits from the remote branch, which then applies to the
         upstream branch. The commit unique identifier changes, so exact history
-        cannot be maintained, but authorship is preserved.
+        cannot be maintained, but authorship is 
+        preserved~\cite[Chapter 5.3]{Chaco09}.
     
     \end{itemize}
 
@@ -287,14 +294,39 @@ the amount of preservation of the original source code properties:
     several consecutive commits are merged into a single one on the pull request
     branch, which can then be merged or cherry-picked to the upstream branch. In
     this case, the author of the commit can be different from the person that
-    applied the commit.
+    applied the commit~\cite[Chapter 6.4]{Chaco09}.
 
 \textbf{Committing the patch.} 
   The merger creates a textual difference between the upstream and the pull
-  request branch, which then applies to the upstream branch. Both history and
+  request branch, which she then applies to the upstream branch. Both history and
   authorship information are lost.
 
+As the project branches are updated in a distributed manner, the changes in a
+pull request may interfere with new changes in the project's main branch. Merging
+such a pull request will result to \emph{conflicts}. Github automatically
+detects conflicting pull requests and marks them as such. Conflicts can be
+resolved by either the contributor or a core team member; however, pull request
+etiquette dictates resolving the conflicts at the contributor's site. The
+conflict resolution process involves pulling new commits from the project's main
+repository, resolve the conflicts and upgrading the pull request with the a new
+merge commit.
 
+Issues and pull requests are dual on Github; for each pull request, an issue is
+opened automatically. Commits can also be attached to issues to convert them to
+pull requests (albeit with external tools). This duality enables project administrators to treat pull requests as work items, which can be managed using the same facilities used for issues. Moreover, issue discussions can include
+links to pull requests and vice versa, while specific message formats can be used
+in commit comments to automatically close issues or pull requests when commits
+are merged to the project's main branch.
+
+The open nature of Github's pull requests lends itself to a variety of usage
+patterns. Except from basic patch submission, pull requests can be used as a
+requirements discussion tool~\footnote{Github uses this internally:
+\url{https://github.com/blog/1124-how-we-use-pull-requests-to-build-github}} or
+as a progress tracking tool towards the fulfilment of a project milestone. In
+the first case, a pull request serves as a discussion board for soliciting the
+opinions of other developers while a new feature is being implemented. In the
+second case, pull requests are associated with milestones in Github's issue
+tracker.
 
 \section{Experimental Design}
 
@@ -448,15 +480,8 @@ watchers of a project and the number of pull requests it has received is $\rho =
 
 \begin{figure}[t]
   \centering
-\subfigure[Number of pull requests per month]{
 \includegraphics[scale=0.35]{num-pullreqs-month}
 \label{fig:pullreq-per-month}
-}
-\subfigure[Histogram of pull request frequencies for projects with more than
-  10 pull requests.]{
-  \includegraphics[scale=0.35]{pull-req-freq}
-  \label{fig:prfreq}
-}
 \caption{Pull requests on Github}
 \end{figure}
 
@@ -750,14 +775,13 @@ statistically significant ($n = 37,492, p < 0.001$).
 %\input{cross-cor.tex}
 
 \section{Pull Request Characteristics}
-(\label{sec:pullreqchar})
+\label{sec:pullreqchar}
 In this section, we analyze the extracted dataset and provide insights
 by relating the selected features to our two research questions.
 
 \textbf{Lifetime of pull requests.}
 After being submitted, pull requests can be in two states: merged or closed
-(and therefore not-merged).~\footnote{Intermediate states shown in
-Figure~\ref{fig:state} are added by the Github pull request handling process.} 
+(and therefore not-merged).
 In our dataset, most pull requests (mean: 74.5\%) are getting
 merged. This result is slightly higher than the overall we calculated for
 Github, but this can be attributed to the fact that the dataset was cleaned
@@ -1135,13 +1159,13 @@ To analyze the projects, we extracted data from i) the {\sc ght}orrent relationa
 database ii) The {\sc ght}orrent raw database iii) each project's Git repository.
 Differences in the data abstraction afforded by each data source may
 lead to different results in the following cases: 
-i) Intra-branch merges: {\sc ght}orrent currently does not record the source
+i) Cross-branch merges: {\sc ght}orrent currently does not record the source
     and target branch names that are affected by a pull request. Therefore, it
     is not possible to use the heuristics presented in
     Section~\ref{sec:expdata} to identify a merged branch, if the project
     does not use Github facilities to merge. In those cases, we
     report the pull request as non-merged. In our dataset, 810 (or 2\% in total)
-    pull requests are label as non-merged and intra-repository; some of them may
+    pull requests are label as non-merged and cross-branch; some of them may
     actually be merged.
 ii) Number of files and commits on touched files: The commits reported
     in a pull request also contain commits that merge branches, which the
