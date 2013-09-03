@@ -369,7 +369,10 @@ Extract data for pull requests for a given repository
       end
 
       # 4. Merg[ing|ed] or appl[ing|ed] as last comment of pull request
-      if last.match(/merg(?:ing|ed)/i) or last.match(/appl(?:ying|ed)/i)
+      if last.match(/merg(?:ing|ed)/i) or 
+        last.match(/appl(?:ying|ed)/i) or
+        last.match(/pull[?:ing|ed]/i) or
+        last.match(/push[?:ing|ed]/)
         return [true, :merged_in_comments]
       end
     end
