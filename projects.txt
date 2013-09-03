@@ -76,7 +76,8 @@ elaird ra1stats Python
 elasticsearch elasticsearch Java
 emesene emesene Python
 #enonic cms-ce Java
-enspiral loomio Ruby
+#enspiral loomio Ruby
+loomio loomio ruby
 errbit errbit Ruby
 essentials Essentials Java
 ets-berkeley-edu calcentral Ruby
