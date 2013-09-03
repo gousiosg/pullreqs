@@ -358,7 +358,10 @@ Extract data for pull requests for a given repository
       # 3. Last comment contains a commit number
       last.scan(/([0-9a-f]{6,40})/m).each do |x|
         # Commit is identified as merged
-        if last.match(/merg(?:ing|ed)/i) or last.match(/appl(?:ying|ed)/i)
+        if last.match(/merg(?:ing|ed)/i) or 
+          last.match(/appl(?:ying|ied)/i) or
+          last.match(/pull[?:ing|ed]/i) or
+          last.match(/push[?:ing|ed]/i)
           return [true, :commit_sha_in_comments]
         else
           # Commit appears in master branch
@@ -372,7 +375,7 @@ Extract data for pull requests for a given repository
       if last.match(/merg(?:ing|ed)/i) or 
         last.match(/appl(?:ying|ed)/i) or
         last.match(/pull[?:ing|ed]/i) or
-        last.match(/push[?:ing|ed]/)
+        last.match(/push[?:ing|ed]/i)
         return [true, :merged_in_comments]
       end
     end
