@@ -77,7 +77,7 @@ elasticsearch elasticsearch Java
 emesene emesene Python
 #enonic cms-ce Java
 #enspiral loomio Ruby
-loomio loomio ruby
+#loomio loomio ruby
 errbit errbit Ruby
 essentials Essentials Java
 ets-berkeley-edu calcentral Ruby
