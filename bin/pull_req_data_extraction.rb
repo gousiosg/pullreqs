@@ -361,7 +361,8 @@ Extract data for pull requests for a given repository
         if last.match(/merg(?:ing|ed)/i) or 
           last.match(/appl(?:ying|ied)/i) or
           last.match(/pull[?:ing|ed]/i) or
-          last.match(/push[?:ing|ed]/i)
+          last.match(/push[?:ing|ed]/i) or
+          last.match(/integrat[?:ing|ed]/i) 
           return [true, :commit_sha_in_comments]
         else
           # Commit appears in master branch
@@ -375,7 +376,8 @@ Extract data for pull requests for a given repository
       if last.match(/merg(?:ing|ed)/i) or 
         last.match(/appl(?:ying|ed)/i) or
         last.match(/pull[?:ing|ed]/i) or
-        last.match(/push[?:ing|ed]/i)
+        last.match(/push[?:ing|ed]/i) or
+        last.match(/integrat[?:ing|ed]/i) 
         return [true, :merged_in_comments]
       end
     end
