@@ -269,7 +269,7 @@ ProjectMeniscus meniscus Python
 projectwonder wonder Java
 pulp pulp Python
 pulp pulp_rpm Python
-puppetlabs facter Ruby
+#puppetlabs facter Ruby
 puppetlabs puppet-acceptance Ruby
 puppetlabs puppet-dashboard Ruby
 puppetlabs puppetlabs-apache Ruby
