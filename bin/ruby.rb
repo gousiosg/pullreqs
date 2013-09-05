@@ -51,7 +51,7 @@ module RubyData
   def test_file_filter
     lambda do |f|
       path = if f.class == Hash then f[:path] else f end
-      (path.include?('test/') ||
+      path.end_with?('.rb') && (path.include?('test/') ||
           path.include?('tests/') ||
           path.include?('spec/'))
     end
