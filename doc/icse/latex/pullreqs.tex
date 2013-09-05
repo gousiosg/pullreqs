@@ -6,6 +6,7 @@
 \usepackage{times}
 \usepackage{balance}
 \usepackage{xspace}
+\usepackage{xfrac}
 
 \begin{document}
 
@@ -118,40 +119,42 @@ can access in an efficient way all information that relates to a pull request
 and solicit the opinions of the community (``crowd-source'') about the merging
 decision.
 
-A distributed development workflow is effective if
-pull requests are eventually accepted, and it is efficient if the time this
-takes is as short as possible. Advancing our insight in the effectiveness and
-efficiency of pull request handling is of direct interest to contributors 
-and developers alike.
-The goal of this work is to investigate pull request usage and to analyze the
-factors that affect the efficiency of the pull-based software development model.
+A distributed development workflow is effective if pull requests are eventually
+accepted, and it is efficient if the time this takes is as short as possible.
+Advancing our insight in the effectiveness and efficiency of pull request
+handling is of direct interest to contributors and developers alike. The goal
+of this work is to investigate pull request usage and to analyze the factors
+that affect the efficiency of the pull-based software development model.
 Specifically, the questions we are trying to answer are: 
 
 \begin{description}
 
-  \item[RQ1] How popular is the pull-based development model among users of distributed version control systems?
+  \item[RQ1] What are the lifecycle characteristics of pull requests? 
+    
+  \item[RQ2] Why are some pull requests not merged?
 
-  \item[RQ2] What factors affect the decision to merge a pull request?
-
-  \item[RQ3] What factors affect the time required to process a pull request,
+  \item[RQ2] What factors affect the time required to process a pull request,
     until it is merged?
 
 \end{description}
 
+%%% GGG: Amend this at the end
 Our study is based on data from the Github collaborative development forge, as
-made available through the {\sc ght}orrent project~\cite{GS12}. Using it, we first
-explore the use of pull requests across all projects in Github. We then examine
-88 carefully selected Ruby, Java and Scala projects (in total, 37,492 pull requests), and
-identify, using machine learning tools, common factors that affect pull request
-lifetime and merging. The results show that pull request \emph{acceptance}
-can be predicted with high accuracy (> 90\%), while it is mostly dependent on
-on the parts of the system affected by the pull request. On the other hand, pull
-request \emph{merge time} can be predicted with reasonable accuracy (> 70\%),
-while it is mostly dependent on the ensuing discussion, the size of the project
-and its test coverage. Both results can be utilized by developers to
-submit better pull requests and project managers to prioritize pull requests, while
-it opens new opportunities for research, such as building automated tools for
-pull request triaging.
+made available through the {\sc ght}orrent project~\cite{GS12}. Using it, we
+first explore the use of pull requests across all projects in Github. We then
+examine 293 carefully selected Ruby, Python, Java and Scala projects (in total,
+168,028 pull requests), and identify, using  
+qualitative and quantitative analysis, the
+factors that affect pull request lifetime and merging. The results show that
+pull request acceptance is very high (> 80\%), while the majority of
+pull requests are merged within a day.
+
+On the other hand, pull request \emph{merge time} can be predicted with
+reasonable accuracy (> 70\%), while it is mostly dependent on the ensuing
+discussion, the size of the project and its test coverage. Both results can be
+utilized by developers to submit better pull requests and project managers to
+prioritize pull requests, while it opens new opportunities for research, such as
+building automated tools for pull request triaging.
 
 \section{Background} \label{sec:bg}
 
@@ -328,34 +331,23 @@ opinions of other developers while a new feature is being implemented. In the
 second case, pull requests are associated with milestones in Github's issue
 tracker.
 
-\section{Experimental Design}
+\section{Research Design}
 
-To answer our research questions, we distinguish two phases.
-The first phase primarily aims at answering RQ1, addressing the use of the pull-based development model among users
-of distributed version control systems. 
-In the second phase, we use the lessons learned from answering RQ1 to understand which factors affect the 
-decision and time required to merge.
+The main focus of this study is to understand and explain how pull requests are
+used by projects to enable collaboration. To answer our research questions, we
+use a sequential mixed-methods approach; mixed methods is a procedure for
+collecting, analyzing, and integrating both quantitative and qualitative data at
+some stage of the research process within a single study for the purpose of
+gaining a better understanding of the problem~\cite{Ivank06}. For all 
+research questions, we first explore the domain quantitatively,
+and then highlight specific interesting cases by exploring cases qualitatively.
 
-\subsection{Github Data}
+The first phase primarily aims at answering RQ1, addressing the use of the
+pull-based development model among users of distributed version control systems.
+In the second phase, we use the lessons learned from answering RQ1 to understand
+which factors affect the decision and time required to merge.
 
-For both phases, we use data obtained through the Github \api.
-In particular, we do this by means of the \ghtorrent
-dataset~\cite{GS12}.
-%
-\ghtorrent is  an off-line mirror of the data
-offered through the Github {\sc api}. The Github {\sc api} 
-data come in two forms; a streaming
-data flow lists events, such as forking or creating pull requests, happening on
-repositories in real time, while a static view contains the current state of
-entities. To obtain references to the roots of the static view entities, the
-{\sc ght}orrent project follows the event stream. From there, it applies a
-recursive dependency-based parsing approach to yield all data offered through
-the {\sc api}. The data is stored in unprocessed format, in a Mongo{\sc db}
-database, while metadata is extracted and stored in a My{\sc sql} relational
-database. The {\sc ght}orrent dataset covers a broad range of development
-activities on Github, including pull requests and issues. Up to February 2013,
-more than a million pull requests from more that a hundred thousand projects
-have been collected.
+
 
 \subsection{Phase I: Pull Request Usage}
 
@@ -438,6 +430,289 @@ dataset and custom-built Ruby and R tools. We share the tools, original data
 sources and extracted data files on the Github repository
 \texttt{gousiosg\-/\-pullreqs}. The execution of all tools is scripted and it is
 possible to run it in sequence automatically.
+
+\section{Data}
+
+\subsection{Github Data}
+
+For both phases, we use data obtained through the Github \api.
+In particular, we do this by means of the \ghtorrent
+dataset~\cite{GS12}.
+%
+\ghtorrent is  an off-line mirror of the data
+offered through the Github {\sc api}. The Github {\sc api} 
+data come in two forms; a streaming
+data flow lists events, such as forking or creating pull requests, happening on
+repositories in real time, while a static view contains the current state of
+entities. To obtain references to the roots of the static view entities, the
+{\sc ght}orrent project follows the event stream. From there, it applies a
+recursive dependency-based parsing approach to yield all data offered through
+the {\sc api}. The data is stored in unprocessed format, in a Mongo{\sc db}
+database, while metadata is extracted and stored in a My{\sc sql} relational
+database. The {\sc ght}orrent dataset covers a broad range of development
+activities on Github, including pull requests and issues. Up to August 2013,
+1.8 million pull requests from more that two hundred thousand projects
+have been collected.
+
+\subsection{Pull request project sample}
+
+\label{sec:expdata} 
+
+While an overview of pull request activity can be safely extracted from the \ghtorrent dataset, several limitations do not allow us to apply our detailed
+analysis across all projects. Specifically, projects worth analyzing have a
+history longer than 1$\sfrac{1}{2}$ years, the data collection period of \ghtorrent, and it is important to retrieve all information
+available during the project's life. To make the data collection and subsequent
+analysis practical we use a dataset consisting of all projects for which
+GHTorrent recorded more than 200 pull requests since January 2012. The
+following inclusion criteria were then specified:
+
+\begin{itemize}
+
+  \item Projects should include tests. To measure the effect of testing on pull
+    request acceptance, we could only use projects that include tests which we
+    could measure reliably. For that, we exploited the convention-based project
+    layout in the Ruby (Gem), Python, Java and Scala (both Maven) language
+    ecosystems, so our project selection was limited to those languages. 
+
+  \item Projects should have a committer count larger than the main team member
+    count, to ensure that the project is open to external contributions and that
+    pull requests are indeed used by developers outside the project.
+
+  \item Projects should be developing software frameworks or applications,
+    rather than documentation or programming languages. We excluded
+    documentation projects, because we are interested in distributed software
+    development. We excluded programming language implementation projects
+    because we wanted to avoid cases where the developed programming language's
+    core library was overshadowing the metrics of the actual implementation.
+    This is especially true for the 5 Ruby implementations hosted on Github.
+
+\end{itemize}
+
+After selection, the full history (including pull requests, issues and commits)
+of the included projects was downloaded and features were extracted by querying
+the {\sc ght}orrent databases and analysing each project's Git repository. To
+compensate for pull requests that are merged outside Github, which Github
+reports as unmerged, we resorted to the following heuristics, listed here in
+order of application:
+
+\begin{itemize}
+
+  \item At least one of the commits associated with the pull request appears in
+    the target project's master branch. 
+
+  \item A commit closes the pull request (using the \texttt{fixes: } convention
+    advocated by Github) and that commit appears in the project's master branch.
+    This means that the pull request commits where squashed into one commit and
+    this commit was merged.
+
+  \item The last 3 (in order of appearance) discussion comments contain
+    a commit unique identifier, this commit appears in the
+    project's master branch and the comment can be matched by the following 
+    regular expression:
+
+    \texttt{merg(?:ing|ed)|appl(?:ying|ied)|\-
+            pull[?:ing|ed]|push[?:ing|ed]|\-
+            integrat[?:ing|ed]}
+
+  \item The latest comment prior to closing the pull request matches the 
+    regular expression above.
+
+\end{itemize}
+
+If none of the above heuristics identifies a merge, we mark the pull request
+as unmerged. 
+
+After creating the data files, we investigated cases where the
+pull request merge ratio was significantly less (in some cases, as small as
+10\%) than the one we calculated across Github (73\%), as this means that our
+heuristics are not inclusive enough. This way, we filtered out 12 projects,
+which we did not replace. 
+
+The final dataset consisted of 293 projects (95 Python, 92 Java, 84 Ruby, 14
+Scala) and 168,028 data points (59,284, 55,672, 45,901 and 7,576 for Python,
+Ruby, Java and Scala projects respectively). Both distributions are
+representative of the contemporary popularity of each respective programming
+language on both Github and other sites.
+
+%Figure~\ref{fig:wordcloud} presents the project names in relative size to the
+%pull requests included per project in the dataset. 
+%
+%\begin{figure}
+%  \begin{center}
+%    \includegraphics[scale=0.7]{wordcloud.pdf}
+%  \end{center}
+%  \caption{Projects in our dataset. Text size is relative to the number of
+%  included pull requests.}
+%  \label{fig:wordcloud}
+%\end{figure}
+
+\textbf{Feature Extraction} The feature selection was based on prior work in the areas of patch submission
+and acceptance~\cite{Nagap05,Bird07a,Weiss08,Baysa12}, bug
+triaging~\cite{Anvik06, Giger10} and also on the semi-structured interviews of
+Github developers in Pham et al.~\cite{Pham13}. The selected features are split
+in three categories:
+
+  \emph{Pull request impact.} These
+    features attempt to quantify the impact of the
+    pull request on the affected code base. When examining external code
+    contributions, the size of the patch is affecting both acceptance and
+    acceptance time~\cite{Weiss08}. There are various metrics to determine the
+    size of a patch that have been used by researchers: code
+    churn~\cite{Nagap05, Ratzi07}, changed files~\cite{Nagap05} and number of
+    commits~\cite{Fluri07}. In the particular case of pull requests, developers
+    reported that tests in a pull request increases their confidence to merge
+    it~\cite{Pham13}. To investigate this, we split the churn feature to two
+    features, namely \texttt{src\_churn} and \texttt{test\_churn}.
+
+  \emph{Project characteristics.} These features quantify how receptive to pull
+  requests the project is. If the project's process is open to external
+  contributions, then we expect to see an increased ratio of external
+  contributors over team members. The project's size may be a detrimental factor
+  to the speed of processing a pull request, as its impact may be more difficult
+  to assess. Also, incoming changes tend to cluster over time (the
+  ``yesterday's weather'' change pattern~\cite{Girba04}), so it is natural to
+  assume that pull requests affecting a part of the system that is under active
+  development will be more likely to merge. Testing plays a role in speed of
+  processing; according to~\cite{Pham13}, projects struggling with constant flux
+  of contributors use testing, manual or preferably automated, a safety net to
+  handle contributions from unknown developers.
+
+  \emph{Developer.}  
+    Developer-based features quantify the influence that the person that
+    created the pull request has on the decision to merge it and
+    the time to process it. In particular, the developer that created the patch
+    has been shown to influence the patch acceptance decision~\cite{Jeong09}. To
+    abstract the results across projects with different developers, we
+    include features that quantify the developer's track record, namely the
+    number of previous pull requests and their acceptance rate; the former has
+    been indicated as a strong indicator of pull request quality~\cite{Pham13}.
+    Bird et al.~\cite{Bird07}, presented evidence that social
+    reputation has an impact on whether a patch will be merged; in our dataset,
+    the number of followers on Github is an interesting proxy for
+    reputation.
+
+All features are calculated at the time a pull request has been closed or
+merged, to evaluate the effect of intermediate updates to the pull request as a
+result of the ensuing discussion. Features that contain a temporal dimension in
+their calculation (e.g., \texttt{team\_size} or
+\texttt{commits\_on\_files\_touched}) are calculated in a time window of $t - 3$
+months, where $t$ is the time the pull request has been closed. 
+
+The initial selection contained 23 features. To check whe\-ther the selected
+features are independent enough, and therefore have strong explanatory power, we
+conducted a pair-wise correlation analysis using the Spearman rank correlation
+($\rho$) metric across all features. We set a threshold of $\rho = 0.7$, above
+which we eliminated features that are strongly correlated. Using this cutoff, we
+removed 2 features, \texttt{asserts\_per\_kloc} and
+\texttt{test\_cases\_per\_kloc} as they where very strongly correlated ($\rho >
+0.92$) with the included \texttt{test\_lines\_per\_kloc} feature. We also
+removed features that could not be calculated reliably at the time a pull
+request was done (\texttt{followers} and \texttt{stars}).\footnote{The Github
+{\sc api} does not report a timestamp on when a user followed another user, or
+when a user stared a project, so it is impossible to know how many followers a
+user had or stars a project had at a specific time instance.} Finally, we
+merged similar features (i.e. \texttt{doc\_files} and \texttt{src\_files} were merged to \texttt{files\_changed}). 
+
+The post processing phase left us with
+13 features, which can be seen in Table~\ref{tab:features}.
+The cross-correlation analysis result for the selected features can be seen in
+Figure~\ref{fig:crosscor}. In general, very few features are correlated at a
+value $\rho > 0.2$, while only two, \texttt{src\_churn} and
+\texttt{files\_changed}, are strongly correlated at $\rho = 0.63$. While the
+correlation is strong, it is below our threshold and it is not definite;
+therefore we do not remove either feature from the dataset. All results are
+statistically significant ($n = 168,028, p < 0.001$).
+
+\begin{table*}
+  \begin{small}
+  \centering
+  \begin{tabular}{rp{40em}}
+    \hline
+    \bf{Feature} & \bf{Description and Justification}\\
+    \hline
+    \multicolumn{2}{l}{\bf{Pull Request Impact}}\\
+    
+    \texttt{num\_commits} & Number of commits in the pull request. A bigger
+    pull request should be slower to examine and therefore to merge.\\
+    
+    \texttt{src\_churn} & Number of lines changed (added + deleted) by the pull
+    request. The more lines changed, the longer a pull request should take to be
+    reviewed.\\
+
+    \texttt{test\_churn} & Number of test lines changed in the pull request. Pull requests
+    that include tests should be faster to merge, as testing would increase
+    confidence for the merger.\\
+    
+    \texttt{files\_changed} & Number of files touched by the pull request. An
+    indication of the impact of the pull request.\\
+    
+    \texttt{num\_comments} & The total number of comments (discussion and code
+    review). More pull code review comments may indicate a rigorous process,
+    therefore slowing down acceptance.\\
+
+    \texttt{conflict} & The word conflict appears in the pull request comments.
+    Pull request that conflict with other branches should be slower to merge.\\
+
+    \texttt{forward\_link} & The pull request comments include links to other
+    pull requests. Pull requests with forward links should be overridden by
+    other pull requests and therefore not merged.\\
+
+    \multicolumn{2}{l}{\bf{Project Characteristics}}\\
+    
+    \texttt{sloc} & Executable lines of code at pull request merge time. The
+    bigger the project, the more difficult would be to assess the impact of
+    a pull request. \\
+
+    \texttt{team\_size} & Number of active core team members during the last 3
+    months prior the pull request creation. A big team will be faster to process
+    a pull request as each team member will have less work load to handle and
+    will be more specialized.\\
+
+    \texttt{perc\_external\_contribs} & The ratio of commits from external
+    members over core team members in the last 3 months prior to pull request
+    creation. A higher ratio indicates a more open
+    process, which may lead to more accepted pull requests.\\
+
+    \texttt{commits\_on\_files\_touched} & Number of total commits on files
+    touched by the pull request 3 months before the pull request creation time.
+    If the pull request touches files in a hotspot, it will be merged faster.\\
+ 
+    \texttt{test\_lines\_per\_1000\_lines} & A proxy for the project's test
+    coverage. The more well tested a project is, the faster a pull request
+    could be merged, as applying it and testing its impact would be faster. \\
+
+    \multicolumn{2}{l}{\bf{Developer}}\\
+    
+    \texttt{prev\_pullreqs} & Number of pull requests submitted by a specific
+    developer, prior to the examined pull request. The more pull requests, the
+    better the developer is known to the project.\\
+
+    \texttt{requester\_succ\_rate} & The percentage of the developer's pull requests that have been merged up to the creation of the examined pull
+    request. A high success rate indicates a developer trusted by the project.\\
+
+    \texttt{main\_team\_member} & Whether the developer belongs to the
+    main repository team. Pull requests from main team members should be
+    faster to accept and merge due to increased confidence.\\
+    \hline
+  \end{tabular}
+  \caption{Selected features and intuition driving the selection.}
+  \label{tab:features}
+  \end{small}
+\end{table*}
+
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[scale=0.5]{cross-cor-heat.pdf}
+  \end{center}
+  \caption{Cross correlation heat map (Spearman) for selected features.}
+  \label{fig:crosscor}
+\end{figure}
+
+\subsection{Qualitative data}
+
+To investigate the reasons of why pull requests are not merged and the , we
+manually examined random
 
 \section{Descriptive statistics of pull request usage on Github}
 \label{sec:github}
@@ -538,239 +813,6 @@ repositories using them is relatively stable.}
 \end{minipage}}
 
 
-\section{Data: Pull Request Project Sample}
-\label{sec:expdata} 
-
-While an overview of pull request activity can be safely extracted from the {\sc
-ght}orrent dataset, several limitations do not allow us to apply our detailed
-analysis across all projects. Specifically, projects worth analyzing have a
-history longer than one year, and it is important to retrieve all information
-available during the project's life. To make the data collection and subsequent
-analysis practical, we restrict our input data to two lists of projects, a
-\textsf{handpicked} and a \textsf{random} one. Both lists contain 50 projects
-of different sizes and languages. To build them, we use the following
-inclusion criteria:
-
-\begin{itemize}
-
-  \item Projects should have more than 10 pull requests in total. This is
-    to filter out toy projects. 
-
-  \item Projects should include tests. To measure the effect of testing on pull
-    request acceptance, we could only use projects that include tests which we
-    could measure reliably. For that, we exploited the convention-based project
-    layout in the Ruby (Gem), Java and Scala (both Maven) language ecosystems,
-    so our project selection was limited to those languages. 
-
-  \item Projects should have a committer count larger than the main team member
-    count, to ensure that the project is open to external contributions and that
-    pull requests are indeed used by developers outside the project.
-
-\end{itemize}
-
-The \textsf{handpicked} list was created by browsing Github's most starred projects
-per language for projects that met the criteria. The \textsf{random} list
-was created by performing a random selection in the {\sc ght}orrent database. In
-cases were the randomly selected projects did not match the criteria (the existence
-of tests could not be evaluated automatically) or overlapped with the
-\textsf{handpicked} list, the projects where replaced with
-other random projects. 
-
-After selection, the datasets where merged, the full history (including pull
-requests, issues and commits) of the included projects was downloaded and
-features were extracted by querying the {\sc ght}orrent database and analysing
-each project's Git directory.
-To compensate for pull requests that are merged
-outside Github, we examined whether at least one of the commits associated
-with the pull request appears in the list of commits of the target project. In
-case commit squashing or patch-based merge has occurred, the merge could not be
-detected, and therefore the pull request was marked as unmerged.
-After creating the data files, we investigated
-cases where the pull request merge ratio was significantly less (in some cases,
-as small as 10\%) than the one we calculated across Github (73\%), as this might
-mean that non-authorship preserving merges occurred (see Section~\ref{sec:github}). This way, we filtered out 12 projects, which we did not replace. 
-
-The final dataset on which we run the prediction experiments consisted of 88
-projects (43 Ruby, 34 Java, 11 Scala) and 37,452 data points (pull requests).
-%Figure~\ref{fig:wordcloud} presents the project names in relative size to the
-%pull requests included per project in the dataset. 
-%
-%\begin{figure}
-%  \begin{center}
-%    \includegraphics[scale=0.7]{wordcloud.pdf}
-%  \end{center}
-%  \caption{Projects in our dataset. Text size is relative to the number of
-%  included pull requests.}
-%  \label{fig:wordcloud}
-%\end{figure}
-
-
-
-\section{Feature Selection}
-\label{sec:featureselection}
-
-The feature selection was based on prior work in the areas of patch submission
-and acceptance~\cite{Nagap05,Bird07a,Weiss08,Baysa12}, bug
-triaging~\cite{Anvik06, Giger10} and also on the semi-structured interviews of
-Github developers in Pham et al.~\cite{Pham13}. The selected features are split
-in three categories:
-
-%\begin{description}
-
-  %\item[Pull request impact] 
-  \textbf{Pull request impact.} These
-    features attempt to quantify the impact of the
-    pull request on the affected code base. When examining external code
-    contributions, the size of the patch is affecting both acceptance and
-    acceptance time~\cite{Weiss08}. There are various metrics to determine the
-    size of a patch that have been used by researchers: code
-    churn~\cite{Nagap05, Ratzi07}, changed files~\cite{Nagap05} and number of
-    commits~\cite{Fluri07}. In the particular case of pull requests, developers
-    reported that tests in a pull request increases their confidence to merge
-    it~\cite{Pham13}. To investigate this, we split the churn feature to two
-    features, namely \texttt{src\_churn} and \texttt{test\_churn}.
-
-  %\item[Project characteristics] 
-  \textbf{Project characteristics.} These features quantify how receptive to pull
-  requests the project is. If the project's process is open to external
-  contributions, then we expect to see an increased ratio of external
-  contributors over team members. The project's size may be a detrimental factor
-  to the speed of processing a pull request, as its impact may be more difficult
-  to assess. Also, incoming changes tend to cluster over time (the
-  ``yesterday's weather'' change pattern~\cite{Girba04}), so it is natural to
-  assume that pull requests affecting a part of the system that is under active
-  development will be more likely to merge. Testing plays a role in speed of
-  processing; according to~\cite{Pham13}, projects struggling with constant flux
-  of contributors use testing, manual or preferably automated, a safety net to
-  handle contributions from unknown developers.
-
-  %\item[Developer] 
-  \textbf{Developer.}  
-    Developer-based features quantify the influence that the person that
-    created the pull request has on the decision to merge it and
-    the time to process it. In particular, the developer that created the patch
-    has been shown to influence the patch acceptance decision~\cite{Jeong09}. To
-    abstract the results across projects with different developers, we
-    include features that quantify the developer's track record, namely the
-    number of previous pull requests and their acceptance rate; the former has
-    been indicated as a strong indicator of pull request quality~\cite{Pham13}.
-    Bird et al.~\cite{Bird07}, presented evidence that social
-    reputation has an impact on whether a patch will be merged; in our dataset,
-    the number of followers on Github is an interesting proxy for
-    reputation.
-%\end{description}
-
-All features are calculated at the time a pull request has been closed or
-merged, to evaluate the effect of intermediate updates to the pull request as a
-result of the ensuing discussion. Features that contain a temporal dimension in
-their calculation (e.g., \texttt{team\_size} or
-\texttt{commits\_on\_files\_touched}) are calculated in a time window of $t - 3$
-months, where $t$ is the time the pull request has been closed. 
-
-The initial selection contained 23 features. To check whe\-ther the selected
-features are independent enough, and therefore have strong explanatory power, we
-conducted a pair-wise correlation analysis using the Spearman rank correlation
-($\rho$) metric across all features. We set a threshold of $\rho = 0.8$, above
-which we eliminated features that are strongly correlated. Using this cutoff, we
-removed 2 features, \texttt{asserts\_per\_kloc} and
-\texttt{test\_cases\_per\_kloc} as they where very strongly correlated ($\rho >
-0.92$) with the included \texttt{test\_lines\_per\_1000\_lines} feature. We also
-removed features that could not be calculated reliably at the time a pull
-request was done (\texttt{followers} and \texttt{stars}).\footnote{The Github
-{\sc api} does not report a timestamp on when a user followed another user, or
-when a user stared a project, so it is impossible to know how many followers a
-user had or stars a project had at a specific time instance.} Finally, we
-merged similar features (i.e. \texttt{doc\_files} and \texttt{src\_files} were merged to \texttt{files\_changed}). 
-
-The post processing phase left us with
-13 features, which can be seen in Table~\ref{tab:features}.
-The cross-correlation analysis result for the selected features can be seen in
-Figure~\ref{fig:crosscor}. In general, very few features are correlated at a
-value $\rho > 0.2$, while only two, \texttt{src\_churn} and
-\texttt{files\_changed}, are strongly correlated at $\rho = 0.71$. While the
-correlation is strong, it is below our threshold and it is not definite;
-therefore we do not remove either feature from the dataset. All results are
-statistically significant ($n = 37,492, p < 0.001$).
-
-\begin{table*}
-  \begin{small}
-  \centering
-  \begin{tabular}{rp{40em}}
-    \hline
-    \bf{Feature} & \bf{Description and Justification}\\
-    \hline
-    \multicolumn{2}{l}{\bf{Pull Request Impact}}\\
-    
-    \texttt{num\_commits} & Number of commits in the pull request. A bigger
-    pull request should be slower to examine and therefore to merge.\\
-    
-    \texttt{src\_churn} & Number of lines changed (added + deleted) by the pull
-    request. The more lines changed, the longer a pull request should take to be
-    reviewed.\\
-
-    \texttt{test\_churn} & Number of test lines changed in the pull request. Pull requests
-    that include tests should be easier to merge, as testing would increase
-    confidence for the merger.\\
-    
-    \texttt{files\_changed} & Number of files touched by the pull request. An
-    indication of the impact of the pull request.\\
-    
-    \texttt{num\_comments} & The total number of comments (discussion and code
-    review). More pull code review comments may indicate a rigorous process,
-    therefore slowing down acceptance.\\
-
-    \multicolumn{2}{l}{\bf{Project Characteristics}}\\
-    
-    \texttt{sloc} & Executable lines of code at pull request merge time. The
-    bigger the project, the more difficult would be to assess the impact of
-    a pull request. \\
-
-    \texttt{team\_size} & Number of active core team members during the last
-    3 months prior the pull request creation. A big team will be faster to process a
-    pull request as each team member will have less work load to handle and
-    will be more specialized.\\
-
-    \texttt{perc\_external\_contribs} & The ratio of commits from external
-    members over core team members in the last 3 months prior to pull request
-    creation. A higher ratio indicates a more open
-    process, which may lead to more accepted pull requests.\\
-
-    \texttt{commits\_on\_files\_touched} & Number of total commits on files
-    touched by the pull request 3 months before the pull request creation time.
-    If the pull request touches files in a hotspot, it will be merged faster.\\
- 
-    \texttt{test\_lines\_per\_1000\_lines} & A proxy for the project's test
-    coverage. The more well tested a project is, the faster a pull request
-    could be merged, as applying it and testing its impact would be faster. \\
-
-    \multicolumn{2}{l}{\bf{Developer}}\\
-    
-    \texttt{prev\_pullreqs} & Number of pull requests submitted by a specific
-    developer, prior to the examined pull request. The more pull requests, the
-    better the developer is known to the project.\\
-
-    \texttt{requester\_succ\_rate} & The percentage of the developer's pull requests that have been merged up to the creation of the examined pull
-    request. A high success rate indicates a developer trusted by the project.\\
-
-    \texttt{main\_team\_member} & Whether the developer belongs to the
-    main repository team. Pull requests from main team members should be
-    faster to accept and merge due to increased confidence.\\
-    \hline
-  \end{tabular}
-  \caption{Selected features and justification.}
-  \label{tab:features}
-  \end{small}
-\end{table*}
-
-
-\begin{figure}
-  \begin{center}
-    \includegraphics[scale=0.5]{cross-cor.pdf}
-  \end{center}
-  \caption{Cross correlation matrix (Spearman) for selected features. The more elliptical a point is, the strongest the correlation. A right slant indicates
-  a positive correlation.}
-  \label{fig:crosscor}
-\end{figure}
 
 %\input{cross-cor.tex}
 
@@ -955,24 +997,24 @@ the \textsf{mergedecision} experiment, the prior probability was 74\% which
 allowed the algorithm to achieve near perfect scores. In both cases,
 the stability of the {\sc auc} metric across folds was good 
 (\textsf{mergetime}: $\sigma_{auc} = 0.019$, \textsf{mergedecision}: $\sigma_{auc} = 0.008$).
-
-\begin{figure*}
-\centering
-\subfigure {
-  \includegraphics[scale=0.4]{varimp-merge-decision-37492-50.pdf} 
-  \label{fig:varimp-merge-decision}
-}
-\subfigure{
-\includegraphics[scale=0.4]{varimp-merge-time-27892-50.pdf}
-  \label{fig:varimp-merge-time}
-}
+%
+%\begin{figure*}
+%\centering
+%\subfigure {
+%  \includegraphics[scale=0.4]{varimp-merge-decision-37492-50.pdf} 
+%  \label{fig:varimp-merge-decision}
+%}
 %\subfigure{
-%\includegraphics[scale=0.3]{varimp-merge-time-(4-bins)-40000-50.pdf}
+%\includegraphics[scale=0.4]{varimp-merge-time-27892-50.pdf}
 %  \label{fig:varimp-merge-time}
 %}
-\caption{Random forest feature importance for predicting merge decision (a) and merge time (b)}
-\label{fig:varimp}
-\end{figure*}
+%%\subfigure{
+%%\includegraphics[scale=0.3]{varimp-merge-time-(4-bins)-40000-50.pdf}
+%%  \label{fig:varimp-merge-time}
+%%}
+%\caption{Random forest feature importance for predicting merge decision (a) and merge time (b)}
+%\label{fig:varimp}
+%\end{figure*}
 
 To extract the features that are important for each classification task, we
 used the process suggested in reference~\cite{Genue10}. Specifically, we run
