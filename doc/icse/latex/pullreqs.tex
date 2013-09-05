@@ -142,8 +142,8 @@ Specifically, the questions we are trying to answer are:
 Our study is based on data from the Github collaborative development forge, as
 made available through the {\sc ght}orrent project~\cite{GS12}. Using it, we
 first explore the use of pull requests across all projects in Github. We then
-examine 293 carefully selected Ruby, Python, Java and Scala projects (in total,
-168,028 pull requests), and identify, using  
+examine 291 carefully selected Ruby, Python, Java and Scala projects (in total,
+166,737 pull requests), and identify, using  
 qualitative and quantitative analysis, the
 factors that affect pull request lifetime and merging. The results show that
 pull request acceptance is very high (> 80\%), while the majority of
@@ -323,9 +323,10 @@ are merged to the project's main branch.
 
 The open nature of Github's pull requests lends itself to a variety of usage
 patterns. Except from basic patch submission, pull requests can be used as a
-requirements discussion tool~\footnote{Github uses this internally:
+requirements and design discussion tool\footnote{Github uses this internally:
 \url{https://github.com/blog/1124-how-we-use-pull-requests-to-build-github}} or
-as a progress tracking tool towards the fulfilment of a project milestone. In
+as a progress tracking tool towards the fulfilment of a project
+release.\footnote{\url{https://github.com/blog/831-issues-2-0-the-next-generation}} In
 the first case, a pull request serves as a discussion board for soliciting the
 opinions of other developers while a new feature is being implemented. In the
 second case, pull requests are associated with milestones in Github's issue
@@ -522,14 +523,14 @@ order of application:
 If none of the above heuristics identifies a merge, we mark the pull request
 as unmerged. 
 
-After creating the data files, we investigated cases where the
-pull request merge ratio was significantly less (in some cases, as small as
-10\%) than the one we calculated across Github (73\%), as this means that our
-heuristics are not inclusive enough. This way, we filtered out 12 projects,
-which we did not replace. 
+After creating the data files, we investigated cases where the pull request
+merge ratio was significantly less than the one we calculated across Github
+(73\%), and in any case less than 40\%, as this means that our heuristics are not
+inclusive enough. This way, we filtered out 2 projects, which we did not
+replace.
 
-The final dataset consisted of 293 projects (95 Python, 92 Java, 84 Ruby, 14
-Scala) and 168,028 data points (59,284, 55,672, 45,901 and 7,576 for Python,
+The final dataset consisted of 291 projects (99 Python, 91 Java, 87 Ruby, 14
+Scala) and 166,737 data points (59,970, 55,320, 43,871 and 7,576 for Python,
 Ruby, Java and Scala projects respectively). Both distributions are
 representative of the contemporary popularity of each respective programming
 language on both Github and other sites.
@@ -621,85 +622,87 @@ value $\rho > 0.2$, while only two, \texttt{src\_churn} and
 \texttt{files\_changed}, are strongly correlated at $\rho = 0.63$. While the
 correlation is strong, it is below our threshold and it is not definite;
 therefore we do not remove either feature from the dataset. All results are
-statistically significant ($n = 168,028, p < 0.001$).
+statistically significant ($n = 166,737, p < 0.001$).
 
-\begin{table*}
-  \begin{small}
-  \centering
-  \begin{tabular}{rp{40em}}
-    \hline
-    \bf{Feature} & \bf{Description and Justification}\\
-    \hline
-    \multicolumn{2}{l}{\bf{Pull Request Impact}}\\
-    
-    \texttt{num\_commits} & Number of commits in the pull request. A bigger
-    pull request should be slower to examine and therefore to merge.\\
-    
-    \texttt{src\_churn} & Number of lines changed (added + deleted) by the pull
-    request. The more lines changed, the longer a pull request should take to be
-    reviewed.\\
+%\begin{table*}
+%  \begin{small}
+%  \centering
+%  \begin{tabular}{rp{40em}}
+%    \hline
+%    \bf{Feature} & \bf{Description and Justification}\\
+%    \hline
+%    \multicolumn{2}{l}{\bf{Pull Request Impact}}\\
+%    
+%    \texttt{num\_commits} & Number of commits in the pull request. A bigger
+%    pull request should be slower to examine and therefore to merge.\\
+%    
+%    \texttt{src\_churn} & Number of lines changed (added + deleted) by the pull
+%    request. The more lines changed, the longer a pull request should take to be
+%    reviewed.\\
+%
+%    \texttt{test\_churn} & Number of test lines changed in the pull request. Pull requests
+%    that include tests should be faster to merge, as testing would increase
+%    confidence for the merger.\\
+%    
+%    \texttt{files\_changed} & Number of files touched by the pull request. An
+%    indication of the impact of the pull request.\\
+%    
+%    \texttt{num\_comments} & The total number of comments (discussion and code
+%    review). More pull code review comments may indicate a rigorous process,
+%    therefore slowing down acceptance.\\
+%
+%    \texttt{conflict} & The word conflict appears in the pull request comments.
+%    Pull request that conflict with other branches should be slower to merge.\\
+%
+%    \texttt{forward\_link} & The pull request comments include links to other
+%    pull requests. Pull requests with forward links should be overridden by
+%    other pull requests and therefore not merged.\\
+%
+%    \multicolumn{2}{l}{\bf{Project Characteristics}}\\
+%    
+%    \texttt{sloc} & Executable lines of code at pull request merge time. The
+%    bigger the project, the more difficult would be to assess the impact of
+%    a pull request. \\
+%
+%    \texttt{team\_size} & Number of active core team members during the last 3
+%    months prior the pull request creation. A big team will be faster to process
+%    a pull request as each team member will have less work load to handle and
+%    will be more specialized.\\
+%
+%    \texttt{perc\_external\_contribs} & The ratio of commits from external
+%    members over core team members in the last 3 months prior to pull request
+%    creation. A higher ratio indicates a more open
+%    process, which may lead to more accepted pull requests.\\
+%
+%    \texttt{commits\_on\_files\_touched} & Number of total commits on files
+%    touched by the pull request 3 months before the pull request creation time.
+%    If the pull request touches files in a hotspot, it will be merged faster.\\
+% 
+%    \texttt{test\_lines\_per\_1000\_lines} & A proxy for the project's test
+%    coverage. The more well tested a project is, the faster a pull request
+%    could be merged, as applying it and testing its impact would be faster. \\
+%
+%    \multicolumn{2}{l}{\bf{Developer}}\\
+%    
+%    \texttt{prev\_pullreqs} & Number of pull requests submitted by a specific
+%    developer, prior to the examined pull request. The more pull requests, the
+%    better the developer is known to the project.\\
+%
+%    \texttt{requester\_succ\_rate} & The percentage of the developer's pull requests that have been merged up to the creation of the examined pull
+%    request. A high success rate indicates a developer trusted by the project.\\
+%
+%    \texttt{main\_team\_member} & Whether the developer belongs to the
+%    main repository team. Pull requests from main team members should be
+%    faster to accept and merge due to increased confidence.\\
+%    \hline
+%  \end{tabular}
+%  \caption{Selected features and intuition driving the selection.}
+%  \label{tab:features}
+%  \end{small}
+%\end{table*}
+%
 
-    \texttt{test\_churn} & Number of test lines changed in the pull request. Pull requests
-    that include tests should be faster to merge, as testing would increase
-    confidence for the merger.\\
-    
-    \texttt{files\_changed} & Number of files touched by the pull request. An
-    indication of the impact of the pull request.\\
-    
-    \texttt{num\_comments} & The total number of comments (discussion and code
-    review). More pull code review comments may indicate a rigorous process,
-    therefore slowing down acceptance.\\
-
-    \texttt{conflict} & The word conflict appears in the pull request comments.
-    Pull request that conflict with other branches should be slower to merge.\\
-
-    \texttt{forward\_link} & The pull request comments include links to other
-    pull requests. Pull requests with forward links should be overridden by
-    other pull requests and therefore not merged.\\
-
-    \multicolumn{2}{l}{\bf{Project Characteristics}}\\
-    
-    \texttt{sloc} & Executable lines of code at pull request merge time. The
-    bigger the project, the more difficult would be to assess the impact of
-    a pull request. \\
-
-    \texttt{team\_size} & Number of active core team members during the last 3
-    months prior the pull request creation. A big team will be faster to process
-    a pull request as each team member will have less work load to handle and
-    will be more specialized.\\
-
-    \texttt{perc\_external\_contribs} & The ratio of commits from external
-    members over core team members in the last 3 months prior to pull request
-    creation. A higher ratio indicates a more open
-    process, which may lead to more accepted pull requests.\\
-
-    \texttt{commits\_on\_files\_touched} & Number of total commits on files
-    touched by the pull request 3 months before the pull request creation time.
-    If the pull request touches files in a hotspot, it will be merged faster.\\
- 
-    \texttt{test\_lines\_per\_1000\_lines} & A proxy for the project's test
-    coverage. The more well tested a project is, the faster a pull request
-    could be merged, as applying it and testing its impact would be faster. \\
-
-    \multicolumn{2}{l}{\bf{Developer}}\\
-    
-    \texttt{prev\_pullreqs} & Number of pull requests submitted by a specific
-    developer, prior to the examined pull request. The more pull requests, the
-    better the developer is known to the project.\\
-
-    \texttt{requester\_succ\_rate} & The percentage of the developer's pull requests that have been merged up to the creation of the examined pull
-    request. A high success rate indicates a developer trusted by the project.\\
-
-    \texttt{main\_team\_member} & Whether the developer belongs to the
-    main repository team. Pull requests from main team members should be
-    faster to accept and merge due to increased confidence.\\
-    \hline
-  \end{tabular}
-  \caption{Selected features and intuition driving the selection.}
-  \label{tab:features}
-  \end{small}
-\end{table*}
-
+\input{feature-stats.tex}
 
 \begin{figure}
   \begin{center}
@@ -711,8 +714,23 @@ statistically significant ($n = 168,028, p < 0.001$).
 
 \subsection{Qualitative data}
 
-To investigate the reasons of why pull requests are not merged and the , we
-manually examined random
+To investigate how pull requests are used in practice and why some pull requests
+are not merged, we performed in-depth examination of random samples of pull
+requests followed by coding and thematic analysis. 
+
+To examine how pull requests are used in practice, we categorized
+100 randomly selected pull requests, sampled from the dataset described above,
+in two categories: patches and feature discussions. We drew those categories
+from our experience as pull request users and also by consulting 
+the interviews in Pham et al.~\cite{Pham13} and Marlow et al.~\cite{Marlo13}.
+
+To discover the reasons for pull request rejection, we again randomly sampled
+from our pull request project dataset: 100 pull requests were initially used by
+the first coder to identify discrete reasons for closing pull requests
+(bootstrapping sample), while a different set of 100 pull requests were used by
+all three coders to validate the identified categories (cross-validation
+sample). After cross validation, a further 150 pull request sample was added to
+the bootstrapping sample to construct the finally analyzed dataset.
 
 \section{Descriptive statistics of pull request usage on Github}
 \label{sec:github}
@@ -750,8 +768,7 @@ thereby indicating that pull requests in principle can work as a medium for
 obtaining external contributions. Moreover, even though one might expect that it
 is the well known projects that receive most pull requests, this is not very
 well supported by our data: the Spearman rank correlation between the number of
-watchers of a project and the number of pull requests it has received is $\rho = 0.42$
-($p < 0.001, n = 75011$).
+watchers of a project and the number of pull requests it has received is $\rho = 0.42$ ($p < 0.001, n = 75011$).
 
 \begin{figure}[t]
   \centering
@@ -1308,6 +1325,8 @@ This work is partially supported by Marie Curie {\sc ief} 298930 --- {\sc sefunc
 
 \bibliographystyle{abbrv}
 \balance
+\begin{small}
 \bibliography{pullreqs}
+\end{small}
 
 \end{document}

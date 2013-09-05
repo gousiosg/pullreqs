@@ -295,7 +295,7 @@ overall.stats$histogram <- lapply(overall.stats$query, function(x){
 
 
 table <- xtable(overall.stats[,-c(2)], label="tab.overall.stats", 
-       caption="Descriptive statisticcs for pull requests across all projects in the GHTorrent dataset (1.8M). Historgrams are in log scale.",
+       caption="Descriptive statistics for pull requests across all projects in the GHTorrent dataset (1.8M). Historgrams are in log scale.",
        align = c("r","r", rep("c", 7)))
 print.xtable(table, file = paste(latex.location, "overall-stats.tex", sep = "/"),
              floating.environment = "table*",

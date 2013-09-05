@@ -10,6 +10,7 @@ library(ggplot2)
 library(xtable)
 library(ellipse)
 library(reshape)
+library(digest)
 library(scales)
 library(cliffsd)
 
@@ -26,37 +27,34 @@ if(length(list.files(pattern="R")) == 0) {
 
 # Take a random sample of projects to analyze
 #print("Sampling projects to analyze")
-#set.seed(1)
-#smpl <- projectstats[sample(which(
-#  (projectstats$language=="Ruby" | projectstats$language=="Java" | projectstats$language=="Scala") &
-#    projectstats$contributors > projectstats$project_members &
-#    projectstats$project_members > 0 &
-#    projectstats$pull_requests > 50), 50, replace = FALSE), ]
-#write.table(smpl[,c(1,8)], file = "random-projects.txt", sep = " ", row.names=FALSE, col.names=FALSE)
 #system("cat random-projects.txt|tr '/' ' '|tr -d '\"' > foo; mv foo random-projects.txt")
 #set.seed(11)
 #smpl <- projectstats[sample(which(
-#   (projectstats$language=="Ruby" | projectstats$language=="Java" | projectstats$language=="Scala") &
+#   (projectstats$language=="Ruby" | projectstats$language=="Java" | projectstats$language=="Scala"| projectstats$language=="Python") &
     #projectstats$contributors > projectstats$project_members &
 #    projectstats$project_members > 0 &
-#    projectstats$pull_requests > 10), 100, replace = FALSE), ]
+#    projectstats$pull_requests >= 200), 1000, replace = FALSE), ]
 #write.table(smpl[,c(1,11)], file = "random-projects.txt", sep = " ", row.names=FALSE, col.names=FALSE)
-#system("cat random-projects.txt|tr '/' ' '|tr -d '\"' > foo; mv foo rnd-projects.txt")
 
 #print("Producing the data files...")
 # Produce the datafiles
 # Those can be run in parallel like so:
 # system("bin/all_projects.sh -p 4 -d data projects.txt")
-# system("bin/all_projects.sh -p 4 -d data random-projects.txt")
 
 print("Loading data files..")
 dfs <- load.all(dir=data.file.location, pattern="*.csv$")
 dfs <- addcol.merged(dfs)
-all <- merge.dataframes(dfs, 200)
+all <- merge.dataframes(dfs)
 
-# Why test_cases_per_kloc and asserts_per_kloc are excluded from further analysis
-cor.test(all$test_lines_per_kloc, all$test_cases_per_kloc, method="spearman")
-cor.test(all$test_lines_per_kloc, all$asserts_per_kloc, method="spearman")
+# Number of projects per language
+for(language in c("ruby", "java", "python", "scala")) {
+  printf("%d projects in %s", length(unique(subset(all, lang == language)$project_name)), language)
+}
+
+# Number of pullrequests per language
+for(language in c("ruby", "java", "python", "scala")) {
+  printf("%d projects in %s", nrow(subset(all, lang == language)), language)
+}
 
 # Columns used in building models
 columns = c("team_size", "num_commits", "files_changed",
@@ -69,6 +67,10 @@ non_merged <- subset(all, merged == FALSE)
 
 # Descriptive statistics accross all projects
 used <- subset(all, select=columns)
+
+# Why test_cases_per_kloc and asserts_per_kloc are excluded from further analysis
+cor.test(all$test_lines_per_kloc, all$test_cases_per_kloc, method="spearman")
+cor.test(all$test_lines_per_kloc, all$asserts_per_kloc, method="spearman")
 
 ## Cross correlation matrix accross all model variables
 ctab <- cor(used, method = "spearman", use='complete.obs')
@@ -90,8 +92,8 @@ ctab.m <- melt(ctab)
 p <- ggplot(ctab.m, aes(X1, X2, fill = value)) +
   geom_tile() +
   scale_fill_gradient2(space = "Lab") +
-  labs(x = '', y = '') +
-  theme(axis.text = element_text(size = 11),
+  theme(axis.title = element_blank(),
+        axis.text = element_text(size = 11),
         axis.text.x = element_text(angle = -90, hjust = 0, vjust = 0.5))
 store.pdf(p, plot.location, "cross-cor-heat.pdf")
 
@@ -151,6 +153,57 @@ p <- ggplot(all, aes(x = num_comments)) +
   xlab("Number of code review and discussion comments (log)") +
   ylab("Number of pull requests")
 store.pdf(p, plot.location, "pr-num-comments-hist.pdf")
+
+### Dataset descriptive statistics
+descr.stats <- data.frame(
+  Feature = c('num_commits', 'src_churn', 'test_churn', 'files_changed',
+              'num_comments', 'sloc', 'team_size',
+              'perc_external_contribs', 'commits_on_files_touched',
+              'test_lines_per_kloc', 'prev_pullreqs', 'requester_succ_rate'),
+  Description = c(
+    "Number of commits in the pull request",
+    "Number of lines changed (added + deleted) by the pull request.",
+    "Number of test lines changed in the pull request.",
+    "Number of files touched by the pull request.",
+    "The total number of comments (discussion and code review).",
+    #"The word conflict appears in the pull request comments.",
+    #"The pull request comments include links to other pull requests.",
+    "Executable lines of code at pull request merge time.",
+    "Number of active core team members during the last 3 months prior the pull request creation.",
+    "The ratio of commits from external members over core team members in the last 3 months prior to pull request creation",
+    "Number of total commits on files touched by the pull request 3 months before the pull request creation time",
+    "A proxy for the project's test coverage",
+    "Number of pull requests submitted by a specific developer, prior to the examined pull request.",
+    "The percentage of the developer's pull requests that have been merged up to the creation of the examined pull request."
+    #"Whether the developer belongs to the main repository team."
+  )
+)
+
+descr.stats$Feature <- as.character(descr.stats$Feature)
+descr.stats$min <- lapply(descr.stats$Feature, function(x){min(all[,x], na.rm = T)})
+descr.stats$mean <- lapply(descr.stats$Feature, function(x){mean(all[,x], na.rm = T)})
+descr.stats$median <- lapply(descr.stats$Feature, function(x){median(all[,x], na.rm = T)})
+descr.stats$max <- lapply(descr.stats$Feature, function(x){max(all[,x], na.rm = T)})
+descr.stats$histogram <- lapply(descr.stats$Feature, function(x){
+  data <- all[, x]
+  unq <- digest(sprintf("descr.stats.%s",as.character(x)))
+  fname <- paste(plot.location, sprintf("hist-%s.pdf",unq), sep="/")
+  par(mar=c(0,0,0,0))
+  plot.window(c(0,1),c(0,1),  xaxs='i', yaxs='i')
+  pdf(file = fname , width = 6, height = 3)
+  hist(log(data), probability = TRUE, col = "red", border = "white",
+       breaks = 10, xlab = "", ylab = "", axes = F, main = NULL)
+  dev.off()
+  sprintf("\\includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-%s.pdf}", unq)
+})
+
+table <- xtable(descr.stats, label="tab:features",
+                caption="Selected features and descriptive statistics. Historgrams are in log scale.",
+                align = c("l","r","p{15em}", rep("c", 5)))
+print.xtable(table, file = paste(latex.location, "feature-stats.tex", sep = "/"),
+             floating.environment = "table*",
+             include.rownames = F, size = c(-2),
+             sanitize.text.function = function(str)gsub("_","\\_",str,fixed=TRUE))
 
 # Merge % overall
 printf("Avg pullreq merged: %f", (nrow(merged)/nrow(all))*100)
