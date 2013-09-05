@@ -43,7 +43,7 @@ Catrobat Catroid Java
 celery celery Python
 cexbrayat linkit Java
 cgeo c-geo-opensource Java
-chiliproject chiliproject Ruby
+#chiliproject chiliproject Ruby
 chriseppstein compass Ruby
 #Clashnia Minecraft-Demigods Java
 cloudfoundry bosh Ruby
@@ -126,7 +126,7 @@ hpcugent easybuild-easyconfigs Python
 hpcugent easybuild-framework Python
 jenkinsci jenkins Java
 imathis octopress Ruby
-infinispan infinispan Java
+#infinispan infinispan Java
 intridea grape Ruby
 intridea omniauth Ruby
 ippontech tatami Java
