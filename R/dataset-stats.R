@@ -41,19 +41,19 @@ users <- fetch(res, n = -1)
 print(sprintf("Total users: %d",users$cnt))
 
 # Original repos
-res <- dbSendQuery(con, "select count(*) as cnt from projects where forked_from is null and name not regexp '^.*\\.github\\.com$' and name <> 'try_git' and name <> 'dotfiles' and name <> 'vimfiles'")
+res <- dbSendQuery(con, "select count(*) as cnt from projects where forked_from is null and deleted is false and name not regexp '^.*\\.github\\.com$' and name <> 'try_git' and name <> 'dotfiles' and name <> 'vimfiles'")
 orig_repos <- fetch(res, n = -1)
 print(sprintf("Original repos: %f",orig_repos$cnt))
 
 # % of original repos 
 print(sprintf("Original repos: %f",(orig_repos$cnt/repos$cnt) * 100))
 
-# Original repositories that received a single commit in 2012
-res <- dbSendQuery(con, "select count(*) as cnt from projects p where forked_from is null and name not regexp '^.*\\.github\\.com$' and name <> 'try_git' and name <> 'dotfiles' and name <> 'vimfiles' and exists ( select * from project_commits pc, commits c where  pc.project_id = p.id and  c.id = pc.commit_id and year(c.created_at) = 2012)")
+# Original repositories that received a single commit in 2013
+res <- dbSendQuery(con, "select count(*) as cnt from projects p where forked_from is null and deleted is false and name not regexp '^.*\\.github\\.com$' and name <> 'try_git' and name <> 'dotfiles' and name <> 'vimfiles' and exists ( select * from project_commits pc, commits c where  pc.project_id = p.id and  c.id = pc.commit_id and year(c.created_at) = 2013)")
 repos_with_commits <- fetch(res, n = -1)
 print(sprintf("Original repos with commits: %f", repos_with_commits$cnt))
 
-# % of active repos (original repos with a commit in 2012)
+# % of active repos (original repos with a commit in 2013)
 print(sprintf("Original repos with commits: %f",(repos_with_commits$cnt/repos$cnt) * 100))
 
 # Total pull requests
@@ -61,13 +61,13 @@ res <- dbSendQuery(con, "select count(*) as cnt from pull_requests")
 pullreqs <- fetch(res, n = -1)
 print(sprintf("Total pull requests: %d",pullreqs$cnt))
 
-# % of pull req comments by non-repo members 
-res <- dbSendQuery(con, "select count(pr.id) as cnt from pull_requests pr, pull_request_comments prc where pr.id = prc.pull_request_id and not exists (select * from project_commits pc, commits c where pc.commit_id = c.id and pc.project_id = pr.base_repo_id and c.author_id = prc.user_id);")
-prc_non_members <- fetch(res, n = -1)
-print(sprintf("Pull request comments by non project members: %f", prc_non_members$cnt))
-
-# % of pull req comments by non-repo members 
-print(sprintf("% comments from non-repo members: %f",(prc_non_members$cnt/pullreqs$cnt) * 100))
+# # % of pull req comments by non-repo members 
+# res <- dbSendQuery(con, "select count(pr.id) as cnt from pull_requests pr, pull_request_comments prc where pr.id = prc.pull_request_id and not exists (select * from project_commits pc, commits c where pc.commit_id = c.id and pc.project_id = pr.base_repo_id and c.author_id = prc.user_id);")
+# prc_non_members <- fetch(res, n = -1)
+# print(sprintf("Pull request comments by non project members: %f", prc_non_members$cnt))
+# 
+# # % of pull req comments by non-repo members 
+# print(sprintf("% comments from non-repo members: %f",(prc_non_members$cnt/pullreqs$cnt) * 100))
 
 # Pull req comments
 # The following takes a while, so here are the latest results
@@ -75,24 +75,43 @@ print(sprintf("% comments from non-repo members: %f",(prc_non_members$cnt/pullre
 # [1] "Num discussion comments per pulreq (95 perc): 9"
 # 80% = 3
 # [1] "Num discussion comments per pulreq (5 perc): 0"         
-res <- dbSendQuery(con, "select i.pr_id, ic_cnt + prc_cnt as cnt, i.issue_id from (select pr.id as pr_id, i.issue_id as issue_id, count(ic.comment_id) as ic_cnt from pull_requests pr left outer join issues i on pr.pullreq_id = i.issue_id left outer join issue_comments ic on i.id = ic.issue_id   where pr.base_repo_id = i.repo_id group by pr.id) as i, (select pr.id as pr_id, count(prc.comment_id) as prc_cnt  from projects p join pull_requests pr on p.id = pr.base_repo_id left outer join pull_request_comments prc on prc.pull_request_id = pr.id   where p.forked_from is null group by pr.id) as pr  where pr.pr_id = i.pr_id;")
-prs <- fetch(res, n = -1)
-print(sprintf("Num discussion comments per pulreq (mean): %f", mean(prs$cnt)))
-print(sprintf("Num discussion comments per pulreq (95 perc): %d", quantile(prs$cnt, 0.95)))
-print(sprintf("Num discussion comments per pulreq (5 perc): %d", quantile(prs$cnt, 0.05)))
+# res <- dbSendQuery(con, "select i.pr_id, ic_cnt + prc_cnt as cnt, i.issue_id from (select pr.id as pr_id, i.issue_id as issue_id, count(ic.comment_id) as ic_cnt from pull_requests pr left outer join issues i on pr.pullreq_id = i.issue_id left outer join issue_comments ic on i.id = ic.issue_id   where pr.base_repo_id = i.repo_id group by pr.id) as i, (select pr.id as pr_id, count(prc.comment_id) as prc_cnt  from projects p join pull_requests pr on p.id = pr.base_repo_id left outer join pull_request_comments prc on prc.pull_request_id = pr.id   where p.forked_from is null group by pr.id) as pr  where pr.pr_id = i.pr_id;")
+# prs <- fetch(res, n = -1)
+# print(sprintf("Num discussion comments per pulreq (mean): %f", mean(prs$cnt)))
+# print(sprintf("Num discussion comments per pulreq (95 perc): %d", quantile(prs$cnt, 0.95)))
+# print(sprintf("Num discussion comments per pulreq (5 perc): %d", quantile(prs$cnt, 0.05)))
 
-# Original repos with > 1 committers and 0 pull reqs in 2012
-res <- dbSendQuery(con, "select count(*) as cnt from projects p where forked_from is null and name not regexp '^.*\\.github\\.com$' and name <> 'try_git' and name <> 'dotfiles' and name <> 'vimfiles' and  (select count(c.author_id) from project_commits pc, commits c where  pc.project_id = p.id and  c.id = pc.commit_id and year(c.created_at) = 2012) > 1 and not exists (select pr.id from pull_requests pr, pull_request_history prh where pr.base_repo_id = p.id and prh.pull_request_id = pr.id and year(prh.created_at)=2012)")
+# Original repos with > 1 committers and 0 pull reqs in 2013
+res <- dbSendQuery(con, "select count(*) as cnt from projects p where forked_from is null and deleted = false and name not regexp '^.*\\.github\\.com$' and name <> 'try_git' and name <> 'dotfiles' and name <> 'vimfiles' and  (select count(c.author_id) from project_commits pc, commits c where  pc.project_id = p.id and  c.id = pc.commit_id and year(c.created_at) = 2013) > 1 and not exists (select pr.id from pull_requests pr, pull_request_history prh where pr.base_repo_id = p.id and prh.pull_request_id = pr.id and year(prh.created_at)=2013)")
 repos_with_co_op_devs <- fetch(res, n = -1)$cnt
-print(sprintf("Repos with > 1 committers and 0 pull reqs in 2012: %d", repos_with_co_op_devs))
+print(sprintf("Repos with > 1 committers and 0 pull reqs in 2013: %d", repos_with_co_op_devs))
 
-# Original repos that received a pullreq in 2012
-res <- dbSendQuery(con, "select count(*) as cnt from projects p where p.forked_from is null  and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles' and exists (select pr.id from pull_requests pr, pull_request_history prh where pr.base_repo_id = p.id and prh.pull_request_id = pr.id and year(prh.created_at)=2012)")
+## Pull req usage comparison 2012 -- 2013
+
+# Original repositories that received a single commit in Feb - Aug 2012
+res <- dbSendQuery(con, "select count(*) as cnt from projects p where forked_from is null and deleted is false and name not regexp '^.*\\.github\\.com$' and name <> 'try_git' and name <> 'dotfiles' and name <> 'vimfiles' and exists ( select * from project_commits pc, commits c where  pc.project_id = p.id and  c.id = pc.commit_id and unix_timestamp(c.created_at) between 1328054400 and 1346457600)")
+repos_with_commits_2012 <- fetch(res, n = -1)
+print(sprintf("Original repos with commits in Feb - Aug 2012: %f", repos_with_commits_2012$cnt))
+
+# Original repos that received a pullreq in Feb - Aug 2012
+res <- dbSendQuery(con, "select count(*) as cnt from projects p where p.forked_from is null and deleted is false and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles' and exists (select pr.id from pull_requests pr, pull_request_history prh where pr.base_repo_id = p.id and prh.pull_request_id = pr.id and prh.action = 'open' and unix_timestamp(prh.created_at) between 1328054400 and 1346457600)")
+orig_repos_pullreqs_2012 <- fetch(res, n = -1)
+print(sprintf("Repos that received a pull request in Feb - Aug 2012: %s", orig_repos_pullreqs_2012$cnt))
+print(sprintf("Perc repos that received a pull request in Feb - Aug 2012: %f", (orig_repos_pullreqs_2012$cnt/repos_with_commits_2012$cnt) * 100))
+
+# Original repositories that received a single commit in Feb - Aug 2013
+res <- dbSendQuery(con, "select count(*) as cnt from projects p where forked_from is null and deleted is false and name not regexp '^.*\\.github\\.com$' and name <> 'try_git' and name <> 'dotfiles' and name <> 'vimfiles' and exists ( select * from project_commits pc, commits c where  pc.project_id = p.id and  c.id = pc.commit_id and unix_timestamp(c.created_at) between 1359676800 and 1377993600)")
+repos_with_commits_2013 <- fetch(res, n = -1)
+print(sprintf("Original repos with commit Feb - Aug 2013s: %f", repos_with_commits_2013$cnt))
+
+# Original repos that received a pullreq in Feb - Aug 2013
+res <- dbSendQuery(con, "select count(*) as cnt from projects p where p.forked_from is null and deleted is false and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles' and exists (select pr.id from pull_requests pr, pull_request_history prh where pr.base_repo_id = p.id and prh.pull_request_id = pr.id and prh.action = 'open' and unix_timestamp(prh.created_at) between 1359676800 and 1377993600)")
 orig_repos_pullreqs <- fetch(res, n = -1)
-print(sprintf("Repos that received a pull request in 2012: %s", orig_repos_pullreqs$cnt))
-print(sprintf("Perc repos that received a pull request in 2012: %f", (orig_repos_pullreqs$cnt/repos_with_commits$cnt) * 100))
+print(sprintf("Repos that received a pull request in Feb - Aug 2013: %s", orig_repos_pullreqs$cnt))
+print(sprintf("Perc repos that received a pull request in Feb - Aug 2013: %f", (orig_repos_pullreqs$cnt/repos_with_commits_2013$cnt) * 100))
 
-# Pull request statistics and histogram for pull reqs
+
+# Distribution of pull requests per project
 res <- dbSendQuery(con, "select pr.base_repo_id as repoid, count(*) as cnt from projects p, pull_requests pr  where p.forked_from is null and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles' and p.name <> 'vimfiles'  and pr.base_repo_id = p.id and exists (select prh.created_at from pull_request_history prh where prh.pull_request_id = pr.id and prh.action='opened' and year(prh.created_at) > 2010)  group by pr.base_repo_id order by count(*) desc")
 pullreqs <- fetch(res, n = -1)
 print(sprintf("Pullreqs per project (mean): %f", mean(pullreqs$cnt)))
@@ -101,15 +120,15 @@ print(sprintf("Pullreqs per project (5 perc): %d", quantile(pullreqs$cnt, 0.05))
 store.pdf(qplot(cnt, data = subset(pullreqs, cnt > 10), geom = "histogram", log = "x", ylab = "Number of projects", xlab = "Number of pull requests (log)"), plot.location, "pull-req-freq.pdf")
 
 # Overall pull req stats - opened
-res <- dbSendQuery(con, "select count(*) as cnt from projects p, pull_requests pr  where p.forked_from is null and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles' and p.name <> 'vimfiles'and pr.base_repo_id = p.id and exists (select prh.created_at from pull_request_history prh where prh.pull_request_id = pr.id and prh.action='opened' and year(prh.created_at)=2012)")
+res <- dbSendQuery(con, "select count(*) as cnt from projects p, pull_requests pr  where p.forked_from is null and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles' and p.name <> 'vimfiles'and pr.base_repo_id = p.id and exists (select prh.created_at from pull_request_history prh where prh.pull_request_id = pr.id and prh.action='opened' and year(prh.created_at) > 2010)")
 opened_pullreqs <- fetch(res, n = -1)$cnt
 
 # Overall pull req stats - closed
-res <- dbSendQuery(con, "select count(*) as cnt from projects p, pull_requests pr  where p.forked_from is null and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles' and p.name <> 'vimfiles' and pr.base_repo_id = p.id and exists (select prh.created_at from pull_request_history prh where prh.pull_request_id = pr.id and prh.action='closed' and year(prh.created_at)=2012)")
+res <- dbSendQuery(con, "select count(*) as cnt from projects p, pull_requests pr  where p.forked_from is null and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles' and p.name <> 'vimfiles' and pr.base_repo_id = p.id and exists (select prh.created_at from pull_request_history prh where prh.pull_request_id = pr.id and prh.action='closed' and year(prh.created_at) > 2010)")
 closed_pullreqs <- fetch(res, n = -1)$cnt
 
 # Overall pull req stats - merged
-res <- dbSendQuery(con, "select count(*) as cnt from projects p, pull_requests pr  where p.forked_from is null and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles' and p.name <> 'vimfiles' and pr.base_repo_id = p.id and pr.merged = true and exists (select prh.created_at from pull_request_history prh where prh.pull_request_id = pr.id  and year(prh.created_at)=2012)")
+res <- dbSendQuery(con, "select count(*) as cnt from projects p, pull_requests pr  where p.forked_from is null and p.name not regexp '^.*\\.github\\.com$' and p.name <> 'try_git' and p.name <> 'dotfiles' and p.name <> 'vimfiles' and pr.base_repo_id = p.id and pr.merged = true and exists (select prh.created_at from pull_request_history prh where prh.pull_request_id = pr.id  and year(prh.created_at) > 2010)")
 merged_pullreqs <- fetch(res, n = -1)$cnt
 print(sprintf("Perc merged pull requests: %f", (merged_pullreqs/opened_pullreqs) * 100))
 
@@ -135,11 +154,11 @@ store.pdf(ggplot(pullreqs_per_month, aes(x = month)) +
   theme(legend.title=element_blank()), plot.location,"num-pullreqs-month.pdf")
   
 # Correlation between pull requests and watchers
-have.pr = subset(projectstats, pull_requests >0 & watchers > 0)
-cor_pr_watch <- cor.test(have.pr$pull_requests, have.pr$watchers, method="kendall")
-print(sprintf("Kendall correlation pullreqs-watchers: %f (n = %d, p = %f)", cor_pr_watch$estimate, length(have.pr$pull_requests), cor_pr_watch$p.value))
-cor_pr_watch <- cor.test(have.pr$pull_requests, have.pr$watchers, method="spearman")
-print(sprintf("Spearman correlation pullreqs-watchers: %f (n = %d, p = %f)", cor_pr_watch$estimate, length(have.pr$pull_requests), cor_pr_watch$p.value))
+res <- dbSendQuery(con, "select count(pr.id) as pullreqs, (select count(*) from watchers w where w.repo_id = pr.base_repo_id) as watchers from pull_requests pr group by pr.base_repo_id")
+pr_watchers <- fetch(res, n = -1)
+cor_pr_watch <- cor.test(pr_watchers$pullreqs, pr_watchers$watchers, method="spearman")
+print(sprintf("Spearman correlation pullreqs-watchers: %f (n = %d, p = %f)", 
+              cor_pr_watch$estimate, nrow(pr_watchers), cor_pr_watch$p.value))
       
 # Forked repos
 res <- dbSendQuery(con, "select count(*) as cnt from projects where forked_from is not null")

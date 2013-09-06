@@ -96,15 +96,22 @@ get.project <- function(dfs, name) {
 
 # Merge dataframes
 merge.dataframes <- function(dfs, min_num_rows = 1) {
-  Reduce(function(acc, x){
-      printf("Merging dataframe %s", project.name(x))
-      if (nrow(x) >= min_num_rows) {
-        rbind(acc, x)
-      } else {
-        printf("Warning: %s has less than %d rows (%d), skipping", project.name(x), min_num_rows, nrow(x))
-        acc
-      }
-    }, dfs)
+  if (file.exists(merged.dataset)) {
+    printf("Loading cached dataset from: %s", merged.dataset)
+    read.csv(merged.dataset)
+  } else {
+    merged = Reduce(function(acc, x){
+        printf("Merging dataframe %s", project.name(x))
+        if (nrow(x) >= min_num_rows) {
+          rbind(acc, x)
+        } else {
+          printf("Warning: %s has less than %d rows (%d), skipping", project.name(x), min_num_rows, nrow(x))
+          acc
+        }
+      }, dfs)
+    write.csv(merged, merged.dataset, quote = FALSE)
+    merged
+  }
 }
 
 # Prints a list of column along with a boolean value. If the value is FALSE, then
@@ -117,8 +124,8 @@ column.contains.na <- function(df) {
 ranksum <- function (a, b, title = "") {
   w <- wilcox.test(a, b)
   d <- cliffs.d(a, b)
-  printf("%s sizes: a: %d b: %d, medians a: %f b: %f, wilcox: %f, p: %f, d: %f", 
-         title, length(a), length(b), median(a), median(b), w$statistic, 
+  printf("%s sizes: a: %d b: %d, medians a: %f b: %f, means a: %f, b: %f, wilcox: %f, p: %f, d: %f", 
+         title, length(a), length(b), median(a), median(b), mean(a), mean(b), w$statistic, 
          w$p.value, d)
 }
 

@@ -128,13 +128,14 @@ that affect the efficiency of the pull-based software development model.
 Specifically, the questions we are trying to answer are: 
 
 \begin{description}
+  
+  \item[RQ1] How popular is the pull based development model?
 
-  \item[RQ1] What are the lifecycle characteristics of pull requests? 
+  \item[RQ2] What are the lifecycle characteristics of pull requests?
     
-  \item[RQ2] Why are some pull requests not merged?
+  \item[RQ3] What factors affect the decision and the time required to merge a pull request?
 
-  \item[RQ2] What factors affect the time required to process a pull request,
-    until it is merged?
+  \item[RQ4] Why are some pull requests not merged?
 
 \end{description}
 
@@ -220,8 +221,6 @@ strategies can be employed with {\sc dvc}s:
     \end{figure}
 
 \subsection{Pull requests on Github}
-
-\input{overall-stats.tex}
 
 Github supports all types of distributed development outlined above; however,
 pull requests receive special treatment. The site is tuned to allow easy forking
@@ -336,97 +335,77 @@ tracker.
 
 The main focus of this study is to understand and explain how pull requests are
 used by projects to enable collaboration. To answer our research questions, we
-use a sequential mixed-methods approach; mixed methods is a procedure for
+use a sequential mixed-methods approach. Mixed methods is a procedure for
 collecting, analyzing, and integrating both quantitative and qualitative data at
 some stage of the research process within a single study for the purpose of
-gaining a better understanding of the problem~\cite{Ivank06}. For all 
+gaining a better understanding of the problem~\cite{Ivank06}. For specific 
 research questions, we first explore the domain quantitatively,
 and then highlight specific interesting cases by exploring cases qualitatively.
 
-The first phase primarily aims at answering RQ1, addressing the use of the
-pull-based development model among users of distributed version control systems.
-In the second phase, we use the lessons learned from answering RQ1 to understand
-which factors affect the decision and time required to merge.
+We present here how we analyzed each 
 
+{\bfseries RQ1} To assess the popularity of the pull-based development model, we
+provide and analyze descriptive statistics on the use of pull request in Github.
+In particular, we investigate such questions as how many projects actually make
+use of pull requests, how many of the projects are original repositories
+(versus, e.g., clones), and what the relation is to Github's issue tracking
+facilities is. The outcomes are in Section~\ref{sec:ghtorrent}.
 
+{\bfseries RQ2 and RQ3} Answering {\sc rq2} and {\sc rq3} first of all requires
+a dedicated dataset of projects that have a sufficiently long history of using
+pull requests. This dataset is described in Section~\ref{sec:expdata}.
 
-\subsection{Phase I: Pull Request Usage}
-
-To asses the popularity of the pull-based development model (RQ1), we provide
-and analyze descriptive statistics on the use of pull request in Github. In
-particular, we investigate such questions as how many projects actually make use
-of pull requests, how many of the projects are original repositories (versus,
-e.g., clones), and what the relation is to Github's issue tracking facilities.
-The outcomes are in Section~\ref{sec:github}.
-
-\subsection{Phase II: Pull Request Acceptance}
-\label{sec:expprocess}
-
-The insights obtained from the analysis for RQ1 can be used to address
-RQ2 and RQ3. 
-
-Answering RQ2 and RQ3 first of all requires a dedicated dataset of
-projects that have a sufficiently long history of using pull requests.
-This dataset is described in Section~\ref{sec:expdata}.
-
-
-
-% \subsection{Process}
-% 
-
-% First, we need to determine the popularity of pull requests; how
-% common are they, how are they treated by projects and what types of 
-% interactions they enable? We answer this question by performing an
-% exploration of pull request usage on the {\sc ght}orrent data set,
-% using descriptive statistics and correlation analysis as necessary.
-
-
-% Based on the results of the exploration, we then investigate the answer of what
-% factors can be used as indicators for predicting whether a pull request will be
-% merged or not.
-
-Given this dataset, we answer RQ2 and RQ3 by determining
-a set of suitable candidate
-features by consulting related work in the fields of patch submission and bug
-triaging. Then, we clean it up through cross-correlation analysis to obtain a
-set of features with maximum predictive power
-(Section~\ref{sec:featureselection}). Using the extracted data for the 
-extracted features, we perform a detailed statistical analysis of pull request
-characteristics (Section~\ref{sec:pullreqchar}).
+Given this dataset, we answer {\sc rq2} and {\sc rq3} by determining a set of
+suitable candidate features by consulting related work in the fields of patch
+submission and bug triaging. Then, we clean it up through cross-correlation
+analysis to obtain a set of features with maximum predictive power
+(Section~\ref{sec:featureselection}). Using the extracted data for the extracted
+features, we perform a detailed statistical analysis of pull request
+characteristics to answer {\sc rq2}  (Section~\ref{sec:pullreqchar}).
 
 Using the identified features, we use machine learning to retrieve
 the dominant ones. Prior to running the classification algorithms, we labeled
-each pull request with a binary attribute; in the case of the \textsf{merge
-decision} classification task, the attribute signifies whether the pull request
+each pull request with an outcome factor; in the case of the \textsf{merge
+decision} classification task, the factor signifies whether the pull request
 has been merged. For the \textsf{merge time} task, we first filter out pull
 requests that have not been merged and then split the remaining data points in
-two bins, slow and fast, using the mean time to merge, so that we get two
-groups of equal number of data points.
+three bins (one hour, one day and remaining) according to the time 
+required to merge the pull request. The bins were chosen to reflect the
+results of {\sc rq2}, and split the available data points in roughly
+equally sized bins.
 
 At a high level, the process to retrieve the dominant features for both
-problems consists of two steps: i) we run each dataset through 4 well known
+problems consists of two steps: i) we run each dataset through 3 well known
 classification algorithms, namely Random Forests (\texttt{randomforest}),
-Support Vector Machines (\texttt{svm}), Binary Logistic Regression
-(\texttt{binlogregr}) and Na\"ive Bayes (\texttt{naivebayes}), and ii) we select
+variants of Logistic Regression (\texttt{logregr}) (binary for the \textsf{merge decision} task, multinomial for the \textsf{merge time} task) and Na\"ive Bayes (\texttt{naivebayes}), and ii) we select
 the best classifier and apply a classifier-specific process to extract the
 feature importance. 
 
 To evaluate the classification performance, we used the Accuracy ({\sc acc}) and
-Area Under the receiver operating characteristic Curve ({\sc auc}) metrics. To select the
-appropriate classification algorithm, we run a 10-fold random selection
-cross-validation and aggregate the mean values for each classification
-metric.\footnote{For the \texttt{randomforest} classifier, cross validation is
-considered redundant~\cite{Breim01}. Nevertheless, we did it for consistency
-across our experiment. The stability of the results across cross validation runs
-confirm the redundancy of cross-validation.} At each iteration, the algorithm
-randomly samples 10,000 data points from the whole dataset, train a
-classifier with 90\% percent of the input and use it to predict the remaining
-10\%. The 10-fold run results also allowed us to evaluate the metric stability
-across runs. We did not perform any additional tuning to the classification
-algorithms (Section~\ref{sec:accrej}).
+Area Under the receiver operating characteristic Curve ({\sc auc}) metrics. To
+select the appropriate classification algorithm, we run a 10-fold random
+selection cross-validation and aggregate the mean values for each classification
+metric. At each iteration, the algorithm randomly samples 10,000 data points
+from the whole dataset, train a classifier with 90\% percent of the input and
+use it to predict the remaining 10\%. The 10-fold run results also allowed us to
+evaluate the metric stability across runs. We did not perform any additional
+tuning to the classification algorithms (Section~\ref{sec:accrej}).
 
-\subsection{Replication Information} 
-This study has been conducted using the {\sc ght}orrent
+{\bfseries RQ4} Applying machine learning to answer {\sc rq4} would pose a
+significant challenge, as the lack of a standardized way of processing pull
+requests across projects hinders our ability to extract reliable relevant
+features. We therefore opted to do in-depth qualitative analysis of a limited
+number of random chosen pull requests. We used grounded coding to come up with
+an inclusive set of tags of why pull requests are not merged as follows: The
+first author read the pull request discussion on Github and summarized it into
+one sentence per sample; during the second pass, the descriptions were
+aggregated and codes were extracted. To validate the identified codes, all three
+authors applied them on a different set of pull requests, compared results and
+identified inconsistencies. The final set of codes was applied on a third sample
+and we used that sample to draw results from. The sampling process is described
+in Section~\ref{sec:qualitative}.
+
+{\bfseries Replication}This study has been conducted using the {\sc ght}orrent
 dataset and custom-built Ruby and R tools. We share the tools, original data
 sources and extracted data files on the Github repository
 \texttt{gousiosg\-/\-pullreqs}. The execution of all tools is scripted and it is
@@ -435,7 +414,7 @@ possible to run it in sequence automatically.
 \section{Data}
 
 \subsection{Github Data}
-
+\label{sec:ghtorrent}
 For both phases, we use data obtained through the Github \api.
 In particular, we do this by means of the \ghtorrent
 dataset~\cite{GS12}.
@@ -456,7 +435,6 @@ activities on Github, including pull requests and issues. Up to August 2013,
 have been collected.
 
 \subsection{Pull request project sample}
-
 \label{sec:expdata} 
 
 While an overview of pull request activity can be safely extracted from the \ghtorrent dataset, several limitations do not allow us to apply our detailed
@@ -614,15 +592,14 @@ when a user stared a project, so it is impossible to know how many followers a
 user had or stars a project had at a specific time instance.} Finally, we
 merged similar features (i.e. \texttt{doc\_files} and \texttt{src\_files} were merged to \texttt{files\_changed}). 
 
-The post processing phase left us with
-13 features, which can be seen in Table~\ref{tab:features}.
-The cross-correlation analysis result for the selected features can be seen in
-Figure~\ref{fig:crosscor}. In general, very few features are correlated at a
-value $\rho > 0.2$, while only two, \texttt{src\_churn} and
-\texttt{files\_changed}, are strongly correlated at $\rho = 0.63$. While the
-correlation is strong, it is below our threshold and it is not definite;
-therefore we do not remove either feature from the dataset. All results are
-statistically significant ($n = 166,737, p < 0.001$).
+The post processing phase left us with 13 features, which can be seen in
+Table~\ref{tab:features}. The cross-correlation analysis result for the
+selected features can be seen in Figure~\ref{fig:crosscor}. In general, very few
+features are correlated at a value $\rho > 0.2$, while only two,
+\texttt{src\_churn} and \texttt{files\_changed}, are strongly correlated at
+$\rho = 0.63$. While the correlation is strong, it is below our threshold and it
+is not definite; therefore we do not remove either feature from the dataset. All
+results are statistically significant ($n = 166,737, p < 0.001$).
 
 %\begin{table*}
 %  \begin{small}
@@ -713,62 +690,62 @@ statistically significant ($n = 166,737, p < 0.001$).
 \end{figure}
 
 \subsection{Qualitative data}
-
+\label{sec:qualitative}
 To investigate how pull requests are used in practice and why some pull requests
 are not merged, we performed in-depth examination of random samples of pull
 requests followed by coding and thematic analysis. 
 
-To examine how pull requests are used in practice, we categorized
-100 randomly selected pull requests, sampled from the dataset described above,
-in two categories: patches and feature discussions. We drew those categories
-from our experience as pull request users and also by consulting 
-the interviews in Pham et al.~\cite{Pham13} and Marlow et al.~\cite{Marlo13}.
+%To examine how pull requests are used in practice, we categorized
+%100 randomly selected pull requests, sampled from the dataset described above,
+%in two categories: patches and feature discussions. We drew those categories
+%from our experience as pull request users and also by consulting 
+%the interviews in Pham et al.~\cite{Pham13} and Marlow et al.~\cite{Marlo13}.
 
 To discover the reasons for pull request rejection, we again randomly sampled
-from our pull request project dataset: 100 pull requests were initially used by
-the first coder to identify discrete reasons for closing pull requests
+cases from our pull request project dataset. 100 pull requests were initially
+used by the first coder to identify discrete reasons for closing pull requests
 (bootstrapping sample), while a different set of 100 pull requests were used by
 all three coders to validate the identified categories (cross-validation
-sample). After cross validation, a further 150 pull request sample was added to
-the bootstrapping sample to construct the finally analyzed dataset.
+sample). After cross validation, a further 150 randomly selected pull requests
+were added to the bootstrapping sample to construct the finally analyzed
+dataset.
 
-\section{Descriptive statistics of pull request usage on Github}
+\section{Popularity of Pull-based Development}
 \label{sec:github}
+\input{overall-stats.tex}
 
 Github is a very popular development site. As of August 2013, Github reports
 more than 7 million repositories and 4 million users. However, not all those
-projects are active: in 2012, the {\sc ght}orrent dataset captured events initiated by
-(approximately) 1,470,200 users affecting 2,607,550 repositories. The majority
+projects are active: in the period Feb 2012 --- Aug 2013, the {\sc ght}orrent dataset captured events initiated by
+(approximately) 2,281,000 users affecting 4,887,500 repositories. The majority
 of registered repositories are forks of other repositories, special repositories
 hosting user web pages (named as \texttt{<name>.github.com}), program
 configuration files (\texttt{dotfiles}) and temporary repositories for
 evaluating Git (\texttt{try\_git}). In the {\sc ght}orrent dataset, less than half
-(1,177,000 or 45\%) of the active repositories are original repositories. From
+(1,877,660 or 45\%) of the active repositories are original repositories. From
 those, 587,800 (or 28\% in total) received a commit in 2012.
 
 Pull requests are enabled by default on all repositories opened on Github. On a
-monthly basis, pull request usage is increasing
+monthly basis, the average number of pull requests per repository is increasing
 (Figure~\ref{fig:pullreq-per-month}). From the set of original repositories as
-described above, 92,600 received at least one pull request in 2012. During the
-same period, 525,900 original repositories used the shared repository approach,
+described above, 92,600 received at least one pull request in 2013. During the
+same period, 898,550 original repositories used the shared repository approach,
 having received commits by more than one developers and no pull requests. The
-situation is similar during the first two months of 2013; 42,400 repositories
+situation is similar during the first eight months of 2013; 42,400 repositories
 received a pull request while 222,967 used the shared repository approach
 exclusively. While pull request usage is increasing overall, they are not the
 most popular approach for distributed software development yet.
 
-For those projects that received pull requests in 2012, the mean number of pull
+An overview
+For those projects that received pull requests in 2013, the mean number of pull
 requests per project is relatively low at 7.1 (percentiles: 5\%: 1, 95\%: 21);
-however, the distribution of the number of pull requests in projects is highly skewed, as
-shown in Figure~\ref{fig:prfreq}.
-%A few large projects (such as the Homebrew package manager and the Ruby on
-%Rails web application framework) receive the vast majority of pull requests.
-From the pull requests that have been opened in 2012, 73,07\% have been merged,
+however, the distribution of the number of pull requests in projects is highly skewed.
+From the pull requests that have been opened in 2012, 73,07\% have been merged
+using Github facilities,
 thereby indicating that pull requests in principle can work as a medium for
 obtaining external contributions. Moreover, even though one might expect that it
-is the well known projects that receive most pull requests, this is not very
-well supported by our data: the Spearman rank correlation between the number of
-watchers of a project and the number of pull requests it has received is $\rho = 0.42$ ($p < 0.001, n = 75011$).
+is the well known projects that receive most pull requests, this is moderately supported by our data: the Spearman rank correlation between the number of
+watchers of a project and the number of pull requests it has received is $\rho = 0.36$ ($p < 0.001, n = 235,564$).
 
 \begin{figure}[t]
   \centering
@@ -833,33 +810,31 @@ repositories using them is relatively stable.}
 
 %\input{cross-cor.tex}
 
-\section{Pull Request Characteristics}
+\section{Pull Request Lifecycle Characteristics}
 \label{sec:pullreqchar}
-In this section, we analyze the extracted dataset and provide insights
-by relating the selected features to our two research questions.
 
 \textbf{Lifetime of pull requests.}
 After being submitted, pull requests can be in two states: merged or closed
 (and therefore not-merged).
-In our dataset, most pull requests (mean: 74.5\%) are getting
-merged. This result is slightly higher than the overall we calculated for
-Github, but this can be attributed to the fact that the dataset was cleaned
-from projects for which we could not detect merges accurately. 
+In our dataset, most pull requests (mean: 84.73\%) are getting
+merged. This result is higher than the overall we calculated for
+Github, but this can be attributed to the fact that the dataset generation
+process employs heuristics to detect merges outside Github.
 
 For merged pull requests, an important property is the time required to process
 and merge them. The time to merge distribution is highly skewed, with the great
 majority of merges happening very fast. Measured in days, 95\% of the pull
-requests are merged in 19, 90\% in 8 and 80\% in only 2.8 days. An interesting
-observation is that there are many (8,525 or 30\% of our sample) pull requests
+requests are merged in 26, 90\% in 10 and 80\% in only 3.7 days. An interesting
+observation is that there are many (43,557 or 30\% of our sample) pull requests
 which are merged in under one hour; the majority of such pull requests (60\%)
-come from core team members, while their source code churn is significantly
-lower than that of the remaining pull requests. If we compare the time to
+come from the community, while their source code churn is significantly
+lower than that of the remaining pull requests (medians: 5 and 13 respectively). If we compare the time to
 process pull requests that are being merged against those that are not, we can
 see (Figure~\ref{fig:close-merged-unmerged}) that pull requests that have been
-merged are closed much faster (mean: 6,921 minutes) than unmerged (mean: 39,008
+merged are closed much faster (median: 434 minutes) than unmerged (median: 2250
 minutes) pull requests.
 The results of an unpaired Mann-Witney test ($p < 0.001$) showed that this difference is statistically significant, with a relatively
-significant effect size (Cliff's $\delta: 0.35$). This means that pull requests
+significant effect size (Cliff's $\delta: 0.32$). This means that pull requests
 are either processed fast or left lingering for long before they are closed.
 
 Based on these observations, a question that emerges is
@@ -867,26 +842,29 @@ whether the pull requests originating from main team members are treated faster
 than those from external contributors. To answer it, we performed an unpaired
 Mann-Witney test among the times to merge pull requests from each group. The
 result is that while the two groups differ in a statistically significant manner
-($n_1 = 14316, n_2 = 12463, p < 0.001$), the apparent difference is very small
-(Cliff's $\delta: -0.11$, see also Figure~\ref{fig:lifetime-boxplot}). This
+($n_1 = 51,829, n_2 = 89,454, p < 0.001$), the apparent difference is negligible
+(Cliff's $\delta: -0.09$, see also Figure~\ref{fig:lifetime-boxplot}). This
 means that merged pull requests received no special treatment, irrespective
 whether they came from core team members or from the community.
 
 On a per project basis, if we calculate the mean time to merge a pull request,
-we see that in the majority of projects (72\%), the time to merge a pull request
-is less than 7 days. The mean time to merge a pull request per project is not
-correlated with the project's size, as indicated by a low Spearman
-correlation value ($\rho = -0.23$) or the project's test coverage ($\rho =
-0.34$). 
+we see that in the majority of projects (65\%), the mean time to merge a pull
+request is less than 7 days. The mean time to merge a pull request per project
+is not correlated with the project's size, as indicated by a low Spearman
+correlation value ($\rho = -0.05$) nor the project's test coverage ($\rho =
+0.27$). It is however, strongly correlated ($\rho = -0.69$) with the pull
+request initiator's track record: the highest the number of pull requests a
+developer has submitted to the same project, the lowest the time to process it.
 Moreover, projects are not getting faster at pull request processing by
 processing more pull requests; the correlation between the average time to merge
-and the number of pull requests is weak ($\rho = -0.33, n = 88, p < 0.01$).
+and the number of pull requests is weak ($\rho = -0.23, n = 291, p < 0.01$).
 
 \fbox{
 \begin{minipage}{0.46\textwidth}
 \emph{80\% of pull requests are merged in less than 3 days, while 30\% are
 merged within one hour. Pull requests are treated the same irrespective of
-their origin (project team or community).}
+their origin (project team or community). The developer's track record
+is an indicator of how fast a pull request will be merged.}
 \end{minipage}}
 
 \begin{figure}

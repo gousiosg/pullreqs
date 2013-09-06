@@ -45,8 +45,9 @@ print("Loading data files..")
 dfs <- load.all(dir=data.file.location, pattern="*.csv$")
 dfs <- addcol.merged(dfs)
 all <- merge.dataframes(dfs)
+all <- subset(all, !is.na(src_churn))
 
-# Number of projects per language
+#  Number of projects per language
 for(language in c("ruby", "java", "python", "scala")) {
   printf("%d projects in %s", length(unique(subset(all, lang == language)$project_name)), language)
 }
@@ -170,9 +171,9 @@ descr.stats <- data.frame(
     #"The pull request comments include links to other pull requests.",
     "Executable lines of code at pull request merge time.",
     "Number of active core team members during the last 3 months prior the pull request creation.",
-    "The ratio of commits from external members over core team members in the last 3 months prior to pull request creation",
-    "Number of total commits on files touched by the pull request 3 months before the pull request creation time",
-    "A proxy for the project's test coverage",
+    "The ratio of commits from external members over core team members in the last 3 months prior to pull request creation.",
+    "Number of total commits on files touched by the pull request 3 months before the pull request creation time.",
+    "A proxy for the project's test coverage.",
     "Number of pull requests submitted by a specific developer, prior to the examined pull request.",
     "The percentage of the developer's pull requests that have been merged up to the creation of the examined pull request."
     #"Whether the developer belongs to the main repository team."
@@ -231,6 +232,7 @@ printf("Merge time in days quantiles: 95: %f, 90: %f, 80: %f",
         to.days(quantile(merged$mergetime_minutes, 0.80)))
 
 merged.fast <- subset(merged, mergetime_minutes < 61)
+printf("Num pull reqs merged in an hour: %f", nrow(merged.fast))
 printf("Perc pull reqs merged in an hour: %f", nrow(merged.fast)/nrow(merged))
 
 printf("Perc fast pull reqs merged from main team members: %f",
@@ -255,28 +257,27 @@ ranksum(merged$lifetime_minutes, non_merged$lifetime_minutes,
 
 # Origin of pull request (main team or external) and mergetime
 # Box plot of merge time between main and external team members
-main.team.mergetimes <- subset(merged, main_team_member == T)$mergetime_minutes
-ext.team.mergetimes <- subset(merged, main_team_member == F)$mergetime_minutes
-
-main.team.mergetimes$team <- "main"
-ext.team.mergetimes$team <- "external"
-teams <- rbind(main.team.mergetimes, ext.team.mergetimes)
+teams <- merged
+teams$team <- lapply(teams$main_team_member, function(x){if(x){"main"}else{"external"}})
 teams$team <- as.factor(teams$team)
+
 p <- ggplot(teams, aes(x = team, y = mergetime_minutes)) +
   geom_boxplot()  + scale_y_log10() + xlab("Team") +
   ylab("Time to merge in minutes (log))")
 store.pdf(p, plot.location, "merge-internal-external.pdf")
 
 # Rank correlation to see whether the populations differ significantly
-ranksum(main.team.mergetimes, ext.team.mergetimes, "pull request origin and merge time")
+ranksum(subset(merged, main_team_member == T)$mergetime_minutes, 
+        subset(merged, main_team_member == F)$mergetime_minutes, 
+        "pull request origin and merge time")
 
 # Pull requests merge time at the proejct level
-print("Cross correlation table for mean time to merge vs other variables")
+print("Cross correlation table for median time to merge vs other variables")
 col1 <- c(columns, 'mergetime_minutes')
-cor(subset(aggregate(merged, list(merged$project_name), mean), select = col1),
+cot.tab <- cor(subset(aggregate(merged, list(merged$project_name), mean), select = col1),
     method = "spearman")
 
-mean.mergetime.per.project <- aggregate(merged, list(merged$project_name), mean)[c('Group.1','mergetime_minutes')]
+mean.mergetime.per.project <- aggregate(merged, list(merged$project_name), median)[c('Group.1','mergetime_minutes')]
 
 printf("Perc projects with mean mergetime < 1 week: %f",
               nrow(subset(mean.mergetime.per.project, mergetime_minutes < 10080))/
