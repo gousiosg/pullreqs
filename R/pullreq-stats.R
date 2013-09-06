@@ -179,10 +179,10 @@ descr.stats <- data.frame(
 )
 
 descr.stats$Feature <- as.character(descr.stats$Feature)
-descr.stats$min <- lapply(descr.stats$Feature, function(x){min(all[,x], na.rm = T)})
+descr.stats$quant_5 <- lapply(descr.stats$Feature, function(x){quantile(all[,x], 0.05,na.rm = T)})
 descr.stats$mean <- lapply(descr.stats$Feature, function(x){mean(all[,x], na.rm = T)})
 descr.stats$median <- lapply(descr.stats$Feature, function(x){median(all[,x], na.rm = T)})
-descr.stats$max <- lapply(descr.stats$Feature, function(x){max(all[,x], na.rm = T)})
+descr.stats$quant_95 <- lapply(descr.stats$Feature, function(x){quantile(all[,x], 0.95, na.rm = T)})
 descr.stats$histogram <- lapply(descr.stats$Feature, function(x){
   data <- all[, x]
   unq <- digest(sprintf("descr.stats.%s",as.character(x)))
@@ -322,7 +322,7 @@ printf("Median commits %f", median(all$src_churn + all$test_churn))
 printf("Perc pull reqs modifying non-code: %f", 1 - nrow(subset(all, src_churn > 0 | test_churn >0))/nrow(all))
 printf("Perc Pull reqs modifying test code: %f", nrow(subset(all, test_churn > 0))/nrow(all))
 printf("Perc Pull reqs modifying test code exclusively: %f", nrow(subset(all, test_churn > 0 & src_churn == 0))/nrow(all))
-printf("Perc test pull reqs merged: %f", nrow(subset(all, test_churn > 0 & merged == TRUE))/nrow(subset(all, merged == TRUE)))
+printf("Perc test pull reqs merged: %f", nrow(subset(all, test_churn > 0 & merged == T))/nrow(subset(all, test_churn > 0)))
 
 ranksum(subset(merged, test_churn > 0, c(mergetime_minutes))$mergetime_minutes,
         subset(merged, test_churn == 0, c(mergetime_minutes))$mergetime_minutes,
@@ -337,6 +337,23 @@ printf("Merged pull reqs comments quantiles: 95: %f, 90: %f, 80: %f",
 cor.test(all$lifetime_minutes, all$num_comments, method = "spearman")
 cor.test(merged$lifetime_minutes, merged$num_comments, method = "spearman")
 cor.test(non_merged$lifetime_minutes, non_merged$num_comments, method = "spearman")
+
+# Code review, pimp the data frame with info about code review
+has.code.review <- function(pr_id) {
+  q = sprintf("select count(*) as cnt from pull_request_comments prc where prc.pull_request_id = %d", pr_id)
+  res <- dbSendQuery(con,q) 
+  num_code_review <- fetch(res, n = -1)
+  num_code_review > 0
+}
+
+all$code_review <- lapply(all$pull_req_id, has.code.review)
+reviewed <- subset(all, code_review == T)
+non.reviewed <- subset(all, code_review == F)
+printf("Pull reqs with code review: %d, %f%%", nrow(reviewed), nrow(reviewed)/nrow(all))
+printf("Reviewed and merged %%: %f", nrow(subset(reviewed, merged == T))/nrow(reviewed))
+ranksum(subset(reviewed, merged == T)$lifetime_minutes,
+        subset(non.reviewed, merged == T)$lifetime_minutes,
+        "code review and mergetime")
 
 # Pull request conflicts, do they affect merge time?
 ranksum(subset(merged, conflict == T)$mergetime_minutes,

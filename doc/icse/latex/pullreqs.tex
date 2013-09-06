@@ -508,7 +508,7 @@ inclusive enough. This way, we filtered out 2 projects, which we did not
 replace.
 
 The final dataset consisted of 291 projects (99 Python, 91 Java, 87 Ruby, 14
-Scala) and 166,737 data points (59,970, 55,320, 43,871 and 7,576 for Python,
+Scala) and 166,884 data points (59,970, 55,468, 43,870 and 7,576 for Python,
 Ruby, Java and Scala projects respectively). Both distributions are
 representative of the contemporary popularity of each respective programming
 language on both Github and other sites.
@@ -599,7 +599,7 @@ features are correlated at a value $\rho > 0.2$, while only two,
 \texttt{src\_churn} and \texttt{files\_changed}, are strongly correlated at
 $\rho = 0.63$. While the correlation is strong, it is below our threshold and it
 is not definite; therefore we do not remove either feature from the dataset. All
-results are statistically significant ($n = 166,737, p < 0.001$).
+results are statistically significant ($n = 166,884, p < 0.001$).
 
 %\begin{table*}
 %  \begin{small}
@@ -755,14 +755,13 @@ watchers of a project and the number of pull requests it has received is $\rho =
 \end{figure}
 
 
-Reviews on a pull request can either target the pull as whole or the individual commits,
-thereby resembling a code review. 
-Even though any Github user can participate to the
-review process, usually it is the project community members that do so:
-only 0.011\% of pull request comments come from users that have not
-committed to the project repository.
-Pull requests receive comments quite frequently: on average, each pull
-request receives 12 (quantiles: 5\%: 2, 95\%: 35) discussion comments.
+Reviews on a pull request can either target the pull as whole or the individual
+commits, thereby resembling a code review.  Even though any Github user can
+participate to the review process, usually it is the project community members
+that do so: only 0.011\% of pull request comments come from users that have not
+committed to the project repository.  Pull requests receive comments quite
+frequently: on average, each pull request receives 12 (quantiles: 5\%: 2, 95\%:
+35) discussion comments.
 
 Issues and pull requests are dual on Github; for each pull request, an issue is
 opened automatically. Commits can also be attached to issues to convert them to
@@ -800,13 +799,12 @@ facilities by both the project and the project community.
 %\end{figure}
 
 
-\fbox{
-\begin{minipage}{0.46\textwidth}
-\emph{RQ1: 14\% of repositories are using pull requests on Github. Pull request usage is increasing, even though the proportion of
-repositories using them is relatively stable.}
-\end{minipage}}
-
-
+%\fbox{
+%\begin{minipage}{0.46\textwidth}
+%\emph{RQ1: 14\% of repositories are using pull requests on Github. Pull request usage is increasing, even though the proportion of
+%repositories using them is relatively stable.}
+%\end{minipage}}
+%
 
 %\input{cross-cor.tex}
 
@@ -816,7 +814,7 @@ repositories using them is relatively stable.}
 \textbf{Lifetime of pull requests.}
 After being submitted, pull requests can be in two states: merged or closed
 (and therefore not-merged).
-In our dataset, most pull requests (mean: 84.73\%) are getting
+In our dataset, most pull requests (84.73\%) are eventually
 merged. This result is higher than the overall we calculated for
 Github, but this can be attributed to the fact that the dataset generation
 process employs heuristics to detect merges outside Github.
@@ -831,7 +829,7 @@ come from the community, while their source code churn is significantly
 lower than that of the remaining pull requests (medians: 5 and 13 respectively). If we compare the time to
 process pull requests that are being merged against those that are not, we can
 see (Figure~\ref{fig:close-merged-unmerged}) that pull requests that have been
-merged are closed much faster (median: 434 minutes) than unmerged (median: 2250
+merged are closed much faster (median: 434 minutes) than unmerged (median: 2,250
 minutes) pull requests.
 The results of an unpaired Mann-Witney test ($p < 0.001$) showed that this difference is statistically significant, with a relatively
 significant effect size (Cliff's $\delta: 0.32$). This means that pull requests
@@ -849,7 +847,7 @@ whether they came from core team members or from the community.
 
 On a per project basis, if we calculate the mean time to merge a pull request,
 we see that in the majority of projects (65\%), the mean time to merge a pull
-request is less than 7 days. The mean time to merge a pull request per project
+request is less than 7 days. The mean time to merge
 is not correlated with the project's size, as indicated by a low Spearman
 correlation value ($\rho = -0.05$) nor the project's test coverage ($\rho =
 0.27$). It is however, strongly correlated ($\rho = -0.69$) with the pull
@@ -859,14 +857,14 @@ Moreover, projects are not getting faster at pull request processing by
 processing more pull requests; the correlation between the average time to merge
 and the number of pull requests is weak ($\rho = -0.23, n = 291, p < 0.01$).
 
-\fbox{
-\begin{minipage}{0.46\textwidth}
-\emph{80\% of pull requests are merged in less than 3 days, while 30\% are
-merged within one hour. Pull requests are treated the same irrespective of
-their origin (project team or community). The developer's track record
-is an indicator of how fast a pull request will be merged.}
-\end{minipage}}
-
+%\fbox{
+%\begin{minipage}{0.46\textwidth}
+%\emph{80\% of pull requests are merged in less than 3 days, while 30\% are
+%merged within one hour. Pull requests are treated the same irrespective of
+%their origin (project team or community). The developer's track record
+%is an indicator of how fast a pull request will be merged.}
+%\end{minipage}}
+%
 \begin{figure}
 \centering
 %\subfigure[Percentage of pull requests that have been merged per project.
@@ -878,14 +876,14 @@ is an indicator of how fast a pull request will be merged.}
 %\includegraphics[scale=0.3]{pr-lifetime-hist.pdf}
 %\label{fig:pull-req-merge-time}
 %}
-\subfigure[Time to close pull requests.]{
-\includegraphics[scale=0.35]{close-merged-unmerged.pdf}
-\label{fig:close-merged-unmerged}
-}
-\subfigure[Time to merge pull requests for internal vs external team members.]{
-\includegraphics[scale=0.35]{merge-internal-external.pdf}
-\label{fig:lifetime-boxplot}
-}
+%\subfigure[Time to close pull requests.]{
+%\includegraphics[scale=0.35]{close-merged-unmerged.pdf}
+%\label{fig:close-merged-unmerged}
+%}
+%\subfigure[Time to merge pull requests for internal vs external team members.]{
+%\includegraphics[scale=0.35]{merge-internal-external.pdf}
+%\label{fig:lifetime-boxplot}
+%}
 %\subfigure[Size of pull request patch.]{
 %\includegraphics[scale=0.3]{pr-size-hist.pdf}
 %\label{fig:pull-req-patch}
@@ -894,19 +892,22 @@ is an indicator of how fast a pull request will be merged.}
 %\includegraphics[scale=0.3]{pr-size-files-changed-hist.pdf}
 %\label{fig:pull-req-files}
 %}
-\subfigure[Percentage of external commenters and comments per project. Bars
-are sorted by percentage of external commenters. Project names omitted for
-clarity.]{
-\includegraphics[scale=0.35]{perc-external-commenters-comments.pdf}
+%\subfigure[Percentage of external commenters and comments per project. Bars
+%are sorted by percentage of external commenters. Project names omitted for
+%clarity.]{
+%\includegraphics[scale=0.35]{perc-external-commenters-comments.pdf}
+%\label{fig:pull-num-comments}
+%}
+\includegraphics[scale=0.45]{perc-external-commenters-comments.pdf}
 \label{fig:pull-num-comments}
-}
-\caption{Dataset characteristics.}
+\caption{Percentage of external commenters and comments per project. Bars
+are sorted by percentage of external commenters. Project names omitted for
+clarity.}
 \end{figure}
 
 \textbf{Sizes of pull requests.}
-
 A pull request bundles together a set of commits; the number of commits on a
-pull request is generally less than 10 (95\% percentile: 11, 90\% percentile: 6,
+pull request is generally less than 10 (95\% percentile: 12, 90\% percentile: 6,
 80\% percentile: 3), with a median of 1. The number of files that are changed by
 a pull request is generally less than 20 (95\% percentile: 36, 90\% percentile:
 17, 80\% percentile: 7), with median number of 2. The number of total lines
@@ -916,28 +917,37 @@ changed by pull requests is on average less than 500 (95\% percentile: 1227,
 Except from the project's source code, pull requests also modify test code. In
 our sample, 33\% of the pull requests included modifications in test code, while
 4\% modified test code exclusively. Of the pull requests that included tests,
-72\% were merged, which is similar to the average. The presence of tests in a
-pull request does not seem to affect the merge time either: an unpaired
-Mann-Witney test shows that while there is a difference in the means of the pull
-request merge time for pull requests that include tests ($tests = 8831, no\_tests
-= 19061, p < 0.001$), the effect size is very small ($\delta = 0.07$). This
-result contradicts the findings by Pham et al.~\cite{Pham13}, where
-interviewed developers identified the presence of tests as a major factor for
-the acceptance of pull requests.
+83\% were merged, which is similar to the average.  This contradicts the
+findings by Pham et al.~\cite{Pham13}, where interviewed developers identified
+the presence of tests as a major factor for the acceptance of pull requests.
+The presence of tests in a pull request does not seem to affect the merge time:
+an unpaired Mann-Witney test shows that while there is a difference in the means
+of the pull request merge time for pull requests that include tests ($tests =
+45,488, no\_tests = 95,980, p < 0.001$), the effect size is very small ($\delta =
+0.11$).
 
-\fbox{
-\begin{minipage}{0.46\textwidth}
-\emph{Including test code does not help pull requests to be processed faster.}
-\end{minipage}}
-
+%\fbox{
+%\begin{minipage}{0.46\textwidth}
+%\emph{Including test code does not help pull requests to be processed faster.}
+%\end{minipage}}
 
 \textbf{Discussion and code review.}
-Once a pull request has been submitted, it is open for discussion until
-it is merged or closed. The discussion is usually brief: 95\% of pull
-requests receive 10 comments or less (80\% less than 4 comments). 
-The number of comments in the discussion is neither correlated with
-whether a pull request will be merged nor with the life time of the
-pull request.
+Once a pull request has been submitted, it is open for discussion until it is
+merged or closed. The discussion is usually brief: 95\% of pull requests receive
+12 comments or less (80\% less than 4 comments). As expected, the number of
+comments in the discussion is moderately correlated with the time to merge a
+pull request ($\rho = 0.48, n = 141,468$) and the time to close a non-merged
+pull request ($\rho = 0.37, n = 25,416$).
+
+Code reviews are integrated in the pull request process. In our sample, 12\% of
+the pull requests have been through code review. Code reviews do not seem to
+increase the probablity of a pull request being merged (84\% of reviewed pull
+requests are merged), but they do slow down the processing of a pull request:
+the unpaired Mann-Witney test between the time required to merge reviewed
+(median: 2719 minutes) and non-reviewed (median: 295 minutes) pull requests
+gives statistically significant differences with a strong effect size ($\delta =
+0.41$). Projects that employ code reviews feature larger code bases and 
+bigger team sizes that those that do not.
 
 Any Github user can participate to the discussion of any pull request. Usually,
 the discussion occurs between core team members trying to understand the changes
@@ -952,38 +962,37 @@ on pull requests the more open the project is and therefore the highest the
 percentage of external contributions; a Spearman correlation test quickly
 indicates that this is not true ($\rho = 0.22, n = 88, p < 0.05$).
 
-\section{Results}
+\section{Influential Factors}
 \label{sec:accrej}
 
 \begin{table}
   \centering
   \begin{tabular}{lcccc}
     \hline
-    {\bf classifier} & {\sc auc} & {\sc acc} & {\sc prec} & {\sc rec} \\
+    {\bf classifier} & {\sc auc} & {\sc acc} \\
     \hline
-    \multicolumn{4}{l}{\textsf{mergedecision} task($n = 37,492$)} \\
-    binlogregr    & 0.73 & 0.63 & 0.87 & 0.58  \\
-    naivebayes    & 0.69 & 0.61 & 0.85 & 0.57  \\
-    randomforest  & 0.94 & 0.87 & 0.93 & 0.93  \\
-    svm           & 0.52 & 0.48 & 0.72 & 0.48  \\
+    \multicolumn{4}{l}{\textsf{mergedecision} task($n = 166,884$)} \\
+    binlogregr    & 0.75 & 0.61  \\
+    naivebayes    & 0.71 & 0.59  \\
+    randomforest  & 0.94 & 0.86  \\
     \hline
-    \multicolumn{4}{l}{\textsf{merge time} task($n = 27,892$)} \\
-    binlogregr    & 0.60 & 0.55 & 0.56 & 0.57  \\
-    naivebayes    & 0.58 & 0.54 & 0.54 & 0.57  \\
-    randomforest  & 0.73 & 0.61 & 0.65 & 0.70  \\
-    svm           & 0.54 & 0.49 & 0.45 & 0.45  \\
+    \multicolumn{4}{l}{\textsf{merge time} task($n = 141,468$)} \\
+    multinomregr  & 0.61 & 0.44  \\
+    naivebayes    & 0.63 & 0.38  \\
+    randomforest  & 0.73 & 0.58  \\
     \hline
   \end{tabular}
   \caption{Classifier performance for the merge decision and merge time
   classification tasks. The results are means of 10-fold random selection
-  cross validation (sample size 10,000), with 90\% train and 10\% test data.}
+  cross validation on all data, with 90\% train and 10\% test data.}
   \label{tab:classif-perf}
 \end{table}
 
 We run the classification processes according to the protocol specified in 
-Section~\ref{sec:expprocess}. The data comprises of 
-37,492 and 27,892 pull requests for the \textsf{merge decision} and \textsf{merge time}
-classification task, respectively.
+Section~\ref{sec:expprocess}. 
+%The data comprises of 
+%37,492 and 27,892 pull requests for the \textsf{merge decision} and \textsf{merge time}
+%classification task, respectively.
 Based on the results presented in Table~\ref{tab:classif-perf},
 we selected the \texttt{randomforest} classification algorithm for
 both our experiments. For the \textsf{mergetime} experiment, \texttt{randomforest}
@@ -992,7 +1001,7 @@ the \textsf{mergedecision} experiment, the prior probability was 74\% which
 allowed the algorithm to achieve near perfect scores. In both cases,
 the stability of the {\sc auc} metric across folds was good 
 (\textsf{mergetime}: $\sigma_{auc} = 0.019$, \textsf{mergedecision}: $\sigma_{auc} = 0.008$).
-%
+
 %\begin{figure*}
 %\centering
 %\subfigure {
@@ -1010,25 +1019,25 @@ the stability of the {\sc auc} metric across folds was good
 %\caption{Random forest feature importance for predicting merge decision (a) and merge time (b)}
 %\label{fig:varimp}
 %\end{figure*}
-
-To extract the features that are important for each classification task, we
-used the process suggested in reference~\cite{Genue10}. Specifically, we run
-the algorithm 50 times on the full dataset for each experiment, using a large
-number of generated trees (2000) and trying 5 random variables per split. We
-then used the mean across 50 runs of the  Mean Decrease in Accuracy metric, as
-reported by the {\sc r} implementation of the random forest algorithm, to
+%
+To extract the features that are important for each classification task, we used
+the process suggested in reference~\cite{Genue10}. Specifically, we run the
+algorithm 50 times on a randomly selected sample of $n = 83,442$ items, using a
+large number of generated trees (2000) and trying 5 random variables per split.
+We then used the mean across 50 runs of the  Mean Decrease in Accuracy metric,
+as reported by the {\sc r} implementation of the random forest algorithm, to
 evaluate the importance of each feature. The results can be seen in
 Figure~\ref{fig:varimp}.
 
-Finally, to validate our feature selection, we rerun the 10-fold
-cross-validation process with increasing number of predictor features starting
-from the most important one per case.
-In each iteration step, we add to the model the next most important feature.
-We stop the process when the mean {\sc
-auc} metric is within 2\% from the value in Table~\ref{tab:classif-perf} for
-each task. The selected set of features should then be enough to predict the
-classification outcome with reasonable accuracy, and therefore can be described
-as important.
+%Finally, to validate our feature selection, we rerun the 10-fold
+%cross-validation process with increasing number of predictor features starting
+%from the most important one per case.
+%In each iteration step, we add to the model the next most important feature.
+%We stop the process when the mean {\sc
+%auc} metric is within 2\% from the value in Table~\ref{tab:classif-perf} for
+%each task. The selected set of features should then be enough to predict the
+%classification outcome with reasonable accuracy, and therefore can be described
+%as important.
 
 For the \textsf{mergedecision} task, the feature importance result is dominated
 by the \texttt{commits\_\-on\_\-files\_\-touched} feature. By re-running the cross
@@ -1040,11 +1049,11 @@ affected by whether it touches an actively developed part of the system (a
 variation of the ``yesterday's weather'' hypothesis), how large the project's
 source code base is and how many files the pull request changes.
 
-\fbox{
-\begin{minipage}{0.46\textwidth}
-\emph{RQ2: The three main factors that affect the decision to merge a pull request are: i)
-How active the area affect by the pull request has been recently ii) The size of the project iii) The number of files changed by the pull request.}
-\end{minipage}}
+%\fbox{
+%\begin{minipage}{0.46\textwidth}
+%\emph{RQ2: The three main factors that affect the decision to merge a pull request are: i)
+%How active the area affect by the pull request has been recently ii) The size of the project iii) The number of files changed by the pull request.}
+%\end{minipage}}
 
 For the \textsf{mergetime} task there is again a dominating feature, but the
 difference is not as pronounced as in the previous case. However, if we re-run
@@ -1055,12 +1064,51 @@ enable \texttt{randomforest} to reach similar performance levels ({\sc auc:}
 conclude that the discussion comments and the size of the project play a
 significant role on how fast pull requests are processed. 
 
-\fbox{
-\begin{minipage}{0.46\textwidth}
-\emph{RQ3: The three main factors that affect the time to merge a pull request
-are: i) The number of discussion comments ii) The size of the project iii) The
-project's test coverage.}
-\end{minipage}}
+%\fbox{
+%\begin{minipage}{0.46\textwidth}
+%\emph{RQ3: The three main factors that affect the time to merge a pull request
+%are: i) The number of discussion comments ii) The size of the project iii) The
+%project's test coverage.}
+%\end{minipage}}
+
+\section{Looking deeper in non merged pull requests}
+
+\begin{table}
+  \begin{small}
+  \centering
+  \begin{tabular}{p{6em}p{18em}c}
+    \hline
+    \textbf{Reason} & \textbf{Description} & \textbf{Cases} \\
+    \hline
+    \textsf{obsolete} &	The {\sc pr} is no longer relevant, as the project
+    has progressed. \\
+
+    \textsf{process} & The {\sc pr} does not follow the correct project
+    conventions for sending and handling pull requests. \\
+
+    \textsf{conflict} &	There feature is currently being implemented by other
+    {\sc pr} or in another branch. \\
+
+    \textsf{superseded} &	A newer {\sc pr} solves the problem better.\\
+
+    \textsf{duplicate} & The functionality already exists in the project. \\
+
+    \textsf{incorrect implementation} &	The implementation of the feature is
+    incorrect, missing or not following project standards. \\
+
+    \textsf{superfluous} & {\sc pr} doesn't solve an existing problem or add a
+    feature needed by the project. \\
+
+    \textsf{tests} & Tests failed to run. \\
+
+    \textsf{deferred} & Proposed change delayed for further investigation in the
+    future. \\
+    \hline
+  \end{tabular}
+  \end{small}
+  \caption{Reasons for closing pull requests without merging.}
+  \label{tab:coding}
+\end{table}
 
 \section{Discussion}
 \label{sec:discussion}
@@ -1082,12 +1130,12 @@ turnover time, rather than characteristics of the pull request. This means that
 it is mostly up to the project to tune its processes (notably, reviewing and
 testing) for faster turnover.
 
-\fbox{
-\begin{minipage}{0.46\textwidth}
-\emph{Pull requests are faster to merge than email-based patches. Projects can
-tune their reviewing and testing processes for faster turnover.}
-\end{minipage}}
-
+%\fbox{
+%\begin{minipage}{0.46\textwidth}
+%\emph{Pull requests are faster to merge than email-based patches. Projects can
+%tune their reviewing and testing processes for faster turnover.}
+%\end{minipage}}
+%
 \textbf{Attracting contributions.}
 Pham et al.~\cite{Pham13}, mention
 that pull requests make casual contributions straightforward through
@@ -1118,12 +1166,12 @@ in our dataset, the community discussing pull requests is actually bigger
 than the project team members, even though only in few cases does the community
 contribute more to the discussion overall.
 
-\fbox{
-\begin{minipage}{0.46\textwidth}
-\emph{Pull requests can help involve project community to the code review
-process.}
-\end{minipage}}
-
+%\fbox{
+%\begin{minipage}{0.46\textwidth}
+%\emph{Pull requests can help involve project community to the code review
+%process.}
+%\end{minipage}}
+%
 \textbf{Democratizing development.} One of the key findings of this work is
 that pull requests are not treated differently based on their origin; both core
 team members and external developers have equal chances to get their pull
@@ -1163,9 +1211,7 @@ to merge a pull request significantly and only adds time overhead; however, this
 may have adverse effects on the quality of the submitted contributions. A more
 comprehensive strategy would include a clear articulation of what is expected
 from a pull request, for example tests or localized changes, on a prominent
-location in the project's Github page.\footnote{Surprisingly, a quick
-investigation revealed that no project in our sample had such information in
-the top-level {\sc readme}.md file.} Moreover, a project owner can invest in a
+location in the project's Github page. Moreover, a project owner can invest in a
 comprehensive test suite; this will improve the time to process a pull request,
 especially if used with an automated continuous integration system.
 
