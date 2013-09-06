@@ -6,7 +6,7 @@ rm(list = ls(all = TRUE))
 source(file = "R/merge-time.R")
 
 library(doMC)
-registerDoMC(num.processe
+registerDoMC(num.processes)
 
 # Loading data files
 dfs <- load.all(dir=data.file.location, pattern="*.csv$")
