@@ -10,6 +10,7 @@ library(e1071)
 library(nnet)
 library(reshape)
 library(ggplot2)
+library(foreach)
 
 # Get a project with the appropriate fields by name to run through a classification task
 class.project <- function(dfs, name) {
@@ -64,14 +65,12 @@ bayes.train <- function(model, train.set) {
 # sampler is f: data.frame -> Int -> list
 # classifier is f: data.frame -> Int -> list
 cross.validation <- function(model, classifier, sampler, df, num_samples, num_runs = 10) {
-  result = lapply(c(1:num_runs),
-                  function(n) {
-                    dataset <- sampler(df, num_samples)
-                    interm = classifier(model, dataset$train, dataset$test)
-                    interm$run <- n
-                    interm
-                  })
-  result = merge.dataframes(result)
+  result <- foreach(n=1:num_runs, .combine=rbind) %dopar% {
+              dataset <- sampler(df, num_samples)
+              interm <- classifier(model, dataset$train, dataset$test)
+              interm$run <- n
+              interm
+  }
   
   # Somewhere along the way, numbers are converted to characters. 
   # Too busy to investigate why
@@ -112,20 +111,20 @@ cross.validation.plot <- function(cvResult, title = "" ,fname = "cv.pdf") {
 }
 
 rf.varimp <- function(model, sampler, data, num_samples = 5000, runs = 50) {
-  result = lapply(c(1:runs), 
-                  function(n) {
-                    df <- sampler(data, num_samples)
-                    rfmodel <- randomForest(model, data=df$train, importance = T, 
-                                            type = "classification", mtry = 5, 
-                                            ntree = 2000)
-                    print(importance(rfmodel))
-                    i <- data.frame(importance(rfmodel))
-                    i$var <- row.names(i)
-                    i$var <- as.factor(i$var)
-                    i$run <- n
-                    i
-                  })
-  result = merge.dataframes(result)
+
+  result <- foreach(n=1:runs, .combine=rbind) %dopar% {
+      df <- sampler(data, num_samples)
+      rfmodel <- randomForest(model, data=df$train, importance = T,
+                              type = "classification", mtry = 5,
+                              ntree = 2000)
+      print(importance(rfmodel))
+      i <- data.frame(importance(rfmodel))
+      i$var <- row.names(i)
+      i$var <- as.factor(i$var)
+      i$run <- n
+      i
+  }
+
   result = aggregate(. ~ var, data = result, mean)
   result = result[with(result, order(-MeanDecreaseAccuracy)),]
   result[c('var', 'MeanDecreaseAccuracy')]

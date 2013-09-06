@@ -11,6 +11,8 @@ source(file = "R/merge-time.R")
 source(file = "R/merge-decision.R")
 
 library(ggplot2)
+library(doMC)
+registerDoMC(num.processes)
 
 run.rf.varimp <- function(expname, model, sampler, data, smpl_size, runs) {
   varimp <- rf.varimp(model, sampler, data, smpl_size, runs)
@@ -32,7 +34,7 @@ run.rf.varimp <- function(expname, model, sampler, data, smpl_size, runs) {
 dfs <- load.all(dir=data.file.location, pattern="*.csv$")
 dfs <- addcol.merged(dfs)
 all <- merge.dataframes(dfs)
+#all <- load.some(dir=data.file.location, pattern="*.csv$", 10)
 
-#run.rf.varimp("Merge decision", merge.decision.model, prepare.data.mergedecision, all, floor(nrow(all)/2), 5)
-run.rf.varimp("Merge time (3 classes)", merge.time.model, prepare.data.mergetime.3bins, all, floor(nrow(all)/2), 5)
-#run.rf.varimp("Merge time (4 classes)", merge.time.model, prepare.data.mergetime.4bins, all, floor(nrow(all)/2), 50)
+run.rf.varimp("Merge decision", merge.decision.model, prepare.data.mergedecision, all, floor(nrow(all)/2), 50)
+run.rf.varimp("Merge time (3 classes)", merge.time.model, prepare.data.mergetime.3bins, all, floor(nrow(all)/2), 50)

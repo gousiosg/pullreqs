@@ -1,14 +1,19 @@
 #
-# Merge time classifiers 2 bins
+# Merge time classifiers
 # Clean up workspace
 rm(list = ls(all = TRUE))
 
 source(file = "R/merge-time.R")
 
+library(doMC)
+registerDoMC(num.processe
+
 # Loading data files
 dfs <- load.all(dir=data.file.location, pattern="*.csv$")
 dfs <- addcol.merged(dfs)
-all <- merge.dataframes(dfs, 200)
+all <- merge.dataframes(dfs)
+
+#all <- load.some(dir=data.file.location, pattern="*.csv$", 10)
 
 run.mergetime.classifiers <- function(df, cases = c(1000, 10000,
                                                     floor(nrow(df)/4),
@@ -28,4 +33,4 @@ run.mergetime.classifiers <- function(df, cases = c(1000, 10000,
 }
 
 run.mergetime.classifiers(all)
-# run.mergetime.classifiers(all, c(20000))
+#run.mergetime.classifiers(all, c(1000))

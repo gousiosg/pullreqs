@@ -54,7 +54,7 @@ for(language in c("ruby", "java", "python", "scala")) {
 
 # Number of pullrequests per language
 for(language in c("ruby", "java", "python", "scala")) {
-  printf("%d projects in %s", nrow(subset(all, lang == language)), language)
+  printf("%d pullreqs %s", nrow(subset(all, lang == language)), language)
 }
 
 # Columns used in building models

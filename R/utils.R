@@ -38,8 +38,8 @@ load.some <- function(dir = ".", pattern = "*.csv$", howmany = -1) {
       return(merged)
     }
     print(sprintf("Reading file %s", file))
-    df = read.csv(pipe(paste("cut -f2-25 -d',' ", file)), check.names = T)
-    merged <- rbind(merged, df)
+    df = load.filter(file)
+    merged <- rbind(merged, addcol.merged.df(df))
   }
   merged
 }
@@ -96,11 +96,7 @@ get.project <- function(dfs, name) {
 
 # Merge dataframes
 merge.dataframes <- function(dfs, min_num_rows = 1) {
-  if (file.exists(merged.dataset)) {
-    printf("Loading cached dataset from: %s", merged.dataset)
-    read.csv(merged.dataset)
-  } else {
-    merged = Reduce(function(acc, x){
+  Reduce(function(acc, x){
         printf("Merging dataframe %s", project.name(x))
         if (nrow(x) >= min_num_rows) {
           rbind(acc, x)
@@ -109,9 +105,6 @@ merge.dataframes <- function(dfs, min_num_rows = 1) {
           acc
         }
       }, dfs)
-    write.csv(merged, merged.dataset, quote = FALSE)
-    merged
-  }
 }
 
 # Prints a list of column along with a boolean value. If the value is FALSE, then

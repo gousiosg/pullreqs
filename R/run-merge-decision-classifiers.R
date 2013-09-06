@@ -3,10 +3,15 @@ rm(list = ls(all = TRUE))
 
 source(file = "R/merge-decision.R")
 
+library(doMC)
+registerDoMC(num.processes)
+
 # Loading data files
 dfs <- load.all(dir=data.file.location, pattern="*.csv$")
 dfs <- addcol.merged(dfs)
-all <- merge.dataframes(dfs,200)
+all <- merge.dataframes(dfs)
+
+#all <- load.some(dir=data.file.location, pattern="*.csv$", 10)
 
 run.mergedecision.classifiers <- function(df, cases = c(1000, 10000,
                                                         floor(nrow(df)/4),
@@ -24,4 +29,4 @@ run.mergedecision.classifiers <- function(df, cases = c(1000, 10000,
 }
 
 run.mergedecision.classifiers(all)
-# run.mergedecision.classifiers(all, c(1000))
+#run.mergedecision.classifiers(all, c(10000))
