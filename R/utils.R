@@ -16,6 +16,14 @@ is.integer <- function(N){
   !length(grep("[^[:digit:]]", format(N, scientific = FALSE)))
 }
 
+# Load an preprocess all data
+load.data <- function() {
+  dfs <- load.all(dir=data.file.location, pattern="*.csv$")
+  dfs <- addcol.merged(dfs)
+  all <- merge.dataframes(dfs)
+  subset(all, !is.na(src_churn))
+}
+
 # Load all csv files in the provided dir as data frames
 load.all <- function(dir = ".", pattern = "*.csv$") {
   lapply(list.files(path = dir, pattern = pattern, full.names = T),

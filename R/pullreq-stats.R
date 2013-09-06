@@ -42,10 +42,8 @@ if(length(list.files(pattern="R")) == 0) {
 # system("bin/all_projects.sh -p 4 -d data projects.txt")
 
 print("Loading data files..")
-dfs <- load.all(dir=data.file.location, pattern="*.csv$")
-dfs <- addcol.merged(dfs)
-all <- merge.dataframes(dfs)
-all <- subset(all, !is.na(src_churn))
+all <- load.data()
+
 
 #  Number of projects per language
 for(language in c("ruby", "java", "python", "scala")) {

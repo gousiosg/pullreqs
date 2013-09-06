@@ -6,8 +6,7 @@ rm(list = ls(all = TRUE))
 source(file = "R/variables.R")
 source(file = "R/utils.R")
 
-dfs <- load.all(dir=data.file.location, pattern="*.csv$")
-all <- merge.dataframes(dfs)
+all <- load.data()
 
 all$name <- apply(all, 1, function(x){strsplit(x[['project_name']], "/")[[1]][2]})
 

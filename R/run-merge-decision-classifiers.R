@@ -7,10 +7,7 @@ library(doMC)
 registerDoMC(num.processes)
 
 # Loading data files
-dfs <- load.all(dir=data.file.location, pattern="*.csv$")
-dfs <- addcol.merged(dfs)
-all <- merge.dataframes(dfs)
-
+all <- load.data()
 #all <- load.some(dir=data.file.location, pattern="*.csv$", 10)
 
 run.mergedecision.classifiers <- function(df, cases = c(1000, 10000,

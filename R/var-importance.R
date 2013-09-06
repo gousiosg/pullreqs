@@ -31,9 +31,7 @@ run.rf.varimp <- function(expname, model, sampler, data, smpl_size, runs) {
 }
 
 # Loading data files in a single dataframe
-dfs <- load.all(dir=data.file.location, pattern="*.csv$")
-dfs <- addcol.merged(dfs)
-all <- merge.dataframes(dfs)
+all <- load.data()
 #all <- load.some(dir=data.file.location, pattern="*.csv$", 10)
 
 run.rf.varimp("Merge decision", merge.decision.model, prepare.data.mergedecision, all, floor(nrow(all)/2), 50)
