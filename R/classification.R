@@ -67,6 +67,8 @@ bayes.train <- function(model, train.set) {
 cross.validation <- function(model, classifier, sampler, df, num_samples, num_runs = 10) {
   result <- foreach(n=1:num_runs, .combine=rbind) %dopar% {
               dataset <- sampler(df, num_samples)
+              printf("Running cross.val num_samples: %d, run: %d", num_samples,
+                     n)
               interm <- classifier(model, dataset$train, dataset$test)
               interm$run <- n
               interm
