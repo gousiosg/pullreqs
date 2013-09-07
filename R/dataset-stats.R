@@ -252,6 +252,16 @@ p <- ggplot(processed_comments, aes(x = foo, y = value, fill = variable)) +
         
 store.pdf(p, plot.location, "perc-external-commenters-comments.pdf")
 
+# Code review, pimp the data frame with info
+has.code.review <- function(pr_id) {
+  q = sprintf("select count(*) as cnt from pull_request_comments prc where prc.pull_request_id = %d", pr_id)
+  res <- dbSendQuery(con,q) 
+  num_code_review <- fetch(res, n = -1)
+  num_code_review > 0
+}
+
+all$code_review <- lapply(all$pull_req_id, has.code.review)
+
 # Various statistics on comments from community
 mean_external_contribs <- aggregate(perc_external_contribs ~ project_name, all, mean)
 joined <- merge(mean_external_contribs, processed_comments, by = "project_name")
