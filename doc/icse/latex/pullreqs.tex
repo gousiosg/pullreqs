@@ -140,7 +140,7 @@ Specifically, the questions we are trying to answer are:
 \end{description}
 
 Our study is based on data from the Github collaborative development forge, as
-made available through the {\sc ght}orrent project~\cite{GS12}. Using it, we
+made available through the {\sc ght}orrent project~\cite{G13}. Using it, we
 first explore the use of pull requests across all projects in Github. We then
 examine 291 carefully selected Ruby, Python, Java and Scala projects (in total,
 166,884 pull requests), and identify, using  
@@ -331,6 +331,7 @@ second case, pull requests are associated with milestones in Github's issue
 tracker.
 
 \section{Research Design}
+\label{sec:resdesign}
 
 The main focus of this study is to understand and explain how pull requests are
 used by projects to enable collaboration. To answer our research questions, we
@@ -600,7 +601,7 @@ results are statistically significant ($n = 166,884, p < 0.001$).
 \end{figure}
 
 \subsection{Qualitative data}
-\label{sec:qualitative}
+\label{sec:qualdata}
 To investigate how pull requests are used in practice and why some pull requests
 are not merged, we performed in-depth examination of random samples of pull
 requests followed by coding and thematic analysis. 100 pull requests were initially
@@ -734,25 +735,24 @@ majority of merges happening very fast. Measured in days, 95\% of the pull
 requests are merged in 26, 90\% in 10 and 80\% in only 3.7 days. An interesting
 observation is that there are many (43,557 or 30\% of our sample) pull requests
 which are merged in under one hour; the majority of such pull requests (60\%)
-come from the community, while their source code churn is significantly
-lower than that of the pull requests (medians: 5 and 13 respectively). If we compare the time to
-process pull requests that are being merged against those that are not, we can
-see (Figure~\ref{fig:close-merged-unmerged}) that pull requests that have been
-merged are closed much faster (median: 434 minutes) than unmerged (median: 2,250
-minutes) pull requests.
-The results of an unpaired Mann-Witney test ($p < 0.001$) showed that this difference is statistically significant, with a relatively
-significant effect size (Cliff's $\delta: 0.32$). This means that pull requests
-are either processed fast or left lingering for long before they are closed.
+come from the community, while their source code churn is significantly lower
+than that of the pull requests (medians: 5 and 13 respectively). If we compare
+the time to process pull requests that are being merged against those that are
+not, we can see that pull requests that have been merged are closed much faster
+(median: 434 minutes) than unmerged (median: 2,250 minutes) pull requests.  The
+results of an unpaired Mann-Witney test ($p < 0.001$) showed that this
+difference is statistically significant, with a relatively significant effect
+size (Cliff's $\delta: 0.32$). This means that pull requests are either
+processed fast or left lingering for long before they are closed.
 
-Based on these observations, a question that emerges is
-whether the pull requests originating from main team members are treated faster
-than those from external contributors. To answer it, we performed an unpaired
-Mann-Witney test among the times to merge pull requests from each group. The
-result is that while the two groups differ in a statistically significant manner
-($n_1 = 51,829, n_2 = 89,454, p < 0.001$), the apparent difference is negligible
-(Cliff's $\delta: -0.09$, see also Figure~\ref{fig:lifetime-boxplot}). This
-means that merged pull requests received no special treatment, irrespective
-whether they came from core team members or from the community.
+Based on these observations, a question that emerges is whether the pull
+requests originating from main team members are treated faster than those from
+external contributors. To answer it, we performed an unpaired Mann-Witney test
+among the times to merge pull requests from each group. The result is that while
+the two groups differ in a statistically significant manner ($n_1 = 51,829, n_2
+= 89,454, p < 0.001$), the apparent difference is negligible (Cliff's $\delta:
+-0.09$). This means that merged pull requests received no special treatment,
+irrespective whether they came from core team members or from the community.
 
 On a per project basis, if we calculate the mean time to merge a pull request,
 we see that in the majority of projects (65\%), the mean time to merge a pull
@@ -898,7 +898,7 @@ indicates that this is not true ($\rho = 0.22, n = 88, p < 0.05$).
 \end{table}
 
 We run the classification processes according to the protocol specified in
-Section~\ref{sec:expprocess}.  Based on the results presented in
+Section~\ref{sec:resdesign}.  Based on the results presented in
 Table~\ref{tab:classif-perf}, we selected the \texttt{randomforest}
 classification algorithm for both our experiments. For the \textsf{mergetime}
 experiment, \texttt{randomforest} achieved an {\sc auc} of 0.73, with a prior
@@ -1026,7 +1026,7 @@ presents the mean percentage across all three examiners in the cross validation 
 As most pull requests are indeed merged, it is interesting to explore why some
 pull requests are not merged. For that reason, we manually looked into 
 250 pull requests and classified the reasons in categories as described in
-Section~\ref{}. The cross-validation of the categories on a different set of
+Section~\ref{sec:qualdata}. The cross-validation of the categories on a different set of
 pull requests 
 revealed that the identified categories are enough to classify all reasons for closing a pull request, even though differences existed among the coders.
 The results are presented in Table~\ref{tab:unmerged}. 
@@ -1048,9 +1048,6 @@ Finally, 14\% of the pull requests were actually merged; this means that the
 proportion of merged pull requests reported in this study (84\%) in slightly
 underrated, due to insufficient heuristics. By extrapolation, the total number
 of merged pull requests could be as high as 90\%.
-
-Overall, we see that a significant number of pull requests are rejected 
-due to 
 
 \section{Discussion}
 \label{sec:discussion}
