@@ -1,33 +1,43 @@
 source(file = "R/utils.R")
 
-manual.classif <- read.csv('unmerged-cross-validation.txt', stringsAsFactors = F, strip.white = T)
 
-manual.classif$coder1.merged <- manual.classif$coder1.merged. == "merged"
-manual.classif$coder2.merged <- manual.classif$coder2.merged. == "merged"
-manual.classif$coder3.merged <- manual.classif$coder3.merged. == "yes"
-
-manual.classif <- manual.classif[,c(1,3,6,9,11,12,13)]
-
-
-manual.classif$coder1.tag <- apply(manual.classif, 1, function(row){if (row[5] == " TRUE") {"merged"} else {row[2]}})
-manual.classif$coder2.tag <- apply(manual.classif, 1, function(row){if (row[6] == " TRUE") {"merged"} else {row[3]}})
-manual.classif$coder3.tag <- apply(manual.classif, 1, function(row){if (row[7] == " TRUE") {"merged"} else {row[4]}})
-
-manual.classif$coder1.tag <- apply(manual.classif, 1, function(row){if (row[2] == "") {"unknown"} else {row[2]}})
-manual.classif$coder2.tag <- apply(manual.classif, 1, function(row){if (row[3] == "") {"unknown"} else {row[3]}})
-manual.classif$coder3.tag <- apply(manual.classif, 1, function(row){if (row[4] == "") {"unknown"} else {row[4]}})
-
-manual.classif <- manual.classif[,c(2,3,4)]
-
-printf("Cases where tag1 != tag2: %d", nrow(subset(manual.classif, coder1.tag != coder2.tag)))
-printf("Cases where tag2 != tag3: %d", nrow(subset(head(manual.classif, 50), coder2.tag != coder3.tag)))
-
-categories <- c("obsolete", "process", "conflict", "superseded", "duplicate", 
+categories <- c("obsolete", "conflict", "superseded", "process", "duplicate", 
                 "incorrect implementation", "superfluous", "tests", "deferred",
                 "merged", "unknown")
 
+# Cross validation sample
+cross.val <- read.csv('unmerged-cross-validation.txt', stringsAsFactors = F, strip.white = T)
+
+cross.val$coder1.merged <- cross.val$coder1.merged. == "merged"
+cross.val$coder2.merged <- cross.val$coder2.merged. == "merged"
+cross.val$coder3.merged <- cross.val$coder3.merged. == "yes"
+
+cross.val <- cross.val[,c(1,3,6,9,11,12,13)]
+
+cross.val$coder1.tag <- apply(cross.val, 1, function(row){if (row[5] == " TRUE") {"merged"} else {row[2]}})
+cross.val$coder2.tag <- apply(cross.val, 1, function(row){if (row[6] == " TRUE") {"merged"} else {row[3]}})
+cross.val$coder3.tag <- apply(cross.val, 1, function(row){if (row[7] == " TRUE") {"merged"} else {row[4]}})
+
+cross.val$coder1.tag <- apply(cross.val, 1, function(row){if (row[2] == "") {"unknown"} else {row[2]}})
+cross.val$coder2.tag <- apply(cross.val, 1, function(row){if (row[3] == "") {"unknown"} else {row[3]}})
+cross.val$coder3.tag <- apply(cross.val, 1, function(row){if (row[4] == "") {"unknown"} else {row[4]}})
+
+cross.val <- cross.val[,c(2,3,4)]
+
+printf("Cases where tag1 != tag2: %d", nrow(subset(cross.val, coder1.tag != coder2.tag)))
+printf("Cases where tag2 != tag3: %d", nrow(subset(head(cross.val, 50), coder2.tag != coder3.tag)))
+
 for (cat in categories) {
   printf("Category: %s, coder 1: %f", cat, 
-         (nrow(subset(manual.classif, coder1.tag == cat)) + nrow(subset(manual.classif, coder2.tag == cat))) / 200)
-  #(nrow(subset(manual.classif, coder1.tag == cat)) + nrow(subset(manual.classif, coder2.tag == cat))) / 200
+         (nrow(subset(cross.val, coder1.tag == cat)) + nrow(subset(cross.val, coder2.tag == cat))) / 200)
+  #(nrow(subset(cross.val, coder1.tag == cat)) + nrow(subset(cross.val, coder2.tag == cat))) / 200
+}
+
+# Actual sample
+sample.250 <- read.csv('data/unmerged-250.txt', stringsAsFactors = F, strip.white = T)
+
+sample.250 <- subset(sample.250, tag != "")
+
+for (cat in categories) {
+  printf("Category: %s, sample250: %f", cat, ceiling((nrow(subset(sample.250, tag == cat)))/nrow(sample.250) * 100))
 }
