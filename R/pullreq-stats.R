@@ -328,6 +328,14 @@ ranksum(subset(merged, test_churn > 0, c(mergetime_minutes))$mergetime_minutes,
         subset(merged, test_churn == 0, c(mergetime_minutes))$mergetime_minutes,
         "existence of tests and mergetime")
 
+ranksum(subset(aggregate(cbind(test_lines_per_kloc, mergetime_minutes) ~ project_name, merged, mean), test_lines_per_kloc < 1000)$mergetime_minutes,
+        subset(aggregate(cbind(test_lines_per_kloc, mergetime_minutes) ~ project_name, merged, mean), test_lines_per_kloc > 1000)$mergetime_minutes,
+        "good testing vs mergetime")
+
+mean.testing.per.project <- aggregate(cbind(test_lines_per_kloc, mergetime_minutes) ~ project_name, merged, mean)
+ranksum(head(mean.testing.per.project[order(mean.testing.per.project$test_lines_per_kloc),], 20)$mergetime_minutes, 
+        tail(mean.testing.per.project[order(mean.testing.per.project$test_lines_per_kloc),], 20)$mergetime_minutes)
+
 # Pull request discusion
 printf("Merged pull reqs comments quantiles: 95: %f, 90: %f, 80: %f",
        quantile(all$num_comments, 0.95),
