@@ -149,10 +149,12 @@ The following scripts can be run with the procedure described above:
 
 * [R/dataset-stats.R](https://github.com/gousiosg/pullreqs/blob/master/R/dataset-stats.R) Various statistics and plots that require access to the GHTorrent MySQL database. To do so, create a file named `R/mysql.R` and set the following variables accordingly:
 
+```splus
 mysql.user =  "foo"
 mysql.passwd = "bar"
 mysql.db = "ghtorrent"
 mysql.host = "127.0.0.1"
+```
 
 * [R/pullreq-stats.R](https://github.com/gousiosg/pullreqs/blob/master/R/pullreq-stats.R) Pull request descriptive statistics (analysis of the data files)
 
