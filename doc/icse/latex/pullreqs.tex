@@ -369,19 +369,23 @@ each pull request with an outcome factor; in the case of the \textsf{merge
 decision} classification task, the factor signifies whether the pull request has
 been merged. For the \textsf{merge time} task, we first filter out pull requests
 that have not been merged and then split the remaining data points in three
-classes (\textsf{hour}, \textsf{day}, \textsf{rest}) according to the time
+classes (\textsf{hour}, \textsf{day}, \textsf{more than a day}) according to the time
 required to merge the pull request. The split points were chosen to reflect the
 results of {\sc rq2}, and split the available data points in roughly equally
 sized bins.
 
 At a high level, the process to retrieve the dominant features for both
-classification tasks consists of two steps: i) we run each dataset through 3
-well known classification algorithms, namely Random Forests
-(\texttt{randomforest}), variants of Logistic Regression (\texttt{logregr})
-(binary for the \textsf{merge decision} task, multinomial for the \textsf{merge
-time} task) and Na\"ive Bayes (\texttt{naivebayes}), and ii) we select the best
-classifier and apply a classifier-specific process to extract the feature
-importance. 
+classification tasks consists of two steps.  First, we run each dataset through
+6 classification algorithms, namely Random Forests (\texttt{randomforest}),
+variants of Logistic Regression (\texttt{logregr}) (binary for the \textsf{merge
+decision} task, multinomial for the \textsf{merge time} task) and Na\"ive Bayes
+(\texttt{naivebayes}), Support Vector Machines (\texttt{svm}), decision trees
+(\texttt{dtree}) and AdaBoost with decision trees (\texttt{adaboost}). We used
+those algorithms as they are known to perform well in large
+datasets~\cite{Lessm08} and have been used in previous work involving prediction
+models~\cite{Giger12}. We only report results on the first three, as those
+performed best. Then, we select the best classifier and apply a
+classifier-specific process to extract the feature importance. 
 
 To evaluate the classification performance, we used the Accuracy ({\sc acc}) and
 Area Under the receiver operating characteristic Curve ({\sc auc}) metrics. To
@@ -394,7 +398,7 @@ evaluate the metric stability across runs. We did not perform any additional
 tuning to the classification algorithms (Section~\ref{sec:accrej}).
 
 {\bfseries RQ4} To examine why some pull requests are not merged, we opted
-qualitatively analyze in-depth a limited number of randomly chosen non-merged
+qualitatively analyze in-depth a set of randomly chosen non-merged
 pull requests. We used grounded coding to come up with an inclusive set of tags
 of why pull requests are not merged as follows: The first author read the pull
 request discussion on Github for randomly selected pull requests and summarized
@@ -464,7 +468,7 @@ projects from the initial selection:
 
 After selection, the full history (including pull requests, issues and commits)
 of the included projects was downloaded and features were extracted by querying
-the {\sc ght}orrent databases and analysing each project's Git repository. To
+the {\sc ght}orrent databases and analyzing each project's Git repository. To
 identify merged pull requests that are merged outside Github, we resorted to the following heuristics, listed here in order of application:
 
 \begin{itemize}
@@ -555,10 +559,10 @@ in three categories:
   abstract the results across projects with different developers, we include
   features that quantify the developer's track record~\cite{Dabbi12}, namely the
   number of previous pull requests and their acceptance rate; the former has
-  been indicated as a strong indicator of pull request quality~\cite{Pham13}.
+  been identified as a strong indicator of pull request quality~\cite{Pham13}.
   Bird et al.~\cite{Bird07}, presented evidence that social reputation has an
   impact on whether a patch will be merged; in our dataset, the number of
-  followers on Github is an interesting proxy for reputation.
+  followers on Github can be seen as a proxy for reputation.
 
 All features are calculated at the time a pull request has been closed or
 merged, to evaluate the effect of intermediate updates to the pull request as a
@@ -568,7 +572,7 @@ their calculation (e.g., \texttt{team\_size} or
 months, where $t$ is the time the pull request has been closed. 
 
 The initial selection contained 23 features. To check whe\-ther the selected
-features are independent enough, and therefore have strong explanatory power, we
+features are independent enough, we
 conducted a pair-wise correlation analysis using the Spearman rank correlation
 ($\rho$) metric across all features. We set a threshold of $\rho = 0.7$, above
 which we eliminated features that are strongly correlated. Using this cutoff, we
@@ -613,7 +617,7 @@ used by the first coder to identify discrete reasons for closing pull requests
 all three coders to validate the identified categories (cross-validation
 sample). After cross validation, a further 150 randomly selected pull requests
 were added to the bootstrapping sample to construct the finally analyzed
-dataset.
+dataset for a total of 250 pull requests.
 
 %To examine how pull requests are used in practice, we categorized
 %100 randomly selected pull requests, sampled from the dataset described above,
@@ -665,15 +669,15 @@ number of repositories using the pull request model has remained stable.
 For those projects that received pull requests in 2013, the mean number of pull
 requests per project is relatively low at 8.1 (median: 2, percentiles: 5\%: 1,
 95\%: 21); however, the distribution of the number of pull requests in projects
-is highly skewed.  Projects such as Ruby on Rails, the Homebrew package manager
-have more that 5,000 pull requests.  From the pull requests that have been
-opened in 2013, 73,07\% have been merged using Github facilities, thereby
-indicating that pull requests in principle can work as a means for obtaining
-external contributions. Moreover, even though one might expect that it is the
-well known projects that receive most pull requests, this is only moderately
-supported by our data: the Spearman rank correlation between the number of stars
-of a project and the number of pull requests it has received is $\rho = 0.36$
-($p < 0.001, n = 239,131$).
+is highly skewed.  Projects exists, such as Ruby on Rails and the Homebrew
+package manager, that have more that 5,000 pull requests. From the pull requests
+that have been opened in 2013, 73,07\% have been merged using Github facilities,
+thereby indicating that pull requests in principle can work as a means for
+obtaining external contributions. Moreover, even though one might expect that it
+is the well known projects that receive most pull requests, this is only
+moderately supported by our data: the Spearman rank correlation between the
+number of stars of a project and the number of pull requests it has received is
+$\rho = 0.36$ ($p < 0.001, n = 239,131$).
 
 Reviews on a pull request can either target the pull as whole or the individual
 commits, thereby resembling a code review. Even though any Github user can
@@ -736,9 +740,8 @@ process employs heuristics to detect merges outside Github.
 For merged pull requests, an important property is the time required to process
 and merge them. The time to merge distribution is highly skewed, with the great
 majority of merges happening very fast. Measured in days, 95\% of the pull
-requests are merged in 26, 90\% in 10 and 80\% in only 3.7 days. An interesting
-observation is that there are many (43,557 or 30\% of our sample) pull requests
-which are merged in under one hour; the majority of such pull requests (60\%)
+requests are merged in 26, 90\% in 10 and 80\% in 3.7 days. 
+30\% of pull requests are merged in under one hour; the majority of such pull requests (60\%)
 come from the community, while their source code churn is significantly lower
 than that of the pull requests (medians: 5 and 13 respectively). If we compare
 the time to process pull requests that are being merged against those that are
@@ -749,7 +752,7 @@ difference is statistically significant, with a relatively significant effect
 size (Cliff's $\delta: 0.32$). This means that pull requests are either
 processed fast or left lingering for long before they are closed.
 
-Based on these observations, a question that emerges is whether the pull
+Based on these observations, we check whether the pull
 requests originating from main team members are treated faster than those from
 external contributors. To answer it, we performed an unpaired Mann-Witney test
 among the times to merge pull requests from each group. The result is that while
@@ -760,9 +763,8 @@ irrespective whether they came from core team members or from the community.
 
 On a per project basis, if we calculate the mean time to merge a pull request,
 we see that in the majority of projects (65\%), the mean time to merge a pull
-request is less than 7 days. The mean time to merge
-is not correlated with the project's size, as indicated by a low Spearman
-correlation value ($\rho = -0.05$) nor the project's test coverage ($\rho =
+request is less than 7 days. The mean time to merge is not correlated with the
+project's size ($\rho = -0.05$), nor the project's test coverage ($\rho =
 0.27$). It is however, strongly correlated ($\rho = -0.69$) with the pull
 request initiator's track record: the higher the number of pull requests a
 developer has submitted to the same project, the lowest the time to process it.
@@ -778,14 +780,14 @@ and the number of pull requests is weak ($\rho = -0.23, n = 291, p < 0.01$).
 %is an indicator of how fast a pull request will be merged.}
 %\end{minipage}}
 %
-\begin{figure}
-\centering
-\includegraphics[scale=0.45]{perc-external-commenters-comments.pdf}
-\label{fig:pull-num-comments}
-\caption{Percentage of external commenters and comments per project. Bars
-are sorted by percentage of external commenters. Project names omitted for
-clarity.}
-\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=0.45]{perc-external-commenters-comments.pdf}
+%\label{fig:pull-num-comments}
+%\caption{Percentage of external commenters and comments per project. Bars
+%are sorted by percentage of external commenters. Project names omitted for
+%clarity.}
+%\end{figure}
 
 \textbf{Sizes of pull requests.}
 A pull request bundles together a set of commits; the number of commits on a
@@ -796,18 +798,17 @@ a pull request is generally less than 20 (95\% percentile: 36, 90\% percentile:
 changed by pull requests is on average less than 500 (95\% percentile: 1227,
 90\% percentile: 497, 80\% percentile: 168) with a median number of 20.
 
-\textbf{Tests and pull requests.}
-Except from the project's source code, pull requests also modify test code. In
-our sample, 33\% of the pull requests included modifications in test code, while
-4\% modified test code exclusively. Of the pull requests that included tests,
-83\% were merged, which is similar to the average. This contradicts the
-findings by Pham et al.~\cite{Pham13}, where interviewed developers identified
-the presence of tests as a major factor for the acceptance of pull requests.
-The presence of tests in a pull request does not seem to affect the merge time:
-an unpaired Mann-Witney test shows that while there is a difference in the means
-of the pull request merge time for pull requests that include tests ($tests =
-45,488, no\_tests = 95,980, p < 0.001$), the effect size is very small ($\delta =
-0.11$).
+\textbf{Tests and pull requests.} Except from the project's source code, pull
+requests also modify test code. In our sample, 33\% of the pull requests
+included modifications in test code, while 4\% modified test code exclusively.
+Of the pull requests that included tests, 83\% were merged, which is similar to
+the average. This seems to go against the findings by Pham et al.~\cite{Pham13},
+where interviewed developers identified the presence of tests in pull requests
+as a major factor for their acceptance. The presence of tests in
+a pull request does not seem to affect the merge time: an unpaired Mann-Witney
+test shows that while there is a difference in the means of the pull request
+merge time for pull requests that include tests ($tests = 45,488, no\_tests =
+95,980, p < 0.001$), the effect size is very small ($\delta = 0.11$).
 
 %\fbox{
 %\begin{minipage}{0.46\textwidth}
@@ -817,7 +818,7 @@ of the pull request merge time for pull requests that include tests ($tests =
 \textbf{Discussion and code review.}
 Once a pull request has been submitted, it is open for discussion until it is
 merged or closed. The discussion is usually brief: 95\% of pull requests receive
-12 comments or less (80\% less than 4 comments). As expected, the number of
+12 comments or less (80\% less than 4 comments). The number of
 comments in the discussion is moderately correlated with the time to merge a
 pull request ($\rho = 0.48, n = 141,468$) and the time to close a non-merged
 pull request ($\rho = 0.37, n = 25,416$).
@@ -834,16 +835,14 @@ bigger team sizes that those that do not.
 
 Any Github user can participate in the discussion of any pull request. Usually,
 the discussion occurs between core team members trying to understand the changes
-introduced by the pull request and community members (often, the pull
-request creator) that explain it. Figure~\ref{fig:pull-num-comments} presents
-the distribution of external commenters and comments to pull request discussion
-across projects in our samples. We observe that in most projects, more than half
-of the commenters are community members. This is not true however for the number
-of comments; in most projects the majority of the comments come from core team
-members. One might think that the bigger the percentage of external commenters
-on pull requests the more open the project is and therefore the highest the
-percentage of external contributions; a Spearman correlation test quickly
-indicates that this is not true ($\rho = 0.22, n = 88, p < 0.05$).
+introduced by the pull request and community members (often, the pull request
+creator) that explain it. In most projects, more than half of the commenters are
+community members. This is not true however for the number of comments; in most
+projects the majority of the comments come from core team members. One might
+think that the bigger the percentage of external commenters on pull requests,
+the more open the project is and therefore the highest the percentage of
+external contributions; a Spearman test indicates that it is not true ($\rho =
+0.22, n = 291, p < 0.05$).
 
 \section{RQ3: Influential Factors}
 \label{sec:accrej}
@@ -852,17 +851,17 @@ indicates that this is not true ($\rho = 0.22, n = 88, p < 0.05$).
   \centering
   \begin{tabular}{lcccc}
     \hline
-    {\bf classifier} & {\sc auc} & {\sc acc} \\
+    {\bf classifier} & {\sc auc} & {\sc acc} & {\sc prec} & {\sc rec} \\
     \hline
     \multicolumn{4}{l}{\textsf{mergedecision} task($n = 166,884$)} \\
-    binlogregr    & 0.75 & 0.61  \\
-    naivebayes    & 0.71 & 0.59  \\
-    randomforest  & 0.94 & 0.86  \\
+    binlogregr    & 0.75 & 0.61 & 0.95  & 0.55 \\
+    naivebayes    & 0.71 & 0.59 & 0.94 &  0.55 \\
+    randomforest  & 0.94 & 0.86 & 0.93 & 0.94 \\
     \hline
     \multicolumn{4}{l}{\textsf{merge time} task($n = 141,468$)} \\
-    multinomregr  & 0.61 & 0.44  \\
-    naivebayes    & 0.63 & 0.38  \\
-    randomforest  & 0.73 & 0.59  \\
+    multinomregr  & 0.61 & 0.44 & --- & --- \\
+    naivebayes    & 0.63 & 0.38 & --- & ---  \\
+    randomforest  & 0.73 & 0.59 & --- & ---   \\
     \hline
   \end{tabular}
   \caption{Classifier performance for the merge decision and merge time
@@ -871,13 +870,13 @@ indicates that this is not true ($\rho = 0.22, n = 88, p < 0.05$).
   \label{tab:classif-perf}
 \end{table}
 
-We run the classification processes according to the protocol specified in
+We run the classification processes according to the method specified in
 Section~\ref{sec:resdesign}.  Based on the results presented in
 Table~\ref{tab:classif-perf}, we selected the \texttt{randomforest}
 classification algorithm for both our experiments. For the \textsf{mergetime}
 experiment, \texttt{randomforest} achieved an {\sc auc} of 0.73, with a prior
 probability of 31\%, 35\% and 34\% for each of the \textsf{hour}, \textsf{day}
-and \textsf{rest} classes respectively. For the \textsf{mergedecision}
+and \textsf{more than a day} classes respectively. For the \textsf{mergedecision}
 experiment, the prior probability for the dominant class was 84\% which allowed
 the algorithm to achieve near perfect scores. In both cases, the stability of
 the {\sc auc} metric across folds was good (\textsf{mergetime}: $\sigma_{auc} =
@@ -934,8 +933,8 @@ source code base is and how many files the pull request changes.
 For the \textsf{mergetime} task, there is no dominant feature; the
 classification model re-run revealed that at least 6 features are required to
 predict how fast a pull request will be merged. The classification accuracy was
-moderate ({\sc auc:} 0.74, {\sc acc}: 0.59), but still much better than random
-selection. From the results, we can conclude that the developer's previous
+moderate ({\sc auc:} 0.74, {\sc acc}: 0.59), but still improved over random
+selection. The results provide evidence that the developer's previous
 track record, the size of the project and its test coverage and the project's
 openness to external contributions seem to play a significant role on
 how fast a pull request will be accepted.
@@ -949,7 +948,7 @@ how fast a pull request will be accepted.
 
 \section{RQ4: Unmerged pull requests}
 
-\begin{table}
+\begin{table}[t]
   \begin{small}
   \centering
   \begin{tabular}{p{6em}p{14em}cc}
@@ -998,7 +997,7 @@ presents the mean percentage across all three examiners in the cross validation 
 \end{table}
 
 As most pull requests are indeed merged, it is interesting to explore why some
-pull requests are not merged. For that reason, we manually looked into 250 pull
+pull requests are \emph{not} merged. For that reason, we manually looked into 250 pull
 requests and classified the reasons in categories as described in
 Section~\ref{sec:qualdata}. The cross-validation of the categories on a
 different set of pull requests revealed that the identified categories are
@@ -1006,7 +1005,7 @@ enough to classify all reasons for closing a pull request, even though
 differences existed among the coders.  The results are presented in
 Table~\ref{tab:unmerged}. 
 
-As expected, the results show that there is no clearly outstanding reason for closing pull requests. However, if we group together close reasons that have a timing dimension (\textsf{obsolete}, \textsf{conflict}, \textsf{superseded}), we
+The results show that there is no clearly outstanding reason for closing pull requests. However, if we group together close reasons that have a timing dimension (\textsf{obsolete}, \textsf{conflict}, \textsf{superseded}), we
 see that 37\% of unmerged pull requests are closed due to concurrent
 modifications of the code in project branches.
 Another 18\% (\textsf{superfluous}, \textsf{duplicate}, \textsf{deferred}) is closed as a result of the contributor not having identified the direction of the project correctly and is therefore submitting uninteresting changes. 24\% of the
@@ -1037,9 +1036,9 @@ of the patch submission process in projects such as Apache and Mozilla, the
 researchers found that the time to commit 50\% of the contributions to the main
 project repository ranges from a few hours~\cite{Rigby08} to less than 3
 days~\cite{Weiss08, Baysa12}. Our findings show that the majority (80\%) of pull
-requests are merged within 3 days, while a very significant number (30\%) are
+requests are merged within 3 days, while 30\% are
 merged within one hour (independent of project size). These numbers are
-indicating that pull based development through pull requests may be more
+indicating that pull-based development through pull requests may be more
 efficient than traditional email-based patches.  Also, it is project-related
 factors that affect the turnover time, rather than characteristics of the pull
 request. This means that it is mostly up to the project to tune its processes
@@ -1053,7 +1052,7 @@ efficiency, thoroughness (for example, was testing included?), and the
 submitter's track record''. Some of the identified inspections (testing code in
 pull requests, track record) are included as factors in our classification
 models, but they do not seem to affect the merge decision process as much.
-However, the developer's track record is important for the speed of processing
+However, the developer track record is important for the speed of processing
 pull requests. Moreover, we found that from rejected pull requests, almost 40\%
 are rejected due to non-transparency issues. While the pull request process is
 transparent from the project manager's side (and praised for that by Dabbish et
@@ -1066,7 +1065,7 @@ view.
 %tune their reviewing and testing processes for faster turnover.}
 %\end{minipage}}
 %
-\textbf{Attracting contributions.} Pham et al.~\cite{Pham13}, mention
+\textbf{Attracting contributions.} Pham et al.~\cite{Pham13} mention
 that pull requests make casual contributions straightforward through
 a mechanism often referred to as ``drive-by commits''. As the
 relative cost to fork a repository is negligible on Github (54\% of the
@@ -1074,7 +1073,7 @@ repositories are forks), it is not uncommon for developers to fork other
 repositories to perform casual commits, such as fixes to spelling mistakes or
 indentation issues. In addition, Github provides web based editors
 for various file formats, by which any user can edit a file in another
-repository; Behind the scenes, Github will fork the repository and ask the user
+repository; behind the scenes, Github will fork the repository and ask the user
 to create a pull request to the original one. Such commits might be identified
 as pull requests that contain a single commit from users that are not yet part
 of the project's community. Even under this na\"ive definition, 7\% of pull
@@ -1121,7 +1120,7 @@ verified in further studies.
 
 \subsection{Implications}
 
-\textbf{Contributors.} Prospective project contributors will want their
+\textbf{Contributors.} Prospective project contributors want their
 contributions to be accepted. Our research shows that pull requests that affect
 parts of the project that  have been changed often lately (are ``hot'') are very
 likely to get merged. Also, most pull requests that include test code are
@@ -1137,7 +1136,7 @@ requests are processed on time, the obvious strategy is to invest in a
 comprehensive test suite and ensure that the project is open and transparent
 enough to contributors. To avoid development concurrency related issues, core
 team members could ask contributors to communicate their indented changes by
-opening an issue which is then augmented by code and converted to a pull
+opening an issue that is then augmented by code and converted to a pull
 request. The project should include a clear articulation of what is expected
 from a pull request, for example tests or localized changes, on a prominent
 location in the project's Github page.
@@ -1145,7 +1144,8 @@ location in the project's Github page.
 % cd /cache && find . -type f -maxdepth 3|grep README.md|while read f; do if [ ! -z "`grep -i "pull request" $f`" ]; then echo $f; fi; done
 
 %\textbf{Researchers.}
-A direct application of our results is the construction of tools to help the core team to prioritize their work; since we can predict
+A direct application of our results is the construction of \emph{tools}
+to help the core team to prioritize their work; since we can predict
 with very high accuracy whether a pull request will be merged or not, a
 potential tool might suggest which pull requests can be merged without further
 examination by the time they arrive. Other tools might examine the quality of

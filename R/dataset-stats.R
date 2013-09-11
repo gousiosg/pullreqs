@@ -61,13 +61,13 @@ res <- dbSendQuery(con, "select count(*) as cnt from pull_requests")
 pullreqs <- fetch(res, n = -1)
 print(sprintf("Total pull requests: %d",pullreqs$cnt))
 
-# # % of pull req comments by non-repo members 
-# res <- dbSendQuery(con, "select count(pr.id) as cnt from pull_requests pr, pull_request_comments prc where pr.id = prc.pull_request_id and not exists (select * from project_commits pc, commits c where pc.commit_id = c.id and pc.project_id = pr.base_repo_id and c.author_id = prc.user_id);")
-# prc_non_members <- fetch(res, n = -1)
-# print(sprintf("Pull request comments by non project members: %f", prc_non_members$cnt))
+# % of pull req comments by non-repo members 
+res <- dbSendQuery(con, "select count(pr.id) as cnt from pull_requests pr, pull_request_comments prc where pr.id = prc.pull_request_id and not exists (select * from project_commits pc, commits c where pc.commit_id = c.id and pc.project_id = pr.base_repo_id and c.author_id = prc.user_id);")
+prc_non_members <- fetch(res, n = -1)
+print(sprintf("Pull request comments by non project members: %f", prc_non_members$cnt))
 # 
-# # % of pull req comments by non-repo members 
-# print(sprintf("% comments from non-repo members: %f",(prc_non_members$cnt/pullreqs$cnt) * 100))
+# % of pull req comments by non-repo members 
+print(sprintf("% comments from non-repo members: %f",(prc_non_members$cnt/pullreqs$cnt) * 100))
 
 # Pull req comments
 # The following takes a while, so here are the latest results
@@ -75,11 +75,11 @@ print(sprintf("Total pull requests: %d",pullreqs$cnt))
 # [1] "Num discussion comments per pulreq (95 perc): 9"
 # 80% = 3
 # [1] "Num discussion comments per pulreq (5 perc): 0"         
-# res <- dbSendQuery(con, "select i.pr_id, ic_cnt + prc_cnt as cnt, i.issue_id from (select pr.id as pr_id, i.issue_id as issue_id, count(ic.comment_id) as ic_cnt from pull_requests pr left outer join issues i on pr.pullreq_id = i.issue_id left outer join issue_comments ic on i.id = ic.issue_id   where pr.base_repo_id = i.repo_id group by pr.id) as i, (select pr.id as pr_id, count(prc.comment_id) as prc_cnt  from projects p join pull_requests pr on p.id = pr.base_repo_id left outer join pull_request_comments prc on prc.pull_request_id = pr.id   where p.forked_from is null group by pr.id) as pr  where pr.pr_id = i.pr_id;")
-# prs <- fetch(res, n = -1)
-# print(sprintf("Num discussion comments per pulreq (mean): %f", mean(prs$cnt)))
-# print(sprintf("Num discussion comments per pulreq (95 perc): %d", quantile(prs$cnt, 0.95)))
-# print(sprintf("Num discussion comments per pulreq (5 perc): %d", quantile(prs$cnt, 0.05)))
+res <- dbSendQuery(con, "select i.pr_id, ic_cnt + prc_cnt as cnt, i.issue_id from (select pr.id as pr_id, i.issue_id as issue_id, count(ic.comment_id) as ic_cnt from pull_requests pr left outer join issues i on pr.id = i.pull_request_id left outer join issue_comments ic on i.id = ic.issue_id where pr.base_repo_id = i.repo_id group by pr.id) as i, (select pr.id as pr_id, count(prc.comment_id) as prc_cnt from projects p join pull_requests pr on p.id = pr.base_repo_id left outer join pull_request_comments prc on prc.pull_request_id = pr.id where p.forked_from is null group by pr.id) as pr where pr.pr_id = i.pr_id")
+prs <- fetch(res, n = -1)
+print(sprintf("Num discussion comments per pulreq (mean): %f", mean(prs$cnt)))
+print(sprintf("Num discussion comments per pulreq (95 perc): %d", quantile(prs$cnt, 0.95)))
+print(sprintf("Num discussion comments per pulreq (5 perc): %d", quantile(prs$cnt, 0.05)))
 
 # Original repos with > 1 committers and 0 pull reqs in 2013
 res <- dbSendQuery(con, "select count(*) as cnt from projects p where forked_from is null and deleted = false and name not regexp '^.*\\.github\\.com$' and name <> 'try_git' and name <> 'dotfiles' and name <> 'vimfiles' and  (select count(c.author_id) from project_commits pc, commits c where  pc.project_id = p.id and  c.id = pc.commit_id and year(c.created_at) = 2013) > 1 and not exists (select pr.id from pull_requests pr, pull_request_history prh where pr.base_repo_id = p.id and prh.pull_request_id = pr.id and year(prh.created_at)=2013)")
