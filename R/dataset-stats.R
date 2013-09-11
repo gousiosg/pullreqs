@@ -49,12 +49,14 @@ print(sprintf("Original repos: %f",orig_repos$cnt))
 print(sprintf("Original repos: %f",(orig_repos$cnt/repos$cnt) * 100))
 
 # Original repositories that received a single commit in 2013
-res <- dbSendQuery(con, "select count(*) as cnt from projects p where forked_from is null and deleted is false and name not regexp '^.*\\.github\\.com$' and name <> 'try_git' and name <> 'dotfiles' and name <> 'vimfiles' and exists ( select * from project_commits pc, commits c where  pc.project_id = p.id and  c.id = pc.commit_id and year(c.created_at) = 2013)")
+res <- dbSendQuery(con, "select count(*) as cnt from projects p where forked_from is null and deleted is false and name not regexp '^.*\\.github\\.com$' and name <> 'try_git' and name <> 'dotfiles' and name <> 'vimfiles' and exists ( select * from project_commits pc, commits c where  pc.project_id = p.id and  c.id = pc.commit_id and unix_timestamp(c.created_at) between 1359676800 and 1377993600)")
 repos_with_commits <- fetch(res, n = -1)
-print(sprintf("Original repos with commits: %f", repos_with_commits$cnt))
+print(sprintf("Original repos with commits Feb-Aug 2013: %f", repos_with_commits$cnt))
 
-# % of active repos (original repos with a commit in 2013)
-print(sprintf("Original repos with commits: %f",(repos_with_commits$cnt/repos$cnt) * 100))
+# Original repositories that received a single commit in 2012
+res <- dbSendQuery(con, "select count(*) as cnt from projects p where forked_from is null and deleted is false and name not regexp '^.*\\.github\\.com$' and name <> 'try_git' and name <> 'dotfiles' and name <> 'vimfiles' and exists ( select * from project_commits pc, commits c where  pc.project_id = p.id and  c.id = pc.commit_id and unix_timestamp(c.created_at) between 1328054400 and 1346457600)")
+repos_with_commits.2012 <- fetch(res, n = -1)
+print(sprintf("Original repos with commits Feb-Aug 2012: %f", repos_with_commits.2012$cnt))
 
 # Total pull requests
 res <- dbSendQuery(con, "select count(*) as cnt from pull_requests")
@@ -70,14 +72,10 @@ print(sprintf("Pull request comments by non project members: %f", prc_non_member
 print(sprintf("% comments from non-repo members: %f",(prc_non_members$cnt/pullreqs$cnt) * 100))
 
 # Pull req comments
-# The following takes a while, so here are the latest results
-# [1] "Num discussion comments per pulreq (mean): 2.314321"
-# [1] "Num discussion comments per pulreq (95 perc): 9"
-# 80% = 3
-# [1] "Num discussion comments per pulreq (5 perc): 0"         
 res <- dbSendQuery(con, "select i.pr_id, ic_cnt + prc_cnt as cnt, i.issue_id from (select pr.id as pr_id, i.issue_id as issue_id, count(ic.comment_id) as ic_cnt from pull_requests pr left outer join issues i on pr.id = i.pull_request_id left outer join issue_comments ic on i.id = ic.issue_id where pr.base_repo_id = i.repo_id group by pr.id) as i, (select pr.id as pr_id, count(prc.comment_id) as prc_cnt from projects p join pull_requests pr on p.id = pr.base_repo_id left outer join pull_request_comments prc on prc.pull_request_id = pr.id where p.forked_from is null group by pr.id) as pr where pr.pr_id = i.pr_id")
 prs <- fetch(res, n = -1)
 print(sprintf("Num discussion comments per pulreq (mean): %f", mean(prs$cnt)))
+print(sprintf("Num discussion comments per pulreq (median): %f", median(prs$cnt))
 print(sprintf("Num discussion comments per pulreq (95 perc): %d", quantile(prs$cnt, 0.95)))
 print(sprintf("Num discussion comments per pulreq (5 perc): %d", quantile(prs$cnt, 0.05)))
 
@@ -134,26 +132,33 @@ merged_pullreqs <- fetch(res, n = -1)$cnt
 print(sprintf("Perc merged pull requests: %f", (merged_pullreqs/opened_pullreqs) * 100))
 
 # Pull reqs per month plot
-res <- dbSendQuery(con, "select last_day(prh.created_at) as cdate, count(*) as pull_reqs from pull_requests pr, pull_request_history prh where prh.pull_request_id = pr.id and prh.action = 'opened' group by  month(prh.created_at), year(prh.created_at) order by prh.created_at")
+res <- dbSendQuery(con, "select last_day(prh.created_at) as cdate, count(*) as pull_reqs from pull_requests pr, pull_request_history prh where prh.pull_request_id = pr.id and prh.action = 'opened' and unix_timestamp(prh.created_at) between 1328054400 and 1375228800 group by  month(prh.created_at), year(prh.created_at) order by prh.created_at")
 pullreqs_per_month <- fetch(res, n = -1)
 
-res <- dbSendQuery(con, "select cdate, count(repo) as repos_with_pull_reqs from (select last_day(prh.created_at) as cdate, pr.base_repo_id as repo from pull_requests pr, pull_request_history prh where pr.id = prh.pull_request_id and prh.action = 'opened' group by pr.base_repo_id, month(prh.created_at), year(prh.created_at)  order by cdate) as a group by cdate")
+res <- dbSendQuery(con, "select cdate, count(repo) as repos_with_pull_reqs from (select last_day(prh.created_at) as cdate, pr.base_repo_id as repo from pull_requests pr, pull_request_history prh where pr.id = prh.pull_request_id and prh.action = 'opened' and unix_timestamp(prh.created_at) between 1328054400 and 1375228800 group by pr.base_repo_id, month(prh.created_at), year(prh.created_at)  order by cdate) as a group by cdate")
 repos_with_pullreqs_per_month <- fetch(res, n = -1)
 
 pullreqs_per_month <- merge(pullreqs_per_month, repos_with_pullreqs_per_month, by = "cdate")
-pullreqs_per_month <- melt(pullreqs_per_month)
 pullreqs_per_month$cdate <- as.POSIXct(pullreqs_per_month$cdate, origin = "1970-01-01")
-#pullreqs_per_month$ratio <- pullreqs_per_month$pull_reqs / pullreqs_per_month$repos
+pullreqs_per_month$ratio <- pullreqs_per_month$pull_reqs / pullreqs_per_month$repos
 
-# store.pdf(ggplot(pullreqs_per_month, aes(x = month)) + 
-#   scale_x_datetime() + 
-#   geom_line(aes(y = ratio, colour = "1")) +
-#   stat_smooth(aes(y = ratio, color = "2"), method = "loess", formula = y ~ x^2, size = 1, alpha = 0) +
-#   xlab("Date") + 
-#   ylab("Number of pull requests per repo per month")+
-#   scale_colour_manual(values=c("red", "blue"), labels = c("actual", "trend")) +
-#   theme(legend.title=element_blank()), plot.location,"num-pullreqs-month.pdf")
+store.pdf(ggplot(pullreqs_per_month, aes(x = cdate)) + 
+   #scale_x_datetime(breaks = date_breaks(width = "6 months")) + 
+   scale_x_datetime(breaks = c(as.POSIXct(1327968000, origin = "1970-01-01"), 
+                               as.POSIXct(1343775600, origin = "1970-01-01"),
+                               as.POSIXct(1359676800, origin = "1970-01-01"),
+                               as.POSIXct(1375311600, origin = "1970-01-01"))) +
+   scale_y_continuous(limits=c(1,5)) +
+   geom_line(aes(y = ratio, colour = "1")) +
+   stat_smooth(aes(y = ratio, color = "2"), method = "loess", formula = y ~ x^2, size = 1, alpha = 0) +
+   xlab("Date") + 
+   ylab("Number of pull requests per repo per month")+
+   scale_colour_manual(values=c("red", "blue"), labels = c("actual", "trend")) +
+   theme(legend.title=element_blank()), 
+      plot.location,"num-pullreqs-month.pdf")
 
+pullreqs_per_month <- melt(pullreqs_per_month)
+      
 store.pdf(ggplot(pullreqs_per_month, aes(x = cdate, y = value, fill = variable)) +
   scale_x_datetime() +
   geom_bar(position = "dodge", stat = "identity") +
