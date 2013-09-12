@@ -521,7 +521,7 @@ language on both Github and other sites.
 \textbf{Feature Extraction.} The feature selection was based on prior work in the areas of patch submission
 and acceptance~\cite{Nagap05,Bird07a,Weiss08,Baysa12}, bug
 triaging~\cite{Anvik06, Giger10} and also on semi-structured interviews of
-Github developers~\cite{Dabbi12, Pham13}. The selected features are split
+Github developers~\cite{Dabbi12, Pham13, McDon13}. The selected features are split
 into three categories:
 
   \emph{Pull request characteristics.} These
@@ -823,15 +823,17 @@ comments in the discussion is moderately correlated with the time to merge a
 pull request ($\rho = 0.48, n = 141,468$) and the time to close a non-merged
 pull request ($\rho = 0.37, n = 25,416$).
 
-Code reviews are integrated in the pull request process. In our sample, 12\% of
-the pull requests have been through code review. Code reviews do not seem to
-increase the probability of a pull request being merged (84\% of reviewed pull
-requests are merged), but they do slow down the processing of a pull request:
-the unpaired Mann-Witney test between the time required to merge reviewed
-(median: 2719 minutes) and non-reviewed (median: 295 minutes) pull requests
-gives statistically significant differences with a strong effect size ($\delta =
-0.41$). Projects that employ code reviews feature larger code bases and 
-bigger team sizes than those that do not.
+Code reviews are integrated in the pull request process. While the pull request
+discussion can be considered as an implicit form of code review, 12\% of the
+pull requests in our sample have also been through explicit code reviewing, by
+having received comments on source code lines in the included commits. Code
+reviews do not seem to increase the probability of a pull request being merged
+(84\% of reviewed pull requests are merged), but they do slow down the
+processing of a pull request: the unpaired Mann-Witney test between the time
+required to merge reviewed (median: 2719 minutes) and non-reviewed (median: 295
+minutes) pull requests gives statistically significant differences with a strong
+effect size ($\delta = 0.41$). Projects that employ code reviews feature larger
+code bases and bigger team sizes than those that do not.
 
 Any Github user can participate in the discussion of any pull request. Usually,
 the discussion occurs between core team members trying to understand the changes
@@ -1227,6 +1229,36 @@ of patch submission, where they find that small patches are processed faster and
 have higher change to be accepted into the repository. Baysal et
 al.~\cite{Baysa12} find that 47\% of the total patches make it into the source
 code repository, a number much lower than our finding for pull requests (84\%).
+Jiang et al.~\cite{Jiang13} analyzed patch submission and acceptance on the
+Linux kernel, which follows the pull-based development model in a more
+decentralized and hierarchical manner. They find that the reviewing time is
+becoming shorter through time while contributors can reduce it by controlling,
+among others, the number of affected subsystems and by being more active in
+their community. Those findings are similar to ours, where we find that the
+contributor's previous track record and number of lines in the pull request
+affect the time to merge it.
+
+An inherent part of pull-based development is peer-reviewing the proposed
+changes. In that sense, our work complements the work by Rigby and
+Bird~\cite{Rigby13} and supports many of their findings. Both works find that
+the peer review discussion is usually short, that peer-reviewed changes are
+small and that reviews happen before the changes are committed and are very
+frequent. Rigby and Bird's work examines industry-led projects and different
+code reviewing processes than ours. The fact that many aspects of the results
+are indeed similar leads us to hypothesize that it is the underlying
+process (pull-based development) that govern the reviewing process.
+
+Recently, Github has been the target of numerous publications. Dabbish
+et.al~\cite{Dabbi13} found that Github's transparency helps developers manage
+their projects, handle dependencies more effectively, reduce communication
+needs, and figure out what requires their attention. Peterson~\cite{Peter13}
+finds that open source software ({\sc oss}) development on Github works mostly
+similarly to traditional {\sc oss} development, with the exception of faster
+turnaround times. Pham et al.~\cite{Pham13} examined the testing practices of
+projects on Github and found that the lower barriers to submission hinders
+high-quality testing as the work load on project member increases.  
+Finally, McDonald and Goggins~\cite{McDon13} find that increased transparency in pull
+requests allows allows teams to become more democratic in their decisions. 
 
 \section{Conclusion}
 
@@ -1266,7 +1298,7 @@ distributed software development. As such, while comprehensive, it is not comple
 Further research on the field can include the role and consequences of drive-by
 commits, the formation of teams and management hierarchies in a seemingly flat
 workspace, the role of testing in assessing pull request impact, large scale
-analysis of the reasons for pull request rejection,
+analysis of the reasons for pull request rejection, code reviewing practices,
 replications in more rigid work environments (e.g., companies) and tools for
 helping teams to automate the handling of pull requests.
 

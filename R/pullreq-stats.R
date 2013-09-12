@@ -347,14 +347,15 @@ cor.test(merged$lifetime_minutes, merged$num_comments, method = "spearman")
 cor.test(non_merged$lifetime_minutes, non_merged$num_comments, method = "spearman")
 
 # Code review, pimp the data frame with info about code review
-has.code.review <- function(pr_id) {
-  q = sprintf("select count(*) as cnt from pull_request_comments prc where prc.pull_request_id = %d", pr_id)
+has.code.review <- function(row) {
+  q = sprintf("select count(*) as cnt from pull_request_comments prc where prc.pull_request_id = %d", row$pull_req_id)
+  printf("%s/%s",row$project_name,row$github_id)
   res <- dbSendQuery(con,q) 
   num_code_review <- fetch(res, n = -1)
   num_code_review > 0
 }
 
-all$code_review <- lapply(all$pull_req_id, has.code.review)
+all$code_review <- apply(all, 1, has.code.review)
 reviewed <- subset(all, code_review == T)
 non.reviewed <- subset(all, code_review == F)
 printf("Pull reqs with code review: %d, %f%%", nrow(reviewed), nrow(reviewed)/nrow(all))
@@ -362,6 +363,8 @@ printf("Reviewed and merged %%: %f", nrow(subset(reviewed, merged == T))/nrow(re
 ranksum(subset(reviewed, merged == T)$lifetime_minutes,
         subset(non.reviewed, merged == T)$lifetime_minutes,
         "code review and mergetime")
+
+
 
 # Pull request conflicts, do they affect merge time?
 ranksum(subset(merged, conflict == T)$mergetime_minutes,
