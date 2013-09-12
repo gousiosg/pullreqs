@@ -364,6 +364,17 @@ ranksum(subset(reviewed, merged == T)$lifetime_minutes,
         subset(non.reviewed, merged == T)$lifetime_minutes,
         "code review and mergetime")
 
+# Number of participants in pull request discussion
+num.participants <- function(row) {
+  q = sprintf("select count(distinct(user_id)) as participants from (select user_id from pull_request_comments where pull_request_id = %s union select user_id from issue_comments ic, issues i where i.id = ic.issue_id and i.pull_request_id = %s) as users", row[1], row[1])
+  printf("%s/%s",row[2],row[4])
+  res <- dbSendQuery(con,q) 
+  participants <- fetch(res, n = -1)$participants
+  print(participants)
+  participants
+}
+
+all$num_participants <- apply(all, 1, num.participants)
 
 
 # Pull request conflicts, do they affect merge time?
