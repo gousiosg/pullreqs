@@ -5,7 +5,14 @@ http://github.com/buildbot/buildbot/pull/435,conflicting with other PR,conflict
 http://github.com/DIRACGrid/DIRAC/pull/1616,conflicts,conflict
 http://github.com/cgeo/c-geo-opensource/pull/822,conflicts with other PR,conflict
 http://github.com/cython/cython/pull/64,merger needs to merge other feature first,conflict
-http://github.com/aeolusproject/conductor/pull/36,"""that didn't go well"", closed by author",deferred
+http://github.com/diaspora/diaspora/pull/571,,conflict
+http://github.com/diaspora/diaspora/pull/4272,,conflict
+http://github.com/saltstack/salt/pull/6829,,conflict
+http://github.com/django/django/pull/526,,conflict
+http://github.com/akka/akka/pull/1083,,conflict
+http://github.com/django/django/pull/763,,conflict
+http://github.com/sferik/rails_admin/pull/306,,conflict
+http://github.com/aeolusproject/conductor/pull/36,"that didn't go well, closed by author",deferred
 http://github.com/diaspora/diaspora/pull/3624,closed by author to work more on it,deferred
 http://github.com/bundler/bundler/pull/1367,More work needed,deferred
 http://github.com/boto/boto/pull/1196,more work needed,deferred
@@ -13,10 +20,20 @@ http://github.com/chriseppstein/compass/pull/662,moved to different project,defe
 http://github.com/cgeo/c-geo-opensource/pull/2577,discussion lead to closing,deferred
 http://github.com/cloudfoundry/bosh/pull/252,more discussion needed on feature,deferred
 http://github.com/jedi4ever/veewee/pull/167,closed by author to work more on it,deferred
+http://github.com/elasticsearch/elasticsearch/pull/2367,,deferred
+http://github.com/rails/rails/pull/11955,,deferred
+http://github.com/django/django/pull/305,,deferred
+http://github.com/scala-ide/scala-ide/pull/447,,deferred
+http://github.com/opscode/chef/pull/25,,deferred
+http://github.com/wildfly/wildfly/pull/4168,,deferred
+http://github.com/rails-api/active_model_serializers/pull/119,,deferred
+http://github.com/midgetspy/Sick-Beard/pull/285,,deferred
 http://github.com/gatein/gatein-portal/pull/226,duplicate,duplicate
 http://github.com/getpelican/pelican/pull/621,functionality exists already,duplicate
 http://github.com/cgeo/c-geo-opensource/pull/2044,implemented otherwise,duplicate
 http://github.com/alphagov/whitehall/pull/511,previous pullreq implements the same stuff,duplicate
+http://github.com/k9mail/k-9/pull/31,,duplicate
+http://github.com/c00w/bitHopper/pull/236,,duplicate
 http://github.com/chriseppstein/compass/pull/564,proposed change incorrect,incorrect implementation
 http://github.com/facebook/tornado/pull/420,code doesn't behave as expected,incorrect implementation
 http://github.com/cgeo/c-geo-opensource/pull/1278,code not correct,incorrect implementation
@@ -31,6 +48,23 @@ http://github.com/everzet/capifony/pull/55,wrong code,incorrect implementation
 http://github.com/github/linguist/pull/61,wrong file modified,incorrect implementation
 http://github.com/gitlabhq/gitlabhq/pull/3041,removed feature that should not have been removed,incorrect implementation
 http://github.com/jnicklas/capybara/pull/167,incorrect feature,incorrect implementation
+http://github.com/imathis/octopress/pull/1036,,incorrect implementation
+http://github.com/chriseppstein/compass/pull/307,,incorrect implementation
+http://github.com/jayway/maven-android-plugin/pull/215,,incorrect implementation
+http://github.com/alibaba/druid/pull/53,,incorrect implementation
+http://github.com/jnicklas/carrierwave/pull/444,,incorrect implementation
+http://github.com/ipython/ipython/pull/2711,,incorrect implementation
+http://github.com/rails/rails/pull/9188,,incorrect implementation
+http://github.com/plataformatec/devise/pull/900,,incorrect implementation
+http://github.com/rails/rails/pull/2670,,incorrect implementation
+http://github.com/VanillaDev/Vanilla/pull/153,,incorrect implementation
+http://github.com/wildfly/wildfly/pull/2770,,incorrect implementation
+http://github.com/codahale/metrics/pull/20,,incorrect implementation
+http://github.com/rails/rails/pull/11287,,incorrect implementation
+http://github.com/justinfrench/formtastic/pull/909,,incorrect implementation
+http://github.com/wildfly/wildfly/pull/331,,incorrect implementation
+http://github.com/gitlabhq/gitlabhq/pull/3385,,incorrect implementation
+http://github.com/carrierwaveuploader/carrierwave/pull/643,,incorrect implementation
 http://github.com/dimagi/commcare-hq/pull/770,,merged
 http://github.com/celery/celery/pull/884,,merged
 http://github.com/autotest/virt-test/pull/289,,merged
@@ -50,13 +84,42 @@ http://github.com/diaspora/diaspora/pull/204,?,merged
 http://github.com/infinispan/infinispan/pull/1639,,merged
 http://github.com/gatein/gatein-portal/pull/300,?,merged
 http://github.com/kennethreitz/requests/pull/124,superseded by later commit,merged
-http://github.com/carrierwaveuploader/carrierwave/pull/1025,"""closing due to inactivity"" -- lingering",obsolete
-http://github.com/alphagov/frontend/pull/1,"""horifficaly old"" --- lingering",obsolete
-http://github.com/candlepin/subscription-manager/pull/693,"changes ""no longer relevant""",obsolete
+http://github.com/gregbell/active_admin/pull/446,,merged
+http://github.com/celery/celery/pull/1268,,merged
+http://github.com/gatein/gatein-portal/pull/227,,merged
+http://github.com/buildbot/buildbot/pull/250,,merged
+http://github.com/celery/celery/pull/595,,merged
+http://github.com/jbosstm/narayana/pull/149,,merged
+http://github.com/celery/celery/pull/780,,merged
+http://github.com/infinispan/infinispan/pull/1893,,merged
+http://github.com/spree/spree/pull/2248,,merged
+http://github.com/spree/spree/pull/3595,,merged
+http://github.com/rails/rails/pull/11191,,merged
+http://github.com/spree/spree/pull/1799,,merged
+http://github.com/kennethreitz/requests/pull/315,,merged
+http://github.com/openshift/origin-server/pull/253,,merged
+http://github.com/saltstack/salt/pull/1550,,merged
+http://github.com/hmarr/mongoengine/pull/533,,merged
+http://github.com/spree/spree/pull/2728,,merged
+http://github.com/RuudBurger/CouchPotatoServer/pull/1149,,merged
+http://github.com/Sage-Bionetworks/Synapse-Repository-Services/pull/223,,merged
+http://github.com/sympy/sympy/pull/464,,merged
+http://github.com/Catrobat/Catroid/pull/389,,merged
+http://github.com/spree/spree/pull/1568,,merged
+http://github.com/autotest/virt-test/pull/98,,merged
+http://github.com/pydata/pandas/pull/2254,,merged
+http://github.com/everzet/capifony/pull/7,,merged
+http://github.com/carrierwaveuploader/carrierwave/pull/1025,closing due to inactivity -- lingering,obsolete
+http://github.com/alphagov/frontend/pull/1,horifficaly old --- lingering,obsolete
+http://github.com/candlepin/subscription-manager/pull/693,changes no longer relevant,obsolete
 http://github.com/emesene/emesene/pull/783,lingering,obsolete
 http://github.com/carrierwaveuploader/carrierwave/pull/477,problem fixed by update in dependency,obsolete
 http://github.com/gitlabhq/gitlabhq/pull/2054,"closed by author, cannot replicate error",obsolete
 http://github.com/rails/rails/pull/11070,"commits have been removed from pr, hence closed.",obsolete
+http://github.com/django/django/pull/356,,obsolete
+http://github.com/opscode/chef/pull/37,,obsolete
+http://github.com/sensu/sensu-community-plugins/pull/186,,obsolete
+http://github.com/rails/rails/pull/6009,,obsolete
 http://github.com/resque/resque/pull/931,code introduces uncessary dependencies,process
 http://github.com/emesene/emesene/pull/1189,"commit formating issues (too many merge commits,needs rebase)",process
 http://github.com/cgeo/c-geo-opensource/pull/1811,commit formatting (needs rebase),process
@@ -73,6 +136,16 @@ http://github.com/alibaba/druid/pull/10,? (chinese...),process
 http://github.com/celery/celery/pull/1242,"closed by author, error in pr code",process
 http://github.com/bbatsov/rubocop/pull/175,"need to split in two prs, incorrect implemation",process
 http://github.com/Governance/s-ramp/pull/298,"closed by author, commits are missing",process
+http://github.com/diaspora/diaspora/pull/558,,process
+http://github.com/MarkUsProject/Markus/pull/638,,process
+http://github.com/cgeo/c-geo-opensource/pull/2418,,process
+http://github.com/SpringSource/spring-framework/pull/70,,process
+http://github.com/filipg/amu_automata_2011/pull/682,,process
+http://github.com/stephenmcd/mezzanine/pull/367,,process
+http://github.com/wildfly/wildfly/pull/2469,,process
+http://github.com/midgetspy/Sick-Beard/pull/649,,process
+http://github.com/django/django/pull/1131,,process
+http://github.com/Maescool/Catacomb-Snatch/pull/501,,process
 http://github.com/wildfly/wildfly/pull/3884,doesn't solve an existing problem,superfluous
 http://github.com/rails/rails/pull/11879,doesn't solve an existing problem,superfluous
 http://github.com/django/django/pull/1068,doesn't solve an existing problem,superfluous
@@ -85,6 +158,11 @@ http://github.com/alibaba/druid/pull/193,? (chinese...),superfluous
 http://github.com/jnicklas/carrierwave/pull/409,incorrect feature,superfluous
 http://github.com/Jasig/cas/pull/62,feature not interesting to include in the core,superfluous
 http://github.com/rails/rails/pull/8696,"pr suggests simple refactoring, which was rejected as not helping",superfluous
+http://github.com/imathis/octopress/pull/789,,superfluous
+http://github.com/kennethreitz/requests/pull/645,,superfluous
+http://github.com/infinispan/infinispan/pull/1627,,superfluous
+http://github.com/mitchellh/vagrant/pull/1443,,superfluous
+http://github.com/django/django/pull/621,,superfluous
 http://github.com/cgeo/c-geo-opensource/pull/1589,superseded,superseded
 http://github.com/autotest/virt-test/pull/54,feature added by another pull req,superseded
 http://github.com/divio/django-cms/pull/1706,new code fixes issue,superseded
@@ -123,8 +201,23 @@ http://github.com/codahale/metrics/pull/376,same feature implemeted in other PR,
 http://github.com/cucumber/cucumber-jvm/pull/434,different implementation based on this pullreq,superseded
 http://github.com/chiliproject/chiliproject/pull/749,superseded,superseded
 http://github.com/intridea/grape/pull/78,"pr too big, request by merger to re-impl in new pull req",superseded
+http://github.com/hornetq/hornetq/pull/965,,superseded
+http://github.com/chiliproject/chiliproject/pull/651,,superseded
+http://github.com/drapergem/draper/pull/384,,superseded
+http://github.com/cucumber/cucumber-jvm/pull/188,,superseded
+http://github.com/wildfly/wildfly/pull/4368,,superseded
+http://github.com/ipython/ipython/pull/901,,superseded
+http://github.com/scrapy/scrapy/pull/323,,superseded
+http://github.com/ippontech/tatami/pull/492,,superseded
+http://github.com/sympy/sympy/pull/447,,superseded
+http://github.com/playframework/playframework/pull/1261,,superseded
+http://github.com/wildfly/wildfly/pull/3748,,superseded
+http://github.com/justinfrench/formtastic/pull/702,,superseded
+http://github.com/hpcugent/easybuild-easyconfigs/pull/250,,superseded
+http://github.com/diaspora/diaspora/pull/3180,,superseded
 http://github.com/carrierwaveuploader/carrierwave/pull/400,failed tests,tests
 http://github.com/aeolusproject/conductor/pull/259,tests didn't run,tests
+http://github.com/rails/rails/pull/10340,,tests
 http://github.com/divio/django-cms/pull/853,?,unknown
 http://github.com/gatein/gatein-portal/pull/53,?,unknown
 http://github.com/elasticsearch/elasticsearch/pull/3214,? closed by author,unknown
@@ -143,43 +236,16 @@ http://github.com/rails/rails/pull/10030,"?closed by author, commenter added tha
 http://github.com/avoinministerio/avoinministerio/pull/366,"closed by author, marked not for merge",unknown
 http://github.com/divio/django-cms/pull/884,?closed by author,unknown
 http://github.com/boto/boto/pull/1307,?closed by author,unknown
-http://github.com/k9mail/k-9/pull/31,,
-http://github.com/hornetq/hornetq/pull/965,,
-http://github.com/imathis/octopress/pull/1036,,
-http://github.com/imathis/octopress/pull/789,,
-http://github.com/chriseppstein/compass/pull/307,,
-http://github.com/diaspora/diaspora/pull/571,,
-http://github.com/gregbell/active_admin/pull/446,,
-http://github.com/celery/celery/pull/1268,,
-http://github.com/diaspora/diaspora/pull/3180,,
-http://github.com/jayway/maven-android-plugin/pull/215,,
-http://github.com/gatein/gatein-portal/pull/227,,
-http://github.com/buildbot/buildbot/pull/250,,
-http://github.com/alibaba/druid/pull/53,,
-http://github.com/celery/celery/pull/595,,
-http://github.com/elasticsearch/elasticsearch/pull/2367,,
-http://github.com/jbosstm/narayana/pull/149,,
-http://github.com/celery/celery/pull/780,,
-http://github.com/chiliproject/chiliproject/pull/651,,
-http://github.com/jnicklas/carrierwave/pull/444,,
-http://github.com/diaspora/diaspora/pull/4272,,
-http://github.com/diaspora/diaspora/pull/558,,
-http://github.com/ipython/ipython/pull/2711,,
-http://github.com/drapergem/draper/pull/384,,
-http://github.com/kennethreitz/requests/pull/645,,
-http://github.com/cucumber/cucumber-jvm/pull/188,,
-http://github.com/infinispan/infinispan/pull/1893,,
-http://github.com/infinispan/infinispan/pull/1627,,
-http://github.com/saltstack/salt/pull/6829,,
-http://github.com/spree/spree/pull/2248,,
-http://github.com/spree/spree/pull/3595,,
-http://github.com/rails/rails/pull/11955,,
-http://github.com/django/django/pull/526,,
-http://github.com/django/django/pull/305,,
-http://github.com/rails/rails/pull/9188,,
-http://github.com/rails/rails/pull/11191,,
-http://github.com/rails/rails/pull/10340,,
-http://github.com/django/django/pull/356,,
-http://github.com/wildfly/wildfly/pull/4368,,
-http://github.com/spree/spree/pull/1799,,
-http://github.com/wildfly/wildfly/pull/4359,,
+http://github.com/wildfly/wildfly/pull/4359,,unknown
+http://github.com/MrMasochism/Pixelmon/pull/329,,unknown
+http://github.com/jbosstm/narayana/pull/7,,unknown
+http://github.com/candlepin/subscription-manager/pull/99,,unknown
+http://github.com/django/django/pull/970,,unknown
+http://github.com/toastdriven/django-tastypie/pull/408,,unknown
+http://github.com/hornetq/hornetq/pull/846,,unknown
+http://github.com/scikit-image/scikit-image/pull/554,,unknown
+http://github.com/mifos/head/pull/145,,unknown
+http://github.com/mozilla/kitsune/pull/99,,unknown
+http://github.com/mozilla/kuma/pull/252,,unknown
+http://github.com/spree/spree/pull/3309,,unknown
+http://github.com/mozilla/socorro-crashstats/pull/80,,unknown

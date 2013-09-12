@@ -985,29 +985,29 @@ how fast a pull request will be accepted.
     has progressed. & 3.5 & 5\\
 
     \textsf{conflict} &	There feature is currently being implemented by other
-    {\sc pr} or in another branch. &  3.5 & 5\\
+    {\sc pr} or in another branch. &  3.5 & 6\\
 
-    \textsf{superseded} &	A new {\sc pr} solves the problem better. & 9.5 & 27\\
+    \textsf{superseded} &	A new {\sc pr} solves the problem better. & 9.5 & 21\\
 
     \textsf{duplicate} & The functionality already exists in the project. & 1.5 & 3 \\
 
     \textsf{superfluous} & {\sc pr} doesn't solve an existing problem or add a
-    feature needed by the project. & 4 & 9\\
+    feature needed by the project. & 4 & 7\\
 
     \textsf{deferred} & Proposed change delayed for further investigation in the
-    future. & 12 & 6\\
+    future. & 12 & 7\\
 
     \textsf{process} & The {\sc pr} does not follow the correct project
-    conventions for sending and handling pull requests. & 5 & 12\\
+    conventions for sending and handling pull requests. & 5 & 11\\
+    
+    \textsf{tests} & Tests failed to run. & 2 & 2\\
 
     \textsf{incorrect implementation} &	The implementation of the feature is
-    incorrect, missing or not following project standards. & 12 & 10\\
-
-    \textsf{tests} & Tests failed to run. & 2 & 2\\
+    incorrect, missing or not following project standards. & 12 & 13\\
 
     \hline 
     \textsf{merged} & The {\sc pr} was identified as merged by the human
-    examiner & 22.5 & 14\\
+    examiner & 22.5 & 18\\
 
     \textsf{unknown} & The {\sc pr} could not be classified due to lacking
     information & 23 & 13 \\
@@ -1032,15 +1032,16 @@ Table~\ref{tab:unmerged}.
 The results show that there is no clearly outstanding reason for closing pull
 requests. However, if we group together close reasons that have a timing
 dimension (\textsf{obsolete}, \textsf{conflict}, \textsf{superseded}), we see
-that 37\% of unmerged pull requests are closed due to concurrent modifications
-of the code in project branches.  Another 18\% (\textsf{superfluous},
+that 32\% of unmerged pull requests are closed due to concurrent modifications
+of the code in project branches. Another 20\% (\textsf{superfluous},
 \textsf{duplicate}, \textsf{deferred}) is closed as a result of the contributor
 not having identified the direction of the project correctly and is therefore
-submitting uninteresting changes. 24\% of the contributions are rejected with
+submitting uninteresting changes. 13\% of the contributions are rejected with
 reasons that have to do with project process and quality requirements
-(\textsf{process}, \textsf{incorrect implementation}, \textsf{tests}); this may
+(\textsf{process}, \textsf{tests}); this may
 be an indicator of processes not being communicated well enough or a rigorous
-code reviewing process.
+code reviewing process. Finally, another 13\% of the contributions are
+rejected because the code review revealed an error in the implementation.
 
 Moreover, for 13\% of the pull requests, the human examiners could not identify
 the cause of not merging them. This usually means that there was no discussion
@@ -1055,12 +1056,23 @@ of merged pull requests reported in this study (84\%) may be slightly
 underrated, due to non-inclusive heuristics. By extrapolation, the total number
 of merged pull requests could be as high as 90\%.
 
+It is interesting to note that only 13\% of the contributions are rejected due
+to technical issues, while a total 62\% are rejected for reasons having to do
+with the distributed nature of the pull request process (concurrent
+modifications) or the way projects handle communication of project goals and
+practices. This may mean that the pull-based model (or at least the way Github
+implements it) may be transparent for the project's core team but not so much
+for potential contributors. The fact that human examiners could not understand
+why pull requests are rejected even after manually reviewing them supports this
+hypothesis further.
+
 \noindent
 \fbox{
 \begin{minipage}{0.46\textwidth}
-  \emph{RQ4: 37\% of pull requests are discarded due to concurrent
-  modifications of code in project branches and forks while 24\% are rejected
-  due to project process and quality requirements not being met.}
+  \emph{RQ4: 32\% of pull requests are discarded due to concurrent
+  modifications of code in project branches and forks while 20\% are rejected
+  due to project process and quality requirements not being met. Only 13\% 
+  of the pull requests are rejected due to technical reasons.}
 \end{minipage}}
 
 \section{Discussion}
@@ -1357,6 +1369,7 @@ This work is partially supported by Marie Curie {\sc ief} 298930 --- {\sc sefunc
 \bibliographystyle{abbrv}
 \balance
 \begin{small}
+
   \bibliography{pullreqs}
 \end{small}
 
