@@ -156,7 +156,7 @@ store.pdf(p, plot.location, "pr-num-comments-hist.pdf")
 ### Dataset descriptive statistics
 descr.stats <- data.frame(
   Feature = c('num_commits', 'src_churn', 'test_churn', 'files_changed',
-              'num_comments', 'sloc', 'team_size',
+              'num_comments', 'num_participants', 'sloc', 'team_size',
               'perc_external_contribs', 'commits_on_files_touched',
               'test_lines_per_kloc', 'prev_pullreqs', 'requester_succ_rate'),
   Description = c(
@@ -165,6 +165,7 @@ descr.stats <- data.frame(
     "Number of test lines changed in the pull request.",
     "Number of files touched by the pull request.",
     "The total number of comments (discussion and code review).",
+    "Number of participants in the pull request discussion",
     #"The word conflict appears in the pull request comments.",
     #"The pull request comments include links to other pull requests.",
     "Executable lines of code at pull request merge time.",
