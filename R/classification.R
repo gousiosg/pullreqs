@@ -19,7 +19,7 @@ class.project <- function(dfs, name) {
 
 # Strip a project data frame from unused columns
 prepare.project.df <- function(a) {
-  a[,c(7:32)]
+  a[,c(7:33)]
 }
 
 rf.train <- function(model, train.set) {

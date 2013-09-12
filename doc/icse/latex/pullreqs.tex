@@ -519,8 +519,8 @@ language on both Github and other sites.
 %  \label{fig:wordcloud}
 %\end{figure}
 
-\textbf{Feature Extraction.} The feature selection was based on prior work in the areas of patch submission
-and acceptance~\cite{Nagap05,Bird07a,Weiss08,Baysa12}, bug
+\textbf{Feature Extraction.} The feature selection was based on prior work in the areas of patch submission and acceptance~\cite{Nagap05,Bird07a,Weiss08,Baysa12}, 
+code reviewing~\cite{Rigby13}, bug
 triaging~\cite{Anvik06, Giger10} and also on semi-structured interviews of
 Github developers~\cite{Dabbi12, Pham13, McDon13}. The selected features are split
 into three categories:
@@ -535,7 +535,9 @@ into three categories:
     commits~\cite{Fluri07}. In the particular case of pull requests, developers
     reported that tests in a pull request increases their confidence to merge
     it~\cite{Pham13}. To investigate this, we split the churn feature into two
-    features, namely \texttt{src\_churn} and \texttt{test\_churn}. 
+    features, namely \texttt{src\_churn} and \texttt{test\_churn}. Finally,
+    the number of participants has been shown to influence the time to process
+    of code reviewing~\cite{Rigby13}.
 
   \emph{Project characteristics.} These features quantify how receptive to pull
   requests the project is. If the project's process is open to external
@@ -569,7 +571,7 @@ their calculation (e.g., \texttt{team\_size} or
 \texttt{commits\_on\_files\_touched}) are calculated in a time window of $t - 3$
 months, where $t$ is the time the pull request has been closed. 
 
-The initial selection contained 23 features. To check whe\-ther the selected
+The initial selection contained 25 features. To check whe\-ther the selected
 features are independent enough, we
 conducted a pair-wise correlation analysis using the Spearman rank correlation
 ($\rho$) metric across all features. We set a threshold of $\rho = 0.7$, above
@@ -578,13 +580,15 @@ removed 2 features, \texttt{asserts\_per\_kloc} and
 \texttt{test\_cases\_per\_kloc} as they where very strongly correlated ($\rho >
 0.92$) with the included \texttt{test\_lines\_per\_kloc} feature. We also
 removed features that could not be calculated reliably at the time a pull
-request was done (\texttt{followers} and \texttt{stars}).\footnote{The Github
-{\sc api} does not report a timestamp on when a user followed another user, or
-when a user stared a project, so it is impossible to know how many followers a
-user had or stars a project had at a specific time instance.} Finally, we
+request was done (\texttt{followers} and \texttt{stars}).
+%\footnote{The Github
+%{\sc api} does not report a timestamp on when a user followed another user, or
+%when a user stared a project, so it is impossible to know how many followers a
+%user had or stars a project had at a specific time instance.} 
+Finally, we
 merged similar features (i.e. \texttt{doc\_files} and \texttt{src\_files} were merged to \texttt{files\_changed}). 
 
-The post processing phase left us with 14 features, which can be seen in
+The post processing phase left us with 15 features, which can be seen in
 Table~\ref{tab:features}. 
 %The cross-correlation analysis result for the
 %selected features can be seen in Figure~\ref{fig:crosscor}. 
@@ -717,7 +721,7 @@ and the project community.
 \noindent
 \fbox{
 \begin{minipage}{0.46\textwidth}
-\emph{RQ1: 14\% of repositories are using pull requests on Github. Pull request usage is increasing in absolute numbers, even though the proportion of repositories using them is relatively stable.}
+\emph{RQ1: 14\% of repositories are using pull requests on Github. Pull request usage is increasing in absolute numbers, even though the proportion of repositories using pull requests is relatively stable.}
 \end{minipage}}
 %
 
@@ -891,18 +895,18 @@ We run the classification processes according to the method specified in
 Section~\ref{sec:resdesign}. Each classifier attempts to predict the dependent
 variable (merge decision, merge time class) based on the features presented in
 Table~\ref{tab:features}. For the \textsf{mergetime} experiment, we excluded the
-\texttt{num\_comments} and \texttt{num\_commits} features as they could not be
-measured reliably at the pull request arrival time. Based on the results
-presented in Table~\ref{tab:classif-perf}, we selected the \texttt{randomforest}
-classification algorithm for both our experiments. For the \textsf{mergetime}
-experiment, \texttt{randomforest} achieved an {\sc auc} of 0.73, with a prior
-probability of 31\%, 35\% and 34\% for each of the \textsf{hour}, \textsf{day}
-and \textsf{more than a day} classes respectively. For the
-\textsf{mergedecision} experiment, the prior probability for the dominant class
-was 84\% which allowed the algorithm to achieve near perfect scores. In both
-cases, the stability of the {\sc auc} metric across folds was good
-(\textsf{mergetime}: $\sigma_{auc} = 0.019$, \textsf{mergedecision}:
-$\sigma_{auc} = 0.008$).
+\texttt{num\_comments}, \texttt{num\_commits} and \texttt{num\_participants}
+features as they could not be measured reliably at the pull request arrival
+time. Based on the results presented in Table~\ref{tab:classif-perf}, we
+selected the \texttt{randomforest} classification algorithm for both our
+experiments. For the \textsf{mergetime} experiment, \texttt{randomforest}
+achieved an {\sc auc} of 0.73, with a prior probability of 31\%, 35\% and 34\%
+for each of the \textsf{hour}, \textsf{day} and \textsf{more than a day} classes
+respectively. For the \textsf{mergedecision} experiment, the prior probability
+for the dominant class was 84\% which allowed the algorithm to achieve near
+perfect scores. In both cases, the stability of the {\sc auc} metric across
+folds was good (\textsf{mergetime}: $\sigma_{auc} = 0.019$,
+\textsf{mergedecision}: $\sigma_{auc} = 0.008$).
 
 \begin{figure*}
 \centering
@@ -976,54 +980,6 @@ how fast a pull request will be accepted.
 
 \section{Unmerged pull requests}
 
-\begin{table}[t]
-  \begin{small}
-  \centering
-  \begin{tabular}{p{6em}p{14em}cc}
-    \hline
-    \textbf{Reason} & \textbf{Description} & \textbf{CV} &
-    \textbf{Sample}
-\\
-    \hline
-    \textsf{obsolete} &	The {\sc pr} is no longer relevant, as the project
-    has progressed. & 3.5 & 5\\
-
-    \textsf{conflict} &	There feature is currently being implemented by other
-    {\sc pr} or in another branch. &  3.5 & 6\\
-
-    \textsf{superseded} &	A new {\sc pr} solves the problem better. & 9.5 & 21\\
-
-    \textsf{duplicate} & The functionality already exists in the project. & 1.5 & 3 \\
-
-    \textsf{superfluous} & {\sc pr} doesn't solve an existing problem or add a
-    feature needed by the project. & 4 & 7\\
-
-    \textsf{deferred} & Proposed change delayed for further investigation in the
-    future. & 12 & 7\\
-
-    \textsf{process} & The {\sc pr} does not follow the correct project
-    conventions for sending and handling pull requests. & 5 & 11\\
-    
-    \textsf{tests} & Tests failed to run. & 2 & 2\\
-
-    \textsf{incorrect implementation} &	The implementation of the feature is
-    incorrect, missing or not following project standards. & 12 & 13\\
-
-    \hline 
-    \textsf{merged} & The {\sc pr} was identified as merged by the human
-    examiner & 22.5 & 18\\
-
-    \textsf{unknown} & The {\sc pr} could not be classified due to lacking
-    information & 23 & 13 \\
-
-    \hline
-  \end{tabular}
-\end{small}
-\caption{Reasons for closing pull requests without merging. The {\sc cv} column
-presents the mean percentage across all three examiners in the cross validation sample. The sample column presents the percentage in the analyzed sample.}
-\label{tab:unmerged}
-\end{table}
-
 As most pull requests are indeed merged, it is interesting to explore why some
 pull requests are \emph{not} merged. For that reason, we manually looked into 250 pull
 requests and classified the reasons in categories as described in
@@ -1078,6 +1034,54 @@ hypothesis further.
   due to project process and quality requirements not being met. Only 13\% 
   of the pull requests are rejected due to technical reasons.}
 \end{minipage}}
+
+\begin{table}[t]
+  \begin{small}
+  \centering
+  \begin{tabular}{p{6em}p{14em}cc}
+    \hline
+    \textbf{Reason} & \textbf{Description} & \textbf{CV} &
+    \textbf{Sample}
+\\
+    \hline
+    \textsf{obsolete} &	The {\sc pr} is no longer relevant, as the project
+    has progressed. & 3.5 & 5\\
+
+    \textsf{conflict} &	There feature is currently being implemented by other
+    {\sc pr} or in another branch. &  3.5 & 6\\
+
+    \textsf{superseded} &	A new {\sc pr} solves the problem better. & 9.5 & 21\\
+
+    \textsf{duplicate} & The functionality already exists in the project. & 1.5 & 3 \\
+
+    \textsf{superfluous} & {\sc pr} doesn't solve an existing problem or add a
+    feature needed by the project. & 4 & 7\\
+
+    \textsf{deferred} & Proposed change delayed for further investigation in the
+    future. & 12 & 7\\
+
+    \textsf{process} & The {\sc pr} does not follow the correct project
+    conventions for sending and handling pull requests. & 5 & 11\\
+    
+    \textsf{tests} & Tests failed to run. & 2 & 2\\
+
+    \textsf{incorrect implementation} &	The implementation of the feature is
+    incorrect, missing or not following project standards. & 12 & 13\\
+
+    \hline 
+    \textsf{merged} & The {\sc pr} was identified as merged by the human
+    examiner & 22.5 & 18\\
+
+    \textsf{unknown} & The {\sc pr} could not be classified due to lacking
+    information & 23 & 13 \\
+
+    \hline
+  \end{tabular}
+\end{small}
+\caption{Reasons for closing pull requests without merging. The {\sc cv} column
+presents the mean percentage across all three examiners in the cross validation sample. The sample column presents the percentage in the analyzed sample.}
+\label{tab:unmerged}
+\end{table}
 
 \section{Discussion}
 \label{sec:discussion}
@@ -1363,11 +1367,9 @@ dataset and custom-built Ruby and R tools. We share the tools, original data
 sources and extracted data files on the Github repository
 \texttt{gousiosg\-/\-pullreqs}, along with instructions on how to use them.
 
-\section*{Acknowledgements}
+\subsection*{Acknowledgements}
 
-The authors would like to thank Efthimia Aivaloglou for her help with 
-optimizing {\sc sql} queries and Panos Louridas for reviewing the 
-statistical analysis parts of the paper.
+We would like to thank the anonymous reviewers for their comments.
 This work is partially supported by Marie Curie {\sc ief} 298930 --- {\sc sefunc}.
 
 \bibliographystyle{abbrv}
