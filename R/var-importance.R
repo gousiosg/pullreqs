@@ -12,8 +12,8 @@ source(file = "R/merge-decision.R")
 
 library(ggplot2)
 library(doMC)
-#registerDoMC(num.processes)
-registerDoMC(10)
+registerDoMC(num.processes)
+
 run.rf.varimp <- function(expname, model, sampler, data, smpl_size, runs) {
   varimp <- rf.varimp(model, sampler, data, smpl_size, runs)
   name.for.file <- gsub(" ", "-", tolower(expname))
