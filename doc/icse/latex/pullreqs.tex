@@ -2,6 +2,7 @@
 \usepackage{url}
 \usepackage{graphicx}
 \usepackage{subfigure}
+\usepackage{hyperref}
 \usepackage{url}
 \usepackage{times}
 \usepackage{balance}
@@ -47,12 +48,13 @@ Arie van Deursen\\
   tapped on the opportunity to facilitate pull-based development by offering
   workflow support tools, such as code reviewing systems and integrated issue
   trackers. In this work, we explore how pull-based software development works,
-  first on the {\sc ght}orrent corpus and then on a carefully selected sample of 88
+  first on the {\sc ght}orrent corpus and then on a carefully selected sample of 291
   projects. We find that the pull request model offers fast turnaround,
-  increased opportunities for community engagement and significantly decreased
-  time to incorporate contributions. Moreover, we show that a relatively
+  increased opportunities for community engagement and decreased
+  time to incorporate contributions. We show that a relatively
   small number of factors affect both the decision to merge a pull request and
-  the time to process it.
+  the time to process it. We also examine the reasons for pull request
+  rejection and find that technical ones are a small minority.
 
 \end{abstract}
 
@@ -620,6 +622,7 @@ results are statistically significant ($n = 166,884, p < 0.001$).
 %  \label{fig:crosscor}
 %\end{figure}
 
+\vspace{1em}
 \subsection{Qualitative data}
 \label{sec:qualdata}
 To investigate how pull requests are used in practice and why some pull requests
@@ -666,15 +669,18 @@ In the {\sc ght}orrent dataset, less than half
 
 Pull requests are enabled by default on all repositories opened on Github;
 however, not all projects are using them to collaborate.  In the period from
-February to August 2012, 315,522 original repositories received a single
-commit. From those, 53,866 (17\%) received at least one pull request, while
-54,205 (18\%) used the shared repository approach, having received commits by
-more than one developers and no pull requests.  The situation is similar during
-the same period in 2013; from the 1,157,625 repositories that received a
-single commit, 120,104 (10\%) repositories received a pull request while 124,316
-(11\%) used the shared repository approach exclusively. While pull request usage
-is increasing overall, partially reflecting Github's growth, the relative number
-of repositories using the pull request model has decreased slightly.
+February to August 2012, 315,522 original repositories received a single commit.
+From those, 53,866 (17\%) received at least one pull request, while 54,205
+(18\%) used the shared repository approach, having received commits by more than
+one developers and no pull requests.  The situation is similar during the same
+period in 2013; from the 1,157,625 repositories that received a single commit,
+120,104 (10\%) repositories received a pull request while 124,316 (11\%) used
+the shared repository approach exclusively. Across both years, 14\% of the
+active repositories use pull requests.  While pull request usage is increasing
+overall, partially reflecting Github's growth, the relative number of
+repositories using the pull request model has decreased slightly.  An almost
+equal number of projects use pull requests and shared repositories for
+distributed collaboration.
 
 %On a per repository basis, the average number of pull requests per month is stable
 %between 2012 and 2013, as we see in Figure~\ref{fig:num-pullreqs-month}.
@@ -732,7 +738,9 @@ and the project community.
 \noindent
 \fbox{
 \begin{minipage}{0.46\textwidth}
-\emph{RQ1: 14\% of repositories are using pull requests on Github. Pull request usage is increasing in absolute numbers, even though the proportion of repositories using pull requests has decreased slightly.}
+\emph{RQ1: 14\% of repositories are using pull requests on Github.
+Pull requests and shared repositories are equally used among projects.
+Pull request usage is increasing in absolute numbers, even though the proportion of repositories using pull requests has decreased slightly.}
 \end{minipage}}
 %
 
@@ -1038,7 +1046,6 @@ project's core team~\cite{Dabbi13} but not so much for potential contributors. T
 human examiners could not understand why pull requests are rejected even after
 manually reviewing them supports this hypothesis further.
 
-\vspace{1em}
 \noindent
 \fbox{
 \begin{minipage}{0.46\textwidth}
@@ -1094,7 +1101,6 @@ manually reviewing them supports this hypothesis further.
 \end{table}
 
 
-\vspace{2em}
 \section{Discussion}
 \label{sec:discussion}
 
@@ -1128,8 +1134,7 @@ However, the developer track record is important for the speed of processing
 pull requests. Moreover, we found that from rejected pull requests, almost 53\%
 are rejected due to the distributed nature of pull-based development. While the pull request process is
 transparent from the project manager's side (and praised for that by Dabbish et
-al.'s interviewees), it may not be so from the potential contributor's point of
-view.
+al.'s interviewees), our findings suggest it is less so from the potential contributor's point of view.
 
 %\fbox{
 %\begin{minipage}{0.46\textwidth}
@@ -1142,14 +1147,17 @@ that pull requests make casual contributions straightforward through
 a mechanism often referred to as ``drive-by commits''. As the
 relative cost to fork a repository is negligible on Github (54\% of the
 repositories are forks), it is not uncommon for developers to fork other
-repositories to perform casual commits, such as fixes to spelling mistakes or
-indentation issues. In addition, Github provides web based editors
-for various file formats, by which any user can edit a file in another
-repository; behind the scenes, Github forks the repository and asks the user
-to create a pull request to the original one. Such commits might be identified
+repositories to perform casual commits.
+%, such as fixes to spelling mistakes or
+%indentation issues. 
+%In addition, Github provides web based editors
+%for various file formats, by which any user can edit a file in another
+%repository; behind the scenes, Github forks the repository and asks the user
+%to create a pull request to the original one. 
+Such commits might be identified
 as pull requests that contain a single commit from users that are not yet part
-of the project's community. Even under this na\"ive definition, 7\% of pull
-requests in 2012 can be classified as drive-by commits. Moreover, 3.5\% of the
+of the project's community and comprise 7\% of the total number of pull
+requests in 2012. Moreover, 3.5\% of the
 forks were created for the sole purpose of creating a drive-by commit. More
 work needs to be done for the accurate definition and assessment of the
 implications of drive-by commits.
@@ -1190,11 +1198,10 @@ verified in further studies.
 
 \subsection{Implications}
 
-\textbf{Contributors.} Prospective project contributors want their
-contributions to be accepted. Our research shows that pull requests that affect
-parts of the project that  have been changed often lately (are ``hot'') are very
-likely to get merged. Also, most pull requests that include test code are
-accepted, while 80\% of the merged pull requests modify three or less files and
+\textbf{Contributors.} Prospective project contributors want their contributions
+to be accepted. Our research shows that pull requests that affect parts of the
+project that  have been changed often lately (are ``hot'') are very likely to
+get merged. Also 80\% of the merged pull requests modify three or less files and
 include patches less than 100 lines long. Therefore, our advice to contributors
 seeking to add a particular feature or fix a bug is to ``keep it short''. If the
 contribution's purpose is to make the contributor known to the project
@@ -1260,17 +1267,17 @@ encouraging.
 
 \section{Related Work}
 
-Software development can be distributed across various
-di\-men\-sions~\cite{Gumm06}; among them, physical distribution distributes
-programming tasks across people collaborating remotely, while temporal
-distribution distributes tasks to people working in different time zones.
-Distribution of development activities has been initially thought to hinder
-collaboration~\cite{Herbs99, Batti01}, even though subsequent studies have
-shown that it does not pose significant threats to project
-quality~\cite{Spine06, Nguye08, Bird09a}. Access to online collaboration tools
-such as version control systems and bug databases have been identified as a necessary
-requirement for collaborative software development~\cite{Catal06}. Moreover, distributed collaboration on software artifacts can be
-facilitated through awareness building tools~\cite{Dabbi12, Lanza10}. 
+%Software development can be distributed across various
+%di\-men\-sions~\cite{Gumm06}; among them, physical distribution distributes
+%programming tasks across people collaborating remotely, while temporal
+%distribution distributes tasks to people working in different time zones.
+%Distribution of development activities has been initially thought to hinder
+%collaboration~\cite{Herbs99, Batti01}, even though subsequent studies have
+%shown that it does not pose significant threats to project
+%quality~\cite{Spine06, Nguye08, Bird09a}. Access to online collaboration tools
+%such as version control systems and bug databases have been identified as a necessary
+%requirement for collaborative software development~\cite{Catal06}. Moreover, distributed collaboration on software artifacts can be
+%facilitated through awareness building tools~\cite{Dabbi12, Lanza10}. 
 
 Arguably, the first study of {\sc dvcs} systems as input for research was done
 by Bird et. al in~\cite{Bird09}. One finding related to our work is that
@@ -1326,55 +1333,105 @@ requests allows allows teams to become more democratic in their decisions.
 
 \section{Conclusion}
 
-We have presented an empirical investigation of how the pull-based development
-model works in practice. We explored its use on Github
-and then focused on the factors that affect pull request acceptance
-and processing time. This work makes the following contributions:
+The goal of this work is to obtain a deep understanding of the pull-based software development model, as used for many important open source projects hosted on Github. To that end, we have conducted a statistical analysis of millions of pull requests, as well of a carefully composed set of hunders of thousands of pull requests from projects actively using the pull-based model.
 
-\begin{itemize}
+Our main findings are as follows:
 
-  \item A statistical analysis of pull request usage on Github.
-   % We find increasing usage of pull requests through time.
+\begin{enumerate}
 
-  \item A statistical analysis of several characteristics of pull requests.
-    %We
-    %find that pull requests are treated equally irrespective of whether they
-    %originate from the project's main team or the community, that projects are
-    %not getting faster at processing pull requests and that the inclusion of
-    %tests in a pull request does not directly affect whether it will be merged
-    %or not.
+  \item The pull-based model is not as popular as we had anticipated: Only 14\%
+    of the active projects use pull requests, but this number is equal to the
+    number of projects using the shared repository approach (Section 5).
 
-  \item The main factors that affect pull request acceptance 
-    %(whether a pull
-    %request touches code that has been modified again recently) 
-    and processing
-    time.% (the developer's track record, the project's size and test coverage).
-  
+  \item Most pull requests affect just a few dozen lines of code, and 60\% are
+    processed (merged or discarded) in less than a day. The merge decision is
+    \emph{not} affected by the presence of test code. Core members and external
+    developers have equal chances to get their pull request accepted (Section
+    6).
 
-  \item The main factors for which pull requests are rejected
-    %, namely concurrent
-    %modifications among project branches and forks and incomplete understanding
-    %of the project's goals.
+  \item The decision to merge is mainly affected by whether the pull request
+    modifies recently modified code. The time to merge is influenced by various
+    factors, including the developer's track record, and the project's test
+    coverage.
 
-  \item A carefully constructed dataset and a statistical toolkit for
-    performing analysis of the pull based development model.
+  \item 53\% of non-merged pull requests are rejected for reasons related to the
+    distributed nature of pull-based development. Only 13\% of the pull requests
+    are rejected due to technical reasons.
 
-\end{itemize}
+\end{enumerate}
 
-This work is the first to explore the emerging paradigm of pull-based
-distributed software development. As such, while comprehensive, it is not complete.
-Further research can include the role and consequences of drive-by
-commits, the formation of teams and management hierarchies in a seemingly flat
-workspace, the role of testing in assessing pull request impact, large scale
-analysis of the reasons for pull request rejection, code reviewing practices,
-replications in more rigid work environments (e.g., companies) and tools for
-helping teams to automate the handling of pull requests.
+Our findings have the following implications:
 
-{\bfseries Replication} This study has been conducted using the {\sc ght}orrent
-dataset and custom-built Ruby and R tools. We share the tools, original data
-sources and extracted data files on the Github repository
-\texttt{gousiosg\-/\-pullreqs}, along with instructions on how to use them.
+\begin{enumerate}
 
+  \item The pull-based model calls for a revision of some of our current
+    understanding of open source software development. Iteresting research
+    directions might include the formation of teams and management hierarchies,
+    novel code reviewing practices and the motives of developers to work in a
+    highly transparent workspace.
+
+  \item Teams seeking to attract external contributors and to speed up merging
+    of contributions can do so not just by providing clear pull request
+    processing guidelines, but also by incorporating a high coverage test suite.
+
+  \item Insufficient task articulation seems the most important cause for wasted
+    (non-merged) work: Devising new ways for integrating task coordination into
+    the pull-based model is a promising area of further research.
+
+\end{enumerate}
+
+Last but not least, our dataset provides a rich body of information on open source software development. The dataset as well as custom-built Ruby and R analysis tools are available on the Github repository 
+\href{https://github.com/gousiosg/pullreqs}{gousiosg/pullreqs}, along with instructions on how to use them.
+
+%We have presented an empirical investigation of how the pull-based development
+%model works in practice. We explored its use on Github
+%and then focused on the factors that affect pull request acceptance
+%and processing time. This work makes the following contributions:
+%
+%\begin{itemize}
+%
+%  \item A statistical analysis of pull request usage on Github.
+%   % We find increasing usage of pull requests through time.
+%
+%  \item A statistical analysis of several characteristics of pull requests.
+%    %We
+%    %find that pull requests are treated equally irrespective of whether they
+%    %originate from the project's main team or the community, that projects are
+%    %not getting faster at processing pull requests and that the inclusion of
+%    %tests in a pull request does not directly affect whether it will be merged
+%    %or not.
+%
+%  \item The main factors that affect pull request acceptance 
+%    %(whether a pull
+%    %request touches code that has been modified again recently) 
+%    and processing
+%    time.% (the developer's track record, the project's size and test coverage).
+%  
+%
+%  \item The main factors for which pull requests are rejected
+%    %, namely concurrent
+%    %modifications among project branches and forks and incomplete understanding
+%    %of the project's goals.
+%
+%  \item A carefully constructed dataset and a statistical toolkit for
+%    performing analysis of the pull based development model.
+%
+%\end{itemize}
+%
+%This work is the first to explore the emerging paradigm of pull-based
+%distributed software development. As such, while comprehensive, it is not complete.
+%Further research can include the role and consequences of drive-by
+%commits, the formation of teams and management hierarchies in a seemingly flat
+%workspace, the role of testing in assessing pull request impact, large scale
+%analysis of the reasons for pull request rejection, code reviewing practices,
+%replications in more rigid work environments (e.g., companies) and tools for
+%helping teams to automate the handling of pull requests.
+%
+%{\bfseries Replication} This study has been conducted using the {\sc ght}orrent
+%dataset and custom-built Ruby and R tools. We share the tools, original data
+%sources and extracted data files on the Github repository
+%\texttt{gousiosg\-/\-pullreqs}, along with instructions on how to use them.
+%
 %\subsection*{Acknowledgements}
 
 %We would like to thank the anonymous reviewers for their comments.

@@ -41,5 +41,5 @@ all.coding <- c(sample.250$tag, cross.val$coder2.tag)
 all.coding <- table(all.coding)
 
 for (cat in categories) {
-  printf("Category: %s, sample350: %f", cat, floor((all.coding[cat]/350) * 100))
+  printf("Category: %s, sample350: %f", cat, (all.coding[cat]/350) * 100)
 }
