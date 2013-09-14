@@ -130,7 +130,7 @@ Extract data for pull requests for a given repository
         :merged_using, :conflict, :forward_links,
         :team_size, :num_commits,
         #:num_commit_comments,:num_issue_comments,
-        :num_comments,
+        :num_comments, :num_participants,
         #:files_added, :files_deleted, :files_modified,
         :files_changed,
         #:src_files, :doc_files, :other_files,
@@ -279,6 +279,7 @@ Extract data for pull requests for a given repository
         #:num_commit_comments     => num_comments(pr[:id])[0][:comment_count],
         #:num_issue_comments      => num_issue_comments(pr[:id])[0][:issue_comment_count],
         :num_comments             => num_comments(pr[:id])[0][:comment_count] + num_issue_comments(pr[:id])[0][:issue_comment_count],
+        :num_participants         => num_participants(pr[:id])[0][:participants],
         #:files_added             => stats[:files_added],
         #:files_deleted           => stats[:files_deleted],
         #:files_modified          => stats[:files_modified],
@@ -476,6 +477,20 @@ Extract data for pull requests for a given repository
       where action = 'closed' and pull_request_id = ?)
     QUERY
     if_empty(db.fetch(q, pr_id, pr_id).all, :issue_comment_count)
+  end
+
+  def num_participants(pr_id)
+    q = <<-QUERY
+    select count(distinct(user_id)) as participants from
+      (select user_id
+       from pull_request_comments
+       where pull_request_id = ?
+       union
+       select user_id
+       from issue_comments ic, issues i
+       where i.id = ic.issue_id and i.pull_request_id = ?) as num_participants
+    QUERY
+    if_empty(db.fetch(q, pr_id, pr_id).all, :num_participants)
   end
 
   # Number of followers of the person that created the pull request
