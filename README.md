@@ -84,6 +84,7 @@ a newer pull request
      `(merged_at - 3 months, merged_at)`
 * `num_commits`: Number of commits included in the pull request
 * `num_comments`: Total number of comments (`num_commit_comments + num_issue_comments`)
+* `num_participants`: Number of people partipating in pull request discussions
 * `files_changed`: Total number of files changed (added, remove, deleted) by the
 pull request
 * `perc_external_contribs`: % of commits commit from pull requests up to one month
