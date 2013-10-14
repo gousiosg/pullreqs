@@ -184,7 +184,7 @@ of those in centralized version control environments~\cite{Shiha12,Bird09}.
 With respect to receiving and processing external contributions, the following
 strategies can be employed with {\sc dvc}s:
 
-\textbf{Shared resporitory.}
+\textbf{Shared repository.}
     The core team shares the project's repository, with read and write
     permissions, with the contributors. To work, contributors clone it locally,
     modify its contents, potentially introducing new branches, and push their
@@ -767,7 +767,7 @@ than that of the pull requests from the main team members (medians: 5 and 13
 lines respectively). If we compare the time to process pull requests that are being
 merged against those that are not, we can see that pull requests that have been
 merged are closed much faster (median: 434 minutes) than unmerged (median: 2,250
-minutes) pull requests.  The results of an unpaired Mann-Witney test ($p <
+minutes) pull requests.  The results of an unpaired Mann-Whitney test ($p <
 0.001$) showed that this difference is statistically significant, with a
 moderately significant effect size (Cliff's $\delta: 0.32$). This means that
 pull requests are either processed fast or left lingering for long before they
@@ -775,7 +775,7 @@ are closed.
 
 Based on these observations, we check whether the pull
 requests originating from main team members are treated faster than those from
-external contributors. To answer it, we performed an unpaired Mann-Witney test
+external contributors. To answer it, we performed an unpaired Mann-Whitney test
 among the times to merge pull requests from each group. The result is that while
 the two groups differ in a statistically significant manner ($n_1 = 51,829, n_2
 = 89,454, p < 0.001$), the apparent difference is negligible (Cliff's $\delta:
@@ -827,11 +827,12 @@ Of the pull requests that included modifications to test code, 83\% were merged,
 which is similar to the average. This seems to go against the findings by Pham
 et al.~\cite{Pham13}, where interviewed developers identified the presence of
 tests in pull requests as a major factor for their acceptance. The presence of
-tests in a pull request does not seem to affect the merge time: an unpaired
-Mann-Witney test shows that while there is a difference in the means of the pull
-request merge time for pull requests that include tests ($tests = 45,488,
-no\_tests = 95,980, p < 0.001$), the effect size is very small ($\delta =
-0.11$).
+tests in a pull request does not seem to affect the merge time either: an
+unpaired Mann-Whitney test shows that while there is a statistically significant
+difference in the means of the pull request merge time between pull requests
+that include tests (median: 17 hours) and those that do not (median: 5 hours)
+($pr\_tests = 45,488, pr\_no\_tests = 95,980, p < 0.001$), the effect size is
+small ($\delta = 0.18$).
 
 %\fbox{
 %\begin{minipage}{0.46\textwidth}
@@ -855,7 +856,7 @@ requests in our sample have also been through explicit code reviewing, by having
 received comments on source code lines in the included commits. Code reviews do
 not seem to increase the probability of a pull request being merged (84\% of
 reviewed pull requests are merged), but they do slow down the processing of a
-pull request: the unpaired Mann-Witney test between the time required to merge
+pull request: the unpaired Mann-Whitney test between the time required to merge
 reviewed (median: 2719 minutes) and non-reviewed (median: 295 minutes) pull
 requests gives statistically significant differences with a significant effect
 size ($\delta = 0.41$). Projects that employ code reviews feature larger code

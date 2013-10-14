@@ -329,6 +329,11 @@ ranksum(subset(merged, test_churn > 0, c(mergetime_minutes))$mergetime_minutes,
         subset(merged, test_churn == 0, c(mergetime_minutes))$mergetime_minutes,
         "existence of tests and mergetime")
 
+p <- ggplot(subset(merged, TRUE, c(mergetime_minutes, has_tests))) + 
+  aes( x=has_tests, y = mergetime_minutes) + geom_boxplot() + scale_y_log10()
+
+store.pdf(p, plot.location, "tests-merge-time.pdf")
+
 ranksum(subset(aggregate(cbind(test_lines_per_kloc, mergetime_minutes) ~ project_name, merged, mean), test_lines_per_kloc < 1000)$mergetime_minutes,
         subset(aggregate(cbind(test_lines_per_kloc, mergetime_minutes) ~ project_name, merged, mean), test_lines_per_kloc > 1000)$mergetime_minutes,
         "good testing vs mergetime")
