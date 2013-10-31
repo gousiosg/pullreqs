@@ -56,7 +56,7 @@ load.filter <- function(path) {
   setAs("character", "POSIXct", function(from){as.POSIXct(from, origin = "1970-01-01")})
   a <- read.csv(path, check.names = T, 
                 colClasses = c("integer",rep("factor",3), rep("integer", 5),
-                               rep("factor", 3), rep("integer", 9),
+                               rep("factor", 3), rep("integer", 10),
                                rep("double", 3), "integer",  "factor",
                                "integer", "double", "integer",
                                "factor", "factor"))

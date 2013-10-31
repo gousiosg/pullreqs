@@ -13,6 +13,7 @@ library(reshape)
 library(digest)
 library(scales)
 library(cliffsd)
+library(sqldf)
 
 print(sprintf("Current directory is: %s", getwd()))
 
@@ -43,7 +44,6 @@ if(length(list.files(pattern="R")) == 0) {
 
 print("Loading data files..")
 all <- load.data()
-
 
 #  Number of projects per language
 for(language in c("ruby", "java", "python", "scala")) {
@@ -273,10 +273,11 @@ ranksum(subset(merged, main_team_member == T)$mergetime_minutes,
 # Pull requests merge time at the proejct level
 print("Cross correlation table for median time to merge vs other variables")
 col1 <- c(columns, 'mergetime_minutes')
-cot.tab <- cor(subset(aggregate(merged, list(merged$project_name), mean), select = col1),
+selected <- subset(merged, TRUE, select = col1)
+cot.tab <- cor(aggregate(selected, list(selected$project_name), length),
     method = "spearman")
 
-mean.mergetime.per.project <- aggregate(merged, list(merged$project_name), median)[c('Group.1','mergetime_minutes')]
+mean.mergetime.per.project <- aggregate(mergetime_minutes ~ project_name, data = merged, median)
 
 printf("Perc projects with mean mergetime < 1 week: %f",
               nrow(subset(mean.mergetime.per.project, mergetime_minutes < 10080))/

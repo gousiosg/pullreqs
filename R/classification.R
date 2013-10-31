@@ -43,7 +43,7 @@ svm.train <- function(model, train.set) {
 }
 
 binlog.train <- function(model, train.set) {
-  binlog <- glm(model, data=train.set, family = binomial(logit));
+  binlog <- glm(model, data=train.set, family = binomial(cauchit));
   print(summary(binlog))
   binlog
 }

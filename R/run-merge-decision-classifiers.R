@@ -7,8 +7,8 @@ library(doMC)
 registerDoMC(num.processes)
 
 # Loading data files
-all <- load.data()
-#all <- load.some(dir=data.file.location, pattern="*.csv$", 10)
+#all <- load.data()
+all <- load.some(dir=data.file.location, pattern="*.csv$", 10)
 
 run.mergedecision.classifiers <- function(df, cases = c(1000, 10000,
                                                         floor(nrow(df)/4),
