@@ -5,8 +5,8 @@ An analysis and report of how pull requests work for Github
 ## Installation and configuration
 
 You only need the following in case you want to regenerate (or generate more)
-the data files used for the analysis. The data files used in the paper can be
-found in `data/*.csv`.
+the data files used for the analysis. The data files used in the various
+papers can be found in `data/*.csv`.
 
 Make sure that Ruby 1.9.3 is installed on your machine. You can 
 try [RVM](https://rvm.io/), if it is not. Then, it should suffice
@@ -37,7 +37,7 @@ MySQL and MongoDB, and the location of a temporary directory
 The data analysis consists of two steps:
 
 * Generating intermediate data files
-* Analysing data files with R
+* Analyzing data files with R
 
 ####Generating intermediate files
 
@@ -51,13 +51,11 @@ To produce the required data files, first run the
 where: 
 * `owner` is the project owner
 * `repo` is the name of the repository
-* `lang` is the main repository language as reported by Github. At the moment,
-only `ruby`, `java`, `python` and `scala` projects can produce fully compatible data files.
-* `num_threads` to set the number of concurrent threads used to generate the
-file.
+* `lang` is the main repository language as reported by Github. At the moment, only `ruby`, `java`, `python` and `scala` projects can produce fully compatible data files.
 
-The projects we analyzed in the paper are included in [this project list](projects.txt). The projects that are commented out were excluded
-for reasons identified in the paper. 
+The projects we analyzed in each paper are included in the `projects.txt`
+file included in each paper directory. 
+The projects that are commented out were excluded for reasons identified in each paper. 
 
 The data extraction script extracts several variables
 for each pull request and prints to `STDOUT` a comma-separated
@@ -75,18 +73,31 @@ actual pull request on Github using the following URL:
 the pull request
 * `mergetime_minutes`: Number of minutes between the creation and the merge of
 the pull request
-* `merged_using`: The heuristic used to identify the merge action
+* `merged_using`: The heuristic used to identify the merge action. The field can have the following values
+    * `github`: The merge button was used for merging
+    * `commits_in_master`: One of the pull request commits appears in the project's master branch
+    * `fixes_in_commit`: The PR was closed by a commit and the commit SHA is in the project's master
+    * `commit_sha_in_comments`: The PR's discussion includes a commit SHA and matches the following regexp `merg(?:ing|ed)|appl(?:ying|ied)|pull[?:ing|ed]|push[?:ing|ed]|integrat[?:ing|ed]`
+    * `merged_in_comments`: One of the last 3 PR comments matches the above regular expression
+    * `unknown`: The pull request cannot be identified as merged
 * `conflict`: Boolean, true if the pull request comments include the word conflict
 * `forward_links`: Boolean, true if the pull request comments include a link to
 a newer pull request
-* `team_size_at_merge`: The number of people that had committed to the
+* `team_size`: The number of people that had committed to the
      repository directly (not through pull requests) in the period
      `(merged_at - 3 months, merged_at)`
 * `num_commits`: Number of commits included in the pull request
+* `num_commit_comments`: Number of code review comments
+* `num_issue_comments`: Number of discussion comments
 * `num_comments`: Total number of comments (`num_commit_comments + num_issue_comments`)
-* `num_participants`: Number of people partipating in pull request discussions
-* `files_changed`: Total number of files changed (added, remove, deleted) by the
-pull request
+* `num_participants`: Number of people participating in pull request discussions
+* `files_added`: Files added by the pull request
+* `files_deleted`: Files deleted by the pull request
+* `files_modified`: Files modified by the pull request
+* `files_changed`: Total number of files changed (added, modified, deleted) by the pull request
+* `src_files`: Number of src files touched by the pull request
+* `doc_files`: Number of documentation files touched by the pull request
+* `other_files`: Number of other (non src/doc) files touched by the pull request 
 * `perc_external_contribs`: % of commits commit from pull requests up to one month
 before the start of this pull request
 * `total_commits_last_month`: Number of commits
@@ -116,10 +127,7 @@ The following features have been disabled from output: `num_commit_comments`,`nu
 not used in further analysis even if they are part of the data files:
 `test_cases_per_kloc`,`asserts_per_kloc`, `watchers`, `followers`, `requester`
 
-Lines reported are always executable lines of code (comments and whitespace have
-been stripped out). To count testing related data, the script exploits the
-fact that Java, Ruby and Python projects are organized using the Maven, Gem and
-Pythonic project conventions respectively. Test cases are recognized as follows:
+Lines reported are always executable lines of code (comments and whitespace have been stripped out). To count testing related data, the script exploits the fact that Java, Ruby and Python projects are organized using the Maven, Gem and Pythonic project conventions respectively. Test cases are recognized as follows:
 
 * Java: Files in directories under a `/test/` branch of the file tree are
 considered test files. JUnit 4 test cases are recognized using the `@Test`
@@ -143,28 +151,19 @@ do
 ```bash
   cd pullreqs
   R --no-save < R/packages.R # install required packages
-  R --no-save < R/one_of_the_scripts.R
+  Rscript R/one_of_the_scripts.R --help
 ```
 
 The following scripts can be run with the procedure described above:
 
-* [R/dataset-stats.R](https://github.com/gousiosg/pullreqs/blob/master/R/dataset-stats.R) Various statistics and plots that require access to the GHTorrent MySQL database. To do so, create a file named `R/mysql.R` and set the following variables accordingly:
+* [R/dataset-stats.R](https://github.com/gousiosg/pullreqs/blob/master/R/dataset-stats.R) Various statistics and plots that require access to the GHTorrent MySQL database. Use command line arguments to configure the MySQL connection.
 
-```splus
-mysql.user =  "foo"
-mysql.passwd = "bar"
-mysql.db = "ghtorrent"
-mysql.host = "127.0.0.1"
-```
+* [R/pullreq-stats.R](https://github.com/gousiosg/pullreqs/blob/master/R/pullreq-stats.R) Pull request descriptive statistics (analysis of the data files).
 
-* [R/pullreq-stats.R](https://github.com/gousiosg/pullreqs/blob/master/R/pullreq-stats.R) Pull request descriptive statistics (analysis of the data files)
-
-* [R/run-merge-decision-classifiers.R](https://github.com/gousiosg/pullreqs/blob/master/R/run-merge-decision-classifiers.R): Cross validation runs for the 
-pull request merge decision classifiers
+* [R/run-merge-decision-classifiers.R](https://github.com/gousiosg/pullreqs/blob/master/R/run-merge-decision-classifiers.R): Cross validation runs for the pull request merge decision classifiers.
 
 * [R/run-mergetime-classifiers.R](https://github.com/gousiosg/pullreqs/blob/master/R/run-mergetime-classifiers.R): Cross validation runs for the 
-pull request merge time classifiers
+pull request merge time classifiers.
 
-* [R/var-importance.R](https://github.com/gousiosg/pullreqs/blob/master/R/var-importance.R) Generate the variable importance plots for choosing important
-features
+* [R/var-importance.R](https://github.com/gousiosg/pullreqs/blob/master/R/var-importance.R) Generate the variable importance plots for choosing important features
 
