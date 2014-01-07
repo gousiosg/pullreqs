@@ -1,3 +1,5 @@
+library(methods)
+
 # printf for R
 printf <- function(...) invisible(print(sprintf(...)))
 
@@ -42,10 +44,11 @@ load.all.df <- function(dir = ".", pattern = "*.csv$",
   to.load <- which.to.load(dir, pattern, projects.file)
   write.table(to.load, file='to_load.txt', row.names = FALSE, col.names = FALSE,
               quote = FALSE)
-  printf("Loading %d files", length(to.load))
+  printf("Loading %d files from %s", length(to.load), projects.file)
   tryCatch({
     load.filter(pipe(script))
   }, finally= {
+    printf("Done loading files")
     unlink("to_load.txt")
   })
 }
@@ -92,7 +95,8 @@ load.some <- function(dir = ".", pattern = "*.csv$", howmany = -1) {
 }
 
 load.filter <- function(path) {
-  setAs("character", "POSIXct", function(from){as.POSIXct(from, origin = "1970-01-01")})
+  setAs("character", "POSIXct",
+        function(from){as.POSIXct(from, origin = "1970-01-01")})
   a <- read.csv(path, check.names = T, 
                 colClasses = c("integer",rep("factor",2), rep("integer", 6),
                                rep("factor", 3), rep("integer", 18),
