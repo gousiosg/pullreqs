@@ -1,294 +1,294 @@
-A24Group@ssGWT-lib.csv
-aeolusproject@conductor.csv
-aeolusproject@imagefactory.csv
-akka@akka.csv
-alibaba@druid.csv
-allegro@ralph.csv
-alphagov@frontend.csv
-alphagov@smart-answers.csv
-alphagov@whitehall.csv
-AppScale@appscale.csv
-AppScale@appscale-tools.csv
-asciidoctor@asciidoctor.csv
-atlasapi@atlas.csv
-autotest@autotest.csv
-autotest@virt-test.csv
-avoinministerio@avoinministerio.csv
-BaseXdb@basex.csv
-bbatsov@rubocop.csv
-bigbluebutton@bigbluebutton.csv
-Bitmessage@PyBitmessage.csv
-boto@boto.csv
-BrightcoveOS@Diamond.csv
-brooklyncentral@brooklyn.csv
-buildbot@buildbot.csv
-bundler@bundler.csv
-c00w@bitHopper.csv
-caktus@django-timepiece.csv
-candlepin@candlepin.csv
-candlepin@subscription-manager.csv
-carrierwaveuploader@carrierwave.csv
-Catrobat@Catroid.csv
-celery@celery.csv
-cexbrayat@linkit.csv
-cgeo@c-geo-opensource.csv
-chriseppstein@compass.csv
-cloudfoundry@bosh.csv
-cobbler@cobbler.csv
-codahale@dropwizard.csv
-codahale@metrics.csv
-CONNECT-Solution@CONNECT.csv
-cucumber@cucumber.csv
-cucumber@cucumber-jvm.csv
-cylc@cylc.csv
-cython@cython.csv
-dana-i2cat@opennaas.csv
-delving@culture-hub.csv
-dianping@phoenix.csv
-diaspora@diaspora.csv
-dimagi@commcare-hq.csv
-DIRACGrid@DIRAC.csv
-DirectEmployers@MyJobs.csv
-divio@django-cms.csv
-django@django.csv
-dkomanov@fizteh-java-task.csv
-dmwm@WMCore.csv
-drapergem@draper.csv
-droolsjbpm@drools.csv
-DSpace@DSpace.csv
-edx@edx-platform.csv
-elaird@ra1stats.csv
-elasticsearch@elasticsearch.csv
-emesene@emesene.csv
-errbit@errbit.csv
-essentials@Essentials.csv
-ets-berkeley-edu@calcentral.csv
-everzet@capifony.csv
-excilys@gatling.csv
-facebook@tornado.csv
-filipg@amu_automata_2011.csv
-flavour@eden.csv
-floodlight@floodlight.csv
-fog@fog.csv
-forcedotcom@SalesforceMobileSDK-Android.csv
-forge@core.csv
-gatein@gatein-portal.csv
-gem@oq-engine.csv
-geoserver@geoserver.csv
-geotools@geotools.csv
-getpelican@pelican.csv
-getrailo@railo.csv
-github@github-services.csv
-github@linguist.csv
-gitlabhq@gitlabhq.csv
-gkhachik@katello-api.csv
-Governance@s-ramp.csv
-grails@grails-core.csv
-gregbell@active_admin.csv
-griddynamics@jagger.csv
-griddynamics@OpenGenesis.csv
-groovy@groovy-core.csv
-Growstuff@growstuff.csv
-gxa@gxa.csv
-hector-client@hector.csv
-heroku@heroku.csv
-hibernate@hibernate-orm.csv
-hibernate@hibernate-search.csv
-hibernate@hibernate-validator.csv
-hmarr@mongoengine.csv
-hornetq@hornetq.csv
-hotsh@rstat.us.csv
-hpcugent@easybuild-easyconfigs.csv
-hpcugent@easybuild-framework.csv
-imathis@octopress.csv
-intridea@grape.csv
-intridea@omniauth.csv
-ippontech@tatami.csv
-ipython@ipython.csv
-irstv@orbisgis.csv
-isenseDev@iSENSE-Hardware.csv
-isenseDev@rSENSE.csv
-JakeWharton@ActionBarSherlock.csv
-Jasig@cas.csv
-jayway@maven-android-plugin.csv
-jbosstm@narayana.csv
-jclouds@jclouds.csv
-jedi4ever@veewee.csv
-jenkinsci@jenkins.csv
-JetBrains@kotlin.csv
-jnicklas@capybara.csv
-jnicklas@carrierwave.csv
-jordansissel@fpm.csv
-junit-team@junit.csv
-justinfrench@formtastic.csv
-k9mail@k-9.csv
-karmi@tire.csv
-Katello@katello.csv
-kennethreitz@requests.csv
-kevinweil@elephant-bird.csv
-kivy@kivy.csv
-kliment@Printrun.csv
-locomotivecms@engine.csv
-logstash@logstash.csv
-lshift@diffa.csv
-Maescool@Catacomb-Snatch.csv
-MarkUsProject@Markus.csv
-MassBayCS225@EMS.csv
-matplotlib@matplotlib.csv
-maxcom@lorsource.csv
-mballance@sveditor.csv
-mesos@spark.csv
-metashare@META-SHARE.csv
-metomi@rose.csv
-middleman@middleman.csv
-midgetspy@Sick-Beard.csv
-mifos@head.csv
-mikel@mail.csv
-MinecraftForge@MinecraftForge.csv
-mitchellh@vagrant.csv
-mitsuhiko@flask.csv
-mitsuhiko@werkzeug.csv
-mne-tools@mne-python.csv
-ModeShape@modeshape.csv
-modilabs@formhub.csv
-mojombo@jekyll.csv
-molgenis@molgenis.csv
-mongodb@mongo-ruby-driver.csv
-mongoid@mongoid.csv
-MovingBlocks@Terasology.csv
-mozilla@bedrock.csv
-mozilla@firefox-flicks.csv
-mozilla@kitsune.csv
-mozilla@kuma.csv
-mozilla@remo.csv
-mozilla-services@android-sync.csv
-mozilla@socorro-crashstats.csv
-mozilla@socorro.csv
-mozilla@webpay.csv
-mozilla@zamboni.csv
-mperham@sidekiq.csv
-mrkipling@maraschino.csv
-MrMasochism@Pixelmon.csv
-mysociety@alaveteli.csv
-naparuba@shinken.csv
-neo4j@community.csv
-neo4j@neo4j.csv
-netty@netty.csv
-ninja-ide@ninja-ide.csv
-nipy@nipype.csv
-Normation@rudder.csv
-NUBIC@ncs_navigator_core.csv
-nukomeet@coworfing.csv
-okfn@ckan.csv
-omab@django-social-auth.csv
-openengsb@openengsb-framework.csv
-OpenMDAO@OpenMDAO-Framework.csv
-openMF@mifosx.csv
-openmicroscopy@bioformats.csv
-openmicroscopy@openmicroscopy.csv
-openshift@origin-server.csv
-openshift@rhc.csv
-OpenSlides@OpenSlides.csv
-opf@openproject.csv
-opscode@chef.csv
-osmandapp@Osmand.csv
-otwcode@otwarchive.csv
-overviewer@Minecraft-Overviewer.csv
-padrino@padrino-framework.csv
-pahimar@Equivalent-Exchange-3.csv
-pculture@miro.csv
-pentaho@pentaho-platform.csv
-pivotal@pivotal_workstation.csv
-plataformatec@devise.csv
-plataformatec@simple_form.csv
-playframework@play1.csv
-playframework@playframework.csv
-praekelt@vumi.csv
-praekelt@vumi-go.csv
-presidentbeef@brakeman.csv
-ProjectMeniscus@meniscus.csv
-projectwonder@wonder.csv
-pulp@pulp.csv
-pulp@pulp_rpm.csv
-puppetlabs@puppet-acceptance.csv
-puppetlabs@puppet.csv
-puppetlabs@puppet-dashboard.csv
-puppetlabs@puppetlabs-apache.csv
-puppetlabs@puppetlabs-nova.csv
-puppetlabs@Razor.csv
-pydata@pandas.csv
-Pylons@pyramid.csv
-pypa@pip.csv
-qiime@qiime.csv
-rails-api@active_model_serializers.csv
-railsforcharity@spokenvote.csv
-rails@rails.csv
-ralsina@nikola.csv
-rapid7@metasploit-framework.csv
-reddit@reddit.csv
-refinery@refinerycms.csv
-resque@resque.csv
-resteasy@Resteasy.csv
-rg3@youtube-dl.csv
-rightscale@right_link.csv
-RiotGames@berkshelf.csv
-rootpy@rootpy.csv
-ros@rosdistro.csv
-rspec@rspec-core.csv
-RuudBurger@CouchPotatoServer.csv
-Sage-Bionetworks@Synapse-Repository-Services.csv
-Sage-Bionetworks@SynapseWebClient.csv
-saltstack@salt-cloud.csv
-saltstack@salt.csv
-sanger@sequencescape.csv
-sbt@sbt.csv
-scala-ide@scala-ide.csv
-scalaz@scalaz.csv
-scieloorg@SciELO-Manager.csv
-scikit-image@scikit-image.csv
-SciTools@iris.csv
-scrapy@scrapy.csv
-sensu@sensu-community-plugins.csv
-sensu@sensu.csv
-seyhunak@twitter-bootstrap-rails.csv
-sferik@rails_admin.csv
-Shopify@active_merchant.csv
-sightmachine@SimpleSeer.csv
-Silverpeas@Silverpeas-Components.csv
-Silverpeas@Silverpeas-Core.csv
-SpoutDev@SpoutAPI.csv
-SpoutDev@Spout.csv
-spree@spree.csv
-SpringSource@spring-framework.csv
-SpringSource@spring-integration.csv
-statsmodels@statsmodels.csv
-stephenmcd@mezzanine.csv
-sunpy@sunpy.csv
-sunspot@sunspot.csv
-sympy@sympy.csv
-tangentlabs@django-oscar.csv
-Teiid-Designer@teiid-designer.csv
-Theano@Theano.csv
-theforeman@foreman.csv
-thoughtbot@paperclip.csv
-toastdriven@django-haystack.csv
-toastdriven@django-tastypie.csv
-tomchristie@django-rest-framework.csv
-topazproject@topaz.csv
-travis-ci@travis-ci.csv
-twitter@scalding.csv
-twitter@zipkin.csv
-unknown-horizons@unknown-horizons.csv
-unmerged-250.txt
-unmerged-cross-validation.txt
-VanillaDev@Vanilla.csv
-vert-x@vert.x.csv
-vmw-tmpst@heroapp-LetsHire.csv
-wajam@nrv.csv
-webbukkit@dynmap.csv
-weld@core.csv
-wildfly@wildfly.csv
-yahoo@oozie.csv
-yammer@sched.do.csv
-yast@ycp-killer.csv
-Yelp@mrjob.csv
+A24Group ssGWT-lib
+aeolusproject conductor
+aeolusproject imagefactory
+akka akka
+alibaba druid
+allegro ralph
+alphagov frontend
+alphagov smart-answers
+alphagov whitehall
+AppScale appscale
+AppScale appscale-tools
+asciidoctor asciidoctor
+atlasapi atlas
+autotest autotest
+autotest virt-test
+avoinministerio avoinministerio
+BaseXdb basex
+bbatsov rubocop
+bigbluebutton bigbluebutton
+Bitmessage PyBitmessage
+boto boto
+BrightcoveOS Diamond
+brooklyncentral brooklyn
+buildbot buildbot
+bundler bundler
+c00w bitHopper
+caktus django-timepiece
+candlepin candlepin
+candlepin subscription-manager
+carrierwaveuploader carrierwave
+Catrobat Catroid
+celery celery
+cexbrayat linkit
+cgeo c-geo-opensource
+chriseppstein compass
+cloudfoundry bosh
+cobbler cobbler
+codahale dropwizard
+codahale metrics
+CONNECT-Solution CONNECT
+cucumber cucumber
+cucumber cucumber-jvm
+cylc cylc
+cython cython
+dana-i2cat opennaas
+delving culture-hub
+dianping phoenix
+diaspora diaspora
+dimagi commcare-hq
+DIRACGrid DIRAC
+DirectEmployers MyJobs
+divio django-cms
+django django
+dkomanov fizteh-java-task
+dmwm WMCore
+drapergem draper
+droolsjbpm drools
+DSpace DSpace
+edx edx-platform
+elaird ra1stats
+elasticsearch elasticsearch
+emesene emesene
+errbit errbit
+essentials Essentials
+ets-berkeley-edu calcentral
+everzet capifony
+excilys gatling
+facebook tornado
+filipg amu_automata_2011
+flavour eden
+floodlight floodlight
+fog fog
+forcedotcom SalesforceMobileSDK-Android
+forge core
+gatein gatein-portal
+gem oq-engine
+geoserver geoserver
+geotools geotools
+getpelican pelican
+getrailo railo
+github github-services
+github linguist
+gitlabhq gitlabhq
+gkhachik katello-api
+Governance s-ramp
+grails grails-core
+gregbell active_admin
+griddynamics jagger
+griddynamics OpenGenesis
+groovy groovy-core
+Growstuff growstuff
+gxa gxa
+hector-client hector
+heroku heroku
+hibernate hibernate-orm
+hibernate hibernate-search
+hibernate hibernate-validator
+hmarr mongoengine
+hornetq hornetq
+hotsh rstat
+hpcugent easybuild-easyconfigs
+hpcugent easybuild-framework
+imathis octopress
+intridea grape
+intridea omniauth
+ippontech tatami
+ipython ipython
+irstv orbisgis
+isenseDev iSENSE-Hardware
+isenseDev rSENSE
+JakeWharton ActionBarSherlock
+Jasig cas
+jayway maven-android-plugin
+jbosstm narayana
+jclouds jclouds
+jedi4ever veewee
+jenkinsci jenkins
+JetBrains kotlin
+jnicklas capybara
+jnicklas carrierwave
+jordansissel fpm
+junit-team junit
+justinfrench formtastic
+k9mail k-9
+karmi tire
+Katello katello
+kennethreitz requests
+kevinweil elephant-bird
+kivy kivy
+kliment Printrun
+locomotivecms engine
+logstash logstash
+lshift diffa
+Maescool Catacomb-Snatch
+MarkUsProject Markus
+MassBayCS225 EMS
+matplotlib matplotlib
+maxcom lorsource
+mballance sveditor
+mesos spark
+metashare META-SHARE
+metomi rose
+middleman middleman
+midgetspy Sick-Beard
+mifos head
+mikel mail
+MinecraftForge MinecraftForge
+mitchellh vagrant
+mitsuhiko flask
+mitsuhiko werkzeug
+mne-tools mne-python
+ModeShape modeshape
+modilabs formhub
+mojombo jekyll
+molgenis molgenis
+mongodb mongo-ruby-driver
+mongoid mongoid
+MovingBlocks Terasology
+mozilla bedrock
+mozilla firefox-flicks
+mozilla kitsune
+mozilla kuma
+mozilla remo
+mozilla-services android-sync
+mozilla socorro-crashstats
+mozilla socorro
+mozilla webpay
+mozilla zamboni
+mperham sidekiq
+mrkipling maraschino
+MrMasochism Pixelmon
+mysociety alaveteli
+naparuba shinken
+neo4j community
+neo4j neo4j
+netty netty
+ninja-ide ninja-ide
+nipy nipype
+Normation rudder
+NUBIC ncs_navigator_core
+nukomeet coworfing
+okfn ckan
+omab django-social-auth
+openengsb openengsb-framework
+OpenMDAO OpenMDAO-Framework
+openMF mifosx
+openmicroscopy bioformats
+openmicroscopy openmicroscopy
+openshift origin-server
+openshift rhc
+OpenSlides OpenSlides
+opf openproject
+opscode chef
+osmandapp Osmand
+otwcode otwarchive
+overviewer Minecraft-Overviewer
+padrino padrino-framework
+pahimar Equivalent-Exchange-3
+pculture miro
+pentaho pentaho-platform
+pivotal pivotal_workstation
+plataformatec devise
+plataformatec simple_form
+playframework play1
+playframework playframework
+praekelt vumi
+praekelt vumi-go
+presidentbeef brakeman
+ProjectMeniscus meniscus
+projectwonder wonder
+pulp pulp
+pulp pulp_rpm
+puppetlabs puppet-acceptance
+puppetlabs puppet
+puppetlabs puppet-dashboard
+puppetlabs puppetlabs-apache
+puppetlabs puppetlabs-nova
+puppetlabs Razor
+pydata pandas
+Pylons pyramid
+pypa pip
+qiime qiime
+rails-api active_model_serializers
+railsforcharity spokenvote
+rails rails
+ralsina nikola
+rapid7 metasploit-framework
+reddit reddit
+refinery refinerycms
+resque resque
+resteasy Resteasy
+rg3 youtube-dl
+rightscale right_link
+RiotGames berkshelf
+rootpy rootpy
+ros rosdistro
+rspec rspec-core
+RuudBurger CouchPotatoServer
+Sage-Bionetworks Synapse-Repository-Services
+Sage-Bionetworks SynapseWebClient
+saltstack salt-cloud
+saltstack salt
+sanger sequencescape
+sbt sbt
+scala-ide scala-ide
+scalaz scalaz
+scieloorg SciELO-Manager
+scikit-image scikit-image
+SciTools iris
+scrapy scrapy
+sensu sensu-community-plugins
+sensu sensu
+seyhunak twitter-bootstrap-rails
+sferik rails_admin
+Shopify active_merchant
+sightmachine SimpleSeer
+Silverpeas Silverpeas-Components
+Silverpeas Silverpeas-Core
+SpoutDev SpoutAPI
+SpoutDev Spout
+spree spree
+SpringSource spring-framework
+SpringSource spring-integration
+statsmodels statsmodels
+stephenmcd mezzanine
+sunpy sunpy
+sunspot sunspot
+sympy sympy
+tangentlabs django-oscar
+Teiid-Designer teiid-designer
+Theano Theano
+theforeman foreman
+thoughtbot paperclip
+toastdriven django-haystack
+toastdriven django-tastypie
+tomchristie django-rest-framework
+topazproject topaz
+travis-ci travis-ci
+twitter scalding
+twitter zipkin
+unknown-horizons unknown-horizons
+unmerged-250
+unmerged-cross-validation
+VanillaDev Vanilla
+vert-x vert
+vmw-tmpst heroapp-LetsHire
+wajam nrv
+webbukkit dynmap
+weld core
+wildfly wildfly
+yahoo oozie
+yammer sched
+yast ycp-killer
+Yelp mrjob
