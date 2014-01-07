@@ -1,9 +1,8 @@
 rm(list = ls(all = TRUE))
 
 source(file = "R/packages.R")
+source(file = "R/cmdline.R")
 source(file = "R/utils.R")
-source(file = "R/variables.R")
-source(file = "R/mysql.R")
 
 library(RMySQL)
 library(ggplot2)
@@ -227,7 +226,7 @@ print(sprintf("Perc drive by pull requests: %f", (drive_by_pr/opened_pullreqs) *
 print(sprintf("Perc one pull req repos: %f", (drive_by_pr/forked_repos) * 100))    
 
 # Load CSV files
-all <- load.data()
+all <- load.data(project.list)
 
 # Discussion comments from internal vs externals
 project_ids <- lapply(unique(all$project_name), function(x) {

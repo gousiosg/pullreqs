@@ -1,7 +1,7 @@
 # Shared functions for the classification experiments
 
 source(file = "R/packages.R")
-source(file = "R/variables.R")
+source(file = "R/cmdline.R")
 source(file = "R/utils.R")
 
 library(ROCR)
@@ -19,7 +19,7 @@ library(foreach)
 
 # Strip a project data frame from unused columns
 prepare.project.df <- function(a) {
-  a[,c(7:33)]
+  a[,c(7:41)]
 }
 
 rf.train <- function(model, train.set) {

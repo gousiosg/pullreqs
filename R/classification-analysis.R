@@ -2,7 +2,7 @@ rm(list = ls(all = TRUE))
 
 source(file = "R/packages.R")
 source(file = "R/utils.R")
-source(file = "R/variables.R")
+source(file = "R/cmdline.R")
 
 library(ggplot2)
 

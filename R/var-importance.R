@@ -4,7 +4,7 @@
 rm(list = ls(all = TRUE))
 
 source(file = "R/packages.R")
-source(file = "R/variables.R")
+source(file = "R/cmdline.R")
 source(file = "R/utils.R")
 source(file = "R/classification.R")
 source(file = "R/merge-time.R")
@@ -31,8 +31,7 @@ run.rf.varimp <- function(expname, model, sampler, data, smpl_size, runs) {
 }
 
 # Loading data files in a single dataframe
-all <- load.data()
-#all <- load.some(dir=data.file.location, pattern="*.csv$", 10)
+all <- load.data(project.list)
 
 run.rf.varimp("Merge decision", merge.decision.model, prepare.data.mergedecision, all, floor(nrow(all)/2), 50)
 run.rf.varimp("Merge time (3 classes)", merge.time.model, prepare.data.mergetime.3bins, all, floor(nrow(all)/2), 50)

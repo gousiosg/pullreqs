@@ -3,14 +3,14 @@
 # Clean up workspace
 rm(list = ls(all = TRUE))
 
+source(file = "R/cmdline.R")
 source(file = "R/merge-time.R")
 
 library(doMC)
 registerDoMC(num.processes)
 
 # Loading data files
-all <- load.data()
-#all <- load.some(dir=data.file.location, pattern="*.csv$", 10)
+all <- load.data(project.list)
 
 run.mergetime.classifiers <- function(df, cases = c(1000, 10000,
                                                     floor(nrow(df)/4),

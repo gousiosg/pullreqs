@@ -1,13 +1,14 @@
 # Clean up workspace
 rm(list = ls(all = TRUE))
 
+source(file = "R/cmdline.R")
 source(file = "R/merge-decision.R")
 
 library(doMC)
 registerDoMC(num.processes)
 
 # Loading data files
-all <- load.data()
+all <- load.data(project.list)
 
 run.mergedecision.classifiers <- function(df, cases = c(1000, 10000,
                                                         floor(nrow(df)/4),

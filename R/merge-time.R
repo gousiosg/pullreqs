@@ -1,7 +1,7 @@
 # Predicting merge_time of pull requests
 
 source(file = "R/packages.R")
-source(file = "R/variables.R")
+source(file = "R/cmdline.R")
 source(file = "R/utils.R")
 source(file = "R/classification.R")
 

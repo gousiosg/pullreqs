@@ -1,7 +1,7 @@
 # Predicting whether pull requests will be merged
 
 source(file = "R/packages.R")
-source(file = "R/variables.R")
+source(file = "R/cmdline.R")
 source(file = "R/utils.R")
 source(file = "R/classification.R")
 

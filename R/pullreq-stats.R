@@ -1,8 +1,8 @@
 rm(list = ls(all = TRUE))
 
 source(file = "R/packages.R")
+source(file = "R/cmdline.R")
 source(file = "R/multiplots.R")
-source(file = "R/variables.R")
 source(file = "R/utils.R")
 source(file = "R/plots.R")
 
@@ -43,7 +43,7 @@ if(length(list.files(pattern="R")) == 0) {
 # system("bin/all_projects.sh -p 4 -d data projects.txt")
 
 print("Loading data files..")
-all <- load.data()
+all <- load.data(project.list)
 
 #  Number of projects per language
 for(language in c("ruby", "java", "python", "scala")) {
