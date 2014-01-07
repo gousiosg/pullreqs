@@ -1,0 +1,196 @@
+\documentclass{sig-alternate}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{times}
+\usepackage{balance}
+\usepackage{xspace}
+%\usepackage{xfrac}
+
+\begin{document}
+
+\newcommand{\todo}[1]{\textbf{TODO}\footnote{\textbf{TODO:} #1}}
+
+\newcommand{\ghtorrent}{ \textsc{ght}orrent\xspace}
+\newcommand{\api}{\textsc{api}\xspace}
+
+\title{A dataset for pull-based development research}
+\numberofauthors{3}
+
+\author{
+\alignauthor
+Georgios Gousios\\
+       \affaddr{Delft University of Technology}\\
+       \affaddr{Delft, The Netherlands}\\
+       \email{G.Gousios@tudelft.nl}
+}
+
+\maketitle
+
+\begin{abstract}
+
+
+\end{abstract}
+
+\category{D.2.7}{Software Engineering}{Distribution, Maintenance, and Enhancement}[Version control]
+\category{D.2.9}{Software Engineering}{Management}[Programming teams]
+
+\terms{Management}
+
+\keywords{pull-based development, pull request, distributed software development,
+empirical software engineering}
+
+\section{Introduction}
+\label{sec:intro} 
+
+\subsection{Data collection process}
+\label{sec:expdata} 
+
+After selection, the full history (including pull requests, issues and commits)
+of the included projects was downloaded and features were extracted by querying
+the {\sc ght}orrent databases and analyzing each project's Git repository. 
+Furthermore, for these selected projects we collected all merges and the values for all factors that we use in our machine learning experiment, as described below.
+
+\textbf{Merge detection.} To
+identify merged pull requests that are merged outside Github, we resorted to the following heuristics, listed here in order of application:
+
+\begin{enumerate}
+
+  \item At least one of the commits associated with the pull request appears in
+    the target project's master branch. 
+
+  \item A commit closes the pull request (using the \texttt{fixes:} convention
+    advocated by Github) and that commit appears in the project's master branch.
+    This means that the pull request commits were squashed onto one commit and
+    this commit was merged.
+
+  \item One of the last 3 (in order of appearance) discussion comments contain a
+    commit unique identifier, this commit appears in the project's master branch
+    and the corresponding comment can be matched by the following regular
+    expression:
+
+    \begin{small}
+    \texttt{(?:merg|appl|pull|push|integrat)(?:ing|i?ed)}
+    \end{small}
+  \item The latest comment prior to closing the pull request matches the 
+    regular expression above.
+
+\end{enumerate}
+
+If none of the above heuristics identifies a merge, we mark the pull request
+as unmerged. 
+
+After creating the data files, we investigated projects where the pull request
+merge ratio was significantly less than the one we calculated across Github
+(73\%), and in any case less than 40\%, as this means that our heuristics are not
+good enough for this project. This way, we filtered out 2 projects, which we did not
+replace.
+
+The final dataset consisted of 291 projects (99 Python, 91 Java, 87 Ruby, 14
+Scala) and 166,884 pull requests (59,970; 55,468; 43,870 and 7,576 for Python,
+Ruby, Java and Scala projects respectively). Both distributions are
+representative of the contemporary popularity of each respective programming
+language on both Github and other sites.
+
+%Figure~\ref{fig:wordcloud} presents the project names in relative size to the
+%pull requests included per project in the dataset. 
+%
+%\begin{figure}
+%  \begin{center}
+%    \includegraphics[scale=0.7]{wordcloud.pdf}
+%  \end{center}
+%  \caption{Projects in our dataset. Text size is relative to the number of
+%  included pull requests.}
+%  \label{fig:wordcloud}
+%\end{figure}
+
+\textbf{Feature Extraction.} The feature selection was based on prior work in the areas of patch submission and acceptance~\cite{Nagap05,Bird07a,Weiss08,Baysa12}, 
+code reviewing~\cite{Rigby13}, bug
+triaging~\cite{Anvik06, Giger10} and also on semi-structured interviews of
+Github developers~\cite{Dabbi12, Pham13, McDon13}. The selected features are split
+into three categories:
+
+  \emph{Pull request characteristics.} These features attempt to quantify the
+  impact of the pull request on the affected code base. When examining external
+  code contributions, the size of the patch is affecting both acceptance and
+  acceptance time~\cite{Weiss08}. There are various metrics to determine the
+  size of a patch that have been used by researchers: code churn~\cite{Nagap05,
+  Ratzi07}, changed files~\cite{Nagap05} and number of commits~\cite{Fluri07}.
+  In the particular case of pull requests, developers reported that the presence
+  of tests in a pull request increases their confidence to merge
+  it~\cite{Pham13}. To investigate this, we split the churn feature into two
+  features, namely \texttt{src\_churn} and \texttt{test\_churn}. The
+  number of participants has been shown to influence the time to process of code
+  reviewing~\cite{Rigby13}. Finally, through our own experience analyzing pull
+  requests, we have found that in many cases conflicts are reported explicitly
+  in pull request comments while in other cases pull requests include links to
+  other related pull requests.
+
+  \emph{Project characteristics.} These features quantify how receptive to pull
+  requests the project is. If the project's process is open to external
+  contributions, then we expect to see an increased ratio of external
+  contributors over team members. The project's size may be a detrimental factor
+  to the speed of processing a pull request, as its impact may be more difficult
+  to assess. Also, incoming changes tend to cluster over time (the ``yesterday's
+  weather'' change pattern~\cite{Girba04}), so it is natural to assume that pull
+  requests affecting a part of the system that is under active development will
+  be more likely to merge. Testing plays a role in speed of processing;
+  according to~\cite{Pham13}, projects struggling with a constant flux of
+  contributors use testing, manual or preferably automated, as a safety net to
+  handle contributions from unknown developers.
+
+  \emph{Developer.}  Developer-based features quantify the influence that the
+  person who created the pull request has on the decision to merge it and the
+  time to process it. In particular, the developer who created the patch has
+  been shown to influence the patch acceptance decision~\cite{Jeong09}. To
+  abstract the results across projects with different developers, we include
+  features that quantify the developer's track record~\cite{Dabbi12}, namely the
+  number of previous pull requests and their acceptance rate; the former has
+  been identified as a strong indicator of pull request quality~\cite{Pham13}.
+  Bird et al.~\cite{Bird07}, presented evidence that social reputation has an
+  impact on whether a patch will be merged; in our dataset, the number of
+  followers on Github can be seen as a proxy for reputation.
+
+All features are calculated at the time a pull request has been closed or
+merged, to evaluate the effect of intermediate updates to the pull request as a
+result of the ensuing discussion. Features that contain a temporal dimension in
+their calculation (e.g., \texttt{team\_size} or
+\texttt{commits\_on\_files\_touched}) are calculated over the three-month time
+period before the pull request was opened.
+
+\input{feature-stats.tex}
+
+\section{Challenges and limitations}
+\label{sec:challenges}
+
+\paragraph*{Merge detection is incomplete}
+
+\paragraph*{Projects are incomplete}
+
+\paragraph*{Test detection is approximate}
+
+
+\section{Research opportunities}
+\label{sec:discussion}
+
+\section{Related Work}
+\label{sec:rel}
+
+
+\section{Conclusion}
+
+%\subsection*{Acknowledgements}
+
+%We would like to thank the anonymous reviewers for their comments.
+%This work is partially supported by Marie Curie {\sc ief} 298930 --- {\sc sefunc}.
+
+\bibliographystyle{abbrv}
+\balance
+%\begin{small}
+
+  \bibliography{dataset}
+%\end{small}
+
+\end{document}
