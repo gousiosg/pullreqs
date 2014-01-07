@@ -14,6 +14,26 @@ library(ggplot2)
 library(doMC)
 registerDoMC(num.processes)
 
+rf.varimp <- function(model, sampler, data, num_samples = 5000, runs = 50) {
+
+  result <- foreach(n=1:runs, .combine=rbind) %dopar% {
+    df <- sampler(data, num_samples)
+    rfmodel <- randomForest(model, data=df$train, importance = T,
+                            type = "classification", mtry = 5,
+                            ntree = 2000)
+    print(importance(rfmodel))
+    i <- data.frame(importance(rfmodel))
+    i$var <- row.names(i)
+    i$var <- as.factor(i$var)
+    i$run <- n
+    i
+  }
+
+  result = aggregate(. ~ var, data = result, mean)
+  result = result[with(result, order(-MeanDecreaseAccuracy)),]
+  result[c('var', 'MeanDecreaseAccuracy')]
+}
+
 run.rf.varimp <- function(expname, model, sampler, data, smpl_size, runs) {
   varimp <- rf.varimp(model, sampler, data, smpl_size, runs)
   name.for.file <- gsub(" ", "-", tolower(expname))

@@ -1,12 +1,7 @@
-# Find max value for column var across data frames
-hist_x_axis_max <- function(dfs, var) {
-  maxval = max(unlist(Map(function(x){max(x)}, Map(function(x){x$var}, dfs))))
-}
-
-### Data conversions
-
 # printf for R
 printf <- function(...) invisible(print(sprintf(...)))
+
+## Data loading and conversions
 
 # Trim whitespace from strings
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
@@ -17,8 +12,8 @@ is.integer <- function(N){
 }
 
 # Load an preprocess all data
-load.data <- function() {
-  all <- load.all.df(dir=data.file.location, pattern="*.csv$")
+load.data <- function(projects.file = "projects.txt") {
+  all <- load.all.df(dir=data.file.location, pattern="*.csv$", projects.file)
   subset(all, !is.na(src_churn))
 }
 
@@ -31,7 +26,7 @@ which.to.load <- function(dir = ".", pattern = "*.csv$",
       repo <- x[[2]]
       sprintf("%s/%s@%s.csv", dir, owner, repo)
     }
-    apply(read.csv(projects.file, sep=" ", header=FALSE), c(1), joiner)
+    apply(read.csv(projects.file, sep = " ", header=FALSE), c(1), joiner)
   } else {
     list.files(path = dir, pattern = pattern, full.names = T)
   }
@@ -144,6 +139,8 @@ merge.dataframes <- function(dfs, min_num_rows = 1) {
       }, dfs)
 }
 
+## Various utilities
+
 # Prints a list of column along with a boolean value. If the value is FALSE, then
 # the column contains at least one NA value
 column.contains.na <- function(df) {
@@ -158,6 +155,8 @@ ranksum <- function (a, b, title = "") {
          title, length(a), length(b), median(a), median(b), mean(a), mean(b), w$statistic, 
          w$p.value, d)
 }
+
+## Plot storage
 
 # Store multiple plots on the same PDF
 store.multi <- function(printer, data, cols, name, where = "~/")

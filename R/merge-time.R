@@ -36,6 +36,12 @@ prepare.data.mergetime <- function(df, num_samples = nrow(df),
   list(train=a.train, test=a.test)
 }
 
+# Bining to fast and slow based on median time
+prepare.data.mergetime.2bins <- function(df, num_samples = nrow(df)) {
+  merged <- subset(df, merged == T)
+  prepare.data.mergetime(merged, num_samples)
+}
+
 # Bining to 1 hour, 1 day and rest
 prepare.data.mergetime.3bins <- function(df, num_samples = nrow(df)) {
   merged <- subset(df, merged == T)
@@ -50,12 +56,6 @@ prepare.data.mergetime.4bins <- function(df, num_samples = nrow(df)) {
   prepare.data.mergetime(merged, num_samples,
                          c(-1,60,1440,10080,max(merged$mergetime_minutes) + 1),
                          c('HOUR', 'DAY', 'WEEK', 'REST'))
-}
-
-# Bining to fast and slow based on media time
-prepare.data.mergetime.4bins <- function(df, num_samples = nrow(df)) {
-  merged <- subset(df, merged == T)
-  prepare.data.mergetime(merged, num_samples)
 }
 
 format.results <- function(name, test, predictions) {
@@ -101,16 +101,4 @@ run.classifiers.mergetime <- function(model, train, test) {
 
   subset(results, auc > 0)
 }
-
-#
-### Linear regression model
-#a <- a[a$mergetime_minutes > 0, ]
-#a["log_mergetime"] <- log(a$mergetime_minutes)
-
-# stepwise linear regression
-#lmmodel <- lm(log_mergetime ~ sloc + test_lines_per_1000_lines + num_commits + src_churn + test_churn + files_changed + 
-#  perc_external_contribs + requester_succ_rate + team_size + prev_pullreqs + commits_on_files_touched, data=a);
-#step <- stepAIC(lmmodel, direction="both")
-#step$anova # display results 
-#summary(step$model)
 
