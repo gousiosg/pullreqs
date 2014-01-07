@@ -7,8 +7,7 @@ library(doMC)
 registerDoMC(num.processes)
 
 # Loading data files
-#all <- load.data()
-all <- load.some(dir=data.file.location, pattern="*.csv$", 10)
+all <- load.data()
 
 run.mergedecision.classifiers <- function(df, cases = c(1000, 10000,
                                                         floor(nrow(df)/4),
@@ -27,7 +26,6 @@ run.mergedecision.classifiers <- function(df, cases = c(1000, 10000,
 }
 
 run.mergedecision.classifiers(all)
-#run.mergedecision.classifiers(all, c(10000))
 
 # Redefine the merge decision model with the dominant characteristics and rerun
 merge.decision.model = merged ~ sloc + test_lines_per_kloc + commits_on_files_touched

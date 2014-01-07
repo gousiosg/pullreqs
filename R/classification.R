@@ -13,9 +13,9 @@ library(ggplot2)
 library(foreach)
 
 # Get a project with the appropriate fields by name to run through a classification task
-class.project <- function(dfs, name) {
-  prepare.project.df(get.project(dfs, name))
-}
+# class.project <- function(dfs, name) {
+#   prepare.project.df(get.project(dfs, name))
+# }
 
 # Strip a project data frame from unused columns
 prepare.project.df <- function(a) {

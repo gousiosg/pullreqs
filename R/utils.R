@@ -18,25 +18,69 @@ is.integer <- function(N){
 
 # Load an preprocess all data
 load.data <- function() {
-  dfs <- load.all(dir=data.file.location, pattern="*.csv$")
-  dfs <- addcol.merged(dfs)
-  all <- merge.dataframes(dfs)
+  all <- load.all.df(dir=data.file.location, pattern="*.csv$")
   subset(all, !is.na(src_churn))
 }
 
-# Load all csv files in the provided dir as data frames
-load.all <- function(dir = ".", pattern = "*.csv$") {
-  lapply(list.files(path = dir, pattern = pattern, full.names = T),
-         function(x){
-           print(sprintf("Reading file %s", x))
-           a <- load.filter(x)
-           if (nrow(a) == 0) {
-            printf("Warning - No rows in file %s", x)
-           }
-           a
-         })
+# Determine which files to load and return a list of paths
+which.to.load <- function(dir = ".", pattern = "*.csv$",
+                          projects.file = "projects.txt") {
+  if(file.exists(projects.file)) {
+    joiner <- function(x){
+      owner <- x[[1]]
+      repo <- x[[2]]
+      sprintf("%s/%s@%s.csv", dir, owner, repo)
+    }
+    apply(read.csv(projects.file, sep=" ", header=FALSE), c(1), joiner)
+  } else {
+    list.files(path = dir, pattern = pattern, full.names = T)
+  }
 }
 
+# Load all files matching the pattern as a single dataframe
+load.all.df <- function(dir = ".", pattern = "*.csv$",
+                        projects.file = "projects.txt") {
+  script = "
+    head -n 1 `head -n 1 to_load.txt`
+    cat to_load.txt|while read f; do cat $f|sed -e 1d; done
+  "
+  to.load <- which.to.load(dir, pattern, projects.file)
+  write.table(to.load, file='to_load.txt', row.names = FALSE, col.names = FALSE,
+              quote = FALSE)
+  printf("Loading %d files", length(to.load))
+  tryCatch({
+    load.filter(pipe(script))
+  }, finally= {
+    unlink("to_load.txt")
+  })
+}
+
+# Load all files matching the pattern as a list of data frames
+# The projects_file argument specifies an optional list of files to load.
+# If the provided projects_file does not exist, all data files will be loaded
+load.all <- function(dir = ".", pattern = "*.csv$",
+                     projects.file = "projects.txt") {
+
+  to_load <- which.to.load(dir, pattern, projects.file)
+
+  Reduce(function(acc, x) {
+      if (file.exists(x)) {
+         print(sprintf("Reading file %s", x))
+         a <- load.filter(pipe(sprintf("cat %s", x)))
+         if (nrow(a) == 0) {
+          printf("Warning - No rows in file %s", x)
+          acc
+         } else {
+           c(acc, list(a))
+         }
+      } else {
+        printf("File does not exist %s", x)
+        acc
+      }
+    }, to_load, c())
+}
+
+# Load some dataframes
 load.some <- function(dir = ".", pattern = "*.csv$", howmany = -1) {
   n = 0
   merged <- data.frame()
@@ -55,8 +99,8 @@ load.some <- function(dir = ".", pattern = "*.csv$", howmany = -1) {
 load.filter <- function(path) {
   setAs("character", "POSIXct", function(from){as.POSIXct(from, origin = "1970-01-01")})
   a <- read.csv(path, check.names = T, 
-                colClasses = c("integer",rep("factor",3), rep("integer", 5),
-                               rep("factor", 3), rep("integer", 10),
+                colClasses = c("integer",rep("factor",2), rep("integer", 6),
+                               rep("factor", 3), rep("integer", 18),
                                rep("double", 3), "integer",  "factor",
                                "integer", "double", "integer",
                                "factor", "factor"))
@@ -69,32 +113,17 @@ load.filter <- function(path) {
   a$main_team_member <- as.factor(a$main_team_member)
   a$intra_branch <- a$intra_branch == "true"
   a$intra_branch <- as.factor(a$intra_branch)
+  a$merged <- !is.na(a$merged_at)
+  a$merged <- as.factor(a$merged)
   # Take care of cases where csv file production was interupted, so the last
   # line has wrong fields
   a <- subset(a, !is.na(intra_branch))
   a
 }
 
-# Add merged column
-addcol.merged <- function(dfs) {
-  lapply(dfs, addcol.merged.df)
-}
-
-addcol.merged.df <- function(x) {
-  print(sprintf("Adding column merged to dataframe %s", (project.name(x))))
-  x$merged <- !is.na(x$merged_at)
-  x$merged <- as.factor(x$merged)
-  x
-}
-
 # Name of a project in a dataframe
 project.name <- function(dataframe) {
   as.character(dataframe$project_name[[1]])
-}
-
-# Name of all projects in the provided dataframe list
-project.names <- function(dfs) {
-  lapply(dfs, project.name)
 }
 
 # Get a project dataframe from the provided data frame list whose name is dfs

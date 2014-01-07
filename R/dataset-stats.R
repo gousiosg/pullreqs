@@ -227,9 +227,7 @@ print(sprintf("Perc drive by pull requests: %f", (drive_by_pr/opened_pullreqs) *
 print(sprintf("Perc one pull req repos: %f", (drive_by_pr/forked_repos) * 100))    
 
 # Load CSV files
-dfs <- load.all(dir=data.file.location, pattern="*.csv$")
-dfs <- addcol.merged(dfs)
-all <- merge.dataframes(dfs)
+all <- load.data()
 
 # Discussion comments from internal vs externals
 project_ids <- lapply(unique(all$project_name), function(x) {
