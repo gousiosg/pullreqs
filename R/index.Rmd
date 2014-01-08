@@ -1,0 +1,64 @@
+---
+layout: page
+title: GHTorrent Openess reports
+tagline: 
+---
+
+```{r preample, include=FALSE}
+projectsjs = paste(apply(projects, 1, function(x){sprintf("'%s-%s'", x[1], x[2])}), collapse = ",")
+projectsmd = paste(apply(projects, 1, function(x){sprintf("[%s/%s](/pullreq-perf/%s-%s/)", x[1], x[2], x[1], x[2])}), collapse="\n")
+```
+
+The GHTorrent progress openess reports 
+
+See here some reports for popular repositories:
+
+<div class="btn-toolbar">
+<button type="button" class="btn btn-default">
+<a href="/pullreq-perf/rails-rails/">Ruby on Rails</a>
+</button>
+<button type="button" class="btn btn-default">
+<a href="/pullreq-perf/ipython-ipython/">IPython</a>
+</button>
+<button type="button" class="btn btn-default">
+<a href="/pullreq-perf/akka-akka/">Akka</a>
+</button>
+</div>
+
+<label for="projectSearch">Search for project: </label>
+<input type="search" id="projectSearch"/>
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script type="text/javascript">
+
+  projects = [`r projectsjs`]
+
+  $("#projectSearch").autocomplete ({
+        source: projects,
+        minLength: 2,
+        delay : 100,
+        focus: function( event, ui ) {},
+        select: function( event, ui ) {
+            $("#langsearch").val("");
+            window.location.href = "http://ghtorrent.org/pullreq-perf/" + ui.item.label;
+            return false;
+        }
+  });
+</script>
+
+### What is this report supposed to say?
+
+The report is presenting data on various aspects of project openess. 
+
+### How did you build it?
+
+For fun and profit. I was always wondering how various projects behave with
+respect to external contributions and whether their . 
+Moreover, I wanted to lure developers to answer my research questionnaire.
+
+### Links to all reports
+<small>
+`r projectsmd`
+</small>
+
