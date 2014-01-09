@@ -1,3 +1,10 @@
+#
+# (c) 2012 -- 2014 Georgios Gousios <gousiosg@gmail.com>
+#
+# BSD licensed, see LICENSE in top level dir
+#
+
+
 rm(list = ls(all = TRUE))
 
 if (! "knitr" %in% installed.packages()) install.packages("knitr", src=TRUE)

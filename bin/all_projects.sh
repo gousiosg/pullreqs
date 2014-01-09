@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+# (c) 2012 -- 2014 Georgios Gousios <gousiosg@gmail.com>
+#
+# BSD licensed, see LICENSE in top level dir
+#
 
 parallel=1
 dir='.'
@@ -19,21 +24,21 @@ usage()
 while getopts "p:d:a:" o
 do
 	case $o in
-	p) 	
-    parallel=$OPTARG ; 
-    echo "Using $parallel processes"; 
+	p)
+    parallel=$OPTARG ;
+    echo "Using $parallel processes";
     ;;
-  d) 	
-    dir=$OPTARG ; 
-    echo "Using $dir for output"; 
+  d)
+    dir=$OPTARG ;
+    echo "Using $dir for output";
     ;;
   a)
     ip=$OPTARG ;
     echo "Using $ip for requests";
     ;;
-  \?) 
-    echo "Invalid option: -$OPTARG" >&2 ; 
-    usage 
+  \?)
+    echo "Invalid option: -$OPTARG" >&2 ;
+    usage
     ;;
   :)
     echo "Option -$OPTARG requires an argument." >&2
@@ -52,8 +57,8 @@ fi
 
 cat $input |
 grep -v "^#"|
-while read pr; do 
-  name=`echo $pr|cut -f1,2 -d' '|tr ' ' '@'` 
+while read pr; do
+  name=`echo $pr|cut -f1,2 -d' '|tr ' ' '@'`
   echo "ruby -Ibin bin/pull_req_data_extraction.rb -a $ip -c config.yaml $pr |grep -v '^[DUG]' |grep -v Overrid | grep -v 'unknown\ header'|grep -v '^$' 1>$dir/$name.csv 2>$dir/$name.err"
-done | xargs -P $parallel -Istr sh -c str 
+done | xargs -P $parallel -Istr sh -c str
 

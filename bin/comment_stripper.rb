@@ -1,3 +1,9 @@
+#
+# (c) 2012 -- 2014 Georgios Gousios <gousiosg@gmail.com>
+#
+# BSD licensed, see LICENSE in top level dir
+#
+
 module CommentStripper
 
   def strip_shell_style_comments(buff)

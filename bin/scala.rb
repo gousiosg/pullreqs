@@ -1,3 +1,9 @@
+#
+# (c) 2012 -- 2014 Georgios Gousios <gousiosg@gmail.com>
+#
+# BSD licensed, see LICENSE in top level dir
+#
+
 require 'comment_stripper'
 
 module ScalaData

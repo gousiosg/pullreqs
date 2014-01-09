@@ -5,6 +5,13 @@ tagline:
 ---
 
 ```{r preample, include=FALSE}
+
+#
+# (c) 2012 -- 2014 Georgios Gousios <gousiosg@gmail.com>
+#
+# BSD licensed, see LICENSE in top level dir
+#
+
 projectsjs = paste(apply(projects, 1, function(x){sprintf("'%s-%s'", x[1], x[2])}), collapse = ",")
 projectsmd = paste(apply(projects, 1, function(x){sprintf("[%s/%s](/pullreq-perf/%s-%s/)", x[1], x[2], x[1], x[2])}), collapse="\n")
 ```

@@ -6,6 +6,12 @@ tagline:
 
 ```{r preample, include=FALSE}
 
+#
+# (c) 2012 -- 2014 Georgios Gousios <gousiosg@gmail.com>
+#
+# BSD licensed, see LICENSE in top level dir
+#
+
 library(RMySQL)
 library(ggplot2)
 library(reshape)

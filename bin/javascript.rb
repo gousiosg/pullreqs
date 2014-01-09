@@ -1,3 +1,9 @@
+#
+# (c) 2012 -- 2014 Georgios Gousios <gousiosg@gmail.com>
+#
+# BSD licensed, see LICENSE in top level dir
+#
+
 module JavascriptData
 
   def num_test_cases(pr_id)

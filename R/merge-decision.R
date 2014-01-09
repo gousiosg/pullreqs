@@ -1,3 +1,9 @@
+#
+# (c) 2012 -- 2014 Georgios Gousios <gousiosg@gmail.com>
+#
+# BSD licensed, see LICENSE in top level dir
+#
+
 # Predicting whether pull requests will be merged
 
 source(file = "R/packages.R")
