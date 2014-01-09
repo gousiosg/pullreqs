@@ -239,7 +239,6 @@ mozilla fjord Python
 ryanmcgrath twython Python
 pazz alot Python
 MilkBowl Vault Java
-jbossas jboss-as Java
 theforeman smart-proxy Ruby
 mballance sveditor Java
 NICTA scoobi Scala

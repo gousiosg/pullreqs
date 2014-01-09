@@ -116,7 +116,7 @@ request was done.
 * `requester`: The developer that performed the pull request
 * `prev_pullreqs`: Number of pull requests by developer up to the specific pull request
 * `requester_succ_rate`: % of merged vs unmerged pull requests for developer
-* `followers`: Number of followers at the time the pull request was done
+* `followers`: Number of followers to the pull requester at the time the pull request was done
 * `intra_branch`: Whether the pull request is among branches of the same
 repository
 * `main_team_member`: Boolean, true if the pull requester is part of the
