@@ -3,6 +3,10 @@ library(methods)
 # printf for R
 printf <- function(...) invisible(print(sprintf(...)))
 
+unwrap <- function(str) {
+  strwrap(str, width=10000, simplify=TRUE)
+}
+
 ## Data loading and conversions
 
 # Trim whitespace from strings

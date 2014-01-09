@@ -11,10 +11,6 @@ library(ggplot2)
 library(reshape)
 library(sqldf)
 
-unwrap <- function(str) {
-  strwrap(str, width=10000, simplify=TRUE)
-}
-
 # Get the project id
   q <- "
     select p.id 

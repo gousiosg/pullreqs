@@ -45,6 +45,40 @@ if(length(list.files(pattern="R")) == 0) {
 print("Loading data files..")
 all <- load.data(project.list)
 
+## Filtering criteria
+a <- all
+
+#1. Should have more that 80 pullreqs
+
+
+#1. Merge percentage > 50
+merged.perc <- sqldf("select project_name, (select count(*) from a a1 where a1.project_name = a.project_name and merged = 'TRUE') *1.0/ (select count(*) from a a1 where a1.project_name = a.project_name) as ratio_merged from a group by project_name order by ratio_merged")
+merged.perc$order = as.numeric(rownames(merged.perc))
+p <- ggplot(merged.perc, aes(x = order, y = ratio_merged)) +
+  geom_bar(stat="identity", color = "#ff3333") +
+  theme(axis.text.x=element_blank()) +
+  ylab("Percentage") +
+  xlab("Project")
+store.pdf(p, plot.location, 'perc-merged.pdf')
+
+# This is to check very low scores in merge % is due to the lack 
+# of data as a result of the project not having an activated issue tracker
+# check.has.bugs <- function(df, credentials = "username:password") {
+#   has.bugs <- function(x) {
+#     library(RCurl)
+#     printf("Checking %s", x)
+#     h = basicHeaderGatherer()
+#     getURI(sprintf("https://api.github.com/repos/%s/issues", x),
+#            userpwd=credentials,  httpauth = 1L, headerfunction = h$update)
+#     h$value()['status'] == 200
+#   }
+#   df$has_bugs <- lapply(df$project_name, has.bugs)
+# }
+
+check.has.bugs(merged.perc)
+rm(a)
+
+
 #  Number of projects per language
 for(language in c("ruby", "java", "python", "scala")) {
   printf("%d projects in %s", length(unique(subset(all, lang == language)$project_name)), language)
@@ -70,34 +104,6 @@ used <- subset(all, select=columns)
 # Why test_cases_per_kloc and asserts_per_kloc are excluded from further analysis
 cor.test(all$test_lines_per_kloc, all$test_cases_per_kloc, method="spearman")
 cor.test(all$test_lines_per_kloc, all$asserts_per_kloc, method="spearman")
-
-# Percentage of merged vs unmerged pull requests accross projects
-a <- all
-merged.perc <- sqldf("select project_name, (select count(*) from a a1 where a1.project_name = a.project_name and merged = 'TRUE') *1.0/ (select count(*) from a a1 where a1.project_name = a.project_name) as ratio_merged from a group by project_name order by ratio_merged")
-merged.perc$order = as.numeric(rownames(merged.perc))
-p <- ggplot(merged.perc, aes(x = order, y = ratio_merged)) +
-  geom_bar(stat="identity", color = "#ff3333") +
-  theme(axis.text.x=element_blank()) +
-  ylab("Percentage") +
-  xlab("Project")
-store.pdf(p, plot.location, 'perc-merged.pdf')
-
-# This is to check very low scores in merge % is due to the lack 
-# of data as a result of the project not having an activated issue tracker
-# check.has.bugs(df, credentials = "username:password") {
-#   has.bugs <- function(x) {
-#     library(RCurl)
-#     printf("Checking %s", x)
-#     h = basicHeaderGatherer()
-#     getURI(sprintf("https://api.github.com/repos/%s/issues", x),
-#            userpwd=credentials,  httpauth = 1L, headerfunction = h$update)
-#     h$value()['status'] == 200
-#   }
-#   df$has_bugs <- lapply(df$project_name, has_bugs)
-# }
-#
-# check.has.bugs(merged.perc)
-rm(a)
 
 # Time to merge pull request box plots histogram
 p <- ggplot(merged, aes(x = mergetime_minutes)) +
