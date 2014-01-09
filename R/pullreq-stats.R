@@ -71,31 +71,6 @@ used <- subset(all, select=columns)
 cor.test(all$test_lines_per_kloc, all$test_cases_per_kloc, method="spearman")
 cor.test(all$test_lines_per_kloc, all$asserts_per_kloc, method="spearman")
 
-## Cross correlation matrix accross all model variables
-ctab <- cor(used, method = "spearman", use='complete.obs')
-colorfun <- colorRamp(c("#ff0000","white","#3366CC"), space="Lab")
-store.pdf(plotcorr(ctab,
-                   #col = 'grey',
-                   col=rgb(colorfun((ctab+1)/2), maxColorValue=255),
-                   outline = FALSE),
-          plot.location,
-          "cross-cor.pdf")
-print(xtable(ctab,
-             caption="Cross correlation matrix (Spearman) between examined factors",
-             label="tab:crosscor"),
-         type = "latex",
-         size = "small",
-         file = paste(latex.location, "cross-cor.tex", "/"))
-
-ctab.m <- melt(ctab)
-p <- ggplot(ctab.m, aes(X1, X2, fill = value)) +
-  geom_tile() +
-  scale_fill_gradient2(space = "Lab") +
-  theme(axis.title = element_blank(),
-        axis.text = element_text(size = 11),
-        axis.text.x = element_text(angle = -90, hjust = 0, vjust = 0.5))
-store.pdf(p, plot.location, "cross-cor-heat.pdf")
-
 # Percentage of merged vs unmerged pull requests accross projects
 a <- all
 merged.perc <- sqldf("select project_name, (select count(*) from a a1 where a1.project_name = a.project_name and merged = 'TRUE') *1.0/ (select count(*) from a a1 where a1.project_name = a.project_name) as ratio_merged from a group by project_name order by ratio_merged")
