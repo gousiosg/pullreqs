@@ -103,60 +103,7 @@ pull requests included per project in the dataset. In the following sections, we
   \label{fig:wordcloud}
 \end{figure}
 
-\subsection{Merge detection}
-\label{sec:mergedec}
-To identify merged pull requests that are merged outside Github, we resorted to
-the following heuristics, listed here in order of application:
-
-\begin{description}
-
-  \item[$H_1$] At least one of the commits associated with the pull request appears in the target project's master branch.
-
-  \item[$H_2$] A commit closes the pull request (using the \texttt{fixes:}
-    convention advocated by Github) and that commit appears in the project's
-    master branch.  This means that the pull request commits were squashed onto
-    one commit and this commit was merged.
-
-  \item[$H_3$] One of the last 3 (in order of appearance) discussion comments contain a
-    commit unique identifier, this commit appears in the project's master branch
-    and the corresponding comment can be matched by the following regular
-    expression:
-
-    \begin{small}
-    \texttt{(?:merg|appl|pull|push|integrat)(?:ing|i?ed)}
-    \end{small}
-
-  \item[$H_4$] The latest comment prior to closing the pull request matches the
-    regular expression above.
-
-\end{description}
-
-If none of the above heuristics identifies a merge, the pull request is
-identied as unmerged. In the dataset, 58\% of the pull requests are 
-merged using Github's facilities while 18\% are identified as unmerged.
-The remaining 24\% is identied as merged using the heuristics described
-above. The contribution of each heuristic 
-
-\subsection{Test case detection}
-
-To count testing related data, the script exploits the fact that Java, Ruby and Python projects are organized using the Maven, Gem and Pythonic project conventions respectively. Test cases are recognized as follows:
-
-\begin{description}
-
-  \item[Java]  Files in directories under a /test/ branch of the file tree are considered test files. JUnit 4 test cases are recognized using the @Test tag. For JUnit3, methods starting with test are considered as test methods. Asserts are counted by "grepping" through the source code lines for assert* statements.
-
-  \item[Python]
-
-  \item[Ruby] Files under the /test/ and /spec/ directories are considered test files. Test cases are recognized by "grepping" for test* (RUnit), should .* do (Shoulda) and it .* do (RSpec) in the source file lines.
-
-
-  \item[Scala] Same as Java with the addition of specs2 matchers
-
-\end{description}
-
-\subsection{Counting lines, files and file types}
-
-\subsection{Feature Extraction.} 
+\subsection{Feature Selection} 
 
 \begin{figure}
   \begin{center}
@@ -223,6 +170,77 @@ period before the pull request was opened.
 
 \input{feature-stats.tex}
 
+\subsection{Merge detection}
+\label{sec:mergedec}
+To identify merged pull requests that are merged outside Github, we resorted to
+the following heuristics, listed here in order of application:
+
+\begin{description}
+
+  \item[$H_1$] At least one of the commits associated with the pull request appears in the target project's master branch.
+
+  \item[$H_2$] A commit closes the pull request (using the \texttt{fixes:}
+    convention advocated by Github) and that commit appears in the project's
+    master branch.  This means that the pull request commits were squashed onto
+    one commit and this commit was merged.
+
+  \item[$H_3$] One of the last 3 (in order of appearance) discussion comments contain a
+    commit unique identifier, this commit appears in the project's master branch
+    and the corresponding comment can be matched by the following regular
+    expression:
+
+    \begin{small}
+    \texttt{(?:merg|appl|pull|push|integrat)(?:ing|i?ed)}
+    \end{small}
+
+  \item[$H_4$] The latest comment prior to closing the pull request matches the
+    regular expression above.
+
+\end{description}
+
+If none of the above heuristics identifies a merge, the pull request is
+identied as unmerged. In the dataset, 58\% of the pull requests are 
+merged using Github's facilities while 18\% are identified as unmerged.
+The remaining 24\% is identied as merged using the heuristics described
+above. The contribution of each heuristic 
+
+\subsection{Test case detection}
+
+To count testing related data, the script exploits the fact that Java, Ruby and Python projects are organized using the Maven, Gem and Pythonic project conventions respectively. Test cases are recognized as follows:
+
+\begin{description}
+
+  \item[Ruby] Files under the \texttt{/test/} and \texttt{/spec/} directories
+    are considered test files. Test cases are recognized by scanning through the
+    test files lines for method name patterns as required by the \textsf{RUnit},
+    \textsf{Rspec} and \textsf{Shoulda} frameworks. The popular Cucumber
+    behaviour driven development testing framework is excluded from the analysis
+    due to inexistent naming conventions.
+
+  \item[Python] Python project conventions do not specify specific directories
+    for test files, so test file detection is based solely on whether the
+    file name contains the word ``test'' as prefix or suffix. Test cases
+    and asserts are discovered both in source code and also in API examples
+    embedded in documentation comments.
+
+  \item[Java] Following Maven conventions, files in directories under a
+    \texttt{test/} branch of the file tree are considered test files.
+    \textsf{junit4} test cases are recognized using the \texttt{@Test} tag. For
+    \textsf{junit3}, methods starting with test are considered as test methods.
+    Asserts are counted by searching through the source code lines for
+    \texttt{assert} statements.
+
+  \item[Scala] As Maven underlies Scala's default build system (\textsf{sbt}),
+    the same conventions as in the Java case can be used to discover test files.
+    In addition to \textsf{junit}, the process can discover test cases and
+    assert statements as defined by the \textsf{scalatest} and
+    \textsf{specs2} testing frameworks.
+
+\end{description}
+
+\subsection{Counting lines, files and file types}
+
+
 \section{Tools}
 
 The \pullreq dataset is accompanied by an extensive analysis toolkit
@@ -237,20 +255,25 @@ written in the R statistics language.
 
 \paragraph*{Test detection is approximate}
 
-
-\section{Research opportunities}
-\label{sec:discussion}
-
 \section{Related Work}
 \label{sec:rel}
 
 
 \section{Conclusion}
 
-%\subsection*{Acknowledgements}
+We presented the \pullreq dataset, a currated dataset of almost 900 projects,
+along with a statistical analysis tool set for its analysis. A previous version
+of the dataset has been used to quantitatively study the pull request
+development process. New research directions whose analysis can be facilitated
+by this dataset can include code review activities, recommender systems for pull
+request handling and triaging and investigation of project process openess. The
+dataset itself can be extended to support more programming languages and more
+projects. Pull requests are certainly welcome!
 
-%We would like to thank the anonymous reviewers for their comments.
-%This work is partially supported by Marie Curie {\sc ief} 298930 --- {\sc sefunc}.
+All source code and data is available on the Github repository
+\href{https://github.com/gousiosg/pullreqs}{gousiosg/pullreqs}. Data on the
+\href{http://ghtorrent.org}{ghtorrent.org} web site permit full replication
+of the construction process or the expansion of this dataset.
 
 \bibliographystyle{abbrv}
 \balance
