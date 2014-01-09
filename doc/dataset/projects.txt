@@ -239,7 +239,6 @@ mozilla fjord
 ryanmcgrath twython
 pazz alot
 MilkBowl Vault
-jbossas jboss-as
 theforeman smart-proxy
 mballance sveditor
 NICTA scoobi

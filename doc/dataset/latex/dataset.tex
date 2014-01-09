@@ -15,6 +15,7 @@
 
 \newcommand{\ghtorrent}{ \textsc{ght}orrent\xspace}
 \newcommand{\api}{\textsc{api}\xspace}
+\newcommand{\pullreq}{ \textsf{pullreq}\xspace}
 
 \title{A dataset for pull-based development research}
 \numberofauthors{3}
@@ -43,10 +44,10 @@ Georgios Gousios\\
 empirical software engineering}
 
 \section{Introduction}
-\label{sec:intro} 
+\label{sec:intro}
 
-\subsection{Data collection process}
-\label{sec:expdata} 
+\section{Data collection process}
+\label{sec:expdata}
 
 After selection, the full history (including pull requests, issues and commits)
 of the included projects was downloaded and features were extracted by querying
@@ -80,7 +81,7 @@ identify merged pull requests that are merged outside Github, we resorted to the
 \end{enumerate}
 
 If none of the above heuristics identifies a merge, we mark the pull request
-as unmerged. 
+as unmerged.
 
 After creating the data files, we investigated projects where the pull request
 merge ratio was significantly less than the one we calculated across Github
@@ -94,17 +95,17 @@ Ruby, Java and Scala projects respectively). Both distributions are
 representative of the contemporary popularity of each respective programming
 language on both Github and other sites.
 
-%Figure~\ref{fig:wordcloud} presents the project names in relative size to the
-%pull requests included per project in the dataset. 
-%
-%\begin{figure}
-%  \begin{center}
-%    \includegraphics[scale=0.7]{wordcloud.pdf}
-%  \end{center}
-%  \caption{Projects in our dataset. Text size is relative to the number of
-%  included pull requests.}
-%  \label{fig:wordcloud}
-%\end{figure}
+Figure~\ref{fig:wordcloud} presents the project names in relative size to the
+pull requests included per project in the dataset.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[scale=0.5]{wordcloud.pdf}
+  \end{center}
+  \caption{Projects in the \pullreq dataset. Text size is relative to the number of
+  included pull requests.}
+  \label{fig:wordcloud}
+\end{figure}
 
 \textbf{Feature Extraction.} The feature selection was based on prior work in the areas of patch submission and acceptance~\cite{Nagap05,Bird07a,Weiss08,Baysa12}, 
 code reviewing~\cite{Rigby13}, bug
@@ -159,6 +160,14 @@ result of the ensuing discussion. Features that contain a temporal dimension in
 their calculation (e.g., \texttt{team\_size} or
 \texttt{commits\_on\_files\_touched}) are calculated over the three-month time
 period before the pull request was opened.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[scale=0.6]{cross-cor.pdf}
+  \end{center}
+  \caption{Cross-correlation among all dataset features}
+  \label{fig:wordcloud}
+\end{figure}
 
 \input{feature-stats.tex}
 

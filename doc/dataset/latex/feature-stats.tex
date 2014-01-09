@@ -1,24 +1,38 @@
 % latex table generated in R 2.15.3 by xtable 1.7-1 package
-% Tue Jan  7 14:58:43 2014
+% Thu Jan  9 10:38:33 2014
 \begin{table*}[ht]
 \centering
-\begin{tabular}{rp{15em}ccccc}
+\begin{tabular}{rp{16em}rrrrc}
   \hline
 Feature & Description & quant\_5 & mean & median & quant\_95 & histogram \\ 
   \hline
-num\_commits & Number of commits in the pull request & 1.00 & 4.43 & 1.00 & 12.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-f128f3cb38588fe5202716588c047381.pdf} \\ 
+lifetime\_minutes & Minutes between opening and closing a pull request & 0.00 & 15258.83 & 586.00 & 71683.95 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-29b6fa715eecc1dad108c8148465533b.pdf} \\ 
+  mergetime\_minutes & Minutes between opening and merging a pull request (only for merged pull
+    requests) & 0.00 & 10515.88 & 419.00 & 44383.95 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-e2ded77f4080f561e112a1f363b125ce.pdf} \\ 
+  num\_commits & Number of commits in the pull request & 1.00 & 4.43 & 1.00 & 12.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-f128f3cb38588fe5202716588c047381.pdf} \\ 
   src\_churn & Number of lines changed (added + deleted) by the pull request. & 0.00 & 286.91 & 10.00 & 865.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-1f006c80a0da61518435a0c55f538326.pdf} \\ 
   test\_churn & Number of test lines changed in the pull request. & 0.00 & 82.59 & 0.00 & 256.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-dd78ccaeedd7fc79735a66eb7f9e506b.pdf} \\ 
-  files\_changed & Number of files touched by the pull request. & 1.00 & 11.80 & 2.00 & 30.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-9b07b060359435635ff2bf4cd34f834a.pdf} \\ 
+  files\_added & Number of files added by the pull request & 0.00 & 4.07 & 0.00 & 7.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-340be33adc9a51666460c68028842c1d.pdf} \\ 
+  files\_modified & Number of files modified by the pull request & 1.00 & 7.73 & 2.00 & 22.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-52a19dc5ca5e4f8c5325bca43137a6c1.pdf} \\ 
+  files\_changed & Number of files touched by the pull request (sum of the above three) & 1.00 & 11.80 & 2.00 & 30.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-9b07b060359435635ff2bf4cd34f834a.pdf} \\ 
+  src\_files & Number of source code files touched by the pull request & 0.00 & 7.78 & 1.00 & 20.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-2d4e53ba8eec29c0c79c1e834756c654.pdf} \\ 
+  doc\_files & Number of documentation (markup) files touched by the pull request & 0.00 & 2.38 & 0.00 & 6.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-d4fb585969e7acb86dd568d80e7f1500.pdf} \\ 
+  other\_files & Number of non-source, non-documentation files touched by the pull request & 0.00 & 2.80 & 0.00 & 4.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-df965fcd0b03a96f1b31b2eda13d2b98.pdf} \\ 
+  num\_commit\_comments & The total number of code review comments in the pull request. & 0.00 & 0.73 & 0.00 & 4.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-f0fac61db5a83629be8f04cc84e8b907.pdf} \\ 
+  num\_issue\_comments & The total number of discussion comments in the pull request & 0.00 & 1.86 & 0.00 & 8.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-fee6653ed7b2359f7e7374841378492b.pdf} \\ 
   num\_comments & The total number of comments (discussion and code review). & 0.00 & 2.59 & 1.00 & 11.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-9db5e2b390de0d64d26c14798cb579ef.pdf} \\ 
   num\_participants & Number of participants in the pull request discussion & 0.00 & 1.27 & 1.00 & 4.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-7d419bb69f175ea7015a9bdc71172f38.pdf} \\ 
-  sloc & Executable lines of code at pull request merge time. & 469.00 & 56609.81 & 18493.50 & 295609.90 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-6b5159d3060b4fdf8493d4c818f79949.pdf} \\ 
+  sloc & Executable lines of code at pull request creation time. & 469.00 & 56609.81 & 18493.50 & 295609.90 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-6b5159d3060b4fdf8493d4c818f79949.pdf} \\ 
   team\_size & Number of active core team members during the last 3 months prior the pull request creation. & 1.00 & 21.11 & 7.00 & 93.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-231fb4fabf4a3f0c551f2a97ae080508.pdf} \\ 
   perc\_external\_contribs & The ratio of commits from external members over core team members in the last 3 months prior to pull request creation. & 8.00 & 53.90 & 56.00 & 95.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-a222f0a5c377ba129dd6c8f257062591.pdf} \\ 
   commits\_on\_files\_touched & Number of total commits on files touched by the pull request 3 months before the pull request creation time. & 0.00 & 51.49 & 4.00 & 208.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-b735900ffcc37e7eda16dcd0c3497e6e.pdf} \\ 
-  test\_lines\_per\_kloc & A proxy for the project's test coverage. & 0.00 & 1289.65 & 356.87 & 2093.26 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-67ff3047089ba9ce0528884eab66e80a.pdf} \\ 
+  test\_lines\_per\_kloc & Executable lines of test code per 1000 lines of source code & 0.00 & 1289.65 & 356.87 & 2093.26 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-67ff3047089ba9ce0528884eab66e80a.pdf} \\ 
+  test\_cases\_per\_kloc & Number of test cases per 1000 lines of source code & 0.00 & 83.16 & 14.12 & 180.75 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-2b62bb5f7ccb31fe66208a895c8dd549.pdf} \\ 
+  asserts\_per\_kloc & Number of assert statements per 1000 lines of source code & 0.00 & 199.00 & 39.01 & 473.94 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-4ad84a89acf32483001ce11c881622b8.pdf} \\ 
+  watchers & Project watchers (stars) at the time the pull request was opened & 4.00 & 1771.39 & 329.00 & 11031.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-d097a7d1786ca9917e46e0fda1adb365.pdf} \\ 
   prev\_pullreqs & Number of pull requests submitted by a specific developer, prior to the examined pull request. & 0.00 & 42.79 & 11.00 & 195.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-a2f7f60851dfa13cfbe0227d1d233767.pdf} \\ 
   requester\_succ\_rate & The percentage of the developer's pull requests that have been merged up to the creation of the examined pull request. & 0.00 & 0.51 & 0.61 & 1.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-9363017165c3ded62457750f1c67c1af.pdf} \\ 
+  followers & Followers to the developer at the time the pull request was made & 0.00 & 20.75 & 4.00 & 79.00 & \includegraphics[scale = 0.1, clip = true, trim= 50px 60px 50px 60px]{hist-a7f2f738f15a09420e70e9a2c30e2aef.pdf} \\ 
    \hline
 \end{tabular}
 \caption{Selected features and descriptive statistics. Historgrams are in log scale.} 
