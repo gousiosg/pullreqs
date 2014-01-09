@@ -49,54 +49,50 @@ empirical software engineering}
 \section{Data collection process}
 \label{sec:expdata}
 
-After selection, the full history (including pull requests, issues and commits)
-of the included projects was downloaded and features were extracted by querying
-the {\sc ght}orrent databases and analyzing each project's Git repository. 
-Furthermore, for these selected projects we collected all merges and the values for all factors that we use in our machine learning experiment, as described below.
+To create the dataset, we followed an iterative process; first, we selected all
+projects in the \ghtorrent dataset that by the end of 2013 had more than 100
+pull requests. Then, the full history (including pull requests, issues and
+commits) of the included projects was downloaded and features were extracted by
+querying the {\sc ght}orrent databases and analyzing each project's Git
+repository. The initial selection resulted in 1047 projects. The following
+criteria were then applied to exclude projects from the initial selection:
 
-\textbf{Merge detection.} To
-identify merged pull requests that are merged outside Github, we resorted to the following heuristics, listed here in order of application:
+\begin{itemize}
 
-\begin{enumerate}
+  \item After processing, the number of remaining pull requests should be more
+    that 80. The typical reason for some pull requests missing from the output
+    is  \todo{Find a reason} . 
 
-  \item At least one of the commits associated with the pull request appears in
-    the target project's master branch. 
+  \item Projects should include tests. We could only use projects that include
+    tests which we could measure reliably. For that, we exploited the
+    convention-based project layout in the Ruby (Gem), Python, Java and Scala
+    (both Maven) language ecosystems, so our project selection was limited to
+    those languages. After processing, we filtered out 97 projects for which
+    our heuristics could not identify any tests.
+    
+  \item Projects should have at least one commit coming from developer outside
+    the project's main team, to ensure that the project is open to external
+    contributions and that pull requests are not just used by developers within
+    the project.
 
-  \item A commit closes the pull request (using the \texttt{fixes:} convention
-    advocated by Github) and that commit appears in the project's master branch.
-    This means that the pull request commits were squashed onto one commit and
-    this commit was merged.
+  \item The ratio of merged pull requests should be within reasonable limits
+    from the mean merge ratio across all Github projects. In the \ghtorrent
+    dataset, the mean merge ratio is 72\%. The \pullreq dataset uses heuristics
+    to indetify merges done outside Github (see Section~\ref{sec:mergedec}), so
+    we generally expect a higher average merge ratio. We set an arbitrary limit
+    of 50\% being merged below which projects are excluded by the dataset. 47
+    projects where filtered out.
 
-  \item One of the last 3 (in order of appearance) discussion comments contain a
-    commit unique identifier, this commit appears in the project's master branch
-    and the corresponding comment can be matched by the following regular
-    expression:
+\end{itemize}
 
-    \begin{small}
-    \texttt{(?:merg|appl|pull|push|integrat)(?:ing|i?ed)}
-    \end{small}
-  \item The latest comment prior to closing the pull request matches the 
-    regular expression above.
-
-\end{enumerate}
-
-If none of the above heuristics identifies a merge, we mark the pull request
-as unmerged.
-
-After creating the data files, we investigated projects where the pull request
-merge ratio was significantly less than the one we calculated across Github
-(73\%), and in any case less than 40\%, as this means that our heuristics are not
-good enough for this project. This way, we filtered out 2 projects, which we did not
-replace.
-
-The final dataset consisted of 291 projects (99 Python, 91 Java, 87 Ruby, 14
-Scala) and 166,884 pull requests (59,970; 55,468; 43,870 and 7,576 for Python,
+The final dataset consisted of 976 projects (328 Python, 324 Java, 288 Ruby, 37
+Scala) and 351,286 pull requests (59,970; 55,468; 43,870 and 7,576 for Python,
 Ruby, Java and Scala projects respectively). Both distributions are
 representative of the contemporary popularity of each respective programming
 language on both Github and other sites.
 
 Figure~\ref{fig:wordcloud} presents the project names in relative size to the
-pull requests included per project in the dataset.
+pull requests included per project in the dataset. In the following sections, we descibe important aspects of the dataset generation process.
 
 \begin{figure}
   \begin{center}
@@ -107,11 +103,75 @@ pull requests included per project in the dataset.
   \label{fig:wordcloud}
 \end{figure}
 
-\textbf{Feature Extraction.} The feature selection was based on prior work in the areas of patch submission and acceptance~\cite{Nagap05,Bird07a,Weiss08,Baysa12}, 
-code reviewing~\cite{Rigby13}, bug
-triaging~\cite{Anvik06, Giger10} and also on semi-structured interviews of
-Github developers~\cite{Dabbi12, Pham13, McDon13}. The selected features are split
-into three categories:
+\subsection{Merge detection}
+\label{sec:mergedec}
+To identify merged pull requests that are merged outside Github, we resorted to
+the following heuristics, listed here in order of application:
+
+\begin{description}
+
+  \item[$H_1$] At least one of the commits associated with the pull request appears in the target project's master branch.
+
+  \item[$H_2$] A commit closes the pull request (using the \texttt{fixes:}
+    convention advocated by Github) and that commit appears in the project's
+    master branch.  This means that the pull request commits were squashed onto
+    one commit and this commit was merged.
+
+  \item[$H_3$] One of the last 3 (in order of appearance) discussion comments contain a
+    commit unique identifier, this commit appears in the project's master branch
+    and the corresponding comment can be matched by the following regular
+    expression:
+
+    \begin{small}
+    \texttt{(?:merg|appl|pull|push|integrat)(?:ing|i?ed)}
+    \end{small}
+
+  \item[$H_4$] The latest comment prior to closing the pull request matches the
+    regular expression above.
+
+\end{description}
+
+If none of the above heuristics identifies a merge, the pull request is
+identied as unmerged. In the dataset, 58\% of the pull requests are 
+merged using Github's facilities while 18\% are identified as unmerged.
+The remaining 24\% is identied as merged using the heuristics described
+above. The contribution of each heuristic 
+
+\subsection{Test case detection}
+
+To count testing related data, the script exploits the fact that Java, Ruby and Python projects are organized using the Maven, Gem and Pythonic project conventions respectively. Test cases are recognized as follows:
+
+\begin{description}
+
+  \item[Java]  Files in directories under a /test/ branch of the file tree are considered test files. JUnit 4 test cases are recognized using the @Test tag. For JUnit3, methods starting with test are considered as test methods. Asserts are counted by "grepping" through the source code lines for assert* statements.
+
+  \item[Python]
+
+  \item[Ruby] Files under the /test/ and /spec/ directories are considered test files. Test cases are recognized by "grepping" for test* (RUnit), should .* do (Shoulda) and it .* do (RSpec) in the source file lines.
+
+
+  \item[Scala] Same as Java with the addition of specs2 matchers
+
+\end{description}
+
+\subsection{Counting lines, files and file types}
+
+\subsection{Feature Extraction.} 
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[scale=0.6]{cross-cor.pdf}
+  \end{center}
+  \caption{Cross-correlation among all dataset features}
+  \label{fig:wordcloud}
+\end{figure}
+
+
+The feature selection was based on prior work in the areas of patch submission
+and acceptance~\cite{Nagap05,Bird07a,Weiss08,Baysa12}, code
+reviewing~\cite{Rigby13}, bug triaging~\cite{Anvik06, Giger10} and also on
+semi-structured interviews of Github developers~\cite{Dabbi12, Pham13, McDon13}.
+The selected features are split into three categories:
 
   \emph{Pull request characteristics.} These features attempt to quantify the
   impact of the pull request on the affected code base. When examining external
@@ -161,15 +221,12 @@ their calculation (e.g., \texttt{team\_size} or
 \texttt{commits\_on\_files\_touched}) are calculated over the three-month time
 period before the pull request was opened.
 
-\begin{figure}
-  \begin{center}
-    \includegraphics[scale=0.6]{cross-cor.pdf}
-  \end{center}
-  \caption{Cross-correlation among all dataset features}
-  \label{fig:wordcloud}
-\end{figure}
-
 \input{feature-stats.tex}
+
+\section{Tools}
+
+The \pullreq dataset is accompanied by an extensive analysis toolkit
+written in the R statistics language.
 
 \section{Challenges and limitations}
 \label{sec:challenges}
