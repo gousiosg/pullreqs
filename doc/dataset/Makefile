@@ -111,7 +111,7 @@ $(BUILD)/$(MASTERTEX).aux: $(TEXFILES_DEST) $(PICTURES_DEST)
 
 # Bibliography
 $(BUILD)/$(MASTERTEX).bib: $(BUILD)/$(MASTERTEX).aux
-	cd $(BUILD) #&& \
+	cd $(BUILD) #&& \#
 	#$(PYBCOMPACT) $(MASTERTEX).aux $(PAPERPATH) > `basename $(BUILD)/$(MASTERTEX).bib`
 
 $(BUILD)/$(MASTERTEX).bbl: $(BUILD)/$(MASTERTEX).bib $(BUILD)/$(MASTERTEX).aux

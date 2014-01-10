@@ -15,7 +15,7 @@
 
 \newcommand{\ghtorrent}{ \textsc{ght}orrent\xspace}
 \newcommand{\api}{\textsc{api}\xspace}
-\newcommand{\pullreq}{ \textsf{pullreq}\xspace}
+\newcommand{\pullreqs}{ \textsf{pullreqs}\xspace}
 
 \title{A dataset for pull-based development research}
 \numberofauthors{3}
@@ -32,6 +32,12 @@ Georgios Gousios\\
 
 \begin{abstract}
 
+Pull requests form a new method for collaborating on distributed software
+development. To study the pull request distributed development model, we
+constructed a dataset of almost 800 projects, including some of the largest
+users of pull requests on Github. In this paper, we describe how the project
+selection was done, we analyze the selected features and present a machine
+learning tool set for the R statistics environment. 
 
 \end{abstract}
 
@@ -46,22 +52,47 @@ empirical software engineering}
 \section{Introduction}
 \label{sec:intro}
 
+Pull requests as a distributed development model in general, and as implemented
+by Github in particular, form a new method for collaborating on distributed
+software development. In the pull-based development model, the project's main
+repository is not shared among potential contributors; instead, contributors
+\emph{fork} (clone) the repository and make their changes independent of each
+other. When a set of changes is ready to be submitted to the main repository,
+they create a pull request, which specifies a local branch to be merged with a
+branch in the main repository. A member of the project's core team is then
+responsible to inspect the changes and pull them to the project's master branch.
+If changes are considered unsatisfactory, more changes may be requested; in that
+case, contributors need to update their local branches with new commits.
+Furthermore, as pull requests only specify branches from which certain commits
+can be pulled, there is nothing that forbids their use in the shared 
+repository approach (cross-branch pull requests).
+
+To understand what the underlying principles that guide pull-based development
+are, we created \pullreqs, a curated dataset of almost 800 projects along with a
+set of tools for its analysis. A previous version of the dataset has been used
+to quantitatively study the pull request development process~\cite{GPD14}. The
+\pullreqs dataset is based on our previous work on \ghtorrent~\cite{Gousi13}, albeit only for
+its construction. In this paper, we describe the construction process of the
+dataset and outline directions for further research with it.
+
 \section{Data collection process}
 \label{sec:expdata}
 
 To create the dataset, we followed an iterative process; first, we selected all
-projects in the \ghtorrent dataset that by the end of 2013 had more than 100
-pull requests. Then, the full history (including pull requests, issues and
-commits) of the included projects was downloaded and features were extracted by
-querying the {\sc ght}orrent databases and analyzing each project's Git
-repository. The initial selection resulted in 1047 projects. The following
+projects in the \ghtorrent dataset which by the end of 2013 had more than 100
+pull requests. The initial selection resulted in 1047 projects. For those, the
+full history (including pull requests, issues and commits) of the included
+projects was downloaded and features were extracted by querying the {\sc
+ght}orrent databases and analyzing each project's Git repository. The following
 criteria were then applied to exclude projects from the initial selection:
 
 \begin{itemize}
 
   \item After processing, the number of remaining pull requests should be more
     that 80. The typical reason for some pull requests missing from the output
-    is  \todo{Find a reason} . 
+    is that many projects use a dedicated branch for documentation which
+    includes no source code; the data generation script skips such pull
+    requests.  87 projects were filtered out
 
   \item Projects should include tests. We could only use projects that include
     tests which we could measure reliably. For that, we exploited the
@@ -77,8 +108,8 @@ criteria were then applied to exclude projects from the initial selection:
 
   \item The ratio of merged pull requests should be within reasonable limits
     from the mean merge ratio across all Github projects. In the \ghtorrent
-    dataset, the mean merge ratio is 72\%. The \pullreq dataset uses heuristics
-    to indetify merges done outside Github (see Section~\ref{sec:mergedec}), so
+    dataset, the mean merge ratio is 72\%. The \pullreqs dataset uses heuristics
+    to identify merges done outside Github (see Section~\ref{sec:mergedec}), so
     we generally expect a higher average merge ratio. We set an arbitrary limit
     of 50\% being merged below which projects are excluded by the dataset. 47
     projects where filtered out.
@@ -91,47 +122,52 @@ Ruby, Java and Scala projects respectively). Both distributions are
 representative of the contemporary popularity of each respective programming
 language on both Github and other sites.
 
-Figure~\ref{fig:wordcloud} presents the project names in relative size to the
-pull requests included per project in the dataset. In the following sections, we descibe important aspects of the dataset generation process.
-
-\begin{figure}
-  \begin{center}
-    \includegraphics[scale=0.5]{wordcloud.pdf}
-  \end{center}
-  \caption{Projects in the \pullreq dataset. Text size is relative to the number of
-  included pull requests.}
-  \label{fig:wordcloud}
-\end{figure}
-
+%Figure~\ref{fig:wordcloud} presents the project names in relative size to the
+%pull requests included per project in the dataset. In the following sections, we descibe important aspects of the dataset generation process.
+%
+%\begin{figure}
+%  \begin{center}
+%    \includegraphics[scale=0.5]{wordcloud.pdf}
+%  \end{center}
+%  \caption{Projects in the \pullreq dataset. Text size is relative to the number of
+%  included pull requests.}
+%  \label{fig:wordcloud}
+%\end{figure}
+%
 \subsection{Feature Selection} 
 
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.6]{cross-cor.pdf}
   \end{center}
-  \caption{Cross-correlation among all dataset features}
-  \label{fig:wordcloud}
+  \caption{Cross-correlation (Spearman) among all dataset features. Blue color indicates positive correlation, red color is negative correlation. The darker
+  the color (and the more acute the ellipsis slant), the stronger the correlation.}
+  \label{fig:features}
 \end{figure}
 
-
 The feature selection was based on prior work in the areas of patch submission
-and acceptance~\cite{Nagap05,Bird07a,Weiss08,Baysa12}, code
-reviewing~\cite{Rigby13}, bug triaging~\cite{Anvik06, Giger10} and also on
-semi-structured interviews of Github developers~\cite{Dabbi12, Pham13, McDon13}.
+and acceptance~\cite{Baysa12}, code
+reviewing~\cite{Rigby13}, bug triaging~\cite{Giger10} and also on
+semi-structured interviews of Github developers~\cite{Dabbi12, Pham13}.
 The selected features are split into three categories:
 
   \emph{Pull request characteristics.} These features attempt to quantify the
   impact of the pull request on the affected code base. When examining external
   code contributions, the size of the patch is affecting both acceptance and
-  acceptance time~\cite{Weiss08}. There are various metrics to determine the
-  size of a patch that have been used by researchers: code churn~\cite{Nagap05,
-  Ratzi07}, changed files~\cite{Nagap05} and number of commits~\cite{Fluri07}.
-  In the particular case of pull requests, developers reported that the presence
-  of tests in a pull request increases their confidence to merge
+  acceptance time. There are various metrics to determine the size of a patch
+  that have been used by researchers: code churn, changed files and number of
+  commits.
+  
+  We split coarse-grained metrics in their constituents: for example,
+  in the particular case of pull requests, developers reported that
+  the presence of tests in a pull request increases their confidence to merge
   it~\cite{Pham13}. To investigate this, we split the churn feature into two
-  features, namely \texttt{src\_churn} and \texttt{test\_churn}. The
-  number of participants has been shown to influence the time to process of code
-  reviewing~\cite{Rigby13}. Finally, through our own experience analyzing pull
+  features, namely \texttt{src\_churn} and \texttt{test\_churn}. The number of
+  participants has been shown to influence the time to process of code
+  reviewing~\cite{Rigby13}. Therefore, the number of comments in pull requests
+  is split between code review and discussion.
+
+  Finally, through our own experience analyzing pull
   requests, we have found that in many cases conflicts are reported explicitly
   in pull request comments while in other cases pull requests include links to
   other related pull requests.
@@ -139,25 +175,25 @@ The selected features are split into three categories:
   \emph{Project characteristics.} These features quantify how receptive to pull
   requests the project is. If the project's process is open to external
   contributions, then we expect to see an increased ratio of external
-  contributors over team members. The project's size may be a detrimental factor
-  to the speed of processing a pull request, as its impact may be more difficult
-  to assess. Also, incoming changes tend to cluster over time (the ``yesterday's
-  weather'' change pattern~\cite{Girba04}), so it is natural to assume that pull
-  requests affecting a part of the system that is under active development will
-  be more likely to merge. Testing plays a role in speed of processing;
-  according to~\cite{Pham13}, projects struggling with a constant flux of
-  contributors use testing, manual or preferably automated, as a safety net to
-  handle contributions from unknown developers.
+  contributors over core team members. The project's size may be a detrimental
+  factor to the speed of processing a pull request, as its impact may be more
+  difficult to assess. Also, incoming changes tend to cluster over time (the
+  ``yesterday's weather'' change pattern), so it is natural to
+  assume that pull requests affecting a part of the system that is under active
+  development will be more likely to merge. Testing plays a role in speed of
+  processing; according to~\cite{Pham13}, projects struggling with a constant
+  flux of contributors use testing, manual or preferably automated, as a safety
+  net to handle contributions from unknown developers.
 
   \emph{Developer.}  Developer-based features quantify the influence that the
   person who created the pull request has on the decision to merge it and the
   time to process it. In particular, the developer who created the patch has
-  been shown to influence the patch acceptance decision~\cite{Jeong09}. To
+  been shown to influence the patch acceptance decision. To
   abstract the results across projects with different developers, we include
   features that quantify the developer's track record~\cite{Dabbi12}, namely the
   number of previous pull requests and their acceptance rate; the former has
   been identified as a strong indicator of pull request quality~\cite{Pham13}.
-  Bird et al.~\cite{Bird07}, presented evidence that social reputation has an
+  Bird et al. presented evidence that social reputation has an
   impact on whether a patch will be merged; in our dataset, the number of
   followers on Github can be seen as a proxy for reputation.
 
@@ -166,7 +202,10 @@ merged, to evaluate the effect of intermediate updates to the pull request as a
 result of the ensuing discussion. Features that contain a temporal dimension in
 their calculation (e.g., \texttt{team\_size} or
 \texttt{commits\_on\_files\_touched}) are calculated over the three-month time
-period before the pull request was opened.
+period before the pull request was opened. As Figure~\ref{fig:features} shows,
+the resulting features are fairly orthogonal, with very few strong correlations
+between them. This is an indication that they capture a wide range of pull
+request activities with minimal overlap.
 
 \input{feature-stats.tex}
 
@@ -184,10 +223,10 @@ the following heuristics, listed here in order of application:
     master branch.  This means that the pull request commits were squashed onto
     one commit and this commit was merged.
 
-  \item[$H_3$] One of the last 3 (in order of appearance) discussion comments contain a
-    commit unique identifier, this commit appears in the project's master branch
-    and the corresponding comment can be matched by the following regular
-    expression:
+  \item[$H_3$] One of the last 3 (in order of appearance) discussion comments
+    contain a commit unique identifier, this commit appears in the project's
+    master branch and the corresponding comment can be matched by the following
+    regular expression:
 
     \begin{small}
     \texttt{(?:merg|appl|pull|push|integrat)(?:ing|i?ed)}
@@ -199,23 +238,26 @@ the following heuristics, listed here in order of application:
 \end{description}
 
 If none of the above heuristics identifies a merge, the pull request is
-identied as unmerged. In the dataset, 58\% of the pull requests are 
+identified as unmerged. In the dataset, 58\% of the pull requests are 
 merged using Github's facilities while 18\% are identified as unmerged.
-The remaining 24\% is identied as merged using the heuristics described
+The remaining 24\% is identified as merged using the heuristics described
 above. The contribution of each heuristic 
 
 \subsection{Test case detection}
 
-To count testing related data, the script exploits the fact that Java, Ruby and Python projects are organized using the Maven, Gem and Pythonic project conventions respectively. Test cases are recognized as follows:
+To evaluate testing related factors, the process exploits the fact that Java,
+Ruby and Python projects are usually organized around the conventions imposed by
+their build or library distribution systems (Maven, Gem and Pypi respectively).
+Consequently, test cases are thus detected as follows:
 
 \begin{description}
 
   \item[Ruby] Files under the \texttt{/test/} and \texttt{/spec/} directories
     are considered test files. Test cases are recognized by scanning through the
     test files lines for method name patterns as required by the \textsf{RUnit},
-    \textsf{Rspec} and \textsf{Shoulda} frameworks. The popular Cucumber
-    behaviour driven development testing framework is excluded from the analysis
-    due to inexistent naming conventions.
+    \textsf{Rspec}, \textsf{Shoulda} and \textsf{Minitest} frameworks. The
+    popular Cucumber behaviour driven development testing framework is excluded
+    from the analysis due to inexistent naming conventions.
 
   \item[Python] Python project conventions do not specify specific directories
     for test files, so test file detection is based solely on whether the
@@ -240,35 +282,62 @@ To count testing related data, the script exploits the fact that Java, Ruby and 
 
 \subsection{Counting lines, files and file types}
 
+Counting lines of code is an unsolved problem in software engineering research,
+as researchers have yet to agree what constitutes a line of code in a source
+code file. In the \pullreqs dataset, a line of code is an executable statement,
+excluding blank lines and comments. To measure lines, we developed custom
+comment strippers for all the programming languages the dataset supports, as
+we could not find any tool that can count lines reliably (block comments in Ruby and Python were a particular problem).
+Moreover, we delegated the identification of file types to a Ruby library
+called Linguist (the same that Github uses), which supports more than 250 file types.
+%~\footnote{The full list is here: \texttt{https://github.com/github/\-linguist/\-blob\-/master\-/lib\-/linguist/languages.yml}}
 
 \section{Tools}
 
-The \pullreq dataset is accompanied by an extensive analysis toolkit
-written in the R statistics language.
+The \pullreqs dataset is accompanied by an extensive analysis toolkit written in
+the R statistics language. The framework allows researchers to load selections
+of projects in R, provides basic statistics in tabular (e.g.
+Table~\ref{tab:features}) and graphical form (e.g. Figure~\ref{fig:features}),
+and exposes a command line base interface that tools can extend. Moreover,
+it implements a modular, multi-step data mining framework that researchers
+can easily re-use in similar machine learning experiments. The data mining
+parts include all the necessary steps for successfully executing a data mining
+experiment, such as distribution plotting, cross correlation among features,
+pluggable model and algorithm definitions, $n$-fold cross-validation and
+plotting of important model variables such as Area Under Curve ({\sc auc}) and
+accuracy across cross-validation runs. To cope with the \pullreqs dataset
+size, several parts of the tooling employ parallelism and can thus exploit
+multi-core machines.
 
-\section{Challenges and limitations}
-\label{sec:challenges}
-
-\paragraph*{Merge detection is incomplete}
-
-\paragraph*{Projects are incomplete}
-
-\paragraph*{Test detection is approximate}
+%\section{Limitations}
+%\label{sec:challenges}
+%
+%\paragraph*{Projects are incomplete} As alleged in Section~\ref{sec:expdata},
+%
+%
+%\paragraph*{Merge detection is incomplete} 
+%
+%\paragraph*{Test detection is approximate}
 
 \section{Related Work}
 \label{sec:rel}
 
+The \pullreqs dataset is similar to the code review datasets published by
+Hamasaki et al.~\cite{Hamas13} and Mukadam et al.~\cite{Mukad13}.  It improves
+upon those two datasets by covering a wider array of projects and languages
+while also offering more precise related data, such as file counts and test
+cases. To the best of our knowledge, this is the only publicly available
+dataset covering pull-based development and certain aspects of distributed
+software development in general.
 
 \section{Conclusion}
 
-We presented the \pullreq dataset, a currated dataset of almost 900 projects,
-along with a statistical analysis tool set for its analysis. A previous version
-of the dataset has been used to quantitatively study the pull request
-development process. New research directions whose analysis can be facilitated
+We presented the \pullreqs dataset, a curated dataset of almost 800 projects,
+along with a statistical analysis tool set for its analysis. New research directions whose analysis can be facilitated
 by this dataset can include code review activities, recommender systems for pull
-request handling and triaging and investigation of project process openess. The
+request handling and triaging and investigation of project process openness. The
 dataset itself can be extended to support more programming languages and more
-projects. Pull requests are certainly welcome!
+projects. Pull requests are especially welcome!
 
 All source code and data is available on the Github repository
 \href{https://github.com/gousiosg/pullreqs}{gousiosg/pullreqs}. Data on the
