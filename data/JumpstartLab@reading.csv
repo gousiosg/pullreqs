@@ -17,7 +17,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 139713,JumpstartLab/reading,ruby,249,1338289419,1338290135,1338290135,11,11,github,false,false,5,1,0,0,0,0,2,0,0,2,0,2,0,55,119,0,0,0,0.0,0.0,0.0,36,Andrewglass1,9,0.7777777777777778,0,false,false
 139709,JumpstartLab/reading,ruby,248,1338289281,1338290150,1338290150,14,14,github,false,false,5,1,0,0,0,0,1,0,0,1,0,1,0,55,119,0,0,0,0.0,0.0,0.0,36,marktabler,8,1.0,5,false,false
 139703,JumpstartLab/reading,ruby,247,1338289102,1338289134,1338289134,0,0,github,false,false,5,1,0,0,0,0,1,0,0,1,0,1,0,55,119,0,0,0,0.0,0.0,0.0,72,mrgilman,9,1.0,6,false,false
-139702,JumpstartLab/reading,ruby,246,1338289018,1338289064,1338289065,0,0,github,false,false,5,1,0,0,0,0,1,0,0,1,0,2,0,55,119,0,0,1,0.0,0.0,0.0,36,tyre,7,0.7142857142857143,4,false,false
+139702,JumpstartLab/reading,ruby,246,1338289018,1338289064,1338289065,0,0,github,false,false,5,1,0,0,0,0,1,1,0,2,0,2,0,55,119,0,0,1,0.0,0.0,0.0,36,tyre,7,0.7142857142857143,4,false,false
 139700,JumpstartLab/reading,ruby,245,1338288933,1338288989,1338288989,0,0,github,false,false,5,1,0,0,0,0,1,0,0,1,0,1,0,55,119,0,0,0,0.0,0.0,0.0,72,MikeSilvis,10,0.9,18,false,false
 139698,JumpstartLab/reading,ruby,244,1338288875,1338289099,1338289100,3,3,github,false,false,5,1,0,0,0,0,1,0,0,1,0,1,0,55,119,0,0,0,0.0,0.0,0.0,36,tkiefhaber,8,0.875,1,false,false
 139665,JumpstartLab/reading,ruby,243,1338287673,1338289114,1338289114,24,24,github,false,false,5,1,0,0,0,0,1,0,0,1,0,1,0,55,119,0,0,0,0.0,0.0,0.0,36,conanr,6,1.0,0,false,false
@@ -97,7 +97,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 386918,JumpstartLab/reading,ruby,169,1335197239,1335754219,1335754219,9283,9283,github,false,false,4,1,0,0,0,0,1,0,0,1,0,1,0,59,119,0,0,0,0.0,0.0,0.0,30,maryelizbeth,3,0.6666666666666666,1,true,false
 302373,JumpstartLab/reading,ruby,168,1335196708,1335196766,1335196766,0,0,github,false,false,4,2,0,0,0,0,0,0,1,1,0,1,0,59,119,0,0,2,0.0,0.0,0.0,60,Andrewglass1,6,0.6666666666666666,0,false,false
 302372,JumpstartLab/reading,ruby,167,1335196683,1335196810,1335196810,2,2,github,false,false,4,1,0,0,0,0,1,0,1,2,0,2,0,59,119,0,0,1,0.0,0.0,0.0,30,darrellrivera,3,0.0,0,false,false
-386914,JumpstartLab/reading,ruby,166,1335196426,,1335799523,10051,,unknown,false,false,4,11,0,0,0,0,53,0,2,55,5,16,30,59,119,1774,0,0,0.0,0.0,0.0,30,travisvalentine,7,0.8571428571428571,2,true,false
+386914,JumpstartLab/reading,ruby,166,1335196426,,1335799523,10051,,unknown,false,false,4,11,0,0,0,0,53,53,2,108,5,16,30,59,119,1774,0,0,0.0,0.0,0.0,30,travisvalentine,7,0.8571428571428571,2,true,false
 302367,JumpstartLab/reading,ruby,165,1335196126,1335754297,1335754297,9302,9302,github,false,false,4,1,0,0,0,0,1,0,0,1,0,1,0,59,119,0,0,0,0.0,0.0,0.0,30,1337807,6,0.6666666666666666,8,false,false
 302366,JumpstartLab/reading,ruby,164,1335196066,1335196883,1335196883,13,13,github,false,false,4,2,0,0,0,0,0,0,1,1,0,1,0,59,119,0,0,2,0.0,0.0,0.0,30,athal7,7,0.7142857142857143,1,false,false
 302362,JumpstartLab/reading,ruby,163,1335195641,1335196957,1335196957,21,21,github,false,false,4,4,0,0,0,0,1,0,2,3,0,2,0,59,119,0,0,1,0.0,0.0,0.0,30,MikeSilvis,5,0.8,9,false,false
@@ -114,7 +114,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 302328,JumpstartLab/reading,ruby,151,1335192075,1335193163,1335193163,18,18,github,false,false,4,1,0,0,0,0,1,0,0,1,0,1,0,59,119,0,0,0,0.0,0.0,0.0,30,worace,10,0.9,0,false,false
 386902,JumpstartLab/reading,ruby,150,1335191958,,1335193561,26,,unknown,false,false,4,6,0,1,1,1,67,0,3,70,1,65,3,59,119,238,0,0,0.0,0.0,0.0,30,verdi327,8,0.25,3,true,false
 386900,JumpstartLab/reading,ruby,149,1335191806,,1335193642,30,,unknown,false,false,4,5,0,0,0,1,66,0,3,69,1,64,3,59,119,238,0,0,0.0,0.0,0.0,30,verdi327,7,0.2857142857142857,3,true,false
-386893,JumpstartLab/reading,ruby,148,1335190509,,1335193514,50,,unknown,false,false,4,8,0,0,0,0,30,0,2,32,5,16,6,58,119,1770,0,0,0.0,0.0,0.0,30,travisvalentine,6,1.0,2,true,false
+386893,JumpstartLab/reading,ruby,148,1335190509,,1335193514,50,,unknown,false,false,4,8,0,0,0,0,30,21,2,53,5,16,6,58,119,1770,0,0,0.0,0.0,0.0,30,travisvalentine,6,1.0,2,true,false
 386885,JumpstartLab/reading,ruby,147,1335189483,1335193215,1335193215,62,62,github,false,false,4,1,0,0,0,0,1,0,0,1,0,1,0,58,119,0,0,0,0.0,0.0,0.0,30,tkiefhaber,4,0.75,0,true,false
 302275,JumpstartLab/reading,ruby,146,1335186056,1335193228,1335193228,119,119,github,false,false,4,1,0,0,0,0,1,0,0,1,0,1,0,58,119,0,0,0,0.0,0.0,0.0,30,marktabler,4,1.0,5,false,false
 302263,JumpstartLab/reading,ruby,145,1335184662,1335193239,1335193239,142,142,github,false,false,4,1,0,0,0,0,1,0,0,1,0,1,0,58,119,0,0,0,0.0,0.0,0.0,30,mrgilman,4,1.0,3,false,false
@@ -130,7 +130,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 382305,JumpstartLab/reading,ruby,134,1333389673,1333390431,1333390432,12,12,github,false,false,4,1,0,0,0,0,1,0,0,1,0,1,0,60,119,0,0,0,0.0,0.0,0.0,29,wengzilla,3,1.0,3,true,false
 382304,JumpstartLab/reading,ruby,133,1333389629,1333390441,1333390441,13,13,github,false,false,4,1,0,0,0,0,1,0,1,2,0,1,1,60,119,0,0,2,0.0,0.0,0.0,29,nisargshah100,3,0.6666666666666666,0,true,false
 382300,JumpstartLab/reading,ruby,132,1333389356,1333389492,1333389492,2,2,github,false,false,4,1,0,0,0,0,0,0,1,1,0,1,0,60,119,0,0,1,0.0,0.0,0.0,29,travisvalentine,5,1.0,2,true,false
-76800,JumpstartLab/reading,ruby,131,1333389213,1333389532,1333389532,5,5,github,false,false,4,7,0,0,0,0,2,0,1,3,0,3,1,60,119,0,0,1,0.0,0.0,0.0,29,1337807,4,0.5,7,false,false
+76800,JumpstartLab/reading,ruby,131,1333389213,1333389532,1333389532,5,5,github,false,false,4,7,0,0,0,0,2,1,1,4,0,3,1,60,119,0,0,1,0.0,0.0,0.0,29,1337807,4,0.5,7,false,false
 486070,JumpstartLab/reading,ruby,130,1333389163,1333389477,1333389477,5,5,github,false,false,4,3,0,0,0,0,1,0,1,2,0,2,0,60,119,0,0,1,0.0,0.0,0.0,29,chrismanderson,3,0.6666666666666666,0,false,false
 76796,JumpstartLab/reading,ruby,129,1333388920,,1333388939,0,,unknown,false,false,4,3,0,1,1,1,1,0,1,2,0,2,0,60,119,0,0,0,0.0,0.0,0.0,58,athal7,3,0.6666666666666666,2,false,false
 382284,JumpstartLab/reading,ruby,128,1333386485,,1335191754,30087,,unknown,false,false,4,5,0,0,0,0,66,0,3,69,1,64,3,60,119,238,0,0,0.0,0.0,0.0,29,verdi327,6,0.3333333333333333,2,true,false
@@ -140,15 +140,15 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 382255,JumpstartLab/reading,ruby,124,1333380704,,1335193663,30215,,unknown,false,false,3,2,0,0,0,1,40,0,11,51,0,29,22,60,119,0,0,0,0.0,0.0,0.0,29,darrellrivera,1,0.0,0,true,false
 382242,JumpstartLab/reading,ruby,123,1333378899,,1335193629,30245,,unknown,false,false,3,1,0,0,0,1,1,0,2,3,0,1,2,60,119,0,0,0,0.0,0.0,0.0,29,Andrewglass1,4,0.75,0,true,false
 76628,JumpstartLab/reading,ruby,122,1333378764,1333392625,1333392625,231,231,github,false,false,3,1,0,0,0,0,1,0,0,1,0,1,0,60,119,0,0,0,0.0,0.0,0.0,29,mrgilman,3,1.0,3,false,false
-76621,JumpstartLab/reading,ruby,121,1333378448,1333389182,1333389182,178,178,commits_in_master,false,false,3,7,0,2,2,2,2,0,1,3,0,3,1,60,119,0,0,1,0.0,0.0,0.0,29,1337807,3,0.6666666666666666,7,false,false
-76619,JumpstartLab/reading,ruby,120,1333378350,1333378385,1333378385,0,0,commits_in_master,false,false,3,5,0,1,1,1,2,0,0,2,0,2,1,60,119,0,0,0,0.0,0.0,0.0,58,1337807,2,1.0,14,false,false
+76621,JumpstartLab/reading,ruby,121,1333378448,1333389182,1333389182,178,178,commits_in_master,false,false,3,7,0,2,2,2,2,1,1,4,0,3,1,60,119,0,0,1,0.0,0.0,0.0,29,1337807,3,0.6666666666666666,7,false,false
+76619,JumpstartLab/reading,ruby,120,1333378350,1333378385,1333378385,0,0,commits_in_master,false,false,3,5,0,1,1,1,2,1,0,3,0,2,1,60,119,0,0,0,0.0,0.0,0.0,58,1337807,2,1.0,14,false,false
 76620,JumpstartLab/reading,ruby,119,1333378164,1333392613,1333392613,240,240,github,false,false,3,1,0,0,0,0,1,0,0,1,0,1,0,60,119,0,0,0,0.0,0.0,0.0,29,marktabler,3,1.0,5,false,false
 486071,JumpstartLab/reading,ruby,118,1333377843,1333389121,1333389121,187,187,commits_in_master,false,false,3,3,0,0,0,0,1,0,1,2,0,2,0,60,119,0,0,1,0.0,0.0,0.0,29,chrismanderson,2,1.0,0,false,false
-76608,JumpstartLab/reading,ruby,117,1333377538,1333392667,1333392667,252,252,github,false,false,3,19,0,0,0,0,50,0,4,54,0,29,25,60,119,0,0,17,0.0,0.0,0.0,29,eliseworthy,2,0.5,9,false,false
+76608,JumpstartLab/reading,ruby,117,1333377538,1333392667,1333392667,252,252,github,false,false,3,19,0,0,0,0,50,5,4,59,0,29,25,60,119,0,0,17,0.0,0.0,0.0,29,eliseworthy,2,0.5,9,false,false
 486072,JumpstartLab/reading,ruby,116,1333375601,1333392685,1333392685,284,284,github,false,false,3,1,0,0,0,0,1,0,0,1,0,1,0,60,119,0,0,0,0.0,0.0,0.0,29,tkiefhaber,3,0.6666666666666666,0,false,false
 486073,JumpstartLab/reading,ruby,115,1333375503,,1333389788,238,,unknown,false,false,3,2,0,0,0,0,1,0,1,2,0,2,0,60,119,0,0,0,0.0,0.0,0.0,29,athal7,2,1.0,1,false,false
 486074,JumpstartLab/reading,ruby,114,1333364916,1333392707,1333392707,463,463,github,false,false,3,2,0,0,0,0,2,0,0,2,0,1,1,59,119,0,0,0,0.0,0.0,0.0,29,worace,9,0.8888888888888888,0,false,false
-486076,JumpstartLab/reading,ruby,113,1333326281,1335193600,1335193600,31121,31121,merged_in_comments,false,false,3,18,0,0,0,1,55,0,8,63,0,51,13,59,119,0,0,0,0.0,0.0,0.0,29,adigitalnative,4,0.5,1,false,false
+486076,JumpstartLab/reading,ruby,113,1333326281,1335193600,1335193600,31121,31121,merged_in_comments,false,false,3,18,0,0,0,1,55,27,8,90,0,51,13,59,119,0,0,0,0.0,0.0,0.0,29,adigitalnative,4,0.5,1,false,false
 382095,JumpstartLab/reading,ruby,112,1333316080,1333392730,1333392730,1277,1277,github,false,false,3,3,0,0,0,0,1,0,1,2,0,2,0,59,119,0,0,1,0.0,0.0,0.0,29,travisvalentine,4,1.0,2,true,false
 380653,JumpstartLab/reading,ruby,111,1332802183,,1332806772,76,,unknown,false,false,3,4,0,0,0,1,65,0,3,68,1,63,3,59,119,238,0,0,0.0,0.0,0.0,29,verdi327,5,0.4,2,true,false
 380600,JumpstartLab/reading,ruby,110,1332784962,,1332800125,252,,unknown,false,false,3,3,0,0,0,1,44,0,3,47,1,43,2,63,119,238,0,0,0.0,0.0,0.0,29,verdi327,4,0.5,2,true,false

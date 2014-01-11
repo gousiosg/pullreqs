@@ -1,4 +1,7 @@
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,merged_using,conflict,forward_links,team_size,num_commits,num_commit_comments,num_issue_comments,num_comments,num_participants,files_added,files_deleted,files_modified,files_changed,src_files,doc_files,other_files,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
+2731503,ros/rosdistro,python,2786,1388646112,1388646943,1388646943,13,13,commits_in_master,false,false,5,1,0,0,0,0,0,0,1,1,0,1,0,57,329,0,0,357,88.14589665653496,6.079027355623101,0.0,85,stonier,197,0.8883248730964467,13,false,false
+2729559,ros/rosdistro,python,2785,1388598628,1388598841,1388598841,3,3,commits_in_master,false,false,5,1,0,0,0,0,0,0,1,1,0,1,0,57,329,0,0,79,88.14589665653496,6.079027355623101,0.0,85,pirobot,12,0.75,4,false,false
+2729277,ros/rosdistro,python,2784,1388591744,,1388598684,115,,unknown,false,false,5,1,0,2,2,2,0,0,1,1,0,1,0,57,329,0,0,0,88.14589665653496,6.079027355623101,0.0,85,pirobot,11,0.8181818181818182,4,false,false
 2725099,ros/rosdistro,python,2783,1388481272,1388481918,1388481918,10,10,commits_in_master,false,false,5,1,0,0,0,0,0,0,1,1,0,1,0,57,329,0,0,375,88.14589665653496,6.079027355623101,0.0,85,isucan,159,0.9371069182389937,7,false,true
 2724210,ros/rosdistro,python,2782,1388458672,1388459077,1388459077,6,6,commits_in_master,false,false,5,1,0,0,0,0,0,0,1,1,0,1,0,57,329,0,0,374,88.14589665653496,6.079027355623101,0.0,85,130s,121,0.9421487603305785,2,false,true
 2724199,ros/rosdistro,python,2781,1388458435,1388458627,1388458627,3,3,commits_in_master,false,false,5,1,0,0,0,0,0,0,1,1,0,1,0,57,329,0,0,104,88.14589665653496,6.079027355623101,0.0,85,130s,120,0.95,2,false,true
@@ -201,7 +204,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2482588,ros/rosdistro,python,2584,1384902019,1384902396,1384902396,6,6,github,false,false,10,2,0,0,0,0,0,0,2,2,0,2,0,65,250,0,0,745,116.0,8.0,0.0,82,130s,95,0.968421052631579,2,false,true
 2478073,ros/rosdistro,python,2583,1384863831,1384864184,1384864185,5,5,github,false,false,10,1,0,0,0,0,0,0,1,1,0,1,0,66,250,0,0,690,116.0,8.0,0.0,81,smits,27,0.7407407407407407,4,false,false
 2477963,ros/rosdistro,python,2582,1384862796,1384863385,1384863385,9,9,github,false,false,10,1,0,0,0,0,0,0,1,1,0,1,0,66,250,0,0,71,116.0,8.0,0.0,81,cogniteam,0,0,0,false,false
-2476532,ros/rosdistro,python,2581,1384845867,1384846837,1384846837,16,16,github,false,false,10,1,0,0,0,0,1,0,0,1,0,0,2,66,250,0,0,1,116.0,8.0,0.0,81,mayrjohannes,2,1.0,0,false,false
+2476532,ros/rosdistro,python,2581,1384845867,1384846837,1384846837,16,16,github,false,false,10,1,0,0,0,0,1,1,0,2,0,0,2,66,250,0,0,1,116.0,8.0,0.0,81,mayrjohannes,2,1.0,0,false,false
 2475790,ros/rosdistro,python,2580,1384832012,1384832447,1384832448,7,7,github,false,false,10,1,0,0,0,0,0,0,1,1,0,1,0,66,250,0,0,690,116.0,8.0,0.0,81,isucan,150,0.9466666666666667,7,false,true
 2475450,ros/rosdistro,python,2579,1384825980,1384827217,1384827218,20,20,github,false,false,10,1,0,0,0,0,0,0,1,1,0,1,0,66,250,0,0,689,116.0,8.0,0.0,81,130s,94,0.9680851063829787,2,false,true
 2475400,ros/rosdistro,python,2578,1384825051,1384825385,1384825386,5,5,github,false,false,10,1,0,0,0,0,0,0,1,1,0,1,0,66,250,0,0,220,116.0,8.0,0.0,81,130s,93,0.967741935483871,2,false,true
@@ -470,7 +473,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2217715,ros/rosdistro,python,2311,1381092032,1381092371,1381092371,5,5,github,false,false,15,1,0,0,0,0,0,0,2,2,0,2,0,72,250,0,0,1243,116.0,8.0,0.0,79,vrabaud,44,0.9090909090909091,14,false,true
 2217373,ros/rosdistro,python,2310,1381084516,1381084646,1381084646,2,2,github,false,false,15,1,0,0,0,0,0,0,1,1,0,1,0,72,250,0,0,951,116.0,8.0,0.0,79,vrabaud,43,0.9069767441860465,14,false,true
 2217281,ros/rosdistro,python,2309,1381082681,1381084304,1381084304,27,27,github,false,false,15,1,0,0,0,0,0,0,2,2,0,2,0,72,250,0,0,1242,116.0,8.0,0.0,79,vrabaud,42,0.9047619047619048,14,false,true
-2216335,ros/rosdistro,python,2308,1381061975,1381072143,1381072143,169,169,github,false,false,15,3,0,0,0,0,1,0,1,2,0,1,2,72,250,0,0,46,116.0,8.0,0.0,79,jizhang-cmu,3,1.0,0,false,false
+2216335,ros/rosdistro,python,2308,1381061975,1381072143,1381072143,169,169,github,false,false,15,3,0,0,0,0,1,1,1,3,0,1,2,72,250,0,0,46,116.0,8.0,0.0,79,jizhang-cmu,3,1.0,0,false,false
 2216171,ros/rosdistro,python,2307,1381057921,1381072158,1381072158,237,237,github,false,false,15,1,0,0,0,0,0,0,1,1,0,1,0,72,250,0,0,98,116.0,8.0,0.0,79,gavanderhoorn,0,0,1,false,false
 2215010,ros/rosdistro,python,2306,1381012526,1381017927,1381017927,90,90,github,false,false,15,2,0,0,0,0,0,0,1,1,0,1,0,73,250,0,0,88,116.0,8.0,0.0,79,shaun-edwards,7,0.8571428571428571,0,false,false
 2214282,ros/rosdistro,python,2305,1380995447,1381017945,1381017945,374,374,github,false,false,15,1,0,0,0,2,2,0,1,3,0,1,2,73,250,0,0,44,116.0,8.0,0.0,79,jizhang-cmu,2,1.0,0,false,false
@@ -1788,7 +1791,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1544165,ros/rosdistro,python,967,1370300334,1370301510,1370301511,19,19,github,false,false,12,1,0,0,0,0,0,0,1,1,0,1,0,52,250,0,0,108,148.0,8.0,12.0,136,stonier,67,0.9701492537313433,20,false,false
 1544163,ros/rosdistro,python,966,1370300292,1370301478,1370301478,19,19,github,false,false,12,1,0,0,0,0,0,0,1,1,0,1,0,52,250,0,0,167,148.0,8.0,12.0,136,stonier,66,0.9696969696969697,20,false,false
 1544046,ros/rosdistro,python,965,1370298609,1370299157,1370299158,9,9,github,false,false,12,2,0,0,0,0,0,0,2,2,0,2,0,52,250,0,0,123,148.0,8.0,12.0,68,ahendrix,22,1.0,0,false,false
-1732511,ros/rosdistro,python,964,1370274151,1370274816,1370274816,11,11,github,false,false,12,1,0,0,0,0,0,0,1,1,0,1,1,52,250,0,0,39,148.0,8.0,12.0,68,tfoote,5,1.0,4,false,true
+1732511,ros/rosdistro,python,964,1370274151,1370274816,1370274816,11,11,github,false,false,12,1,0,0,0,0,0,1,1,2,0,1,1,52,250,0,0,39,148.0,8.0,12.0,68,tfoote,5,1.0,4,false,true
 1732476,ros/rosdistro,python,963,1370273913,1370275132,1370275133,20,20,github,false,false,12,1,0,1,1,2,0,0,2,2,0,2,0,52,250,0,0,53,148.0,8.0,12.0,68,davetcoleman,2,0.5,8,false,false
 1730850,ros/rosdistro,python,962,1370258123,1370259885,1370259885,29,29,github,false,false,12,1,0,0,0,0,0,0,1,1,0,1,0,52,250,0,0,103,148.0,8.0,12.0,68,isucan,34,0.9411764705882353,4,false,true
 1730554,ros/rosdistro,python,961,1370252714,1370259914,1370259914,120,120,github,false,false,12,1,0,0,0,0,0,0,1,1,0,1,0,52,250,0,0,21,148.0,8.0,12.0,68,seigo777,1,1.0,0,false,false
@@ -1928,7 +1931,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1453532,ros/rosdistro,python,825,1368062307,1368067161,1368067161,80,80,github,false,false,11,1,0,0,0,0,0,0,1,1,0,1,0,47,250,0,0,6,148.0,8.0,12.0,66,aswinthomas,0,0,0,false,false
 1453158,ros/rosdistro,python,824,1368053079,1368067286,1368067286,236,236,github,false,false,11,1,0,0,0,0,0,0,1,1,0,1,0,46,250,0,0,43,148.0,8.0,12.0,66,jkammerl,20,0.95,2,false,true
 1451123,ros/rosdistro,python,823,1368024780,1368025786,1368025787,16,16,github,false,false,11,1,0,0,0,0,0,0,1,1,0,1,0,47,250,0,0,59,148.0,8.0,12.0,66,ahornung,34,0.8823529411764706,0,false,false
-1451012,ros/rosdistro,python,822,1368023447,1368025143,1368025143,28,28,github,false,false,11,1,0,0,0,0,0,0,0,0,0,0,6,47,250,0,0,6,148.0,8.0,12.0,66,meyerj,10,1.0,0,false,false
+1451012,ros/rosdistro,python,822,1368023447,1368025143,1368025143,28,28,github,false,false,11,1,0,0,0,0,0,6,0,6,0,0,6,47,250,0,0,6,148.0,8.0,12.0,66,meyerj,10,1.0,0,false,false
 1449280,ros/rosdistro,python,821,1368001434,,1368024980,392,,unknown,false,false,11,1,0,1,1,1,0,0,1,1,0,1,0,47,250,0,0,0,148.0,8.0,12.0,66,ahornung,33,0.9090909090909091,0,false,false
 1447464,ros/rosdistro,python,820,1367960823,1367961762,1367961762,15,15,github,false,false,11,2,0,0,0,0,0,0,1,1,0,1,0,47,250,0,0,110,148.0,8.0,12.0,66,isucan,11,0.9090909090909091,2,false,true
 1447442,ros/rosdistro,python,819,1367960414,1367960577,1367960577,2,2,github,false,false,11,1,0,0,0,0,0,0,1,1,0,1,0,47,250,0,0,18,148.0,8.0,12.0,66,isucan,10,0.9,2,false,true
@@ -2054,7 +2057,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1316690,ros/rosdistro,python,696,1365994401,1365994702,1365994702,5,5,github,false,false,13,2,0,0,0,1,0,0,2,2,0,1,1,50,222,0,0,328,117.11711711711712,0.0,9.00900900900901,66,k-okada,17,1.0,3,false,false
 1370209,ros/rosdistro,python,695,1365981387,1365984873,1365984874,58,58,github,false,false,13,1,0,0,0,0,1,0,0,1,0,0,1,50,222,0,0,0,117.11711711711712,0.0,9.00900900900901,66,ericperko,1,1.0,10,false,false
 1369501,ros/rosdistro,python,693,1365961941,1365963279,1365963280,22,22,github,false,false,13,1,0,0,0,0,0,0,2,2,0,0,2,50,222,0,0,3,117.11711711711712,0.0,9.00900900900901,132,gheorghelisca,2,1.0,4,false,false
-1369167,ros/rosdistro,python,692,1365952948,1365962057,1365962058,151,151,github,false,false,13,1,0,0,0,0,0,0,4,4,0,4,14,50,222,0,0,514,117.11711711711712,0.0,9.00900900900901,66,rctoris,21,1.0,3,false,false
+1369167,ros/rosdistro,python,692,1365952948,1365962057,1365962058,151,151,github,false,false,13,1,0,0,0,0,0,14,4,18,0,4,14,50,222,0,0,514,117.11711711711712,0.0,9.00900900900901,66,rctoris,21,1.0,3,false,false
 1365222,ros/rosdistro,python,691,1365804954,1365868930,1365868930,1066,1066,github,false,false,13,5,0,1,1,2,0,0,4,4,0,4,0,50,222,0,0,522,117.11711711711712,0.0,9.00900900900901,66,atiderko,5,1.0,0,false,false
 1364814,ros/rosdistro,python,690,1365796536,1365797014,1365797014,7,7,github,false,false,13,1,0,0,0,0,1,0,0,1,0,0,1,50,222,0,0,0,117.11711711711712,0.0,9.00900900900901,66,parcon,0,0,1,false,false
 1363729,ros/rosdistro,python,688,1365779025,1365779685,1365779685,11,11,github,false,false,13,1,0,0,0,0,0,0,1,1,0,1,0,50,222,0,0,118,117.11711711711712,0.0,9.00900900900901,66,jack-oquin,24,0.9166666666666666,1,false,false
@@ -2263,7 +2266,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1100401,ros/rosdistro,python,462,1360695250,1360700230,1360700230,83,83,github,false,false,17,1,0,0,0,0,0,0,1,1,0,1,0,32,144,0,0,498,0.0,0.0,0.0,64,dgossow,5,1.0,3,false,false
 1100290,ros/rosdistro,python,461,1360694243,1360802738,1360802738,1808,1808,github,false,false,17,5,0,2,2,2,1,0,2,3,0,1,2,32,144,0,0,960,0.0,0.0,0.0,64,jkammerl,4,0.75,1,false,true
 1100405,ros/rosdistro,python,460,1360691714,1360692866,1360692866,19,19,github,false,false,17,1,0,0,0,0,4,0,0,4,0,0,4,32,144,0,0,0,0.0,0.0,0.0,64,abencz,1,1.0,0,false,false
-1100300,ros/rosdistro,python,459,1360600875,,1362764815,36065,,unknown,false,false,17,4,0,1,1,2,1,0,6,7,0,7,0,31,144,0,0,0,0.0,0.0,0.0,64,po1,1,0.0,0,false,false
+1100300,ros/rosdistro,python,459,1360600875,,1362764815,36065,,unknown,false,false,17,4,0,1,1,2,1,1,6,8,0,7,0,31,144,0,0,0,0.0,0.0,0.0,64,po1,1,0.0,0,false,false
 1100406,ros/rosdistro,python,458,1360471203,1360473656,1360473656,40,40,github,false,false,17,1,0,0,0,0,4,0,0,4,0,0,4,31,144,0,0,0,0.0,0.0,0.0,64,shaun-edwards,2,1.0,0,false,false
 1100324,ros/rosdistro,python,457,1360466679,1360473629,1360473629,115,115,github,false,false,17,2,0,0,0,0,1,0,1,2,0,1,1,30,144,0,0,525,0.0,0.0,0.0,64,stonier,39,1.0,7,false,false
 1100411,ros/rosdistro,python,456,1360420185,1360431043,1360431043,180,180,github,false,false,17,1,0,0,0,0,0,0,1,1,0,1,0,30,144,0,0,529,0.0,0.0,0.0,64,stonier,38,1.0,7,false,false
@@ -2310,7 +2313,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 933240,ros/rosdistro,python,397,1359398722,1359399648,1359399648,15,15,github,false,false,17,1,0,0,0,0,1,0,0,1,0,0,1,21,144,0,0,0,0.0,0.0,0.0,62,mikeferguson,3,1.0,2,false,false
 931222,ros/rosdistro,python,396,1359354048,1359357012,1359357012,49,49,github,false,false,17,1,0,0,0,0,0,0,1,1,0,1,0,21,144,0,0,603,0.0,0.0,0.0,62,rctoris,14,1.0,2,false,false
 929876,ros/rosdistro,python,395,1359298320,1359391184,1359391184,1547,1547,github,false,false,17,1,0,2,2,2,2,0,0,2,0,0,2,21,144,0,0,0,0.0,0.0,0.0,62,konradb3,0,0,7,false,false
-927077,ros/rosdistro,python,394,1359170864,1359447572,1359447572,4611,4611,github,false,false,17,4,0,2,2,3,1,0,2,3,0,2,3,20,144,0,0,685,0.0,0.0,0.0,62,stonier,29,1.0,7,false,false
+927077,ros/rosdistro,python,394,1359170864,1359447572,1359447572,4611,4611,github,false,false,17,4,0,2,2,3,1,2,2,5,0,2,3,20,144,0,0,685,0.0,0.0,0.0,62,stonier,29,1.0,7,false,false
 933829,ros/rosdistro,python,393,1359147716,1359408963,1359408963,4354,4354,github,false,false,18,1,0,0,0,0,0,0,1,1,0,0,1,20,144,0,0,1,0.0,0.0,0.0,62,130s,0,0,0,false,true
 929245,ros/rosdistro,python,392,1359103275,1359265367,1359265368,2701,2701,github,false,false,18,1,0,0,0,0,1,0,0,1,0,0,1,20,144,0,0,0,0.0,0.0,0.0,62,stwirth,1,1.0,0,false,false
 1100452,ros/rosdistro,python,391,1359071686,1359095074,1359095074,389,389,github,false,false,18,1,0,0,0,0,0,0,5,5,0,0,5,20,144,0,0,10,0.0,0.0,0.0,62,stonier,28,1.0,7,false,false
@@ -2319,10 +2322,10 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 842246,ros/rosdistro,python,388,1359039800,1359040934,1359040934,18,18,github,false,false,18,1,0,0,0,0,0,0,1,1,0,1,0,20,144,0,0,664,0.0,0.0,0.0,62,mjcarroll,0,0,5,false,false
 841982,ros/rosdistro,python,387,1359033882,1359035394,1359035395,25,25,github,false,false,18,1,0,0,0,0,1,0,2,3,0,0,3,20,144,0,0,2,0.0,0.0,0.0,124,atiderko,3,1.0,0,false,false
 839414,ros/rosdistro,python,386,1358990082,1359035417,1359035417,755,755,github,false,false,18,1,0,0,0,0,0,0,1,1,0,0,1,20,144,0,0,1,0.0,0.0,0.0,62,alexalspach,1,1.0,0,false,false
-841984,ros/rosdistro,python,385,1358985644,1359035459,1359035459,830,830,github,false,false,18,1,0,0,0,0,0,0,7,7,0,1,10,20,144,0,0,39,0.0,0.0,0.0,62,stonier,27,1.0,7,false,false
+841984,ros/rosdistro,python,385,1358985644,1359035459,1359035459,830,830,github,false,false,18,1,0,0,0,0,0,4,7,11,0,1,10,20,144,0,0,39,0.0,0.0,0.0,62,stonier,27,1.0,7,false,false
 837675,ros/rosdistro,python,384,1358970662,1359035496,1359035496,1080,1080,github,false,false,18,3,0,0,0,0,0,0,1,1,0,1,0,20,144,0,0,1301,0.0,0.0,0.0,62,rctoris,12,1.0,2,false,false
 835000,ros/rosdistro,python,383,1358929595,,1359035541,1765,,unknown,false,false,18,1,0,0,0,1,0,0,1,1,0,1,0,20,144,0,0,0,0.0,0.0,0.0,62,blaroche,0,0,0,false,false
-832484,ros/rosdistro,python,382,1358870063,1358870941,1358870941,14,14,github,false,false,18,1,0,0,0,0,0,0,0,0,0,0,1,20,144,0,0,1,0.0,0.0,0.0,62,dornhege,2,1.0,0,false,false
+832484,ros/rosdistro,python,382,1358870063,1358870941,1358870941,14,14,github,false,false,18,1,0,0,0,0,0,1,0,1,0,0,1,20,144,0,0,1,0.0,0.0,0.0,62,dornhege,2,1.0,0,false,false
 831368,ros/rosdistro,python,381,1358844390,1358844472,1358844472,1,1,github,false,false,18,1,0,0,0,0,1,0,0,1,0,0,1,20,144,0,0,0,0.0,0.0,0.0,62,alexalspach,0,0,0,false,false
 831203,ros/rosdistro,python,380,1358840126,1358843732,1358843732,60,60,github,false,false,18,1,0,0,0,0,0,0,2,2,0,0,2,20,144,0,0,2,0.0,0.0,0.0,62,svddries,1,1.0,0,false,false
 820502,ros/rosdistro,python,379,1358815776,1358918026,1358918026,1704,1704,github,false,false,18,2,3,1,4,2,1,0,2,3,0,2,1,20,144,0,0,1380,0.0,0.0,0.0,62,rctoris,11,1.0,2,false,false
@@ -2345,9 +2348,9 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 818363,ros/rosdistro,python,361,1358434243,1358436881,1358436881,43,43,github,false,false,18,1,0,0,0,0,0,0,1,1,0,0,1,19,144,0,0,1,0.0,0.0,0.0,62,ahornung,23,0.8695652173913043,0,false,false
 818328,ros/rosdistro,python,360,1358433809,,1358433968,2,,unknown,false,false,18,1,0,0,0,1,0,0,1,1,0,0,1,19,144,0,0,0,0.0,0.0,0.0,62,ahornung,22,0.9090909090909091,0,false,false
 818300,ros/rosdistro,python,359,1358433262,1358434363,1358434363,18,18,github,false,false,18,1,0,0,0,0,0,0,1,1,0,1,0,19,144,0,0,661,0.0,0.0,0.0,62,ahornung,21,0.9047619047619048,0,false,false
-966027,ros/rosdistro,python,358,1358413964,1358423787,1358423787,163,163,github,false,false,18,5,0,0,0,0,0,0,1,1,0,1,3,19,144,0,0,97,0.0,0.0,0.0,62,ipa-fmw,6,0.8333333333333334,10,false,false
-817334,ros/rosdistro,python,357,1358413133,1358413912,1358413912,12,12,commits_in_master,false,false,18,1,0,1,1,1,0,0,0,0,0,0,3,19,144,0,0,3,0.0,0.0,0.0,62,ipa-fmw,5,1.0,10,false,false
-920522,ros/rosdistro,python,355,1358323982,1358331351,1358331351,122,122,github,false,false,18,1,0,0,0,0,1,0,0,1,0,0,6,19,144,0,0,5,0.0,0.0,0.0,62,moresun,1,1.0,0,false,false
+966027,ros/rosdistro,python,358,1358413964,1358423787,1358423787,163,163,github,false,false,18,5,0,0,0,0,0,3,1,4,0,1,3,19,144,0,0,97,0.0,0.0,0.0,62,ipa-fmw,6,0.8333333333333334,10,false,false
+817334,ros/rosdistro,python,357,1358413133,1358413912,1358413912,12,12,commits_in_master,false,false,18,1,0,1,1,1,0,3,0,3,0,0,3,19,144,0,0,3,0.0,0.0,0.0,62,ipa-fmw,5,1.0,10,false,false
+920522,ros/rosdistro,python,355,1358323982,1358331351,1358331351,122,122,github,false,false,18,1,0,0,0,0,1,5,0,6,0,0,6,19,144,0,0,5,0.0,0.0,0.0,62,moresun,1,1.0,0,false,false
 919621,ros/rosdistro,python,354,1358288682,1358289155,1358289156,7,7,github,false,false,18,1,0,0,0,0,0,0,1,1,0,1,0,19,144,0,0,21,0.0,0.0,0.0,62,ahendrix,2,1.0,0,false,false
 919502,ros/rosdistro,python,353,1358285578,1358290598,1358290598,83,83,github,false,false,18,1,0,0,0,0,0,0,1,1,0,1,0,19,144,0,0,47,0.0,0.0,0.0,62,rctoris,10,1.0,2,false,false
 918564,ros/rosdistro,python,352,1358261491,1358261551,1358261551,1,1,github,false,false,18,1,0,0,0,0,5,0,0,5,0,0,5,19,144,0,0,0,0.0,0.0,0.0,62,moresun,0,0,0,false,false
@@ -2364,7 +2367,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 797850,ros/rosdistro,python,340,1357909202,1357911688,1357911688,41,41,github,false,false,18,1,0,0,0,0,0,0,1,1,0,1,0,18,144,0,0,692,0.0,0.0,0.0,61,rctoris,8,1.0,2,false,false
 791947,ros/rosdistro,python,339,1357825198,1357825684,1357825684,8,8,github,false,false,18,1,0,0,0,0,0,0,1,1,0,1,0,18,144,0,0,33,0.0,0.0,0.0,122,ahornung,20,0.9,0,false,false
 791509,ros/rosdistro,python,338,1357818268,1357836478,1357836478,303,303,github,false,false,18,2,0,2,2,2,2,0,2,4,0,0,3,18,144,0,0,1,0.0,0.0,0.0,61,mintar,3,1.0,0,false,false
-790861,ros/rosdistro,python,337,1357798882,1357825753,1357825753,447,447,github,false,false,18,2,0,0,0,0,6,0,0,6,0,0,7,18,144,0,0,1,0.0,0.0,0.0,61,piyushk,2,1.0,0,false,false
+790861,ros/rosdistro,python,337,1357798882,1357825753,1357825753,447,447,github,false,false,18,2,0,0,0,0,6,1,0,7,0,0,7,18,144,0,0,1,0.0,0.0,0.0,61,piyushk,2,1.0,0,false,false
 789804,ros/rosdistro,python,336,1357769488,1357825783,1357825783,938,938,github,false,false,18,4,0,0,0,0,1,0,2,3,0,2,1,18,144,0,0,2117,0.0,0.0,0.0,61,rctoris,7,1.0,2,false,false
 788220,ros/rosdistro,python,335,1357744835,1357745082,1357745082,4,4,github,false,false,18,1,0,0,0,0,1,0,1,2,0,0,2,18,144,0,0,1,0.0,0.0,0.0,61,andre-dietrich,1,1.0,0,false,false
 786674,ros/rosdistro,python,334,1357719056,1357719433,1357719433,6,6,github,false,false,18,1,0,0,0,0,0,0,1,1,0,1,0,18,144,0,0,698,0.0,0.0,0.0,61,thomas-moulard,5,0.8,9,false,false
@@ -2375,7 +2378,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 781293,ros/rosdistro,python,328,1357614723,1357620642,1357620642,98,98,github,false,false,18,1,0,0,0,0,0,0,1,1,0,1,0,18,144,0,0,702,0.0,0.0,0.0,61,thomas-moulard,4,0.75,9,false,false
 781125,ros/rosdistro,python,327,1357609989,1357611464,1357611464,24,24,github,false,false,18,2,0,0,0,0,0,0,1,1,0,1,0,18,144,0,0,94,0.0,0.0,0.0,61,thomas-moulard,3,0.6666666666666666,9,false,false
 778936,ros/rosdistro,python,326,1357552591,1357554612,1357554613,33,33,github,false,false,18,2,0,0,0,0,0,0,1,1,0,1,0,17,144,0,0,96,0.0,0.0,0.0,61,flixr,0,0,12,false,false
-965982,ros/rosdistro,python,325,1357469274,1357531151,1357531152,1031,1031,github,false,false,18,1,0,0,0,0,5,0,1,6,0,0,7,17,144,0,0,2,0.0,0.0,0.0,61,stonier,25,1.0,7,false,false
+965982,ros/rosdistro,python,325,1357469274,1357531151,1357531152,1031,1031,github,false,false,18,1,0,0,0,0,5,1,1,7,0,0,7,17,144,0,0,2,0.0,0.0,0.0,61,stonier,25,1.0,7,false,false
 965984,ros/rosdistro,python,324,1357397935,1357398011,1357398011,1,1,github,false,false,18,1,0,0,0,0,0,0,1,1,0,1,0,17,144,0,0,707,0.0,0.0,0.0,61,ahornung,17,0.8823529411764706,0,false,false
 965986,ros/rosdistro,python,323,1357394438,1357413794,1357413794,322,322,github,false,false,18,2,0,0,0,0,0,0,1,1,0,1,0,17,144,0,0,98,0.0,0.0,0.0,61,kstrabala,0,0,0,false,false
 965989,ros/rosdistro,python,322,1357297051,1357339232,1357339232,703,703,github,false,false,18,2,0,0,0,0,2,0,0,2,0,0,2,17,144,0,0,0,0.0,0.0,0.0,61,adolfo-rt,1,0.0,1,false,false
@@ -2409,14 +2412,14 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 753079,ros/rosdistro,python,277,1355548724,1355556751,1355556751,133,133,github,false,false,16,4,0,1,1,2,1,0,6,7,0,0,7,17,144,0,0,10,0.0,0.0,0.0,116,stonier,21,1.0,12,false,false
 750643,ros/rosdistro,python,275,1355473538,1355480318,1355480318,113,113,github,false,false,16,2,0,0,0,0,2,0,0,2,0,0,2,17,144,0,0,0,0.0,0.0,0.0,58,aelkhour,0,0,1,false,false
 749446,ros/rosdistro,python,274,1355433104,1355433134,1355433134,0,0,github,false,false,15,1,0,0,0,0,0,0,1,1,0,0,1,17,144,0,0,2,0.0,0.0,0.0,58,ablasdel,2,1.0,0,false,false
-743327,ros/rosdistro,python,273,1355258328,1355288957,1355288957,510,510,github,false,false,15,2,0,0,0,0,14,0,2,16,0,0,16,17,144,0,0,12,0.0,0.0,0.0,58,stephanemagnenat,8,0.875,8,false,false
+743327,ros/rosdistro,python,273,1355258328,1355288957,1355288957,510,510,github,false,false,15,2,0,0,0,0,14,2,2,18,0,0,16,17,144,0,0,12,0.0,0.0,0.0,58,stephanemagnenat,8,0.875,8,false,false
 743319,ros/rosdistro,python,270,1355237631,1355288482,1355288482,847,847,github,false,false,15,1,0,0,0,0,0,0,1,1,0,1,0,17,144,0,0,79,0.0,0.0,0.0,58,rctoris,6,1.0,2,false,false
 890962,ros/rosdistro,python,269,1355154900,1355188738,1355188738,563,563,github,false,false,15,1,0,0,0,0,1,0,0,1,0,0,1,18,144,0,0,0,0.0,0.0,0.0,58,rctoris,5,1.0,2,false,false
 890837,ros/rosdistro,python,268,1355150503,1355152856,1355152856,39,39,github,false,false,15,1,0,0,0,0,0,0,1,1,0,1,0,18,144,0,0,25,0.0,0.0,0.0,58,mintar,2,1.0,0,false,false
 768696,ros/rosdistro,python,267,1355134984,1355188790,1355188790,896,896,github,false,false,15,1,0,0,0,2,10,0,0,10,0,0,10,18,144,0,0,0,0.0,0.0,0.0,58,andreaswitsch,0,0,0,false,false
 723218,ros/rosdistro,python,266,1354903665,1354903699,1354903699,0,0,github,false,false,14,1,0,0,0,0,0,0,1,1,0,1,0,18,144,0,0,745,0.0,0.0,0.0,58,chadrockey,5,1.0,7,false,false
 889641,ros/rosdistro,python,265,1354891058,,1354891386,5,,unknown,false,false,14,1,0,0,0,0,0,0,1,1,0,0,1,17,144,0,0,0,0.0,0.0,0.0,58,IngoKresse,1,1.0,0,false,false
-719780,ros/rosdistro,python,264,1354881677,1354909694,1354909694,466,466,github,false,false,14,1,0,0,0,0,3,0,0,3,0,0,5,17,144,0,0,2,0.0,0.0,0.0,58,moesenle,11,0.8181818181818182,11,false,false
+719780,ros/rosdistro,python,264,1354881677,1354909694,1354909694,466,466,github,false,false,14,1,0,0,0,0,3,2,0,5,0,0,5,17,144,0,0,2,0.0,0.0,0.0,58,moesenle,11,0.8181818181818182,11,false,false
 707581,ros/rosdistro,python,261,1354828975,1354829956,1354829957,16,16,github,false,false,14,2,0,0,0,0,2,0,1,3,0,1,2,17,144,0,0,1448,0.0,0.0,0.0,58,chadrockey,4,1.0,7,false,false
 707520,ros/rosdistro,python,260,1354828917,1354829933,1354829933,16,16,github,false,false,14,2,0,0,0,0,0,0,1,1,0,1,0,17,144,0,0,1492,0.0,0.0,0.0,116,chadrockey,3,1.0,14,false,false
 889524,ros/rosdistro,python,259,1354824597,1354826610,1354826610,33,33,github,false,false,14,1,0,0,0,0,0,0,4,4,0,1,3,17,144,0,0,726,0.0,0.0,0.0,58,chadrockey,2,1.0,7,false,false
@@ -2430,7 +2433,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 613126,ros/rosdistro,python,245,1354327064,1354352745,1354352745,428,428,github,false,false,14,1,0,0,0,0,3,0,0,3,0,0,3,17,144,0,0,0,0.0,0.0,0.0,57,chadrockey,0,0,7,false,false
 609522,ros/rosdistro,python,244,1354293920,1354299498,1354299498,92,92,github,false,false,14,1,0,0,0,0,1,0,0,1,0,0,1,16,144,0,0,0,0.0,0.0,0.0,57,stefanmay,0,0,1,false,false
 601393,ros/rosdistro,python,243,1354261220,1354261332,1354261333,1,1,github,false,false,14,1,0,0,0,0,0,0,1,1,0,1,0,16,144,0,0,97,0.0,0.0,0.0,57,abubeck,0,0,3,false,false
-591323,ros/rosdistro,python,242,1354229655,1354229747,1354229747,1,1,github,false,false,14,2,0,0,0,0,0,0,0,0,0,0,4,16,144,0,0,4,0.0,0.0,0.0,57,mateiciocarlie,1,1.0,0,false,false
+591323,ros/rosdistro,python,242,1354229655,1354229747,1354229747,1,1,github,false,false,14,2,0,0,0,0,0,4,0,4,0,0,4,16,144,0,0,4,0.0,0.0,0.0,57,mateiciocarlie,1,1.0,0,false,false
 580682,ros/rosdistro,python,241,1354197947,1354199828,1354199828,31,31,github,false,false,14,2,0,0,0,0,0,0,1,1,0,1,0,16,144,0,0,1492,0.0,0.0,0.0,57,stonier,18,1.0,6,false,false
 887408,ros/rosdistro,python,240,1354118053,1354127153,1354127153,151,151,github,false,false,14,1,0,0,0,0,0,0,1,1,0,1,0,16,144,0,0,749,0.0,0.0,0.0,57,moesenle,10,0.8,11,false,false
 886377,ros/rosdistro,python,238,1354094712,1354138801,1354138801,734,734,github,false,false,14,1,0,0,0,0,2,0,4,6,0,0,6,16,144,0,0,4,0.0,0.0,0.0,57,bit-pirat,3,0.3333333333333333,3,false,false
@@ -2448,14 +2451,14 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 513619,ros/rosdistro,python,220,1353489675,1353570779,1353570779,1351,1351,github,false,false,13,1,0,0,0,0,1,0,0,1,0,0,1,16,144,0,0,0,0.0,0.0,0.0,57,ntolos,0,0,0,false,false
 506601,ros/rosdistro,python,218,1353418212,1353466518,1353466518,805,805,github,false,false,13,1,0,0,0,0,0,0,1,1,0,1,0,16,144,0,0,727,0.0,0.0,0.0,57,moesenle,9,0.7777777777777778,11,false,false
 497221,ros/rosdistro,python,217,1353307294,1353310227,1353310227,48,48,github,false,false,13,1,0,0,0,0,0,0,1,1,0,1,0,16,144,0,0,94,0.0,0.0,0.0,57,hsu,0,0,0,false,false
-488118,ros/rosdistro,python,215,1353019485,1353019984,1353019984,8,8,github,false,false,12,3,0,0,0,0,3,0,0,3,0,0,5,17,144,0,0,2,0.0,0.0,0.0,57,jihoonl,2,1.0,0,false,false
-487145,ros/rosdistro,python,214,1353010430,1353016265,1353016265,97,97,github,false,false,12,2,0,0,0,0,1,0,0,1,0,0,2,16,144,0,0,1,0.0,0.0,0.0,57,ccny-ros-pkg,2,1.0,5,false,false
+488118,ros/rosdistro,python,215,1353019485,1353019984,1353019984,8,8,github,false,false,12,3,0,0,0,0,3,2,0,5,0,0,5,17,144,0,0,2,0.0,0.0,0.0,57,jihoonl,2,1.0,0,false,false
+487145,ros/rosdistro,python,214,1353010430,1353016265,1353016265,97,97,github,false,false,12,2,0,0,0,0,1,1,0,2,0,0,2,16,144,0,0,1,0.0,0.0,0.0,57,ccny-ros-pkg,2,1.0,5,false,false
 483388,ros/rosdistro,python,213,1352942715,1352943374,1352943374,10,10,github,false,false,12,1,0,0,0,0,1,0,0,1,0,0,1,16,144,0,0,0,0.0,0.0,0.0,57,jfstepha,0,0,0,false,false
 479759,ros/rosdistro,python,210,1352899683,1352912740,1352912740,217,217,github,false,false,12,1,0,0,0,0,8,0,0,8,0,0,8,16,144,0,0,0,0.0,0.0,0.0,57,pirobot,2,1.0,0,false,false
 479396,ros/rosdistro,python,209,1352890456,1352891000,1352891000,9,9,github,false,false,12,1,0,0,0,0,0,0,1,1,0,1,0,16,144,0,0,33,0.0,0.0,0.0,57,stonier,12,1.0,6,false,false
 478999,ros/rosdistro,python,208,1352880954,1352881009,1352881009,0,0,github,false,false,12,1,0,0,0,0,0,0,1,1,0,1,0,16,144,0,0,6,0.0,0.0,0.0,57,smits,5,1.0,4,false,false
 478980,ros/rosdistro,python,207,1352880337,1352881034,1352881034,11,11,github,false,false,12,1,0,0,0,0,1,0,0,1,0,0,1,16,144,0,0,0,0.0,0.0,0.0,57,roboearth,0,0,1,false,false
-478892,ros/rosdistro,python,206,1352877718,1352879893,1352879894,36,36,github,false,false,12,2,0,0,0,0,2,0,1,3,0,1,4,16,144,0,0,673,0.0,0.0,0.0,57,stonier,11,1.0,6,false,false
+478892,ros/rosdistro,python,206,1352877718,1352879893,1352879894,36,36,github,false,false,12,2,0,0,0,0,2,2,1,5,0,1,4,16,144,0,0,673,0.0,0.0,0.0,57,stonier,11,1.0,6,false,false
 475440,ros/rosdistro,python,198,1352813329,1352839498,1352839498,436,436,github,false,false,12,1,0,0,0,0,2,0,2,4,0,0,4,16,144,0,0,2,0.0,0.0,0.0,57,pirobot,1,1.0,0,false,false
 475217,ros/rosdistro,python,197,1352807936,1352839476,1352839476,525,525,github,false,false,12,1,0,0,0,0,1,0,0,1,0,0,1,16,144,0,0,0,0.0,0.0,0.0,57,rctoris,4,1.0,2,false,false
 471505,ros/rosdistro,python,191,1352748492,1352749134,1352749134,10,10,github,false,false,12,1,0,0,0,0,0,0,1,1,0,1,0,16,144,0,0,660,0.0,0.0,0.0,57,moesenle,8,0.75,11,false,false
@@ -2473,7 +2476,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 543836,ros/rosdistro,python,174,1352311933,1352312054,1352312054,2,2,github,false,false,12,1,0,0,0,0,3,0,0,3,0,0,3,17,144,0,0,0,0.0,0.0,0.0,57,rctoris,3,1.0,2,false,false
 479584,ros/rosdistro,python,173,1352300584,1352309673,1352309673,151,151,github,false,false,12,2,0,2,2,3,0,0,2,2,0,2,0,17,144,0,0,642,0.0,0.0,0.0,57,stonier,7,1.0,6,false,false
 543837,ros/rosdistro,python,172,1352277595,1352278121,1352278121,8,8,github,false,false,12,1,0,0,0,0,0,0,1,1,0,1,0,17,144,0,0,26,0.0,0.0,0.0,57,ahornung,13,0.8461538461538461,0,false,false
-543838,ros/rosdistro,python,171,1352257968,1352259499,1352259499,25,25,github,false,false,12,1,0,0,0,0,14,0,6,20,0,0,22,17,144,0,0,8,0.0,0.0,0.0,56,stonier,6,1.0,6,false,false
+543838,ros/rosdistro,python,171,1352257968,1352259499,1352259499,25,25,github,false,false,12,1,0,0,0,0,14,2,6,22,0,0,22,17,144,0,0,8,0.0,0.0,0.0,56,stonier,6,1.0,6,false,false
 543839,ros/rosdistro,python,170,1352237684,1352237708,1352237708,0,0,github,false,false,12,1,0,0,0,0,0,0,1,1,0,1,0,17,144,0,0,610,0.0,0.0,0.0,56,ahornung,12,0.8333333333333334,0,false,false
 543840,ros/rosdistro,python,169,1352223575,1352241883,1352241883,305,305,github,false,false,12,1,0,0,0,0,1,0,0,1,0,0,1,17,144,0,0,0,0.0,0.0,0.0,56,jack-oquin,2,1.0,0,false,false
 543922,ros/rosdistro,python,168,1352160969,1352161181,1352161181,3,3,github,false,false,12,5,0,0,0,0,5,0,0,5,0,0,5,17,144,0,0,0,0.0,0.0,0.0,56,ccny-ros-pkg,1,1.0,5,false,false

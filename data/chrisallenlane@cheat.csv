@@ -33,7 +33,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2134529,chrisallenlane/cheat,python,103,1379777262,1379976156,1379976156,3314,3314,github,false,false,3,1,0,0,0,1,1,0,0,1,0,0,1,47,21,0,0,0,0.0,0.0,0.0,793,gbremer,5,0.4,0,false,false
 2134520,chrisallenlane/cheat,python,102,1379777252,1379975857,1379975857,3310,3310,github,false,false,3,1,0,0,0,1,0,0,1,1,0,0,1,47,21,0,0,5,0.0,0.0,0.0,793,gbremer,4,0.25,0,false,false
 2134515,chrisallenlane/cheat,python,101,1379777229,1379976074,1379976074,3314,3314,github,false,false,3,1,0,0,0,1,0,0,1,1,0,0,1,47,21,0,0,1,0.0,0.0,0.0,793,gbremer,3,0.0,0,false,false
-2126634,chrisallenlane/cheat,python,100,1379630398,1379976931,1379976931,5775,5775,github,false,false,3,5,0,0,0,1,0,0,1,1,0,0,1,47,21,0,0,306,0.0,0.0,0.0,792,0rax,2,0.5,0,false,false
+2126634,chrisallenlane/cheat,python,100,1379630398,1379976931,1379976931,5775,5775,github,false,false,3,5,0,0,0,1,0,1,1,2,0,0,1,47,21,0,0,306,0.0,0.0,0.0,792,0rax,2,0.5,0,false,false
 2126341,chrisallenlane/cheat,python,98,1379290974,1379625415,1379625415,5574,5574,github,false,true,3,3,6,1,7,2,0,0,1,1,0,0,1,47,21,0,0,219,0.0,0.0,0.0,792,0rax,1,0.0,0,false,false
 2126447,chrisallenlane/cheat,python,97,1379260882,,1379626859,6099,,unknown,false,false,3,1,0,0,0,0,0,0,1,1,0,0,1,46,21,0,0,0,0.0,0.0,0.0,792,Aaylor,0,0,5,false,false
 2695419,chrisallenlane/cheat,python,96,1379241589,1379244826,1379244826,53,53,github,false,false,3,1,0,0,0,1,0,0,1,1,0,0,1,46,21,0,0,72,0.0,0.0,0.0,792,cushy007,0,0,0,false,false
@@ -88,7 +88,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1991457,chrisallenlane/cheat,python,40,1377594517,1377637508,1377637508,716,716,commits_in_master,false,false,3,1,0,0,0,1,1,0,0,1,0,0,1,41,15,0,0,0,0.0,0.0,0.0,788,carlosp420,1,0.0,8,false,false
 1990911,chrisallenlane/cheat,python,39,1377586681,1377639915,1377639915,887,887,commits_in_master,false,false,3,2,0,0,0,1,1,0,1,2,0,0,2,41,15,0,0,3,0.0,0.0,0.0,788,ozdemircili,1,0.0,0,false,false
 1988701,chrisallenlane/cheat,python,38,1377544064,1377551183,1377551183,118,118,commits_in_master,false,false,3,1,0,1,1,1,0,0,1,1,0,0,1,45,15,0,0,3,0.0,0.0,0.0,788,carlosp420,0,0,8,false,false
-1986766,chrisallenlane/cheat,python,37,1377522205,1377552221,1377552221,500,500,commits_in_master,false,false,3,8,0,0,0,2,3,0,4,7,0,0,4,42,15,0,0,42,0.0,0.0,0.0,788,ozdemircili,0,0,0,false,false
+1986766,chrisallenlane/cheat,python,37,1377522205,1377552221,1377552221,500,500,commits_in_master,false,false,3,8,0,0,0,2,3,1,4,8,0,0,4,42,15,0,0,42,0.0,0.0,0.0,788,ozdemircili,0,0,0,false,false
 1989365,chrisallenlane/cheat,python,36,1377488032,1377552810,1377552810,1079,1079,commits_in_master,false,false,3,1,0,0,0,1,0,0,1,1,0,0,1,41,15,0,0,2,0.0,0.0,0.0,788,codehill,0,0,0,false,false
 1983320,chrisallenlane/cheat,python,35,1377448300,1377553185,1377553185,1748,1748,commits_in_master,false,false,3,1,0,0,0,1,0,0,1,1,0,0,1,41,15,0,0,42,0.0,0.0,0.0,788,shanahanjrs,3,0.0,0,false,false
 1980605,chrisallenlane/cheat,python,34,1377360527,1377369994,1377369994,157,157,commits_in_master,false,false,3,1,0,0,0,1,0,0,1,1,0,0,1,41,15,0,0,2,0.0,0.0,0.0,788,stvnwlsn,0,0,0,false,false
@@ -101,6 +101,6 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1961298,chrisallenlane/cheat,python,25,1377051497,1377131569,1377131569,1334,1334,commits_in_master,false,false,3,1,0,0,0,2,0,0,1,1,0,0,1,40,13,0,0,1,0.0,0.0,0.0,787,adelviscio,0,0,0,false,false
 1960435,chrisallenlane/cheat,python,24,1377034011,1377178222,1377178222,2403,2403,commit_sha_in_comments,false,false,3,2,0,1,1,2,1,0,2,3,2,0,25,39,13,7,0,0,0.0,0.0,0.0,787,jlund3,0,0,0,false,false
 1960058,chrisallenlane/cheat,python,23,1377029105,1377131367,1377131367,1704,1704,commits_in_master,false,false,3,1,0,0,0,2,0,0,1,1,0,0,1,39,13,0,0,32,0.0,0.0,0.0,787,smartboyathome,0,0,2,false,false
-1949837,chrisallenlane/cheat,python,21,1376893163,1376954173,1376954173,1016,1016,commits_in_master,false,false,3,3,0,0,0,1,1,0,1,2,0,0,3,40,15,0,0,28,0.0,0.0,0.0,786,kragniz,1,0.0,24,false,false
+1949837,chrisallenlane/cheat,python,21,1376893163,1376954173,1376954173,1016,1016,commits_in_master,false,false,3,3,0,0,0,1,1,1,1,3,0,0,3,40,15,0,0,28,0.0,0.0,0.0,786,kragniz,1,0.0,24,false,false
 1949141,chrisallenlane/cheat,python,20,1376877154,,1382571520,94906,,unknown,false,false,3,1,0,5,5,4,1,0,0,1,1,0,0,36,15,2,0,0,0.0,0.0,0.0,785,v2e4lisp,0,0,1,false,false
 1949011,chrisallenlane/cheat,python,19,1376873688,1376953710,1376953710,1333,1333,commits_in_master,false,false,3,2,1,0,1,2,0,0,1,1,0,0,1,36,15,0,0,54,0.0,0.0,0.0,785,shanahanjrs,2,0.0,0,false,false

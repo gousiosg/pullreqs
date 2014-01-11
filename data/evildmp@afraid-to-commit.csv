@@ -1,5 +1,5 @@
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,merged_using,conflict,forward_links,team_size,num_commits,num_commit_comments,num_issue_comments,num_comments,num_participants,files_added,files_deleted,files_modified,files_changed,src_files,doc_files,other_files,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
-2720222,evildmp/afraid-to-commit,python,176,1388393520,1388402141,1388402141,143,143,commits_in_master,false,false,1,3,0,0,0,0,0,0,2,2,0,2,0,91,29,0,0,126,0.0,0.0,0.0,10,oscarmlage,0,0,0,false,false
+2720222,evildmp/afraid-to-commit,python,176,1388393520,1388402141,1388402141,143,143,commits_in_master,false,false,1,3,0,0,0,0,0,0,2,2,0,2,0,93,29,0,0,126,0.0,0.0,0.0,10,oscarmlage,0,0,0,false,false
 2483578,evildmp/afraid-to-commit,python,175,1384916654,1384950014,1384950014,556,556,commits_in_master,false,false,1,1,0,0,0,0,0,0,1,1,0,1,0,97,29,0,0,181,0.0,0.0,0.0,9,ktam33,0,0,0,false,false
 2259410,evildmp/afraid-to-commit,python,174,1381751499,1381761554,1381761554,167,167,commits_in_master,false,false,1,1,0,0,0,0,0,0,1,1,0,1,0,98,29,0,0,177,0.0,0.0,0.0,8,TommyGib,0,0,0,false,false
 2259198,evildmp/afraid-to-commit,python,173,1381749354,,1381749428,1,,unknown,false,false,1,1,0,0,0,0,0,0,0,0,0,0,0,98,29,0,0,0,0.0,0.0,0.0,8,tmaster,2,0.0,2,false,false
@@ -10,7 +10,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2258641,evildmp/afraid-to-commit,python,168,1381741923,1381749988,1381749988,134,134,merged_in_comments,false,false,1,1,0,0,0,1,0,0,1,1,0,1,0,98,29,0,0,0,0.0,0.0,0.0,8,casavantesj,1,0.0,0,false,false
 2258637,evildmp/afraid-to-commit,python,167,1381741870,1381749743,1381749743,131,131,commits_in_master,false,false,1,2,0,0,0,0,0,0,1,1,0,1,0,98,29,0,0,264,0.0,0.0,0.0,8,VincentHussey,1,0.0,0,false,false
 2258609,evildmp/afraid-to-commit,python,166,1381741547,,1381741840,4,,unknown,false,false,1,1,0,0,0,0,0,0,0,0,0,0,0,98,29,0,0,0,0.0,0.0,0.0,8,jenpaff,1,0.0,0,false,false
-2258593,evildmp/afraid-to-commit,python,165,1381741275,1381749742,1381749742,141,141,commits_in_master,false,false,1,4,0,0,0,0,1,0,1,2,0,1,1,98,29,0,0,132,0.0,0.0,0.0,8,portovep,2,0.0,4,false,false
+2258593,evildmp/afraid-to-commit,python,165,1381741275,1381749742,1381749742,141,141,commits_in_master,false,false,1,4,0,0,0,0,1,1,1,3,0,1,1,98,29,0,0,132,0.0,0.0,0.0,8,portovep,2,0.0,4,false,false
 2258586,evildmp/afraid-to-commit,python,164,1381741193,1381750051,1381750051,147,147,commits_in_master,false,false,1,2,0,1,1,1,0,0,1,1,0,1,0,98,29,0,0,132,0.0,0.0,0.0,8,larryone,1,0.0,0,false,false
 2258585,evildmp/afraid-to-commit,python,163,1381741186,1381749491,1381749491,138,138,commits_in_master,false,false,1,5,0,0,0,0,0,0,1,1,0,1,0,98,29,0,0,271,0.0,0.0,0.0,8,paulcunnane,1,0.0,0,false,false
 2258574,evildmp/afraid-to-commit,python,162,1381741101,1381749742,1381749742,144,144,commits_in_master,false,false,1,2,0,0,0,0,0,0,1,1,0,1,0,98,29,0,0,258,0.0,0.0,0.0,8,saoili,1,0.0,1,false,false
@@ -87,13 +87,13 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2061349,evildmp/afraid-to-commit,python,90,1378413494,1378423625,1378423625,168,168,github,false,false,0,2,0,0,0,2,0,0,1,1,0,1,0,100,29,0,0,136,0.0,0.0,0.0,4,millerc,0,0,0,false,false
 2030412,evildmp/afraid-to-commit,python,89,1378135325,1378136573,1378136573,20,20,github,false,false,0,2,0,1,1,2,0,0,1,1,0,1,0,100,29,0,0,6,0.0,0.0,0.0,4,davideire,2,1.0,0,false,false
 2030406,evildmp/afraid-to-commit,python,88,1378135268,1378140429,1378140429,86,86,github,false,false,0,6,0,0,0,1,0,0,1,1,0,1,0,100,29,0,0,6,0.0,0.0,0.0,4,jasonblum,3,0.0,0,false,false
-2030264,evildmp/afraid-to-commit,python,87,1378132961,1378143019,1378143019,167,167,github,false,false,0,13,0,0,0,0,68,0,3,71,7,19,42,100,29,3704,0,182,0.0,0.0,0.0,4,ernestorx,2,0.5,8,false,false
+2030264,evildmp/afraid-to-commit,python,87,1378132961,1378143019,1378143019,167,167,github,false,false,0,13,0,0,0,0,68,68,3,139,7,19,42,100,29,3704,0,182,0.0,0.0,0.0,4,ernestorx,2,0.5,8,false,false
 2030561,evildmp/afraid-to-commit,python,86,1378132640,1378143018,1378143018,172,172,github,false,false,0,2,0,0,0,0,0,0,1,1,0,1,0,100,29,0,0,43,0.0,0.0,0.0,4,hhajar,1,0.0,0,false,false
 2030427,evildmp/afraid-to-commit,python,85,1378132400,1378132718,1378132718,5,5,github,false,false,0,5,0,1,1,1,0,0,1,1,0,1,0,100,29,0,0,96,0.0,0.0,0.0,4,davideire,1,1.0,0,false,false
 2030196,evildmp/afraid-to-commit,python,84,1378132112,1378132690,1378132690,9,9,commits_in_master,false,false,0,4,0,0,0,0,0,0,0,0,0,0,0,100,29,0,0,0,0.0,0.0,0.0,4,jasonblum,2,0.0,0,false,false
 2030124,evildmp/afraid-to-commit,python,83,1378131511,1378131880,1378131880,6,6,github,false,false,0,1,0,0,0,0,0,0,0,0,0,0,0,100,29,0,0,0,0.0,0.0,0.0,4,ernestorx,1,0.0,8,false,false
 2030040,evildmp/afraid-to-commit,python,82,1378130097,1378132336,1378132336,37,37,commits_in_master,false,false,0,2,0,0,0,0,0,0,1,1,0,1,0,100,29,0,0,0,0.0,0.0,0.0,4,jasonblum,1,0.0,0,false,false
-2030030,evildmp/afraid-to-commit,python,81,1378129998,1378130029,1378130029,0,0,commits_in_master,false,false,0,10,0,0,0,0,68,0,3,71,7,19,42,100,29,3704,0,88,0.0,0.0,0.0,4,kedmiston,1,1.0,0,false,false
+2030030,evildmp/afraid-to-commit,python,81,1378129998,1378130029,1378130029,0,0,commits_in_master,false,false,0,10,0,0,0,0,68,68,3,139,7,19,42,100,29,3704,0,88,0.0,0.0,0.0,4,kedmiston,1,1.0,0,false,false
 2030038,evildmp/afraid-to-commit,python,80,1378129928,1378130166,1378130167,3,3,github,false,false,0,2,0,0,0,0,0,0,1,1,0,1,0,100,29,0,0,43,0.0,0.0,0.0,4,bahendri,1,1.0,0,false,false
 2029794,evildmp/afraid-to-commit,python,79,1378127555,,1378143234,261,,unknown,false,false,0,1,0,0,0,0,0,0,1,1,0,1,0,100,29,0,0,0,0.0,0.0,0.0,4,hhajar,0,0,0,false,false
 2029772,evildmp/afraid-to-commit,python,78,1378127097,1378130145,1378130145,50,50,github,false,false,0,2,0,0,0,0,0,0,1,1,0,1,0,100,29,0,0,84,0.0,0.0,0.0,4,kedmiston,0,0,0,false,false
@@ -103,7 +103,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2029765,evildmp/afraid-to-commit,python,74,1378126769,1378127391,1378127391,10,10,github,false,false,0,1,0,0,0,0,0,0,1,1,0,1,0,100,29,0,0,42,0.0,0.0,0.0,4,bahendri,0,0,0,false,false
 2048808,evildmp/afraid-to-commit,python,73,1377791098,1377792100,1377792100,16,16,github,false,false,0,3,0,0,0,0,0,0,1,1,0,1,0,100,29,0,0,39,0.0,0.0,0.0,4,superdmp,2,0.5,0,false,false
 2048589,evildmp/afraid-to-commit,python,72,1377787522,1377788285,1377788286,12,12,github,false,false,0,1,0,0,0,0,0,0,1,1,0,1,0,100,29,0,0,39,0.0,0.0,0.0,4,superdmp,1,0.0,0,false,false
-1997803,evildmp/afraid-to-commit,python,71,1377686926,1377686984,1377686984,0,0,commits_in_master,false,false,0,216,0,1,1,1,16,0,18,34,1,18,7,100,29,6,0,57,0.0,0.0,0.0,4,gonff,2,0.0,0,false,false
+1997803,evildmp/afraid-to-commit,python,71,1377686926,1377686984,1377686984,0,0,commits_in_master,false,false,0,216,0,1,1,1,16,1,18,35,1,18,7,100,29,6,0,57,0.0,0.0,0.0,4,gonff,2,0.0,0,false,false
 1997506,evildmp/afraid-to-commit,python,70,1377683804,,1377683873,1,,unknown,false,false,0,1,0,1,1,1,0,0,0,0,0,0,0,100,29,0,0,0,0.0,0.0,0.0,4,gonff,1,0.0,0,false,false
 1992132,evildmp/afraid-to-commit,python,69,1377603641,1377603753,1377603753,1,1,commits_in_master,false,false,0,1,0,0,0,0,0,0,1,1,0,1,0,100,29,0,0,38,0.0,0.0,0.0,8,gonff,0,0,0,false,false
 1958652,evildmp/afraid-to-commit,python,65,1377013804,,1377013850,0,,unknown,false,false,0,1,0,0,0,0,0,0,1,1,0,1,0,100,29,0,0,0,0.0,0.0,0.0,4,Paul-C-Anagnostopoulos,3,0.0,0,false,false

@@ -100,7 +100,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 363247,collective/collective.developermanual,python,64,1347174561,1347246460,1347246460,1198,1198,github,false,false,20,1,0,0,0,0,0,0,1,1,0,1,0,14,132,0,0,1,0.0,0.0,0.0,79,sureshvv,0,0,0,false,true
 339428,collective/collective.developermanual,python,63,1346156560,1347538462,1347538462,23031,23031,github,false,false,20,1,0,1,1,1,0,0,1,1,0,1,0,14,132,0,0,0,0.0,0.0,0.0,79,marcinwudarczyk,0,0,0,false,false
 258950,collective/collective.developermanual,python,62,1345622663,1345624002,1345624002,22,22,github,false,false,22,2,0,1,1,1,0,0,1,1,0,1,0,13,132,0,0,18,0.0,0.0,0.0,79,witekdev,0,0,0,false,true
-255420,collective/collective.developermanual,python,61,1345475398,1345476577,1345476577,19,19,github,false,false,21,1,0,3,3,6,6,0,1,7,0,3,5,13,132,0,0,10,0.0,0.0,0.0,79,bakednotfried,1,1.0,1,false,false
+255420,collective/collective.developermanual,python,61,1345475398,1345476577,1345476577,19,19,github,false,false,21,1,0,3,3,6,6,1,1,8,0,3,5,13,132,0,0,10,0.0,0.0,0.0,79,bakednotfried,1,1.0,1,false,false
 230501,collective/collective.developermanual,python,60,1343974035,1343976544,1343976544,41,41,github,false,false,19,1,0,0,0,0,0,0,1,1,0,1,0,14,132,0,0,3,0.0,0.0,0.0,79,khink,1,1.0,2,false,true
 1006010,collective/collective.developermanual,python,59,1343780588,1343780598,1343780598,0,0,github,false,false,19,1,0,0,0,0,0,0,1,1,0,1,0,13,132,0,0,3,0.0,0.0,0.0,79,pigeonflight,10,1.0,2,false,true
 875175,collective/collective.developermanual,python,58,1343735965,1343735972,1343735972,0,0,github,false,false,19,1,0,0,0,0,0,0,1,1,0,1,0,12,132,0,0,2,0.0,0.0,0.0,79,pigeonflight,9,1.0,2,false,true
@@ -130,7 +130,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 96679,collective/collective.developermanual,python,33,1334894558,,1341916958,117040,,unknown,false,false,26,1,0,1,1,1,0,0,1,1,0,1,0,13,132,0,0,0,0.0,0.0,0.0,76,adam139,0,0,0,false,true
 90074,collective/collective.developermanual,python,32,1334421077,1334421333,1334421333,4,4,github,false,false,27,1,0,0,0,0,0,0,1,1,0,1,0,13,132,0,0,4,0.0,0.0,0.0,150,jschinnerer,0,0,0,false,false
 384760,collective/collective.developermanual,python,31,1334310737,1334311162,1334311162,7,7,github,false,false,26,1,0,0,0,0,0,0,1,1,0,1,0,13,132,0,0,1,0.0,0.0,0.0,148,svx,0,0,4,true,true
-87870,collective/collective.developermanual,python,30,1334248263,1351063309,1351063309,280250,280250,merged_in_comments,false,false,26,9,0,2,2,2,1,0,2,3,0,1,14,13,132,0,0,7,0.0,0.0,0.0,74,spanktar,1,0.0,1,false,true
+87870,collective/collective.developermanual,python,30,1334248263,1351063309,1351063309,280250,280250,merged_in_comments,false,false,26,9,0,2,2,2,1,13,2,16,0,1,14,13,132,0,0,7,0.0,0.0,0.0,74,spanktar,1,0.0,1,false,true
 87729,collective/collective.developermanual,python,29,1334241015,1334245729,1334245729,78,78,github,false,false,26,1,0,0,0,0,0,0,1,1,0,1,0,13,132,0,0,3,0.0,0.0,0.0,74,benjamir,0,0,0,false,false
 293673,collective/collective.developermanual,python,28,1333561331,1333573989,1333573989,210,210,github,false,false,25,1,0,1,1,1,0,0,1,1,0,1,0,12,132,0,0,1,0.0,0.0,0.0,74,JohnHren,0,0,0,false,false
 289455,collective/collective.developermanual,python,27,1332854394,1332904783,1332904783,839,839,github,false,false,23,1,0,0,0,0,0,0,1,1,0,1,0,14,132,0,0,2,0.0,0.0,0.0,72,msabramo,0,0,7,false,false
@@ -139,7 +139,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 288269,collective/collective.developermanual,python,24,1332647721,1332648470,1332648470,12,12,github,false,false,23,4,0,0,0,0,0,0,4,4,0,4,0,11,132,0,0,4,0.0,0.0,0.0,72,bdbaddog,2,0.5,2,true,true
 288167,collective/collective.developermanual,python,23,1332617697,1332617719,1332617719,0,0,github,false,false,22,2,0,0,0,0,286,0,1,287,1,286,0,11,132,2,0,1,0.0,0.0,0.0,144,bdbaddog,1,0.0,4,true,true
 288123,collective/collective.developermanual,python,21,1332609961,,1334246005,27327,,unknown,false,false,22,1,0,0,0,1,0,0,1,1,0,0,1,10,132,0,0,0,0.0,0.0,0.0,72,spanktar,0,0,1,false,true
-288113,collective/collective.developermanual,python,20,1332607522,,1332617821,171,,unknown,false,false,21,11,0,0,0,0,1,0,5,6,0,2,16,10,132,0,0,7,0.0,0.0,0.0,72,bdbaddog,0,0,2,false,true
+288113,collective/collective.developermanual,python,20,1332607522,,1332617821,171,,unknown,false,false,21,11,0,0,0,0,1,13,5,19,0,2,16,10,132,0,0,7,0.0,0.0,0.0,72,bdbaddog,0,0,2,false,true
 1006069,collective/collective.developermanual,python,19,1332156797,1332160151,1332160151,55,55,github,false,false,19,1,0,0,0,0,0,0,1,1,0,0,1,7,129,0,0,5,0.0,0.0,0.0,71,hannoschulz,0,0,0,false,true
 277180,collective/collective.developermanual,python,17,1329732688,1329733153,1329733153,7,7,github,false,false,17,1,0,0,0,0,0,0,1,1,0,0,1,10,129,0,0,2,0.0,0.0,0.0,140,siebo,0,0,0,false,true
 275702,collective/collective.developermanual,python,16,1329393667,1329393752,1329393752,1,1,github,false,false,17,1,0,0,0,0,0,0,1,1,0,0,1,9,129,0,0,0,0.0,0.0,0.0,140,danboggins,1,1.0,0,false,false

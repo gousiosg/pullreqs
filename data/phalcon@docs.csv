@@ -1,4 +1,12 @@
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,merged_using,conflict,forward_links,team_size,num_commits,num_commit_comments,num_issue_comments,num_comments,num_participants,files_added,files_deleted,files_modified,files_changed,src_files,doc_files,other_files,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
+2765594,phalcon/docs,python,305,1389184879,1389185694,1389185694,13,13,github,false,false,4,1,0,0,0,1,0,0,3,3,0,3,0,54,311,0,0,6,0.0,0.0,0.0,59,oikyn,1,1.0,0,false,false
+2763547,phalcon/docs,python,304,1389152968,1389183555,1389183555,509,509,github,false,false,4,1,0,0,0,1,0,0,1,1,0,1,0,54,311,0,0,2,0.0,0.0,0.0,59,oikyn,0,0,0,false,false
+2758642,phalcon/docs,python,303,1389095172,,1389213706,1975,,unknown,false,false,4,1,0,4,4,3,0,0,1,1,0,1,0,54,311,0,0,0,0.0,0.0,0.0,59,unisys12,2,1.0,0,false,false
+2757004,phalcon/docs,python,302,1389065585,1389072476,1389072476,114,114,github,false,false,4,2,0,0,0,1,0,0,2,2,0,2,0,54,311,0,0,1,0.0,0.0,0.0,59,unisys12,1,1.0,0,false,false
+2756759,phalcon/docs,python,301,1389059849,1389072422,1389072422,209,209,github,false,false,4,1,0,0,0,1,0,0,1,1,0,1,0,54,311,0,0,1,0.0,0.0,0.0,59,unisys12,0,0,0,false,false
+2756037,phalcon/docs,python,300,1389047256,1389190126,1389190126,2381,2381,commit_sha_in_comments,false,false,4,1,0,0,0,1,0,0,1,1,0,1,0,54,311,0,0,0,0.0,0.0,0.0,59,tiraeth,2,0.5,7,false,false
+2754528,phalcon/docs,python,298,1389030960,1389040357,1389040357,156,156,github,false,false,4,1,0,0,0,1,0,0,1,1,0,1,0,55,311,0,0,0,0.0,0.0,0.0,59,tiraeth,1,0.0,7,false,false
+2734719,phalcon/docs,python,296,1388686682,1388708475,1388708475,363,363,github,false,false,4,1,0,0,0,1,0,0,1,1,0,1,0,54,311,0,0,0,0.0,0.0,0.0,58,kwlininger,0,0,0,false,false
 2724445,phalcon/docs,python,295,1388464666,1388464697,1388464697,0,0,commits_in_master,false,false,4,2,0,0,0,1,0,0,2,2,0,2,0,54,311,0,0,7,0.0,0.0,0.0,56,inouet,11,0.5454545454545454,1,false,false
 2722582,phalcon/docs,python,294,1388429874,1388430299,1388430299,7,7,commits_in_master,false,false,4,1,0,0,0,2,114,0,1,115,4,2,104,54,271,470,0,0,0.0,0.0,0.0,55,tiraeth,0,0,7,false,false
 2719733,phalcon/docs,python,293,1388381769,1388389519,1388389519,129,129,commits_in_master,false,false,4,1,0,0,0,1,0,0,1,1,0,1,0,54,271,0,0,9,0.0,0.0,0.0,54,JimmDiGrizli,38,0.21052631578947367,1,false,false
@@ -166,8 +174,8 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1657931,phalcon/docs,python,111,1372337771,1372337781,1372337782,0,0,github,false,false,2,15,0,0,0,0,9,0,21,30,2,17,10,91,115,24,0,24,0.0,0.0,0.0,27,phalcon,18,0.7222222222222222,114,true,true
 1657591,phalcon/docs,python,110,1372334134,1372334380,1372334380,4,4,commits_in_master,false,false,2,1,0,0,0,1,0,0,1,1,0,1,0,91,115,0,0,7,0.0,0.0,0.0,27,tmihalik,8,0.625,0,false,false
 1610933,phalcon/docs,python,108,1371537178,,1384176942,210602,,unknown,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,86,115,0,0,0,0.0,0.0,0.0,27,tmihalik,7,0.7142857142857143,0,false,false
-1598073,phalcon/docs,python,107,1371229625,1371229632,1371229632,0,0,commits_in_master,false,false,2,9,0,0,0,0,0,0,42,42,1,42,0,86,115,2,0,237,0.0,0.0,0.0,26,phalcon,17,0.7647058823529411,114,true,true
-1598069,phalcon/docs,python,106,1371229578,1371229588,1371229588,0,0,commits_in_master,false,false,2,10,0,0,0,0,0,0,42,42,1,42,0,87,115,2,0,248,0.0,0.0,0.0,52,phalcon,16,0.8125,228,true,true
+1598073,phalcon/docs,python,107,1371229625,1371229632,1371229632,0,0,commits_in_master,false,false,2,9,0,0,0,0,0,1,42,43,1,42,0,86,115,2,0,237,0.0,0.0,0.0,26,phalcon,17,0.7647058823529411,114,true,true
+1598069,phalcon/docs,python,106,1371229578,1371229588,1371229588,0,0,commits_in_master,false,false,2,10,0,0,0,0,0,1,42,43,1,42,0,87,115,2,0,248,0.0,0.0,0.0,52,phalcon,16,0.8125,228,true,true
 1565331,phalcon/docs,python,105,1370613227,1370613245,1370613245,0,0,commits_in_master,false,false,2,42,0,0,0,0,8,0,71,79,1,69,7,87,115,20,0,540,0.0,0.0,0.0,26,phalcon,15,0.8666666666666667,114,true,true
 1521906,phalcon/docs,python,103,1369630580,1369635658,1369635658,84,84,commits_in_master,false,false,2,1,0,0,0,1,0,0,1,1,0,1,0,85,115,0,0,6,0.0,0.0,0.0,26,hander,0,0,0,false,false
 1519842,phalcon/docs,python,102,1369573971,1369574787,1369574787,13,13,commits_in_master,false,false,2,1,0,0,0,1,0,0,1,1,0,1,0,85,115,0,0,6,0.0,0.0,0.0,25,dedalozzo,0,0,0,false,false
@@ -213,7 +221,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1291413,phalcon/docs,python,60,1363979713,1363980614,1363980614,15,15,commits_in_master,false,false,4,1,0,0,0,1,0,0,1,1,0,1,0,79,115,0,0,2,0.0,0.0,0.0,20,xboston,5,0.6,16,false,true
 1290445,phalcon/docs,python,59,1363966650,1363966691,1363966691,0,0,commits_in_master,false,false,4,1,0,0,0,1,0,0,1,1,0,1,0,79,115,0,0,2,0.0,0.0,0.0,20,xboston,4,0.75,16,false,true
 1287134,phalcon/docs,python,58,1363899138,1363899796,1363899796,10,10,github,false,false,4,1,0,2,2,2,0,0,1,1,0,1,0,80,115,0,0,7,0.0,0.0,0.0,20,tmihalik,6,0.6666666666666666,0,false,false
-1285399,phalcon/docs,python,57,1363875656,1363875667,1363875667,0,0,github,false,false,4,43,0,0,0,0,480,0,188,668,6,526,108,81,77,514,0,816,0.0,0.0,0.0,20,phalcon,9,0.8888888888888888,114,true,true
+1285399,phalcon/docs,python,57,1363875656,1363875667,1363875667,0,0,github,false,false,4,43,0,0,0,0,480,1,188,669,6,526,108,81,77,514,0,816,0.0,0.0,0.0,20,phalcon,9,0.8888888888888888,114,true,true
 1275403,phalcon/docs,python,56,1363691292,1363696478,1363696478,86,86,github,false,false,4,1,0,0,0,1,0,0,1,1,0,1,0,79,77,0,0,1,0.0,0.0,0.0,20,xboston,3,0.6666666666666666,16,false,true
 1275303,phalcon/docs,python,55,1363689513,1363696451,1363696452,115,115,github,false,false,4,1,0,0,0,1,0,0,1,1,0,1,0,79,77,0,0,1,0.0,0.0,0.0,20,xboston,2,0.5,16,false,true
 1271849,phalcon/docs,python,54,1363620658,1363621271,1363621271,10,10,github,false,false,4,1,0,0,0,3,0,0,1,1,0,1,0,80,77,0,0,2,0.0,0.0,0.0,40,odiel,1,1.0,4,false,false
@@ -250,7 +258,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1085044,phalcon/docs,python,18,1350503708,1350503715,1350503715,0,0,github,false,false,3,5,0,0,0,0,0,0,3,3,0,3,0,36,39,0,0,51,0.0,0.0,0.0,16,niden,9,0.8888888888888888,11,false,true
 1085086,phalcon/docs,python,17,1350503692,1350503724,1350503724,0,0,github,false,false,3,1,0,0,0,0,0,0,1,1,0,1,0,36,39,0,0,15,0.0,0.0,0.0,16,niden,8,0.875,11,false,true
 1085088,phalcon/docs,python,16,1350503655,1350503664,1350503664,0,0,github,false,false,3,1,0,0,0,0,0,0,1,1,0,1,0,36,39,0,0,15,0.0,0.0,0.0,16,niden,7,0.8571428571428571,11,false,true
-848914,phalcon/docs,python,15,1350236324,1350236342,1350236342,0,0,github,false,false,4,29,0,0,0,0,2,0,26,28,2,25,1,36,38,24,0,373,0.0,0.0,0.0,16,phalcon,1,1.0,81,true,true
+848914,phalcon/docs,python,15,1350236324,1350236342,1350236342,0,0,github,false,false,4,29,0,0,0,0,2,2,26,30,2,25,1,36,38,24,0,373,0.0,0.0,0.0,16,phalcon,1,1.0,81,true,true
 424114,phalcon/docs,python,14,1348053211,1348059796,1348059796,109,109,github,false,false,4,1,0,0,0,1,0,0,1,1,0,1,0,31,39,0,0,12,0.0,0.0,0.0,15,xboston,0,0,15,false,true
 418687,phalcon/docs,python,13,1347845243,1347845250,1347845250,0,0,github,false,false,4,1,0,0,0,0,0,0,2,2,0,2,0,28,39,0,0,20,0.0,0.0,0.0,15,phalcon,0,0,74,true,true
 338743,phalcon/docs,python,12,1345888440,1345891595,1345891595,52,52,github,false,false,3,1,0,0,0,1,0,0,1,1,0,1,0,37,38,0,0,4,0.0,0.0,0.0,14,november-eleven,0,0,4,false,false

@@ -1,6 +1,12 @@
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,merged_using,conflict,forward_links,team_size,num_commits,num_commit_comments,num_issue_comments,num_comments,num_participants,files_added,files_deleted,files_modified,files_changed,src_files,doc_files,other_files,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
+2741016,zsh-users/zsh-completions,python,201,1388769006,,1388817390,806,,unknown,false,false,4,1,0,0,0,0,1,0,0,1,0,0,1,28,849,0,0,0,0.0,0.0,0.0,544,TimofeyTitovets,3,0.0,0,false,false
+2738549,zsh-users/zsh-completions,python,200,1388741350,,1388817519,1269,,unknown,false,false,5,1,0,0,0,0,1,0,0,1,0,0,1,26,849,0,0,0,0.0,0.0,0.0,544,TimofeyTitovets,2,0.0,0,false,false
+2735821,zsh-users/zsh-completions,python,199,1388697287,,1388740211,715,,unknown,false,false,5,2,0,0,0,0,1,0,1,2,0,0,1,22,849,0,0,0,0.0,0.0,0.0,544,TimofeyTitovets,1,0.0,0,false,false
+2730524,zsh-users/zsh-completions,python,198,1388619399,1388648592,1388648592,486,486,commits_in_master,false,false,5,1,0,0,0,0,1,0,0,1,0,0,1,21,849,0,0,0,0.0,0.0,0.0,544,TimofeyTitovets,0,0,0,false,false
+2730087,zsh-users/zsh-completions,python,197,1388610203,,1388648574,639,,unknown,false,false,5,1,0,0,0,1,1,0,0,1,0,0,1,19,849,0,0,0,0.0,0.0,0.0,544,locojay,0,0,8,false,false
 2691732,zsh-users/zsh-completions,python,195,1387826432,1387881187,1387881187,912,912,commits_in_master,false,false,6,1,0,1,1,2,0,0,1,1,0,0,1,19,849,0,0,2,0.0,0.0,0.0,543,babysnakes,0,0,3,false,false
 2649703,zsh-users/zsh-completions,python,193,1387222317,1387881219,1387881219,10981,10981,commits_in_master,false,false,6,1,0,0,0,0,0,0,1,1,0,0,1,17,849,0,0,2,0.0,0.0,0.0,542,xuhdev,3,0.6666666666666666,14,false,false
+2532782,zsh-users/zsh-completions,python,191,1385580608,,1388648645,51133,,unknown,false,false,6,1,0,4,4,2,1,0,0,1,0,0,1,25,849,0,0,0,0.0,0.0,0.0,531,wilmoore,0,0,83,false,false
 2506436,zsh-users/zsh-completions,python,190,1385206008,1385571131,1385571132,6085,6085,github,false,false,6,1,0,0,0,0,0,0,1,1,1,0,0,25,837,28,0,2,0.0,0.0,0.0,531,hhatto,0,0,25,false,true
 2503502,zsh-users/zsh-completions,python,189,1385145938,1385147498,1385147498,26,26,github,false,false,6,1,0,0,0,1,0,0,1,1,1,0,0,24,827,2,0,0,0.0,0.0,0.0,531,aronj,0,0,0,false,false
 2467150,zsh-users/zsh-completions,python,187,1384720861,,1386006557,21428,,unknown,false,false,6,1,0,4,4,3,1,0,0,1,0,0,1,25,827,0,0,0,0.0,0.0,0.0,530,hura,0,0,1,false,false
@@ -42,7 +48,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1519225,zsh-users/zsh-completions,python,145,1369372518,1369553693,1369553693,3019,3019,github,false,false,2,1,0,0,0,0,1,0,0,1,0,0,1,71,840,0,0,0,0.0,0.0,0.0,528,mitukiii,1,1.0,72,false,false
 1503783,zsh-users/zsh-completions,python,144,1369077006,1369553671,1369553671,7944,7944,github,false,false,2,1,0,0,0,0,0,0,1,1,0,0,1,69,840,0,0,0,0.0,0.0,0.0,528,graywh,0,0,10,false,false
 1464652,zsh-users/zsh-completions,python,142,1368280653,1369553641,1369553641,21216,21216,commits_in_master,false,false,2,8,0,0,0,2,1,0,2,3,0,0,2,68,840,0,0,0,0.0,0.0,0.0,528,luolimao,2,1.0,1,false,false
-1464588,zsh-users/zsh-completions,python,141,1368279450,1369553407,1369553407,21232,21232,github,false,false,2,6,0,0,0,0,1,0,1,2,0,0,2,68,840,0,0,0,0.0,0.0,0.0,528,luolimao,1,1.0,1,false,false
+1464588,zsh-users/zsh-completions,python,141,1368279450,1369553407,1369553407,21232,21232,github,false,false,2,6,0,0,0,0,1,1,1,3,0,0,2,68,840,0,0,0,0.0,0.0,0.0,528,luolimao,1,1.0,1,false,false
 1424986,zsh-users/zsh-completions,python,140,1367501550,1369553366,1369553366,34196,34196,github,false,false,3,4,0,0,0,0,1,0,1,2,0,0,1,63,840,0,0,0,0.0,0.0,0.0,528,peteryates,1,0.0,4,false,false
 1424825,zsh-users/zsh-completions,python,139,1367499961,1367501224,1367501224,21,21,commits_in_master,false,false,3,1,0,0,0,0,1,0,0,1,0,0,1,62,840,0,0,0,0.0,0.0,0.0,528,peteryates,0,0,4,false,false
 1405465,zsh-users/zsh-completions,python,138,1367196557,1369553331,1369553331,39279,39279,github,false,false,3,2,0,0,0,0,0,0,1,1,0,0,1,60,840,0,0,2,0.0,0.0,0.0,527,zhaocai,4,0.75,15,false,false
@@ -91,7 +97,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 172796,zsh-users/zsh-completions,python,85,1340549609,1340556172,1340556172,109,109,github,false,false,3,1,0,1,1,2,1,0,0,1,0,0,1,40,840,0,0,0,0.0,0.0,0.0,421,xuhdev,0,0,6,false,false
 170395,zsh-users/zsh-completions,python,84,1340362105,1340556216,1340556216,3235,3235,github,false,false,3,1,0,0,0,0,0,0,1,1,0,0,1,33,840,0,0,0,0.0,0.0,0.0,421,myrkraverk,0,0,0,false,false
 165542,zsh-users/zsh-completions,python,83,1340123912,1340124057,1340124057,2,2,github,false,false,3,1,0,1,1,1,0,0,1,1,0,0,1,28,840,0,0,1,0.0,0.0,0.0,417,spk,0,0,13,false,false
-153421,zsh-users/zsh-completions,python,82,1339281970,1339315207,1339315207,553,553,github,false,false,3,1,0,1,1,1,0,0,30,30,2,0,29,20,840,30,0,3,0.0,0.0,0.0,411,Mikachu,0,0,5,false,true
+153421,zsh-users/zsh-completions,python,82,1339281970,1339315207,1339315207,553,553,github,false,false,3,1,0,1,1,1,0,1,30,31,2,0,29,20,840,30,0,3,0.0,0.0,0.0,411,Mikachu,0,0,5,false,true
 386284,zsh-users/zsh-completions,python,78,1334889888,1334899357,1334899357,157,157,github,false,false,5,1,0,0,0,0,0,0,1,1,0,0,1,30,840,0,0,1,0.0,0.0,0.0,386,tylerball,0,0,8,true,false
 18388,zsh-users/zsh-completions,python,74,1329586030,1329648642,1329648642,1043,1043,github,false,false,4,1,0,0,0,0,0,0,1,1,0,0,1,26,840,0,0,0,0.0,0.0,0.0,354,sorin-ionescu,8,1.0,19,false,false
 22039,zsh-users/zsh-completions,python,72,1328000044,1328020056,1328020056,333,333,github,false,false,5,1,0,0,0,2,1,0,0,1,0,0,1,17,840,0,0,0,0.0,0.0,0.0,339,chmduquesne,0,0,12,false,true

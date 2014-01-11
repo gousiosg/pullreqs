@@ -1,9 +1,14 @@
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,merged_using,conflict,forward_links,team_size,num_commits,num_commit_comments,num_issue_comments,num_comments,num_participants,files_added,files_deleted,files_modified,files_changed,src_files,doc_files,other_files,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
-2730785,Homebrew/homebrew-science,ruby,581,1388626213,1388629941,1388629941,62,62,fixes_in_commit,false,false,36,1,0,0,0,0,0,0,1,1,1,0,0,28,5570,4,0,0,0.0,0.0,0.0,223,zhouyan,0,0,0,false,false
-2726809,Homebrew/homebrew-science,ruby,579,1388510754,1388526680,1388526680,265,265,fixes_in_commit,false,false,35,1,0,0,0,0,0,0,1,1,1,0,0,29,5566,6,0,0,0.0,0.0,0.0,223,nomis2k,0,0,2,false,false
-2715285,Homebrew/homebrew-science,ruby,574,1388258220,,1388617102,5981,,unknown,false,false,35,1,0,18,18,3,0,0,1,1,1,0,0,30,5564,17,0,0,0.0,0.0,0.0,223,ambs,0,0,34,false,false
-2714225,Homebrew/homebrew-science,ruby,572,1388233058,1388362431,1388362431,2156,2156,fixes_in_commit,false,false,34,1,0,0,0,0,0,0,1,1,1,0,0,30,5564,31,0,0,0.0,0.0,0.0,223,humdedum,2,0.0,0,false,false
-2713852,Homebrew/homebrew-science,ruby,571,1388221490,1388360976,1388360976,2324,2324,fixes_in_commit,false,false,34,1,0,0,0,0,0,0,1,1,1,0,0,31,5564,2,0,0,0.0,0.0,0.0,223,humdedum,1,0.0,0,false,false
+2761226,Homebrew/homebrew-science,ruby,602,1389121481,,1389129277,129,,unknown,false,false,38,1,0,0,0,2,0,0,1,1,1,0,0,26,5661,268,0,0,0.0,0.0,0.0,223,mcg1969,0,0,2,false,false
+2760140,Homebrew/homebrew-science,ruby,601,1389110307,1389140557,1389140557,504,504,fixes_in_commit,false,false,38,1,0,0,0,0,0,0,1,1,1,0,0,26,5661,13,0,0,0.0,0.0,0.0,223,agordon,0,0,10,false,false
+2741835,Homebrew/homebrew-science,ruby,590,1388776480,,1388778501,33,,unknown,false,false,37,1,0,3,3,2,0,0,1,1,1,0,0,28,5661,1,0,0,0.0,0.0,0.0,223,lukeolson,0,0,2,false,false
+2739468,Homebrew/homebrew-science,ruby,585,1388753656,,1388760419,112,,unknown,false,false,37,1,0,0,0,0,0,0,1,1,1,0,0,28,5600,4,0,0,0.0,0.0,0.0,223,sxprophet,11,0.0,1,false,false
+2730785,Homebrew/homebrew-science,ruby,581,1388626213,1388629941,1388629941,62,62,fixes_in_commit,false,false,37,1,0,0,0,0,0,0,1,1,1,0,0,28,5570,4,0,0,0.0,0.0,0.0,223,zhouyan,0,0,0,false,false
+2726809,Homebrew/homebrew-science,ruby,579,1388510754,1388526680,1388526680,265,265,fixes_in_commit,false,false,36,1,0,0,0,0,0,0,1,1,1,0,0,28,5566,6,0,0,0.0,0.0,0.0,223,nomis2k,0,0,2,false,false
+2715285,Homebrew/homebrew-science,ruby,574,1388258220,,1388617102,5981,,unknown,false,false,36,1,0,18,18,3,0,0,1,1,1,0,0,30,5564,17,0,0,0.0,0.0,0.0,223,ambs,0,0,34,false,false
+2714225,Homebrew/homebrew-science,ruby,572,1388233058,1388362431,1388362431,2156,2156,fixes_in_commit,false,false,35,1,0,0,0,0,0,0,1,1,1,0,0,30,5564,31,0,0,0.0,0.0,0.0,223,humdedum,2,0.0,0,false,false
+2713852,Homebrew/homebrew-science,ruby,571,1388221490,1388360976,1388360976,2324,2324,fixes_in_commit,false,false,35,1,0,0,0,0,0,0,1,1,1,0,0,30,5564,2,0,0,0.0,0.0,0.0,223,humdedum,1,0.0,0,false,false
+2710613,Homebrew/homebrew-science,ruby,570,1388153549,1388770306,1388770306,10279,10279,fixes_in_commit,false,false,34,2,0,6,6,2,1,0,1,2,1,0,0,31,5547,40,0,0,0.0,0.0,0.0,223,geniejhang,0,0,0,false,false
 2683541,Homebrew/homebrew-science,ruby,564,1387638430,,1387645414,116,,unknown,false,false,33,1,0,1,1,1,1,0,0,1,1,0,0,35,5541,56,0,0,0.0,0.0,0.0,223,sxprophet,9,0.0,1,false,false
 2682481,Homebrew/homebrew-science,ruby,563,1387608832,1388092583,1388092583,8062,8062,merged_in_comments,false,false,33,2,2,4,6,2,0,0,1,1,1,0,0,35,5541,8,0,0,0.0,0.0,0.0,223,jehrhardt,0,0,10,false,false
 2679448,Homebrew/homebrew-science,ruby,561,1387557560,1387841690,1387841690,4735,4735,fixes_in_commit,false,false,33,1,0,0,0,0,0,0,1,1,1,0,0,35,5541,4,0,0,0.0,0.0,0.0,223,lparsons,1,0.0,5,false,false
@@ -57,7 +62,9 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2422963,Homebrew/homebrew-science,ruby,461,1384103826,,1384110488,111,,unknown,false,false,24,2,0,0,0,0,2,0,0,2,2,0,0,51,5053,57,0,0,0.0,0.0,0.0,223,polakovic,0,0,0,false,false
 2407262,Homebrew/homebrew-science,ruby,455,1383848272,1388428771,1388428771,76341,76341,fixes_in_commit,false,false,24,1,0,0,0,0,0,0,1,1,1,0,0,51,5053,6,0,0,0.0,0.0,0.0,223,depulsor,1,0.0,0,false,false
 2406752,Homebrew/homebrew-science,ruby,454,1383843681,,1383918194,1241,,unknown,false,true,24,1,0,5,5,3,0,0,1,1,1,0,0,51,5058,4,0,0,0.0,0.0,0.0,223,depulsor,0,0,0,false,false
+2404774,Homebrew/homebrew-science,ruby,453,1383826540,1388687764,1388687764,81020,81020,fixes_in_commit,false,false,24,2,0,1,1,2,0,0,1,1,1,0,0,51,5058,51,0,0,0.0,0.0,0.0,223,sxprophet,4,0.0,0,false,false
 2399558,Homebrew/homebrew-science,ruby,450,1383758887,1383847471,1383847471,1476,1476,fixes_in_commit,false,false,24,1,0,2,2,2,0,0,1,1,1,0,0,52,4963,59,0,0,0.0,0.0,0.0,223,aiche,0,0,1,false,false
+2398571,Homebrew/homebrew-science,ruby,448,1383751014,,1388760596,83493,,unknown,false,false,23,3,0,3,3,2,0,0,1,1,1,0,0,52,4963,95,0,0,0.0,0.0,0.0,223,sxprophet,3,0.0,0,false,false
 2397425,Homebrew/homebrew-science,ruby,447,1383740670,,1384451749,11851,,unknown,false,true,23,1,0,0,0,1,0,0,1,1,1,0,0,52,4963,7,0,0,0.0,0.0,0.0,223,sxprophet,2,0.0,0,false,false
 2373823,Homebrew/homebrew-science,ruby,440,1383399550,1384738858,1384738858,22321,22321,commits_in_master,false,false,23,1,0,1,1,1,1,0,0,1,1,0,0,56,4864,56,0,0,0.0,0.0,0.0,223,dpo,19,0.0,9,false,true
 2373668,Homebrew/homebrew-science,ruby,439,1383396242,,1386468467,51203,,unknown,false,false,23,1,0,4,4,3,2,0,0,2,2,0,0,55,4864,59,0,0,0.0,0.0,0.0,223,dstndstn,5,0.0,13,false,false
@@ -245,7 +252,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1478617,Homebrew/homebrew-science,ruby,115,1364230664,1368630461,1368630461,73389,73389,fixes_in_commit,false,false,28,2,2,1,3,4,1,0,1,2,1,0,0,33,2140,20,0,0,0.0,0.0,0.0,184,mhowison,7,0.0,0,false,false
 1223934,Homebrew/homebrew-science,ruby,114,1362479274,,1367294429,80312,,unknown,false,false,22,1,0,1,1,1,0,0,1,1,1,0,0,29,2007,22,0,0,0.0,0.0,0.0,181,iml,0,0,0,false,false
 1213429,Homebrew/homebrew-science,ruby,113,1362210041,1363780318,1363780318,26171,26171,fixes_in_commit,false,false,20,1,0,2,2,2,0,0,1,1,1,0,0,28,2007,4,0,0,0.0,0.0,0.0,180,bfroehle,0,0,2,false,false
-1213220,Homebrew/homebrew-science,ruby,112,1362200126,,1369355141,119310,,unknown,false,true,20,252,0,3,3,3,31,0,61,92,80,0,0,28,2007,3597,0,0,0.0,0.0,0.0,180,fahasch,0,0,0,false,false
+1213220,Homebrew/homebrew-science,ruby,112,1362200126,,1369355141,119310,,unknown,false,true,20,252,0,3,3,3,31,3,61,95,80,0,0,28,2007,3597,0,0,0.0,0.0,0.0,180,fahasch,0,0,0,false,false
 1202931,Homebrew/homebrew-science,ruby,111,1361995373,1368985508,1368985508,116562,116562,fixes_in_commit,false,false,19,1,3,0,3,2,1,0,0,1,1,0,0,31,2007,23,0,0,0.0,0.0,0.0,180,ngcrawford,0,0,9,false,false
 1187021,Homebrew/homebrew-science,ruby,110,1361635172,1364337016,1364337016,45030,45030,fixes_in_commit,false,false,20,2,0,2,2,3,1,0,0,1,1,0,0,29,2007,177,0,0,0.0,0.0,0.0,180,bosborne,5,0.0,0,false,false
 1162143,Homebrew/homebrew-science,ruby,109,1361068022,1364336068,1364336068,54467,54467,fixes_in_commit,false,false,22,1,1,1,2,1,1,0,0,1,1,0,0,27,2007,21,0,0,0.0,0.0,0.0,178,kjemmett,1,0.0,0,false,false
@@ -264,7 +271,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 956313,Homebrew/homebrew-science,ruby,93,1359992171,,1360601593,10157,,unknown,false,false,21,1,0,2,2,1,0,0,1,1,1,0,0,32,1652,4,0,0,0.0,0.0,0.0,176,mhowison,5,0.0,0,false,false
 955183,Homebrew/homebrew-science,ruby,92,1359960034,1368922552,1368922552,149435,149435,fixes_in_commit,true,false,21,3,6,6,12,2,2,0,0,2,2,0,0,32,1652,124,0,0,0.0,0.0,0.0,176,vsbuffalo,1,0.0,32,false,false
 1036304,Homebrew/homebrew-science,ruby,91,1359885632,1360673757,1360673757,13135,13135,fixes_in_commit,false,false,21,1,0,3,3,1,1,0,0,1,1,0,0,32,1652,20,0,0,0.0,0.0,0.0,176,vsbuffalo,0,0,32,false,false
-951466,Homebrew/homebrew-science,ruby,90,1359817810,,1360675506,14294,,unknown,false,false,20,29,1,2,3,3,5,0,4,9,6,0,0,31,1652,577,0,0,0.0,0.0,0.0,176,bosborne,1,0.0,0,false,false
+951466,Homebrew/homebrew-science,ruby,90,1359817810,,1360675506,14294,,unknown,false,false,20,29,1,2,3,3,5,1,4,10,6,0,0,31,1652,577,0,0,0.0,0.0,0.0,176,bosborne,1,0.0,0,false,false
 1036303,Homebrew/homebrew-science,ruby,89,1359763538,,1360603326,13996,,unknown,false,true,20,1,0,1,1,3,0,0,1,1,1,0,0,31,1652,114,0,0,0.0,0.0,0.0,176,sjackman,12,0.0,11,false,true
 948162,Homebrew/homebrew-science,ruby,88,1359734583,1360671956,1360671956,15622,15622,fixes_in_commit,false,false,20,1,0,0,0,1,1,0,0,1,1,0,0,31,1652,19,0,0,0.0,0.0,0.0,176,mhowison,4,0.0,0,false,false
 947480,Homebrew/homebrew-science,ruby,86,1359720793,1360671057,1360671057,15837,15837,fixes_in_commit,false,false,20,1,0,0,0,1,1,0,0,1,1,0,0,31,1652,18,0,0,0.0,0.0,0.0,176,mhowison,3,0.0,0,false,false
@@ -293,7 +300,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 918756,Homebrew/homebrew-science,ruby,60,1357809112,1358265417,1358265417,7605,7605,fixes_in_commit,false,false,15,2,0,11,11,2,1,0,1,2,1,0,0,27,1094,57,0,0,0.0,0.0,0.0,166,wdeconinck,0,0,3,false,false
 787595,Homebrew/homebrew-science,ruby,59,1357596894,1357735870,1357735870,2316,2316,commit_sha_in_comments,false,false,14,1,0,1,1,1,0,0,1,1,1,0,0,28,1088,4,0,0,0.0,0.0,0.0,166,sjackman,5,0.0,10,false,true
 780361,Homebrew/homebrew-science,ruby,58,1357594498,1358258462,1358258462,11066,11066,fixes_in_commit,false,false,14,1,2,1,3,2,1,0,0,1,1,0,0,29,1088,22,0,0,0.0,0.0,0.0,166,aaleman,0,0,0,false,false
-800859,Homebrew/homebrew-science,ruby,57,1357594014,1358254342,1358254342,11005,11005,merged_in_comments,false,false,14,23,21,3,24,2,3,0,4,7,4,0,0,28,1088,412,0,0,0.0,0.0,0.0,166,bosborne,0,0,0,false,false
+800859,Homebrew/homebrew-science,ruby,57,1357594014,1358254342,1358254342,11005,11005,merged_in_comments,false,false,14,23,21,3,24,2,3,1,4,8,4,0,0,28,1088,412,0,0,0.0,0.0,0.0,166,bosborne,0,0,0,false,false
 818516,Homebrew/homebrew-science,ruby,56,1357411979,,1358247966,13933,,unknown,false,false,13,1,0,3,3,2,0,0,1,1,1,0,0,28,1088,10,0,0,0.0,0.0,0.0,166,sjackman,4,0.0,10,false,true
 1036301,Homebrew/homebrew-science,ruby,55,1357411416,1358246808,1358246808,13923,13923,fixes_in_commit,false,false,13,1,0,1,1,1,1,0,0,1,1,0,0,28,1088,18,0,0,0.0,0.0,0.0,166,sjackman,3,0.0,10,false,true
 789427,Homebrew/homebrew-science,ruby,52,1357233713,1357763459,1357763459,8829,8829,fixes_in_commit,false,false,13,1,0,4,4,2,0,0,1,1,1,0,0,28,1088,8,0,0,0.0,0.0,0.0,166,sjackman,2,0.0,10,false,true

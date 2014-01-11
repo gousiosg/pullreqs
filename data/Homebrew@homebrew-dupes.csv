@@ -5,7 +5,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2505726,Homebrew/homebrew-dupes,ruby,250,1385181757,,1385181952,3,,unknown,false,false,14,1,0,0,0,1,0,0,1,1,1,0,0,25,907,2,0,0,0.0,0.0,0.0,377,nandub,1,0.0,10,false,false
 2495520,Homebrew/homebrew-dupes,ruby,249,1385053634,1385165005,1385165005,1856,1856,fixes_in_commit,false,false,13,1,0,0,0,0,0,0,1,1,1,0,0,26,953,2,0,0,0.0,0.0,0.0,377,DNNX,0,0,7,false,false
 2482143,Homebrew/homebrew-dupes,ruby,248,1384897364,1385165088,1385165088,4462,4462,fixes_in_commit,false,false,12,2,0,0,0,0,0,0,2,2,2,0,0,27,953,8,0,0,0.0,0.0,0.0,377,fourseven,0,0,5,false,false
-2480320,Homebrew/homebrew-dupes,ruby,247,1384881419,1385165123,1385165123,4728,4728,fixes_in_commit,false,false,11,1,0,1,1,2,0,0,0,0,1,0,0,29,953,62,0,0,0.0,0.0,0.0,377,durka,0,0,3,false,false
+2480320,Homebrew/homebrew-dupes,ruby,247,1384881419,1385165123,1385165123,4728,4728,fixes_in_commit,false,false,11,1,0,1,1,2,0,1,0,1,1,0,0,29,953,62,0,0,0.0,0.0,0.0,377,durka,0,0,3,false,false
 2442970,Homebrew/homebrew-dupes,ruby,246,1384356184,1384838754,1384838754,8042,8042,fixes_in_commit,false,false,12,1,0,0,0,0,0,0,1,1,1,0,0,30,951,1,0,0,0.0,0.0,0.0,377,mat128,0,0,2,false,false
 2335622,Homebrew/homebrew-dupes,ruby,243,1382890822,1382897815,1382897815,116,116,fixes_in_commit,false,false,12,1,0,1,1,1,0,0,1,1,1,0,0,31,968,6,0,0,0.0,0.0,0.0,377,jvz,3,0.0,0,false,false
 2311613,Homebrew/homebrew-dupes,ruby,240,1382519671,,1385165484,44036,,unknown,false,false,13,1,0,1,1,2,0,0,1,1,1,0,0,31,968,6,0,0,0.0,0.0,0.0,377,GaretJax,0,0,7,false,false
@@ -15,7 +15,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2240068,Homebrew/homebrew-dupes,ruby,234,1381408498,,1381447995,658,,unknown,false,false,14,1,1,1,2,3,0,0,1,1,1,0,0,27,961,19,0,0,0.0,0.0,0.0,377,jvz,1,0.0,0,false,false
 2234461,Homebrew/homebrew-dupes,ruby,233,1381334200,,1381408516,1238,,unknown,false,false,14,3,1,5,6,4,0,0,1,1,1,0,0,23,961,21,0,0,0.0,0.0,0.0,377,jvz,0,0,0,false,false
 2207976,Homebrew/homebrew-dupes,ruby,232,1380878400,1381426684,1381426684,9138,9138,fixes_in_commit,false,false,15,2,4,3,7,2,0,0,1,1,1,0,0,23,909,22,0,0,0.0,0.0,0.0,377,terrywang,0,0,11,false,false
-2164902,Homebrew/homebrew-dupes,ruby,229,1380262496,1380263882,1380263882,23,23,merged_in_comments,false,false,14,1,0,4,4,2,0,0,0,0,1,0,0,19,906,57,0,0,0.0,0.0,0.0,377,manphiz,12,0.25,3,false,false
+2164902,Homebrew/homebrew-dupes,ruby,229,1380262496,1380263882,1380263882,23,23,merged_in_comments,false,false,14,1,0,4,4,2,0,1,0,1,1,0,0,19,906,57,0,0,0.0,0.0,0.0,377,manphiz,12,0.25,3,false,false
 2123202,Homebrew/homebrew-dupes,ruby,228,1380140604,1380400742,1380400742,4335,4335,fixes_in_commit,false,false,15,4,11,0,11,3,0,0,1,1,1,0,0,15,906,10,0,0,0.0,0.0,0.0,377,michelangelo,0,0,4,false,false
 2139801,Homebrew/homebrew-dupes,ruby,227,1379914702,1379914788,1379914788,1,1,github,false,false,14,1,0,0,0,0,0,0,1,1,1,0,0,16,899,16,0,0,0.0,0.0,0.0,377,manphiz,11,0.18181818181818182,3,false,false
 2136002,Homebrew/homebrew-dupes,ruby,226,1379818167,1381286344,1381286344,24469,24469,fixes_in_commit,false,false,14,1,0,0,0,0,0,0,1,1,1,0,0,13,899,6,0,0,0.0,0.0,0.0,377,darinmorrison,0,0,23,false,false
@@ -30,7 +30,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1862662,Homebrew/homebrew-dupes,ruby,215,1375149138,1375203563,1375203563,907,907,fixes_in_commit,false,false,18,1,0,0,0,0,0,0,1,1,1,0,0,12,889,4,0,0,0.0,0.0,0.0,377,GaelanS,0,0,1,false,false
 1844426,Homebrew/homebrew-dupes,ruby,214,1374843036,,1374864830,363,,unknown,false,false,19,1,0,0,0,1,0,0,1,1,1,0,0,12,878,4,0,0,0.0,0.0,0.0,377,gologo13,0,0,1,false,false
 1833163,Homebrew/homebrew-dupes,ruby,213,1374752059,1374958699,1374958699,3444,3444,fixes_in_commit,false,false,20,1,0,1,1,1,0,0,1,1,1,0,0,13,878,2,0,0,0.0,0.0,0.0,377,ShimojiK,0,0,0,false,false
-1811661,Homebrew/homebrew-dupes,ruby,212,1374551801,1374632866,1374632866,1351,1351,fixes_in_commit,false,false,19,1,0,2,2,2,0,0,0,0,1,0,0,12,875,34,0,0,0.0,0.0,0.0,376,manphiz,7,0.0,2,false,false
+1811661,Homebrew/homebrew-dupes,ruby,212,1374551801,1374632866,1374632866,1351,1351,fixes_in_commit,false,false,19,1,0,2,2,2,0,1,0,1,1,0,0,12,875,34,0,0,0.0,0.0,0.0,376,manphiz,7,0.0,2,false,false
 1811131,Homebrew/homebrew-dupes,ruby,211,1374542143,1374632692,1374632692,1509,1509,fixes_in_commit,false,false,19,1,0,3,3,3,0,0,1,1,1,0,0,12,875,2,0,0,0.0,0.0,0.0,376,jmurzy,0,0,1,false,false
 1805542,Homebrew/homebrew-dupes,ruby,210,1374477404,1374481114,1374481114,61,61,fixes_in_commit,false,false,18,1,0,0,0,0,0,0,1,1,1,0,0,13,854,4,0,0,0.0,0.0,0.0,376,sonicgao,0,0,4,false,false
 1768851,Homebrew/homebrew-dupes,ruby,209,1373758835,1374546020,1374546020,13119,13119,fixes_in_commit,false,false,17,1,0,2,2,2,0,0,1,1,1,0,0,14,853,7,0,0,0.0,0.0,0.0,376,xuhdev,0,0,10,false,false
@@ -82,7 +82,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1036461,Homebrew/homebrew-dupes,ruby,149,1360435743,1361030812,1361030812,9917,9917,fixes_in_commit,false,false,20,1,0,0,0,0,0,0,1,1,1,0,0,7,791,4,0,0,0.0,0.0,0.0,373,creativecoder,0,0,1,false,false
 1036473,Homebrew/homebrew-dupes,ruby,147,1360086824,1360519134,1360519134,7205,7205,fixes_in_commit,false,false,19,1,0,0,0,0,0,0,1,1,1,0,0,7,791,8,0,0,0.0,0.0,0.0,373,yosinski,0,0,4,false,false
 958312,Homebrew/homebrew-dupes,ruby,146,1360034296,1360519442,1360519442,8085,8085,fixes_in_commit,false,false,18,1,0,0,0,0,0,0,1,1,1,0,0,8,791,6,0,0,0.0,0.0,0.0,373,humdedum,1,0.0,0,false,false
-957901,Homebrew/homebrew-dupes,ruby,145,1359975600,1363284459,1363284459,55147,55147,fixes_in_commit,false,false,17,1,0,10,10,3,0,0,0,0,1,0,0,8,791,142,0,0,0.0,0.0,0.0,373,manphiz,4,0.0,1,false,false
+957901,Homebrew/homebrew-dupes,ruby,145,1359975600,1363284459,1363284459,55147,55147,fixes_in_commit,false,false,17,1,0,10,10,3,0,1,0,1,1,0,0,8,791,142,0,0,0.0,0.0,0.0,373,manphiz,4,0.0,1,false,false
 953129,Homebrew/homebrew-dupes,ruby,143,1359888006,1360519172,1360519172,10519,10519,fixes_in_commit,false,false,17,1,0,0,0,0,0,0,1,1,1,0,0,8,791,4,0,0,0.0,0.0,0.0,373,ScOut3R,0,0,0,false,false
 1036462,Homebrew/homebrew-dupes,ruby,142,1359887540,,1363734436,64114,,unknown,false,false,16,1,0,0,0,2,0,0,1,1,1,0,0,9,791,15,0,0,0.0,0.0,0.0,373,grundprinzip,0,0,26,false,false
 934140,Homebrew/homebrew-dupes,ruby,138,1359414747,1363728490,1363728490,71895,71895,fixes_in_commit,false,false,16,1,0,0,0,0,0,0,1,1,1,0,0,9,801,7,0,0,0.0,0.0,0.0,373,BrianGilbert,0,0,7,false,false
@@ -103,7 +103,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 823907,Homebrew/homebrew-dupes,ruby,114,1351838009,1358556157,1358556157,111969,111969,fixes_in_commit,false,false,14,1,0,0,0,1,1,0,0,1,1,0,0,6,722,21,0,0,0.0,0.0,0.0,346,jwise,0,0,43,false,false
 619102,Homebrew/homebrew-dupes,ruby,111,1350990367,,1354406263,56871,,unknown,false,false,13,1,0,1,1,1,0,0,1,1,1,0,0,6,743,4,0,0,0.0,0.0,0.0,345,Villadelfia,0,0,0,false,false
 1036450,Homebrew/homebrew-dupes,ruby,110,1350576043,1354408960,1354408960,63821,63821,fixes_in_commit,false,false,13,1,0,0,0,1,0,0,1,1,1,0,0,6,744,4,0,0,0.0,0.0,0.0,345,zhouyan,0,0,0,false,false
-850640,Homebrew/homebrew-dupes,ruby,109,1350519165,,1351137259,10301,,unknown,false,false,13,8,0,0,0,0,1,0,1,2,1,0,0,5,744,177,0,0,0.0,0.0,0.0,345,simonair,1,0.0,1,false,false
+850640,Homebrew/homebrew-dupes,ruby,109,1350519165,,1351137259,10301,,unknown,false,false,13,8,0,0,0,0,1,1,1,3,1,0,0,5,744,177,0,0,0.0,0.0,0.0,345,simonair,1,0.0,1,false,false
 850382,Homebrew/homebrew-dupes,ruby,108,1350472316,1363733460,1363733460,220959,220959,fixes_in_commit,false,false,13,2,0,1,1,1,0,0,1,1,1,0,0,5,745,23,0,0,0.0,0.0,0.0,345,arnested,0,0,6,false,false
 619056,Homebrew/homebrew-dupes,ruby,107,1350418837,1354405862,1354405862,66390,66390,fixes_in_commit,false,false,13,1,0,1,1,1,0,0,1,1,1,0,0,5,745,1,0,0,0.0,0.0,0.0,345,staticfloat,3,0.0,2,false,false
 1036489,Homebrew/homebrew-dupes,ruby,104,1350326545,1350346678,1350346678,335,335,fixes_in_commit,false,false,12,2,0,0,0,3,0,0,1,1,1,0,0,5,746,12,0,0,0.0,0.0,0.0,345,manphiz,1,0.0,0,false,false
@@ -133,7 +133,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 222029,Homebrew/homebrew-dupes,ruby,54,1343031268,1344958894,1344958894,32127,32127,commit_sha_in_comments,false,false,12,1,0,0,0,2,0,0,1,1,1,0,0,5,822,4,0,0,0.0,0.0,0.0,301,hashar,0,0,8,false,false
 216532,Homebrew/homebrew-dupes,ruby,53,1342703836,,1360519246,296863,,unknown,false,false,12,1,0,0,0,0,1,0,0,1,1,0,0,4,822,21,0,0,0.0,0.0,0.0,295,insom,0,0,5,false,false
 15987,Homebrew/homebrew-dupes,ruby,52,1342609934,1344511763,1344511763,31697,31697,github,false,false,13,0,0,4,4,2,0,0,0,0,0,0,0,4,823,0,0,0,0.0,0.0,0.0,294,samueljohn,0,0,7,false,true
-206711,Homebrew/homebrew-dupes,ruby,51,1342253529,1344778755,1344778755,42087,42087,fixes_in_commit,false,false,12,1,0,10,10,5,0,0,0,0,1,0,0,4,822,34,0,0,0.0,0.0,0.0,291,josegonzalez,0,0,324,false,false
+206711,Homebrew/homebrew-dupes,ruby,51,1342253529,1344778755,1344778755,42087,42087,fixes_in_commit,false,false,12,1,0,10,10,5,0,1,0,1,1,0,0,4,822,34,0,0,0.0,0.0,0.0,291,josegonzalez,0,0,324,false,false
 195765,Homebrew/homebrew-dupes,ruby,48,1341770356,1360860817,1360860817,318114,318114,merged_in_comments,false,false,14,1,0,4,4,5,1,0,0,1,1,0,0,4,822,58,0,0,0.0,0.0,0.0,288,simonair,0,0,1,false,false
 159652,Homebrew/homebrew-dupes,ruby,41,1339682988,1344959773,1344959773,87946,87946,commit_sha_in_comments,false,false,17,1,0,2,2,3,0,0,1,1,1,0,0,6,820,12,0,0,0.0,0.0,0.0,275,rhysd,2,0.0,17,false,false
 153826,Homebrew/homebrew-dupes,ruby,40,1339335433,1339442950,1339442950,1791,1791,fixes_in_commit,false,false,16,1,0,1,1,1,1,0,0,1,1,0,0,4,800,26,0,0,0.0,0.0,0.0,273,norton,0,0,50,false,false

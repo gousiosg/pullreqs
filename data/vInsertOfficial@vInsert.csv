@@ -13,7 +13,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1405282,vInsertOfficial/vInsert,java,90,1366767073,,1367191159,7068,,unknown,false,false,7,1,0,0,0,1,0,0,1,1,1,0,0,54,10391,4,0,0,0.0,0.0,0.0,15,derett25,0,0,0,false,false
 1370796,vInsertOfficial/vInsert,java,89,1366002270,1366047101,1366047101,747,747,github,false,false,6,1,0,0,0,0,0,0,1,1,1,0,0,59,9994,49,0,2,0.0,0.0,0.0,15,tylerpnn,9,0.5555555555555556,0,false,false
 1369445,vInsertOfficial/vInsert,java,87,1365960396,,1365983532,385,,unknown,false,false,6,3,0,0,0,0,1,0,2,3,2,0,1,59,9994,78,0,0,0.0,0.0,0.0,15,results,0,0,0,false,false
-1365217,vInsertOfficial/vInsert,java,86,1365804801,1367192579,1367192579,23129,23129,merged_in_comments,false,false,6,5,0,1,1,1,1,0,4,5,5,0,0,63,10053,267,0,0,0.0,0.0,0.0,15,iBlink,3,0.6666666666666666,1,false,false
+1365217,vInsertOfficial/vInsert,java,86,1365804801,1367192579,1367192579,23129,23129,merged_in_comments,false,false,6,5,0,1,1,1,1,1,4,6,5,0,0,63,10053,267,0,0,0.0,0.0,0.0,15,iBlink,3,0.6666666666666666,1,false,false
 1364176,vInsertOfficial/vInsert,java,85,1365785922,,1365786045,2,,unknown,false,false,6,1,0,0,0,1,0,0,1,1,1,0,0,64,10053,10,0,0,0.0,0.0,0.0,30,Springdv,2,1.0,0,false,false
 1348300,vInsertOfficial/vInsert,java,84,1365457401,1365786141,1365786141,5479,5479,github,false,false,6,1,0,0,0,0,0,0,1,1,1,0,0,64,9741,2,0,5,0.0,0.0,0.0,13,xor-,1,0.0,0,false,false
 1308584,vInsertOfficial/vInsert,java,83,1365434069,,1365630913,3280,,unknown,false,false,6,2,1,0,1,1,1,0,4,5,5,0,0,64,9741,197,0,0,0.0,0.0,0.0,13,iBlink,2,1.0,1,false,false
@@ -21,7 +21,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1356607,vInsertOfficial/vInsert,java,81,1365422869,1365630962,1365630963,3468,3468,github,false,false,6,2,0,0,0,0,3,0,3,6,4,0,0,64,9741,408,0,7,0.0,0.0,0.0,13,triggdev,17,0.5294117647058824,0,false,false
 1345340,vInsertOfficial/vInsert,java,80,1365402926,,1365407693,79,,unknown,false,false,6,1,0,0,0,0,0,0,1,1,1,0,0,63,9741,6,0,0,0.0,0.0,0.0,13,IamBurt,3,0.3333333333333333,0,false,false
 1345334,vInsertOfficial/vInsert,java,79,1365402816,,1365407652,80,,unknown,false,false,6,1,0,0,0,0,0,0,1,1,1,0,0,63,9741,76,0,0,0.0,0.0,0.0,13,IamBurt,2,0.5,0,false,false
-1344929,vInsertOfficial/vInsert,java,78,1365390418,,1365407538,285,,unknown,false,false,6,1,0,0,0,0,1,0,5,6,7,0,0,63,9741,370,0,0,0.0,0.0,0.0,13,triggdev,16,0.5625,0,false,false
+1344929,vInsertOfficial/vInsert,java,78,1365390418,,1365407538,285,,unknown,false,false,6,1,0,0,0,0,1,1,5,7,7,0,0,63,9741,370,0,0,0.0,0.0,0.0,13,triggdev,16,0.5625,0,false,false
 1344211,vInsertOfficial/vInsert,java,77,1365363723,,1365407207,724,,unknown,false,false,6,1,0,0,0,0,0,0,1,1,1,0,0,63,9741,20,0,0,0.0,0.0,0.0,13,IamBurt,1,1.0,0,false,false
 1343604,vInsertOfficial/vInsert,java,76,1365347833,1367191430,1367191430,30726,30726,commits_in_master,false,false,6,7,0,0,0,1,0,0,7,7,7,0,0,62,9702,411,0,44,0.0,0.0,0.0,13,DarkStorm652,2,1.0,1,false,false
 1343372,vInsertOfficial/vInsert,java,75,1365341689,1365341977,1365341977,4,4,github,false,false,6,1,0,0,0,0,0,0,1,1,1,0,0,62,9699,5,0,10,0.0,0.0,0.0,13,DarkStorm652,1,1.0,1,false,false
@@ -49,7 +49,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1336102,vInsertOfficial/vInsert,java,52,1365138857,,1365140371,25,,unknown,false,false,5,1,0,0,0,0,0,0,1,1,1,0,0,65,9614,174,0,0,0.0,0.0,0.0,26,NissanNut,7,0.14285714285714285,0,false,false
 1336086,vInsertOfficial/vInsert,java,51,1365138523,,1365140263,29,,unknown,false,false,5,1,0,1,1,1,0,0,1,1,1,0,0,65,9614,174,0,0,0.0,0.0,0.0,26,NissanNut,6,0.16666666666666666,0,false,false
 1335811,vInsertOfficial/vInsert,java,50,1365129769,,1365202575,1213,,unknown,false,false,5,1,0,0,0,0,0,0,1,1,1,0,0,65,9614,3,0,0,0.0,0.0,0.0,13,marijuana,0,0,0,false,false
-1334969,vInsertOfficial/vInsert,java,48,1365108069,1365119606,1365119606,192,192,github,false,false,5,4,0,1,1,1,1,0,3,4,4,0,0,65,9598,151,0,14,0.0,0.0,0.0,13,triggdev,15,0.5333333333333333,0,false,false
+1334969,vInsertOfficial/vInsert,java,48,1365108069,1365119606,1365119606,192,192,github,false,false,5,4,0,1,1,1,1,1,3,5,4,0,0,65,9598,151,0,14,0.0,0.0,0.0,13,triggdev,15,0.5333333333333333,0,false,false
 2694844,vInsertOfficial/vInsert,java,47,1365095410,,1365100160,79,,unknown,false,false,5,1,0,0,0,1,0,0,1,1,1,0,0,65,9550,15,0,0,0.0,0.0,0.0,12,triggdev,14,0.5714285714285714,0,false,false
 1334384,vInsertOfficial/vInsert,java,46,1365095178,1365103226,1365103226,134,134,github,false,false,5,3,0,0,0,0,0,0,2,2,2,0,0,65,9550,111,0,7,0.0,0.0,0.0,12,triggdev,13,0.5384615384615384,0,false,false
 1332535,vInsertOfficial/vInsert,java,45,1365052483,,1365052682,3,,unknown,false,false,5,2,0,0,0,0,0,0,2,2,2,0,0,63,9550,88,0,0,0.0,0.0,0.0,12,triggdev,12,0.5833333333333334,0,false,false
@@ -69,7 +69,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1328712,vInsertOfficial/vInsert,java,30,1364960027,1364960061,1364960061,0,0,github,false,false,4,1,0,0,0,0,0,0,5,5,5,0,0,60,9296,108,0,8,0.0,0.0,0.0,10,iamtommo,3,1.0,6,false,false
 1328579,vInsertOfficial/vInsert,java,29,1364956554,1364956594,1364956595,0,0,github,false,false,4,2,0,0,0,0,0,0,5,5,5,0,0,61,9271,233,0,13,0.0,0.0,0.0,10,iamtommo,2,1.0,6,false,false
 1328329,vInsertOfficial/vInsert,java,28,1364950995,1364951032,1364951032,0,0,github,false,false,4,2,0,0,0,0,0,0,3,3,3,0,0,61,9266,21,0,13,0.0,0.0,0.0,10,iamtommo,1,1.0,6,false,false
-1327495,vInsertOfficial/vInsert,java,27,1364935517,1364935950,1364935950,7,7,github,false,false,3,13,0,0,0,0,7,0,31,38,16,1,22,66,8949,1483,0,89,0.0,0.0,0.0,10,iamtommo,0,0,6,false,false
+1327495,vInsertOfficial/vInsert,java,27,1364935517,1364935950,1364935950,7,7,github,false,false,3,13,0,0,0,0,7,4,31,42,16,1,22,66,8949,1483,0,89,0.0,0.0,0.0,10,iamtommo,0,0,6,false,false
 1326557,vInsertOfficial/vInsert,java,26,1364920675,1364923191,1364923191,41,41,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,62,8920,71,0,3,0.0,0.0,0.0,9,triggdev,9,0.4444444444444444,0,false,false
 1328146,vInsertOfficial/vInsert,java,25,1364907791,1364947648,1364947648,664,664,github,false,false,3,3,0,0,0,0,1,0,3,4,3,0,0,60,8949,320,0,8,0.0,0.0,0.0,9,triggdev,8,0.375,0,false,false
 1328127,vInsertOfficial/vInsert,java,24,1364900249,1364947150,1364947150,781,781,commits_in_master,false,false,3,2,0,0,0,1,0,0,3,3,3,0,0,59,8920,7,0,3,0.0,0.0,0.0,9,tylerpnn,6,0.6666666666666666,0,false,false
@@ -77,7 +77,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1324159,vInsertOfficial/vInsert,java,22,1364878693,1364947197,1364947197,1141,1141,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,55,8920,10,0,1,0.0,0.0,0.0,8,NissanNut,0,0,0,false,false
 1323801,vInsertOfficial/vInsert,java,21,1364869115,1364869306,1364869306,3,3,github,false,false,3,3,0,0,0,0,1,0,4,5,4,0,0,56,8862,188,0,7,0.0,0.0,0.0,8,triggdev,7,0.2857142857142857,0,false,false
 1323627,vInsertOfficial/vInsert,java,20,1364865499,1364869671,1364869671,69,69,github,false,false,3,1,0,0,0,0,0,0,9,9,9,0,0,53,8862,90,0,17,0.0,0.0,0.0,8,triggdev,6,0.16666666666666666,0,false,false
-1323602,vInsertOfficial/vInsert,java,19,1364864847,1364864991,1364864991,2,2,github,false,false,3,3,0,0,0,0,1,0,1,2,2,0,0,53,8800,232,0,3,0.0,0.0,0.0,16,triggdev,5,0.0,0,false,false
+1323602,vInsertOfficial/vInsert,java,19,1364864847,1364864991,1364864991,2,2,github,false,false,3,3,0,0,0,0,1,1,1,3,2,0,0,53,8800,232,0,3,0.0,0.0,0.0,16,triggdev,5,0.0,0,false,false
 1323544,vInsertOfficial/vInsert,java,18,1364863289,,1364864732,24,,unknown,false,false,3,1,0,0,0,1,0,0,1,1,1,0,0,50,8800,20,0,0,0.0,0.0,0.0,8,Qwik,0,0,0,false,false
 1323536,vInsertOfficial/vInsert,java,17,1364863155,,1364863467,5,,unknown,false,false,3,5,0,0,0,0,1,0,11,12,11,0,0,50,8800,190,0,0,0.0,0.0,0.0,8,triggdev,4,0.0,0,false,false
 1323363,vInsertOfficial/vInsert,java,16,1364859592,1364859617,1364859617,0,0,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,48,8800,4,0,1,0.0,0.0,0.0,8,tylerpnn,4,0.5,0,false,false
@@ -89,8 +89,8 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1322147,vInsertOfficial/vInsert,java,10,1364838572,1364838670,1364838671,1,1,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,40,8769,6,0,1,0.0,0.0,0.0,7,tylerpnn,3,0.3333333333333333,0,false,false
 1373833,vInsertOfficial/vInsert,java,9,1364831740,,1364855244,391,,unknown,false,false,3,1,0,1,1,1,1,0,0,1,1,0,0,40,8769,63,0,0,0.0,0.0,0.0,7,Soxs,1,1.0,0,false,false
 1320937,vInsertOfficial/vInsert,java,8,1364819011,1364837592,1364837592,309,309,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,40,8769,8,0,1,0.0,0.0,0.0,7,Soxs,0,0,0,false,false
-1319954,vInsertOfficial/vInsert,java,7,1364795496,,1364840091,743,,unknown,false,false,3,6,0,1,1,1,21,0,7,28,282,0,22,37,8769,455,0,0,0.0,0.0,0.0,7,triggdev,1,0.0,0,false,false
-1319918,vInsertOfficial/vInsert,java,6,1364794019,,1364795286,21,,unknown,false,false,3,5,0,0,0,0,0,0,7,7,282,0,22,25,8769,455,0,0,0.0,0.0,0.0,6,triggdev,0,0,0,false,false
+1319954,vInsertOfficial/vInsert,java,7,1364795496,,1364840091,743,,unknown,false,false,3,6,0,1,1,1,21,21,7,49,282,0,22,37,8769,455,0,0,0.0,0.0,0.0,7,triggdev,1,0.0,0,false,false
+1319918,vInsertOfficial/vInsert,java,6,1364794019,,1364795286,21,,unknown,false,false,3,5,0,0,0,0,0,21,7,28,282,0,22,25,8769,455,0,0,0.0,0.0,0.0,6,triggdev,0,0,0,false,false
 1319810,vInsertOfficial/vInsert,java,5,1364789184,1364789548,1364789548,6,6,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,17,8768,3,0,2,0.0,0.0,0.0,6,IamBurt,0,0,0,false,false
 1319288,vInsertOfficial/vInsert,java,4,1364771977,1364772779,1364772779,13,13,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,13,8768,2,0,1,0.0,0.0,0.0,5,kennehisftw,0,0,0,false,false
 1319206,vInsertOfficial/vInsert,java,3,1364769246,,1364838506,1154,,unknown,false,false,3,2,0,1,1,1,0,0,3,3,3,0,0,7,8768,75,0,0,0.0,0.0,0.0,5,tylerpnn,2,0.5,0,false,false

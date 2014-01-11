@@ -1,4 +1,6 @@
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,merged_using,conflict,forward_links,team_size,num_commits,num_commit_comments,num_issue_comments,num_comments,num_participants,files_added,files_deleted,files_modified,files_changed,src_files,doc_files,other_files,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
+2761630,sensu/sensu-community-plugins,ruby,408,1389126024,1389126092,1389126092,1,1,github,false,false,2,1,0,1,1,2,1,0,0,1,1,0,0,69,10672,93,0,0,0.0,0.0,0.0,150,jswoods,0,0,0,false,false
+2746706,sensu/sensu-community-plugins,ruby,405,1388867779,1388873350,1388873350,92,92,github,false,false,2,1,0,1,1,1,4,0,0,4,4,0,0,70,10451,270,0,0,0.0,0.0,0.0,150,zsprackett,2,0.0,9,false,false
 2724463,sensu/sensu-community-plugins,ruby,400,1388465436,1388497102,1388497102,527,527,commits_in_master,false,false,2,2,0,1,1,1,1,0,1,2,1,0,0,73,10302,216,0,0,0.0,0.0,0.0,150,icebourg,0,0,6,false,false
 2711512,sensu/sensu-community-plugins,ruby,399,1388166526,,1388166920,6,,unknown,false,false,2,1,0,0,0,0,1,0,0,1,1,0,0,73,10239,43,0,0,0.0,0.0,0.0,150,retr0h,0,0,44,false,false
 2691970,sensu/sensu-community-plugins,ruby,396,1387829595,1387847370,1387847370,296,296,commits_in_master,false,false,2,1,0,1,1,1,0,0,1,1,1,0,0,76,10140,17,0,1,0.0,0.0,0.0,150,bobtfish,1,0.0,154,false,false
@@ -14,7 +16,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2627942,sensu/sensu-community-plugins,ruby,384,1386888013,1386888321,1386888321,5,5,commits_in_master,false,false,2,2,0,0,0,0,0,0,2,2,1,0,1,80,9807,24,0,0,0.0,0.0,0.0,149,salehsed,0,0,4,false,false
 2615152,sensu/sensu-community-plugins,ruby,383,1386757902,1386953231,1386953231,3255,3255,commits_in_master,false,false,2,2,0,2,2,2,0,0,1,1,1,0,0,80,9715,9,0,4,0.0,0.0,0.0,149,woltage,0,0,15,false,false
 2589031,sensu/sensu-community-plugins,ruby,382,1386357283,1386357472,1386357472,3,3,github,false,false,2,1,0,0,0,0,2,0,0,2,1,0,1,80,9679,66,0,0,0.0,0.0,0.0,149,nstielau,20,0.85,30,false,true
-2587962,sensu/sensu-community-plugins,ruby,381,1386347263,1386347858,1386347858,9,9,github,false,false,2,1,0,1,1,1,0,0,0,0,0,0,2,80,9679,0,0,2,0.0,0.0,0.0,149,pburkholder,2,0.5,1,false,false
+2587962,sensu/sensu-community-plugins,ruby,381,1386347263,1386347858,1386347858,9,9,github,false,false,2,1,0,1,1,1,0,2,0,2,0,0,2,80,9679,0,0,2,0.0,0.0,0.0,149,pburkholder,2,0.5,1,false,false
 2587849,sensu/sensu-community-plugins,ruby,380,1386346134,1386346941,1386346941,13,13,github,false,false,2,2,0,0,0,0,1,0,0,1,1,0,0,81,9679,41,0,0,0.0,0.0,0.0,149,Fizzadar,1,1.0,16,false,false
 2586936,sensu/sensu-community-plugins,ruby,379,1386338419,1387813862,1387813862,24590,24590,commits_in_master,false,false,2,3,0,3,3,2,0,0,1,1,1,0,0,82,9566,7,0,30,0.0,0.0,0.0,149,ermajn,0,0,1,false,false
 2586617,sensu/sensu-community-plugins,ruby,378,1386335504,1386345471,1386345471,166,166,github,false,false,2,3,0,0,0,0,1,0,2,3,3,0,0,82,9566,18,0,3,0.0,0.0,0.0,149,barryorourke,0,0,1,false,false
@@ -34,7 +36,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2513687,sensu/sensu-community-plugins,ruby,361,1385360105,1386174254,1386174254,13569,13569,commits_in_master,false,false,1,5,0,4,4,4,1,0,1,2,1,0,0,82,9232,145,0,0,0.0,0.0,0.0,149,maoe,1,0.0,62,false,false
 2503294,sensu/sensu-community-plugins,ruby,360,1385144151,1386174359,1386174359,17170,17170,commits_in_master,false,false,1,1,0,1,1,1,1,0,0,1,1,0,0,82,9232,169,0,0,0.0,0.0,0.0,149,sgargan,0,0,3,false,false
 2501074,sensu/sensu-community-plugins,ruby,359,1385123814,1386778611,1386778611,27579,27579,commits_in_master,false,false,1,5,1,2,3,3,3,0,3,6,3,0,0,82,9232,329,0,0,0.0,0.0,0.0,149,ashish30jain,0,0,0,false,false
-2491468,sensu/sensu-community-plugins,ruby,356,1385010009,1385044104,1385044104,568,568,commits_in_master,false,false,1,2,0,1,1,1,1,0,1,2,2,0,0,82,9197,282,0,0,0.0,0.0,0.0,149,portertech,16,0.8125,79,false,true
+2491468,sensu/sensu-community-plugins,ruby,356,1385010009,1385044104,1385044104,568,568,commits_in_master,false,false,1,2,0,1,1,1,1,1,1,3,2,0,0,82,9197,282,0,0,0.0,0.0,0.0,149,portertech,16,0.8125,79,false,true
 2482296,sensu/sensu-community-plugins,ruby,355,1384898696,1384900574,1384900574,31,31,commits_in_master,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,83,9197,4,0,3,0.0,0.0,0.0,149,maxamg,2,0.0,2,false,false
 2481567,sensu/sensu-community-plugins,ruby,354,1384892557,1384896189,1384896189,60,60,commits_in_master,false,true,1,2,0,1,1,2,0,0,1,1,1,0,0,83,9185,19,0,2,0.0,0.0,0.0,149,maxamg,1,0.0,2,false,false
 2480398,sensu/sensu-community-plugins,ruby,353,1384882174,1384885668,1384885668,58,58,commits_in_master,false,false,1,1,2,0,2,2,0,0,1,1,1,0,0,83,9179,25,0,1,0.0,0.0,0.0,149,maxamg,0,0,2,false,false
@@ -49,7 +51,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2427501,sensu/sensu-community-plugins,ruby,343,1384179915,1384191999,1384191999,201,201,commits_in_master,false,false,1,1,0,1,1,1,19,0,0,19,19,0,0,85,9104,0,0,19,0.0,0.0,0.0,149,mrichar1,0,0,0,false,false
 2427188,sensu/sensu-community-plugins,ruby,342,1384177010,1384191698,1384191698,244,244,commits_in_master,false,false,1,3,0,2,2,2,0,0,2,2,1,0,1,85,9102,134,0,0,0.0,0.0,0.0,149,janstenpickle,3,1.0,1,false,false
 2415642,sensu/sensu-community-plugins,ruby,341,1383945285,1384371146,1384371146,7097,7097,commits_in_master,false,false,1,5,0,1,1,1,0,0,1,1,1,0,0,85,9102,69,0,0,0.0,0.0,0.0,149,joemiller,11,1.0,50,false,true
-2413861,sensu/sensu-community-plugins,ruby,340,1383927783,1384816386,1384816386,14810,14810,commits_in_master,false,false,1,14,0,4,4,2,2,0,2,4,2,0,0,85,9102,603,0,0,0.0,0.0,0.0,149,badmadrad,1,0.0,0,false,false
+2413861,sensu/sensu-community-plugins,ruby,340,1383927783,1384816386,1384816386,14810,14810,commits_in_master,false,false,1,14,0,4,4,2,2,2,2,6,2,0,0,85,9102,603,0,0,0.0,0.0,0.0,149,badmadrad,1,0.0,0,false,false
 2413183,sensu/sensu-community-plugins,ruby,339,1383922169,1384178539,1384178539,4272,4272,commits_in_master,false,false,1,3,2,2,4,3,0,0,1,1,1,0,0,84,9102,88,0,0,0.0,0.0,0.0,149,kcrayon,4,1.0,1,false,false
 2406682,sensu/sensu-community-plugins,ruby,338,1383843033,1383843424,1383843424,6,6,commits_in_master,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,84,9102,8,0,3,0.0,0.0,0.0,149,nstielau,19,0.8947368421052632,28,false,true
 2406330,sensu/sensu-community-plugins,ruby,337,1383840110,1383840333,1383840333,3,3,commits_in_master,false,false,1,3,0,1,1,1,1,0,1,2,1,0,0,84,9068,64,0,0,0.0,0.0,0.0,149,johanek,3,0.3333333333333333,3,false,false
@@ -78,12 +80,12 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2220932,sensu/sensu-community-plugins,ruby,311,1381152197,1381171031,1381171031,313,313,github,false,false,1,3,0,2,2,2,1,0,1,2,1,0,0,82,8709,67,0,0,0.0,0.0,0.0,149,johanek,0,0,3,false,false
 2196896,sensu/sensu-community-plugins,ruby,310,1380737291,,1380751435,235,,unknown,false,false,2,4,0,2,2,2,0,0,1,1,1,0,0,81,8709,54,0,0,0.0,0.0,0.0,149,jprokay,2,0.0,1,false,false
 2237055,sensu/sensu-community-plugins,ruby,309,1380716840,1381367426,1381367426,10843,10843,commits_in_master,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,81,8709,2,0,2,0.0,0.0,0.0,149,yacn,3,0.3333333333333333,0,false,false
-2190212,sensu/sensu-community-plugins,ruby,308,1380663612,1380675593,1380675593,199,199,commits_in_master,false,false,2,7,0,2,2,2,1,0,2,3,2,0,0,80,8645,133,0,0,0.0,0.0,0.0,149,jprokay,1,0.0,1,false,false
+2190212,sensu/sensu-community-plugins,ruby,308,1380663612,1380675593,1380675593,199,199,commits_in_master,false,false,2,7,0,2,2,2,1,1,2,4,2,0,0,80,8645,133,0,0,0.0,0.0,0.0,149,jprokay,1,0.0,1,false,false
 2191029,sensu/sensu-community-plugins,ruby,307,1380633023,1380675607,1380675607,709,709,commits_in_master,false,false,2,2,0,1,1,1,1,0,1,2,1,0,0,79,8645,75,0,0,0.0,0.0,0.0,149,yacn,2,0.5,0,false,false
 2182931,sensu/sensu-community-plugins,ruby,306,1380571355,1380573293,1380573293,32,32,commits_in_master,false,false,2,3,0,1,1,1,1,0,1,2,1,0,0,79,8549,130,0,0,0.0,0.0,0.0,149,jprokay,0,0,1,false,false
 2182283,sensu/sensu-community-plugins,ruby,305,1380565168,1380903931,1380903931,5646,5646,commits_in_master,false,false,2,2,0,0,0,0,1,0,1,2,1,0,0,78,8549,74,0,0,0.0,0.0,0.0,149,badmadrad,0,0,0,false,false
 2180038,sensu/sensu-community-plugins,ruby,304,1380543695,1380630893,1380630893,1453,1453,commits_in_master,false,false,2,2,0,8,8,7,0,0,2,2,2,0,0,78,8549,36,0,4,0.0,0.0,0.0,149,jlambert121,12,1.0,2,false,false
-2169974,sensu/sensu-community-plugins,ruby,303,1380338195,1381404192,1381404192,17766,17766,commits_in_master,true,false,2,120,0,6,6,3,18,0,35,53,39,1,2,78,8549,2766,0,26,0.0,0.0,0.0,149,mduggan,0,0,0,false,false
+2169974,sensu/sensu-community-plugins,ruby,303,1380338195,1381404192,1381404192,17766,17766,commits_in_master,true,false,2,120,0,6,6,3,18,1,35,54,39,1,2,78,8549,2766,0,26,0.0,0.0,0.0,149,mduggan,0,0,0,false,false
 2169497,sensu/sensu-community-plugins,ruby,302,1380320491,1380639378,1380639378,5314,5314,commits_in_master,false,false,2,1,2,0,2,2,0,0,1,1,1,0,0,78,8549,4,0,0,0.0,0.0,0.0,149,piavlo,7,0.8571428571428571,1,false,false
 2128760,sensu/sensu-community-plugins,ruby,301,1380269273,1380309458,1380309458,669,669,commits_in_master,false,false,2,3,2,1,3,2,0,0,1,1,1,0,0,77,8457,47,0,3,0.0,0.0,0.0,149,jameslegg,0,0,1,false,false
 2164406,sensu/sensu-community-plugins,ruby,300,1380253361,1380573697,1380573697,5338,5338,commits_in_master,false,false,2,3,0,3,3,3,1,0,1,2,2,0,0,76,8457,163,0,0,0.0,0.0,0.0,149,nstielau,18,0.9444444444444444,28,false,true
@@ -109,16 +111,16 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2007090,sensu/sensu-community-plugins,ruby,277,1377800904,1377823893,1377823893,383,383,github,false,false,3,1,0,1,1,1,0,0,1,1,1,0,0,63,7922,14,0,0,0.0,0.0,0.0,145,robbydyer,0,0,1,false,false
 2004066,sensu/sensu-community-plugins,ruby,276,1377774604,1378278303,1378278303,8394,8394,commits_in_master,false,false,3,1,0,3,3,3,0,0,1,1,1,0,0,64,7922,2,0,2,0.0,0.0,0.0,145,horus,0,0,0,false,false
 2000087,sensu/sensu-community-plugins,ruby,275,1377710685,1378278443,1378278443,9462,9462,commits_in_master,false,false,3,4,1,1,2,2,0,0,1,1,1,0,0,63,7922,15,0,8,0.0,0.0,0.0,145,skymob,3,1.0,3,false,false
-1998853,sensu/sensu-community-plugins,ruby,274,1377697447,1378278629,1378278629,9686,9686,commits_in_master,false,false,3,2,0,0,0,0,2,0,0,2,2,0,0,63,7922,232,0,2,0.0,0.0,0.0,145,bashtoni,6,1.0,2,false,false
+1998853,sensu/sensu-community-plugins,ruby,274,1377697447,1378278629,1378278629,9686,9686,commits_in_master,false,false,3,2,0,0,0,0,2,1,0,3,2,0,0,63,7922,232,0,2,0.0,0.0,0.0,145,bashtoni,6,1.0,2,false,false
 1998803,sensu/sensu-community-plugins,ruby,273,1377696945,1379511956,1379511956,30250,30250,commits_in_master,false,false,3,3,1,2,3,3,0,0,1,1,1,0,0,63,7922,14,0,0,0.0,0.0,0.0,145,girijabrahme,2,1.0,0,false,false
 1992561,sensu/sensu-community-plugins,ruby,272,1377609111,1379512128,1379512128,31716,31716,commits_in_master,false,false,3,1,1,0,1,1,1,0,0,1,1,0,0,63,7846,41,0,0,0.0,0.0,0.0,145,j-russell,0,0,3,false,false
 1984830,sensu/sensu-community-plugins,ruby,271,1377494425,1377610587,1377610587,1936,1936,github,false,false,3,2,0,0,0,0,0,0,1,1,1,0,0,63,7799,10,0,2,0.0,0.0,0.0,144,pdf,3,1.0,2,false,false
-1927603,sensu/sensu-community-plugins,ruby,270,1376366348,1376447350,1376447350,1350,1350,github,false,false,3,1,0,3,3,2,0,0,1,1,2,0,0,64,7839,134,0,2,0.0,0.0,0.0,143,pdf,2,1.0,2,false,false
+1927603,sensu/sensu-community-plugins,ruby,270,1376366348,1376447350,1376447350,1350,1350,github,false,false,3,1,0,3,3,2,0,1,1,2,2,0,0,64,7839,134,0,2,0.0,0.0,0.0,143,pdf,2,1.0,2,false,false
 2006754,sensu/sensu-community-plugins,ruby,269,1376366122,1376399886,1376399886,562,562,github,false,false,3,0,0,0,0,0,0,0,0,0,0,0,0,64,7802,0,0,0,0.0,0.0,0.0,143,pdf,1,1.0,2,false,false
 2006767,sensu/sensu-community-plugins,ruby,268,1376365765,1376401011,1376401011,587,587,github,false,false,3,0,0,0,0,0,0,0,0,0,0,0,0,64,7802,0,0,0,0.0,0.0,0.0,143,pdf,0,0,2,false,false
 1915081,sensu/sensu-community-plugins,ruby,267,1376062097,1376066534,1376066534,73,73,github,false,false,3,3,0,2,2,2,0,0,1,1,1,0,0,64,7800,34,0,9,0.0,0.0,0.0,286,girijabrahme,1,1.0,0,false,false
 1907703,sensu/sensu-community-plugins,ruby,266,1375942316,1375944893,1375944893,42,42,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,66,7788,184,0,1,0.0,0.0,0.0,143,bashtoni,5,1.0,2,false,false
-1905537,sensu/sensu-community-plugins,ruby,265,1375899545,1375900179,1375900179,10,10,github,false,false,3,8,0,1,1,1,1,0,1,2,2,0,0,66,7786,78,0,1,0.0,0.0,0.0,143,skymob,2,1.0,3,false,false
+1905537,sensu/sensu-community-plugins,ruby,265,1375899545,1375900179,1375900179,10,10,github,false,false,3,8,0,1,1,1,1,1,1,3,2,0,0,66,7786,78,0,1,0.0,0.0,0.0,143,skymob,2,1.0,3,false,false
 1898631,sensu/sensu-community-plugins,ruby,264,1375812774,1375815619,1375815619,47,47,github,false,false,3,1,0,0,0,0,1,0,0,1,1,0,0,67,7736,72,0,0,0.0,0.0,0.0,143,bashtoni,4,1.0,2,false,false
 1896698,sensu/sensu-community-plugins,ruby,262,1375790727,1375799577,1375799578,147,147,github,false,false,3,1,0,0,0,0,1,0,0,1,1,0,0,68,7641,98,0,0,0.0,0.0,0.0,143,bashtoni,3,1.0,2,false,false
 1930696,sensu/sensu-community-plugins,ruby,261,1375771677,1378301312,1378301312,42160,42160,commits_in_master,false,false,3,5,0,3,3,2,0,0,3,3,2,0,1,67,7641,24,0,5,0.0,0.0,0.0,143,kepes,1,1.0,0,false,false
@@ -128,7 +130,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1854703,sensu/sensu-community-plugins,ruby,256,1375013197,1375800054,1375800055,13114,13114,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,65,7641,7,0,1,0.0,0.0,0.0,142,nstielau,15,1.0,27,false,true
 1851536,sensu/sensu-community-plugins,ruby,255,1374953324,1377608777,1377608777,44257,44257,github,false,false,3,5,3,5,8,4,1,0,1,2,1,0,0,65,7581,147,0,0,0.0,0.0,0.0,142,nstielau,14,1.0,26,false,true
 1834115,sensu/sensu-community-plugins,ruby,254,1374759065,,1374777557,308,,unknown,false,false,3,1,0,6,6,3,1,0,0,1,1,0,0,66,7505,22,0,0,0.0,0.0,0.0,142,simonjohansson,1,1.0,4,false,false
-1817759,sensu/sensu-community-plugins,ruby,253,1374607402,1374760104,1374760105,2545,2545,github,false,false,3,5,1,2,3,2,1,0,2,3,2,0,0,65,7482,1016,0,2,0.0,0.0,0.0,142,janstenpickle,1,1.0,0,false,false
+1817759,sensu/sensu-community-plugins,ruby,253,1374607402,1374760104,1374760105,2545,2545,github,false,false,3,5,1,2,3,2,1,1,2,4,2,0,0,65,7482,1016,0,2,0.0,0.0,0.0,142,janstenpickle,1,1.0,0,false,false
 1814782,sensu/sensu-community-plugins,ruby,252,1374587674,1374704341,1374704341,1944,1944,github,false,false,3,4,0,7,7,2,1,0,2,3,1,2,0,65,7482,56,0,29,0.0,0.0,0.0,142,simonjohansson,0,0,4,false,false
 1805614,sensu/sensu-community-plugins,ruby,251,1374478528,1374500154,1374500155,360,360,github,false,false,3,3,0,1,1,2,0,0,1,1,1,0,0,65,7468,18,0,12,0.0,0.0,0.0,142,janstenpickle,0,0,0,false,false
 1807525,sensu/sensu-community-plugins,ruby,250,1374358132,1374517948,1374517949,2663,2663,github,false,false,3,4,0,4,4,2,5,0,6,11,6,0,0,64,7468,309,0,1,0.0,0.0,0.0,142,EmilienM,0,0,26,false,false
@@ -147,7 +149,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1704028,sensu/sensu-community-plugins,ruby,237,1373065647,1373065660,1373065660,0,0,github,false,false,4,1,0,0,0,0,0,0,1,1,1,0,0,67,7222,10,0,3,0.0,0.0,0.0,141,portertech,13,0.7692307692307693,65,false,true
 1702523,sensu/sensu-community-plugins,ruby,236,1373045267,1373060634,1373060634,256,256,github,false,false,4,1,0,1,1,1,0,0,1,1,1,0,0,68,7165,2,0,1,0.0,0.0,0.0,141,newmanne,0,0,0,false,false
 1701777,sensu/sensu-community-plugins,ruby,235,1373037354,1375012459,1375012460,32918,32918,github,false,false,4,2,0,0,0,0,1,0,1,2,1,0,0,68,7165,50,0,0,0.0,0.0,0.0,141,failshell,20,0.55,8,false,false
-1688272,sensu/sensu-community-plugins,ruby,234,1372852563,1372859973,1372859973,123,123,github,false,false,4,1,0,1,1,1,0,0,1,1,1,0,1,68,7186,50,0,0,0.0,0.0,0.0,141,failshell,19,0.5263157894736842,8,false,false
+1688272,sensu/sensu-community-plugins,ruby,234,1372852563,1372859973,1372859973,123,123,github,false,false,4,1,0,1,1,1,0,1,1,2,1,0,1,68,7186,50,0,0,0.0,0.0,0.0,141,failshell,19,0.5263157894736842,8,false,false
 1683852,sensu/sensu-community-plugins,ruby,233,1372833185,,1373474313,10685,,unknown,false,false,4,3,0,0,0,0,3,0,2,5,2,0,1,68,7186,199,0,0,0.0,0.0,0.0,141,siavashs,0,0,1,false,false
 1681827,sensu/sensu-community-plugins,ruby,232,1372792166,1373059544,1373059544,4456,4456,github,false,false,4,3,0,2,2,2,1,0,1,2,1,0,0,68,7186,109,0,0,0.0,0.0,0.0,141,portertech,12,0.75,65,false,true
 1676881,sensu/sensu-community-plugins,ruby,231,1372711104,1372733451,1372733451,372,372,github,false,false,4,3,0,4,4,2,0,0,1,1,1,0,0,68,7143,54,0,0,0.0,0.0,0.0,140,jlambert121,8,1.0,0,false,false
@@ -247,9 +249,9 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 789617,sensu/sensu-community-plugins,ruby,128,1357766409,1357767091,1357767091,11,11,github,false,false,3,3,0,0,0,0,0,0,1,1,1,0,0,71,4672,43,0,9,0.0,0.0,0.0,122,agent462,1,1.0,0,false,false
 789573,sensu/sensu-community-plugins,ruby,127,1357765762,1357767735,1357767735,32,32,github,false,false,3,2,0,1,1,1,0,0,1,1,1,0,0,70,4672,13,0,0,0.0,0.0,0.0,244,agent462,0,0,0,false,false
 789252,sensu/sensu-community-plugins,ruby,124,1356022982,1357760851,1357760851,28964,28964,github,false,false,3,4,0,0,0,0,2,0,1,3,3,0,0,70,4610,125,0,1,0.0,0.0,0.0,121,zadunn,6,1.0,1,false,false
-723910,sensu/sensu-community-plugins,ruby,123,1355777710,1355883998,1355883998,1771,1771,github,false,false,3,10,1,1,2,2,1,0,5,6,8,0,1,68,4536,505,0,14,0.0,0.0,0.0,121,portertech,10,0.7,52,false,true
+723910,sensu/sensu-community-plugins,ruby,123,1355777710,1355883998,1355883998,1771,1771,github,false,false,3,10,1,1,2,2,1,1,5,7,8,0,1,68,4536,505,0,14,0.0,0.0,0.0,121,portertech,10,0.7,52,false,true
 758496,sensu/sensu-community-plugins,ruby,122,1355776410,1355777012,1355777012,10,10,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,69,4538,6,0,0,0.0,0.0,0.0,121,jlambert121,0,0,0,false,false
-758446,sensu/sensu-community-plugins,ruby,121,1355775405,1355777153,1355777153,29,29,github,false,false,3,2,0,0,0,0,1,0,1,2,2,0,0,68,4538,228,0,7,0.0,0.0,0.0,121,portertech,9,0.6666666666666666,52,false,true
+758446,sensu/sensu-community-plugins,ruby,121,1355775405,1355777153,1355777153,29,29,github,false,false,3,2,0,0,0,0,1,1,1,3,2,0,0,68,4538,228,0,7,0.0,0.0,0.0,121,portertech,9,0.6666666666666666,52,false,true
 757474,sensu/sensu-community-plugins,ruby,120,1355756105,1355762037,1355762039,98,98,github,false,false,3,2,0,0,0,0,2,0,1,3,3,0,0,68,4538,2,0,3,0.0,0.0,0.0,242,zadunn,5,1.0,2,false,false
 756074,sensu/sensu-community-plugins,ruby,119,1355713180,1355717844,1355717844,77,77,github,false,false,3,1,0,1,1,1,2,0,0,2,2,0,0,70,4501,121,0,0,0.0,0.0,0.0,121,joemiller,9,1.0,40,false,true
 709808,sensu/sensu-community-plugins,ruby,118,1355426047,1355426174,1355426174,2,2,github,false,false,2,1,0,1,1,2,1,0,0,1,1,0,0,71,4431,82,0,0,0.0,0.0,0.0,121,skymob,0,0,0,false,false
@@ -295,7 +297,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 426960,sensu/sensu-community-plugins,ruby,77,1348166729,1348167374,1348167374,10,10,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,60,2847,2,0,1,0.0,0.0,0.0,116,bhenerey,2,1.0,7,false,false
 392904,sensu/sensu-community-plugins,ruby,76,1347487645,1352914686,1352914686,90390,90390,github,false,false,3,2,0,2,2,2,1,0,1,2,1,0,0,59,2744,61,0,0,0.0,0.0,0.0,116,dsuarez,0,0,0,false,false
 363382,sensu/sensu-community-plugins,ruby,75,1347184883,1347219714,1347219714,580,580,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,60,2744,4,0,0,0.0,0.0,0.0,116,kepes,0,0,0,false,false
-361486,sensu/sensu-community-plugins,ruby,74,1347051506,1347053222,1347053222,28,28,github,false,false,3,1,0,1,1,1,0,0,2,2,2,0,2,60,2744,11,0,3,0.0,0.0,0.0,232,nstielau,3,1.0,44,false,true
+361486,sensu/sensu-community-plugins,ruby,74,1347051506,1347053222,1347053222,28,28,github,false,false,3,1,0,1,1,1,0,2,2,4,2,0,2,60,2744,11,0,3,0.0,0.0,0.0,232,nstielau,3,1.0,44,false,true
 360839,sensu/sensu-community-plugins,ruby,73,1347032628,1347035322,1347035322,44,44,github,false,false,2,1,0,1,1,2,2,0,2,4,3,0,1,61,2741,47,0,0,0.0,0.0,0.0,116,gilles,0,0,14,false,false
 358845,sensu/sensu-community-plugins,ruby,72,1346962950,1355504805,1355504805,142304,142304,github,false,false,2,2,2,3,5,3,0,0,1,1,1,0,0,61,2741,42,0,2,0.0,0.0,0.0,116,alanshields,0,0,0,false,false
 353729,sensu/sensu-community-plugins,ruby,71,1346787538,1348078497,1348078498,21516,21515,github,false,false,2,4,0,3,3,2,1,0,1,2,1,0,0,58,2741,15,0,0,0.0,0.0,0.0,116,portertech,6,0.5,50,false,true
@@ -334,7 +336,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 709721,sensu/sensu-community-plugins,ruby,38,1333031950,1333207265,1333207265,2921,2921,github,false,false,2,1,0,0,0,0,1,0,0,1,1,0,0,40,1898,73,0,0,0.0,0.0,0.0,93,petey5king,11,0.5454545454545454,4,false,false
 709722,sensu/sensu-community-plugins,ruby,37,1332531463,1333207193,1333207193,11322,11322,github,false,false,2,1,0,0,0,0,1,0,0,1,1,0,0,39,1898,59,0,0,0.0,0.0,0.0,93,petey5king,10,0.5,4,false,false
 709712,sensu/sensu-community-plugins,ruby,36,1332458976,1332518009,1332518009,983,983,github,false,false,2,1,0,1,1,1,0,0,33,33,33,0,0,40,1886,293,0,55,0.0,0.0,0.0,93,decklin,0,0,23,false,true
-709716,sensu/sensu-community-plugins,ruby,35,1332452639,,1333032404,9722,,unknown,false,true,2,17,0,2,2,2,15,0,38,53,42,0,0,40,1606,1831,0,0,0.0,0.0,0.0,93,petey5king,9,0.5555555555555556,4,false,false
+709716,sensu/sensu-community-plugins,ruby,35,1332452639,,1333032404,9722,,unknown,false,true,2,17,0,2,2,2,15,1,38,54,42,0,0,40,1606,1831,0,0,0.0,0.0,0.0,93,petey5king,9,0.5555555555555556,4,false,false
 709707,sensu/sensu-community-plugins,ruby,34,1332369997,,1332459250,1487,,unknown,false,false,2,2,0,1,1,1,1,0,1,2,1,0,0,40,1606,157,0,0,0.0,0.0,0.0,93,petey5king,8,0.625,4,false,false
 709709,sensu/sensu-community-plugins,ruby,33,1332366311,,1332459246,1548,,unknown,false,false,2,3,0,1,1,1,1,0,1,2,1,0,0,40,1606,78,0,0,0.0,0.0,0.0,93,petey5king,7,0.7142857142857143,4,false,false
 709702,sensu/sensu-community-plugins,ruby,32,1331913428,,1332459240,9096,,unknown,false,false,2,2,0,2,2,2,1,0,1,2,1,0,0,39,1606,72,0,0,0.0,0.0,0.0,93,petey5king,6,0.8333333333333334,3,false,false
@@ -342,7 +344,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 709698,sensu/sensu-community-plugins,ruby,30,1331825134,1331859956,1331859956,580,580,github,false,false,3,3,0,2,2,3,1,0,1,2,1,0,0,41,1344,261,0,0,0.0,0.0,0.0,93,petey5king,4,1.0,3,false,false
 709700,sensu/sensu-community-plugins,ruby,29,1331767614,1331825136,1331825136,958,958,github,false,false,3,1,0,0,0,0,1,0,0,1,1,0,0,40,1344,136,0,0,0.0,0.0,0.0,93,petey5king,3,1.0,3,false,false
 709695,sensu/sensu-community-plugins,ruby,28,1331682827,1331742100,1331742100,987,987,github,false,false,3,2,0,1,1,1,1,0,1,2,1,0,0,39,1288,151,0,0,0.0,0.0,0.0,93,petey5king,2,1.0,3,false,false
-709696,sensu/sensu-community-plugins,ruby,27,1331682330,1331742100,1331742100,996,996,github,false,false,3,2,0,2,2,2,2,0,0,2,2,0,0,39,1288,195,0,0,0.0,0.0,0.0,93,petey5king,1,1.0,3,false,false
+709696,sensu/sensu-community-plugins,ruby,27,1331682330,1331742100,1331742100,996,996,github,false,false,3,2,0,2,2,2,2,1,0,3,2,0,0,39,1288,195,0,0,0.0,0.0,0.0,93,petey5king,1,1.0,3,false,false
 709691,sensu/sensu-community-plugins,ruby,25,1331317640,1331319575,1331319575,32,32,github,false,false,3,1,0,0,0,0,2,0,0,2,1,0,1,33,1272,23,0,0,0.0,0.0,0.0,93,petey5king,0,0,3,false,false
 709693,sensu/sensu-community-plugins,ruby,24,1331075435,1331077237,1331077237,30,30,github,false,false,3,1,0,0,0,0,1,0,0,1,1,0,0,32,1189,114,0,0,0.0,0.0,0.0,93,fujin,3,1.0,48,false,false
 709904,sensu/sensu-community-plugins,ruby,23,1330720429,1330720635,1330720635,3,3,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,32,1189,6,0,3,0.0,0.0,0.0,93,pcheslock,1,1.0,0,false,false

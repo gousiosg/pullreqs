@@ -117,7 +117,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 819461,middleman/middleman-guides,ruby,133,1358449521,1358463518,1358463518,233,233,github,false,false,3,1,0,0,0,0,0,0,1,1,0,1,0,41,44,0,0,10,0.0,0.0,0.0,122,RyanParsley,0,0,9,false,false
 790403,middleman/middleman-guides,ruby,132,1357781994,1357785258,1357785258,54,54,github,false,false,2,1,0,1,1,1,0,0,1,1,0,1,0,43,42,0,0,0,0.0,0.0,0.0,120,max,0,0,49,false,false
 1065639,middleman/middleman-guides,ruby,131,1357398348,1357406706,1357406706,139,139,github,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,43,42,0,0,9,0.0,0.0,0.0,120,alexandru,0,0,71,false,false
-772769,middleman/middleman-guides,ruby,129,1356847530,1357158755,1357158755,5187,5187,github,false,false,2,1,0,1,1,1,5,0,10,15,1,15,0,45,42,3,0,7,0.0,0.0,0.0,120,stevenosloan,0,0,7,false,false
+772769,middleman/middleman-guides,ruby,129,1356847530,1357158755,1357158755,5187,5187,github,false,false,2,1,0,1,1,1,5,1,10,16,1,15,0,45,42,3,0,7,0.0,0.0,0.0,120,stevenosloan,0,0,7,false,false
 769888,middleman/middleman-guides,ruby,128,1356735097,1356746261,1356746261,186,186,github,false,false,1,1,0,0,0,3,0,0,1,1,0,1,0,45,42,0,0,7,0.0,0.0,0.0,120,heitzke,0,0,4,false,false
 901340,middleman/middleman-guides,ruby,127,1356116488,1356119497,1356119497,50,50,github,false,false,1,1,0,1,1,1,0,0,1,1,0,1,0,45,42,0,0,0,0.0,0.0,0.0,119,athanph,0,0,0,false,false
 900458,middleman/middleman-guides,ruby,126,1356064669,1356110342,1356110342,761,761,github,false,false,1,1,0,0,0,0,0,0,1,1,0,1,0,45,42,0,0,6,0.0,0.0,0.0,119,dleavitt,0,0,7,false,false
@@ -154,7 +154,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 873384,middleman/middleman-guides,ruby,92,1343374715,1343398979,1343398979,404,404,github,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,33,42,0,0,10,0.0,0.0,0.0,106,karlfreeman,0,0,9,false,true
 225640,middleman/middleman-guides,ruby,91,1343164570,1343178010,1343178010,224,224,github,false,false,2,3,0,0,0,0,0,0,1,1,0,1,0,31,42,0,0,9,0.0,0.0,0.0,106,dannyprose,4,1.0,3,false,false
 225069,middleman/middleman-guides,ruby,90,1343147779,1343154688,1343154689,115,115,github,false,false,2,3,0,1,1,1,1,0,2,3,0,2,0,28,42,0,0,2,0.0,0.0,0.0,106,dannyprose,3,1.0,3,false,false
-219651,middleman/middleman-guides,ruby,89,1342830893,,1352858392,167064,,unknown,false,false,2,1,0,0,0,2,1,0,1,2,0,3,0,30,42,0,0,0,0.0,0.0,0.0,106,minipai,6,0.5,0,false,false
+219651,middleman/middleman-guides,ruby,89,1342830893,,1352858392,167064,,unknown,false,false,2,1,0,0,0,2,1,1,1,3,0,3,0,30,42,0,0,0,0.0,0.0,0.0,106,minipai,6,0.5,0,false,false
 213397,middleman/middleman-guides,ruby,87,1342579686,1342582062,1342582063,39,39,github,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,31,42,0,0,9,0.0,0.0,0.0,106,lukebowerman,0,0,0,false,false
 213179,middleman/middleman-guides,ruby,86,1342566571,1342572017,1342572018,90,90,github,false,false,2,1,0,0,0,0,0,0,2,2,0,2,0,30,42,0,0,3,0.0,0.0,0.0,106,minipai,5,0.4,0,false,false
 212926,middleman/middleman-guides,ruby,85,1342557011,1342557646,1342557648,10,10,github,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,30,42,0,0,3,0.0,0.0,0.0,106,adamesque,0,0,10,false,false
@@ -164,7 +164,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 206437,middleman/middleman-guides,ruby,80,1342226669,,1342247735,351,,unknown,false,false,2,1,0,5,5,3,11,0,3,14,0,11,3,30,41,0,0,0,0.0,0.0,0.0,106,minipai,2,0.5,0,false,false
 206184,middleman/middleman-guides,ruby,79,1342212742,1342233686,1342233686,349,349,github,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,29,41,0,0,7,0.0,0.0,0.0,106,deepfriedmind,0,0,7,false,false
 205620,middleman/middleman-guides,ruby,78,1342197752,1342208507,1342208507,179,179,github,false,false,2,1,0,0,0,1,4,0,4,8,0,6,2,29,41,0,0,6,0.0,0.0,0.0,106,minipai,1,0.0,0,false,false
-203746,middleman/middleman-guides,ruby,77,1342123139,,1342197903,1246,,unknown,false,false,2,10,0,1,1,2,10,0,6,16,0,12,2,30,41,0,0,0,0.0,0.0,0.0,106,minipai,0,0,0,false,false
+203746,middleman/middleman-guides,ruby,77,1342123139,,1342197903,1246,,unknown,false,false,2,10,0,1,1,2,10,1,6,17,0,12,2,30,41,0,0,0,0.0,0.0,0.0,106,minipai,0,0,0,false,false
 1065737,middleman/middleman-guides,ruby,76,1342030850,1342032118,1342032119,21,21,github,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,30,41,0,0,6,0.0,0.0,0.0,105,hayley,1,1.0,0,false,false
 403523,middleman/middleman-guides,ruby,75,1342017612,1342020889,1342020889,54,54,github,false,false,2,1,0,0,0,1,0,0,1,1,0,1,0,28,41,0,0,1,0.0,0.0,0.0,104,mattonrails,0,0,43,true,false
 183121,middleman/middleman-guides,ruby,74,1341072817,1341074062,1341074062,20,20,github,false,false,2,1,0,0,0,1,0,0,1,1,0,1,0,35,34,0,0,4,0.0,0.0,0.0,103,cgag,0,0,0,false,false

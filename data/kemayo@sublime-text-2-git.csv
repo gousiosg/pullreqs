@@ -4,7 +4,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1162156,kemayo/sublime-text-2-git,python,243,1361068563,,1361079816,187,,unknown,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,25,1041,2,0,2,0.0,0.0,0.0,947,allixsenos,0,0,21,false,false
 787596,kemayo/sublime-text-2-git,python,229,1357735860,1358311043,1358311043,9586,9586,github,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,0,995,7,0,0,0.0,0.0,0.0,945,phuslu,1,0.0,198,false,false
 786637,kemayo/sublime-text-2-git,python,228,1357718444,,1357735679,287,,unknown,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,0,995,10,0,0,0.0,0.0,0.0,945,phuslu,0,0,198,false,false
-770556,kemayo/sublime-text-2-git,python,224,1356757393,1364507518,1364507518,129168,129168,commits_in_master,false,false,1,11,0,7,7,2,2,0,1,3,1,0,2,0,995,159,0,0,0.0,0.0,0.0,945,dacap,0,0,8,false,false
+770556,kemayo/sublime-text-2-git,python,224,1356757393,1364507518,1364507518,129168,129168,commits_in_master,false,false,1,11,0,7,7,2,2,1,1,4,1,0,2,0,995,159,0,0,0.0,0.0,0.0,945,dacap,0,0,8,false,false
 759392,kemayo/sublime-text-2-git,python,222,1355803139,1355847571,1355847571,740,740,github,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,33,994,2,0,0,0.0,0.0,0.0,929,jamesadney,0,0,2,false,false
 542574,kemayo/sublime-text-2-git,python,213,1351877921,1355847861,1355847861,66165,66165,github,false,false,2,1,0,2,2,3,0,0,1,1,1,0,0,25,994,39,0,14,0.0,0.0,0.0,891,spence,0,0,0,false,false
 894590,kemayo/sublime-text-2-git,python,208,1350669767,1355847923,1355847923,86242,86242,github,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,26,994,0,0,1,0.0,0.0,0.0,891,martinsvalin,0,0,5,false,false

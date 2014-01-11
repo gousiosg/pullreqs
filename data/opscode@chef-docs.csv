@@ -1,4 +1,7 @@
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,merged_using,conflict,forward_links,team_size,num_commits,num_commit_comments,num_issue_comments,num_comments,num_participants,files_added,files_deleted,files_modified,files_changed,src_files,doc_files,other_files,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
+2761728,opscode/chef-docs,python,222,1389127202,1389127809,1389127809,10,10,github,false,false,2,1,0,0,0,0,0,0,8,8,0,5,0,5,572,0,0,83,0.0,0.0,0.0,38,sean-horn,6,0.3333333333333333,3,true,true
+2748514,opscode/chef-docs,python,220,1388918877,1388974295,1388974295,923,923,github,false,false,2,1,0,0,0,1,0,0,1,1,0,1,0,5,572,0,0,0,0.0,0.0,0.0,38,cl-lab-k,26,0.5769230769230769,2,false,false
+2742411,opscode/chef-docs,python,219,1388781142,1388785211,1388785211,67,67,github,false,false,2,2,0,0,0,2,0,0,1,1,0,1,0,5,572,0,0,0,0.0,0.0,0.0,38,miketheman,2,0.0,57,false,false
 2666898,opscode/chef-docs,python,215,1387392033,1387396235,1387396235,70,70,github,false,false,4,1,0,0,0,0,0,0,3,3,0,1,2,6,572,0,0,58,0.0,0.0,0.0,38,juliandunn,24,0.2916666666666667,17,false,true
 2658298,opscode/chef-docs,python,214,1387318829,1387322022,1387322022,53,53,commits_in_master,false,false,4,1,0,0,0,0,0,0,1,1,0,1,0,6,572,0,0,0,0.0,0.0,0.0,38,mattray,7,0.5714285714285714,100,false,true
 2649857,opscode/chef-docs,python,213,1387223537,1387224001,1387224001,7,7,commits_in_master,false,false,4,1,0,0,0,0,0,0,1,1,0,1,0,6,572,0,0,7,0.0,0.0,0.0,38,juliandunn,23,0.30434782608695654,17,false,true
@@ -122,11 +125,11 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1745219,opscode/chef-docs,python,67,1366901705,1366903980,1366903980,37,37,github,false,false,2,1,0,1,1,1,0,0,1,1,0,1,0,38,3409,0,0,0,0.0,0.0,0.0,23,juliandunn,5,0.6,6,false,true
 1742412,opscode/chef-docs,python,66,1366844215,1366851015,1366851015,113,113,github,false,false,2,1,0,0,0,0,0,0,2,2,0,2,0,38,3409,0,0,0,0.0,0.0,0.0,23,richleland,0,0,50,false,false
 1734659,opscode/chef-docs,python,65,1366825437,,1370294183,57812,,unknown,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,38,3409,0,0,0,0.0,0.0,0.0,23,seth,0,0,40,true,true
-1719504,opscode/chef-docs,python,64,1366811808,1373295603,1373295603,108063,108063,commits_in_master,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,38,3409,0,0,1,0.0,0.0,0.0,23,smith,0,0,50,false,true
+1719504,opscode/chef-docs,python,64,1366811808,,1373295603,108063,,unknown,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,38,3409,0,0,1,0.0,0.0,0.0,23,smith,0,0,50,false,true
 1392534,opscode/chef-docs,python,63,1366443451,,1366648562,3418,,unknown,false,false,2,2,0,0,0,1,0,0,4,4,0,1,1,38,3409,0,0,0,0.0,0.0,0.0,23,zuazo,2,0.0,0,false,false
 1390976,opscode/chef-docs,python,62,1366392470,1366399090,1366399090,110,110,github,false,false,2,1,0,0,0,0,0,0,1,1,0,0,0,38,3409,0,0,3,0.0,0.0,0.0,46,juliandunn,4,0.5,12,false,true
-1390946,opscode/chef-docs,python,61,1366391944,,1367340955,15816,,unknown,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,38,3409,0,0,2,0.0,0.0,0.0,23,juliandunn,3,0.6666666666666666,6,false,true
-1390944,opscode/chef-docs,python,60,1366391921,,1367340974,15817,,unknown,false,false,2,3,0,0,0,0,0,0,2,2,0,1,1,38,3409,0,0,21,0.0,0.0,0.0,23,juliandunn,2,1.0,6,false,true
+1390946,opscode/chef-docs,python,61,1366391944,1367340955,1367340955,15816,15816,commits_in_master,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,38,3409,0,0,2,0.0,0.0,0.0,23,juliandunn,3,0.6666666666666666,6,false,true
+1390944,opscode/chef-docs,python,60,1366391921,1367340974,1367340974,15817,15817,commits_in_master,false,false,2,3,0,0,0,0,0,0,2,2,0,1,1,38,3409,0,0,21,0.0,0.0,0.0,23,juliandunn,2,1.0,6,false,true
 1388107,opscode/chef-docs,python,59,1366334012,1366338471,1366338471,74,74,github,false,false,2,1,0,0,0,1,0,0,2,2,0,1,1,38,3409,0,0,6,0.0,0.0,0.0,46,juliandunn,1,1.0,12,false,true
 1387959,opscode/chef-docs,python,58,1366329283,1366338684,1366338684,156,156,github,false,false,2,1,0,0,0,1,0,0,1,1,0,1,0,38,3409,0,0,3,0.0,0.0,0.0,23,juliandunn,0,0,6,false,true
 1377182,opscode/chef-docs,python,57,1366126383,1366170961,1366170961,742,742,github,false,false,2,1,0,0,0,1,0,0,1,1,0,1,0,38,3409,0,0,10,0.0,0.0,0.0,23,pierreozoux,1,0.0,1,false,false
@@ -150,7 +153,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 945934,opscode/chef-docs,python,29,1359677411,,1359742505,1084,,unknown,false,false,3,2,0,11,11,2,0,0,1,1,0,1,0,3,3289,0,0,0,0.0,0.0,0.0,18,danielsdeleo,0,0,50,true,true
 842888,opscode/chef-docs,python,27,1359052143,1359052510,1359052511,6,6,github,false,false,3,1,0,0,0,0,0,0,1,1,0,1,0,3,3248,0,0,0,0.0,0.0,0.0,18,crazysim,0,0,8,false,false
 838505,opscode/chef-docs,python,25,1358978162,1358978252,1358978252,1,1,github,false,false,3,1,0,1,1,1,0,0,1,1,0,1,0,3,3248,0,0,4,0.0,0.0,0.0,18,tjstum,0,0,0,false,false
-1081574,opscode/chef-docs,python,24,1357994364,,1373295426,255077,,unknown,false,false,5,2,0,0,0,1,0,0,6,6,0,0,394,2,3248,0,0,0,0.0,0.0,0.0,17,jhotta,0,0,1,false,false
+1081574,opscode/chef-docs,python,24,1357994364,,1373295426,255077,,unknown,false,false,5,2,0,0,0,1,0,388,6,394,0,0,394,2,3248,0,0,0,0.0,0.0,0.0,17,jhotta,0,0,1,false,false
 1081573,opscode/chef-docs,python,23,1357287728,1366385318,1366385318,151686,151686,commits_in_master,false,false,6,1,0,3,3,3,0,0,1,1,0,0,0,3,3598,0,0,8,0.0,0.0,0.0,17,apaxuc,0,0,3,false,false
 897150,opscode/chef-docs,python,22,1355923599,1355934968,1355934968,189,189,github,false,false,6,2,0,0,0,0,0,0,1,1,0,1,0,9,3560,0,0,4,0.0,0.0,0.0,17,gsandie,0,0,9,false,false
 894848,opscode/chef-docs,python,21,1355854322,1355935198,1355935198,1347,1347,github,false,false,6,1,0,1,1,1,0,0,1,1,0,1,0,9,3560,0,0,3,0.0,0.0,0.0,17,juddmaltin-dell,0,0,1,false,false
@@ -162,5 +165,5 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 601706,opscode/chef-docs,python,14,1354262323,1354298514,1354298514,603,603,github,false,false,6,2,0,0,0,0,6,0,3,9,0,9,0,11,3315,0,0,56,0.0,0.0,0.0,15,stevendanna,2,0.0,9,false,true
 498609,opscode/chef-docs,python,13,1353334270,1353346737,1353346737,207,207,github,false,false,6,1,0,0,0,0,0,0,3,3,0,2,1,15,3146,0,0,4,0.0,0.0,0.0,13,nathenharvey,0,0,21,false,true
 1081611,opscode/chef-docs,python,12,1352234251,1352234333,1352234333,1,1,github,false,false,6,1,0,0,0,0,0,0,1,1,0,1,0,21,2181,0,0,2,0.0,0.0,0.0,13,jblaine,0,0,3,false,false
-1081587,opscode/chef-docs,python,5,1349378664,,1373295404,398612,,unknown,false,false,3,53,0,1,1,1,1452,0,331,1783,70,1029,309,45,1965,14558,0,0,0.0,0.0,0.0,13,paulmooring,2,0.5,2,false,true
-1081501,opscode/chef-docs,python,4,1349369300,,1351898275,42089,,unknown,false,false,3,54,0,0,0,1,1452,0,330,1782,70,1029,309,48,1965,14558,0,0,0.0,0.0,0.0,13,paulmooring,1,1.0,2,false,true
+1081587,opscode/chef-docs,python,5,1349378664,,1373295404,398612,,unknown,false,false,3,53,0,1,1,1,1452,42,331,1825,70,1029,309,45,1965,14558,0,0,0.0,0.0,0.0,13,paulmooring,2,0.5,2,false,true
+1081501,opscode/chef-docs,python,4,1349369300,,1351898275,42089,,unknown,false,false,3,54,0,0,0,1,1452,42,330,1824,70,1029,309,48,1965,14558,0,0,0.0,0.0,0.0,13,paulmooring,1,1.0,2,false,true

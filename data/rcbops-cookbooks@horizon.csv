@@ -1,10 +1,14 @@
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,merged_using,conflict,forward_links,team_size,num_commits,num_commit_comments,num_issue_comments,num_comments,num_participants,files_added,files_deleted,files_modified,files_changed,src_files,doc_files,other_files,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
+2766958,rcbops-cookbooks/horizon,ruby,150,1389197983,1389200876,1389200876,48,48,github,false,false,8,1,0,6,6,1,0,0,3,3,2,1,0,42,390,6,0,27,0.0,0.0,0.0,16,rackerjoe,18,0.6111111111111112,18,false,true
+2754207,rcbops-cookbooks/horizon,ruby,149,1389026841,1389029778,1389029778,48,48,github,false,false,8,1,0,6,6,1,0,0,1,1,1,0,0,42,388,2,0,22,0.0,0.0,0.0,16,rackerjoe,17,0.5882352941176471,18,false,true
+2742653,rcbops-cookbooks/horizon,ruby,148,1388783567,1388786578,1388786578,50,50,github,false,false,9,1,0,7,7,2,0,0,1,1,1,0,0,41,388,2,0,23,0.0,0.0,0.0,16,rackerjoe,16,0.5625,18,false,true
+2742652,rcbops-cookbooks/horizon,ruby,147,1388783513,1388796483,1388796483,216,216,github,false,false,9,1,0,14,14,2,0,0,1,1,1,0,0,41,390,2,0,24,0.0,0.0,0.0,16,rackerjoe,15,0.5333333333333333,18,false,true
 2569004,rcbops-cookbooks/horizon,ruby,146,1386108568,1386173878,1386173878,1088,1088,github,false,false,8,1,0,13,13,2,0,0,3,3,2,1,0,48,388,6,0,62,0.0,0.0,0.0,16,jrcloud,5,1.0,4,false,true
 2503634,rcbops-cookbooks/horizon,ruby,145,1385146995,1385150501,1385150501,58,58,commits_in_master,false,false,8,1,0,6,6,1,0,0,1,1,1,0,0,48,388,2,0,34,0.0,0.0,0.0,16,claco,1,0.0,49,false,true
 2428392,rcbops-cookbooks/horizon,ruby,144,1384187850,1384190492,1384190492,44,44,commits_in_master,false,false,8,1,0,7,7,2,0,0,1,1,1,0,0,48,387,3,0,33,0.0,0.0,0.0,16,willkelly,2,0.5,9,false,true
 2323328,rcbops-cookbooks/horizon,ruby,143,1382646635,1382650282,1382650282,60,60,commits_in_master,false,false,8,1,0,6,6,1,0,0,1,1,1,0,0,49,387,26,0,33,0.0,0.0,0.0,16,cloudnull,7,0.14285714285714285,27,false,true
 2323179,rcbops-cookbooks/horizon,ruby,142,1382644893,1382646150,1382646150,20,20,commits_in_master,false,false,8,2,0,6,6,1,0,0,2,2,2,0,0,49,386,20,0,44,0.0,0.0,0.0,16,cloudnull,6,0.16666666666666666,27,false,true
-2320275,rcbops-cookbooks/horizon,ruby,141,1382620032,1382640428,1382640428,339,339,commits_in_master,false,false,8,4,0,18,18,2,0,0,3,3,2,2,0,49,407,167,0,47,0.0,0.0,0.0,16,cloudnull,5,0.2,27,false,true
+2320275,rcbops-cookbooks/horizon,ruby,141,1382620032,1382640428,1382640428,339,339,commits_in_master,false,false,8,4,0,18,18,2,0,2,3,5,2,2,0,49,407,167,0,47,0.0,0.0,0.0,16,cloudnull,5,0.2,27,false,true
 2317470,rcbops-cookbooks/horizon,ruby,140,1382586877,1382587436,1382587436,9,9,commits_in_master,false,false,8,2,0,8,8,1,0,0,1,1,1,0,0,46,407,4,0,58,0.0,0.0,0.0,16,cloudnull,4,0.25,27,false,true
 2317466,rcbops-cookbooks/horizon,ruby,139,1382586722,1382586729,1382586729,0,0,commits_in_master,false,false,8,2,0,1,1,1,0,0,2,2,1,1,0,46,416,29,0,31,0.0,0.0,0.0,16,cloudnull,3,0.3333333333333333,27,false,true
 2317421,rcbops-cookbooks/horizon,ruby,138,1382585802,1382621498,1382621498,594,594,commits_in_master,false,false,8,1,0,9,9,2,0,0,1,1,0,1,0,45,416,0,0,3,0.0,0.0,0.0,16,willkelly,1,1.0,9,false,true
@@ -17,7 +21,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2241808,rcbops-cookbooks/horizon,ruby,131,1381424401,1381424824,1381424824,7,7,commits_in_master,false,false,6,1,0,4,4,1,0,0,1,1,1,0,0,48,292,2,0,0,0.0,0.0,0.0,16,rackerjoe,13,0.6153846153846154,16,false,true
 2203466,rcbops-cookbooks/horizon,ruby,130,1380818236,1380820700,1380820700,41,41,github,false,false,3,1,0,7,7,2,0,0,1,1,1,0,0,57,291,1,0,9,0.0,0.0,0.0,16,odyssey4me,0,0,5,false,false
 2202924,rcbops-cookbooks/horizon,ruby,129,1380812569,1380814935,1380814935,39,39,github,false,false,3,1,0,6,6,1,0,0,1,1,0,1,0,57,291,0,0,9,0.0,0.0,0.0,16,jrcloud,4,1.0,3,false,true
-2197630,rcbops-cookbooks/horizon,ruby,128,1380745534,1380801075,1380801075,925,925,commits_in_master,false,false,3,12,0,2,2,1,1,0,5,6,2,5,0,52,299,154,0,62,0.0,0.0,0.0,16,cloudnull,0,0,25,false,true
+2197630,rcbops-cookbooks/horizon,ruby,128,1380745534,1380801075,1380801075,925,925,commits_in_master,false,false,3,12,0,2,2,1,1,1,5,7,2,5,0,52,299,154,0,62,0.0,0.0,0.0,16,cloudnull,0,0,25,false,true
 2167817,rcbops-cookbooks/horizon,ruby,127,1380298822,1380301525,1380301526,45,45,github,false,false,3,1,0,6,6,1,0,0,1,1,1,0,0,47,301,11,0,9,0.0,0.0,0.0,16,jrcloud,3,1.0,2,false,true
 2117310,rcbops-cookbooks/horizon,ruby,126,1379524446,1379532441,1379532441,133,133,github,false,false,4,2,0,10,10,1,0,0,3,3,2,1,0,52,290,23,0,43,0.0,0.0,0.0,16,jrcloud,2,1.0,2,false,true
 2115899,rcbops-cookbooks/horizon,ruby,125,1379512579,1379514992,1379514992,40,40,github,false,false,4,1,0,6,6,1,0,0,3,3,2,1,0,52,288,8,0,28,0.0,0.0,0.0,16,jrcloud,1,1.0,2,false,true
@@ -34,7 +38,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1808712,rcbops-cookbooks/horizon,ruby,114,1374511310,1374551634,1374551634,672,672,commits_in_master,false,false,3,3,0,17,17,2,0,0,4,4,2,1,1,59,268,4,0,22,0.0,0.0,0.0,15,rackerjoe,12,0.6666666666666666,14,false,true
 1764489,rcbops-cookbooks/horizon,ruby,113,1373636639,1374136336,1374136336,8328,8328,commits_in_master,false,false,4,2,0,33,33,2,0,0,2,2,2,0,0,56,261,73,0,10,0.0,0.0,0.0,15,mancdaz,11,0.5454545454545454,12,false,true
 1740639,rcbops-cookbooks/horizon,ruby,112,1373355795,1373357890,1373357890,34,34,github,false,false,5,1,0,6,6,1,0,0,1,1,0,1,0,57,261,0,0,6,0.0,0.0,0.0,15,andymcc,4,0.0,1,false,true
-1679094,rcbops-cookbooks/horizon,ruby,111,1372759518,1372775653,1372775653,268,268,commits_in_master,false,false,6,2,0,18,18,2,0,0,1,1,2,1,0,56,273,78,0,13,0.0,0.0,0.0,15,andymcc,3,0.0,1,false,true
+1679094,rcbops-cookbooks/horizon,ruby,111,1372759518,1372775653,1372775653,268,268,commits_in_master,false,false,6,2,0,18,18,2,0,2,1,3,2,1,0,56,273,78,0,13,0.0,0.0,0.0,15,andymcc,3,0.0,1,false,true
 1666620,rcbops-cookbooks/horizon,ruby,110,1372434775,1372437262,1372437262,41,41,github,false,false,6,1,0,5,5,1,0,0,1,1,0,0,1,56,273,0,0,1,0.0,0.0,0.0,15,rackerjoe,11,0.6363636363636364,14,false,true
 1649847,rcbops-cookbooks/horizon,ruby,109,1372201020,1372203614,1372203614,43,43,commits_in_master,false,false,6,3,0,7,7,2,0,0,2,2,2,0,0,57,272,30,0,30,0.0,0.0,0.0,15,egon010,0,0,2,false,false
 1641914,rcbops-cookbooks/horizon,ruby,108,1372090848,1372103421,1372103421,209,209,merged_in_comments,false,false,5,4,0,12,12,3,0,0,5,5,3,2,0,54,237,15,0,1,0.0,0.0,0.0,15,DavidWittman,1,1.0,14,false,false
@@ -55,7 +59,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1470010,rcbops-cookbooks/horizon,ruby,93,1366686459,,1368437087,29177,,unknown,false,false,5,1,0,3,3,1,0,0,1,1,1,0,0,46,231,1,0,0,0.0,0.0,0.0,14,spheromak,0,0,13,false,false
 1363010,rcbops-cookbooks/horizon,ruby,92,1365767999,1365781034,1365781034,217,217,github,false,false,4,1,0,10,10,2,0,0,1,1,0,1,0,51,231,0,0,2,0.0,0.0,0.0,14,galstrom21,20,0.2,12,false,true
 1360630,rcbops-cookbooks/horizon,ruby,91,1365701712,1365712976,1365712976,187,187,github,false,false,3,1,0,3,3,1,0,0,1,1,0,1,0,51,231,0,0,1,0.0,0.0,0.0,14,jcannava,0,0,5,false,true
-1352127,rcbops-cookbooks/horizon,ruby,90,1365539466,1365539503,1365539504,0,0,github,false,false,2,1,0,0,0,0,0,0,1,1,1,4,0,51,237,15,0,6,0.0,0.0,0.0,14,galstrom21,19,0.15789473684210525,12,false,true
+1352127,rcbops-cookbooks/horizon,ruby,90,1365539466,1365539503,1365539504,0,0,github,false,false,2,1,0,0,0,0,0,2,1,3,1,4,0,51,237,15,0,6,0.0,0.0,0.0,14,galstrom21,19,0.15789473684210525,12,false,true
 1199644,rcbops-cookbooks/horizon,ruby,88,1361917250,1361941048,1361941048,396,396,commits_in_master,false,false,1,1,0,4,4,1,0,0,1,1,1,0,0,51,237,4,0,6,0.0,0.0,0.0,14,mancdaz,7,0.8571428571428571,12,false,true
 1178826,rcbops-cookbooks/horizon,ruby,87,1361450824,1361458428,1361458428,126,126,github,false,false,1,2,0,5,5,1,0,0,2,2,1,1,0,51,237,6,0,14,0.0,0.0,0.0,14,mattt416,0,0,1,false,true
 1158673,rcbops-cookbooks/horizon,ruby,86,1360958002,1360970178,1360970178,202,202,commits_in_master,false,false,1,1,0,5,5,1,0,0,1,1,1,0,0,50,234,9,0,3,0.0,0.0,0.0,14,rackerjoe,6,1.0,10,false,true

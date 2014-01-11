@@ -22,7 +22,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2619889,EmilHernvall/tregmine,java,214,1386805971,1387127211,1387127211,5354,5354,commits_in_master,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,74,52153,4,0,1,0.0,0.0,0.0,7,JoshMorgan,18,0.4444444444444444,0,false,false
 2618181,EmilHernvall/tregmine,java,213,1386788095,1387306581,1387306581,8641,8641,commits_in_master,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,74,52153,2,0,0,0.0,0.0,0.0,7,JoshMorgan,17,0.47058823529411764,0,false,false
 2615475,EmilHernvall/tregmine,java,212,1386762017,1386771971,1386771971,165,165,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,74,52113,54,0,5,0.0,0.0,0.0,7,lDiverse,93,0.27956989247311825,2,false,false
-2613921,EmilHernvall/tregmine,java,211,1386740451,1386757584,1386757584,285,285,github,false,false,2,1,0,0,0,0,18,0,10,28,27,2,0,74,42241,3614,0,11,0.0,0.0,0.0,7,JoshMorgan,16,0.4375,0,false,false
+2613921,EmilHernvall/tregmine,java,211,1386740451,1386757584,1386757584,285,285,github,false,false,2,1,0,0,0,0,18,1,10,29,27,2,0,74,42241,3614,0,11,0.0,0.0,0.0,7,JoshMorgan,16,0.4375,0,false,false
 2610122,EmilHernvall/tregmine,java,209,1386694671,1386695833,1386695833,19,19,github,false,false,2,3,0,0,0,0,0,0,3,3,3,0,0,74,42215,21,0,17,0.0,0.0,0.0,7,lDiverse,92,0.2717391304347826,2,false,false
 2608639,EmilHernvall/tregmine,java,208,1386682878,1386683389,1386683389,8,8,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,73,42214,3,0,0,0.0,0.0,0.0,7,lDiverse,91,0.26373626373626374,2,false,false
 2607826,EmilHernvall/tregmine,java,206,1386675075,1386676507,1386676507,23,23,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,75,42059,2,0,0,0.0,0.0,0.0,7,lDiverse,90,0.25555555555555554,2,false,false
@@ -70,7 +70,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2501999,EmilHernvall/tregmine,java,150,1385132156,,1385291690,2658,,unknown,false,false,1,5,0,0,0,0,0,0,5,5,5,0,0,90,40852,680,0,0,0.0,0.0,0.0,7,lDiverse,49,0.02040816326530612,2,false,false
 2501779,EmilHernvall/tregmine,java,149,1385130404,,1385291699,2688,,unknown,false,false,1,5,0,0,0,0,0,0,5,5,5,0,0,90,40852,181,0,0,0.0,0.0,0.0,7,lDiverse,48,0.020833333333333332,2,false,false
 2500794,EmilHernvall/tregmine,java,148,1385121032,,1385295013,2899,,unknown,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,90,40852,6,0,0,0.0,0.0,0.0,7,lDiverse,47,0.02127659574468085,2,false,false
-2492268,EmilHernvall/tregmine,java,147,1385023150,1385069166,1385069166,766,766,commits_in_master,false,false,1,3,0,0,0,0,16,0,0,16,13,1,2,91,38107,898,0,0,0.0,0.0,0.0,7,JoshMorgan,15,0.4666666666666667,0,false,false
+2492268,EmilHernvall/tregmine,java,147,1385023150,1385069166,1385069166,766,766,commits_in_master,false,false,1,3,0,0,0,0,16,2,0,18,13,1,2,91,38107,898,0,0,0.0,0.0,0.0,7,JoshMorgan,15,0.4666666666666667,0,false,false
 2489500,EmilHernvall/tregmine,java,146,1384982243,1384984457,1384984457,36,36,commits_in_master,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,92,38099,37,0,1,0.0,0.0,0.0,7,lDiverse,46,0.021739130434782608,2,false,false
 2478493,EmilHernvall/tregmine,java,144,1384867363,1384984445,1384984445,1951,1951,commits_in_master,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,92,38099,7,0,1,0.0,0.0,0.0,7,lDiverse,45,0.022222222222222223,2,false,false
 2466608,EmilHernvall/tregmine,java,140,1384711410,1384714589,1384714589,52,52,commits_in_master,false,false,1,2,0,0,0,0,0,0,2,2,2,0,0,96,37786,108,0,1,0.0,0.0,0.0,6,lDiverse,44,0.022727272727272728,1,false,false
@@ -138,7 +138,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1982535,EmilHernvall/tregmine,java,58,1377426550,1377575442,1377575442,2481,2481,commits_in_master,false,false,4,4,0,2,2,2,1,0,3,4,3,1,0,76,31997,159,0,61,0.0,0.0,0.0,4,JoshMorgan,5,0.4,0,false,false
 1981614,EmilHernvall/tregmine,java,57,1377390962,1377492469,1377492469,1691,1691,commits_in_master,false,false,4,6,0,2,2,2,1,0,4,5,3,1,0,76,31997,596,0,61,0.0,0.0,0.0,4,JoshMorgan,4,0.5,0,false,false
 1979775,EmilHernvall/tregmine,java,56,1377337613,1377390879,1377390879,887,887,commits_in_master,false,false,4,6,0,0,0,0,1,0,4,5,3,1,0,76,31997,596,0,61,0.0,0.0,0.0,4,JoshMorgan,3,0.6666666666666666,0,false,false
-1978229,EmilHernvall/tregmine,java,55,1377287858,,1377566016,4635,,unknown,false,false,4,10,0,9,9,3,4,0,9,13,12,0,0,75,31997,452,0,0,0.0,0.0,0.0,4,sabersamus,9,0.0,2,false,false
+1978229,EmilHernvall/tregmine,java,55,1377287858,,1377566016,4635,,unknown,false,false,4,10,0,9,9,3,4,1,9,14,12,0,0,75,31997,452,0,0,0.0,0.0,0.0,4,sabersamus,9,0.0,2,false,false
 1961116,EmilHernvall/tregmine,java,51,1377047397,1377239277,1377239277,3198,3198,commits_in_master,false,false,4,12,0,1,1,2,3,0,6,9,7,1,0,73,31098,754,0,285,0.0,0.0,0.0,4,notaro1997,2,0.0,3,false,false
 1946281,EmilHernvall/tregmine,java,49,1376300988,1376775269,1376775270,7904,7904,github,false,false,5,2,0,0,0,0,0,0,2,2,1,1,0,64,30961,97,0,21,0.0,0.0,0.0,3,JoshMorgan,2,0.5,0,false,false
 1921957,EmilHernvall/tregmine,java,48,1376267977,1377047042,1377047042,12984,12984,commits_in_master,false,false,5,9,0,2,2,2,2,0,6,8,6,1,0,64,30961,522,0,173,0.0,0.0,0.0,3,notaro1997,1,0.0,3,false,false

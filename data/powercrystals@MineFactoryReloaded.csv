@@ -14,10 +14,10 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2043687,powercrystals/MineFactoryReloaded,java,291,1374271263,,1380941332,111167,,unknown,false,false,4,3,0,1,1,1,0,0,22,22,22,0,0,25,42028,140,0,0,0.0,0.0,0.0,50,skyboy,35,0.5428571428571428,7,false,false
 2040787,powercrystals/MineFactoryReloaded,java,289,1374165258,1374271125,1374271125,1764,1764,github,false,false,4,0,0,0,0,0,0,0,0,0,0,0,0,25,42041,0,0,0,0.0,0.0,0.0,49,skyboy,34,0.5294117647058824,7,false,false
 1778259,powercrystals/MineFactoryReloaded,java,287,1373970687,1373971586,1373971586,14,14,commits_in_master,false,false,4,2,0,0,0,0,0,0,41,41,41,0,0,25,42194,278,0,407,0.0,0.0,0.0,96,skyboy,33,0.5454545454545454,14,false,false
-1777696,powercrystals/MineFactoryReloaded,java,286,1373961436,1373969161,1373969161,128,128,commits_in_master,false,false,4,5,0,0,0,0,1,0,10,11,8,0,20,24,42105,1036,0,148,0.0,0.0,0.0,48,skyboy,32,0.5625,7,false,false
+1777696,powercrystals/MineFactoryReloaded,java,286,1373961436,1373969161,1373969161,128,128,commits_in_master,false,false,4,5,0,0,0,0,1,18,10,29,8,0,20,24,42105,1036,0,148,0.0,0.0,0.0,48,skyboy,32,0.5625,7,false,false
 1773352,powercrystals/MineFactoryReloaded,java,284,1373890994,1373891358,1373891358,6,6,commits_in_master,false,false,4,2,0,0,0,0,1,0,2,3,2,0,0,24,42059,56,0,47,0.0,0.0,0.0,48,skyboy,31,0.5806451612903226,7,false,false
 1741662,powercrystals/MineFactoryReloaded,java,273,1373358369,1373373142,1373373142,246,246,github,false,false,4,2,0,0,0,0,0,0,4,4,4,0,0,23,41977,45,0,58,0.0,0.0,0.0,46,skyboy,30,0.5666666666666667,7,false,false
-1713149,powercrystals/MineFactoryReloaded,java,269,1373216780,1377300295,1377300295,68058,68058,merged_in_comments,false,false,4,12,0,0,0,2,3,0,4,7,11,1,3,23,41643,1244,0,0,0.0,0.0,0.0,46,denoflionsx,5,0.4,28,false,false
+1713149,powercrystals/MineFactoryReloaded,java,269,1373216780,1377300295,1377300295,68058,68058,merged_in_comments,false,false,4,12,0,0,0,2,3,9,4,16,11,1,3,23,41643,1244,0,0,0.0,0.0,0.0,46,denoflionsx,5,0.4,28,false,false
 1706736,powercrystals/MineFactoryReloaded,java,267,1373150891,1373207330,1373207330,940,940,commits_in_master,false,false,4,15,0,0,0,0,1,0,10,11,11,0,0,23,40955,201,0,218,0.0,0.0,0.0,46,skyboy,29,0.5862068965517241,7,false,false
 1705879,powercrystals/MineFactoryReloaded,java,266,1373125523,1373125760,1373125760,3,3,github,false,false,4,1,0,0,0,0,0,0,0,0,0,0,1,22,40955,0,0,0,0.0,0.0,0.0,45,Zmiko,1,0.0,0,false,false
 1692960,powercrystals/MineFactoryReloaded,java,259,1372903075,1372914426,1372914426,189,189,github,false,false,4,2,0,0,0,0,0,0,1,1,1,0,0,21,40911,7,0,6,0.0,0.0,0.0,45,skyboy,28,0.5714285714285714,7,false,false
@@ -71,7 +71,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1497659,powercrystals/MineFactoryReloaded,java,118,1368947919,1368980852,1368980852,548,548,commits_in_master,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,25,33361,6,0,3,0.0,0.0,0.0,26,Yoshi667,1,1.0,0,false,false
 1494125,powercrystals/MineFactoryReloaded,java,114,1368828144,1368828834,1368828834,11,11,commits_in_master,false,false,3,1,0,0,0,0,0,0,1,1,0,1,0,27,33194,0,0,36,0.0,0.0,0.0,24,Kobata,0,0,5,false,false
 1486920,powercrystals/MineFactoryReloaded,java,113,1368707613,1368749531,1368749531,698,698,github,false,false,3,2,0,0,0,0,0,0,2,2,2,0,0,28,32729,15,0,24,0.0,0.0,0.0,24,Yoshi667,0,0,0,false,false
-1474753,powercrystals/MineFactoryReloaded,java,110,1368514272,1371340807,1371340807,47108,47108,commits_in_master,false,false,3,75,0,1,1,1,14,0,45,59,47,1,22,28,32689,6907,0,1781,0.0,0.0,0.0,24,skyboy,1,0.0,7,false,false
+1474753,powercrystals/MineFactoryReloaded,java,110,1368514272,1371340807,1371340807,47108,47108,commits_in_master,false,false,3,75,0,1,1,1,14,21,45,80,47,1,22,28,32689,6907,0,1781,0.0,0.0,0.0,24,skyboy,1,0.0,7,false,false
 1466566,powercrystals/MineFactoryReloaded,java,106,1368345005,1368358377,1368358377,222,222,commits_in_master,false,false,3,5,0,0,0,0,0,0,2,2,0,0,2,28,32304,0,0,10,0.0,0.0,0.0,22,crafteverywhere,3,0.0,1,false,false
 1453697,powercrystals/MineFactoryReloaded,java,99,1368066976,1368128503,1368128503,1025,1025,commits_in_master,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,29,31630,97,0,37,0.0,0.0,0.0,21,skyboy,0,0,7,false,false
 1444665,powercrystals/MineFactoryReloaded,java,97,1367919965,1367956962,1367956962,616,616,commits_in_master,false,false,3,1,0,0,0,0,0,0,1,1,0,0,1,30,31402,0,0,1,0.0,0.0,0.0,21,crafteverywhere,2,0.0,1,false,false
@@ -86,7 +86,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1356738,powercrystals/MineFactoryReloaded,java,63,1365634409,1365634627,1365634627,3,3,github,false,false,2,10,0,0,0,0,0,0,2,2,2,0,0,38,19072,42,0,15,0.0,0.0,0.0,21,GSValore,2,1.0,0,false,false
 1352843,powercrystals/MineFactoryReloaded,java,62,1365556696,1365556760,1365556760,1,1,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,38,19063,4,0,6,0.0,0.0,0.0,42,Shukaro,6,0.3333333333333333,2,false,false
 1352668,powercrystals/MineFactoryReloaded,java,61,1365551002,1365553975,1365553975,49,49,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,38,19046,22,0,5,0.0,0.0,0.0,21,Shukaro,5,0.2,1,false,false
-1343959,powercrystals/MineFactoryReloaded,java,57,1365356589,1365356903,1365356903,5,5,github,false,false,2,1,0,0,0,0,0,0,1,1,3,0,0,39,18842,284,0,10,0.0,0.0,0.0,42,GSValore,1,1.0,0,false,false
+1343959,powercrystals/MineFactoryReloaded,java,57,1365356589,1365356903,1365356903,5,5,github,false,false,2,1,0,0,0,0,0,1,1,2,3,0,0,39,18842,284,0,10,0.0,0.0,0.0,42,GSValore,1,1.0,0,false,false
 1342156,powercrystals/MineFactoryReloaded,java,56,1365296587,1365296791,1365296791,3,3,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,39,18841,7,0,7,0.0,0.0,0.0,21,GSValore,0,0,0,false,false
 1331858,powercrystals/MineFactoryReloaded,java,54,1365031304,1365108775,1365108775,1291,1291,merged_in_comments,false,false,2,1,0,0,0,2,1,0,1,2,2,0,0,40,18777,242,0,0,0.0,0.0,0.0,18,MachineMuse,0,0,7,false,false
 2705214,powercrystals/MineFactoryReloaded,java,46,1362524775,1362524815,1362524815,0,0,github,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,66,15009,70,0,4,0.0,0.0,0.0,15,Emys,4,0.0,0,false,true

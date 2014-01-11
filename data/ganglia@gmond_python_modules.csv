@@ -47,10 +47,10 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 175719,ganglia/gmond_python_modules,python,68,1340707824,1340767161,1340767161,988,988,github,false,false,4,1,0,0,0,0,0,0,1,1,1,0,0,51,8339,23,0,0,0.0,0.0,0.0,155,waxie,0,0,0,false,false
 160019,ganglia/gmond_python_modules,python,66,1339699125,1339765288,1339765289,1102,1102,github,false,false,4,1,0,0,0,0,1,0,0,1,0,0,1,58,8335,0,0,0,0.0,0.0,0.0,152,monkeymantra,2,1.0,0,false,false
 150975,ganglia/gmond_python_modules,python,65,1339090252,1339090980,1339090980,12,12,github,false,false,4,1,0,0,0,0,2,0,0,2,1,0,1,61,8335,0,0,0,0.0,0.0,0.0,151,monkeymantra,1,1.0,0,false,false
-148448,ganglia/gmond_python_modules,python,64,1338931534,1339004633,1339004633,1218,1218,github,false,false,3,11,0,0,0,2,6,0,2,8,3,0,3,65,8221,623,0,0,0.0,0.0,0.0,151,monkeymantra,0,0,0,false,false
+148448,ganglia/gmond_python_modules,python,64,1338931534,1339004633,1339004633,1218,1218,github,false,false,3,11,0,0,0,2,6,2,2,10,3,0,3,65,8221,623,0,0,0.0,0.0,0.0,151,monkeymantra,0,0,0,false,false
 140537,ganglia/gmond_python_modules,python,63,1338331554,1338339620,1338339620,134,134,github,false,false,3,1,0,0,0,0,5,0,0,5,1,0,4,61,7784,496,0,0,0.0,0.0,0.0,150,sjthespian,0,0,0,false,false
 133094,ganglia/gmond_python_modules,python,62,1337745693,1337745731,1337745731,0,0,github,false,false,2,1,0,0,0,0,0,0,3,3,1,0,2,59,6865,17,0,0,0.0,0.0,0.0,148,bernardl,2,1.0,0,false,true
-128804,ganglia/gmond_python_modules,python,61,1337371372,1337782661,1337782661,6854,6854,github,false,false,2,8,0,0,0,0,6,0,4,10,4,0,2,60,6865,3535,0,0,0.0,0.0,0.0,147,webbob,0,0,0,false,false
+128804,ganglia/gmond_python_modules,python,61,1337371372,1337782661,1337782661,6854,6854,github,false,false,2,8,0,0,0,0,6,3,4,13,4,0,2,60,6865,3535,0,0,0.0,0.0,0.0,147,webbob,0,0,0,false,false
 86910,ganglia/gmond_python_modules,python,60,1334181050,1334184040,1334184040,49,49,github,false,false,2,2,0,0,0,0,3,0,0,3,1,0,2,57,6336,232,0,0,0.0,0.0,0.0,141,evanjfraser,0,0,0,false,false
 63651,ganglia/gmond_python_modules,python,59,1332451168,1332508541,1332508541,956,956,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,51,6336,2,0,3,0.0,0.0,0.0,141,holdenk,0,0,12,false,false
 866822,ganglia/gmond_python_modules,python,58,1330961021,1330962515,1330962515,24,24,github,false,false,3,2,0,0,0,0,0,0,2,2,1,0,1,34,6273,131,0,2,0.0,0.0,0.0,136,jimjcollins,0,0,0,false,false
@@ -66,7 +66,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1027384,ganglia/gmond_python_modules,python,46,1320407439,1320410128,1320410128,44,44,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,35,5958,5,0,1,0.0,0.0,0.0,119,frail,0,0,8,false,false
 1027523,ganglia/gmond_python_modules,python,44,1319627474,1319673680,1319673680,770,770,github,false,false,2,1,0,0,0,0,1,0,0,1,0,0,1,35,5958,0,0,0,0.0,0.0,0.0,119,gerhard,0,0,33,false,false
 1027377,ganglia/gmond_python_modules,python,43,1318051715,1318091784,1318091784,667,667,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,38,6272,18,0,0,0.0,0.0,0.0,118,martin2110,1,1.0,0,false,false
-1027527,ganglia/gmond_python_modules,python,42,1317319293,1317322797,1317322797,58,58,github,false,false,2,4,0,0,0,0,1,0,2,3,1,0,2,35,6098,90,0,4,0.0,0.0,0.0,115,phobos182,1,1.0,1,false,false
+1027527,ganglia/gmond_python_modules,python,42,1317319293,1317322797,1317322797,58,58,github,false,false,2,4,0,0,0,0,1,1,2,4,1,0,2,35,6098,90,0,4,0.0,0.0,0.0,115,phobos182,1,1.0,1,false,false
 1027530,ganglia/gmond_python_modules,python,41,1317241767,1317246420,1317246420,77,77,github,false,false,2,1,0,0,0,0,3,0,0,3,1,0,2,35,5902,246,0,0,0.0,0.0,0.0,115,phobos182,0,0,1,false,false
 1027533,ganglia/gmond_python_modules,python,40,1315837645,1315838598,1315838598,15,15,github,false,false,3,8,0,0,0,0,17,0,5,22,8,0,10,55,5755,363,0,0,0.0,0.0,0.0,112,chemikadze,0,0,7,false,false
 1027536,ganglia/gmond_python_modules,python,39,1314898025,1314913993,1314913993,266,266,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,52,5430,16,0,0,0.0,0.0,0.0,110,kmullin,2,0.5,1,false,false
@@ -92,7 +92,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1027603,ganglia/gmond_python_modules,python,18,1294867023,,1295527816,11013,,unknown,false,false,5,1,0,2,2,2,8,0,0,8,4,0,4,50,3779,874,0,0,0.0,0.0,0.0,85,pcting,1,0.0,2,false,false
 1027608,ganglia/gmond_python_modules,python,17,1294078560,,1294170059,1524,,unknown,false,false,6,3,0,0,0,0,0,0,3,3,2,0,1,51,3775,14,0,0,0.0,0.0,0.0,85,dhutty,2,0.0,0,false,false
 1027434,ganglia/gmond_python_modules,python,16,1293578689,1294170080,1294170080,9856,9856,commits_in_master,false,false,6,6,0,0,0,0,3,0,5,8,3,0,3,53,3775,683,0,7,0.0,0.0,0.0,83,mconigliaro,3,0.0,10,false,true
-1027610,ganglia/gmond_python_modules,python,15,1293502074,,1293649065,2449,,unknown,false,false,7,10,0,0,0,0,7,0,5,12,6,0,2,51,3775,1314,0,0,0.0,0.0,0.0,83,pcting,0,0,2,false,false
+1027610,ganglia/gmond_python_modules,python,15,1293502074,,1293649065,2449,,unknown,false,false,7,10,0,0,0,0,7,1,5,13,6,0,2,51,3775,1314,0,0,0.0,0.0,0.0,83,pcting,0,0,2,false,false
 1027430,ganglia/gmond_python_modules,python,14,1292548656,1294083786,1294083786,25585,25585,github,false,false,7,1,0,0,0,0,1,0,0,1,1,0,0,69,3775,70,0,0,0.0,0.0,0.0,83,martin2110,0,0,0,false,false
 1027621,ganglia/gmond_python_modules,python,13,1292521146,,1294170096,27482,,unknown,false,false,7,3,0,0,0,0,0,0,3,3,2,0,1,68,3775,14,0,0,0.0,0.0,0.0,83,dhutty,1,0.0,0,false,false
 1027623,ganglia/gmond_python_modules,python,12,1292436721,,1294170113,28889,,unknown,false,false,7,3,0,0,0,0,0,0,3,3,2,0,1,70,3775,14,0,0,0.0,0.0,0.0,83,dhutty,0,0,0,false,false

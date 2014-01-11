@@ -95,7 +95,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 783466,unbit/uwsgi-docs,python,28,1357658020,1357749309,1357749309,1521,1521,github,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,19,754,0,0,1,0.0,0.0,0.0,174,evildmp,1,1.0,15,false,false
 908904,unbit/uwsgi-docs,python,26,1357143135,1357154389,1357154390,187,187,github,false,false,2,2,0,1,1,1,1,0,1,2,0,2,0,18,754,0,0,2,0.0,0.0,0.0,170,evildmp,0,0,14,false,false
 907160,unbit/uwsgi-docs,python,25,1356977727,1357026152,1357026152,807,807,github,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,19,754,0,0,1,0.0,0.0,0.0,170,StephenPierce,0,0,0,false,false
-905357,unbit/uwsgi-docs,python,24,1356450835,1356504428,1356504428,893,893,github,false,false,2,1,0,0,0,0,16,0,16,32,1,32,1,19,754,16,0,129,0.0,0.0,0.0,165,akx,15,1.0,4,false,false
+905357,unbit/uwsgi-docs,python,24,1356450835,1356504428,1356504428,893,893,github,false,false,2,1,0,0,0,0,16,2,16,34,1,32,1,19,754,16,0,129,0.0,0.0,0.0,165,akx,15,1.0,4,false,false
 904055,unbit/uwsgi-docs,python,23,1356338677,1356338722,1356338723,0,0,github,false,false,2,2,0,0,0,0,0,0,1,1,0,1,0,19,754,0,0,2,0.0,0.0,0.0,165,mountain,0,0,78,false,false
 725793,unbit/uwsgi-docs,python,22,1354975000,1354976395,1354976396,23,23,github,false,false,2,5,0,0,0,0,5,0,8,13,1,12,0,18,754,18,0,93,0.0,0.0,0.0,160,akx,14,1.0,4,false,false
 1126366,unbit/uwsgi-docs,python,21,1353528218,1353560161,1353560161,532,532,github,false,false,2,2,0,0,0,0,6,0,6,12,3,9,0,20,662,132,0,45,0.0,0.0,0.0,155,akx,13,1.0,4,false,false
@@ -105,11 +105,11 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 465602,unbit/uwsgi-docs,python,17,1352555943,1352565033,1352565033,151,151,github,false,false,2,1,0,0,0,0,2,0,3,5,1,4,0,17,662,22,0,32,0.0,0.0,0.0,155,akx,11,1.0,4,false,false
 464939,unbit/uwsgi-docs,python,16,1352523786,1352524456,1352524456,11,11,github,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,17,662,0,0,3,0.0,0.0,0.0,155,podados,0,0,3,false,false
 1126377,unbit/uwsgi-docs,python,15,1352114425,1352115177,1352115177,12,12,github,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,18,662,0,0,17,0.0,0.0,0.0,154,akx,10,1.0,4,false,false
-1126380,unbit/uwsgi-docs,python,14,1352029954,1352043151,1352043151,219,219,github,false,false,2,1,0,0,0,0,4,0,4,8,0,9,0,21,662,0,0,27,0.0,0.0,0.0,154,akx,9,1.0,4,false,false
+1126380,unbit/uwsgi-docs,python,14,1352029954,1352043151,1352043151,219,219,github,false,false,2,1,0,0,0,0,4,1,4,9,0,9,0,21,662,0,0,27,0.0,0.0,0.0,154,akx,9,1.0,4,false,false
 1126383,unbit/uwsgi-docs,python,12,1351702703,1351705309,1351705309,43,43,github,false,false,2,1,0,0,0,0,3,0,7,10,0,10,0,22,662,0,0,39,0.0,0.0,0.0,153,akx,8,1.0,4,false,false
 1126385,unbit/uwsgi-docs,python,11,1351491446,1351492149,1351492149,11,11,github,false,false,2,3,0,0,0,1,6,0,8,14,0,14,0,22,662,0,0,28,0.0,0.0,0.0,153,akx,7,1.0,4,false,false
 1126388,unbit/uwsgi-docs,python,10,1351359119,1351396125,1351396125,556,556,github,false,false,2,1,0,0,0,0,3,0,5,8,1,7,0,20,662,18,0,31,0.0,0.0,0.0,153,akx,6,1.0,4,false,false
-1126392,unbit/uwsgi-docs,python,9,1351109275,1351114911,1351114911,93,93,github,false,false,2,3,0,0,0,0,6,0,9,15,3,29,0,19,795,132,0,76,0.0,0.0,0.0,153,akx,5,1.0,4,false,false
+1126392,unbit/uwsgi-docs,python,9,1351109275,1351114911,1351114911,93,93,github,false,false,2,3,0,0,0,0,6,19,9,34,3,29,0,19,795,132,0,76,0.0,0.0,0.0,153,akx,5,1.0,4,false,false
 1126395,unbit/uwsgi-docs,python,7,1350489347,1350492481,1350492481,52,52,github,false,false,2,2,0,0,0,0,4,0,4,8,3,5,0,16,788,21,0,15,0.0,0.0,0.0,153,akx,4,1.0,4,false,false
 1126397,unbit/uwsgi-docs,python,6,1350412585,1350449490,1350449490,615,615,github,false,false,2,2,0,0,0,0,21,0,7,28,4,22,0,16,474,611,0,14,0.0,0.0,0.0,153,akx,3,1.0,4,false,false
 843819,unbit/uwsgi-docs,python,4,1349809544,1349836174,1349836174,443,443,github,false,false,2,1,0,1,1,1,1,0,6,7,3,4,0,18,475,69,0,8,0.0,0.0,0.0,149,akx,2,1.0,4,false,false

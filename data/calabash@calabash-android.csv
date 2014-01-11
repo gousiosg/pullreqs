@@ -1,7 +1,10 @@
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,merged_using,conflict,forward_links,team_size,num_commits,num_commit_comments,num_issue_comments,num_comments,num_participants,files_added,files_deleted,files_modified,files_changed,src_files,doc_files,other_files,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
-2559605,calabash/calabash-android,java,319,1386004987,,1387391748,23112,,unknown,false,false,1,1,0,2,2,2,1,0,0,1,1,0,0,6,64790,32,0,0,0.0,0.0,0.0,495,SeanFelipe,0,0,0,false,false
-2514457,calabash/calabash-android,java,314,1385372025,1385377601,1385377601,92,92,commits_in_master,false,false,2,1,0,0,0,1,0,0,1,1,0,1,0,6,64790,0,0,0,0.0,0.0,0.0,495,steven-aerts,0,0,0,false,false
+2665909,calabash/calabash-android,java,328,1387384166,1388651365,1388651365,21119,21119,commits_in_master,false,false,1,1,0,0,0,0,0,0,2,2,2,0,0,20,64795,12,0,0,0.0,0.0,0.0,495,zmarkan,0,0,2,false,false
+2559605,calabash/calabash-android,java,319,1386004987,,1387391748,23112,,unknown,false,false,1,1,0,2,2,2,1,0,0,1,1,0,0,10,64790,32,0,0,0.0,0.0,0.0,495,SeanFelipe,0,0,0,false,false
+2514457,calabash/calabash-android,java,314,1385372025,1385377601,1385377601,92,92,commits_in_master,false,false,2,1,0,0,0,1,0,0,1,1,0,1,0,10,64790,0,0,0,0.0,0.0,0.0,495,steven-aerts,0,0,0,false,false
+2418906,calabash/calabash-android,java,309,1384015386,1388651797,1388651797,77273,77273,commits_in_master,false,false,2,2,0,1,1,1,0,0,2,2,2,0,0,7,64790,4,0,17,0.0,0.0,0.0,494,garuma,0,0,50,false,false
 2410164,calabash/calabash-android,java,307,1383882440,1385666162,1385666162,29728,29728,commits_in_master,false,false,2,2,0,0,0,1,0,0,1,1,0,1,0,7,64790,0,0,0,0.0,0.0,0.0,494,midopa,0,0,0,false,false
+2409197,calabash/calabash-android,java,306,1383867475,,1388649471,79699,,unknown,false,false,2,1,0,3,3,2,0,0,2,2,1,1,0,4,64790,35,0,0,0.0,0.0,0.0,494,meredrica,0,0,1,false,false
 1971012,calabash/calabash-android,java,289,1377181745,1377415516,1377415516,3896,3896,github,false,false,2,1,0,0,0,1,0,0,1,1,1,0,0,59,64738,2,0,0,0.0,0.0,0.0,493,oclbdk,0,0,1,false,false
 1913938,calabash/calabash-android,java,286,1376048074,1376815005,1376815005,12782,12782,github,false,false,2,1,0,0,0,2,0,0,1,1,1,0,0,75,64513,4,0,5,0.0,0.0,0.0,492,emartynov,0,0,4,false,false
 1829884,calabash/calabash-android,java,281,1374716756,,1381084894,106135,,unknown,false,false,2,1,0,2,2,2,1,0,1,2,2,0,0,73,64513,59,0,0,0.0,0.0,0.0,492,samstewart,0,0,9,false,false
@@ -50,7 +53,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 745410,calabash/calabash-android,java,169,1355334531,1355338219,1355338219,61,61,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,22,52549,8,0,0,0.0,0.0,0.0,442,bootstraponline,8,0.625,11,false,false
 744797,calabash/calabash-android,java,167,1355323610,1355338253,1355338253,244,244,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,21,52549,2,0,10,0.0,0.0,0.0,442,bootstraponline,7,0.5714285714285714,11,false,false
 772511,calabash/calabash-android,java,165,1355257790,1355323188,1355323188,1089,1089,commit_sha_in_comments,false,false,2,1,0,2,2,1,0,0,2,2,2,0,0,22,52549,62,0,0,0.0,0.0,0.0,442,bootstraponline,6,0.6666666666666666,11,false,false
-891434,calabash/calabash-android,java,163,1355170918,1355171317,1355171317,6,6,github,false,false,1,1,0,0,0,0,0,0,1,1,2,0,0,23,52534,41,0,2,0.0,0.0,0.0,442,bootstraponline,5,0.6,11,false,false
+891434,calabash/calabash-android,java,163,1355170918,1355171317,1355171317,6,6,github,false,false,1,1,0,0,0,0,0,1,1,2,2,0,0,23,52534,41,0,2,0.0,0.0,0.0,442,bootstraponline,5,0.6,11,false,false
 638813,calabash/calabash-android,java,161,1354914367,1355242593,1355242593,5470,5470,github,false,false,1,2,2,4,6,2,0,0,1,1,1,0,0,22,52564,30,0,2,0.0,0.0,0.0,441,bootstraponline,4,0.5,10,false,false
 723557,calabash/calabash-android,java,160,1354910063,,1354910954,14,,unknown,false,false,1,1,0,1,1,1,0,0,1,1,1,0,0,22,52366,8,0,0,0.0,0.0,0.0,441,bootstraponline,3,0.6666666666666666,10,false,false
 723651,calabash/calabash-android,java,159,1354897315,1354912297,1354912298,249,249,github,false,false,1,1,0,0,0,0,0,0,2,2,1,1,0,22,52328,4,0,4,0.0,0.0,0.0,441,withoutclass,2,0.5,1,false,false
@@ -63,7 +66,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 519570,calabash/calabash-android,java,139,1351368730,1351701364,1351701364,5483,5483,github,false,false,1,2,0,0,0,0,0,0,1,1,1,0,0,37,52373,19,0,12,0.0,0.0,0.0,424,JustATrick,3,1.0,1,false,false
 519571,calabash/calabash-android,java,138,1351252316,1351363030,1351363030,1845,1845,github,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,37,52374,5,0,4,0.0,0.0,0.0,424,zarate,2,1.0,7,false,false
 519572,calabash/calabash-android,java,136,1351234088,1351234461,1351234461,6,6,github,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,37,52374,2,0,23,0.0,0.0,0.0,424,zarate,1,1.0,7,false,false
-519573,calabash/calabash-android,java,131,1350612800,1350643090,1350643090,504,504,github,false,false,1,2,0,0,0,0,1,0,2,3,1,0,2,37,52395,25,0,1,0.0,0.0,0.0,422,DominikDary,1,1.0,7,false,false
+519573,calabash/calabash-android,java,131,1350612800,1350643090,1350643090,504,504,github,false,false,1,2,0,0,0,0,1,1,2,4,1,0,2,37,52395,25,0,1,0.0,0.0,0.0,422,DominikDary,1,1.0,7,false,false
 519574,calabash/calabash-android,java,130,1350387881,1350408342,1350408342,341,341,github,false,false,1,1,0,0,0,0,1,0,0,1,1,0,0,37,52374,40,0,0,0.0,0.0,0.0,420,zarate,0,0,7,false,false
 519575,calabash/calabash-android,java,129,1350041938,1350214994,1350214994,2884,2884,github,false,false,1,1,0,1,1,1,0,0,1,1,1,0,0,38,52374,6,0,0,0.0,0.0,0.0,419,casidiablo,1,0.0,19,false,false
 449755,calabash/calabash-android,java,127,1349095499,,1350037337,15697,,unknown,false,false,1,1,0,0,0,0,1,0,4,5,3,2,0,42,52214,45,0,0,0.0,0.0,0.0,414,casidiablo,0,0,19,false,false
@@ -94,7 +97,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 244737,calabash/calabash-android,java,91,1344991526,1345006656,1345006640,251,252,github,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,30,50722,9,0,0,0.0,0.0,0.0,391,leviwilson,4,0.75,10,false,false
 244635,calabash/calabash-android,java,90,1344985167,1345717686,1345717686,12208,12208,github,false,false,1,9,0,6,6,2,13,0,6,19,14,3,1,28,51512,784,0,9,0.0,0.0,0.0,391,nalbion,3,0.6666666666666666,1,false,false
 244631,calabash/calabash-android,java,89,1344984903,1345006793,1345006793,364,364,github,false,false,1,1,0,1,1,1,0,0,5,5,4,1,0,28,50722,45,0,32,0.0,0.0,0.0,391,nalbion,2,0.5,1,false,false
-241909,calabash/calabash-android,java,87,1344894723,1345019541,1345019541,2080,2080,github,false,false,1,18,0,0,0,2,30,0,37,67,57,5,1,28,50682,3784,46,86,0.0,0.0,0.0,391,nalbion,1,0.0,1,false,false
+241909,calabash/calabash-android,java,87,1344894723,1345019541,1345019541,2080,2080,github,false,false,1,18,0,0,0,2,30,16,37,83,57,5,1,28,50682,3784,46,86,0.0,0.0,0.0,391,nalbion,1,0.0,1,false,false
 239965,calabash/calabash-android,java,85,1344841201,1344962776,1344962776,2026,2026,github,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,28,50682,18,0,1,0.0,0.0,0.0,391,plaa,1,1.0,0,false,false
 519576,calabash/calabash-android,java,80,1344568881,1344574493,1344574493,93,93,github,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,27,50636,5,0,3,0.0,0.0,0.0,391,leviwilson,3,0.6666666666666666,10,false,false
 243869,calabash/calabash-android,java,79,1344566602,1344962559,1344962559,6599,6599,github,false,false,1,1,0,0,0,0,1,0,1,2,2,0,0,27,50636,38,0,1,0.0,0.0,0.0,391,leviwilson,2,0.5,10,false,false
@@ -113,7 +116,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 191629,calabash/calabash-android,java,61,1341543036,,1343815398,37872,,unknown,false,false,3,1,0,1,1,1,0,0,1,1,1,0,0,34,49648,10,0,0,0.30212697389622944,0.0,0.0,368,leviwilson,0,0,10,false,false
 188132,calabash/calabash-android,java,60,1341370286,1344993951,1344993951,60394,60394,commits_in_master,false,false,3,2,0,2,2,2,11,0,0,11,11,0,0,33,49648,350,0,0,0.30212697389622944,0.0,0.0,367,nalbion,0,0,1,false,false
 117646,calabash/calabash-android,java,46,1336559459,,1339002365,40715,,unknown,false,false,5,1,0,2,2,2,0,0,1,1,1,0,0,19,49736,2,0,0,0.3015924079137848,0.0,0.0,335,gw111zz,3,0.3333333333333333,1,false,false
-113118,calabash/calabash-android,java,43,1336162060,1336170671,1336170671,143,143,github,false,false,5,17,0,0,0,0,530,0,15,545,511,11,19,21,49736,1701,0,113,0.3015924079137848,0.0,0.0,335,jonasmaturana,1,1.0,5,true,true
+113118,calabash/calabash-android,java,43,1336162060,1336170671,1336170671,143,143,github,false,false,5,17,0,0,0,0,530,7,15,552,511,11,19,21,49736,1701,0,113,0.3015924079137848,0.0,0.0,335,jonasmaturana,1,1.0,5,true,true
 102436,calabash/calabash-android,java,42,1335356236,1335356313,1335356313,1,1,github,false,false,5,1,0,0,0,0,0,0,1,1,1,0,0,16,49737,1,0,4,0.301586344170336,0.0,0.0,660,JonnyGibson,0,0,0,false,false
 91464,calabash/calabash-android,java,40,1334562576,1339017182,1339017182,74243,74243,fixes_in_commit,false,false,5,2,0,1,1,2,0,0,5,5,3,2,0,15,49737,33,0,0,0.301586344170336,0.0,0.0,325,gw111zz,2,0.5,1,false,false
 90288,calabash/calabash-android,java,39,1334439784,1334443755,1334443755,66,66,github,false,false,5,2,0,0,0,0,0,0,2,2,2,0,0,14,49730,39,0,3,0.30162879549567667,0.0,0.0,324,mortengrouleff,1,1.0,0,false,false
@@ -127,7 +130,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 379674,calabash/calabash-android,java,24,1332445588,1332462248,1332462248,277,277,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,10,49429,1,0,11,0.0,0.0,0.0,303,oliver32767,1,1.0,0,true,false
 379193,calabash/calabash-android,java,23,1332303662,1332336373,1332336373,545,545,github,false,false,3,1,0,2,2,1,0,0,1,1,1,0,0,10,49429,2,0,10,0.0,0.0,0.0,303,oliver32767,0,0,0,true,false
 519567,calabash/calabash-android,java,18,1330634587,1330647203,1330647203,210,210,github,false,false,3,1,0,0,0,0,0,0,1,1,0,1,0,14,1621,0,0,5,0.0,0.0,0.0,286,mwl,0,0,1,false,false
-37855,calabash/calabash-android,java,16,1329832242,1329845277,1329845277,217,217,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,1,27,1518,0,23,3,9.881422924901186,0.0,0.0,282,scompt,9,0.7777777777777778,5,false,false
+37855,calabash/calabash-android,java,16,1329832242,1329845277,1329845277,217,217,github,false,false,2,1,0,0,0,0,0,1,1,2,1,0,1,27,1518,0,23,3,9.881422924901186,0.0,0.0,282,scompt,9,0.7777777777777778,5,false,false
 37854,calabash/calabash-android,java,15,1329832224,1329845173,1329845173,215,215,github,false,false,2,1,0,0,0,1,0,0,3,3,3,0,0,27,1518,16,0,3,9.881422924901186,0.0,0.0,282,scompt,8,0.75,5,false,false
 33414,calabash/calabash-android,java,14,1329462339,,1329548438,1434,,unknown,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,27,1517,0,0,0,9.88793671720501,0.0,0.0,278,scompt,7,0.8571428571428571,5,false,false
 31267,calabash/calabash-android,java,13,1329308309,1329312500,1329312500,69,69,github,false,false,2,1,0,0,0,0,0,0,1,1,0,1,0,29,1517,0,0,7,9.88793671720501,0.0,0.0,277,scompt,6,0.8333333333333334,5,false,false

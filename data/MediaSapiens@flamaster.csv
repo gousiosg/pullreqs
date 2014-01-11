@@ -97,7 +97,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1285527,MediaSapiens/flamaster,python,30,1363877305,1363950407,1363950407,1218,1218,commits_in_master,false,false,4,1,0,0,0,0,0,0,2,2,2,0,0,33,2733,4,0,35,0.0,0.0,0.0,15,kastigar,4,0.5,0,true,true
 1281244,MediaSapiens/flamaster,python,29,1363794378,1363857079,1363857079,1045,1045,github,false,false,4,1,0,0,0,0,0,0,1,1,1,0,0,33,2733,4,0,27,0.0,0.0,0.0,15,kastigar,3,0.3333333333333333,0,true,true
 1280780,MediaSapiens/flamaster,python,28,1363788777,1363788784,1363788785,0,0,github,false,false,4,1,0,0,0,0,0,0,2,2,2,0,0,32,2744,94,0,38,0.0,0.0,0.0,15,nimnull,13,0.8461538461538461,15,true,true
-1279901,MediaSapiens/flamaster,python,27,1363775073,1363775086,1363775086,0,0,github,false,false,4,25,0,0,0,0,2,0,17,19,20,0,0,32,2714,1018,0,417,0.0,0.0,0.0,15,nimnull,12,0.8333333333333334,15,true,true
+1279901,MediaSapiens/flamaster,python,27,1363775073,1363775086,1363775086,0,0,github,false,false,4,25,0,0,0,0,2,2,17,21,20,0,0,32,2714,1018,0,417,0.0,0.0,0.0,15,nimnull,12,0.8333333333333334,15,true,true
 1270459,MediaSapiens/flamaster,python,26,1363597366,1363597372,1363597373,0,0,github,false,false,4,5,0,0,0,0,0,0,4,4,4,0,0,31,2775,74,0,49,0.0,0.0,0.0,30,nimnull,11,0.8181818181818182,30,true,true
 1191864,MediaSapiens/flamaster,python,24,1361802991,1361963317,1361963317,2672,2672,commits_in_master,false,false,4,1,0,0,0,0,2,0,26,28,28,0,0,33,2557,302,0,175,0.0,0.0,0.0,14,nimnull,10,0.9,14,true,true
 1182861,MediaSapiens/flamaster,python,22,1361533702,1361566185,1361566185,541,541,commits_in_master,false,false,4,1,0,0,0,0,0,0,1,1,1,0,0,33,2507,5,0,14,0.0,0.0,0.0,12,kastigar,2,0.5,0,true,true
@@ -114,7 +114,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 935078,MediaSapiens/flamaster,python,11,1359392701,1359451667,1359451667,982,982,github,false,false,5,10,0,0,0,0,3,0,9,12,11,0,1,27,2494,168,0,165,0.0,0.0,0.0,10,nimnull,4,1.0,13,true,true
 841417,MediaSapiens/flamaster,python,10,1359025297,1359115450,1359115450,1502,1502,github,false,false,5,1,0,0,0,0,1,0,2,3,3,0,0,24,2474,26,0,50,0.0,0.0,0.0,10,aisayko,1,1.0,1,true,false
 836576,MediaSapiens/flamaster,python,9,1358953740,1359020021,1359020021,1104,1104,github,false,false,5,1,0,0,0,0,0,0,1,1,1,0,0,22,2475,3,0,27,0.0,0.0,0.0,10,aisayko,0,0,1,true,false
-640031,MediaSapiens/flamaster,python,7,1354526394,1354530141,1354530141,62,62,github,false,false,2,5,0,0,0,0,2,0,5,7,7,0,0,41,2409,122,0,52,0.0,0.0,0.0,10,I159,2,1.0,0,true,false
+640031,MediaSapiens/flamaster,python,7,1354526394,1354530141,1354530141,62,62,github,false,false,2,5,0,0,0,0,2,1,5,8,7,0,0,41,2409,122,0,52,0.0,0.0,0.0,10,I159,2,1.0,0,true,false
 1064424,MediaSapiens/flamaster,python,6,1353942736,1353944025,1353944025,21,21,github,false,false,2,6,0,0,0,0,1,0,7,8,7,0,0,40,2370,339,0,127,0.0,0.0,0.0,9,I159,1,1.0,0,true,false
 1064428,MediaSapiens/flamaster,python,5,1353588563,1353589703,1353589703,19,19,github,false,false,2,1,0,0,0,0,0,0,6,6,5,0,1,36,2290,157,0,47,0.0,0.0,0.0,9,nimnull,3,1.0,13,true,true
 498954,MediaSapiens/flamaster,python,4,1353339287,1353339297,1353339297,0,0,github,false,false,2,11,0,0,0,0,0,0,11,11,11,0,0,44,2179,538,0,76,0.0,0.0,0.0,9,nimnull,2,1.0,13,true,true

@@ -86,7 +86,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1637612,Homebrew/homebrew-versions,ruby,154,1372043942,1372597849,1372597849,9231,9231,fixes_in_commit,false,false,15,1,0,0,0,0,0,0,1,1,1,0,0,29,4107,101,0,0,0.0,0.0,0.0,105,patrickli,1,0.0,0,false,false
 1637151,Homebrew/homebrew-versions,ruby,153,1372027596,1372597849,1372597849,9504,9504,fixes_in_commit,false,false,15,1,0,0,0,0,0,0,1,1,1,0,0,28,4107,38,0,0,0.0,0.0,0.0,105,patrickli,0,0,0,false,false
 1635175,Homebrew/homebrew-versions,ruby,152,1371977952,,1372100380,2040,,unknown,false,false,14,1,0,1,1,1,1,0,0,1,1,0,0,26,4107,143,0,0,0.0,0.0,0.0,105,sbooob,0,0,0,false,false
-1632666,Homebrew/homebrew-versions,ruby,151,1371881630,1371987904,1371987904,1771,1771,merged_in_comments,false,false,15,1,0,2,2,1,1,0,0,1,2,0,0,26,4107,173,0,0,0.0,0.0,0.0,104,gvvaughan,1,0.0,3,false,false
+1632666,Homebrew/homebrew-versions,ruby,151,1371881630,1371987904,1371987904,1771,1771,merged_in_comments,false,false,15,1,0,2,2,1,1,1,0,2,2,0,0,26,4107,173,0,0,0.0,0.0,0.0,104,gvvaughan,1,0.0,3,false,false
 1631546,Homebrew/homebrew-versions,ruby,150,1371842853,1373554589,1373554589,28528,28528,fixes_in_commit,false,false,15,3,0,5,5,1,0,0,1,1,1,0,0,26,4107,91,0,0,0.0,0.0,0.0,104,felixbuenemann,0,0,2,false,false
 1631467,Homebrew/homebrew-versions,ruby,149,1371841571,,1371875426,564,,unknown,false,true,15,1,0,1,1,2,0,0,1,1,1,0,0,26,4107,20,0,0,0.0,0.0,0.0,104,potatosalad,0,0,1,false,false
 1618351,Homebrew/homebrew-versions,ruby,147,1371643627,1371647194,1371647194,59,59,merged_in_comments,false,false,17,1,0,0,0,1,1,0,0,1,1,0,0,24,3960,225,0,0,0.0,0.0,0.0,103,clemensg,0,0,1,false,false

@@ -1,4 +1,5 @@
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,merged_using,conflict,forward_links,team_size,num_commits,num_commit_comments,num_issue_comments,num_comments,num_participants,files_added,files_deleted,files_modified,files_changed,src_files,doc_files,other_files,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
+2736292,jaliss/securesocial,scala,335,1388702549,1389192085,1389192085,8158,8158,github,false,false,2,1,0,0,0,1,0,0,1,1,0,1,0,4,2576,0,0,1,0.0,0.0,0.0,677,fayimora,1,0.0,36,false,false
 2358417,jaliss/securesocial,scala,309,1383172739,,1383173647,15,,unknown,false,false,2,1,0,1,1,1,0,0,1,1,1,0,0,40,2576,2,0,0,0.0,0.0,0.0,676,abrauner,0,0,0,false,false
 2334751,jaliss/securesocial,scala,306,1382874827,1382986357,1382986357,1858,1858,commits_in_master,false,false,1,1,0,0,0,1,0,0,1,1,0,1,0,77,2491,0,0,0,0.0,0.0,0.0,676,OlivierBlanvillain,0,0,0,false,false
 2292235,jaliss/securesocial,scala,302,1382215853,,1383152388,15548,,unknown,false,false,1,3,0,1,1,2,0,0,1,1,1,0,0,77,2491,38,0,0,0.0,0.0,0.0,675,danielkza,1,0.0,1,false,false
@@ -6,7 +7,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2216963,jaliss/securesocial,scala,290,1381076982,,1381610193,8886,,unknown,false,false,1,1,0,2,2,3,0,0,1,1,1,0,0,83,2519,15,0,0,0.0,0.0,0.0,674,n0tel,1,0.0,0,false,false
 2216777,jaliss/securesocial,scala,288,1381072031,,1381958131,14768,,unknown,false,false,1,1,0,0,0,1,0,0,1,1,1,0,0,83,2519,10,0,0,0.0,0.0,0.0,674,n0tel,0,0,0,false,false
 2137100,jaliss/securesocial,scala,285,1379852010,1383137215,1383137215,54693,54693,commits_in_master,false,false,1,1,0,0,0,0,0,0,1,1,0,1,0,84,2519,0,0,0,0.0,0.0,0.0,674,dhruvbhatia,0,0,0,false,false
-2118688,jaliss/securesocial,scala,283,1379537809,,1381941633,40063,,unknown,true,false,1,8,0,23,23,13,2,0,14,16,12,0,3,83,2519,176,0,0,0.0,0.0,0.0,674,danielkza,0,0,0,false,false
+2118688,jaliss/securesocial,scala,283,1379537809,,1381941633,40063,,unknown,true,false,1,8,0,23,23,13,2,2,14,18,12,0,3,83,2519,176,0,0,0.0,0.0,0.0,674,danielkza,0,0,0,false,false
 2112098,jaliss/securesocial,scala,282,1379445942,,1383156287,61779,,unknown,false,false,1,1,0,1,1,2,0,0,3,3,1,0,2,83,2519,10,0,0,0.0,0.0,0.0,674,mkubala,1,0.0,1,false,false
 2108916,jaliss/securesocial,scala,281,1379146305,1381941682,1381941682,46589,46589,commit_sha_in_comments,false,false,1,1,0,5,5,3,0,0,10,10,7,0,3,83,2519,51,0,0,0.0,0.0,0.0,673,andyoll,0,0,1,false,false
 2017356,jaliss/securesocial,scala,273,1378057980,1383003804,1383003804,82370,82370,commits_in_master,false,false,1,1,0,0,0,1,0,0,1,1,1,0,0,84,2519,2,0,1,0.0,0.0,0.0,673,ndeverge,1,0.0,4,false,false
@@ -41,7 +42,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1162696,jaliss/securesocial,scala,153,1361096377,,1361541173,7413,,unknown,false,false,1,2,0,17,17,14,0,0,26,26,20,2,4,26,2348,611,0,0,0.0,0.0,0.0,649,tarkik,0,0,0,false,false
 1161904,jaliss/securesocial,scala,152,1361058722,1361102715,1361102715,733,733,github,false,false,1,1,0,0,0,1,0,0,1,1,1,0,0,26,2348,2,0,7,0.0,0.0,0.0,649,platypii,2,0.5,1,false,false
 1149021,jaliss/securesocial,scala,151,1360742495,1360875260,1360875260,2212,2212,github,false,false,1,1,0,0,0,1,1,0,0,1,0,0,1,14,2249,0,0,0,0.0,0.0,0.0,649,wuhaixing,0,0,0,false,false
-1043203,jaliss/securesocial,scala,149,1360532070,1360955916,1360955916,7064,7064,github,false,false,1,5,0,3,3,2,3,0,8,11,1,3,6,11,2249,108,0,46,0.0,0.0,0.0,649,poornerd,6,0.3333333333333333,2,false,false
+1043203,jaliss/securesocial,scala,149,1360532070,1360955916,1360955916,7064,7064,github,false,false,1,5,0,3,3,2,3,1,8,12,1,3,6,11,2249,108,0,46,0.0,0.0,0.0,649,poornerd,6,0.3333333333333333,2,false,false
 1043249,jaliss/securesocial,scala,148,1360530954,1360531203,1360531203,4,4,github,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,10,2249,2,0,1,0.0,0.0,0.0,649,poornerd,5,0.2,2,false,false
 1043209,jaliss/securesocial,scala,145,1360396849,1360875511,1360875511,7977,7977,github,false,false,1,1,0,1,1,2,2,0,6,8,1,2,5,10,2249,62,0,25,0.0,0.0,0.0,648,KonstantinGrigoriev,0,0,0,false,false
 1043255,jaliss/securesocial,scala,143,1360333034,1360335301,1360335301,37,37,github,false,false,1,2,0,0,0,2,4,0,7,11,2,2,7,10,2135,188,0,40,0.0,0.0,0.0,648,poornerd,4,0.0,2,false,false
@@ -68,7 +69,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1043270,jaliss/securesocial,scala,89,1351706138,1351867539,1351867539,2690,2690,github,false,false,1,1,0,0,0,1,0,0,1,1,1,0,0,8,1282,2,0,0,0.0,0.0,0.0,602,chazmcgarvey,0,0,1,false,false
 1043274,jaliss/securesocial,scala,88,1351519019,,1351522120,51,,unknown,false,false,1,3,0,2,2,3,0,0,7,7,5,0,2,8,1282,22,0,0,0.0,0.0,0.0,602,marsmining,0,0,0,false,false
 506320,jaliss/securesocial,scala,82,1349575713,1360875864,1360875864,188275,188275,github,false,false,1,3,0,5,5,2,2,0,2,4,2,1,0,8,1946,777,0,2,24.665981500513873,2.055498458376156,0.0,595,mnrasul,0,0,1,false,false
-448344,jaliss/securesocial,scala,78,1349030353,,1360334950,188349,,unknown,false,false,1,2,0,1,1,1,5,0,11,16,4,9,1,4,1946,36,0,0,24.665981500513873,2.055498458376156,0.0,589,i-akhmadullin,1,0.0,3,false,false
+448344,jaliss/securesocial,scala,78,1349030353,,1360334950,188349,,unknown,false,false,1,2,0,1,1,1,5,5,11,21,4,9,1,4,1946,36,0,0,24.665981500513873,2.055498458376156,0.0,589,i-akhmadullin,1,0.0,3,false,false
 363926,jaliss/securesocial,scala,73,1347214664,,1348533096,21973,,unknown,false,false,1,1,0,1,1,2,0,0,1,1,1,0,0,0,1200,9,0,0,0.0,0.0,0.0,578,hakandilek,0,0,5,false,false
 432310,jaliss/securesocial,scala,69,1343504752,1348446704,1348446704,82365,82365,merged_in_comments,false,false,1,1,0,3,3,3,0,0,1,1,1,0,0,37,1200,2,0,0,0.0,0.0,0.0,557,aogriffiths,0,0,1,false,false
 225036,jaliss/securesocial,scala,66,1343146586,1348445075,1348445075,88308,88308,github,false,false,1,1,0,0,0,1,0,0,1,1,1,0,0,37,1200,2,0,1,0.0,0.0,0.0,554,analytically,0,0,2,false,false
@@ -76,9 +77,9 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 183414,jaliss/securesocial,scala,61,1341095349,1348452554,1348452554,122620,122620,merged_in_comments,false,false,1,5,0,3,3,2,54,0,4,58,36,5,13,37,1200,97,0,0,0.0,0.0,0.0,530,Kiwi,0,0,28,false,false
 153548,jaliss/securesocial,scala,59,1339301478,,1348451231,152495,,unknown,false,false,1,1,0,0,0,1,0,0,2,2,2,0,0,55,1001,8,0,0,0.0,0.0,0.0,493,joscha,5,0.4,11,false,false
 7580,jaliss/securesocial,scala,58,1339300074,,1344265109,82750,,unknown,false,false,1,3,2,11,13,4,10,0,13,23,15,4,2,55,1001,719,0,0,0.0,0.0,0.0,493,joscha,4,0.5,11,false,false
-153152,jaliss/securesocial,scala,57,1339252176,1339332617,1339332617,1340,1340,github,false,false,1,2,0,1,1,2,1,0,3,4,0,0,5,55,1001,0,0,5,0.0,0.0,0.0,493,winger,0,0,0,false,false
+153152,jaliss/securesocial,scala,57,1339252176,1339332617,1339332617,1340,1340,github,false,false,1,2,0,1,1,2,1,1,3,5,0,0,5,55,1001,0,0,5,0.0,0.0,0.0,493,winger,0,0,0,false,false
 151178,jaliss/securesocial,scala,56,1339098696,,1339332025,3888,,unknown,false,false,1,1,0,2,2,3,0,0,1,1,1,0,0,50,1001,4,0,0,0.0,0.0,0.0,485,rintcius,1,0.0,0,false,false
-150913,jaliss/securesocial,scala,55,1339087090,,1349030155,165717,,unknown,false,false,1,2,0,4,4,3,5,0,11,16,4,9,1,50,1001,36,0,0,0.0,0.0,0.0,485,i-akhmadullin,0,0,2,false,false
+150913,jaliss/securesocial,scala,55,1339087090,,1349030155,165717,,unknown,false,false,1,2,0,4,4,3,5,5,11,21,4,9,1,50,1001,36,0,0,0.0,0.0,0.0,485,i-akhmadullin,0,0,2,false,false
 150664,jaliss/securesocial,scala,53,1339075421,,1348452521,156285,,unknown,false,false,1,3,0,5,5,4,0,0,2,2,2,0,0,50,1001,29,0,0,0.0,0.0,0.0,484,rintcius,0,0,0,false,false
 149760,jaliss/securesocial,scala,51,1339010644,,1349199766,169818,,unknown,false,false,1,1,0,0,0,0,0,0,2,2,0,0,2,50,1001,0,0,0,0.0,0.0,0.0,960,joscha,3,0.6666666666666666,22,false,false
 149743,jaliss/securesocial,scala,50,1339009934,1339010059,1339010059,2,2,github,false,false,1,1,0,1,1,1,2,0,2,4,0,0,4,50,1001,0,0,2,0.0,0.0,0.0,480,joscha,2,0.5,11,false,false
@@ -97,5 +98,5 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1043192,jaliss/securesocial,scala,7,1322448246,,1322474843,443,,unknown,false,false,1,1,0,0,0,2,0,0,1,1,1,0,0,42,1294,40,0,0,37.09428129829984,3.0911901081916535,0.0,355,erosas,1,1.0,0,false,false
 1043190,jaliss/securesocial,scala,6,1322412777,1322416057,1322416057,54,54,github,false,false,1,1,0,0,0,1,0,0,1,1,1,0,0,42,1293,1,0,2,37.12296983758701,3.0935808197989174,0.0,354,erosas,0,0,0,false,false
 1043305,jaliss/securesocial,scala,5,1322154574,1322156283,1322156284,28,28,github,false,false,1,1,0,1,1,1,0,0,1,1,1,0,0,47,1290,6,0,1,37.2093023255814,3.10077519379845,0.0,353,sussegaduss,0,0,5,false,false
-860126,jaliss/securesocial,scala,4,1321389734,,1327008658,93648,,unknown,false,false,1,8,0,4,4,2,4,0,10,14,8,2,2,40,1190,739,2,0,20.16806722689076,1.680672268907563,0.0,349,marius0,0,0,2,false,false
+860126,jaliss/securesocial,scala,4,1321389734,,1327008658,93648,,unknown,false,false,1,8,0,4,4,2,4,1,10,15,8,2,2,40,1190,739,2,0,20.16806722689076,1.680672268907563,0.0,349,marius0,0,0,2,false,false
 860123,jaliss/securesocial,scala,2,1321105172,,1327008574,98390,,unknown,false,false,1,4,0,0,0,0,1,0,4,5,2,2,1,10,1190,0,2,0,20.16806722689076,1.680672268907563,0.0,346,opensas,0,0,8,false,false

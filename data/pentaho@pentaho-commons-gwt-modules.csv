@@ -130,7 +130,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1566366,pentaho/pentaho-commons-gwt-modules,java,91,1370625849,1370625913,1370625913,1,1,commits_in_master,false,false,14,1,0,0,0,0,2,0,2,4,0,0,2,42,12413,0,0,30,0.0,0.0,0.0,0,rfellows,34,0.4411764705882353,1,false,true
 1566200,pentaho/pentaho-commons-gwt-modules,java,90,1370623751,1370623798,1370623798,0,0,github,false,false,14,1,0,0,0,0,0,0,3,3,0,0,0,42,12413,0,0,67,0.0,0.0,0.0,0,rfellows,33,0.42424242424242425,2,false,true
 1562166,pentaho/pentaho-commons-gwt-modules,java,89,1370555685,1370555850,1370555850,2,2,commits_in_master,false,false,14,1,0,0,0,0,0,0,1,1,1,0,0,42,12407,15,0,4,0.0,0.0,0.0,0,rfellows,32,0.4375,1,false,true
-1556717,pentaho/pentaho-commons-gwt-modules,java,88,1370476221,1370476332,1370476332,1,1,github,false,false,14,1,0,0,0,0,42,0,13,55,0,0,61,42,12407,0,0,52,0.0,0.0,0.0,0,rfellows,31,0.41935483870967744,2,false,true
+1556717,pentaho/pentaho-commons-gwt-modules,java,88,1370476221,1370476332,1370476332,1,1,github,false,false,14,1,0,0,0,0,42,8,13,63,0,0,61,42,12407,0,0,52,0.0,0.0,0.0,0,rfellows,31,0.41935483870967744,2,false,true
 1554446,pentaho/pentaho-commons-gwt-modules,java,87,1370442230,1370442369,1370442369,2,2,github,false,false,13,1,0,0,0,0,0,0,3,3,0,0,0,42,12407,0,0,63,0.0,0.0,0.0,0,rfellows,30,0.4,1,false,true
 1551224,pentaho/pentaho-commons-gwt-modules,java,86,1370390046,1370390138,1370390138,1,1,github,false,false,13,1,0,0,0,0,0,0,1,1,1,0,0,42,12406,7,0,1,0.0,0.0,0.0,0,dcleao,5,0.4,0,false,true
 1550002,pentaho/pentaho-commons-gwt-modules,java,85,1370370956,1370371161,1370371161,3,3,github,false,false,13,1,0,0,0,0,0,0,1,1,1,0,0,42,12405,64,0,0,0.0,0.0,0.0,0,krivera-pentaho,6,0.5,0,false,true
@@ -145,7 +145,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1536055,pentaho/pentaho-commons-gwt-modules,java,76,1369851758,,1369852899,19,,unknown,false,false,13,1,0,1,1,1,0,0,1,1,1,0,0,41,12395,8,0,0,0.0,0.0,0.0,0,jeffreythomas,9,0.6666666666666666,0,false,true
 1535884,pentaho/pentaho-commons-gwt-modules,java,75,1369849577,1369850851,1369850851,21,21,commits_in_master,false,false,13,1,3,0,3,2,4,0,3,7,0,0,4,41,12395,0,0,49,0.0,0.0,0.0,0,rfellows,24,0.375,1,false,true
 1529518,pentaho/pentaho-commons-gwt-modules,java,74,1369755590,1369755820,1369755820,3,3,commits_in_master,false,false,13,2,0,0,0,0,0,0,1,1,1,0,0,41,12411,33,0,2,0.0,0.0,0.0,0,jeffreythomas,8,0.75,0,false,true
-1529208,pentaho/pentaho-commons-gwt-modules,java,73,1369751713,1369751957,1369751957,4,4,commits_in_master,false,false,13,1,0,0,0,0,1,0,1,2,15,0,1,41,14863,3622,0,56,0.0,0.0,0.0,0,mdamour1976,10,0.5,2,false,true
+1529208,pentaho/pentaho-commons-gwt-modules,java,73,1369751713,1369751957,1369751957,4,4,commits_in_master,false,false,13,1,0,0,0,0,1,15,1,17,15,0,1,41,14863,3622,0,56,0.0,0.0,0.0,0,mdamour1976,10,0.5,2,false,true
 1529084,pentaho/pentaho-commons-gwt-modules,java,72,1369750370,1369750933,1369750933,9,9,commits_in_master,false,false,13,1,0,0,0,0,1,0,3,4,0,0,1,41,14863,0,0,46,0.0,0.0,0.0,0,pminutillo,0,0,2,false,true
 1513873,pentaho/pentaho-commons-gwt-modules,java,71,1369414457,1369435864,1369435864,356,356,commits_in_master,false,false,13,1,0,0,0,0,0,0,2,2,0,0,0,40,14863,0,0,15,0.0,0.0,0.0,0,krivera-pentaho,5,0.6,0,false,true
 1711151,pentaho/pentaho-commons-gwt-modules,java,70,1369333691,1369335442,1369335442,29,29,github,false,false,13,1,0,0,0,0,0,0,3,3,0,0,0,40,14863,0,0,42,0.0,0.0,0.0,0,rfellows,23,0.34782608695652173,1,false,true
@@ -210,7 +210,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2704609,pentaho/pentaho-commons-gwt-modules,java,11,1364232926,1364232935,1364232935,0,0,github,false,false,5,1,0,0,0,0,0,0,1,1,1,0,0,57,14400,4,0,10,0.0,0.0,0.0,0,pentaho-skarmali,3,0.6666666666666666,0,false,true
 1291422,pentaho/pentaho-commons-gwt-modules,java,10,1363979813,1363979824,1363979825,0,0,github,false,false,5,2,0,0,0,0,0,0,2,2,1,0,1,57,14400,8,0,1,0.0,0.0,0.0,0,pentaho-skarmali,2,0.5,0,false,true
 1291371,pentaho/pentaho-commons-gwt-modules,java,9,1363979163,1363979190,1363979190,0,0,commits_in_master,false,false,5,3,0,0,0,0,0,0,2,2,2,0,0,56,14372,125,0,24,0.0,0.0,0.0,0,pentaho-skarmali,1,1.0,0,false,true
-1285966,pentaho/pentaho-commons-gwt-modules,java,8,1363882631,1363886603,1363886603,66,66,github,false,false,4,4,0,0,0,0,2,0,8,10,8,0,1,55,14317,5157,0,10,0.0,0.0,0.0,0,pentaho-skarmali,0,0,0,false,true
+1285966,pentaho/pentaho-commons-gwt-modules,java,8,1363882631,1363886603,1363886603,66,66,github,false,false,4,4,0,0,0,0,2,2,8,12,8,0,1,55,14317,5157,0,10,0.0,0.0,0.0,0,pentaho-skarmali,0,0,0,false,true
 1278410,pentaho/pentaho-commons-gwt-modules,java,7,1363736251,1363736371,1363736371,2,2,github,false,false,4,1,0,0,0,0,0,0,1,1,1,0,0,52,14309,22,0,2,0.0,0.0,0.0,0,rfellows,1,1.0,2,false,true
 1260255,pentaho/pentaho-commons-gwt-modules,java,6,1363318571,1363318580,1363318580,0,0,github,false,false,4,1,0,0,0,0,0,0,1,1,1,0,0,45,14308,471,0,0,0.0,0.0,0.0,0,rfellows,0,0,1,false,true
 1249756,pentaho/pentaho-commons-gwt-modules,java,5,1363119724,1363119815,1363119815,1,1,commits_in_master,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,44,14306,3,0,1,0.0,0.0,0.0,0,mdamour1976,1,0.0,2,false,true

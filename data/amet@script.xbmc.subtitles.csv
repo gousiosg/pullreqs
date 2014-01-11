@@ -34,7 +34,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1434988,amet/script.xbmc.subtitles,python,177,1367686384,,1367741065,911,,unknown,false,false,3,1,0,2,2,2,0,0,1,1,1,0,0,43,7894,42,0,3,0.0,0.0,0.0,86,IcEBnd,4,0.75,2,false,false
 1434443,amet/script.xbmc.subtitles,python,176,1367672474,,1367741076,1143,,unknown,false,false,3,1,0,0,0,0,0,0,0,0,3,0,1,41,7894,0,0,0,0.0,0.0,0.0,86,slmosl,0,0,0,false,false
 1431928,amet/script.xbmc.subtitles,python,175,1367603504,,1367603673,2,,unknown,false,false,3,1,0,0,0,0,4,0,1,5,3,1,1,42,7670,299,0,1,0.0,0.0,0.0,85,guysoft,1,0.0,5,false,false
-1431470,amet/script.xbmc.subtitles,python,174,1367598471,,1367603442,82,,unknown,false,false,3,14,0,3,3,2,10,0,5,15,6,2,3,41,7670,708,0,0,0.0,0.0,0.0,85,guysoft,0,0,5,false,false
+1431470,amet/script.xbmc.subtitles,python,174,1367598471,,1367603442,82,,unknown,false,false,3,14,0,3,3,2,10,2,5,17,6,2,3,41,7670,708,0,0,0.0,0.0,0.0,85,guysoft,0,0,5,false,false
 1402975,amet/script.xbmc.subtitles,python,172,1367053589,1367143287,1367143287,1494,1494,github,false,false,3,1,0,2,2,2,0,0,1,1,1,0,0,41,7656,31,0,2,0.0,0.0,0.0,85,IcEBnd,2,1.0,2,false,false
 1299506,amet/script.xbmc.subtitles,python,171,1364367109,1364367395,1364367395,4,4,github,false,false,3,1,0,2,2,1,0,0,1,1,0,1,0,65,7656,0,0,7,0.0,0.0,0.0,170,MartijnKaijser,0,0,12,false,false
 1243317,amet/script.xbmc.subtitles,python,169,1363015889,,1363030686,246,,unknown,false,false,3,1,0,1,1,1,0,0,3,3,3,0,0,67,7635,52,0,9,0.0,0.0,0.0,84,highlandr,13,1.0,1,false,false
@@ -55,10 +55,10 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 933844,amet/script.xbmc.subtitles,python,153,1359409348,,1359412496,52,,unknown,false,false,1,2,0,0,0,1,0,0,1,1,1,0,0,96,7541,233,0,6,0.0,0.0,0.0,79,hroussez,0,0,0,false,false
 928196,amet/script.xbmc.subtitles,python,152,1359222406,1359442134,1359442134,3662,3662,github,false,false,1,1,0,1,1,1,0,0,1,1,1,0,0,96,7541,37,0,0,0.0,0.0,0.0,79,meathook,6,0.3333333333333333,0,false,false
 928117,amet/script.xbmc.subtitles,python,151,1359219342,1359222120,1359222120,46,46,github,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,98,7538,24,0,0,0.0,0.0,0.0,79,meathook,5,0.2,0,false,false
-928101,amet/script.xbmc.subtitles,python,150,1359219318,,1359222133,46,,unknown,false,false,1,58,0,0,0,0,78,0,87,165,30,40,8,98,6845,4132,0,0,0.0,0.0,0.0,79,meathook,4,0.25,0,false,false
+928101,amet/script.xbmc.subtitles,python,150,1359219318,,1359222133,46,,unknown,false,false,1,58,0,0,0,0,78,39,87,204,30,40,8,98,6845,4132,0,0,0.0,0.0,0.0,79,meathook,4,0.25,0,false,false
 928187,amet/script.xbmc.subtitles,python,149,1359207504,,1359222154,244,,unknown,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,98,7538,26,0,0,0.0,0.0,0.0,79,meathook,3,0.3333333333333333,0,false,false
-927721,amet/script.xbmc.subtitles,python,148,1359207374,,1359216876,158,,unknown,false,false,1,58,0,0,0,0,78,0,87,165,30,40,8,98,6845,4147,0,0,0.0,0.0,0.0,79,meathook,2,0.5,0,false,false
-928019,amet/script.xbmc.subtitles,python,147,1359207248,,1359216854,160,,unknown,false,false,1,58,0,0,0,0,78,0,87,165,30,40,8,98,6845,4147,0,0,0.0,0.0,0.0,79,meathook,1,1.0,0,false,false
+927721,amet/script.xbmc.subtitles,python,148,1359207374,,1359216876,158,,unknown,false,false,1,58,0,0,0,0,78,39,87,204,30,40,8,98,6845,4147,0,0,0.0,0.0,0.0,79,meathook,2,0.5,0,false,false
+928019,amet/script.xbmc.subtitles,python,147,1359207248,,1359216854,160,,unknown,false,false,1,58,0,0,0,0,78,39,87,204,30,40,8,98,6845,4147,0,0,0.0,0.0,0.0,79,meathook,1,1.0,0,false,false
 927708,amet/script.xbmc.subtitles,python,146,1359205133,1359205512,1359205512,6,6,github,false,false,1,1,0,3,3,2,0,0,1,1,1,0,0,98,6841,26,0,0,0.0,0.0,0.0,79,meathook,0,0,0,false,false
 834170,amet/script.xbmc.subtitles,python,145,1358908187,1358915696,1358915696,125,125,github,false,false,1,2,0,0,0,0,0,0,2,2,2,0,0,98,7458,940,0,2,0.0,0.0,0.0,79,gfjardim,1,1.0,0,false,false
 825482,amet/script.xbmc.subtitles,python,144,1358633643,1358650016,1358650016,272,272,github,false,false,1,1,0,1,1,1,3,0,1,4,2,1,1,98,7270,248,0,4,0.0,0.0,0.0,79,yllar,0,0,0,false,false
@@ -66,9 +66,9 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 788951,amet/script.xbmc.subtitles,python,142,1357756357,1357816480,1357816480,1002,1002,github,false,false,1,1,0,2,2,2,0,0,3,3,3,0,0,98,7369,948,0,4,0.0,0.0,0.0,79,highlandr,8,1.0,1,false,false
 785559,amet/script.xbmc.subtitles,python,141,1357691382,1357704752,1357704752,222,222,github,false,false,1,1,0,1,1,2,0,0,3,3,3,0,0,98,6939,926,0,4,0.0,0.0,0.0,79,highlandr,7,1.0,1,false,false
 779133,amet/script.xbmc.subtitles,python,140,1357555682,1357556215,1357556215,8,8,github,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,98,7369,2,0,0,0.0,0.0,0.0,79,MutatedHero,2,0.0,0,false,false
-778745,amet/script.xbmc.subtitles,python,139,1357549177,,1357555856,111,,unknown,false,false,1,40,0,1,1,1,69,0,85,154,21,40,4,98,6945,1340,0,0,0.0,0.0,0.0,79,MutatedHero,1,0.0,0,false,false
+778745,amet/script.xbmc.subtitles,python,139,1357549177,,1357555856,111,,unknown,false,false,1,40,0,1,1,1,69,37,85,191,21,40,4,98,6945,1340,0,0,0.0,0.0,0.0,79,MutatedHero,1,0.0,0,false,false
 778713,amet/script.xbmc.subtitles,python,138,1357548539,,1357548582,0,,unknown,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,98,6945,2,0,0,0.0,0.0,0.0,79,MutatedHero,0,0,0,false,false
-779058,amet/script.xbmc.subtitles,python,137,1357525432,1357554248,1357554248,480,480,github,false,false,1,2,0,1,1,1,6,0,2,8,5,2,3,98,6987,604,0,12,0.0,0.0,0.0,79,lambda81,1,1.0,5,false,false
+779058,amet/script.xbmc.subtitles,python,137,1357525432,1357554248,1357554248,480,480,github,false,false,1,2,0,1,1,1,6,2,2,10,5,2,3,98,6987,604,0,12,0.0,0.0,0.0,79,lambda81,1,1.0,5,false,false
 779047,amet/script.xbmc.subtitles,python,136,1357416093,1357554170,1357554171,2301,2301,github,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,98,6945,2,0,0,0.0,0.0,0.0,79,xbmcspain,0,0,0,false,false
 906863,amet/script.xbmc.subtitles,python,135,1356961394,1356964606,1356964606,53,53,github,false,false,2,1,0,0,0,2,11,0,41,52,0,1,1,96,6987,0,0,60,0.0,0.0,0.0,79,alanwww1,0,0,4,false,false
 774563,amet/script.xbmc.subtitles,python,134,1356895073,1356895264,1356895264,3,3,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,96,6945,4,0,1,0.0,0.0,0.0,156,tweemeterjop,0,0,0,false,false
@@ -85,7 +85,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 358863,amet/script.xbmc.subtitles,python,115,1346963589,,1346964848,20,,unknown,false,false,4,4,0,1,1,2,0,0,4,4,1,3,0,62,6192,100,0,0,0.0,0.0,0.0,71,gacopl,2,0.5,0,false,false
 356564,amet/script.xbmc.subtitles,python,114,1346882186,,1346902494,338,,unknown,false,false,4,3,0,0,0,2,0,0,4,4,1,3,0,66,6192,65,0,0,0.0,0.0,0.0,71,gacopl,1,1.0,0,false,false
 352983,amet/script.xbmc.subtitles,python,113,1346768244,1346839063,1346839063,1180,1180,github,false,false,4,1,0,0,0,0,0,0,1,1,1,0,0,69,6181,24,0,1,0.0,0.0,0.0,71,gacopl,0,0,0,false,false
-352504,amet/script.xbmc.subtitles,python,112,1346756072,1346757089,1346757089,16,16,github,false,false,3,1,0,0,0,0,0,0,4,4,3,3,1,71,6260,123,0,0,0.0,0.0,0.0,142,mrto,2,0.5,0,false,false
+352504,amet/script.xbmc.subtitles,python,112,1346756072,1346757089,1346757089,16,16,github,false,false,3,1,0,0,0,0,0,3,4,7,3,3,1,71,6260,123,0,0,0.0,0.0,0.0,142,mrto,2,0.5,0,false,false
 267519,amet/script.xbmc.subtitles,python,111,1345917872,1345917978,1345917978,1,1,github,false,false,2,1,0,1,1,1,0,0,1,1,1,0,0,89,6260,2,0,1,0.0,0.0,0.0,70,mdklapwijk,1,1.0,0,false,false
 338729,amet/script.xbmc.subtitles,python,110,1345883748,1345884124,1345884125,6,6,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,88,6260,2,0,0,0.0,0.0,0.0,140,mdklapwijk,0,0,0,false,false
 337940,amet/script.xbmc.subtitles,python,109,1345796976,1345797800,1345797800,13,13,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,87,6260,4,0,2,0.0,0.0,0.0,70,taxigps,3,1.0,0,false,false
@@ -100,7 +100,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 151151,amet/script.xbmc.subtitles,python,99,1339097799,,1339267243,2824,,unknown,false,false,2,2,0,0,0,2,3,0,2,5,3,1,1,41,6219,387,0,0,0.0,0.0,0.0,68,quillo86,3,0.6666666666666666,0,false,false
 151146,amet/script.xbmc.subtitles,python,98,1339097656,1339267175,1339267175,2825,2825,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,41,6219,299,0,1,0.0,0.0,0.0,68,quillo86,2,0.5,0,false,false
 392765,amet/script.xbmc.subtitles,python,97,1337390924,1337491613,1337491613,1678,1678,github,false,false,2,1,0,1,1,1,3,0,1,4,2,1,1,43,6051,232,0,4,0.0,0.0,0.0,67,quillo86,1,0.0,0,true,false
-392644,amet/script.xbmc.subtitles,python,96,1337347817,,1337369002,353,,unknown,false,false,2,3,0,2,2,2,5,0,2,7,2,1,3,40,6051,260,0,0,0.0,0.0,0.0,67,quillo86,0,0,0,true,false
+392644,amet/script.xbmc.subtitles,python,96,1337347817,,1337369002,353,,unknown,false,false,2,3,0,2,2,2,5,2,2,9,2,1,3,40,6051,260,0,0,0.0,0.0,0.0,67,quillo86,0,0,0,true,false
 122223,amet/script.xbmc.subtitles,python,95,1336888762,1337005889,1337005889,1952,1952,github,false,false,2,2,0,0,0,0,0,0,2,2,2,0,0,38,6051,16,0,0,0.0,0.0,0.0,66,BBLN,0,0,4,false,false
 91593,amet/script.xbmc.subtitles,python,94,1334569964,,1334589333,322,,unknown,false,false,2,3,0,1,1,2,1,0,5,6,4,1,1,60,6084,24,0,0,0.0,0.0,0.0,63,MartinWallgren,2,1.0,1,false,false
 90460,amet/script.xbmc.subtitles,python,93,1334463754,1334464082,1334464082,5,5,github,false,false,2,1,0,0,0,1,0,0,1,1,0,1,0,66,5975,0,0,0,0.0,0.0,0.0,126,Troopie,0,0,0,false,false

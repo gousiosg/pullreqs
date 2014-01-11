@@ -70,7 +70,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1318497,mdipierro/web2py-book,python,50,1364753541,1364766920,1364766920,222,222,merged_in_comments,false,false,3,1,0,0,0,1,0,0,1,1,0,0,1,50,3665,0,0,0,0.0,0.0,0.0,42,neoecos,1,0.0,0,false,false
 1316886,mdipierro/web2py-book,python,49,1364702866,,1364753655,846,,unknown,false,false,3,1,0,1,1,1,0,0,1,1,0,0,1,50,3665,0,0,0,0.0,0.0,0.0,42,neoecos,0,0,0,false,false
 1319128,mdipierro/web2py-book,python,46,1364149863,1364766953,1364766954,10344,10344,github,false,false,4,1,0,0,0,0,0,0,1,1,0,0,1,37,3665,0,0,7,0.0,0.0,0.0,40,dpetzel,0,0,6,false,false
-1264609,mdipierro/web2py-book,python,44,1363399562,1364766934,1364766934,22849,22849,commits_in_master,false,false,4,18,0,1,1,1,3,0,17,20,0,0,20,28,3665,0,0,25,0.0,0.0,0.0,39,spametki,11,0.7272727272727273,0,false,false
+1264609,mdipierro/web2py-book,python,44,1363399562,1364766934,1364766934,22849,22849,commits_in_master,false,false,4,18,0,1,1,1,3,3,17,23,0,0,20,28,3665,0,0,25,0.0,0.0,0.0,39,spametki,11,0.7272727272727273,0,false,false
 1258557,mdipierro/web2py-book,python,43,1363290222,1363354035,1363354035,1063,1063,github,false,false,4,1,0,0,0,0,0,0,1,1,1,0,0,28,3659,32,0,0,0.0,0.0,0.0,39,AllanMatheus,0,0,0,false,false
 1256758,mdipierro/web2py-book,python,42,1363270468,1363270620,1363270620,2,2,github,false,false,4,1,0,0,0,0,0,0,1,1,0,0,1,28,3659,0,0,1,0.0,0.0,0.0,39,spametki,10,0.7,0,false,false
 1246363,mdipierro/web2py-book,python,41,1363074201,1363354049,1363354049,4664,4664,commits_in_master,false,false,4,2,0,0,0,0,0,0,9,9,0,0,9,27,3659,0,0,37,0.0,0.0,0.0,39,rif,0,0,4,false,false
@@ -78,7 +78,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1223668,mdipierro/web2py-book,python,38,1362474071,1362754790,1362754790,4678,4678,commits_in_master,false,false,4,3,0,0,0,0,0,0,5,5,0,0,5,25,3659,0,0,11,0.0,0.0,0.0,38,spametki,9,0.7777777777777778,0,false,false
 1168392,mdipierro/web2py-book,python,36,1361233568,1361807535,1361807535,9566,9566,commits_in_master,false,false,4,2,0,0,0,0,0,0,2,2,0,0,2,28,3658,0,0,63,0.0,0.0,0.0,38,timrichardson,5,0.6,0,false,false
 1155686,mdipierro/web2py-book,python,35,1360893574,1360967632,1360967632,1234,1234,commits_in_master,false,false,4,4,0,0,0,0,0,0,3,3,0,0,3,27,3658,0,0,17,0.0,0.0,0.0,35,timrichardson,4,0.75,0,false,false
-1151144,mdipierro/web2py-book,python,34,1360787507,1360868710,1360868710,1353,1353,github,false,false,5,6,0,0,0,0,248,0,194,442,1,12,489,25,3658,0,0,65,0.0,0.0,0.0,35,kneipp,0,0,5,false,false
+1151144,mdipierro/web2py-book,python,34,1360787507,1360868710,1360868710,1353,1353,github,false,false,5,6,0,0,0,0,248,284,194,726,1,12,489,25,3658,0,0,65,0.0,0.0,0.0,35,kneipp,0,0,5,false,false
 1064274,mdipierro/web2py-book,python,33,1360439447,1360868503,1360868503,7150,7150,commits_in_master,false,false,4,1,0,0,0,0,0,0,1,1,0,0,1,24,3658,0,0,17,0.0,0.0,0.0,33,gokceneraslan,0,0,22,false,false
 958128,mdipierro/web2py-book,python,32,1359978320,1360868895,1360868895,14842,14842,commits_in_master,false,false,4,2,0,6,6,2,0,0,1,1,0,0,1,23,3657,0,0,28,0.0,0.0,0.0,32,timrichardson,3,1.0,0,false,false
 957528,mdipierro/web2py-book,python,31,1359451803,1360013684,1360013684,9364,9364,merged_in_comments,false,false,4,1,0,0,0,1,1,0,2,3,0,0,3,24,3657,0,0,0,0.0,0.0,0.0,32,nicozanf,4,1.0,0,false,false
@@ -99,9 +99,9 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 477579,mdipierro/web2py-book,python,15,1352840641,1353004897,1353004897,2737,2737,github,false,false,4,4,0,0,0,0,4,0,2,6,0,0,6,43,3512,0,0,5,0.0,0.0,0.0,29,nicozanf,1,1.0,0,false,false
 883257,mdipierro/web2py-book,python,10,1349717764,1349730929,1349730929,219,219,github,false,false,3,4,0,0,0,0,0,0,2,2,0,0,2,45,3512,0,0,20,0.0,0.0,0.0,29,spametki,1,1.0,0,false,false
 420607,mdipierro/web2py-book,python,9,1347911671,1347927371,1347927371,261,261,github,false,false,3,9,0,0,0,0,1,0,4,5,0,0,4,43,3512,0,0,18,0.0,0.0,0.0,26,nicozanf,0,0,0,false,false
-416773,mdipierro/web2py-book,python,8,1347729235,1348794064,1348794064,17747,17747,github,false,false,3,9,0,0,0,0,2,0,3,5,0,0,4,40,3512,0,0,16,0.0,0.0,0.0,52,spametki,0,0,0,false,false
+416773,mdipierro/web2py-book,python,8,1347729235,1348794064,1348794064,17747,17747,github,false,false,3,9,0,0,0,0,2,1,3,6,0,0,4,40,3512,0,0,16,0.0,0.0,0.0,52,spametki,0,0,0,false,false
 369189,mdipierro/web2py-book,python,7,1347389079,1347453636,1347453636,1075,1075,github,false,false,3,2,0,0,0,0,0,0,2,2,0,0,2,42,3513,0,0,7,0.0,0.0,0.0,25,apt-net,0,0,0,false,false
-361480,mdipierro/web2py-book,python,5,1347051265,1347139626,1347139626,1472,1472,github,false,false,3,2,0,0,0,0,284,0,0,284,0,1,283,38,3513,0,0,0,0.0,0.0,0.0,23,DonaldClermont,0,0,0,false,false
+361480,mdipierro/web2py-book,python,5,1347051265,1347139626,1347139626,1472,1472,github,false,false,3,2,0,0,0,0,284,1,0,285,0,1,283,38,3513,0,0,0,0.0,0.0,0.0,23,DonaldClermont,0,0,0,false,false
 358280,mdipierro/web2py-book,python,4,1346948003,1346974108,1346974108,435,435,github,false,false,2,1,0,0,0,0,0,0,1,1,0,0,1,44,3504,0,0,1,0.0,0.0,0.0,23,benjreinhart,0,0,24,false,false
 351414,mdipierro/web2py-book,python,3,1346703136,1346705553,1346705553,40,40,github,false,false,1,2,0,0,0,0,284,0,1,285,0,1,283,40,3499,0,0,0,0.0,0.0,0.0,21,mulonemartin,1,0.0,4,false,false
 351363,mdipierro/web2py-book,python,2,1346700735,,1346700926,3,,unknown,false,false,1,11,0,1,1,2,284,0,2,286,0,1,285,36,3499,0,0,0,0.0,0.0,0.0,21,mulonemartin,0,0,4,false,false

@@ -1,5 +1,6 @@
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,merged_using,conflict,forward_links,team_size,num_commits,num_commit_comments,num_issue_comments,num_comments,num_participants,files_added,files_deleted,files_modified,files_changed,src_files,doc_files,other_files,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
-2373311,kennethreitz/python-guide,python,332,1383387718,,1385447160,34324,,unknown,false,false,1,4,0,1,1,1,0,0,3,3,0,3,0,74,113,0,0,0,0.0,0.0,0.0,4010,pengkui,1,1.0,4,false,false
+2736655,kennethreitz/python-guide,python,349,1388707256,1389205427,1389205427,8302,8302,github,false,false,1,1,0,0,0,0,0,0,1,1,0,1,0,33,113,0,0,0,0.0,0.0,0.0,4043,justinhorner,0,0,0,false,false
+2373311,kennethreitz/python-guide,python,332,1383387718,1385447160,1385447160,34324,34324,commits_in_master,false,false,1,4,0,1,1,1,0,0,3,3,0,3,0,74,113,0,0,3,0.0,0.0,0.0,4010,pengkui,1,1.0,4,false,false
 2147301,kennethreitz/python-guide,python,323,1380017598,1381723087,1381723087,28424,28424,commits_in_master,false,false,1,2,1,1,2,2,0,0,1,1,0,1,0,75,113,0,0,10,0.0,0.0,0.0,3986,AloisMahdal,0,0,2,false,false
 2650580,kennethreitz/python-guide,python,321,1379364406,1379365306,1379365306,15,15,github,false,false,1,1,0,0,0,0,0,0,1,1,0,1,0,74,113,0,0,4,0.0,0.0,0.0,3975,AnSavvides,0,0,1,false,false
 2106975,kennethreitz/python-guide,python,318,1379098326,1379098445,1379098445,1,1,commits_in_master,false,false,1,1,0,0,0,0,0,0,1,1,0,1,0,75,113,0,0,0,0.0,0.0,0.0,3972,rgbkrk,5,0.8,16,false,false
@@ -133,7 +134,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 151640,kennethreitz/python-guide,python,162,1339136768,1339136822,1339136822,0,0,github,false,false,3,1,0,1,1,1,0,0,1,1,0,1,0,57,107,0,0,0,0.0,0.0,0.0,2634,JensRantil,0,0,5,false,false
 150721,kennethreitz/python-guide,python,160,1339077847,1339106867,1339106867,483,483,github,false,false,3,1,0,1,1,1,0,0,1,1,0,1,0,57,107,0,0,2,0.0,0.0,0.0,2630,uvtc,0,0,0,false,false
 142466,kennethreitz/python-guide,python,158,1338470131,,1339139859,11162,,unknown,false,false,3,1,0,2,2,2,0,0,1,1,0,1,0,57,107,0,0,0,0.0,0.0,0.0,2576,fofore,1,0.0,0,false,false
-395062,kennethreitz/python-guide,python,157,1338465139,,1338469321,69,,unknown,false,false,3,6,0,0,0,1,1,0,2,3,0,2,1,57,107,0,0,0,0.0,0.0,0.0,2576,fofore,0,0,0,true,false
+395062,kennethreitz/python-guide,python,157,1338465139,,1338469321,69,,unknown,false,false,3,6,0,0,0,1,1,1,2,4,0,2,1,57,107,0,0,0,0.0,0.0,0.0,2576,fofore,0,0,0,true,false
 141439,kennethreitz/python-guide,python,156,1338371089,1338400209,1338400209,485,485,github,false,false,3,1,0,1,1,1,0,0,1,1,0,1,0,57,107,0,0,17,0.0,0.0,0.0,2574,ncoghlan,0,0,0,false,false
 137882,kennethreitz/python-guide,python,155,1338125874,1338329206,1338329206,3388,3388,github,false,false,3,1,0,1,1,1,0,0,2,2,0,2,0,57,107,0,0,32,0.0,0.0,0.0,2561,Gelma,0,0,2,false,false
 129583,kennethreitz/python-guide,python,154,1337483784,1337483827,1337483829,0,0,github,false,false,3,1,0,1,1,2,0,0,1,1,0,1,0,57,107,0,0,15,0.0,0.0,0.0,2538,kuyan,2,1.0,0,false,false
@@ -200,7 +201,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 698640,kennethreitz/python-guide,python,73,1325733045,1326625124,1326625125,14868,14867,github,false,false,1,5,0,2,2,1,0,0,1,1,0,1,0,54,104,0,0,8,0.0,0.0,0.0,1892,rday,0,0,7,false,false
 698641,kennethreitz/python-guide,python,72,1325702912,1325711690,1325711692,146,146,github,false,false,1,1,0,1,1,1,0,0,3,3,0,3,0,54,104,0,0,13,0.0,0.0,0.0,1891,salty-horse,0,0,8,false,false
 281844,kennethreitz/python-guide,python,70,1325599510,1331763141,1331763141,102727,102727,github,false,false,1,2,0,5,5,2,0,0,2,2,1,1,0,54,104,6,0,7,0.0,0.0,0.0,1852,dcrosta,4,1.0,42,false,false
-698643,kennethreitz/python-guide,python,69,1325510894,1325542007,1325542007,518,518,github,false,false,1,2,0,1,1,1,0,0,6,6,0,6,1,54,104,0,0,37,0.0,0.0,0.0,1844,kisielk,8,1.0,17,false,false
+698643,kennethreitz/python-guide,python,69,1325510894,1325542007,1325542007,518,518,github,false,false,1,2,0,1,1,1,0,1,6,7,0,6,1,54,104,0,0,37,0.0,0.0,0.0,1844,kisielk,8,1.0,17,false,false
 698645,kennethreitz/python-guide,python,68,1325428836,1326625111,1326625111,19937,19937,github,false,false,1,3,0,5,5,2,0,0,1,1,0,1,0,54,104,0,0,3,0.0,0.0,0.0,1839,john2x,2,1.0,1,false,false
 698647,kennethreitz/python-guide,python,67,1325362227,1325542031,1325542032,2996,2996,github,false,false,1,1,0,1,1,1,0,0,1,1,0,1,0,55,104,0,0,3,0.0,0.0,0.0,1834,mrshu,1,1.0,2,false,false
 698648,kennethreitz/python-guide,python,66,1325357169,1325357854,1325357854,11,11,github,false,false,1,1,0,1,1,1,1,0,1,2,0,2,0,55,104,0,0,13,0.0,0.0,0.0,1834,chewxy,0,0,0,false,false
@@ -236,7 +237,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 698694,kennethreitz/python-guide,python,32,1325181416,1325181524,1325181524,1,1,github,false,false,1,1,0,1,1,1,0,0,1,1,0,1,0,61,103,0,0,9,0.0,0.0,0.0,1830,gggritso,0,0,0,false,false
 698609,kennethreitz/python-guide,python,31,1324737382,1324751767,1324751767,239,239,github,false,false,1,1,0,1,1,2,0,0,1,1,0,1,0,61,103,0,0,0,0.0,0.0,0.0,1821,kisielk,7,1.0,17,false,false
 698611,kennethreitz/python-guide,python,30,1324678772,1324694563,1324694563,263,263,github,false,false,1,1,0,1,1,1,1,0,1,2,0,1,1,62,103,0,0,1,0.0,0.0,0.0,1820,kisielk,6,1.0,17,false,false
-698605,kennethreitz/python-guide,python,29,1324676151,1324694480,1324694480,305,305,github,false,false,1,1,0,1,1,1,0,0,1,1,0,2,0,62,103,0,0,0,0.0,0.0,0.0,1820,kisielk,5,1.0,17,false,false
+698605,kennethreitz/python-guide,python,29,1324676151,1324694480,1324694480,305,305,github,false,false,1,1,0,1,1,1,0,1,1,2,0,2,0,62,103,0,0,0,0.0,0.0,0.0,1820,kisielk,5,1.0,17,false,false
 698607,kennethreitz/python-guide,python,28,1324673684,1324674947,1324674947,21,21,github,false,false,1,1,0,2,2,2,0,0,1,1,0,1,0,62,103,0,0,1,0.0,0.0,0.0,1820,kisielk,4,1.0,17,false,false
 698602,kennethreitz/python-guide,python,27,1324604180,1324604398,1324604398,3,3,github,false,false,1,3,0,1,1,1,0,0,2,2,0,2,0,62,103,0,0,2,0.0,0.0,0.0,1819,nstielau,0,0,9,false,false
 698603,kennethreitz/python-guide,python,26,1324591469,1324592077,1324592077,10,10,github,false,false,1,2,0,1,1,1,0,0,2,2,0,1,1,63,103,0,0,2,0.0,0.0,0.0,1818,kisielk,3,1.0,17,false,false
@@ -248,7 +249,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 698593,kennethreitz/python-guide,python,20,1324576980,1324577035,1324577035,0,0,github,false,false,1,1,0,0,0,1,0,0,1,1,0,1,0,69,103,0,0,1,0.0,0.0,0.0,1817,dstufft,0,0,23,false,false
 698587,kennethreitz/python-guide,python,19,1324576638,1324576817,1324576817,2,2,github,false,false,1,1,0,0,0,0,0,0,1,1,0,1,0,68,103,0,0,0,0.0,0.0,0.0,1817,alex,1,1.0,585,false,false
 698588,kennethreitz/python-guide,python,18,1324576448,1324576594,1324576594,2,2,github,false,false,1,1,0,1,1,1,0,0,1,1,0,1,0,70,103,0,0,4,0.0,0.0,0.0,1817,alex,0,0,585,false,false
-698589,kennethreitz/python-guide,python,17,1324576184,1324576268,1324576268,1,1,github,false,false,1,1,0,1,1,1,3,0,2,5,0,5,1,72,103,0,0,3,0.0,0.0,0.0,1817,kisielk,2,1.0,17,false,false
+698589,kennethreitz/python-guide,python,17,1324576184,1324576268,1324576268,1,1,github,false,false,1,1,0,1,1,1,3,1,2,6,0,5,1,72,103,0,0,3,0.0,0.0,0.0,1817,kisielk,2,1.0,17,false,false
 698583,kennethreitz/python-guide,python,16,1324574297,1324574492,1324574492,3,3,github,false,false,1,1,0,1,1,1,0,0,1,1,0,1,0,72,103,0,0,1,0.0,0.0,0.0,1817,kisielk,1,1.0,17,false,false
 698585,kennethreitz/python-guide,python,15,1324573431,1324574226,1324574227,13,13,github,false,false,1,1,0,1,1,1,0,0,1,1,0,1,0,72,103,0,0,3,0.0,0.0,0.0,1817,kisielk,0,0,17,false,false
 698833,kennethreitz/python-guide,python,14,1324573408,1324574200,1324574200,13,13,github,false,false,1,1,0,2,2,2,0,0,1,1,0,1,0,72,103,0,0,0,0.0,0.0,0.0,1817,daltonmatos,0,0,25,false,false

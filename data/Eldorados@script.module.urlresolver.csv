@@ -13,7 +13,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2402474,Eldorados/script.module.urlresolver,python,144,1383792476,,1383869720,1287,,unknown,false,false,1,2,0,0,0,0,9,0,9,18,9,0,0,68,6354,756,0,0,0.0,0.0,0.0,36,HIGHWAY99,3,0.0,5,false,false
 2402199,Eldorados/script.module.urlresolver,python,143,1383787627,1383869755,1383869755,1368,1368,commits_in_master,false,false,1,10,0,0,0,0,9,0,9,18,9,0,0,68,6354,756,0,0,0.0,0.0,0.0,36,HIGHWAY99,2,0.0,5,false,false
 2402070,Eldorados/script.module.urlresolver,python,142,1383785385,1383836628,1383836628,854,854,commits_in_master,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,67,6354,58,0,1,0.0,0.0,0.0,36,JUL1EN094,18,0.1111111111111111,1,false,false
-2400909,Eldorados/script.module.urlresolver,python,141,1383771551,1384185289,1384185289,6895,6895,commits_in_master,false,false,1,12,1,4,5,3,4,0,5,9,5,0,0,67,6354,482,0,2,0.0,0.0,0.0,36,jasanand,3,0.0,0,false,false
+2400909,Eldorados/script.module.urlresolver,python,141,1383771551,1384185289,1384185289,6895,6895,commits_in_master,false,false,1,12,1,4,5,3,4,1,5,10,5,0,0,67,6354,482,0,2,0.0,0.0,0.0,36,jasanand,3,0.0,0,false,false
 2399857,Eldorados/script.module.urlresolver,python,140,1383761798,1383836392,1383836392,1243,1243,commits_in_master,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,66,6354,2,0,3,0.0,0.0,0.0,36,kubakul,3,0.0,1,false,false
 2397730,Eldorados/script.module.urlresolver,python,139,1383743740,1383836374,1383836374,1543,1543,commits_in_master,false,false,1,1,0,2,2,2,0,0,1,1,1,0,0,66,6354,28,0,2,0.0,0.0,0.0,36,mikey1234,2,0.0,5,false,false
 2396477,Eldorados/script.module.urlresolver,python,138,1383728645,1383836310,1383836310,1794,1794,commit_sha_in_comments,false,false,1,1,0,1,1,1,0,0,1,1,1,0,0,66,6354,2,0,0,0.0,0.0,0.0,36,mikey1234,1,0.0,5,false,false
@@ -50,7 +50,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1923218,Eldorados/script.module.urlresolver,python,102,1376293449,1376294225,1376294225,12,12,commits_in_master,false,false,1,1,0,0,0,1,0,0,1,1,1,0,0,60,5312,39,0,0,0.0,0.0,0.0,32,JUL1EN094,15,0.13333333333333333,1,false,false
 1919408,Eldorados/script.module.urlresolver,python,101,1376186072,1381681142,1381681142,91584,91584,merged_in_comments,false,false,1,5,0,2,2,1,9,0,2,11,9,1,0,60,5312,872,0,0,0.0,0.0,0.0,31,HIGHWAY99,0,0,1,false,false
 1902991,Eldorados/script.module.urlresolver,python,100,1375876435,1378388708,1378388708,41871,41871,commits_in_master,false,false,1,23,0,12,12,2,5,0,9,14,9,0,0,60,5312,957,0,8,0.0,0.0,0.0,31,vinnydude,6,0.3333333333333333,2,false,false
-1879891,Eldorados/script.module.urlresolver,python,99,1375441255,1375563465,1375563465,2036,2036,commits_in_master,false,false,1,5,6,1,7,3,3,0,2,5,4,0,0,57,5265,521,0,1,0.0,0.0,0.0,31,jasanand,0,0,0,false,false
+1879891,Eldorados/script.module.urlresolver,python,99,1375441255,1375563465,1375563465,2036,2036,commits_in_master,false,false,1,5,6,1,7,3,3,2,2,7,4,0,0,57,5265,521,0,1,0.0,0.0,0.0,31,jasanand,0,0,0,false,false
 1868037,Eldorados/script.module.urlresolver,python,98,1375225246,1375360416,1375360416,2252,2252,commits_in_master,false,false,1,1,0,0,0,0,0,0,2,2,2,0,0,55,5140,8,0,2,0.0,0.0,0.0,31,irfancharania,5,0.0,1,false,false
 1864653,Eldorados/script.module.urlresolver,python,97,1375184124,1375360391,1375360391,2937,2937,commits_in_master,false,false,1,2,0,0,0,0,1,0,1,2,1,0,0,54,5140,102,0,0,0.0,0.0,0.0,31,irfancharania,4,0.0,1,false,false
 1862206,Eldorados/script.module.urlresolver,python,96,1375137847,1375360371,1375360371,3708,3708,commits_in_master,false,false,1,5,0,0,0,0,1,0,1,2,1,0,0,53,5140,128,0,0,0.0,0.0,0.0,31,irfancharania,3,0.0,1,false,false
@@ -126,7 +126,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 355735,Eldorados/script.module.urlresolver,python,20,1346859939,1346861177,1346861177,20,20,github,false,false,0,1,0,0,0,0,0,0,1,1,1,0,0,100,2905,24,0,0,0.0,0.0,0.0,14,mscreations,3,1.0,1,false,false
 336351,Eldorados/script.module.urlresolver,python,18,1346132135,1346158148,1346158150,433,433,github,false,false,0,1,0,0,0,0,0,0,1,1,1,0,0,100,2904,2,0,0,0.0,0.0,0.0,14,mscreations,2,1.0,0,false,false
 330324,Eldorados/script.module.urlresolver,python,17,1346021108,1346069653,1346069654,809,809,github,false,false,0,1,0,0,0,0,0,0,1,1,1,0,0,100,2904,2,0,0,0.0,0.0,0.0,14,mscreations,1,1.0,0,false,false
-382984,Eldorados/script.module.urlresolver,python,15,1333636570,1333977226,1333977226,5677,5677,github,false,false,1,2,0,2,2,2,52,0,5,57,57,0,0,72,3000,9156,0,0,0.0,0.0,0.0,9,bstrdsmkr,4,0.75,2,true,false
+382984,Eldorados/script.module.urlresolver,python,15,1333636570,1333977226,1333977226,5677,5677,github,false,false,1,2,0,2,2,2,52,45,5,102,57,0,0,72,3000,9156,0,0,0.0,0.0,0.0,9,bstrdsmkr,4,0.75,2,true,false
 382981,Eldorados/script.module.urlresolver,python,14,1333636294,,1333636386,1,,unknown,false,false,1,1,0,1,1,1,49,0,0,49,49,0,0,72,3000,4807,0,0,0.0,0.0,0.0,18,bstrdsmkr,3,1.0,4,true,false
 78122,Eldorados/script.module.urlresolver,python,13,1333478319,1333544695,1333544695,1106,1106,github,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,73,2988,33,0,2,0.0,0.0,0.0,9,prono,1,1.0,0,false,false
 76953,Eldorados/script.module.urlresolver,python,12,1333396211,1333456641,1333456641,1007,1007,github,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,74,2988,17,0,1,0.0,0.0,0.0,9,prono,0,0,0,false,false
@@ -137,7 +137,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 377334,Eldorados/script.module.urlresolver,python,7,1330450145,1330607417,1330607417,2621,2621,github,false,false,1,14,0,1,1,1,0,0,4,4,4,0,0,57,2665,189,0,34,0.0,0.0,0.0,7,anilkuj,2,1.0,2,true,false
 376805,Eldorados/script.module.urlresolver,python,6,1330272457,1330351119,1330351119,1311,1311,github,false,false,1,3,0,0,0,0,3,0,2,5,3,0,0,54,2499,306,0,0,0.0,0.0,0.0,7,anilkuj,1,1.0,2,true,false
 375034,Eldorados/script.module.urlresolver,python,5,1329708300,1329835959,1329835959,2127,2127,github,false,false,1,3,0,1,1,1,1,0,1,2,1,0,0,52,2229,167,0,0,0.0,0.0,0.0,7,anilkuj,0,0,1,true,false
-374081,Eldorados/script.module.urlresolver,python,4,1329341670,1329755369,1329755369,6894,6894,github,false,false,1,2,0,0,0,0,5,0,0,5,5,0,0,42,2229,566,0,0,0.0,0.0,0.0,7,bstrdsmkr,2,1.0,1,true,false
+374081,Eldorados/script.module.urlresolver,python,4,1329341670,1329755369,1329755369,6894,6894,github,false,false,1,2,0,0,0,0,5,1,0,6,5,0,0,42,2229,566,0,0,0.0,0.0,0.0,7,bstrdsmkr,2,1.0,1,true,false
 31386,Eldorados/script.module.urlresolver,python,3,1329318175,1329320854,1329320854,44,44,github,false,false,1,1,0,1,1,1,0,0,1,1,1,0,0,45,2211,30,0,1,0.0,0.0,0.0,7,Rogerthis,0,0,0,false,false
 1019900,Eldorados/script.module.urlresolver,python,2,1329255039,1329320703,1329320703,1094,1094,github,false,false,1,1,0,0,0,0,1,0,0,1,1,0,0,40,2211,85,0,0,0.0,0.0,0.0,7,bstrdsmkr,1,1.0,1,false,false
 373021,Eldorados/script.module.urlresolver,python,1,1328929068,1329160966,1329160966,3864,3864,github,false,false,1,4,0,0,0,0,2,0,1,3,3,0,0,0,2067,223,0,2,0.0,0.0,0.0,7,bstrdsmkr,0,0,1,true,false

@@ -49,11 +49,11 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1586892,rcbops-cookbooks/keystone,ruby,113,1371053762,1371058160,1371058160,73,73,github,false,false,4,2,0,13,13,2,0,0,2,2,2,0,0,63,1550,10,0,21,0.0,0.0,0.0,16,jcannava,13,1.0,7,false,true
 1529595,rcbops-cookbooks/keystone,ruby,112,1369756571,1369765465,1369765465,148,148,github,false,false,4,2,0,7,7,1,0,0,4,4,3,3,0,61,1550,8,0,22,0.0,0.0,0.0,16,rackerjoe,20,0.95,14,false,true
 1512989,rcbops-cookbooks/keystone,ruby,111,1369405382,1369418373,1369418373,216,216,github,false,false,4,1,0,12,12,3,0,0,1,1,0,1,0,61,1550,0,0,13,0.0,0.0,0.0,16,john5223,0,0,2,false,false
-1711300,rcbops-cookbooks/keystone,ruby,110,1369335720,1369343542,1369343542,130,130,github,false,false,4,1,0,5,5,1,0,0,4,4,4,3,0,61,1568,39,0,29,0.0,0.0,0.0,16,rackerjoe,19,0.9473684210526315,14,false,true
+1711300,rcbops-cookbooks/keystone,ruby,110,1369335720,1369343542,1369343542,130,130,github,false,false,4,1,0,5,5,1,0,3,4,7,4,3,0,61,1568,39,0,29,0.0,0.0,0.0,16,rackerjoe,19,0.9473684210526315,14,false,true
 2016332,rcbops-cookbooks/keystone,ruby,109,1369249660,1369253256,1369253256,59,59,github,false,false,4,0,0,5,5,1,0,0,0,0,0,0,0,62,1567,0,0,0,0.0,0.0,0.0,15,jcannava,12,1.0,6,false,true
 1491972,rcbops-cookbooks/keystone,ruby,108,1368796242,1368836246,1368836246,666,666,github,false,false,4,2,0,5,5,1,0,0,3,3,2,1,0,63,1568,31,0,24,0.0,0.0,0.0,15,jcannava,11,1.0,6,false,true
 1455406,rcbops-cookbooks/keystone,ruby,107,1368102391,1368106999,1368106999,76,76,github,false,false,4,8,0,5,5,1,1,0,8,9,8,0,0,63,1860,2915,0,0,0.0,0.0,0.0,15,mancdaz,14,1.0,12,false,true
-1442423,rcbops-cookbooks/keystone,ruby,106,1367872187,1367935338,1367935338,1052,1052,github,false,false,4,2,0,9,9,2,3,0,3,6,4,2,0,59,1962,770,0,46,0.0,0.0,0.0,15,galstrom21,42,1.0,12,false,true
+1442423,rcbops-cookbooks/keystone,ruby,106,1367872187,1367935338,1367935338,1052,1052,github,false,false,4,2,0,9,9,2,3,1,3,7,4,2,0,59,1962,770,0,46,0.0,0.0,0.0,15,galstrom21,42,1.0,12,false,true
 1423119,rcbops-cookbooks/keystone,ruby,105,1367473844,1367473856,1367473856,0,0,github,false,false,4,1,0,2,2,1,0,0,1,1,1,0,0,58,1961,2,0,4,0.0,0.0,0.0,15,mancdaz,13,1.0,12,false,true
 1419813,rcbops-cookbooks/keystone,ruby,104,1367419920,1367419978,1367419978,0,0,github,false,false,4,1,0,1,1,1,0,0,3,3,3,0,0,59,1960,10,0,19,0.0,0.0,0.0,15,jcannava,10,1.0,6,false,true
 1417307,rcbops-cookbooks/keystone,ruby,103,1367370847,1367640540,1367640540,4494,4494,github,false,false,4,7,0,18,18,2,0,0,5,5,4,1,0,58,1960,19,0,60,0.0,0.0,0.0,15,galstrom21,41,1.0,12,false,true
@@ -72,7 +72,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1398929,rcbops-cookbooks/keystone,ruby,90,1366629941,,1366634797,80,,unknown,false,false,4,1,0,3,3,1,0,0,2,2,2,0,0,60,1835,12,0,0,0.0,0.0,0.0,15,mattt416,2,0.5,3,false,true
 1386500,rcbops-cookbooks/keystone,ruby,89,1366302688,1366302834,1366302834,2,2,github,false,false,3,2,0,1,1,2,0,0,4,4,3,1,0,57,1827,11,0,16,0.0,0.0,0.0,15,rackerjoe,15,0.9333333333333333,13,false,true
 1371944,rcbops-cookbooks/keystone,ruby,87,1366024786,,1366798689,12898,,unknown,false,false,3,6,0,9,9,1,0,0,5,5,3,2,0,52,1827,158,0,0,0.0,0.0,0.0,15,mattt416,1,1.0,3,false,true
-1352111,rcbops-cookbooks/keystone,ruby,86,1365539152,1365539244,1365539244,1,1,github,false,false,3,2,0,3,3,1,0,0,5,5,5,2,0,50,1861,55,0,10,0.0,0.0,0.0,15,galstrom21,39,1.0,12,false,true
+1352111,rcbops-cookbooks/keystone,ruby,86,1365539152,1365539244,1365539244,1,1,github,false,false,3,2,0,3,3,1,0,1,5,6,5,2,0,50,1861,55,0,10,0.0,0.0,0.0,15,galstrom21,39,1.0,12,false,true
 1295980,rcbops-cookbooks/keystone,ruby,85,1364300490,1364304203,1364304203,61,61,github,false,false,2,1,0,5,5,1,0,0,2,2,2,0,0,48,1858,13,0,10,0.0,0.0,0.0,15,mancdaz,12,1.0,12,false,true
 1203641,rcbops-cookbooks/keystone,ruby,84,1362005231,1362057873,1362057873,877,877,github,false,false,1,1,0,11,11,2,0,0,1,1,0,1,0,57,1858,0,0,3,0.0,0.0,0.0,15,mancdaz,11,1.0,12,false,true
 1198779,rcbops-cookbooks/keystone,ruby,83,1361918089,1361988831,1361988831,1179,1179,github,false,false,1,1,0,19,19,2,0,0,2,2,2,0,0,59,1858,12,0,10,0.0,0.0,0.0,15,mancdaz,10,1.0,12,false,true
@@ -101,7 +101,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 476674,rcbops-cookbooks/keystone,ruby,60,1352832126,1352837604,1352837604,91,91,github,false,false,2,16,0,14,14,3,0,0,3,3,2,1,0,70,758,48,0,51,0.0,0.0,0.0,14,jcannava,1,1.0,3,false,true
 469860,rcbops-cookbooks/keystone,ruby,59,1352727579,1352730147,1352730147,42,42,github,false,false,2,1,0,4,4,1,0,0,1,1,1,0,0,65,758,2,0,4,0.0,0.0,0.0,14,rackerjoe,9,1.0,10,false,true
 463764,rcbops-cookbooks/keystone,ruby,58,1352485984,1352491981,1352491981,99,99,github,false,false,2,2,0,9,9,2,0,0,1,1,1,0,0,55,758,6,0,5,0.0,0.0,0.0,14,galstrom21,33,1.0,9,false,true
-709308,rcbops-cookbooks/keystone,ruby,57,1352139922,1352143509,1352143509,59,59,github,false,false,2,7,0,4,4,1,5,0,3,8,2,3,2,53,749,55,0,12,0.0,0.0,0.0,14,rackerjoe,8,1.0,10,false,true
+709308,rcbops-cookbooks/keystone,ruby,57,1352139922,1352143509,1352143509,59,59,github,false,false,2,7,0,4,4,1,5,1,3,9,2,3,2,53,749,55,0,12,0.0,0.0,0.0,14,rackerjoe,8,1.0,10,false,true
 709309,rcbops-cookbooks/keystone,ruby,55,1351620921,1351631604,1351631604,178,178,github,false,false,2,1,0,5,5,2,0,0,2,2,2,0,0,50,749,5,0,9,0.0,0.0,0.0,14,galstrom21,32,1.0,9,false,true
 709310,rcbops-cookbooks/keystone,ruby,54,1350983008,1350988734,1350988734,95,95,github,false,false,2,1,0,4,4,1,2,0,1,3,1,2,0,53,744,8,0,6,0.0,0.0,0.0,14,mancdaz,4,1.0,10,false,true
 425883,rcbops-cookbooks/keystone,ruby,53,1348125102,1348231881,1348231882,1779,1779,github,false,false,5,1,0,28,28,2,0,0,1,1,1,0,0,57,744,46,0,9,0.0,0.0,0.0,14,mancdaz,3,1.0,10,false,true
@@ -121,7 +121,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 198812,rcbops-cookbooks/keystone,ruby,39,1341921071,1341922082,1341922082,16,16,github,false,false,8,2,0,5,5,1,0,0,2,2,2,0,0,63,761,25,0,42,0.0,0.0,0.0,14,rackerjoe,2,1.0,7,false,true
 197026,rcbops-cookbooks/keystone,ruby,38,1341843736,1341846957,1341846957,53,53,github,false,false,8,1,0,5,5,1,0,0,1,1,1,0,0,63,761,2,0,20,0.0,0.0,0.0,14,galstrom21,26,1.0,8,false,true
 185445,rcbops-cookbooks/keystone,ruby,37,1341243508,1341243545,1341243545,0,0,github,false,false,8,1,0,0,0,0,0,0,1,1,1,0,0,63,761,4,0,3,0.0,0.0,0.0,14,rackerjoe,1,1.0,7,false,true
-174687,rcbops-cookbooks/keystone,ruby,36,1340649409,1340649439,1340649439,0,0,github,false,false,8,1,0,0,0,0,0,0,3,3,4,0,0,60,778,93,0,61,0.0,0.0,0.0,28,rpedde-rcbops,0,0,0,false,true
+174687,rcbops-cookbooks/keystone,ruby,36,1340649409,1340649439,1340649439,0,0,github,false,false,8,1,0,0,0,0,0,1,3,4,4,0,0,60,778,93,0,61,0.0,0.0,0.0,28,rpedde-rcbops,0,0,0,false,true
 169304,rcbops-cookbooks/keystone,ruby,35,1340299798,1340302487,1340302487,44,44,github,false,false,9,4,0,0,0,0,1,0,3,4,2,2,0,53,776,7,0,50,0.0,0.0,0.0,14,galstrom21,25,1.0,8,false,true
 167498,rcbops-cookbooks/keystone,ruby,34,1340216247,1340223592,1340223592,122,122,github,false,false,9,6,0,1,1,1,1,0,4,5,3,1,0,50,761,52,0,47,0.0,0.0,0.0,14,jcannava,0,0,3,false,true
 163947,rcbops-cookbooks/keystone,ruby,33,1340035743,1340133132,1340133132,1623,1623,github,false,false,9,3,0,0,0,0,0,0,2,2,2,0,0,48,762,9,0,44,0.0,0.0,0.0,14,galstrom21,24,1.0,7,false,true

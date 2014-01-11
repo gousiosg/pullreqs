@@ -110,7 +110,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 238130,opscode-cookbooks/chef-client,ruby,16,1343598642,1344662159,1344662159,17725,17725,github,false,false,5,1,0,0,0,0,0,0,1,1,0,1,0,42,350,0,0,0,0.0,0.0,0.0,39,stevendanna,0,0,9,false,true
 216321,opscode-cookbooks/chef-client,ruby,15,1342698502,1343960937,1343960937,21040,21040,merged_in_comments,false,false,5,1,0,0,0,1,0,0,4,4,2,2,0,44,349,4,0,0,0.0,0.0,0.0,39,atomic-penguin,0,0,11,false,false
 194669,opscode-cookbooks/chef-client,ruby,14,1341670957,1343062768,1343062768,23196,23196,github,false,false,5,3,0,0,0,0,1,0,5,6,3,2,0,37,338,7,0,2,0.0,0.0,0.0,38,dcrosta,0,0,62,false,false
-53340,opscode-cookbooks/chef-client,ruby,13,1340622971,1348690203,1348690203,134453,134453,merged_in_comments,false,false,3,9,10,0,10,3,2,0,5,7,2,3,0,45,338,74,0,0,0.0,0.0,0.0,37,ringods,0,0,1,false,false
+53340,opscode-cookbooks/chef-client,ruby,13,1340622971,1348690203,1348690203,134453,134453,merged_in_comments,false,false,3,9,10,0,10,3,2,1,5,8,2,3,0,45,338,74,0,0,0.0,0.0,0.0,37,ringods,0,0,1,false,false
 164066,opscode-cookbooks/chef-client,ruby,12,1340041382,1342638010,1342638011,43277,43277,github,false,false,2,1,0,0,0,0,0,0,5,5,3,2,0,60,338,16,0,9,0.0,0.0,0.0,37,chrisroberts,4,0.75,16,false,false
 155505,opscode-cookbooks/chef-client,ruby,11,1339449501,,1370658608,520151,,unknown,false,false,2,1,0,0,0,1,0,0,1,1,0,1,0,55,340,0,0,0,0.0,0.0,0.0,35,juliandunn,0,0,1,false,true
 146492,opscode-cookbooks/chef-client,ruby,10,1338813541,1339712366,1339712366,14980,14980,github,false,false,2,1,0,0,0,0,0,0,2,2,1,1,0,60,340,6,0,3,0.0,0.0,0.0,35,chrisroberts,3,0.6666666666666666,15,false,false

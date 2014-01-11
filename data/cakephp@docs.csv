@@ -1,4 +1,12 @@
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,merged_using,conflict,forward_links,team_size,num_commits,num_commit_comments,num_issue_comments,num_comments,num_participants,files_added,files_deleted,files_modified,files_changed,src_files,doc_files,other_files,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
+2733119,cakephp/docs,python,988,1388713588,1388715134,1388715134,25,25,github,false,false,10,1,1,0,1,5,0,0,1,1,0,1,0,57,92,0,0,72,0.0,0.0,0.0,424,bcrowe,61,0.3770491803278688,6,false,false
+2735030,cakephp/docs,python,987,1388689393,1388690934,1388690934,25,25,github,false,false,10,1,0,0,0,0,0,0,1,1,0,1,0,57,92,0,0,1,0.0,0.0,0.0,424,markstory,48,0.375,509,true,true
+2733667,cakephp/docs,python,986,1388676573,1388681192,1388681192,76,76,github,false,false,10,1,0,0,0,1,0,0,1,1,0,1,0,57,92,0,0,0,0.0,0.0,0.0,424,arteq,0,0,0,false,false
+2731915,cakephp/docs,python,984,1388654863,1388708607,1388708607,895,895,github,false,false,10,1,0,0,0,0,0,0,1,1,0,1,0,57,92,0,0,1,0.0,0.0,0.0,424,okonomi,35,0.8857142857142857,41,false,true
+2731565,cakephp/docs,python,983,1388647590,1388649179,1388649179,26,26,commits_in_master,false,false,10,1,0,0,0,0,0,0,1,1,0,1,0,57,92,0,0,2,0.0,0.0,0.0,424,okonomi,34,0.9117647058823529,41,false,true
+2731142,cakephp/docs,python,982,1388635874,,1388669143,554,,unknown,false,false,10,3,0,0,0,0,0,0,2,2,0,2,0,57,92,0,0,88,0.0,0.0,0.0,424,ADmad,13,0.5384615384615384,87,false,true
+2731104,cakephp/docs,python,981,1388635287,,1388669072,563,,unknown,false,false,10,1,0,0,0,1,0,0,5,5,0,5,0,57,92,0,0,62,0.0,0.0,0.0,424,okonomi,33,0.9393939393939394,41,false,true
+2729550,cakephp/docs,python,980,1388598543,,1388609477,182,,unknown,false,false,10,2,5,0,5,3,0,0,1,1,0,1,0,58,92,0,0,14,0.0,0.0,0.0,424,markstory,47,0.3829787234042553,509,true,true
 2729004,cakephp/docs,python,979,1388585457,,1388600590,252,,unknown,true,false,10,6,0,4,4,2,0,0,2,2,0,2,0,58,92,0,0,10,0.0,0.0,0.0,424,lorenzo,4,0.25,210,true,true
 2729001,cakephp/docs,python,978,1388585395,,1388586010,10,,unknown,false,false,10,1,0,1,1,1,0,0,1,1,0,1,0,58,92,0,0,38,0.0,0.0,0.0,424,okonomi,32,0.96875,41,false,true
 2728870,cakephp/docs,python,977,1388582312,,1388592771,174,,unknown,false,false,10,7,10,2,12,2,0,0,1,1,0,1,0,58,92,0,0,11,0.0,0.0,0.0,424,lorenzo,3,0.3333333333333333,210,true,true
@@ -30,7 +38,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2665219,cakephp/docs,python,946,1387411222,1387415566,1387415566,72,72,commits_in_master,false,false,10,3,2,0,2,2,0,0,2,2,0,2,0,58,92,0,0,33,0.0,0.0,0.0,424,ezrabynx,2,0.0,0,false,false
 2667916,cakephp/docs,python,945,1387404164,1387414497,1387414497,172,172,commits_in_master,false,false,10,1,0,0,0,1,0,0,5,5,0,5,0,58,92,0,0,17,0.0,0.0,0.0,424,Ayb3x,8,0.75,1,false,false
 2667899,cakephp/docs,python,944,1387403968,1387414554,1387414554,176,176,commits_in_master,false,false,10,1,0,0,0,1,0,0,3,3,0,3,0,58,92,0,0,9,0.0,0.0,0.0,424,Ayb3x,7,0.8571428571428571,1,false,false
-2659518,cakephp/docs,python,943,1387336140,,1387387815,861,,unknown,false,false,11,4,2,0,2,2,0,0,4,4,0,5,0,58,92,0,0,127,0.0,0.0,0.0,424,markstory,36,0.5,509,true,true
+2659518,cakephp/docs,python,943,1387336140,,1387387815,861,,unknown,false,false,11,4,2,0,2,2,0,1,4,5,0,5,0,58,92,0,0,127,0.0,0.0,0.0,424,markstory,36,0.5,509,true,true
 2651872,cakephp/docs,python,942,1387246119,1387248444,1387248444,38,38,commits_in_master,false,false,12,1,0,0,0,0,0,0,1,1,0,1,0,58,92,0,0,1,0.0,0.0,0.0,424,bcrowe,57,0.40350877192982454,6,false,false
 2646315,cakephp/docs,python,941,1387192646,1387331115,1387331115,2307,2307,commits_in_master,false,false,12,5,4,0,4,3,0,0,6,6,0,6,0,57,92,0,0,41,0.0,0.0,0.0,424,Ayb3x,6,1.0,1,false,false
 2637180,cakephp/docs,python,940,1386990432,,1387032934,708,,unknown,false,false,12,4,0,0,0,0,0,0,10,10,0,10,0,57,92,0,0,243,0.0,0.0,0.0,424,markstory,35,0.5142857142857142,509,true,true
@@ -85,7 +93,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2435870,cakephp/docs,python,873,1384274338,,1384275346,16,,unknown,false,false,14,1,0,1,1,1,0,0,2,2,0,2,0,51,92,0,0,0,0.0,0.0,0.0,424,Jberlinsky,0,0,14,false,false
 2430844,cakephp/docs,python,872,1384210856,1384218549,1384218549,128,128,commits_in_master,false,false,14,1,0,0,0,0,0,0,9,9,0,9,0,51,92,0,0,7,0.0,0.0,0.0,424,suzuki,39,0.9230769230769231,21,false,true
 2430706,cakephp/docs,python,871,1384209185,1384213416,1384213416,70,70,commits_in_master,false,false,15,1,0,0,0,0,0,0,1,1,0,1,0,51,92,0,0,0,0.0,0.0,0.0,424,suzuki,38,0.9473684210526315,21,false,true
-2418757,cakephp/docs,python,870,1384012255,,1384020156,131,,unknown,false,false,15,3,9,1,10,2,6,0,7,13,0,11,0,51,92,0,0,20,0.0,0.0,0.0,423,markstory,25,0.68,509,true,true
+2418757,cakephp/docs,python,870,1384012255,,1384020156,131,,unknown,false,false,15,3,9,1,10,2,6,1,7,14,0,11,0,51,92,0,0,20,0.0,0.0,0.0,423,markstory,25,0.68,509,true,true
 2415491,cakephp/docs,python,869,1383943735,,1384015518,1196,,unknown,false,false,15,3,2,1,3,2,1,0,4,5,0,4,0,51,92,0,0,41,0.0,0.0,0.0,423,markstory,24,0.7083333333333334,509,true,true
 2409840,cakephp/docs,python,868,1383876204,1383879579,1383879579,56,56,commits_in_master,false,false,15,1,0,0,0,0,0,0,7,7,0,7,0,51,92,0,0,18,0.0,0.0,0.0,423,bcrowe,50,0.44,6,false,false
 2404848,cakephp/docs,python,867,1383827238,1383829507,1383829507,37,37,commits_in_master,false,false,15,1,0,0,0,0,0,0,1,1,0,1,0,51,92,0,0,5,0.0,0.0,0.0,423,Harreh,1,0.0,0,false,false
@@ -100,7 +108,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2359535,cakephp/docs,python,858,1383187311,1383704132,1383704132,8613,8613,commits_in_master,false,false,16,4,1,3,4,3,0,0,1,1,0,1,0,50,92,0,0,4,0.0,0.0,0.0,423,bcrowe,47,0.46808510638297873,5,false,false
 2359075,cakephp/docs,python,857,1383181694,1383181957,1383181957,4,4,commits_in_master,false,false,16,1,0,0,0,0,0,0,1,1,0,1,0,50,92,0,0,1,0.0,0.0,0.0,423,bcrowe,46,0.4782608695652174,5,false,false
 2349606,cakephp/docs,python,855,1383072497,1383072541,1383072541,0,0,github,false,false,16,1,0,0,0,2,0,0,1,1,0,1,0,51,92,0,0,3,0.0,0.0,0.0,423,lucfranken,0,0,0,false,false
-2336251,cakephp/docs,python,854,1382901563,,1382903934,39,,unknown,false,false,16,1,0,1,1,1,0,0,10,10,0,12,0,53,92,0,0,54,0.0,0.0,0.0,423,markstory,23,0.7391304347826086,509,true,true
+2336251,cakephp/docs,python,854,1382901563,,1382903934,39,,unknown,false,false,16,1,0,1,1,1,0,2,10,12,0,12,0,53,92,0,0,54,0.0,0.0,0.0,423,markstory,23,0.7391304347826086,509,true,true
 2334377,cakephp/docs,python,853,1382864931,1382872850,1382872850,131,131,commits_in_master,false,false,16,1,0,0,0,0,0,0,1,1,0,1,0,53,92,0,0,2,0.0,0.0,0.0,423,hakito,1,1.0,0,false,false
 2331279,cakephp/docs,python,852,1382787340,,1382789205,31,,unknown,false,false,16,1,0,0,0,0,0,0,1,1,0,1,0,53,92,0,0,4,0.0,0.0,0.0,423,Phally,5,1.0,46,false,true
 2324407,cakephp/docs,python,851,1382665749,1382666006,1382666006,4,4,commits_in_master,false,false,16,1,0,0,0,0,0,0,1,1,0,1,0,54,92,0,0,5,0.0,0.0,0.0,423,bcrowe,44,0.5,5,false,false
@@ -232,7 +240,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1991860,cakephp/docs,python,716,1377600364,1377600523,1377600523,2,2,github,false,false,20,1,0,0,0,0,0,0,1,1,0,1,0,54,89,0,0,1,0.0,0.0,0.0,421,cake17,20,0.8,4,false,true
 1988830,cakephp/docs,python,715,1377545474,1377555193,1377555193,161,161,github,false,false,20,1,0,0,0,0,0,0,1,1,0,1,0,54,89,0,0,0,0.0,0.0,0.0,421,hugomn,0,0,1,false,false
 1987302,cakephp/docs,python,714,1377527722,1377529226,1377529226,25,25,github,false,false,20,1,0,1,1,1,0,0,1,1,0,1,0,54,89,0,0,5,0.0,0.0,0.0,421,cake17,19,0.7894736842105263,4,false,true
-1983511,cakephp/docs,python,713,1377452214,1377465531,1377465531,221,221,github,false,false,20,1,0,0,0,0,0,0,3,3,0,4,0,54,89,0,0,1,0.0,0.0,0.0,421,ADmad,3,0.6666666666666666,79,false,true
+1983511,cakephp/docs,python,713,1377452214,1377465531,1377465531,221,221,github,false,false,20,1,0,0,0,0,0,1,3,4,0,4,0,54,89,0,0,1,0.0,0.0,0.0,421,ADmad,3,0.6666666666666666,79,false,true
 1983287,cakephp/docs,python,712,1377447480,1377447526,1377447526,0,0,github,false,false,20,1,0,0,0,0,0,0,1,1,0,1,0,54,89,0,0,2,0.0,0.0,0.0,421,hakito,0,0,0,false,false
 1982910,cakephp/docs,python,711,1377437162,1377528845,1377528845,1528,1528,github,false,false,20,4,4,2,6,4,0,0,4,4,0,4,0,54,89,0,0,16,0.0,0.0,0.0,421,markstory,9,1.0,509,true,true
 1981573,cakephp/docs,python,710,1377389244,1377642347,1377642347,4218,4218,github,false,false,20,2,1,1,2,3,0,0,1,1,0,1,0,54,89,0,0,0,0.0,0.0,0.0,421,waterada,1,1.0,0,false,false
@@ -261,7 +269,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1907360,cakephp/docs,python,687,1376233376,1376233938,1376233938,9,9,github,false,false,18,2,2,0,2,2,0,0,1,1,0,1,0,59,89,0,0,4,0.0,0.0,0.0,420,jaysh,1,1.0,0,false,false
 1918459,cakephp/docs,python,686,1376152104,1376152400,1376152400,4,4,github,false,false,18,1,0,0,0,0,0,0,1,1,0,1,0,60,89,0,0,0,0.0,0.0,0.0,420,jaysh,0,0,0,false,false
 1916740,cakephp/docs,python,685,1376089208,1376091461,1376091461,37,37,github,false,false,18,1,0,0,0,0,0,0,1,1,0,1,0,60,89,0,0,0,0.0,0.0,0.0,420,bcrowe,9,1.0,2,false,false
-1904640,cakephp/docs,python,684,1376067969,1376138712,1376138712,1179,1179,github,false,false,18,1,1,8,9,4,0,0,1,1,0,2,0,60,89,0,0,27,0.0,0.0,0.0,420,ADmad,1,0.0,79,false,true
+1904640,cakephp/docs,python,684,1376067969,1376138712,1376138712,1179,1179,github,false,false,18,1,1,8,9,4,0,1,1,2,0,2,0,60,89,0,0,27,0.0,0.0,0.0,420,ADmad,1,0.0,79,false,true
 1912104,cakephp/docs,python,683,1376007070,1376007743,1376007743,11,11,github,false,false,18,1,0,0,0,1,0,0,1,1,0,1,0,60,89,0,0,2,0.0,0.0,0.0,420,bcrowe,8,1.0,2,false,false
 1911983,cakephp/docs,python,682,1376004029,1376004449,1376004449,7,7,github,false,false,18,1,0,0,0,1,0,0,1,1,0,1,0,60,89,0,0,1,0.0,0.0,0.0,420,bcrowe,7,1.0,2,false,false
 1902859,cakephp/docs,python,681,1375979395,1376298136,1376298136,5312,5312,github,false,false,18,3,2,1,3,2,0,0,12,12,0,12,0,60,89,0,0,47,0.0,0.0,0.0,420,dereuromark,55,0.9090909090909091,84,false,true
@@ -459,7 +467,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1138711,cakephp/docs,python,487,1360634554,1361067028,1361067028,7207,7207,github,false,false,9,1,2,1,3,3,0,0,1,1,0,1,0,39,89,0,0,4,0.0,0.0,0.0,408,dereuromark,26,0.8846153846153846,60,false,true
 1144734,cakephp/docs,python,486,1360603489,,1360616354,214,,unknown,false,false,9,1,0,1,1,2,0,0,1,1,0,1,0,38,89,0,0,0,0.0,0.0,0.0,408,TeckniX,2,1.0,8,false,false
 1143837,cakephp/docs,python,485,1360572792,,1360625890,884,,unknown,false,false,9,1,0,2,2,2,1,0,0,1,0,1,0,38,89,0,0,0,0.0,0.0,0.0,408,dereuromark,25,0.92,60,false,true
-961855,cakephp/docs,python,484,1360112200,1360626178,1360626178,8566,8566,github,false,false,8,6,13,1,14,4,1,0,6,7,0,7,2,38,89,0,0,13,0.0,0.0,0.0,408,ravage84,9,0.8888888888888888,0,false,true
+961855,cakephp/docs,python,484,1360112200,1360626178,1360626178,8566,8566,github,false,false,8,6,13,1,14,4,1,2,6,9,0,7,2,38,89,0,0,13,0.0,0.0,0.0,408,ravage84,9,0.8888888888888888,0,false,true
 1000029,cakephp/docs,python,483,1360050294,1360051957,1360051957,27,27,github,false,false,8,1,0,0,0,0,0,0,1,1,0,1,0,37,89,0,0,2,0.0,0.0,0.0,408,dbyzero,1,1.0,0,false,false
 958792,cakephp/docs,python,482,1360050112,1360051943,1360051944,30,30,github,false,false,8,1,0,0,0,0,0,0,1,1,0,1,0,37,89,0,0,2,0.0,0.0,0.0,408,dbyzero,0,0,0,false,false
 958624,cakephp/docs,python,481,1360044608,1362098508,1362098508,34231,34231,github,false,false,8,1,0,0,0,0,5,0,1,6,0,6,0,37,89,0,0,0,0.0,0.0,0.0,408,hiromi2424,25,1.0,105,false,false
@@ -562,15 +570,15 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 407058,cakephp/docs,python,382,1347603218,1347603581,1347603581,6,6,github,false,false,11,1,0,0,0,0,0,0,3,3,0,3,0,53,89,0,0,18,0.0,0.0,0.0,390,andreaskri,1,1.0,3,false,false
 402427,cakephp/docs,python,381,1347553451,1347553733,1347553733,4,4,github,false,false,11,1,0,0,0,1,0,0,3,3,0,3,0,53,89,0,0,15,0.0,0.0,0.0,390,andreaskri,0,0,3,false,false
 389393,cakephp/docs,python,380,1347469058,1347491689,1347491689,377,377,github,false,false,11,1,0,3,3,3,0,0,1,1,0,1,0,53,89,0,0,5,0.0,0.0,0.0,390,daVinciWanaB,4,0.75,1,false,false
-387767,cakephp/docs,python,379,1347462051,1349609156,1349609156,35785,35785,merged_in_comments,true,false,11,6,0,1,1,1,0,0,84,84,0,84,2,53,89,0,0,0,0.0,0.0,0.0,390,cake17,5,0.4,1,false,true
+387767,cakephp/docs,python,379,1347462051,1349609156,1349609156,35785,35785,merged_in_comments,true,false,11,6,0,1,1,1,0,2,84,86,0,84,2,53,89,0,0,0,0.0,0.0,0.0,390,cake17,5,0.4,1,false,true
 369382,cakephp/docs,python,378,1347461765,,1347473364,193,,unknown,false,false,11,1,1,1,2,2,0,0,1,1,0,1,0,53,89,0,0,0,0.0,0.0,0.0,390,daVinciWanaB,3,1.0,1,false,false
 362157,cakephp/docs,python,377,1347099065,1347108427,1347108427,156,156,github,false,false,10,1,0,0,0,1,0,0,2,2,0,2,0,54,89,0,0,28,0.0,0.0,0.0,389,okonomi,26,1.0,25,false,true
-362068,cakephp/docs,python,376,1347093100,1347461801,1347461801,6145,6145,merged_in_comments,true,false,10,6,0,5,5,3,0,0,84,84,0,84,2,54,89,0,0,0,0.0,0.0,0.0,389,cake17,4,0.5,1,false,true
+362068,cakephp/docs,python,376,1347093100,1347461801,1347461801,6145,6145,merged_in_comments,true,false,10,6,0,5,5,3,0,2,84,86,0,84,2,54,89,0,0,0,0.0,0.0,0.0,389,cake17,4,0.5,1,false,true
 357954,cakephp/docs,python,375,1346938881,1347029763,1347029763,1514,1514,github,false,false,10,2,0,1,1,2,0,0,1,1,0,1,0,53,89,0,0,2,0.0,0.0,0.0,388,BigHeadCreations,0,0,0,false,false
-350467,cakephp/docs,python,374,1346670955,1346858592,1346858592,3127,3127,commit_sha_in_comments,false,false,10,5,0,2,2,2,0,0,31,31,0,31,2,53,89,0,0,0,0.0,0.0,0.0,387,cake17,3,0.6666666666666666,1,false,true
+350467,cakephp/docs,python,374,1346670955,1346858592,1346858592,3127,3127,commit_sha_in_comments,false,false,10,5,0,2,2,2,0,2,31,33,0,31,2,53,89,0,0,0,0.0,0.0,0.0,387,cake17,3,0.6666666666666666,1,false,true
 412373,cakephp/docs,python,373,1346564164,1346573502,1346573502,155,155,github,false,false,9,3,0,0,0,1,1,0,1,2,0,1,0,53,89,0,0,0,0.0,0.0,0.0,386,tkengo,4,0.75,12,false,false
 412363,cakephp/docs,python,372,1346556689,,1346560312,60,,unknown,false,false,9,3,0,1,1,2,1,0,1,2,0,1,0,53,89,0,0,0,0.0,0.0,0.0,386,tkengo,3,1.0,12,false,false
-323443,cakephp/docs,python,371,1346400707,,1346670145,4490,,unknown,true,false,10,4,4,1,5,2,0,0,29,29,0,29,2,52,89,0,0,0,0.0,0.0,0.0,386,cake17,2,1.0,1,false,true
+323443,cakephp/docs,python,371,1346400707,,1346670145,4490,,unknown,true,false,10,4,4,1,5,2,0,2,29,31,0,29,2,52,89,0,0,0,0.0,0.0,0.0,386,cake17,2,1.0,1,false,true
 345651,cakephp/docs,python,370,1346374396,1346379972,1346379972,92,92,github,false,false,10,1,0,0,0,1,0,0,2,2,0,2,0,52,89,0,0,2,0.0,0.0,0.0,386,okonomi,25,1.0,25,false,true
 345650,cakephp/docs,python,369,1346374324,1346380069,1346380069,95,95,github,false,false,10,1,0,0,0,0,0,0,3,3,0,3,0,52,89,0,0,6,0.0,0.0,0.0,386,okonomi,24,1.0,25,false,true
 345204,cakephp/docs,python,368,1346353270,1346355437,1346355437,36,36,github,false,false,10,1,0,0,0,1,0,0,1,1,0,1,0,52,89,0,0,2,0.0,0.0,0.0,386,TeckniX,0,0,8,false,false
@@ -607,7 +615,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 240414,cakephp/docs,python,337,1344857997,1344869866,1344869866,197,197,github,false,false,10,7,0,0,0,0,0,0,6,6,0,6,0,43,89,0,0,10,0.0,0.0,0.0,383,okonomi,3,1.0,25,false,true
 240283,cakephp/docs,python,336,1344853035,1344853479,1344853479,7,7,github,false,false,10,1,0,0,0,0,0,0,1,1,0,1,0,43,89,0,0,0,0.0,0.0,0.0,383,lornajane,0,0,71,false,false
 87702,cakephp/docs,python,335,1344703483,1344705199,1344705199,28,28,github,false,false,11,1,0,0,0,2,0,0,1,1,0,1,0,43,89,0,0,3,0.0,0.0,0.0,383,reinoldus,0,0,0,false,false
-237703,cakephp/docs,python,334,1344630744,1344669904,1344669904,652,652,github,false,false,11,177,0,4,4,6,125,0,75,200,0,119,12,43,89,0,0,0,0.0,0.0,0.0,383,cake17,0,0,1,false,true
+237703,cakephp/docs,python,334,1344630744,1344669904,1344669904,652,652,github,false,false,11,177,0,4,4,6,125,7,75,207,0,119,12,43,89,0,0,0,0.0,0.0,0.0,383,cake17,0,0,1,false,true
 8209,cakephp/docs,python,333,1344278460,1344278808,1344278808,5,5,github,false,false,11,1,0,0,0,1,0,0,2,2,0,2,0,45,89,0,0,9,0.0,0.0,0.0,380,tigrang,5,0.8,7,false,false
 18922,cakephp/docs,python,332,1344170151,1344821848,1344821848,10861,10861,github,false,false,11,4,2,0,2,2,0,0,1,1,0,1,0,44,89,0,0,0,0.0,0.0,0.0,379,okonomi,2,1.0,25,false,true
 234361,cakephp/docs,python,331,1344167603,1344174798,1344174798,119,119,github,false,false,11,1,0,0,0,0,1,0,0,1,0,1,0,44,89,0,0,0,0.0,0.0,0.0,379,tkengo,2,1.0,10,false,false
@@ -680,7 +688,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 316366,cakephp/docs,python,264,1337733519,1337736289,1337736289,46,46,github,false,false,11,1,0,0,0,1,0,0,1,1,0,1,0,21,80,0,0,6,0.0,0.0,0.0,341,nicholasareed,0,0,2,false,false
 393306,cakephp/docs,python,263,1337688449,1337688658,1337688659,3,3,github,false,false,11,1,0,0,0,0,0,0,1,1,0,1,0,21,80,0,0,0,0.0,0.0,0.0,341,aqeeliz,0,0,1,true,false
 315646,cakephp/docs,python,262,1337625026,1337625383,1337625383,5,5,github,false,false,11,1,0,0,0,0,0,0,4,4,0,4,0,21,80,0,0,15,0.0,0.0,0.0,682,jellehenkens,1,1.0,24,false,true
-315537,cakephp/docs,python,261,1337613035,1337620665,1337620666,127,127,github,false,false,11,49,0,2,2,2,5,0,1,6,0,5,0,21,80,0,0,0,0.0,0.0,0.0,682,colares,1,1.0,8,false,false
+315537,cakephp/docs,python,261,1337613035,1337620665,1337620666,127,127,github,false,false,11,49,0,2,2,2,5,4,1,10,0,5,0,21,80,0,0,0,0.0,0.0,0.0,682,colares,1,1.0,8,false,false
 314035,cakephp/docs,python,260,1337277513,1337277637,1337277637,2,2,github,false,false,11,1,0,0,0,1,0,0,2,2,0,2,0,20,80,0,0,17,0.0,0.0,0.0,339,jellehenkens,0,0,12,false,true
 197930,cakephp/docs,python,258,1336924430,1341873752,1341873752,82488,82488,commit_sha_in_comments,false,false,11,2,0,3,3,3,0,0,4,4,0,4,0,20,80,0,0,0,0.0,0.0,0.0,338,dkullmann,1,1.0,10,false,false
 311079,cakephp/docs,python,257,1336735996,1336737147,1336737148,19,19,github,false,false,11,1,0,2,2,3,1,0,0,1,0,1,0,20,80,0,0,0,0.0,0.0,0.0,676,suzuki,3,1.0,18,false,true
@@ -715,7 +723,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 285304,cakephp/docs,python,228,1332270428,1332281687,1332281687,187,187,github,false,false,9,1,0,0,0,0,0,0,1,1,0,1,0,21,80,0,0,22,0.0,0.0,0.0,310,turnred,0,0,0,false,false
 738547,cakephp/docs,python,226,1332222725,1332267623,1332267623,748,748,github,false,false,9,1,0,0,0,0,0,0,1,1,1,0,0,21,80,2,0,0,0.0,0.0,0.0,310,maurymmarques,0,0,9,false,false
 53538,cakephp/docs,python,223,1332038142,,1374669351,710580,,unknown,false,false,9,5,2,3,5,3,1,0,3,4,0,2,0,21,80,0,0,0,0.0,0.0,0.0,310,sime,0,0,7,false,false
-283176,cakephp/docs,python,222,1331945974,1332611279,1332611279,11088,11088,commit_sha_in_comments,false,false,9,4,2,10,12,3,1,0,2,3,0,3,0,20,80,0,0,0,0.0,0.0,0.0,310,simkimsia,1,1.0,7,false,false
+283176,cakephp/docs,python,222,1331945974,1332611279,1332611279,11088,11088,commit_sha_in_comments,false,false,9,4,2,10,12,3,1,1,2,4,0,3,0,20,80,0,0,0,0.0,0.0,0.0,310,simkimsia,1,1.0,7,false,false
 283052,cakephp/docs,python,221,1331925712,1331925915,1331925915,3,3,github,false,false,9,1,0,0,0,0,0,0,1,1,0,1,0,20,80,0,0,6,0.0,0.0,0.0,620,majna,3,1.0,8,false,false
 282168,cakephp/docs,python,220,1331811369,1331818513,1331818513,119,119,github,false,false,9,1,0,0,0,0,0,0,1,1,0,1,0,20,80,0,0,11,0.0,0.0,0.0,310,elitalon,0,0,0,false,false
 738548,cakephp/docs,python,219,1331788337,1331788455,1331788455,1,1,github,false,false,9,1,0,0,0,0,0,0,1,1,0,1,0,20,80,0,0,4,0.0,0.0,0.0,309,dakota,0,0,19,false,false
@@ -785,7 +793,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 738574,cakephp/docs,python,153,1323889105,1323893511,1323893512,73,73,github,false,false,11,1,0,0,0,0,0,0,1,1,0,1,0,37,79,0,0,6,0.0,0.0,0.0,269,watermark,0,0,0,false,false
 738575,cakephp/docs,python,152,1323842721,1323864288,1323864288,359,359,github,false,false,11,1,0,0,0,0,0,0,1,1,0,1,0,37,79,0,0,20,0.0,0.0,0.0,268,tkaretsos,0,0,1,false,false
 738576,cakephp/docs,python,151,1323721346,1323722520,1323722520,19,19,github,false,false,11,1,0,0,0,0,0,0,1,1,0,1,0,38,79,0,0,7,0.0,0.0,0.0,268,diverdude,0,0,0,false,false
-394384,cakephp/docs,python,150,1323467830,1347494899,1347494899,400511,400511,github,false,false,11,10,0,3,3,3,7,0,4,11,0,7,1,37,79,0,0,9,0.0,0.0,0.0,267,horechek,0,0,0,true,false
+394384,cakephp/docs,python,150,1323467830,1347494899,1347494899,400511,400511,github,false,false,11,10,0,3,3,3,7,5,4,16,0,7,1,37,79,0,0,9,0.0,0.0,0.0,267,horechek,0,0,0,true,false
 738577,cakephp/docs,python,149,1323356169,1323780635,1323780635,7074,7074,github,false,false,11,1,0,0,0,0,0,0,2,2,0,2,0,37,79,0,0,20,0.0,0.0,0.0,267,rchavik,2,1.0,41,false,true
 738578,cakephp/docs,python,148,1323085061,1323110411,1323110411,422,422,github,false,false,11,2,0,2,2,2,0,0,1,1,0,1,0,37,79,0,0,26,0.0,0.0,0.0,267,Rondrer,0,0,0,false,false
 999755,cakephp/docs,python,147,1322863507,1322871669,1322871669,136,136,github,false,false,11,2,0,0,0,0,0,0,1,1,0,1,0,38,79,0,0,48,0.0,0.0,0.0,266,gilleswittenberg,0,0,1,false,false
@@ -832,7 +840,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 738631,cakephp/docs,python,106,1320264593,1320264839,1320264839,4,4,merged_in_comments,false,false,8,1,0,0,0,1,0,0,1,1,0,1,0,42,75,0,0,0,0.0,0.0,0.0,254,shama,9,1.0,32,false,true
 738632,cakephp/docs,python,105,1320264585,1320280727,1320280728,269,269,github,false,false,8,1,0,2,2,2,0,0,4,4,0,4,0,42,75,0,0,14,0.0,0.0,0.0,254,majna,1,1.0,4,false,false
 738633,cakephp/docs,python,104,1320206694,1320243929,1320243929,620,620,github,false,false,8,7,0,1,1,1,1,0,2,3,0,2,0,41,75,0,0,3,0.0,0.0,0.0,254,shama,8,1.0,32,false,true
-738634,cakephp/docs,python,103,1320101120,1320155367,1320155367,904,904,github,false,false,8,1,0,1,1,1,2,0,1,3,0,4,0,41,75,0,0,5,0.0,0.0,0.0,254,hiromi2424,12,1.0,63,false,false
+738634,cakephp/docs,python,103,1320101120,1320155367,1320155367,904,904,github,false,false,8,1,0,1,1,1,2,1,1,4,0,4,0,41,75,0,0,5,0.0,0.0,0.0,254,hiromi2424,12,1.0,63,false,false
 738635,cakephp/docs,python,102,1320077124,1320090571,1320090571,224,224,github,false,false,8,1,0,0,0,0,0,0,1,1,0,1,0,41,75,0,0,5,0.0,0.0,0.0,254,hiromi2424,11,1.0,63,false,false
 999789,cakephp/docs,python,101,1320037491,1320065307,1320065307,463,463,github,false,false,8,1,0,1,1,1,0,0,9,9,0,9,0,41,75,0,0,33,0.0,0.0,0.0,254,tarcisio,6,1.0,0,false,false
 999795,cakephp/docs,python,100,1320026826,1320026921,1320026921,1,1,github,false,false,7,1,0,0,0,2,2,0,0,2,0,2,0,40,75,0,0,0,0.0,0.0,0.0,254,tarcisio,5,1.0,0,false,false
@@ -871,11 +879,11 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 738671,cakephp/docs,python,67,1318979524,1318980250,1318980250,12,12,github,false,false,7,2,0,0,0,0,0,0,2,2,0,2,0,34,75,0,0,34,0.0,0.0,0.0,251,shama,1,1.0,32,false,true
 738672,cakephp/docs,python,66,1318966066,1318968066,1318968066,33,33,github,false,false,7,2,0,3,3,2,1,0,1,2,0,1,0,33,75,0,0,0,0.0,0.0,0.0,251,shama,0,0,32,false,true
 738673,cakephp/docs,python,65,1318935395,1318941757,1318941757,106,106,github,false,false,7,3,0,1,1,1,0,0,2,2,0,2,0,33,75,0,0,4,0.0,0.0,0.0,251,hiromi2424,6,1.0,63,false,false
-999813,cakephp/docs,python,64,1318903602,1318904227,1318904227,10,10,github,false,false,7,1,0,0,0,0,0,0,7,7,0,8,0,33,75,0,0,6,0.0,0.0,0.0,250,tarcisio,0,0,0,false,false
+999813,cakephp/docs,python,64,1318903602,1318904227,1318904227,10,10,github,false,false,7,1,0,0,0,0,0,1,7,8,0,8,0,33,75,0,0,6,0.0,0.0,0.0,250,tarcisio,0,0,0,false,false
 999812,cakephp/docs,python,63,1318870693,1318870776,1318870776,1,1,github,false,false,7,1,0,1,1,1,0,0,1,1,0,1,0,32,75,0,0,2,0.0,0.0,0.0,250,mscdex,0,0,97,false,false
 737797,cakephp/docs,python,62,1318870121,1318870310,1318870310,3,3,github,false,false,7,3,0,1,1,1,0,0,3,3,0,3,0,32,75,0,0,16,0.0,0.0,0.0,250,jamiewright,1,1.0,0,false,false
 737799,cakephp/docs,python,61,1318779670,1318779985,1318779985,5,5,github,false,false,7,1,0,0,0,0,0,0,1,1,0,1,0,32,75,0,0,10,0.0,0.0,0.0,250,jamiewright,0,0,0,false,false
-737800,cakephp/docs,python,60,1318655084,1318655169,1318655169,1,1,github,false,false,7,8,0,0,0,0,11,0,12,23,0,15,0,32,75,0,0,8,0.0,0.0,0.0,249,hiromi2424,5,1.0,62,false,false
+737800,cakephp/docs,python,60,1318655084,1318655169,1318655169,1,1,github,false,false,7,8,0,0,0,0,11,2,12,25,0,15,0,32,75,0,0,8,0.0,0.0,0.0,249,hiromi2424,5,1.0,62,false,false
 737792,cakephp/docs,python,59,1318647209,1318654954,1318654954,129,129,github,false,false,7,1,0,0,0,1,0,0,1,1,0,1,0,32,75,0,0,2,0.0,0.0,0.0,249,hiromi2424,4,1.0,62,false,false
 737793,cakephp/docs,python,58,1318282837,1318292417,1318292417,159,159,github,false,false,6,1,0,0,0,0,0,0,1,1,0,1,0,33,75,0,0,11,0.0,0.0,0.0,247,L4suicide,0,0,0,false,false
 737795,cakephp/docs,python,57,1318181058,1318181351,1318181351,4,4,github,false,false,6,2,0,1,1,1,5,0,0,5,0,5,0,34,75,0,0,0,0.0,0.0,0.0,245,steinkel,3,1.0,7,false,true

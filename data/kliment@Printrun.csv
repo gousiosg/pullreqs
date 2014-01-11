@@ -2,8 +2,8 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2711744,kliment/Printrun,python,466,1388169688,1388170163,1388170163,7,7,commits_in_master,false,false,1,10,0,0,0,0,9,0,4,13,1,3,7,8,7532,5,0,0,5.443441317047266,0.0,0.0,498,hroncok,7,0.8571428571428571,8,false,false
 2711540,kliment/Printrun,python,465,1388167065,1388167583,1388167583,8,8,commits_in_master,false,false,1,1,0,0,0,0,0,0,1,1,0,1,0,5,7532,0,0,1,5.443441317047266,0.0,0.0,498,hroncok,6,1.0,8,false,false
 2165167,kliment/Printrun,python,436,1380266258,1380266389,1380266389,2,2,github,false,false,4,1,0,0,0,0,0,0,1,1,1,0,0,1,7506,12,0,12,5.4622968292033045,0.0,0.0,493,hroncok,5,1.0,8,false,false
-1947033,kliment/Printrun,python,425,1376819793,1376898925,1376898925,1318,1318,merged_in_comments,false,false,6,47,0,1,1,1,49,0,40,89,71,2,10,2,7481,12646,0,0,5.480550728512231,0.0,0.0,491,garyhodgson,6,0.3333333333333333,26,false,false
-1921402,kliment/Printrun,python,422,1376249712,1376555740,1376555740,5100,5100,commit_sha_in_comments,true,false,6,45,0,3,3,2,49,0,40,89,71,2,10,2,8173,12630,0,0,5.016517802520494,0.0,0.0,491,garyhodgson,5,0.4,26,false,false
+1947033,kliment/Printrun,python,425,1376819793,1376898925,1376898925,1318,1318,merged_in_comments,false,false,6,47,0,1,1,1,49,17,40,106,71,2,10,2,7481,12646,0,0,5.480550728512231,0.0,0.0,491,garyhodgson,6,0.3333333333333333,26,false,false
+1921402,kliment/Printrun,python,422,1376249712,1376555740,1376555740,5100,5100,commit_sha_in_comments,true,false,6,45,0,3,3,2,49,17,40,106,71,2,10,2,8173,12630,0,0,5.016517802520494,0.0,0.0,491,garyhodgson,5,0.4,26,false,false
 1904001,kliment/Printrun,python,420,1375885358,1375885984,1375885984,10,10,github,false,false,6,1,0,0,0,2,1,0,7,8,5,0,3,2,8113,27,0,315,0.0,0.0,0.0,982,eldir,1,1.0,0,false,true
 1899374,kliment/Printrun,python,419,1375822157,1375852599,1375852599,507,507,github,false,false,6,1,0,0,0,2,0,0,2,2,2,0,0,2,8109,3,0,111,0.0,0.0,0.0,491,eldir,0,0,0,false,true
 1768356,kliment/Printrun,python,410,1373739793,1373743397,1373743397,60,60,github,false,false,7,1,0,1,1,1,0,0,1,1,1,0,0,3,7255,26,0,52,0.0,0.0,0.0,972,funflin,0,0,2,false,false
@@ -13,7 +13,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1520586,kliment/Printrun,python,369,1369593986,1369665444,1369665444,1190,1190,github,true,false,6,5,0,10,10,3,0,0,1,1,1,0,0,17,5044,342,0,38,0.0,0.0,0.0,482,eliasbakken,1,0.0,0,false,false
 1520215,kliment/Printrun,python,368,1369584379,,1369594031,160,,unknown,false,false,6,3,0,2,2,2,1,0,1,2,2,0,0,16,4679,116,0,0,0.0,0.0,0.0,482,eliasbakken,0,0,0,false,false
 1421566,kliment/Printrun,python,358,1367439833,1367464287,1367464287,407,407,github,false,false,5,1,0,0,0,0,0,0,1,1,1,0,0,75,4915,2,0,3,0.0,0.0,0.0,480,DanLipsitt,0,0,0,false,false
-1391896,kliment/Printrun,python,356,1366412552,1366431425,1366431425,314,314,github,false,false,2,19,0,3,3,3,12,0,9,21,8,3,5,88,5011,2027,0,5,0.0,0.0,0.0,477,D1plo1d,2,0.5,28,false,true
+1391896,kliment/Printrun,python,356,1366412552,1366431425,1366431425,314,314,github,false,false,2,19,0,3,3,3,12,3,9,24,8,3,5,88,5011,2027,0,5,0.0,0.0,0.0,477,D1plo1d,2,0.5,28,false,true
 1347625,kliment/Printrun,python,352,1365434873,1365446417,1365446418,192,192,github,false,false,4,11,0,0,0,0,1,0,4,5,4,0,0,84,4832,743,0,27,0.0,0.0,0.0,474,fsantini,1,0.0,0,false,false
 1660336,kliment/Printrun,python,351,1365413469,1365434435,1365434435,349,349,commits_in_master,false,false,4,8,0,3,3,2,1,0,4,5,4,0,0,83,4832,739,0,20,0.0,0.0,0.0,474,fsantini,0,0,0,false,false
 1311215,kliment/Printrun,python,350,1364566941,1364566993,1364566993,0,0,github,false,false,4,4,0,0,0,0,0,0,2,2,1,1,0,82,4832,16,0,5,0.0,0.0,0.0,474,kenaaker,0,0,0,false,false
@@ -22,7 +22,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1294602,kliment/Printrun,python,345,1364072006,1364079613,1364079613,126,126,commits_in_master,false,false,4,37,0,1,1,2,3,0,6,9,5,1,3,83,4679,535,0,17,0.0,0.0,0.0,942,PixnBits,0,0,0,false,false
 1791060,kliment/Printrun,python,342,1362502769,1362519335,1362519335,276,276,github,false,false,4,1,0,0,0,0,0,0,1,1,0,1,0,78,4829,0,0,1,0.0,0.0,0.0,468,felipesanches,1,1.0,9,false,false
 1791062,kliment/Printrun,python,341,1362502700,1362519289,1362519289,276,276,github,false,false,4,1,0,0,0,0,0,0,1,1,0,1,0,78,4679,0,0,1,0.0,0.0,0.0,468,felipesanches,0,0,9,false,false
-1170316,kliment/Printrun,python,338,1361276484,1369920025,1369920025,144119,144119,merged_in_comments,false,false,4,39,0,9,9,2,48,0,35,83,70,2,10,78,4829,11308,0,0,0.0,0.0,0.0,465,garyhodgson,4,0.5,21,false,false
+1170316,kliment/Printrun,python,338,1361276484,1369920025,1369920025,144119,144119,merged_in_comments,false,false,4,39,0,9,9,2,48,17,35,100,70,2,10,78,4829,11308,0,0,0.0,0.0,0.0,465,garyhodgson,4,0.5,21,false,false
 1164351,kliment/Printrun,python,337,1361148516,1361161906,1361161906,223,223,github,false,false,4,1,0,0,0,0,0,0,1,1,1,0,0,82,4829,2,0,5,0.0,0.0,0.0,465,KazW,2,1.0,1,false,false
 1163845,kliment/Printrun,python,336,1361132548,1361132856,1361132857,5,5,github,false,false,4,2,0,0,0,0,0,0,1,1,1,0,0,81,4829,8,0,6,0.0,0.0,0.0,465,KazW,1,1.0,1,false,false
 1163829,kliment/Printrun,python,335,1361132073,1361132178,1361132178,1,1,github,false,false,4,3,0,0,0,0,3,0,1,4,1,0,3,80,4829,4,0,2,0.0,0.0,0.0,465,KazW,0,0,1,false,false
@@ -30,7 +30,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1053582,kliment/Printrun,python,332,1360252349,1360253583,1360253583,20,20,github,false,false,4,1,0,0,0,0,0,0,1,1,1,0,0,78,4822,7,0,5,0.0,0.0,0.0,462,colah,9,0.6666666666666666,44,false,false
 951214,kliment/Printrun,python,331,1359805310,1366481868,1366481868,111335,111335,github,false,false,4,1,0,2,2,2,0,0,1,1,0,1,0,75,4679,0,0,1,0.0,0.0,0.0,461,hroncok,4,1.0,1,false,false
 949985,kliment/Printrun,python,330,1359768638,1360736367,1360736368,16128,16128,github,false,false,4,2,0,0,0,0,0,0,1,1,1,0,0,74,4824,41,0,20,0.0,0.0,0.0,461,colah,8,0.625,44,false,false
-949973,kliment/Printrun,python,329,1359768561,1359768570,1359768570,0,0,commits_in_master,false,false,4,21,0,0,0,0,0,0,3,3,3,0,0,74,4679,512,0,9,0.0,0.0,0.0,461,colah,7,0.7142857142857143,44,false,false
+949973,kliment/Printrun,python,329,1359768561,,1359768570,0,,unknown,false,false,4,21,0,0,0,0,0,0,3,3,3,0,0,74,4679,512,0,9,0.0,0.0,0.0,461,colah,7,0.7142857142857143,44,false,false
 932572,kliment/Printrun,python,326,1359387986,,1370273602,181486,,unknown,false,false,4,1,0,3,3,2,0,0,12,12,12,0,0,74,4679,24,0,0,0.0,0.0,0.0,459,LukeShu,0,0,1,false,false
 925229,kliment/Printrun,python,324,1359048696,1359067545,1359067545,314,314,github,false,false,4,1,0,1,1,1,0,0,1,1,1,0,0,73,4814,12,0,2,0.0,0.0,0.0,459,Lenbok,1,0.0,0,false,false
 840802,kliment/Printrun,python,323,1359015584,,1359048736,552,,unknown,false,false,4,1,0,1,1,2,0,0,1,1,1,0,0,72,4679,11,0,0,0.0,0.0,0.0,459,Lenbok,0,0,0,false,false
@@ -42,8 +42,8 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 914035,kliment/Printrun,python,316,1358103600,1358104016,1358104016,6,6,github,false,false,4,1,0,0,0,0,0,0,1,1,1,0,0,53,4674,4,0,2,0.0,0.0,0.0,457,hroncok,2,1.0,0,false,false
 912314,kliment/Printrun,python,314,1358013341,1358016641,1358016641,55,55,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,40,4762,62,0,1,0.0,0.0,0.0,457,colah,3,0.3333333333333333,44,false,false
 912312,kliment/Printrun,python,313,1358013236,1358014620,1358014620,23,23,github,false,false,3,3,0,0,0,0,0,0,1,1,1,0,0,40,4762,90,0,3,0.0,0.0,0.0,457,colah,2,0.0,44,false,false
-794322,kliment/Printrun,python,311,1357861864,1358013285,1358013285,2523,2523,commits_in_master,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,33,4680,62,0,1,0.0,0.0,0.0,455,colah,1,0.0,44,false,false
-794298,kliment/Printrun,python,310,1357861483,1358013160,1358013160,2527,2527,commits_in_master,false,false,3,2,0,1,1,1,0,0,1,1,1,0,0,33,4680,83,0,2,0.0,0.0,0.0,455,colah,0,0,44,false,false
+794322,kliment/Printrun,python,311,1357861864,,1358013285,2523,,unknown,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,33,4680,62,0,1,0.0,0.0,0.0,455,colah,1,0.0,44,false,false
+794298,kliment/Printrun,python,310,1357861483,,1358013160,2527,,unknown,false,false,3,2,0,1,1,1,0,0,1,1,1,0,0,33,4680,83,0,2,0.0,0.0,0.0,455,colah,0,0,44,false,false
 913385,kliment/Printrun,python,300,1353765389,1358075749,1358075749,71839,71839,github,false,false,3,2,0,1,1,2,0,0,21,21,20,1,0,63,4680,309,0,1,0.0,0.0,0.0,427,hroncok,1,1.0,0,false,false
 461647,kliment/Printrun,python,297,1352442071,1352445333,1352445333,54,54,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,63,4680,191,0,2,0.0,0.0,0.0,424,sivu,3,0.6666666666666666,2,false,false
 1053465,kliment/Printrun,python,294,1350911158,1351937908,1351937908,17052,17052,github,false,false,4,4,0,0,0,0,1,0,1,2,1,0,1,75,4680,2,0,0,0.0,0.0,0.0,422,kliment,6,1.0,73,true,true
@@ -61,7 +61,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 249327,kliment/Printrun,python,273,1345150135,1345150201,1345150201,1,1,github,false,false,3,2,0,0,0,0,1,0,1,2,1,0,1,77,4676,18,0,8,0.0,0.0,0.0,402,Traumflug,2,1.0,9,false,false
 240667,kliment/Printrun,python,270,1344864203,1344873423,1344873423,153,153,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,77,4676,2,0,19,0.0,0.0,0.0,802,Traumflug,1,1.0,18,false,false
 240572,kliment/Printrun,python,269,1344861710,1344863187,1344863187,24,24,github,false,false,3,5,0,0,0,0,1,0,3,4,2,0,1,77,4676,26,0,37,0.0,0.0,0.0,401,Traumflug,0,0,9,false,false
-348900,kliment/Printrun,python,264,1343722144,1346823622,1346823622,51691,51691,github,false,false,3,14,0,16,16,3,27,0,6,33,33,0,1,71,4676,452,0,306,0.0,0.0,0.0,392,iXce,6,0.8333333333333334,0,false,true
+348900,kliment/Printrun,python,264,1343722144,1346823622,1346823622,51691,51691,github,false,false,3,14,0,16,16,3,27,1,6,34,33,0,1,71,4676,452,0,306,0.0,0.0,0.0,392,iXce,6,0.8333333333333334,0,false,true
 207439,kliment/Printrun,python,260,1342295601,,1342343394,796,,unknown,false,false,2,1,0,0,0,1,0,0,1,1,1,0,0,78,3358,2,0,0,0.0,0.0,0.0,383,GeorgeHahn,0,0,2,false,false
 180964,kliment/Printrun,python,252,1340934461,1340935820,1340935820,22,22,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,81,4657,3,0,6,0.0,0.0,0.0,377,ajd4096,4,0.5,0,false,false
 180475,kliment/Printrun,python,251,1340907104,1340907343,1340907343,3,3,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,82,4657,4,0,5,0.0,0.0,0.0,754,cakeller98,12,0.8333333333333334,4,false,false
@@ -71,12 +71,12 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 179772,kliment/Printrun,python,247,1340882565,,1340882984,6,,unknown,false,false,2,1,0,0,0,1,0,0,1,1,1,0,0,83,3358,20,0,0,0.0,0.0,0.0,377,ajd4096,0,0,0,false,false
 161346,kliment/Printrun,python,243,1339782941,1339786187,1339786188,54,54,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,86,4639,2,0,2,0.0,0.0,0.0,372,logxen,1,1.0,1,false,false
 160475,kliment/Printrun,python,242,1339735097,1339735918,1339735918,13,13,github,false,false,2,1,0,1,1,1,0,0,1,1,1,0,0,87,4636,17,0,1,0.0,0.0,0.0,372,logxen,0,0,1,false,false
-397457,kliment/Printrun,python,239,1339595735,1339595804,1339595804,1,1,commits_in_master,false,false,2,69,0,0,0,1,268,0,15,283,237,11,29,88,3358,36258,21522,236,0.0,0.0,0.0,372,Stefanowicz,3,0.3333333333333333,0,true,false
+397457,kliment/Printrun,python,239,1339595735,1339595804,1339595804,1,1,commits_in_master,false,false,2,69,0,0,0,1,268,236,15,519,237,11,29,88,3358,36258,21522,236,0.0,0.0,0.0,372,Stefanowicz,3,0.3333333333333333,0,true,false
 152782,kliment/Printrun,python,238,1339203005,1370274408,1370274408,517856,517856,merged_in_comments,false,false,2,1,0,2,2,2,0,0,2,2,2,0,0,90,4633,9,0,0,0.0,0.0,0.0,369,beardface,4,0.5,0,false,false
-152775,kliment/Printrun,python,237,1339202855,1339202940,1339202940,1,1,commits_in_master,false,false,2,67,0,0,0,0,268,0,15,283,237,11,29,90,3358,36263,21522,236,0.0,0.0,0.0,369,beardface,3,0.6666666666666666,0,false,false
+152775,kliment/Printrun,python,237,1339202855,1339202940,1339202940,1,1,commits_in_master,false,false,2,67,0,0,0,0,268,236,15,519,237,11,29,90,3358,36263,21522,236,0.0,0.0,0.0,369,beardface,3,0.6666666666666666,0,false,false
 150141,kliment/Printrun,python,236,1339038840,1339597402,1339597402,9309,9309,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,92,4633,10,0,14,0.0,0.0,0.0,368,alexanderhiam,0,0,5,false,false
-147793,kliment/Printrun,python,234,1338901302,1338901653,1338901653,5,5,github,false,false,2,23,0,0,0,0,242,0,6,248,216,3,23,92,4297,33671,21522,48,0.0,0.0,0.0,366,beardface,2,0.5,0,false,false
-146876,kliment/Printrun,python,233,1338833071,1338901655,1338901655,1143,1143,github,false,false,2,5,0,3,3,1,1,0,4,5,214,2,21,92,16126,16690,10761,276,540.1215428500558,12.40233163834801,81.73136549671338,366,beardface,1,0.0,0,false,false
+147793,kliment/Printrun,python,234,1338901302,1338901653,1338901653,5,5,github,false,false,2,23,0,0,0,0,242,236,6,484,216,3,23,92,4297,33671,21522,48,0.0,0.0,0.0,366,beardface,2,0.5,0,false,false
+146876,kliment/Printrun,python,233,1338833071,1338901655,1338901655,1143,1143,github,false,false,2,5,0,3,3,1,1,236,4,241,214,2,21,92,16126,16690,10761,276,540.1215428500558,12.40233163834801,81.73136549671338,366,beardface,1,0.0,0,false,false
 140266,kliment/Printrun,python,232,1338315472,,1346901556,143101,,unknown,false,false,1,1,0,4,4,2,0,0,2,2,2,0,0,95,4297,18,0,0,0.0,0.0,0.0,360,fheinz,0,0,0,false,false
 394404,kliment/Printrun,python,231,1338212168,1338219047,1338219047,114,114,github,false,false,1,1,0,0,0,0,0,0,3,3,3,0,0,95,4289,26,0,30,0.0,0.0,0.0,359,Stefanowicz,2,0.0,0,true,false
 394403,kliment/Printrun,python,230,1338212114,1338212282,1338212282,2,2,commits_in_master,false,false,1,44,0,1,1,1,27,0,10,37,23,8,6,95,3358,2583,0,223,0.0,0.0,0.0,718,Stefanowicz,1,0.0,0,true,false
@@ -171,9 +171,9 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1053539,kliment/Printrun,python,106,1322537875,1322541169,1322541169,54,54,github,false,false,4,1,0,1,1,1,0,0,1,1,1,0,0,62,2538,93,0,13,0.0,0.0,0.0,252,cakeller98,2,1.0,2,false,false
 1053535,kliment/Printrun,python,104,1322491701,1322495145,1322495145,57,57,github,false,false,4,1,0,2,2,3,0,0,1,1,1,0,0,62,2353,8,0,60,0.0,0.0,0.0,251,cakeller98,1,1.0,2,false,false
 1053748,kliment/Printrun,python,100,1321811787,1321829366,1321829366,292,292,github,false,false,5,1,0,0,0,0,0,0,1,1,1,0,0,61,2345,4,0,12,0.0,0.0,0.0,250,ErikZalm,0,0,15,false,false
-1053750,kliment/Printrun,python,99,1321457430,1321457611,1321457611,3,3,github,false,false,5,2,0,0,0,0,1,0,3,4,0,0,2,60,2345,0,0,20,0.0,0.0,0.0,249,CyrilLD,1,1.0,0,false,false
+1053750,kliment/Printrun,python,99,1321457430,1321457611,1321457611,3,3,github,false,false,5,2,0,0,0,0,1,1,3,5,0,0,2,60,2345,0,0,20,0.0,0.0,0.0,249,CyrilLD,1,1.0,0,false,false
 1053758,kliment/Printrun,python,98,1321412896,1321829406,1321829406,6941,6941,github,false,false,5,1,0,0,0,0,0,0,1,1,1,0,0,59,2278,11,0,2,0.0,0.0,0.0,249,canadaduane,5,0.8,8,false,false
-1053763,kliment/Printrun,python,94,1321296398,1321452759,1321452759,2606,2606,github,false,false,5,20,0,1,1,1,0,0,2,2,3,0,0,60,2278,398,0,499,0.0,0.0,0.0,248,k-eex,21,0.9523809523809523,0,true,true
+1053763,kliment/Printrun,python,94,1321296398,1321452759,1321452759,2606,2606,github,false,false,5,20,0,1,1,1,0,1,2,3,3,0,0,60,2278,398,0,499,0.0,0.0,0.0,248,k-eex,21,0.9523809523809523,0,true,true
 1053540,kliment/Printrun,python,92,1321218566,1321219733,1321219733,19,19,github,false,false,5,1,0,0,0,0,0,0,1,1,1,0,0,61,2278,4,0,5,11.41352063213345,0.0,0.0,247,alexrj,6,1.0,10,false,true
 1053784,kliment/Printrun,python,90,1321113702,1321113753,1321113753,0,0,github,false,false,5,3,0,0,0,0,0,0,1,1,1,0,0,61,2278,2,0,39,11.41352063213345,0.0,0.0,245,canadaduane,4,0.75,8,false,false
 1053786,kliment/Printrun,python,88,1321102255,1321111316,1321111316,151,151,commits_in_master,false,false,5,3,0,1,1,2,0,0,2,2,2,0,0,61,2278,4,0,48,11.41352063213345,0.0,0.0,245,canadaduane,3,1.0,8,false,false
@@ -193,7 +193,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1053926,kliment/Printrun,python,60,1316145468,1316147333,1316147333,31,31,github,false,false,5,7,0,0,0,0,0,0,1,1,1,0,0,34,1501,88,0,142,0.0,0.0,0.0,224,tjhowse,1,0.0,0,false,false
 1053940,kliment/Printrun,python,59,1315470296,1315474624,1315474624,72,72,commits_in_master,false,false,5,8,0,1,1,3,0,0,1,1,1,0,0,27,1495,1439,0,94,0.0,0.0,0.0,220,tjhowse,0,0,0,false,false
 1053569,kliment/Printrun,python,58,1315388698,1317200821,1317200821,30202,30202,github,false,false,4,1,0,0,0,0,0,0,1,1,1,0,0,28,1422,8,0,24,0.0,0.0,0.0,220,alexrj,4,1.0,9,false,true
-1053961,kliment/Printrun,python,57,1315317769,1315330223,1315330223,207,207,github,false,false,4,5,0,0,0,0,1,0,6,7,1,0,4,27,1419,75,0,436,0.0,0.0,0.0,220,CyrilLD,0,0,0,false,false
+1053961,kliment/Printrun,python,57,1315317769,1315330223,1315330223,207,207,github,false,false,4,5,0,0,0,0,1,1,6,8,1,0,4,27,1419,75,0,436,0.0,0.0,0.0,220,CyrilLD,0,0,0,false,false
 1053550,kliment/Printrun,python,56,1314549729,1314792312,1314792312,4043,4043,github,false,false,4,1,0,0,0,0,0,0,1,1,0,0,1,27,1387,0,0,2,0.0,0.0,0.0,218,alexrj,3,1.0,8,false,true
 1053968,kliment/Printrun,python,55,1314532331,1314532952,1314532952,10,10,github,false,false,4,1,0,0,0,0,0,0,2,2,2,0,0,27,1368,79,0,124,0.0,0.0,0.0,218,nesqi,0,0,0,false,false
 1053972,kliment/Printrun,python,54,1314470251,1314471049,1314471049,13,13,github,false,false,4,1,0,0,0,0,0,0,1,1,1,0,0,27,1368,1,0,101,0.0,0.0,0.0,217,Skateboss,1,1.0,0,false,false
@@ -204,8 +204,8 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1053998,kliment/Printrun,python,46,1312667523,1312771897,1312771897,1739,1739,github,false,false,5,2,0,1,1,1,7,0,1,8,1,0,4,23,1315,295,0,90,0.0,0.0,0.0,202,jmarsden,0,0,0,false,false
 1054006,kliment/Printrun,python,44,1312545618,,1314476308,32178,,unknown,false,false,5,11,0,1,1,1,2,0,2,4,3,0,0,23,1291,2582,0,0,0.0,0.0,0.0,201,garyhodgson,1,0.0,7,false,false
 1054020,kliment/Printrun,python,43,1312389446,1312402652,1312402652,220,220,github,false,false,5,1,0,0,0,0,0,0,1,1,1,0,0,24,1224,29,0,10,0.0,0.0,0.0,200,grevaillot,0,0,0,false,false
-1054044,kliment/Printrun,python,42,1312265712,1312267472,1312267472,29,29,github,false,false,5,2,0,0,0,0,828,0,3,831,240,121,470,24,1211,29161,0,100,0.0,0.0,0.0,200,ahmetcemturan,5,0.2,4,false,false
-1054050,kliment/Printrun,python,41,1312222289,1312265670,1312265670,723,723,commits_in_master,false,false,5,2,0,0,0,0,828,0,3,831,240,121,470,24,1211,29161,0,100,0.0,0.0,0.0,199,ahmetcemturan,4,0.25,4,false,false
+1054044,kliment/Printrun,python,42,1312265712,1312267472,1312267472,29,29,github,false,false,5,2,0,0,0,0,828,826,3,1657,240,121,470,24,1211,29161,0,100,0.0,0.0,0.0,200,ahmetcemturan,5,0.2,4,false,false
+1054050,kliment/Printrun,python,41,1312222289,1312265670,1312265670,723,723,commits_in_master,false,false,5,2,0,0,0,0,828,826,3,1657,240,121,470,24,1211,29161,0,100,0.0,0.0,0.0,199,ahmetcemturan,4,0.25,4,false,false
 1054051,kliment/Printrun,python,40,1312204778,1312267555,1312267555,1046,1046,merged_in_comments,false,false,5,3,0,0,0,1,1,0,2,3,2,0,0,23,1211,211,0,0,0.0,0.0,0.0,199,garyhodgson,0,0,7,false,false
 1054056,kliment/Printrun,python,39,1311973323,,1312267496,4902,,unknown,false,false,5,1,0,0,0,0,0,0,1,1,1,0,0,24,1198,7,0,0,0.0,0.0,0.0,199,ahmetcemturan,3,0.3333333333333333,4,false,false
 1053563,kliment/Printrun,python,37,1311082481,1311140564,1311140564,968,968,github,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,27,1112,8,0,66,0.0,0.0,0.0,195,alexrj,2,1.0,7,false,true

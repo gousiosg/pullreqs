@@ -70,7 +70,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1305442,opsschool/curriculum,python,128,1364887905,1365722391,1365722391,13908,13908,github,false,false,3,2,11,2,13,2,0,0,1,1,0,1,0,86,30,0,0,14,0.0,0.0,0.0,374,nibalizer,1,0.0,38,false,false
 1300086,opsschool/curriculum,python,127,1364619627,1364988176,1364988176,6202,6202,github,false,false,3,3,1,1,2,2,2,0,2,4,0,3,0,84,30,0,0,15,0.0,0.0,0.0,374,handyman5,4,0.5,1,false,false
 1313702,opsschool/curriculum,python,126,1364611786,1364611973,1364611973,3,3,github,false,false,3,1,0,0,0,1,0,0,3,3,0,3,0,84,30,0,0,3,0.0,0.0,0.0,374,unpixie,6,0.6666666666666666,0,false,false
-1259155,opsschool/curriculum,python,125,1363669889,1364609022,1364609022,15652,15652,commits_in_master,false,false,3,1,2,1,3,3,2,0,2,4,0,5,0,79,30,0,0,37,0.0,0.0,0.0,374,unpixie,5,0.8,0,false,false
+1259155,opsschool/curriculum,python,125,1363669889,1364609022,1364609022,15652,15652,commits_in_master,false,false,3,1,2,1,3,3,2,1,2,5,0,5,0,79,30,0,0,37,0.0,0.0,0.0,374,unpixie,5,0.8,0,false,false
 1256285,opsschool/curriculum,python,124,1363491726,1372275869,1372275869,146462,146462,commits_in_master,false,false,3,2,4,4,8,3,0,0,1,1,0,1,0,78,30,0,0,0,0.0,0.0,0.0,374,aytch,1,0.0,7,false,false
 1263221,opsschool/curriculum,python,123,1363368850,1363378430,1363378430,159,159,github,false,false,3,4,0,0,0,1,0,0,3,3,0,3,0,78,30,0,0,36,0.0,0.0,0.0,373,dhutty,0,0,0,false,false
 1254520,opsschool/curriculum,python,122,1363345922,1363920930,1363920930,9583,9583,commits_in_master,false,false,3,1,20,2,22,3,0,0,1,1,0,1,0,77,30,0,0,5,0.0,0.0,0.0,373,nibalizer,0,0,36,false,false

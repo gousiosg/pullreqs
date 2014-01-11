@@ -1,6 +1,6 @@
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,merged_using,conflict,forward_links,team_size,num_commits,num_commit_comments,num_issue_comments,num_comments,num_participants,files_added,files_deleted,files_modified,files_changed,src_files,doc_files,other_files,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
 2617122,opscode/omnibus-chef,ruby,111,1386777398,1386777442,1386777442,0,0,github,false,false,6,1,0,0,0,0,0,0,1,1,0,0,1,34,602,0,0,9,0.0,0.0,0.0,49,adamedx,6,0.5,6,true,true
-2559532,opscode/omnibus-chef,ruby,110,1386601977,1386614228,1386614228,204,204,github,false,false,5,3,3,1,4,2,1,0,5,6,5,1,6,35,602,497,0,12,0.0,0.0,0.0,49,schisamo,16,0.375,64,true,true
+2559532,opscode/omnibus-chef,ruby,110,1386601977,1386614228,1386614228,204,204,github,false,false,5,3,3,1,4,2,1,6,5,12,5,1,6,35,602,497,0,12,0.0,0.0,0.0,49,schisamo,16,0.375,64,true,true
 2599168,opscode/omnibus-chef,ruby,109,1386570991,1386574801,1386574801,63,63,github,false,false,5,1,0,1,1,1,0,0,1,1,0,0,1,35,602,0,0,9,0.0,0.0,0.0,49,kaustubh-d,2,0.0,1,false,false
 2519567,opscode/omnibus-chef,ruby,108,1385422773,1386712457,1386712457,21494,21494,merged_in_comments,false,false,5,2,0,2,2,2,0,0,1,1,1,0,0,34,602,4,0,0,0.0,0.0,0.0,49,adamedx,5,0.6,6,true,true
 2518212,opscode/omnibus-chef,ruby,107,1385408669,1385409237,1385409237,9,9,commits_in_master,false,false,5,1,0,1,1,1,0,0,2,2,1,0,1,34,602,4,0,7,0.0,0.0,0.0,49,sersut,10,0.4,0,true,true
@@ -41,8 +41,8 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1419274,opscode/omnibus-chef,ruby,71,1367413432,1367525054,1367525054,1860,1860,commit_sha_in_comments,false,false,12,6,0,1,1,1,2,0,9,11,2,1,7,41,580,196,0,0,0.0,0.0,0.0,34,schisamo,14,0.42857142857142855,50,true,true
 1419262,opscode/omnibus-chef,ruby,70,1367413182,,1367521249,1801,,unknown,false,false,12,4,0,0,0,0,2,0,6,8,2,1,4,41,580,214,0,0,0.0,0.0,0.0,34,schisamo,13,0.46153846153846156,50,true,true
 1416787,opscode/omnibus-chef,ruby,69,1367360663,1367858328,1367858328,8294,8294,commits_in_master,false,false,12,2,0,0,0,0,0,0,1,1,1,0,0,41,580,53,0,1,0.0,0.0,0.0,34,danielsdeleo,7,0.42857142857142855,54,true,true
-1731409,opscode/omnibus-chef,ruby,67,1366639196,1366648429,1366648430,153,153,github,false,false,14,2,0,0,0,0,0,0,1,1,53,59,72,43,2217,2982,0,74,0.0,0.0,0.0,32,schisamo,12,0.4166666666666667,50,true,true
-1381223,opscode/omnibus-chef,ruby,66,1366206832,,1366563169,5938,,unknown,false,false,14,18,0,0,0,0,3,0,29,32,22,1,14,42,2190,324,0,0,0.0,0.0,0.0,32,schisamo,11,0.45454545454545453,50,true,true
+1731409,opscode/omnibus-chef,ruby,67,1366639196,1366648429,1366648430,153,153,github,false,false,14,2,0,0,0,0,0,185,1,186,53,59,72,43,2217,2982,0,74,0.0,0.0,0.0,32,schisamo,12,0.4166666666666667,50,true,true
+1381223,opscode/omnibus-chef,ruby,66,1366206832,,1366563169,5938,,unknown,false,false,14,18,0,0,0,0,3,3,29,35,22,1,14,42,2190,324,0,0,0.0,0.0,0.0,32,schisamo,11,0.45454545454545453,50,true,true
 1338951,opscode/omnibus-chef,ruby,65,1365191381,1365448671,1365448671,4288,4288,merged_in_comments,false,false,15,3,0,2,2,2,1,0,4,5,3,2,0,41,2166,51,0,0,0.0,0.0,0.0,32,schisamo,10,0.5,50,true,true
 1297816,opscode/omnibus-chef,ruby,64,1364334206,1364402751,1364402751,1142,1142,github,false,false,16,2,0,2,2,2,0,0,1,1,1,0,0,38,2196,61,0,22,0.0,0.0,0.0,32,danielsdeleo,6,0.3333333333333333,53,true,true
 1262934,opscode/omnibus-chef,ruby,63,1363364028,1363632726,1363632726,4478,4478,github,false,false,15,1,0,3,3,2,0,0,1,1,1,0,0,38,2191,11,0,10,0.0,0.0,0.0,32,danielsdeleo,5,0.2,53,true,true
@@ -64,7 +64,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 934616,opscode/omnibus-chef,ruby,44,1359429736,1380575321,1380575321,352486,352486,merged_in_comments,false,false,15,1,0,1,1,2,0,0,2,2,0,0,2,39,1829,0,0,0,0.0,0.0,0.0,27,jtimberman,2,0.0,165,true,true
 934189,opscode/omnibus-chef,ruby,43,1359415615,1367525081,1367525081,135217,135217,commit_sha_in_comments,false,false,15,1,0,1,1,1,0,0,3,3,0,0,3,38,1829,0,0,0,0.0,0.0,0.0,27,someara,1,0.0,13,false,true
 837762,opscode/omnibus-chef,ruby,42,1358971908,1358972215,1358972216,5,5,github,false,false,14,1,0,1,1,1,0,0,2,2,1,1,0,39,1827,2,0,29,0.0,0.0,0.0,26,christophermaier,2,1.0,7,true,true
-790872,opscode/omnibus-chef,ruby,40,1357799241,1358193642,1358193642,6573,6573,github,false,false,12,3,0,2,2,2,0,0,5,5,7,1,0,38,1878,484,0,31,0.0,0.0,0.0,25,hosh,0,0,40,true,true
+790872,opscode/omnibus-chef,ruby,40,1357799241,1358193642,1358193642,6573,6573,github,false,false,12,3,0,2,2,2,0,3,5,8,7,1,0,38,1878,484,0,31,0.0,0.0,0.0,25,hosh,0,0,40,true,true
 900375,opscode/omnibus-chef,ruby,37,1356044433,1356044754,1356044754,5,5,github,false,false,11,1,0,1,1,1,0,0,1,1,0,0,1,39,1863,0,0,1,0.0,0.0,0.0,24,sersut,0,0,0,true,true
 897743,opscode/omnibus-chef,ruby,36,1355951057,,1359415597,57742,,unknown,false,false,12,1,0,1,1,1,0,0,3,3,0,0,3,38,1863,0,0,0,0.0,0.0,0.0,24,someara,0,0,12,false,true
 746435,opscode/omnibus-chef,ruby,35,1355354090,1355421647,1355421647,1125,1125,github,false,false,12,35,0,0,0,0,22,0,16,38,10,3,15,38,1738,525,0,118,0.0,0.0,0.0,24,sdelano,0,0,4,true,true
@@ -75,11 +75,11 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 763559,opscode/omnibus-chef,ruby,30,1354912114,1355184179,1355184179,4534,4534,commit_sha_in_comments,false,false,12,3,0,2,2,1,0,0,2,2,1,1,0,35,1720,2,0,0,0.0,0.0,0.0,24,adamhjk,2,0.5,104,false,true
 709561,opscode/omnibus-chef,ruby,29,1354834345,1354836523,1354836523,36,36,merged_in_comments,false,false,12,1,0,1,1,1,0,0,1,1,1,0,0,35,1742,23,0,0,0.0,0.0,0.0,24,adamhjk,1,1.0,104,true,true
 709984,opscode/omnibus-chef,ruby,28,1354770160,1354835414,1354835414,1087,1087,github,false,false,11,1,0,0,0,0,0,0,1,1,1,0,0,33,1742,125,0,3,0.0,0.0,0.0,24,adamhjk,0,0,104,true,true
-611932,opscode/omnibus-chef,ruby,27,1354726990,,1354744407,290,,unknown,false,false,11,1,2,0,2,1,0,0,2,2,1,4,0,30,1744,1,0,0,0.0,0.0,0.0,24,jtimberman,1,0.0,155,false,true
+611932,opscode/omnibus-chef,ruby,27,1354726990,,1354744407,290,,unknown,false,false,11,1,2,0,2,1,0,3,2,5,1,4,0,30,1744,1,0,0,0.0,0.0,0.0,24,jtimberman,1,0.0,155,false,true
 672113,opscode/omnibus-chef,ruby,26,1354726594,,1354744373,296,,unknown,false,false,11,1,0,0,0,1,0,0,2,2,2,0,0,30,1744,4,0,0,0.0,0.0,0.0,24,jtimberman,0,0,155,false,true
 593954,opscode/omnibus-chef,ruby,25,1354233689,1354316189,1354316189,1375,1375,github,false,false,11,1,0,1,1,1,0,0,1,1,0,1,0,31,1737,0,0,1,0.0,0.0,0.0,24,seth,2,0.5,34,true,true
 593315,opscode/omnibus-chef,ruby,24,1354232657,,1354504947,4538,,unknown,false,false,11,1,0,1,1,1,0,0,1,1,1,0,0,31,1737,4,0,0,0.0,0.0,0.0,24,seth,1,1.0,34,true,true
-486207,opscode/omnibus-chef,ruby,21,1352994780,1354505009,1354505009,25170,25170,merged_in_comments,false,false,12,1,0,1,1,1,2,0,2,4,2,6,0,31,1742,16,0,4,0.0,0.0,0.0,24,mmzyk,2,0.5,4,true,true
+486207,opscode/omnibus-chef,ruby,21,1352994780,1354505009,1354505009,25170,25170,merged_in_comments,false,false,12,1,0,1,1,1,2,1,2,5,2,6,0,31,1742,16,0,4,0.0,0.0,0.0,24,mmzyk,2,0.5,4,true,true
 448600,opscode/omnibus-chef,ruby,15,1349043024,1349997618,1349997618,15909,15909,github,false,false,11,19,0,0,0,0,0,0,6,6,4,2,0,38,1725,25,0,99,0.0,0.0,0.0,23,schisamo,4,0.75,41,true,true
 439830,opscode/omnibus-chef,ruby,13,1348682308,1349202770,1349202770,8674,8674,merged_in_comments,false,false,9,3,0,2,2,2,4,0,1,5,1,0,4,36,1725,26,0,18,0.0,0.0,0.0,23,tylercloke,0,0,2,true,true
 409121,opscode/omnibus-chef,ruby,12,1347633912,1347644019,1347644019,168,168,github,false,false,8,4,0,2,2,1,2,0,1,3,1,0,2,36,1740,93,0,0,0.0,0.0,0.0,21,schisamo,3,0.6666666666666666,40,true,true
@@ -87,9 +87,9 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 345236,opscode/omnibus-chef,ruby,10,1346354077,1346354652,1346354652,9,9,github,false,false,9,1,0,1,1,1,0,0,1,1,0,1,0,38,1733,0,0,0,0.0,0.0,0.0,42,jamesc,1,1.0,12,true,true
 342455,opscode/omnibus-chef,ruby,9,1346258995,1346259164,1346259164,2,2,github,false,false,8,1,0,0,0,0,1,0,0,1,1,0,0,37,1732,20,0,0,0.0,0.0,0.0,42,jamesc,0,0,12,true,true
 334123,opscode/omnibus-chef,ruby,8,1346094973,1346095899,1346095899,15,15,github,false,false,8,4,0,2,2,2,0,0,4,4,4,0,0,36,1741,44,0,25,0.0,0.0,0.0,21,mmzyk,1,0.0,4,true,true
-334068,opscode/omnibus-chef,ruby,7,1346093810,,1346094871,17,,unknown,false,false,8,50,0,0,0,1,37,0,22,59,32,29,0,36,1424,1869,0,174,0.0,0.0,0.0,21,mmzyk,0,0,4,true,true
-229804,opscode/omnibus-chef,ruby,6,1345674249,1345747885,1345747885,1227,1227,github,false,false,7,13,7,1,8,2,8,0,13,21,18,4,0,33,1622,601,0,118,0.0,0.0,0.0,21,schisamo,2,0.5,39,true,true
-62782,opscode/omnibus-chef,ruby,4,1342739486,1343069794,1343069794,5505,5505,github,false,false,6,17,2,0,2,1,7,0,34,41,31,6,3,16,1303,906,0,128,0.0,0.0,0.0,16,schisamo,1,0.0,39,true,true
-217619,opscode/omnibus-chef,ruby,3,1342738292,1346780909,1346780909,67376,67376,commit_sha_in_comments,false,false,6,58,0,0,0,1,38,0,24,62,33,29,0,15,1361,1896,0,231,0.0,0.0,0.0,16,schisamo,0,0,39,true,true
+334068,opscode/omnibus-chef,ruby,7,1346093810,,1346094871,17,,unknown,false,false,8,50,0,0,0,1,37,17,22,76,32,29,0,36,1424,1869,0,174,0.0,0.0,0.0,21,mmzyk,0,0,4,true,true
+229804,opscode/omnibus-chef,ruby,6,1345674249,1345747885,1345747885,1227,1227,github,false,false,7,13,7,1,8,2,8,1,13,22,18,4,0,33,1622,601,0,118,0.0,0.0,0.0,21,schisamo,2,0.5,39,true,true
+62782,opscode/omnibus-chef,ruby,4,1342739486,1343069794,1343069794,5505,5505,github,false,false,6,17,2,0,2,1,7,1,34,42,31,6,3,16,1303,906,0,128,0.0,0.0,0.0,16,schisamo,1,0.0,39,true,true
+217619,opscode/omnibus-chef,ruby,3,1342738292,1346780909,1346780909,67376,67376,commit_sha_in_comments,false,false,6,58,0,0,0,1,38,17,24,79,33,29,0,15,1361,1896,0,231,0.0,0.0,0.0,16,schisamo,0,0,39,true,true
 165678,opscode/omnibus-chef,ruby,2,1340131231,,1380575460,674070,,unknown,false,false,5,1,0,2,2,3,0,0,5,5,1,0,4,0,1303,2,0,0,0.0,0.0,0.0,14,brandonmartin,1,0.0,0,false,false
 386605,opscode/omnibus-chef,ruby,1,1335035392,1340121826,1340121826,84773,84773,merged_in_comments,false,false,1,3,0,1,1,2,0,0,4,4,2,0,2,0,52,4,0,0,0.0,0.0,0.0,11,brandonmartin,0,0,0,true,false

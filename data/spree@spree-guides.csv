@@ -1,4 +1,7 @@
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,merged_using,conflict,forward_links,team_size,num_commits,num_commit_comments,num_issue_comments,num_comments,num_participants,files_added,files_deleted,files_modified,files_changed,src_files,doc_files,other_files,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
+2734003,spree/spree-guides,ruby,197,1388679429,,1388722906,724,,unknown,false,false,23,1,0,0,0,0,0,0,1,1,0,1,0,31,1135,0,0,0,16.740088105726873,1.762114537444934,1.762114537444934,79,binaryphile,2,0.0,1,false,false
+2697230,spree/spree-guides,ruby,196,1387932444,,1388701362,12815,,unknown,false,false,24,1,0,0,0,0,0,0,1,1,0,1,0,36,1135,0,0,0,16.740088105726873,1.762114537444934,1.762114537444934,79,brchristian,1,1.0,1,false,false
+2680681,spree/spree-guides,ruby,195,1387571085,,1388704753,18894,,unknown,false,false,24,1,0,0,0,0,0,0,1,1,0,1,0,36,1135,0,0,0,16.740088105726873,1.762114537444934,1.762114537444934,79,janpapenbrock,0,0,0,false,false
 2636558,spree/spree-guides,ruby,190,1386975809,1387237926,1387237926,4368,4368,fixes_in_commit,false,false,26,6,0,0,0,1,0,0,3,3,0,3,0,38,1135,0,0,0,16.740088105726873,1.762114537444934,1.762114537444934,78,davekiss,2,0.0,4,false,false
 2588159,spree/spree-guides,ruby,189,1386349152,1386582758,1386582758,3893,3893,commit_sha_in_comments,false,false,25,4,0,0,0,1,0,0,3,3,0,3,0,38,1135,0,0,0,16.740088105726873,1.762114537444934,1.762114537444934,78,davekiss,1,0.0,4,false,false
 2568678,spree/spree-guides,ruby,188,1386105094,1386120309,1386120309,253,253,github,false,false,24,1,0,0,0,1,0,0,1,1,0,1,0,36,1135,0,0,7,16.740088105726873,1.762114537444934,1.762114537444934,78,skatkov,0,0,8,false,false
@@ -50,11 +53,11 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1421176,spree/spree-guides,ruby,111,1367434545,1367442732,1367442725,136,136,github,false,false,17,1,0,1,1,1,0,0,1,1,0,1,0,26,955,0,0,10,0.0,0.0,0.0,70,xorrbit,0,0,14,false,false
 1418694,spree/spree-guides,ruby,110,1367404476,1367444607,1367444607,668,668,fixes_in_commit,false,false,17,2,0,1,1,1,0,0,2,2,0,2,0,26,955,0,0,0,0.0,0.0,0.0,70,Hates,1,0.0,6,false,false
 1417804,spree/spree-guides,ruby,109,1367383401,1367383585,1367383585,3,3,fixes_in_commit,false,false,16,1,0,0,0,1,0,0,1,1,0,1,0,26,955,0,0,0,0.0,0.0,0.0,70,JohanB,0,0,10,false,false
-1492989,spree/spree-guides,ruby,107,1366762035,1368809648,1368809649,34126,34126,github,false,false,15,1,0,1,1,1,1,0,1,2,0,1,2,27,955,0,0,7,0.0,0.0,0.0,70,huoxito,1,0.0,19,false,true
+1492989,spree/spree-guides,ruby,107,1366762035,1368809648,1368809649,34126,34126,github,false,false,15,1,0,1,1,1,1,1,1,3,0,1,2,27,955,0,0,7,0.0,0.0,0.0,70,huoxito,1,0.0,19,false,true
 1385767,spree/spree-guides,ruby,106,1366292178,,1366633621,5690,,unknown,false,false,15,1,0,1,1,1,0,0,1,1,0,1,0,27,43,0,0,0,0.0,0.0,0.0,70,Hates,0,0,6,false,false
 1347134,spree/spree-guides,ruby,93,1365438601,1365466334,1365466334,462,462,github,false,false,14,2,0,0,0,1,0,0,1,1,0,1,0,40,48,0,0,2,0.0,0.0,0.0,70,MettaAudio,0,0,6,false,false
 1336428,spree/spree-guides,ruby,91,1365146796,1365162384,1365162384,259,259,github,false,false,13,1,0,0,0,1,0,0,1,1,0,1,0,43,48,0,0,0,0.0,0.0,0.0,70,splattael,0,0,27,false,false
-1334689,spree/spree-guides,ruby,89,1365103781,,1365103801,0,,unknown,false,false,12,98,0,0,0,0,255,0,80,335,26,251,135,43,48,3662,0,0,0.0,0.0,0.0,70,j1mr10rd4n,0,0,3,false,false
+1334689,spree/spree-guides,ruby,89,1365103781,,1365103801,0,,unknown,false,false,12,98,0,0,0,0,255,183,80,518,26,251,135,43,48,3662,0,0,0.0,0.0,0.0,70,j1mr10rd4n,0,0,3,false,false
 1335176,spree/spree-guides,ruby,88,1365094850,1365111981,1365111982,285,285,github,false,false,11,1,0,0,0,0,0,0,1,1,0,1,0,44,48,0,0,1,0.0,0.0,0.0,70,westonplatter,0,0,15,false,false
 1301060,spree/spree-guides,ruby,85,1364390103,1364853067,1364853067,7776,7776,fixes_in_commit,false,false,10,1,0,1,1,1,0,0,1,1,0,1,0,46,48,0,0,0,0.0,0.0,0.0,70,codesavvy,0,0,9,false,false
 1194419,spree/spree-guides,ruby,83,1361841695,1361842079,1361842079,6,6,merged_in_comments,false,false,10,1,0,0,0,1,0,0,1,1,0,1,0,33,48,0,0,0,0.0,0.0,0.0,69,adisutanto,0,0,0,false,false

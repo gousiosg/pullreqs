@@ -1,4 +1,5 @@
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,merged_using,conflict,forward_links,team_size,num_commits,num_commit_comments,num_issue_comments,num_comments,num_participants,files_added,files_deleted,files_modified,files_changed,src_files,doc_files,other_files,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
+2736630,github/developer.github.com,ruby,408,1388706946,,1388734393,457,,unknown,false,false,11,1,0,1,1,2,0,0,1,1,0,1,0,48,1751,0,0,0,0.0,0.0,0.0,597,joeyw,3,1.0,10,false,false
 2724244,github/developer.github.com,ruby,407,1388459378,,1388459903,8,,unknown,false,false,10,1,0,1,1,1,0,0,1,1,0,1,0,49,1751,0,0,0,0.0,0.0,0.0,597,despo,0,0,20,false,false
 2703316,github/developer.github.com,ruby,406,1388096002,1388096083,1388096083,1,1,commits_in_master,false,false,10,1,0,0,0,0,0,0,1,1,0,1,0,49,1751,0,0,27,0.0,0.0,0.0,596,aviflax,0,0,29,false,false
 2702143,github/developer.github.com,ruby,405,1388074355,1388080937,1388080937,109,109,commits_in_master,false,false,10,1,0,0,0,0,0,0,1,1,0,1,0,49,1733,0,0,4,0.0,0.0,0.0,596,randomecho,5,0.6,1,false,false
@@ -19,8 +20,8 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2541869,github/developer.github.com,ruby,388,1385726775,,1385726871,1,,unknown,false,false,10,4,0,0,0,0,0,0,1,1,0,1,0,54,1677,0,0,0,0.0,0.0,0.0,596,JamesOnme85,0,0,0,true,false
 2537675,github/developer.github.com,ruby,387,1385652511,1385725585,1385725585,1217,1217,commits_in_master,false,false,10,1,0,1,1,1,0,0,1,1,0,1,0,54,1677,0,0,19,0.0,0.0,0.0,596,izuzak,19,0.5263157894736842,86,true,false
 2529777,github/developer.github.com,ruby,386,1385553999,1385728478,1385728478,2907,2907,commits_in_master,false,false,10,2,5,2,7,2,0,0,1,1,0,1,0,54,1677,0,0,42,0.0,0.0,0.0,596,ax3l,0,0,4,false,false
-2527371,github/developer.github.com,ruby,385,1385517964,1385518011,1385518011,0,0,commits_in_master,false,false,10,2,0,0,0,0,2,0,0,2,0,3,0,53,1677,0,0,15,0.0,0.0,0.0,596,gjtorikian,13,0.38461538461538464,83,true,false
-2527363,github/developer.github.com,ruby,384,1385517852,1385517857,1385517857,0,0,commits_in_master,false,false,10,1,0,0,0,0,0,0,0,0,0,2,0,53,1677,0,0,7,0.0,0.0,0.0,596,gjtorikian,12,0.4166666666666667,83,true,false
+2527371,github/developer.github.com,ruby,385,1385517964,1385518011,1385518011,0,0,commits_in_master,false,false,10,2,0,0,0,0,2,2,0,4,0,3,0,53,1677,0,0,15,0.0,0.0,0.0,596,gjtorikian,13,0.38461538461538464,83,true,false
+2527363,github/developer.github.com,ruby,384,1385517852,1385517857,1385517857,0,0,commits_in_master,false,false,10,1,0,0,0,0,0,2,0,2,0,2,0,53,1677,0,0,7,0.0,0.0,0.0,596,gjtorikian,12,0.4166666666666667,83,true,false
 2518196,github/developer.github.com,ruby,383,1385408449,1386096355,1386096355,11465,11465,commits_in_master,false,false,10,1,0,4,4,3,0,0,1,1,0,1,0,51,1677,0,0,7,0.0,0.0,0.0,596,jspahrsummers,6,0.6666666666666666,148,true,false
 2511485,github/developer.github.com,ruby,382,1385320072,1385320378,1385320378,5,5,commits_in_master,false,false,10,1,0,1,1,1,0,0,1,1,0,1,0,51,1676,0,0,20,0.0,0.0,0.0,596,cmfcmf,0,0,9,false,false
 2510799,github/developer.github.com,ruby,381,1385307754,1385310126,1385310126,39,39,commits_in_master,false,false,10,3,0,2,2,2,0,0,9,9,1,5,1,51,1676,4,0,146,0.0,0.0,0.0,596,jdennes,12,0.5833333333333334,52,true,false
@@ -160,7 +161,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1736567,github/developer.github.com,ruby,246,1366721658,1366736077,1366736077,240,240,github,false,false,7,1,0,0,0,0,0,0,1,1,0,1,0,66,1169,0,0,8,0.0,0.0,0.0,581,dsheets,2,0.5,1,false,false
 1386956,github/developer.github.com,ruby,245,1366309682,,1366381602,1198,,unknown,false,false,7,2,0,0,0,3,0,0,3,3,1,1,0,65,1169,7,0,0,0.0,0.0,0.0,581,twokul,0,0,0,false,false
 1386522,github/developer.github.com,ruby,244,1366302994,1366396127,1366396127,1552,1552,github,false,false,7,1,0,1,1,1,0,0,1,1,0,1,0,65,1169,0,0,6,0.0,0.0,0.0,581,jasonrudolph,6,1.0,69,true,false
-1376910,github/developer.github.com,ruby,243,1366122443,1366122743,1366122743,5,5,github,false,false,7,4,0,0,0,0,4,0,4,8,0,2,6,63,1169,0,0,12,0.0,0.0,0.0,579,cameronmcefee,0,0,330,true,false
+1376910,github/developer.github.com,ruby,243,1366122443,1366122743,1366122743,5,5,github,false,false,7,4,0,0,0,0,4,1,4,9,0,2,6,63,1169,0,0,12,0.0,0.0,0.0,579,cameronmcefee,0,0,330,true,false
 1372987,github/developer.github.com,ruby,242,1366041493,1366052808,1366052808,188,188,github,false,false,7,1,0,0,0,0,0,0,1,1,0,1,0,63,1169,0,0,2,0.0,0.0,0.0,579,none-da,0,0,18,false,false
 1359376,github/developer.github.com,ruby,241,1365692511,1365693255,1365693255,12,12,github,false,false,7,1,0,0,0,2,0,0,2,2,1,1,0,62,1117,2,0,21,0.0,0.0,0.0,578,pengwynn,2,1.0,524,true,false
 1358384,github/developer.github.com,ruby,240,1365675987,1365701163,1365701163,419,419,github,false,false,7,1,0,0,0,0,0,0,1,1,0,1,0,61,1117,0,0,7,0.0,0.0,0.0,578,jasonrudolph,5,1.0,69,true,false
@@ -182,7 +183,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1229904,github/developer.github.com,ruby,224,1362691179,,1362693175,33,,unknown,false,false,7,1,0,0,0,1,0,0,1,1,0,1,0,47,1102,0,0,0,0.0,0.0,0.0,575,atodorov,0,0,8,false,false
 1229402,github/developer.github.com,ruby,223,1362685877,,1362717089,520,,unknown,false,false,7,3,0,1,1,2,1,0,4,5,3,0,2,47,1102,172,0,0,0.0,0.0,0.0,575,tsants,0,0,0,false,false
 1228463,github/developer.github.com,ruby,222,1362674668,1362676071,1362676071,23,23,github,false,false,6,1,0,0,0,1,0,0,1,1,0,1,0,47,1102,0,0,7,0.0,0.0,0.0,575,evanj,1,1.0,0,false,false
-1228403,github/developer.github.com,ruby,221,1362603288,1362677189,1362677189,1231,1231,github,false,false,6,12,2,4,6,4,5,0,9,14,0,8,2,47,1102,0,0,14,0.0,0.0,0.0,575,gjtorikian,1,0.0,43,true,false
+1228403,github/developer.github.com,ruby,221,1362603288,1362677189,1362677189,1231,1231,github,false,false,6,12,2,4,6,4,5,1,9,15,0,8,2,47,1102,0,0,14,0.0,0.0,0.0,575,gjtorikian,1,0.0,43,true,false
 1226771,github/developer.github.com,ruby,220,1362597424,1362664950,1362664950,1125,1125,github,false,false,6,2,0,1,1,1,0,0,1,1,0,1,0,46,1102,0,0,4,0.0,0.0,0.0,575,dennisreimann,0,0,193,false,false
 1226359,github/developer.github.com,ruby,219,1362592439,1362664922,1362664922,1208,1208,github,false,false,6,1,0,0,0,1,0,0,1,1,0,1,0,46,1102,0,0,9,0.0,0.0,0.0,575,evanj,0,0,0,false,false
 1226307,github/developer.github.com,ruby,218,1362591955,1362592352,1362592352,6,6,github,false,false,6,3,0,0,0,1,0,0,1,1,0,1,0,45,1102,0,0,12,0.0,0.0,0.0,575,jasonrudolph,0,0,64,true,false
@@ -216,7 +217,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 772195,github/developer.github.com,ruby,190,1356817231,1356819858,1356819858,43,43,github,false,false,4,1,0,0,0,1,0,0,1,1,0,1,0,66,1068,0,0,0,0.0,0.0,0.0,567,jacobbednarz,0,0,0,false,false
 894275,github/developer.github.com,ruby,188,1355841069,1355841199,1355841199,2,2,github,false,false,4,1,0,0,0,0,0,0,4,4,1,3,0,65,1063,6,0,29,0.0,0.0,0.0,563,pengwynn,1,1.0,515,true,false
 750337,github/developer.github.com,ruby,187,1355459328,1355491013,1355491013,528,528,github,false,false,4,1,0,1,1,1,0,0,2,2,0,2,0,66,1063,0,0,10,0.0,0.0,0.0,561,randomecho,1,1.0,1,false,false
-745516,github/developer.github.com,ruby,186,1355336550,1355341814,1355341814,87,87,commits_in_master,false,false,4,142,0,0,0,0,24,0,46,70,2,51,2,66,1014,204,0,221,0.0,0.0,0.0,559,mirrorzimage,0,0,0,false,false
+745516,github/developer.github.com,ruby,186,1355336550,1355341814,1355341814,87,87,commits_in_master,false,false,4,142,0,0,0,0,24,1,46,71,2,51,2,66,1014,204,0,221,0.0,0.0,0.0,559,mirrorzimage,0,0,0,false,false
 891628,github/developer.github.com,ruby,185,1355178669,1355183893,1355183893,87,87,github,false,false,4,1,0,1,1,1,0,0,5,5,0,5,0,64,1063,0,0,27,0.0,0.0,0.0,557,pborreli,0,0,100,false,false
 742094,github/developer.github.com,ruby,184,1355086383,1355086599,1355086599,3,3,github,false,false,4,1,0,0,0,1,1,0,0,1,0,1,0,63,1063,0,0,0,0.0,0.0,0.0,553,rick,2,1.0,85,true,false
 737104,github/developer.github.com,ruby,183,1355053600,1355056446,1355056446,47,47,github,false,false,4,1,0,0,0,2,0,0,2,2,0,2,0,63,1063,0,0,4,0.0,0.0,0.0,552,michaelhood,0,0,12,false,false
@@ -226,7 +227,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 724415,github/developer.github.com,ruby,179,1354937614,1354975186,1354975186,626,626,github,false,false,3,2,0,3,3,2,0,0,8,8,0,8,0,62,1062,0,0,46,0.0,0.0,0.0,552,randomecho,0,0,1,false,false
 580139,github/developer.github.com,ruby,178,1354160181,1354196943,1354196943,612,612,github,false,false,6,1,0,0,0,1,0,0,1,1,0,1,0,65,1049,0,0,4,0.0,0.0,0.0,548,joeyw,0,0,6,false,false
 884712,github/developer.github.com,ruby,177,1354030692,1354031516,1354031516,13,13,github,false,false,6,1,0,0,0,2,0,0,1,1,0,1,0,65,1049,0,0,3,0.0,0.0,0.0,546,sigmavirus24,13,0.8461538461538461,13,false,false
-1029972,github/developer.github.com,ruby,176,1353424652,1353506659,1353506659,1366,1366,commits_in_master,false,false,6,113,0,0,0,2,17,0,30,47,1,33,3,65,1014,194,0,243,0.0,0.0,0.0,546,Ellorah,0,0,0,false,false
+1029972,github/developer.github.com,ruby,176,1353424652,1353506659,1353506659,1366,1366,commits_in_master,false,false,6,113,0,0,0,2,17,1,30,48,1,33,3,65,1014,194,0,243,0.0,0.0,0.0,546,Ellorah,0,0,0,false,false
 503667,github/developer.github.com,ruby,175,1353396695,1353421346,1353421346,410,410,github,false,false,6,1,0,0,0,1,0,0,1,1,0,1,0,65,1049,0,0,11,0.0,0.0,0.0,546,heelhook,0,0,0,false,false
 498620,github/developer.github.com,ruby,174,1353334535,,1353335054,8,,unknown,false,false,6,1,0,0,0,2,0,0,1,1,0,1,0,65,1049,0,0,0,0.0,0.0,0.0,546,simonw,0,0,711,false,false
 497723,github/developer.github.com,ruby,173,1353320568,1353335215,1353335215,244,244,github,false,false,6,1,0,0,0,0,0,0,1,1,0,1,0,65,1049,0,0,2,0.0,0.0,0.0,546,coderaiser,0,0,0,false,false

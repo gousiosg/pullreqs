@@ -1,7 +1,9 @@
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,merged_using,conflict,forward_links,team_size,num_commits,num_commit_comments,num_issue_comments,num_comments,num_participants,files_added,files_deleted,files_modified,files_changed,src_files,doc_files,other_files,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
+2760344,Deadrik/TFCraft,java,431,1389111918,1389148176,1389148176,604,604,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,50,90714,67,0,1,0.0,0.0,0.0,77,emris,48,0.875,2,false,false
+2760290,Deadrik/TFCraft,java,430,1389111488,1389148204,1389148204,611,611,github,false,false,2,1,0,0,0,0,0,0,1,1,1,0,0,50,90714,1,0,0,0.0,0.0,0.0,77,emris,47,0.8723404255319149,2,false,false
 2699963,Deadrik/TFCraft,java,428,1388021410,,1388371922,5841,,unknown,false,false,2,3,0,0,0,0,0,0,4,4,4,0,0,63,87966,61,0,7,0.0,0.0,0.0,77,Kittychanley,40,0.575,0,false,true
-2697720,Deadrik/TFCraft,java,427,1387952802,,1387954948,35,,unknown,false,false,2,2,0,1,1,1,6,0,1,7,705,0,2018,62,87966,726,0,0,0.0,0.0,0.0,77,k2b6s9j,1,0.0,8,false,false
-2697665,Deadrik/TFCraft,java,426,1387950191,,1387950738,9,,unknown,false,false,2,2,0,1,1,2,6,0,1,7,596,0,1910,62,74172,693,0,0,0.0,0.0,0.0,77,k2b6s9j,0,0,8,false,false
+2697720,Deadrik/TFCraft,java,427,1387952802,,1387954948,35,,unknown,false,false,2,2,0,1,1,1,6,24,1,31,705,0,2018,62,87966,726,0,0,0.0,0.0,0.0,77,k2b6s9j,1,0.0,8,false,false
+2697665,Deadrik/TFCraft,java,426,1387950191,,1387950738,9,,unknown,false,false,2,2,0,1,1,2,6,22,1,29,596,0,1910,62,74172,693,0,0,0.0,0.0,0.0,77,k2b6s9j,0,0,8,false,false
 2657930,Deadrik/TFCraft,java,425,1387314990,,1387918529,10058,,unknown,false,false,3,2,0,0,0,0,0,0,3,3,3,0,0,62,87711,46,0,3,0.0,0.0,0.0,77,Kittychanley,39,0.5897435897435898,0,false,true
 2556397,Deadrik/TFCraft,java,423,1386210169,,1386372071,2698,,unknown,false,false,3,6,6,0,6,3,0,0,3,3,3,0,0,62,74172,38,0,0,0.0,0.0,0.0,76,SionoiS,0,0,0,false,false
 2490795,Deadrik/TFCraft,java,420,1384997050,,1385831331,13904,,unknown,false,false,3,1,0,0,0,0,0,0,1,1,1,0,0,50,87925,5,0,0,0.0,0.0,0.0,75,Kittychanley,38,0.6052631578947368,0,false,true
@@ -32,7 +34,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2666725,Deadrik/TFCraft,java,372,1379362519,1379363458,1379363458,15,15,github,false,false,5,1,0,0,0,0,0,0,7,7,7,0,0,22,73465,11,0,76,0.0,0.0,0.0,68,Kittychanley,25,0.68,0,false,true
 2110521,Deadrik/TFCraft,java,371,1379349883,1379363481,1379363481,226,226,github,false,false,5,3,0,2,2,2,0,0,1,1,1,0,0,22,73465,17,0,39,0.0,0.0,0.0,68,Kittychanley,24,0.6666666666666666,0,false,true
 2666726,Deadrik/TFCraft,java,368,1379298792,1379363469,1379363469,1077,1077,github,false,false,5,2,0,0,0,0,0,0,3,3,3,0,0,22,73465,56,0,19,0.0,0.0,0.0,68,Kittychanley,23,0.6521739130434783,0,false,true
-2666727,Deadrik/TFCraft,java,367,1379292565,,1379360925,1139,,unknown,false,false,5,2,0,0,0,0,1,0,0,1,0,0,2,22,73465,0,0,0,0.0,0.0,0.0,68,Kittychanley,22,0.6818181818181818,0,false,true
+2666727,Deadrik/TFCraft,java,367,1379292565,,1379360925,1139,,unknown,false,false,5,2,0,0,0,0,1,1,0,2,0,0,2,22,73465,0,0,0,0.0,0.0,0.0,68,Kittychanley,22,0.6818181818181818,0,false,true
 2101827,Deadrik/TFCraft,java,361,1379021220,1379078464,1379078464,954,954,commits_in_master,false,false,5,1,0,0,0,0,0,0,2,2,2,0,0,20,73462,11,0,61,0.0,0.0,0.0,68,Kittychanley,21,0.7142857142857143,0,false,true
 2096513,Deadrik/TFCraft,java,357,1378962995,1379078472,1379078472,1924,1924,commits_in_master,false,false,5,1,0,0,0,0,0,0,1,1,1,0,0,20,73462,6,0,7,0.0,0.0,0.0,68,Kittychanley,20,0.75,0,false,true
 2082709,Deadrik/TFCraft,java,352,1378781745,1378782785,1378782786,17,17,github,false,false,5,1,0,0,0,0,0,0,1,1,1,0,0,20,73457,12,0,13,0.0,0.0,0.0,68,Kittychanley,19,0.7368421052631579,0,false,true
@@ -72,7 +74,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1953936,Deadrik/TFCraft,java,241,1376941449,,1376948562,118,,unknown,false,false,7,1,0,0,0,2,0,0,1,1,1,0,0,19,73458,218,0,0,0.0,0.0,0.0,66,treeman1111,5,0.6,0,false,false
 1952937,Deadrik/TFCraft,java,239,1376930483,1376930570,1376930570,1,1,github,false,false,7,1,0,0,0,0,0,0,1,1,1,0,0,20,73457,2,0,9,0.0,0.0,0.0,66,treeman1111,4,0.5,0,false,false
 1952872,Deadrik/TFCraft,java,238,1376929752,1376929877,1376929877,2,2,github,false,false,7,1,0,0,0,0,1,0,7,8,0,0,8,19,73457,0,0,24,0.0,0.0,0.0,66,aliceingame,13,0.6923076923076923,0,false,false
-1948792,Deadrik/TFCraft,java,237,1376868440,1376897393,1376897393,482,482,github,false,false,7,2,0,0,0,0,0,0,1,1,0,0,4,20,73441,0,0,3,0.0,0.0,0.0,66,Kittychanley,6,0.8333333333333334,0,false,true
+1948792,Deadrik/TFCraft,java,237,1376868440,1376897393,1376897393,482,482,github,false,false,7,2,0,0,0,0,0,2,1,3,0,0,4,20,73441,0,0,3,0.0,0.0,0.0,66,Kittychanley,6,0.8333333333333334,0,false,true
 1947812,Deadrik/TFCraft,java,235,1376844657,1376897360,1376897360,878,878,github,false,false,7,1,0,0,0,0,0,0,1,1,1,0,0,20,73441,16,0,2,0.0,0.0,0.0,66,treeman1111,3,0.3333333333333333,0,false,false
 1947297,Deadrik/TFCraft,java,234,1376830414,1376833632,1376833632,53,53,github,false,false,7,1,0,0,0,0,0,0,3,3,3,0,0,20,73416,52,0,3,0.0,0.0,0.0,66,Smjert,3,1.0,2,false,true
 2022338,Deadrik/TFCraft,java,233,1376809605,1376813596,1376813596,66,66,github,false,false,7,0,0,0,0,0,0,0,0,0,0,0,0,19,73398,0,0,0,0.0,0.0,0.0,66,mayaknife,11,0.8181818181818182,1,false,false
@@ -82,7 +84,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1945661,Deadrik/TFCraft,java,228,1376748126,1376765550,1376765550,290,290,github,false,false,6,1,0,0,0,0,0,0,1,1,1,0,0,20,71756,2,0,1,0.0,0.0,0.0,66,treeman1111,2,0.0,0,false,false
 1944786,Deadrik/TFCraft,java,227,1376721451,1376741920,1376741920,341,341,github,false,false,6,1,0,1,1,1,0,0,1,1,1,0,0,20,71716,2,0,4,0.0,0.0,0.0,66,macrixen,0,0,0,false,false
 1944758,Deadrik/TFCraft,java,226,1376720339,,1376741879,359,,unknown,false,false,6,1,0,0,0,1,0,0,5,5,5,0,0,20,71716,55,0,0,0.0,0.0,0.0,66,Kittychanley,5,1.0,0,false,true
-1944395,Deadrik/TFCraft,java,225,1376702626,1376703866,1376703866,20,20,github,false,false,6,2,0,0,0,0,8,0,2,10,2,0,8,20,71399,24,0,53,0.0,0.0,0.0,66,Kittychanley,4,1.0,0,false,true
+1944395,Deadrik/TFCraft,java,225,1376702626,1376703866,1376703866,20,20,github,false,false,6,2,0,0,0,0,8,1,2,11,2,0,8,20,71399,24,0,53,0.0,0.0,0.0,66,Kittychanley,4,1.0,0,false,true
 1943989,Deadrik/TFCraft,java,224,1376689668,1376703895,1376703895,237,237,github,false,false,6,1,0,0,0,0,0,0,2,2,2,0,0,20,71399,6,0,11,0.0,0.0,0.0,65,Kittychanley,3,1.0,0,false,true
 1943861,Deadrik/TFCraft,java,223,1376687236,1376703909,1376703909,277,277,github,false,false,6,1,0,1,1,1,0,0,1,1,1,0,0,20,71399,23,0,0,0.0,0.0,0.0,65,Kittychanley,2,1.0,0,false,true
 1940837,Deadrik/TFCraft,java,222,1376650183,1376657309,1376657309,118,118,github,false,false,6,1,0,0,0,1,1,0,3,4,0,0,4,20,71423,0,0,8,0.0,0.0,0.0,65,aliceingame,12,0.6666666666666666,0,false,false
@@ -98,7 +100,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1921999,Deadrik/TFCraft,java,195,1376269079,1376280015,1376280015,182,182,github,false,false,5,1,0,0,0,0,0,0,1,1,1,0,0,23,71980,2,0,9,0.0,0.0,0.0,63,mayaknife,4,0.5,1,false,false
 1921214,Deadrik/TFCraft,java,194,1376245302,1376280036,1376280036,578,578,github,false,false,5,1,0,0,0,0,0,0,1,1,1,0,0,23,71980,75,0,9,0.0,0.0,0.0,63,emris,41,0.9024390243902439,1,false,false
 1920374,Deadrik/TFCraft,java,189,1376223182,1376281281,1376281281,968,968,github,false,false,5,2,0,0,0,0,0,0,5,5,5,0,18,23,71980,37,0,40,0.0,0.0,0.0,63,emris,40,0.9,1,false,false
-1920091,Deadrik/TFCraft,java,188,1376215053,1376281307,1376281307,1104,1104,github,false,false,5,2,0,0,0,0,1,0,16,17,11,0,8,22,71980,651,0,150,0.0,0.0,0.0,63,emris,39,0.8974358974358975,1,false,false
+1920091,Deadrik/TFCraft,java,188,1376215053,1376281307,1376281307,1104,1104,github,false,false,5,2,0,0,0,0,1,1,16,18,11,0,8,22,71980,651,0,150,0.0,0.0,0.0,63,emris,39,0.8974358974358975,1,false,false
 1918736,Deadrik/TFCraft,java,186,1376159819,,1376260886,1684,,unknown,false,false,5,4,0,0,0,1,0,0,10,10,10,0,0,23,71971,58,0,0,0.0,0.0,0.0,63,mayaknife,3,0.6666666666666666,1,false,false
 1910700,Deadrik/TFCraft,java,181,1375983849,1376000524,1376000524,277,277,github,false,false,5,1,0,2,2,1,2,0,9,11,3,0,8,25,75957,26,0,103,0.0,0.0,0.0,62,jack42,2,1.0,0,false,false
 1906828,Deadrik/TFCraft,java,175,1375920097,,1375957979,631,,unknown,false,false,5,1,0,0,0,1,5,0,2,7,0,0,7,26,75474,0,0,0,0.0,0.0,0.0,62,aliceingame,10,0.7,0,false,false
@@ -113,7 +115,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1892090,Deadrik/TFCraft,java,154,1375708801,1375727067,1375727067,304,304,github,false,false,5,1,0,0,0,0,0,0,1,1,0,0,1,29,75396,0,0,22,0.0,0.0,0.0,60,aliceingame,8,0.75,0,false,false
 1888897,Deadrik/TFCraft,java,153,1375640023,1375654578,1375654578,242,242,github,false,false,5,1,0,0,0,0,0,0,1,1,1,0,0,29,74937,7,0,3,0.0,0.0,0.0,60,Kittychanley,0,0,0,false,true
 1888841,Deadrik/TFCraft,java,152,1375638385,1375645735,1375645735,122,122,commits_in_master,false,false,5,1,0,0,0,1,0,0,1,1,1,0,0,28,74937,5,0,17,0.0,0.0,0.0,59,mayaknife,0,0,1,false,false
-1888508,Deadrik/TFCraft,java,149,1375629333,1375670523,1375670523,686,686,github,false,false,5,4,0,1,1,1,34,0,10,44,4,0,41,28,74937,249,0,105,0.0,0.0,0.0,59,jack42,1,1.0,0,false,false
+1888508,Deadrik/TFCraft,java,149,1375629333,1375670523,1375670523,686,686,github,false,false,5,4,0,1,1,1,34,1,10,45,4,0,41,28,74937,249,0,105,0.0,0.0,0.0,59,jack42,1,1.0,0,false,false
 1885396,Deadrik/TFCraft,java,148,1375522640,1375546029,1375546029,389,389,github,false,false,5,1,0,0,0,0,0,0,3,3,3,0,0,29,74797,125,0,1,0.0,0.0,0.0,59,jack42,0,0,0,false,false
 1884491,Deadrik/TFCraft,java,146,1375485876,1375488877,1375488877,50,50,github,false,false,5,1,0,2,2,2,0,0,1,1,1,0,0,29,75244,7,0,1,0.0,0.0,0.0,59,VegasGoat,14,0.9285714285714286,0,false,false
 1883841,Deadrik/TFCraft,java,145,1375471853,1375545680,1375545680,1230,1230,github,false,false,5,2,0,4,4,2,0,0,2,2,2,0,0,29,75334,15,0,0,0.0,0.0,0.0,59,emris,38,0.8947368421052632,1,false,false
@@ -199,13 +201,13 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1336346,Deadrik/TFCraft,java,31,1365145122,1365148122,1365148122,50,50,github,false,false,2,7,0,0,0,0,0,0,19,19,19,0,0,9,74912,114,0,81,0.0,0.0,0.0,37,upthorn,1,1.0,2,false,false
 1332532,Deadrik/TFCraft,java,30,1365052143,1365052345,1365052345,3,3,github,false,false,2,8,0,0,0,0,0,0,28,28,13,0,15,8,75208,151,0,74,0.0,0.0,0.0,37,upthorn,0,0,2,false,false
 1218416,Deadrik/TFCraft,java,26,1362366000,1362366063,1362366064,1,1,github,false,false,1,1,0,0,0,0,16,0,29,45,40,0,5,7,77051,4271,0,63,0.0,0.0,0.0,60,Dunkleosteus,4,1.0,0,false,true
-403625,Deadrik/TFCraft,java,12,1342051271,1342051310,1342051313,0,0,github,false,false,1,1,0,0,0,0,2,0,6,8,9,0,0,12,50628,2148,0,11,0.0,0.0,0.0,38,Dunkleosteus,3,1.0,0,true,true
+403625,Deadrik/TFCraft,java,12,1342051271,1342051310,1342051313,0,0,github,false,false,1,1,0,0,0,0,2,1,6,9,9,0,0,12,50628,2148,0,11,0.0,0.0,0.0,38,Dunkleosteus,3,1.0,0,true,true
 402513,Deadrik/TFCraft,java,11,1341622685,1341799311,1341799311,2943,2943,github,false,false,1,1,0,0,0,0,4,0,7,11,11,0,0,12,48210,2069,0,27,0.0,0.0,0.0,18,Dunkleosteus,2,1.0,0,true,true
 402239,Deadrik/TFCraft,java,10,1341543126,1341570070,1341570070,449,449,github,false,false,1,1,0,0,0,0,0,0,6,6,6,0,0,11,48098,1129,0,7,0.0,0.0,0.0,18,Dunkleosteus,1,1.0,0,true,true
 402213,Deadrik/TFCraft,java,9,1341534633,1341534725,1341534726,1,1,github,false,false,1,1,0,0,0,0,1,0,2,3,1,0,2,9,48098,2,0,3,0.0,0.0,0.0,18,Dunkleosteus,0,0,0,true,true
 181026,Deadrik/TFCraft,java,8,1340939958,,1341614526,11242,,unknown,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,10,40461,25,0,0,0.0,0.0,0.0,17,mikiones,0,0,0,false,false
 113758,Deadrik/TFCraft,java,7,1336241058,,1341614508,89557,,unknown,false,false,1,5,0,1,1,1,3,0,7,10,9,0,0,15,32957,1373,0,0,0.0,0.0,0.0,13,Jimmynator,6,0.5,0,false,false
-389210,Deadrik/TFCraft,java,6,1335984222,,1336242217,4299,,unknown,false,false,1,9,0,0,0,0,4,0,6,10,9,0,0,20,32325,2075,0,0,0.0,0.0,0.0,13,Jimmynator,5,0.6,0,true,false
+389210,Deadrik/TFCraft,java,6,1335984222,,1336242217,4299,,unknown,false,false,1,9,0,0,0,0,4,1,6,11,9,0,0,20,32325,2075,0,0,0.0,0.0,0.0,13,Jimmynator,5,0.6,0,true,false
 388441,Deadrik/TFCraft,java,5,1335689542,,1335711115,359,,unknown,false,false,1,4,0,0,0,0,1,0,12,13,12,0,0,23,29363,756,0,0,0.0,0.0,0.0,13,Jimmynator,4,0.75,0,true,false
 388300,Deadrik/TFCraft,java,4,1335614716,1335655798,1335655798,684,684,github,false,false,1,2,0,0,0,0,0,0,5,5,5,0,0,15,29300,1061,0,14,0.0,0.0,0.0,13,Jimmynator,3,0.6666666666666666,0,true,false
 388115,Deadrik/TFCraft,java,3,1335534415,,1335592246,963,,unknown,false,false,1,3,0,0,0,0,0,0,3,3,3,0,0,0,29300,62,0,0,0.0,0.0,0.0,13,Jimmynator,2,1.0,0,true,false

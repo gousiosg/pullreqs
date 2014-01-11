@@ -1,5 +1,8 @@
 pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,merged_using,conflict,forward_links,team_size,num_commits,num_commit_comments,num_issue_comments,num_comments,num_participants,files_added,files_deleted,files_modified,files_changed,src_files,doc_files,other_files,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
-2647391,mongodb/docs-ecosystem,python,120,1387203434,,1387232483,484,,unknown,false,false,10,1,0,0,0,1,0,0,1,1,0,0,1,0,172,0,0,0,0.0,0.0,0.0,19,nquinlan,0,0,26,false,false
+2713276,mongodb/docs-ecosystem,python,123,1388201105,1388672799,1388672799,7861,7861,merged_in_comments,false,false,11,1,0,0,0,1,0,0,1,1,0,0,1,0,172,0,0,0,0.0,0.0,0.0,19,ramann,0,0,0,false,false
+2696679,mongodb/docs-ecosystem,python,122,1387914883,1388672787,1388672787,12631,12631,merged_in_comments,false,false,12,1,0,0,0,1,0,0,1,1,0,0,1,0,172,0,0,0,0.0,0.0,0.0,19,crcsmnky,2,0.0,9,false,false
+2647391,mongodb/docs-ecosystem,python,120,1387203434,,1387232483,484,,unknown,false,false,11,1,0,0,0,1,0,0,1,1,0,0,1,0,172,0,0,0,0.0,0.0,0.0,19,nquinlan,0,0,26,false,false
+2635457,mongodb/docs-ecosystem,python,119,1386964075,1388672763,1388672763,28478,28478,commit_sha_in_comments,false,false,11,2,0,2,2,3,0,0,1,1,0,0,1,0,172,0,0,0,0.0,0.0,0.0,18,kiyoto,0,0,20,false,false
 2472592,mongodb/docs-ecosystem,python,117,1384794053,1385039276,1385039276,4087,4087,merged_in_comments,false,false,17,1,0,0,0,1,0,0,1,1,0,0,1,4,172,0,0,0,0.0,0.0,0.0,18,kstirman,4,0.0,0,false,false
 2428949,mongodb/docs-ecosystem,python,116,1384193193,1385039375,1385039375,14103,14103,merged_in_comments,false,false,17,2,0,0,0,1,1,0,2,3,0,0,3,8,172,0,0,0,0.0,0.0,0.0,18,bgrabar,0,0,1,false,true
 2394025,mongodb/docs-ecosystem,python,113,1383689621,1383689671,1383689671,0,0,merged_in_comments,false,false,17,1,0,1,1,1,0,0,1,1,0,0,1,8,172,0,0,0,0.0,0.0,0.0,18,drmirror,0,0,2,false,false
@@ -10,7 +13,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 2160482,mongodb/docs-ecosystem,python,102,1380202144,1380203786,1380203786,27,27,merged_in_comments,false,false,25,1,0,0,0,1,0,0,1,1,0,0,1,6,174,0,0,0,0.0,0.0,0.0,17,friedo,0,0,12,false,true
 2123755,mongodb/docs-ecosystem,python,100,1379600321,1380139540,1380139540,8986,8986,merged_in_comments,false,false,25,1,0,0,0,1,0,0,1,1,0,0,1,6,174,0,0,0,0.0,0.0,0.0,16,gianpaj,1,0.0,4,false,false
 2004061,mongodb/docs-ecosystem,python,98,1377774579,,1378731291,15945,,unknown,false,false,28,1,0,1,1,1,0,0,1,1,0,0,1,6,177,0,0,0,0.0,0.0,0.0,16,nodens,0,0,0,false,false
-1965262,mongodb/docs-ecosystem,python,96,1377102720,1377115898,1377115898,219,219,merged_in_comments,false,false,30,2,0,1,1,1,0,0,2,2,0,0,5,6,177,0,0,0,0.0,0.0,0.0,14,crcsmnky,1,0.0,9,false,false
+1965262,mongodb/docs-ecosystem,python,96,1377102720,1377115898,1377115898,219,219,merged_in_comments,false,false,30,2,0,1,1,1,0,3,2,5,0,0,5,6,177,0,0,0,0.0,0.0,0.0,14,crcsmnky,1,0.0,9,false,false
 1960284,mongodb/docs-ecosystem,python,95,1377031788,1377114275,1377114275,1374,1374,merged_in_comments,false,false,29,1,0,0,0,1,0,0,2,2,0,0,2,6,177,0,0,0,0.0,0.0,0.0,14,sridharn,4,0.0,8,false,true
 1958886,mongodb/docs-ecosystem,python,94,1377016403,1377114229,1377114229,1630,1630,merged_in_comments,false,false,29,1,0,1,1,1,0,0,1,1,0,0,1,6,177,0,0,0,0.0,0.0,0.0,14,dstorch,0,0,0,false,true
 1958181,mongodb/docs-ecosystem,python,93,1377008539,1377114298,1377114298,1762,1762,merged_in_comments,false,false,28,1,0,1,1,1,0,0,3,3,0,0,3,6,177,0,0,0,0.0,0.0,0.0,14,sridharn,3,0.0,8,false,true
@@ -29,7 +32,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1806961,mongodb/docs-ecosystem,python,78,1374495157,1374520111,1374520111,415,415,merged_in_comments,false,false,24,1,0,0,0,1,0,0,1,1,0,0,1,0,177,0,0,0,0.0,0.0,0.0,13,anorsich,1,0.0,1,false,false
 1801992,mongodb/docs-ecosystem,python,77,1374412726,1377115064,1377115064,45038,45038,merged_in_comments,false,false,23,1,0,0,0,1,0,0,1,1,0,0,1,0,177,0,0,0,0.0,0.0,0.0,13,kstirman,0,0,0,false,false
 1807146,mongodb/docs-ecosystem,python,75,1374231513,1374496356,1374496356,4414,4414,merged_in_comments,false,false,22,1,0,1,1,1,0,0,1,1,0,0,1,0,177,0,0,0,0.0,0.0,0.0,12,jasssonpet,0,0,53,false,false
-1966555,mongodb/docs-ecosystem,python,74,1374169546,1377116934,1377116934,49123,49123,merged_in_comments,false,false,22,6,0,1,1,1,1,0,4,5,0,0,8,0,177,0,0,0,0.0,0.0,0.0,12,crcsmnky,0,0,8,false,false
+1966555,mongodb/docs-ecosystem,python,74,1374169546,1377116934,1377116934,49123,49123,merged_in_comments,false,false,22,6,0,1,1,1,1,3,4,8,0,0,8,0,177,0,0,0,0.0,0.0,0.0,12,crcsmnky,0,0,8,false,false
 1774874,mongodb/docs-ecosystem,python,73,1373910052,1374174132,1374174132,4401,4401,merged_in_comments,false,false,22,1,0,2,2,2,0,0,1,1,0,0,1,0,177,0,0,0,0.0,0.0,0.0,12,anorsich,0,0,1,false,false
 1771240,mongodb/docs-ecosystem,python,72,1373847073,,1374174025,5449,,unknown,false,false,21,1,0,1,1,2,0,0,1,1,0,0,1,0,177,0,0,0,0.0,0.0,0.0,12,LeeWanhui,1,0.0,0,false,false
 1673272,mongodb/docs-ecosystem,python,71,1372646612,1372874230,1372874230,3793,3793,commit_sha_in_comments,false,false,23,1,0,3,3,2,0,0,1,1,0,0,1,3,181,0,0,0,0.0,0.0,0.0,12,LeeWanhui,0,0,0,false,false
@@ -72,7 +75,7 @@ pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_
 1282932,mongodb/docs-ecosystem,python,33,1363817463,1363971518,1363971518,2567,2567,merged_in_comments,false,false,13,1,0,0,0,1,0,0,4,4,0,0,4,26,1660,0,0,0,0.0,0.0,0.0,10,kay-kim,4,0.75,0,false,true
 1281547,mongodb/docs-ecosystem,python,32,1363797873,1363814805,1363814805,282,282,merged_in_comments,false,false,13,1,0,0,0,1,0,0,6,6,0,0,6,26,1660,0,0,0,0.0,0.0,0.0,10,craiggwilson,2,1.0,20,false,true
 1276384,mongodb/docs-ecosystem,python,31,1363705867,1363705937,1363705937,1,1,merged_in_comments,false,false,11,1,0,1,1,1,0,0,1,1,0,0,1,27,1660,0,0,0,0.0,0.0,0.0,10,stbrody,0,0,9,false,false
-1271560,mongodb/docs-ecosystem,python,29,1363616868,1363617133,1363617134,4,4,github,false,false,8,1,0,0,0,0,0,0,1,1,0,2,0,28,1660,0,0,4,0.0,0.0,0.0,10,kay-kim,3,0.6666666666666666,0,false,true
+1271560,mongodb/docs-ecosystem,python,29,1363616868,1363617133,1363617134,4,4,github,false,false,8,1,0,0,0,0,0,1,1,2,0,2,0,28,1660,0,0,4,0.0,0.0,0.0,10,kay-kim,3,0.6666666666666666,0,false,true
 1196787,mongodb/docs-ecosystem,python,28,1361889467,1361890391,1361890391,15,15,commits_in_master,false,false,6,1,0,0,0,0,0,0,1,1,1,0,0,29,1660,4,0,6,0.0,0.0,0.0,10,puentesarrin,4,0.5,8,false,false
 1184516,mongodb/docs-ecosystem,python,27,1361557745,,1361559393,27,,unknown,false,false,6,2,0,1,1,1,0,0,1,1,0,0,1,28,1660,0,0,0,0.0,0.0,0.0,10,epc,5,0.6,7,false,false
 1179441,mongodb/docs-ecosystem,python,26,1361460018,1361465938,1361465938,98,98,github,false,false,6,1,0,0,0,0,0,0,1,1,0,0,1,29,1660,0,0,1,0.0,0.0,0.0,10,puentesarrin,3,0.3333333333333333,8,false,false
