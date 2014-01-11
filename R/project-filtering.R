@@ -35,7 +35,7 @@ q <- "select distinct(project_name)
         from a a2 
         where a2.project_name = a1.project_name and a2.intra_branch is 1)"
 only.intra_branch <- sqldf(unwrap(q), drv="SQLite", row.names=F)
-a <- a[!a$project_name %in% as.vector(only.intra_branch$project_name),]
+a <- a[a$project_name %in% as.vector(only.intra_branch$project_name),]
 
 #4. Merge percentage should be > 50%
 q <- "select project_name, 
