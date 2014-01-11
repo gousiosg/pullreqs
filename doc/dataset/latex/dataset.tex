@@ -34,7 +34,8 @@ Georgios Gousios\\
 
 Pull requests form a new method for collaborating on distributed software
 development. To study the pull request distributed development model, we
-constructed a dataset of almost 800 projects, including some of the largest
+constructed a dataset of almost 900 projects and 350,000 pull requests, 
+including some of the largest
 users of pull requests on Github. In this paper, we describe how the project
 selection was done, we analyze the selected features and present a machine
 learning tool set for the R statistics environment. 
@@ -68,7 +69,7 @@ can be pulled, there is nothing that forbids their use in the shared
 repository approach (cross-branch pull requests).
 
 To understand what the underlying principles that guide pull-based development
-are, we created \pullreqs, a curated dataset of almost 800 projects along with a
+are, we created \pullreqs, a curated dataset of almost 900 projects along with a
 set of tools for its analysis. A previous version of the dataset has been used
 to quantitatively study the pull request development process~\cite{GPD14}. The
 \pullreqs dataset is based on our previous work on \ghtorrent~\cite{Gousi13}, albeit only for
@@ -92,32 +93,32 @@ criteria were then applied to exclude projects from the initial selection:
     that 80. The typical reason for some pull requests missing from the output
     is that many projects use a dedicated branch for documentation which
     includes no source code; the data generation script skips such pull
-    requests.  87 projects were filtered out
+    requests. 38 projects were filtered out.
 
   \item Projects should include tests. We could only use projects that include
     tests which we could measure reliably. For that, we exploited the
     convention-based project layout in the Ruby (Gem), Python, Java and Scala
     (both Maven) language ecosystems, so our project selection was limited to
-    those languages. After processing, we filtered out 97 projects for which
+    those languages. After processing, we filtered out 96 projects for which
     our heuristics could not identify any tests.
-    
+
   \item Projects should have at least one commit coming from developer outside
     the project's main team, to ensure that the project is open to external
     contributions and that pull requests are not just used by developers within
-    the project.
+    the project. 0 projects were excluded.
 
   \item The ratio of merged pull requests should be within reasonable limits
     from the mean merge ratio across all Github projects. In the \ghtorrent
     dataset, the mean merge ratio is 72\%. The \pullreqs dataset uses heuristics
     to identify merges done outside Github (see Section~\ref{sec:mergedec}), so
     we generally expect a higher average merge ratio. We set an arbitrary limit
-    of 50\% being merged below which projects are excluded by the dataset. 47
+    of 50\% being merged below which projects are excluded by the dataset. 43
     projects where filtered out.
 
 \end{itemize}
 
-The final dataset consisted of 976 projects (328 Python, 324 Java, 288 Ruby, 37
-Scala) and 351,286 pull requests (59,970; 55,468; 43,870 and 7,576 for Python,
+The final dataset consisted of 895 projects (302 Python, 252 Java, 304 Ruby, 37
+Scala) and 332,643 pull requests (115,703; 84,156; 115,703 and 18,691for Python,
 Ruby, Java and Scala projects respectively). Both distributions are
 representative of the contemporary popularity of each respective programming
 language on both Github and other sites.
@@ -157,7 +158,7 @@ The selected features are split into three categories:
   acceptance time. There are various metrics to determine the size of a patch
   that have been used by researchers: code churn, changed files and number of
   commits.
-  
+
   We split coarse-grained metrics in their constituents: for example,
   in the particular case of pull requests, developers reported that
   the presence of tests in a pull request increases their confidence to merge
@@ -238,10 +239,10 @@ the following heuristics, listed here in order of application:
 \end{description}
 
 If none of the above heuristics identifies a merge, the pull request is
-identified as unmerged. In the dataset, 58\% of the pull requests are 
+identified as unmerged. In the dataset, 58\% of the pull requests are
 merged using Github's facilities while 18\% are identified as unmerged.
 The remaining 24\% is identified as merged using the heuristics described
-above. The contribution of each heuristic 
+above ($H_1$: 10\%, $H_2$: 4\%, $H_3$: 3\%, $H_4$: 7\%) .
 
 \subsection{Test case detection}
 
@@ -332,7 +333,7 @@ software development in general.
 
 \section{Conclusion}
 
-We presented the \pullreqs dataset, a curated dataset of almost 800 projects,
+We presented the \pullreqs dataset, a curated dataset of almost 900 projects,
 along with a statistical analysis tool set for its analysis. New research directions whose analysis can be facilitated
 by this dataset can include code review activities, recommender systems for pull
 request handling and triaging and investigation of project process openness. The
