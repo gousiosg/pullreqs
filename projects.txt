@@ -14,7 +14,6 @@ amatsuda kaminari Ruby
 netty netty Java
 WindowsAzure azure-sdk-for-java Java
 resolve refinerycms Ruby
-Spesmilo Electrum Python
 aeolusproject imagefactory Python
 kennethreitz requests Python
 javan whenever Ruby
@@ -68,7 +67,6 @@ scieloorg SciELO-Manager Python
 twitter finagle Scala
 statsmodels statsmodels Python
 liquibase liquibase Java
-MrMasochism Pixelmon Java
 gabrielfalcao lettuce Python
 mozilla marketplace-tests Python
 spree spree-guides Ruby
@@ -97,7 +95,6 @@ mongodb mongo-python-driver Python
 thoughtbot factory_girl Ruby
 newrelic rpm Ruby
 gradle gradle Java
-SpoutDev Spout Java
 cilib cilib Java
 candlepin candlepin Java
 guardian deploy Scala
@@ -179,7 +176,6 @@ carlhuda bundler Ruby
 sstephenson sprockets Ruby
 isenseDev iSENSE-Hardware Java
 geoserver geoserver Java
-CocoaPods Specs Ruby
 Sage-Bionetworks SynapseWebClient Java
 sleuthkit autopsy Java
 puppetlabs facter Ruby
@@ -230,7 +226,6 @@ enthought enaml Python
 OpenMDAO OpenMDAO-Framework Python
 reddit reddit Python
 jaliss securesocial Scala
-AlibabaTech druid Java
 getpelican pelican Python
 nex3 sass Ruby
 stephenmcd mezzanine Python
@@ -314,7 +309,6 @@ rails strong_parameters Ruby
 rubinius rubinius Ruby
 rcbops chef-cookbooks Ruby
 svenfuchs rails-i18n Ruby
-bbatsov ruby-style-guide Ruby
 avoinministerio avoinministerio Ruby
 celery kombu Python
 plataformatec devise Ruby
@@ -654,7 +648,6 @@ openmicroscopy openmicroscopy Java
 enthought enstaller Python
 qos-ch logback Java
 webyast webyast Ruby
-belaban JGroups Java
 liferay liferay-faces Java
 l0rdn1kk0n wicket-bootstrap Java
 mozilla solitude Python
@@ -704,7 +697,6 @@ musicbrainz picard Python
 railsgirls railsgirls.github.com Ruby
 ipython nbconvert Python
 twitter algebird Scala
-Connexions oer.exports Python
 Findwise Hydra Java
 sanger-pathogens Artemis Java
 mozilla mozmill-ci Python
@@ -725,7 +717,6 @@ jboss-switchyard release Java
 collective collective.cover Python
 rosedu wouso Python
 wbsoft frescobaldi Python
-aichallenge aichallenge Python
 ronnix fabtools Python
 andreasronge neo4j Ruby
 picketlink federation Java
@@ -977,7 +968,6 @@ sugarlabs sugar Python
 ciudadanointeligente write-it Python
 floodlight loxigen Python
 vInsertOfficial vInsert Java
-blasv DineOn Java
 coldstar96 cse403 Java
 hylang hy Python
 realtalk403 realtalk Java
@@ -1041,7 +1031,6 @@ cms-analysis HiggsAnalysis-HiggsToTauTau Python
 molgenis systemsgenetics Java
 berkmancenter chillingeffects Ruby
 seomoz askari Java
-CiscoSystems openstack-installer Ruby
 rultor rultor Java
 EmilHernvall tregmine Java
 playframework playframework Scala
@@ -1069,4 +1058,3 @@ pyca cryptography Python
 pentaho pentaho-kettle Java
 UWE-Ruby RubyFall2013 Ruby
 kmazanec adopt-a-coder Ruby
-cdcueva oliwi Ruby
