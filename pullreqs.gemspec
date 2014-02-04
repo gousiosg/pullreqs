@@ -20,4 +20,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency "grit", ['>= 2.5.0']
   gem.add_dependency 'ghtorrent', ['>= 0.7.3']
   gem.add_dependency 'parallel', ['>= 0.7.1']
+  gem.add_dependency 'erubis', ['>= 2.7']
 end
