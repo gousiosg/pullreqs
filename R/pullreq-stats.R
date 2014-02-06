@@ -63,8 +63,8 @@ for(language in c("ruby", "java", "python", "scala")) {
 }
 
 # Percentage of merged pull reqs per identified cretirion
-for(cretirion in unique(a$merged_using)) {
-  printf("%f pullreqs merged with %s", (nrow(subset(a, merged_using==cretirion))/nrow(a)), cretirion)
+for(cretirion in unique(all$merged_using)) {
+  printf("%f pullreqs merged with %s", (nrow(subset(all, merged_using==cretirion))/nrow(all)), cretirion)
 }
 
 # Columns used in building models
