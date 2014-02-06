@@ -69,7 +69,7 @@ def send_spam(db, tmpl,  owner, repo)
 
     email = render_erb(tmpl, :name => m[:name], :email => m[:email], :login => m[:login],
                  :role => 'integrators', :repo => "#{owner}/#{repo}",
-                 :link => 'http://gousiosg.gr',
+                 :link => 'https://www.surveymonkey.com/s/pullreq-handlers',
                  :perflink => "http://ghtorrent.org/pullreq-perf/#{owner}-#{repo}/")
 
     Net::SMTP.start('localhost') do |smtp|
@@ -86,7 +86,7 @@ def send_spam(db, tmpl,  owner, repo)
 
     email = render_erb(tmpl, :name => m[:name], :email => m[:email], :login => m[:login],
                  :role => 'integrators', :repo => "#{owner}/#{repo}",
-                 :link => 'http://gousiosg.gr',
+                 :link => 'https://www.surveymonkey.com/s/pullreqs-contrib',
                  :perflink => "http://ghtorrent.org/pullreq-perf/#{owner}-#{repo}/")
 
     Net::SMTP.start('localhost') do |smtp|
