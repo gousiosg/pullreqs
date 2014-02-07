@@ -4,10 +4,11 @@ require 'mysql2'
 require 'net/smtp'
 require 'erb'
 require 'ostruct'
+require 'set'
 
 email_tmpl = File.open('email.erb').read
 
-mysql = Mysql2::Client.new(:host => "dutihr",
+mysql = Mysql2::Client.new(:host => "127.0.0.1",
                            :username => ARGV[1],
                            :password => ARGV[2],
                            :database => "ghtorrent")
@@ -16,6 +17,8 @@ if ARGV[0].nil?
   puts 'A list of repositories is required'
   exit(1)
 end
+
+@used_email_addresses = SortedSet.new
 
 def q_top_mergers(owner, repo)
       "select u1.login as login, u1.name as name, u1.company as company,
@@ -68,21 +71,31 @@ def send_spam(db, tmpl,  owner, repo)
     if m[:email].nil?
       next
     end
+
+    if @used_email_addresses.include? m[:email]
+      next
+    end
+
     puts "Sending email to #{m[:email]}, merger at #{owner}/#{repo}"
     email = render_erb(tmpl, :name => m[:name], :email => m[:email], :login => m[:login],
                  :role => 'integrators', :repo => "#{owner}/#{repo}",
                  :link => 'https://www.surveymonkey.com/s/pullreq-handlers',
                  :perflink => "http://ghtorrent.org/pullreq-perf/#{owner}-#{repo}/")
 
-    Net::SMTP.start('localhost', 25, 'ghtorrent.org') do |smtp|
-       #smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
-       #                 m[:email])
-    end
+    #Net::SMTP.start('localhost', 25, 'ghtorrent.org') do |smtp|
+    #   #smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
+    #   #                 m[:email])
+    #end
+    @used_email_addresses << m[:email]
   end
 
   top_submitters.to_a.reverse[0..1].each do |m|
 
     if m[:email].nil?
+      next
+    end
+
+    if @used_email_addresses.include? m[:email]
       next
     end
 
@@ -92,15 +105,28 @@ def send_spam(db, tmpl,  owner, repo)
                  :link => 'https://www.surveymonkey.com/s/pullreqs-contrib',
                  :perflink => "http://ghtorrent.org/pullreq-perf/#{owner}-#{repo}/")
 
-    Net::SMTP.start('localhost', 25, 'ghtorrent.org') do |smtp|
-      #smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
-      #                  m[:email])
-    end
+    #Net::SMTP.start('localhost', 25, 'ghtorrent.org') do |smtp|
+    #  #smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
+    #  #                  m[:email])
+    #end
+    @used_email_addresses << m[:email]
   end
 
+end
+
+if File.exists? 'used-emails.txt'
+  File.open("used-emails.txt").each do |line|
+    @used_email_addresses << line.strip
+  end
 end
 
 File.open(ARGV[0]).each do |line|
   owner, repo = line.split(/ /)
   send_spam(mysql, email_tmpl, owner.strip, repo.strip)
+end
+
+File.open("used-emails.txt", 'w+') do |f|
+  @used_email_addresses.each do |email|
+    f.write("#{email}\n")
+  end
 end
