@@ -19,6 +19,7 @@ if ARGV[0].nil?
 end
 
 @used_email_addresses = SortedSet.new
+@num_send = 0
 
 def q_top_mergers(owner, repo)
       "select u1.login as login, u1.name as name, u1.company as company,
@@ -64,51 +65,47 @@ def send_spam(db, tmpl,  owner, repo)
   top_mergers = db.query(q_top_mergers(owner, repo), :symbolize_keys => true)
   top_submitters = db.query(q_top_submitters(owner, repo), :symbolize_keys => true)
 
-  puts "#{top_mergers.size} mergers, #{top_submitters.size} submitters for #{owner}/#{repo}"
+  #puts "#{top_mergers.size} mergers, #{top_submitters.size} submitters for #{owner}/#{repo}"
   
   top_mergers.to_a.reverse[0..1].each do |m|
 
-    if m[:email].nil?
+    if m[:email].nil? or @used_email_addresses.include? m[:email]
       next
     end
 
-    if @used_email_addresses.include? m[:email]
-      next
-    end
-
-    puts "Sending email to #{m[:email]}, merger at #{owner}/#{repo}"
     email = render_erb(tmpl, :name => m[:name], :email => m[:email], :login => m[:login],
                  :role => 'integrators', :repo => "#{owner}/#{repo}",
                  :link => 'https://www.surveymonkey.com/s/pullreq-handlers',
                  :perflink => "http://ghtorrent.org/pullreq-perf/#{owner}-#{repo}/")
 
-    #Net::SMTP.start('localhost', 25, 'ghtorrent.org') do |smtp|
-    #   #smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
-    #   #                 m[:email])
-    #end
+    Net::SMTP.start('localhost', 25, 'ghtorrent.org') do |smtp|
+       #smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
+       #                 m[:email])
+      @num_send += 1
+      puts "Sent email to #{m[:email]}, merger at #{owner}/#{repo}, sent #{@num_send}"
+    end
+
     @used_email_addresses << m[:email]
   end
 
   top_submitters.to_a.reverse[0..1].each do |m|
 
-    if m[:email].nil?
+    if m[:email].nil? or @used_email_addresses.include? m[:email]
       next
     end
 
-    if @used_email_addresses.include? m[:email]
-      next
-    end
-
-    puts "Sending email to #{m[:email]}, contributor to #{owner}/#{repo}"
     email = render_erb(tmpl, :name => m[:name], :email => m[:email], :login => m[:login],
                  :role => 'integrators', :repo => "#{owner}/#{repo}",
                  :link => 'https://www.surveymonkey.com/s/pullreqs-contrib',
                  :perflink => "http://ghtorrent.org/pullreq-perf/#{owner}-#{repo}/")
 
-    #Net::SMTP.start('localhost', 25, 'ghtorrent.org') do |smtp|
-    #  #smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
-    #  #                  m[:email])
-    #end
+    Net::SMTP.start('localhost', 25, 'ghtorrent.org') do |smtp|
+      #smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
+      #                  m[:email])
+      puts "Sent email to #{m[:email]}, contributor to #{owner}/#{repo}, sent #{@num_send}"
+      @num_send += 1
+    end
+
     @used_email_addresses << m[:email]
   end
 
