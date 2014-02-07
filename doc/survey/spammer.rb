@@ -7,7 +7,7 @@ require 'ostruct'
 
 email_tmpl = File.open('email.erb').read
 
-mysql = Mysql2::Client.new(:host => "127.0.0.1",
+mysql = Mysql2::Client.new(:host => "dutihr",
                            :username => ARGV[1],
                            :password => ARGV[2],
                            :database => "ghtorrent")
@@ -27,9 +27,9 @@ def q_top_mergers(owner, repo)
         and prh.action='merged'
         and prh.actor_id = u1.id
         and pr.base_repo_id = p.id
-
-        and p.name = '#{owner}'
-        and u.login = '#{repo}'
+        and year(prh.created_at) = 2013
+        and p.name = '#{repo}'
+        and u.login = '#{owner}'
       group by u1.id
       order by count(*) desc
       limit 10"
@@ -45,9 +45,9 @@ def q_top_submitters(owner, repo)
         and prh.action='opened'
         and prh.actor_id = u1.id
         and pr.base_repo_id = p.id
-
-        and p.name = '#{owner}'
-        and u.login = '#{repo}'
+        and year(prh.created_at) = 2013
+        and p.name = '#{repo}'
+        and u.login = '#{owner}'
       group by u1.id
       order by count(*) desc
       limit 10"
@@ -61,37 +61,40 @@ def send_spam(db, tmpl,  owner, repo)
   top_mergers = db.query(q_top_mergers(owner, repo), :symbolize_keys => true)
   top_submitters = db.query(q_top_submitters(owner, repo), :symbolize_keys => true)
 
-  top_mergers.each do |m|
+  puts "#{top_mergers.size} mergers, #{top_submitters.size} submitters for #{owner}/#{repo}"
+  
+  top_mergers.to_a.reverse[0..1].each do |m|
 
     if m[:email].nil?
       next
     end
-
+    puts "Sending email to #{m[:email]}, merger at #{owner}/#{repo}"
     email = render_erb(tmpl, :name => m[:name], :email => m[:email], :login => m[:login],
                  :role => 'integrators', :repo => "#{owner}/#{repo}",
                  :link => 'https://www.surveymonkey.com/s/pullreq-handlers',
                  :perflink => "http://ghtorrent.org/pullreq-perf/#{owner}-#{repo}/")
 
-    Net::SMTP.start('localhost') do |smtp|
-      smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
-                        m[:email])
+    Net::SMTP.start('localhost', 25, 'ghtorrent.org') do |smtp|
+       #smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
+       #                 m[:email])
     end
   end
 
-  top_submitters.each do |m|
+  top_submitters.to_a.reverse[0..1].each do |m|
 
     if m[:email].nil?
       next
     end
 
+    puts "Sending email to #{m[:email]}, contributor to #{owner}/#{repo}"
     email = render_erb(tmpl, :name => m[:name], :email => m[:email], :login => m[:login],
                  :role => 'integrators', :repo => "#{owner}/#{repo}",
                  :link => 'https://www.surveymonkey.com/s/pullreqs-contrib',
                  :perflink => "http://ghtorrent.org/pullreq-perf/#{owner}-#{repo}/")
 
-    Net::SMTP.start('localhost') do |smtp|
-      smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
-                        m[:email])
+    Net::SMTP.start('localhost', 25, 'ghtorrent.org') do |smtp|
+      #smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
+      #                  m[:email])
     end
   end
 
@@ -99,5 +102,5 @@ end
 
 File.open(ARGV[0]).each do |line|
   owner, repo = line.split(/ /)
-  send_spam(mysql, email_tmpl, owner, repo)
+  send_spam(mysql, email_tmpl, owner.strip, repo.strip)
 end
