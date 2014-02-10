@@ -1,0 +1,13 @@
+pull_req_id,project_name,lang,github_id,created_at,merged_at,closed_at,lifetime_minutes,mergetime_minutes,merged_using,conflict,forward_links,team_size,num_commits,num_commit_comments,num_issue_comments,num_comments,num_participants,files_added,files_deleted,files_modified,files_changed,src_files,doc_files,other_files,perc_external_contribs,sloc,src_churn,test_churn,commits_on_files_touched,test_lines_per_kloc,test_cases_per_kloc,asserts_per_kloc,watchers,requester,prev_pullreqs,requester_succ_rate,followers,intra_branch,main_team_member
+2016675,clojure/clojure,java,42,1377784080,,1377797049,216,,unknown,false,false,1,1,0,1,1,2,0,0,1,1,1,0,0,83,35356,4,0,0,0.7919447901346306,0.0,0.0,2070,pbzdyl,0,0,4,false,false
+1983883,clojure/clojure,java,41,1377460977,,1377461691,11,,unknown,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,83,35356,2,0,0,0.7919447901346306,0.0,0.0,2070,nickgieschen,0,0,1,false,false
+880860,clojure/clojure,java,31,1349405341,,1349443990,644,,unknown,false,false,0,8,0,1,1,2,0,0,8,8,8,0,0,100,34563,18,0,0,0.8101148627144634,0.0,0.0,1963,kimmel,0,0,8,false,false
+429795,clojure/clojure,java,30,1348284239,,1348367689,1390,,unknown,false,false,0,3,0,2,2,2,0,0,2,2,2,0,0,100,34375,37,0,0,0.8145454545454545,0.0,0.0,1950,pparkkin,0,0,0,false,false
+243781,clojure/clojure,java,27,1344960448,,1344960706,4,,unknown,false,false,1,1,0,0,0,1,1,0,2,3,3,0,0,93,34304,45,0,0,0.816231343283582,0.0,0.0,1888,ieure,0,0,100,false,false
+223608,clojure/clojure,java,26,1343086888,,1343086999,1,,unknown,false,false,2,1,0,0,0,1,0,0,1,1,1,0,0,84,34304,5,0,0,0.816231343283582,0.0,0.0,1819,craigbro,0,0,3,false,false
+114793,clojure/clojure,java,24,1336358994,,1364497120,468908,,unknown,false,false,4,1,0,0,0,0,0,0,1,1,1,0,0,35,34215,9,0,0,0.8183545228700861,0.0,0.0,1586,myguidingstar,0,0,3,false,false
+112859,clojure/clojure,java,23,1336145674,,1336149375,61,,unknown,false,false,4,1,0,3,3,2,0,0,2,2,2,0,0,35,34215,12,0,0,0.8183545228700861,0.0,0.0,1579,l0st3d,0,0,2,false,false
+713122,clojure/clojure,java,18,1331425471,,1331426992,25,,unknown,false,false,5,1,0,0,0,0,0,0,1,1,1,0,0,32,34083,2,0,0,0.8215239268843705,0.0,0.0,1398,jwinter,0,0,1,false,false
+19992,clojure/clojure,java,14,1327765241,,1331693966,65478,,unknown,false,false,5,1,0,0,0,0,0,0,1,1,1,0,0,30,34126,8,0,0,0.351638047236711,0.0,0.0,1308,jeremyheiler,0,0,4,false,false
+1003875,clojure/clojure,java,9,1311753821,,1311764372,175,,unknown,false,false,1,1,0,0,0,0,0,0,1,1,1,0,0,50,33754,3,0,0,0.35551342063162883,0.0,0.0,1170,pcomans,0,0,2,false,false
+1003870,clojure/clojure,java,1,1287817600,,1288247424,7163,,unknown,false,false,1,1,0,1,1,1,0,0,1,1,1,0,0,99,27233,3,0,0,0.0,0.0,0.0,906,jszakmeister,0,0,2,false,false
