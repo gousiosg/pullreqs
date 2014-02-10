@@ -1,2 +1,0 @@
-W, [2014-02-10T17:09:37.207891 #12258]  WARN -- : APIClient: https://api.github.com/repos/owner/name: Not Found
-W, [2014-02-10T17:09:37.208015 #12258]  WARN -- : Repo owner/name does not exist
