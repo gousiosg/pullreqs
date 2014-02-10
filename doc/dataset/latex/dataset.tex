@@ -13,9 +13,9 @@
 
 \newcommand{\todo}[1]{\textbf{TODO}\footnote{\textbf{TODO:} #1}}
 
-\newcommand{\ghtorrent}{ \textsc{ght}orrent\xspace}
+\newcommand{\ghtorrent}{\textsc{ght}orrent\xspace}
 \newcommand{\api}{\textsc{api}\xspace}
-\newcommand{\pullreqs}{ \textsf{pullreqs}\xspace}
+\newcommand{\pullreqs}{\textsf{pullreqs}\xspace}
 
 \title{A dataset for pull-based development research}
 \numberofauthors{2}
@@ -24,20 +24,20 @@
 \alignauthor
 Georgios Gousios\\
        \affaddr{Delft University of Technology}\\
-       \affaddr{Delft, The Netherlands}\\
-       \email{G.Gousios@tudelft.nl}
+       \affaddr{Delft, the Netherlands}\\
+       \email{g.gousios@tudelft.nl}
 \and
 Andy Zaidman\\
        \affaddr{Delft University of Technology}\\
-       \affaddr{Delft, The Netherlands}\\
-       \email{A.Zaidman@tudelft.nl}
+       \affaddr{Delft, the Netherlands}\\
+       \email{a.e.zaidman@tudelft.nl}
 }
 
 \maketitle
 
 \begin{abstract}
 
-Pull requests form a new method for collaborating on distributed software
+Pull requests form a new method for collaborating in distributed software
 development. To study the pull request distributed development model, we
 constructed a dataset of almost 900 projects and 350,000 pull requests, 
 including some of the largest
@@ -79,7 +79,7 @@ set of tools for its analysis. A previous version of the dataset has been used
 to quantitatively study the pull request development process~\cite{GPD14}. The
 \pullreqs dataset is based on our previous work on \ghtorrent~\cite{Gousi13},
 albeit only for its construction. While \ghtorrent is a full mirror of all
-data offered by the Github {\sc api}, the \pullreqs dataset includes many features extracted by combining \ghtorrent and the project's repostiry and is offered in a format ready to be processed by statistical software.
+data offered by the Github {\sc api}, the \pullreqs dataset includes many features extracted by combining \ghtorrent and the project's repository; the dataset is offered in a format ready to be processed by statistical software.
 In this paper, we describe the construction
 process of the dataset and outline directions for further research with it.
 
@@ -98,16 +98,16 @@ The selected features are split into three categories:
   code contributions, the size of the patch is affecting both acceptance and
   acceptance time. There are various metrics to determine the size of a patch
   that have been used by researchers: code churn, changed files and number of
-  commits.
+  commits. \todo{Do you have a reference?}
 
   We split coarse-grained metrics in their constituents: for example,
   in the particular case of pull requests, developers reported that
   the presence of tests in a pull request increases their confidence to merge
   it~\cite{Pham13}. To investigate this, we split the churn feature into two
   features, namely \texttt{src\_churn} and \texttt{test\_churn}. The number of
-  participants has been shown to influence the time to process of code
+  participants \todo{the number of reviewers?} has been shown to influence the time to process \todo{process the change suggestions?} of code
   reviewing~\cite{Rigby13}. Therefore, the number of comments in pull requests
-  is split between code review and discussion.
+  is split between code review and discussion. \todo{I don't see the consequence that you are implying with ``therefore''... am I missing something?}
 
   Finally, through our own experience analyzing pull
   requests, we have found that in many cases conflicts are reported explicitly
@@ -135,9 +135,9 @@ The selected features are split into three categories:
   features that quantify the developer's track record~\cite{Dabbi12}, namely the
   number of previous pull requests and their acceptance rate; the former has
   been identified as a strong indicator of pull request quality~\cite{Pham13}.
-  Bird et al. presented evidence that social reputation has an
+  Bird et al. \todo{reference?} presented evidence that social reputation has an
   impact on whether a patch will be merged; in our dataset, the number of
-  followers on Github can be seen as a proxy for reputation.
+  followers on Github can be seen as a proxy for reputation \todo{Why can this be seen as a proxy?}.
 
 All features must be calculated at the time a pull request has been closed or
 merged, to evaluate the effect of intermediate updates to the pull request as a
@@ -195,8 +195,8 @@ repository.
 \input{feature-stats.tex}
 
 \paragraph*{Merge detection}
-To identify merged pull requests that are merged outside Github, we resorted to
-the following heuristics, listed here in order of application:
+To identify pull requests that are merged outside Github, we resorted to
+the following heuristics \todo{How frequent is this merging outside Github?}, listed here in order of application:
 
 \begin{description}
 
@@ -234,7 +234,7 @@ is excluded from the analysis due to inexistent naming conventions.  In
 \emph{Python}, project conventions do not specify specific directories for test
 files, so test file detection is based solely on whether the file name contains
 the word ``test'' as prefix or suffix. Test cases and asserts are discovered
-both in source code and also in API examples embedded in documentation comments.
+both in source code and also in API examples embedded in documentation comments. \todo{Is this a side-effect? Is this a feature or a bug? :-)}
 
 Following Maven conventions, in \emph{Java} projects, files in directories under
 a \texttt{test/} branch of the file tree are considered test files.
@@ -269,10 +269,11 @@ ensure homogeneity:
     includes no source code; the data generation script skips such pull
     requests. 38 projects were filtered out.
 
-  \item Projects should have at least one commit coming from developer outside
+  \item Projects should have at least one commit coming from a developer outside
     the project's main team, to ensure that the project is open to external
     contributions and that pull requests are not just used by developers within
-    the project. No projects were excluded due to this criterion.
+    the project. No projects were excluded due to this criterion. \todo{just 
+		curious, how can you see if someone is from outside the main team?}
 
   \item The ratio of merged pull requests should be within reasonable limits
     from the mean merge ratio across all Github projects. In the \ghtorrent
