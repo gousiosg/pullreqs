@@ -89,30 +89,24 @@ process of the dataset and outline directions for further research with it.
 \section{Feature Selection}
 \label{sec:expdata}
 
-The first step in the dataset construction process was to determine the
-features to select.
-The selection was based on prior work in the areas of patch submission
-and acceptance~\cite{Baysa12}, code reviewing~\cite{Rigby13}, bug triaging~\cite{Giger10} and also on
-semi-structured interviews of Github developers~\cite{Dabbi12, Pham13}.
-The selected features are split into three categories:
+The feature selection was based on prior work in the areas of patch submission
+and acceptance~\cite{Nagap05,Bird07a,Weiss08,Baysa12}, code
+reviewing~\cite{Rigby13}, bug triaging~\cite{Anvik06, Giger10} and also
+on semi-structured interviews of Github developers~\cite{Dabbi12, Pham13}. The
+selected features are split into three categories:
 
   \emph{Pull request characteristics.} These features attempt to quantify the
   impact of the pull request on the affected code base. When examining external
   code contributions, the size of the patch is affecting both acceptance and
-  acceptance time. There are various metrics to determine the size of a patch
-  that have been used by researchers: code churn, changed files and number of
-  commits. \todo{Do you have a reference?}
-
-  We split coarse-grained metrics in their constituents: for example,
-  in the particular case of pull requests, developers reported that
-  the presence of tests in a pull request increases their confidence to merge
+  acceptance time~\cite{Weiss08}. There are various metrics to determine the
+  size of a patch that have been used by researchers: code churn~\cite{Nagap05},
+  changed files~\cite{Nagap05} and number of commits.
+  In the particular case of pull requests, developers reported that the presence
+  of tests in a pull request increases their confidence to merge
   it~\cite{Pham13}. To investigate this, we split the churn feature into two
-  features, namely \texttt{src\_churn} and \texttt{test\_churn}. The number of
-  participants \todo{the number of reviewers?} has been shown to influence the time to process \todo{process the change suggestions?} of code
-  reviewing~\cite{Rigby13}. Therefore, the number of comments in pull requests
-  is split between code review and discussion. \todo{I don't see the consequence that you are implying with ``therefore''... am I missing something?}
-
-  Finally, through our own experience analyzing pull
+  features, namely \texttt{src\_churn} and \texttt{test\_churn}. The
+  number of participants has been shown to influence the time to process of code
+  reviewing~\cite{Rigby13}. Finally, through our own experience analyzing pull
   requests, we have found that in many cases conflicts are reported explicitly
   in pull request comments while in other cases pull requests include links to
   other related pull requests.
@@ -120,27 +114,29 @@ The selected features are split into three categories:
   \emph{Project characteristics.} These features quantify how receptive to pull
   requests the project is. If the project's process is open to external
   contributions, then we expect to see an increased ratio of external
-  contributors over core team members. The project's size may be a detrimental
-  factor to the speed of processing a pull request, as its impact may be more
-  difficult to assess. Also, incoming changes tend to cluster over time (the
-  ``yesterday's weather'' change pattern), so it is natural to
-  assume that pull requests affecting a part of the system that is under active
-  development will be more likely to merge. Testing plays a role in speed of
-  processing; according to~\cite{Pham13}, projects struggling with a constant
-  flux of contributors use testing, manual or preferably automated, as a safety
-  net to handle contributions from unknown developers.
+  contributors over team members. The project's size may be a detrimental factor
+  to the speed of processing a pull request, as its impact may be more difficult
+  to assess. Also, incoming changes tend to cluster over time (the ``yesterday's
+  weather'' change pattern), so it is natural to assume that pull
+  requests affecting a part of the system that is under active development will
+  be more likely to merge. Testing plays a role in speed of processing;
+  according to~\cite{Pham13}, projects struggling with a constant flux of
+  contributors use testing, manual or preferably automated, as a safety net to
+  handle contributions from unknown developers.
 
   \emph{Developer.}  Developer-based features quantify the influence that the
   person who created the pull request has on the decision to merge it and the
   time to process it. In particular, the developer who created the patch has
-  been shown to influence the patch acceptance decision. To
+  been shown to influence the patch acceptance decision~\cite{Jeong09}. To
   abstract the results across projects with different developers, we include
   features that quantify the developer's track record~\cite{Dabbi12}, namely the
   number of previous pull requests and their acceptance rate; the former has
   been identified as a strong indicator of pull request quality~\cite{Pham13}.
-  Bird et al. \todo{reference?} presented evidence that social reputation has an
+  Bird et al.~\cite{Bird07}, presented evidence that social reputation has an
   impact on whether a patch will be merged; in our dataset, the number of
-  followers on Github can be seen as a proxy for reputation \todo{Why can this be seen as a proxy?}.
+  followers on Github can be seen as a proxy for reputation.
+
+
 
 All features must be calculated at the time a pull request has been closed or
 merged, to evaluate the effect of intermediate updates to the pull request as a
@@ -158,14 +154,15 @@ projects had received a pull request while only 8,600 had received more than
 project development cycle, rather than just occasional external contributions,
 we only selected the top 1\% of projects by total number of pull requests
 created. The initial selection led to 2,551 projects.
-Moreover, to evaluate testing related features as described above,
-we needed a way to determine whether a file represented test code.
+In addition, to evaluate testing related features as described above,
+we needed a way to determine whether a source code file in a project
+repository represented test code.
 For that, we exploited the
 convention-based project layout in the Ruby (Gem), Python, Java and Scala (both
 Maven) language ecosystems, so our project selection was limited to those
 languages. 1,517 projects where thus filtered out.
 
-For the remaining 1034 repositories, the full history (including pull requests,
+For the remaining 1,034 repositories, the full history (including pull requests,
 issues and commits) of the included projects was downloaded and features were
 extracted by querying the \ghtorrent databases and analyzing each project's Git
 repository.
@@ -174,8 +171,7 @@ repository.
   \begin{center}
     \includegraphics[scale=0.6]{cross-cor.pdf}
   \end{center}
-  \caption{Cross-correlation (Spearman) among all dataset features. Blue color indicates positive correlation, red color is negative correlation. The darker
-  the color (and the more acute the ellipsis slant), the stronger the correlation.}
+  \caption{Cross-correlation (Spearman) among all dataset features. Blue color (or right slant) indicates positive correlation, red color (or left slant) is negative correlation. The darker the color, the stronger the correlation.}
   \label{fig:features}
 \end{figure}
 
@@ -183,7 +179,7 @@ repository.
 
 \paragraph*{Merge detection}
 To identify pull requests that are merged outside Github, we resorted to
-the following heuristics \todo{How frequent is this merging outside Github?}, listed here in order of application:
+the following heuristics, listed here in order of application:
 
 \begin{compactdesc}
 
@@ -221,7 +217,7 @@ is excluded from the analysis due to inexistent naming conventions.  In
 \emph{Python}, project conventions do not specify specific directories for test
 files, so test file detection is based solely on whether the file name contains
 the word ``test'' as prefix or suffix. Test cases and asserts are discovered
-both in source code and also in API examples embedded in documentation comments. \todo{Is this a side-effect? Is this a feature or a bug? :-)}
+both in source code and also in API examples embedded in documentation comments. 
 
 Following Maven conventions, in \emph{Java} projects, files in directories under
 a \texttt{test/} branch of the file tree are considered test files.
@@ -262,8 +258,7 @@ ensure homogeneity:
   \item Projects should have at least one commit coming from a developer outside
     the project's main team, to ensure that the project is open to external
     contributions and that pull requests are not just used by developers within
-    the project. No projects were excluded due to this criterion. \todo{just 
-		curious, how can you see if someone is from outside the main team?}
+    the project. No projects were excluded due to this criterion. 
 
   \item The ratio of merged pull requests should be within reasonable limits
     from the mean merge ratio across all Github projects. In the \ghtorrent
