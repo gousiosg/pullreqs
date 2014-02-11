@@ -7,6 +7,9 @@
 \usepackage{times}
 \usepackage{balance}
 \usepackage{xspace}
+\usepackage{paralist}
+\usepackage{relsize}
+
 %\usepackage{xfrac}
 
 \begin{document}
@@ -198,7 +201,7 @@ repository.
 To identify pull requests that are merged outside Github, we resorted to
 the following heuristics \todo{How frequent is this merging outside Github?}, listed here in order of application:
 
-\begin{description}
+\begin{compactdesc}
 
   \item[$H_1$] At least one of the commits associated with the pull request appears in the target project's master branch.
 
@@ -219,7 +222,7 @@ the following heuristics \todo{How frequent is this merging outside Github?}, li
   \item[$H_4$] The latest comment prior to closing the pull request matches the
     regular expression above.
 
-\end{description}
+\end{compactdesc}
 
 If none of the above heuristics identifies a merge, the pull request is
 identified as unmerged.
@@ -261,7 +264,7 @@ called Linguist (the same that Github uses), which supports more than 250 file t
 After the dataset was constructed, the following criteria were applied to 
 ensure homogeneity:
 
-\begin{itemize}
+\begin{compactitem}
 
   \item After processing, the number of remaining pull requests should be more
     that 80. The typical reason for some pull requests missing from the output
@@ -281,7 +284,7 @@ ensure homogeneity:
     to identify merges done outside Github, so we generally expect a mean merge
     ratio close to or higher of the one across Github.
 
-\end{itemize}
+\end{compactitem}
 
 \paragraph*{Results} The final dataset consists of 895 projects (302 Python, 252 Java, 304 Ruby, 37
 Scala) and 332,643 pull requests (115,703; 84,156; 115,703 and 18,691for Python,
@@ -291,7 +294,7 @@ The remaining 24\% is identified as merged using the heuristics described
 above ($H_1$: 10\%, $H_2$: 4\%, $H_3$: 3\%, $H_4$: 7\%).
 Moreover, as Figure~\ref{fig:features} shows,
 the selected features are fairly orthogonal, with very few strong correlations
-between them. This is an indication that they capture a wide range of pull
+between them. This indicates that they capture a wide range of pull
 request activities with minimal overlap.
 
 \section{Tools}
