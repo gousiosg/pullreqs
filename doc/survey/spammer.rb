@@ -31,14 +31,9 @@ def q_top_mergers(owner, repo)
         and prh.action='merged'
         and prh.actor_id = u1.id
         and pr.base_repo_id = p.id
-<<<<<<< Updated upstream
         and year(prh.created_at) = 2013
         and p.name = '#{repo}'
         and u.login = '#{owner}'
-=======
-        and p.name = '#{owner}'
-        and u.login = '#{repo}'
->>>>>>> Stashed changes
       group by u1.id
       order by count(*) desc
       limit 10"
