@@ -20,7 +20,7 @@
 \newcommand{\api}{\textsc{api}\xspace}
 \newcommand{\pullreqs}{\textsf{pullreqs}\xspace}
 
-\title{A dataset for pull-based development research}
+\title{A Dataset for Pull Request Research}
 \numberofauthors{2}
 
 \author{
@@ -169,22 +169,6 @@ For the remaining 1034 repositories, the full history (including pull requests,
 issues and commits) of the included projects was downloaded and features were
 extracted by querying the \ghtorrent databases and analyzing each project's Git
 repository.
-%Both distributions are
-%representative of the contemporary popularity of each respective programming
-%language on both Github and other sites.
-
-%Figure~\ref{fig:wordcloud} presents the project names in relative size to the
-%pull requests included per project in the dataset. In the following sections, we descibe important aspects of the dataset generation process.
-%
-%\begin{figure}
-%  \begin{center}
-%    \includegraphics[scale=0.5]{wordcloud.pdf}
-%  \end{center}
-%  \caption{Projects in the \pullreq dataset. Text size is relative to the number of
-%  included pull requests.}
-%  \label{fig:wordcloud}
-%\end{figure}
-%
 
 \begin{figure}
   \begin{center}
@@ -267,10 +251,13 @@ ensure homogeneity:
 \begin{compactitem}
 
   \item After processing, the number of remaining pull requests should be more
-    that 80. The typical reason for some pull requests missing from the output
+    that 90\% of the initially calculated number of pull requests.
+    The typical reason for some pull requests missing from the output
     is that many projects use a dedicated branch for documentation which
     includes no source code; the data generation script skips such pull
-    requests. 38 projects were filtered out.
+    requests. Other reasons might include the project has beed deleted from
+    Github or no source code files could be identified in a specific version. 
+    38 projects were filtered out.
 
   \item Projects should have at least one commit coming from a developer outside
     the project's main team, to ensure that the project is open to external
@@ -326,6 +313,9 @@ dataset covering pull-based development and certain aspects of distributed
 software development in general.
 
 \section{Research Opportunities and Conclusion}
+
+The \pullreqs dataset can be used for a multitude of studies, apart from
+basic exploration of the pull-based distributed development model.
 
 We presented the \pullreqs dataset, a curated dataset of almost 900 projects,
 along with a statistical analysis tool set for its analysis. New research directions whose analysis can be facilitated
