@@ -84,15 +84,43 @@ descr.stats <- data.frame(
 
 all <- load.data(project.list)
 
+quant5 <- function(x){quantile(x, 0.05)}
+quant95 <- function(x){quantile(x, 0.95)}
+
 descr.stats$Feature <- as.character(descr.stats$Feature)
 descr.stats$quant_5 <- lapply(descr.stats$Feature, function(x){quantile(all[,x], 0.05,na.rm = T)})
 descr.stats$mean <- lapply(descr.stats$Feature, function(x){mean(all[,x], na.rm = T)})
 descr.stats$median <- lapply(descr.stats$Feature, function(x){median(all[,x], na.rm = T)})
 descr.stats$quant_95 <- lapply(descr.stats$Feature, function(x){quantile(all[,x], 0.95, na.rm = T)})
 descr.stats$histogram <- lapply(descr.stats$Feature, function(x) {
+  
+  print(sprintf("boxplot for %s", x))
+  unq <- digest(sprintf("descr.stats.boxplot.%s",as.character(x)))
+  fname <- paste(plot.location, sprintf("box-%s.pdf",unq), sep="/")
+#   p <- ggplot(all) + 
+#     aes(factor(0),lifetime_minutes) + 
+#     geom_boxplot() + 
+#     scale_y_log10() +
+#     coord_flip() + 
+#     stat_summary(fun.y=median, geom="text", label=median(all$lifetime_minutes)) + 
+#     stat_summary(fun.y=quant5, geom="text", label=quant5(all$lifetime_minutes)) + 
+#     stat_summary(fun.y=quant95, geom="text", label=quant95(all$lifetime_minutes)) + 
+#     theme_bw() + 
+#     theme(panel.grid.major = element_blank(), 
+#           panel.grid.minor = element_blank(), 
+#           panel.border = element_blank(), 
+#           panel.background = element_blank(), 
+#           axis.title.y = element_blank(), 
+#           axis.title.x = element_blank(), 
+#           axis.text.y = element_blank(), 
+#           axis.text.x = element_blank(), 
+#           axis.ticks.x = element_blank(), 
+#           axis.ticks.y = element_blank())
+#   ggsave(fname, p, width=10, height = 2, units="cm")
+
   print(sprintf("Histogram for %s", x))
   data <- all[, x]
-  unq <- digest(sprintf("descr.stats.%s",as.character(x)))
+  unq <- digest(sprintf("descr.stats.hist.%s",as.character(x)))
   fname <- paste(plot.location, sprintf("hist-%s.pdf",unq), sep="/")
 
   par(mar=c(0,0,0,0))
