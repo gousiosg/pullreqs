@@ -8,7 +8,7 @@ require 'set'
 
 email_tmpl = File.open('email.erb').read
 
-mysql = Mysql2::Client.new(:host => "127.0.0.1",
+mysql = Mysql2::Client.new(:host => "dutihr",
                            :username => ARGV[1],
                            :password => ARGV[2],
                            :database => "ghtorrent")
@@ -69,8 +69,6 @@ end
 def send_spam(db, tmpl,  owner, repo)
   top_mergers = db.query(q_top_mergers(owner, repo), :symbolize_keys => true)
   top_submitters = db.query(q_top_submitters(owner, repo), :symbolize_keys => true)
-
-  #puts "#{top_mergers.size} mergers, #{top_submitters.size} submitters for #{owner}/#{repo}"
   
   top_mergers.to_a.reverse[0..1].each do |m|
 
@@ -84,10 +82,14 @@ def send_spam(db, tmpl,  owner, repo)
                  :perflink => "http://ghtorrent.org/pullreq-perf/#{owner}-#{repo}/")
 
     Net::SMTP.start('localhost', 25, 'ghtorrent.org') do |smtp|
-       #smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
-       #                 m[:email])
+      begin
+        smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
+                        m[:email])
+        puts "Sent email to #{m[:email]}, merger at #{owner}/#{repo}, sent #{@num_send}"
+      rescue
+        puts "Cannot send email to #{m[:email]}"
+      end
       @num_send += 1
-      puts "Sent email to #{m[:email]}, merger at #{owner}/#{repo}, sent #{@num_send}"
     end
 
     @used_email_addresses << m[:email]
@@ -105,9 +107,13 @@ def send_spam(db, tmpl,  owner, repo)
                  :perflink => "http://ghtorrent.org/pullreq-perf/#{owner}-#{repo}/")
 
     Net::SMTP.start('localhost', 25, 'ghtorrent.org') do |smtp|
-      #smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
-      #                  m[:email])
-      puts "Sent email to #{m[:email]}, contributor to #{owner}/#{repo}, sent #{@num_send}"
+      begin
+        smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
+                        m[:email])
+        puts "Sent email to #{m[:email]}, merger at #{owner}/#{repo}, sent #{@num_send}"
+      rescue
+        puts "Cannot send email to #{m[:email]}"
+      end
       @num_send += 1
     end
 
@@ -124,6 +130,11 @@ end
 
 File.open(ARGV[0]).each do |line|
   owner, repo = line.split(/ /)
+  
+  if @num_send > 100
+    break
+  end
+  
   send_spam(mysql, email_tmpl, owner.strip, repo.strip)
 end
 
