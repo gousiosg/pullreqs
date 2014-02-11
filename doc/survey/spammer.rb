@@ -97,7 +97,7 @@ def send_spam(db, tmpl,  owner, repo)
     end
 
     email = render_erb(tmpl, :name => m[:name], :email => m[:email], :login => m[:login],
-                 :role => 'integrators', :repo => "#{owner}/#{repo}",
+                 :role => 'contributors', :repo => "#{owner}/#{repo}",
                  :link => 'https://www.surveymonkey.com/s/pullreqs-contrib',
                  :perflink => "http://ghtorrent.org/pullreq-perf/#{owner}-#{repo}/")
 
@@ -105,7 +105,7 @@ def send_spam(db, tmpl,  owner, repo)
       begin
         smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
                         m[:email])
-        puts "Sent email to #{m[:email]}, merger at #{owner}/#{repo}, sent #{@num_send}"
+        puts "Sent email to #{m[:email]}, submitter at #{owner}/#{repo}, sent #{@num_send}"
       rescue
         puts "Cannot send email to #{m[:email]}"
       end
@@ -126,7 +126,7 @@ end
 File.open(ARGV[0]).each do |line|
   owner, repo = line.split(/ /)
   
-  if @num_send > 100
+  if @num_send > 200
     break
   end
   
