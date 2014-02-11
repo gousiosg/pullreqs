@@ -40,7 +40,7 @@ option_list <- list(
               help = "MySQL database [\"%default\"]"),
   make_option(c("-u", "--mysql-user"), default=mysql.user, dest = 'mysql.user',
               help = "MySQL user [\"%default\"]"),
-  make_option(c("-p", "--mysql-passwd"), default=mysql.passwd, dest = 'mysql.host',
+  make_option(c("-p", "--mysql-passwd"), default=mysql.passwd, dest = 'mysql.passwd',
               help = "MySQL password [\"%default\"]"),
 
   make_option(c("-n", "--num-processes"), default = num.processes, 
