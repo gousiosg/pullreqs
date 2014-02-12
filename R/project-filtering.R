@@ -61,74 +61,98 @@ write.csv(repos, "doc/dataset/dataset-repos.csv")
 
 ####2. After datafiles have been created
 library(sqldf)
+require(plyr)
 
+repos$project_name <- sprintf("%s/%s",repos$owner, repos$name)
 # Load the top-level project list
-a <- load.data("projects.txt")
+all <- load.data("projects.txt")
 
 # Apply exclusion criteria
-#1. Should have more that 80 pullreqs
+#1. 70% of pull requests must have been extracted
 q <- "select project_name, count(*) cnt from a group by project_name"
 pullreq.counts <- sqldf(q, drv="SQLite", row.names=F)
 
-repos$extracted_pullreqs <- 
-  apply(repos, 1, function(x) {
-    
-  })
-
-repos$completeness_criterion <- 
+repos$pr_extracted <- 
   apply(repos, 1, function(x){
     name = sprintf("%s/%s", x[1], x[2])
     num.pullreqs <- subset(pullreq.counts, project_name == name)
     num.pullreqs <- if (nrow(num.pullreqs) == 0){0}else{num.pullreqs$cnt}
     printf("name: %s pullreqs in database: %d, extracted: %s",name, num.pullreqs, x[5])
-    if (x[5] > num.pullreqs * 0.8 ) {
-      FALSE
-    } else {
-      TRUE
+    num.pullreqs
+  })
+
+repos$completeness_criterion <- repos$pr_extracted > (repos$cnt * 0.7)
+
+#2. Should have non intra-branch pull requests
+repos.with.intrabranch <- aggregate(pull_req_id~project_name, subset(a, intra_branch == T), length)
+repos.with.intrabranch <- rename(repos.with.intrabranch, c("pull_req_id"="intra_branch_pullreqs"))
+
+repos <- merge(repos, repos.with.intrabranch, by="project_name", all.x = T)
+
+# The above merge is a left outer join, so NA values might appear
+repos$intra_branch_pullreqs <-
+  apply(repos, 1, function(x){
+    if(is.na(x[9])){
+      0
+    } else{
+      as.integer(x[9])
     }
   })
 
-#a <- a[!a$project_name %in% as.vector(less.than.80$project_name),]
+repos$intrabranch_criterion <- repos$pr_extracted > (repos$intra_branch_pullreqs)
 
-#3. Should have non intra-branch pull requests
-q <- "select distinct(project_name) 
-      from a a1 where not exists (
-        select * 
-        from a a2 
-        where a2.project_name = a1.project_name and a2.intra_branch is 1)"
-only.intra_branch <- sqldf(unwrap(q), drv="SQLite", row.names=F)
-a <- a[a$project_name %in% as.vector(only.intra_branch$project_name),]
+#3. Remove lowest 5% projects by merge ratio
+merged <- aggregate(pull_req_id~project_name, subset(a, !is.na(merged_at)), length)
+merged <- rename(merged, c("pull_req_id" = "merged"))
+repos <- merge(repos, merged, by="project_name", all.x = T)
 
-#4. Merge percentage should mean + 1 stdev
-q <- "select project_name, 
-        (select count(*) 
-        from a a1 
-        where a1.project_name = a.project_name and merged = 'TRUE') * 1.0 / 
-        (select count(*) 
-        from a a1 
-        where a1.project_name = a.project_name) as ratio_merged 
-      from a 
-      group by project_name 
-      order by ratio_merged"
+repos$merged <-
+  apply(repos, 1, function(x){
+    if(is.na(x['merged'])){
+      0
+    } else{
+      as.numeric(x['merged'])
+    }
+  })
 
-repos.mergeratio <- sqldf(unwrap(q), drv="SQLite", row.names=F)
-a <- a[!a$project_name %in% as.vector(less.than.50.mergeratio$project_name),]
+repos$merge_ratio <-
+  apply(repos, 1, function(x) {
+    if(as.numeric(x['pr_extracted']) == 0){
+      0
+    } else {
+      as.numeric(x['merged']) / as.numeric(x['pr_extracted'])
+    }
+  })
 
-out <- "Filtered out %d projects
-          %d had < 80 pullreqs, 
-          %d did not have tests, 
-          %d did only had intra-branch pullreqs, 
-          %d had merge ratio < 0.5"
-printf(out, nrow(rbind(less.than.80, no.tests, only.intra_branch, less.than.50.mergeratio)),
-       nrow(less.than.80), nrow(no.tests), 
-       nrow(only.intra_branch), nrow(less.than.50.mergeratio))
+five.perc <- quantile(repos$merge_ratio, 0.05, na.rm = T)
+repos$merge_criterion <- as.logical(repos$merge_ratio > five.perc)
 
+# Finally the results
+include <- unique(subset(repos, completeness_criterion == T & merge_criterion == T)$project_name)
+all <- all[all$project_name %in% as.vector(include),]
 
+printf("Total projects: %d, total pullreqs: %d", length(include), nrow(all))
 
-# merged.perc$order = as.numeric(rownames(merged.perc))
-# p <- ggplot(merged.perc, aes(x = order, y = ratio_merged)) +
-#   geom_bar(stat="identity", color = "#ff3333") +
-#   theme(axis.text.x=element_blank()) +
-#   ylab("Percentage") +
-#   xlab("Project")
-# store.pdf(p, plot.location, 'perc-merged.pdf')
+out <- "Filtered out %d projects,
+          %d failed to build properly,
+          %d had too low merge ratio,
+          %d had both of the above"
+printf(unwrap(out), 
+       length(unique(subset(repos, completeness_criterion == F | merge_criterion == F)$project_name)),
+       length(unique(subset(repos, completeness_criterion == F)$project_name)),
+       length(unique(subset(repos, merge_criterion == F)$project_name)),
+       length(unique(subset(repos, merge_criterion == F & merge_criterion == F)$project_name)))
+
+for(language in c("ruby", "java", "python", "scala")) {
+  printf("%d projects in %s", length(unique(subset(all, lang == language)$project_name)), language)
+}
+
+# Number of pullrequests per language
+for(language in c("ruby", "java", "python", "scala")) {
+  printf("%d pullreqs %s", nrow(subset(all, lang == language)), language)
+}
+
+# Percentage of merged pull reqs per identified cretirion
+for(cretirion in unique(all$merged_using)) {
+  printf("%f pullreqs merged with %s", (nrow(subset(all, merged_using==cretirion))/nrow(all)), cretirion)
+}

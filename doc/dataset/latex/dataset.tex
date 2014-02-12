@@ -136,8 +136,6 @@ selected features are split into three categories:
   impact on whether a patch will be merged; in our dataset, the number of
   followers on Github can be seen as a proxy for reputation.
 
-
-
 All features must be calculated at the time a pull request has been closed or
 merged, to evaluate the effect of intermediate updates to the pull request as a
 result of the ensuing discussion. Features that contain a temporal dimension in
@@ -205,7 +203,7 @@ the following heuristics, listed here in order of application:
 \end{compactdesc}
 
 If none of the above heuristics identifies a merge, the pull request is
-identified as unmerged.
+identified as unmerged. The heuristics proposed above are not complete, i.e. they may not identify all merged pull requests, nor sound, i.e. they might lead to false positives (especially $H_4$).
 
 \paragraph*{Test case detection}
 In \emph{Ruby} projects, files under the \texttt{/test/} and \texttt{/spec/}
@@ -246,34 +244,30 @@ ensure homogeneity:
 
 \begin{compactitem}
 
-  \item After processing, the number of remaining pull requests should be more
-    that 90\% of the initially calculated number of pull requests.
+  \item The number of pull requests in the data files should be more
+    that 70\% of the pull requests in the database.
     The typical reason for some pull requests missing from the output
     is that many projects use a dedicated branch for documentation which
     includes no source code; the data generation script skips such pull
-    requests. Other reasons might include the project has beed deleted from
+    requests. Other reasons might include the project has been deleted from
     Github or no source code files could be identified in a specific version. 
-    38 projects were filtered out.
-
-  \item Projects should have at least one commit coming from a developer outside
-    the project's main team, to ensure that the project is open to external
-    contributions and that pull requests are not just used by developers within
-    the project. No projects were excluded due to this criterion. 
+    119 projects were filtered out.
 
   \item The ratio of merged pull requests should be within reasonable limits
     from the mean merge ratio across all Github projects. In the \ghtorrent
     dataset, the mean merge ratio is 72\%. The \pullreqs dataset uses heuristics
     to identify merges done outside Github, so we generally expect a mean merge
-    ratio close to or higher of the one across Github.
+    ratio close to or higher of the one across Github. For this reason, 
+    we filtered out the lowest 5\% of the projects. The remaining projects
+    exhibit a merge ratio more than 50.8\%. 43 projects were filtered out.
 
 \end{compactitem}
 
-\paragraph*{Results} The final dataset consists of 895 projects (302 Python, 252 Java, 304 Ruby, 37
-Scala) and 332,643 pull requests (115,703; 84,156; 115,703 and 18,691for Python,
-Ruby, Java and Scala projects respectively). 58\% of the pull requests are
-merged using Github's facilities while 18\% are identified as unmerged.
+\paragraph*{Results} The final dataset consists of 865 projects (303 Python, 253 Java, 274 Ruby, 35 Scala) and 336,502 pull requests (120,475; 83,960; 113,665 and 18,402 for Python,
+Ruby, Java and Scala projects respectively). 60\% of the pull requests are
+merged using Github's facilities while 16\% are identified as unmerged.
 The remaining 24\% is identified as merged using the heuristics described
-above ($H_1$: 10\%, $H_2$: 4\%, $H_3$: 3\%, $H_4$: 7\%).
+above ($H_1$: 11\%, $H_2$: 3\%, $H_3$: 4\%, $H_4$: 6\%).
 Moreover, as Figure~\ref{fig:features} shows,
 the selected features are fairly orthogonal, with very few strong correlations
 between them. This indicates that they capture a wide range of pull
@@ -309,20 +303,30 @@ software development in general.
 
 \section{Research Opportunities and Conclusion}
 
-The \pullreqs dataset can be used for a multitude of studies, apart from
-basic exploration of the pull-based distributed development model.
+The \pullreqs dataset can be used for a multitude of studies, apart from basic
+exploration of the pull-based distributed development model. Making the pull
+request process more efficient requires research in topics such as \emph{pull
+request triaging} and \emph{patch quality evaluation}.  Tools that recommend
+appropriate developers for doing code reviews or label pull requests according
+to their characteristics might be possible. The dataset can then be used as a
+benchmark for comparing recommender systems. \emph{Code reviews} are a core
+ingredient of the pull request model. Using this dataset, a researcher can
+readily get quantitative data for thousands of code reviews, which can then be
+combined with qualitative data for specific projects.  Finally, Github has been
+praised for lowering the entry barrier for casual contributions to projects, but
+do projects actually take advantage of this? \emph{Community openess} is an
+important property for projects hosted on Github; the \pullreqs dataset can be
+used to evaluate aspects of it.
 
 We presented the \pullreqs dataset, a curated dataset of almost 900 projects,
-along with a statistical analysis tool set for its analysis. New research directions whose analysis can be facilitated
-by this dataset can include code review activities, recommender systems for pull
-request handling and triaging and investigation of project process openness. The
+along with a statistical analysis tool set for its analysis. The
 dataset itself can be extended to support more programming languages and more
-projects. Pull requests are especially welcome!
-
-All source code and data is available on the Github repository
+projects. All source code and data is available on the Github repository
 \href{https://github.com/gousiosg/pullreqs}{gousiosg/pullreqs}. Data on the
 \href{http://ghtorrent.org}{ghtorrent.org} web site permit full replication
 of the construction process or the expansion of this dataset.
+Pull requests are especially welcome!
+
 
 \bibliographystyle{abbrv}
 \balance
