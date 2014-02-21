@@ -100,19 +100,19 @@ selected features are split into three categories:
   code contributions, the size of the patch is affecting both acceptance and
   acceptance time~\cite{Weiss08}. There are various metrics to determine the
   size of a patch that have been used by researchers: code churn~\cite{Nagap05},
-  changed files~\cite{Nagap05} and number of commits.
-  In the particular case of pull requests, developers reported that the presence
-  of tests in a pull request increases their confidence to merge
-  it~\cite{Pham13}. To investigate this, we split the churn feature into two
-  features, namely \texttt{src\_churn} and \texttt{test\_churn}. The
-  number of participants has been shown to influence the time to process of code
-  reviewing~\cite{Rigby13}. Finally, through our own experience analyzing pull
-  requests, we have found that in many cases conflicts are reported explicitly
-  in pull request comments while in other cases pull requests include links to
-  other related pull requests.
+  changed files~\cite{Nagap05} and number of commits.  In the particular case of
+  pull requests, developers reported that the presence of tests in a pull
+  request increases their confidence to merge it~\cite{Pham13}. To investigate
+  this, we split the churn feature into two features, namely \texttt{src\_churn}
+  and \texttt{test\_churn}. The number of participants has been shown to
+  influence the time required to do a code review~\cite{Rigby13}. Finally,
+  through our own experience analyzing pull requests, we have found that in many
+  cases conflicts are reported explicitly in pull request comments while in
+  other cases pull requests include links to other related pull requests. We
+  therefore included corresponding binary features in the dataset.
 
   \emph{Project characteristics.} These features quantify how receptive to pull
-  requests the project is. If the project's process is open to external
+  requests a project is. If the project's process is open to external
   contributions, then we expect to see an increased ratio of external
   contributors over team members. The project's size may be a detrimental factor
   to the speed of processing a pull request, as its impact may be more difficult
@@ -142,6 +142,9 @@ result of the ensuing discussion. Features that contain a temporal dimension in
 their calculation (e.g., \texttt{team\_size} or
 \texttt{commits\_on\_files\_touched}) are calculated over the three-month time
 period before the pull request was opened.
+
+The full list of features can be seen in Table~\ref{tab:features}.
+
 
 \section{Dataset Construction}
 
@@ -215,7 +218,8 @@ is excluded from the analysis due to inexistent naming conventions.  In
 \emph{Python}, project conventions do not specify specific directories for test
 files, so test file detection is based solely on whether the file name contains
 the word ``test'' as prefix or suffix. Test cases and asserts are discovered
-both in source code and also in API examples embedded in documentation comments. 
+both in source code and also in API examples embedded in documentation comments
+(also known as \emph{doctests}).
 
 Following Maven conventions, in \emph{Java} projects, files in directories under
 a \texttt{test/} branch of the file tree are considered test files.
@@ -319,7 +323,7 @@ important property for projects hosted on Github; the \pullreqs dataset can be
 used to evaluate aspects of it.
 
 We presented the \pullreqs dataset, a curated dataset of almost 900 projects,
-along with a statistical analysis tool set for its analysis. The
+along with a statistical tool set for its analysis. The
 dataset itself can be extended to support more programming languages and more
 projects. All source code and data is available on the Github repository
 \href{https://github.com/gousiosg/pullreqs}{gousiosg/pullreqs}. Data on the
