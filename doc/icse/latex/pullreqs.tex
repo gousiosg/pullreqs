@@ -7,6 +7,7 @@
 \usepackage{times}
 \usepackage{balance}
 \usepackage{xspace}
+\usepackage{paralist}
 %\usepackage{xfrac}
 
 \begin{document}
@@ -87,15 +88,15 @@ empirical software engineering}
 %
 
 Pull-based development is an emerging paradigm for distributed software
-development. As more developers appreciate isolated
-development and branching~\cite{Bird12}, more projects, both closed source and,
-especially, open source, are being migrated to code hosting sites such as Github
-and Bitbucket with support for pull-based development~\cite{Barr12}. A unique
+development. As more developers appreciate isolated development and
+branching~\cite{Bird12}, more projects, both closed source and, especially, open
+source, are being migrated to code hosting sites such as Github and Bitbucket,
+which provide support for pull-based development~\cite{Barr12}. A unique
 characteristic of such sites is that they allow any user to clone any public
 repository. The clone creates a public project that belongs to the user that
 cloned it, so the user can modify the repository without being part of the
-development team. Furthermore, such sites automate the selective
-contribution of commits from the clone to the source through pull requests. 
+development team. Furthermore, such sites automate the selective contribution of
+commits from the clone to the source through pull requests. 
 
 Pull requests as a distributed development model in general, and as implemented
 by Github in particular, form a new method for collaborating on distributed
@@ -162,8 +163,7 @@ and rejection.
 
 \section{Background} \label{sec:bg}
 
-Since their appearance in 2001, distributed version control systems ({\sc
-dvcs}), notably Git~\cite{Chaco09}, have revolutionized the way distributed
+Since the appearance of the first open source implementations in 2001, distributed version control systems ({\sc dvcs}), notably Git~\cite{Chaco09}, have revolutionized the way distributed
 software development is carried out. Driven by pragmatic needs, most {\sc dvcs}s
 were designed from scratch to work as advanced patch management systems, rather
 than versioned file systems, the then dominant version control paradigm. In most
@@ -449,7 +449,9 @@ examine toy projects, we use a dataset consisting of all projects for which
 following criteria were then applied to exclude projects from the initial
 selection:
 
-\begin{itemize}
+%\begin{itemize}
+\begin{compactitem}
+
 
   \item Projects should include tests. To measure the effect of testing on pull
     request acceptance, we could only use projects that include tests which we
@@ -469,7 +471,8 @@ selection:
     core library was overshadowing the metrics of the actual implementation.
     This is especially true for the 5 Ruby implementations hosted on Github.
 
-\end{itemize}
+%\end{itemize}
+\end{compactitem}
 
 After selection, the full history (including pull requests, issues and commits)
 of the included projects was downloaded and features were extracted by querying
@@ -479,7 +482,7 @@ Furthermore, for these selected projects we collected all merges and the values 
 \textbf{Merge detection.} To
 identify merged pull requests that are merged outside Github, we resorted to the following heuristics, listed here in order of application:
 
-\begin{enumerate}
+\begin{compactenum}
 
   \item At least one of the commits associated with the pull request appears in
     the target project's master branch. 
@@ -500,7 +503,7 @@ identify merged pull requests that are merged outside Github, we resorted to the
   \item The latest comment prior to closing the pull request matches the 
     regular expression above.
 
-\end{enumerate}
+\end{compactenum}
 
 If none of the above heuristics identifies a merge, we mark the pull request
 as unmerged. 
@@ -508,8 +511,7 @@ as unmerged.
 After creating the data files, we investigated projects where the pull request
 merge ratio was significantly less than the one we calculated across Github
 (73\%), and in any case less than 40\%, as this means that our heuristics are not
-good enough for this project. This way, we filtered out 2 projects, which we did not
-replace.
+good enough for this project. This way, we filtered out 2 projects, which we did not replace.
 
 The final dataset consisted of 291 projects (99 Python, 91 Java, 87 Ruby, 14
 Scala) and 166,884 pull requests (59,970; 55,468; 43,870 and 7,576 for Python,
@@ -586,7 +588,7 @@ period before the pull request was opened.
 The initial selection contained 25 features. To check whe\-ther the selected
 features are sufficiently independent, we
 conducted a pair-wise correlation analysis using the Spearman rank correlation
-($\rho$) metric across all features. We set a threshold of $\rho = 0.7$, above
+($\rho$) metric across all features. We set a threshold of $\rho = \pm0.7$, above
 which we eliminated features. Using this cutoff, we
 removed 2 features, \texttt{asserts\_per\_kloc} and
 \texttt{test\_cases\_per\_kloc} as they where very strongly correlated ($\rho >
@@ -671,10 +673,11 @@ however, not all projects are using them to collaborate.  In the period from
 February to August 2012, 315,522 original repositories received a single commit.
 From those, 53,866 (17\%) received at least one pull request, while 54,205
 (18\%) used the shared repository approach, having received commits by more than
-one developers and no pull requests.  The situation is similar during the same
+one developers and no pull requests. The situation is similar during the same
 period in 2013; from the 1,157,625 repositories that received a single commit,
 120,104 (10\%) repositories received a pull request while 124,316 (11\%) used
-the shared repository approach exclusively. Across both years, 14\% of the
+the shared repository approach exclusively. In both cases, the remaining
+65\% and 79\% are single developer projects. Across both years, 14\% of the
 active repositories use pull requests.  While pull request usage is increasing
 overall, partially reflecting Github's growth, the relative number of
 repositories using the pull request model has decreased slightly.  An almost
@@ -704,7 +707,7 @@ process, usually it is the project community members that do so: only 0.011\% of
 pull request comments come from users that have not committed to the project
 repository. Across projects that received pull requests in 2012, 35\% also
 received a bug report (not pull-request based) on the Github issue tracker,
-indicating a strong use of Github's collaboration facilities by both the project
+indicating moderate use of Github's collaboration facilities by both the project
 and the project community.
 
 %Pull requests in their current form were introduced by Github in late August
@@ -1069,7 +1072,8 @@ manually reviewing them supports this hypothesis further.
 
     \textsf{superseded} &	A new {\sc pr} solves the problem better. & 18\\
 
-    \textsf{duplicate} & The functionality already exists in the project. & 2 \\
+    \textsf{duplicate} & The functionality had been in the project prior to
+    the submission of the {\sc pr} & 2 \\
 
     \textsf{superfluous} & {\sc pr} doesn't solve an existing problem or add a
     feature needed by the project. & 6 \\
@@ -1095,10 +1099,11 @@ manually reviewing them supports this hypothesis further.
     \hline
   \end{tabular}
 \end{small}
+
 \caption{Reasons for closing pull requests without merging.}
 \label{tab:unmerged}
 \end{table}
-
+\vspace{-1em}
 
 \section{Discussion}
 \label{sec:discussion}
@@ -1336,7 +1341,7 @@ The goal of this work is to obtain a deep understanding of the pull-based softwa
 
 Our main findings are as follows:
 
-\begin{enumerate}
+\begin{compactenum}
 
   \item The pull-based model is not as popular as we had anticipated: Only 14\%
     of the active projects use pull requests, but this number is equal to the
@@ -1357,14 +1362,14 @@ Our main findings are as follows:
     distributed nature of pull-based development. Only 13\% of the pull requests
     are rejected due to technical reasons.
 
-\end{enumerate}
+\end{compactenum}
 
 Our findings have the following implications:
 
-\begin{enumerate}
+\begin{compactenum}
 
   \item The pull-based model calls for a revision of some of our current
-    understanding of open source software development. Iteresting research
+    understanding of open source software development. Interesting research
     directions might include the formation of teams and management hierarchies,
     novel code reviewing practices and the motives of developers to work in a
     highly transparent workspace.
@@ -1377,64 +1382,14 @@ Our findings have the following implications:
     (non-merged) work: Devising new ways for integrating task coordination into
     the pull-based model is a promising area of further research.
 
-\end{enumerate}
+\end{compactenum}
 
 Last but not least, our dataset provides a rich body of information on open source software development. The dataset as well as custom-built Ruby and R analysis tools are available on the Github repository 
 \href{https://github.com/gousiosg/pullreqs}{gousiosg/pullreqs}, along with instructions on how to use them.
 
-%We have presented an empirical investigation of how the pull-based development
-%model works in practice. We explored its use on Github
-%and then focused on the factors that affect pull request acceptance
-%and processing time. This work makes the following contributions:
-%
-%\begin{itemize}
-%
-%  \item A statistical analysis of pull request usage on Github.
-%   % We find increasing usage of pull requests through time.
-%
-%  \item A statistical analysis of several characteristics of pull requests.
-%    %We
-%    %find that pull requests are treated equally irrespective of whether they
-%    %originate from the project's main team or the community, that projects are
-%    %not getting faster at processing pull requests and that the inclusion of
-%    %tests in a pull request does not directly affect whether it will be merged
-%    %or not.
-%
-%  \item The main factors that affect pull request acceptance 
-%    %(whether a pull
-%    %request touches code that has been modified again recently) 
-%    and processing
-%    time.% (the developer's track record, the project's size and test coverage).
-%  
-%
-%  \item The main factors for which pull requests are rejected
-%    %, namely concurrent
-%    %modifications among project branches and forks and incomplete understanding
-%    %of the project's goals.
-%
-%  \item A carefully constructed dataset and a statistical toolkit for
-%    performing analysis of the pull based development model.
-%
-%\end{itemize}
-%
-%This work is the first to explore the emerging paradigm of pull-based
-%distributed software development. As such, while comprehensive, it is not complete.
-%Further research can include the role and consequences of drive-by
-%commits, the formation of teams and management hierarchies in a seemingly flat
-%workspace, the role of testing in assessing pull request impact, large scale
-%analysis of the reasons for pull request rejection, code reviewing practices,
-%replications in more rigid work environments (e.g., companies) and tools for
-%helping teams to automate the handling of pull requests.
-%
-%{\bfseries Replication} This study has been conducted using the {\sc ght}orrent
-%dataset and custom-built Ruby and R tools. We share the tools, original data
-%sources and extracted data files on the Github repository
-%\texttt{gousiosg\-/\-pullreqs}, along with instructions on how to use them.
-%
-%\subsection*{Acknowledgements}
-
-%We would like to thank the anonymous reviewers for their comments.
-%This work is partially supported by Marie Curie {\sc ief} 298930 --- {\sc sefunc}.
+\paragraph*{Acknowledgements}
+We would like to thank the anonymous reviewers for their comments.
+This work is partially supported by the Marie Curie {\sc ief} 298930 --- {\sc sefunc} and the {\sc nwo} 639.022.314 --- TestRoots projects.
 
 \bibliographystyle{abbrv}
 \balance
