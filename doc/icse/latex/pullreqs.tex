@@ -12,12 +12,16 @@
 
 \begin{document}
 
+\conferenceinfo{ICSE}{'14, May 31 -- June 7, 2014, Hyderabad, India}
+\CopyrightYear{14}
+\crdata{978-1-4503-2756-5/14/05}
+
 \newcommand{\todo}[1]{\textbf{TODO}\footnote{\textbf{TODO:} #1}}
 
 \newcommand{\ghtorrent}{ \textsc{ght}orrent\xspace}
 \newcommand{\api}{\textsc{api}\xspace}
 
-\title{An Exploratory Study of the Pull-based Software Development Model}
+\title{An Exploratory Study of the Pull-Based Software Development Model}
 \numberofauthors{3}
 
 \author{
@@ -223,7 +227,7 @@ strategies can be employed with {\sc dvc}s:
       \label{fig:pullreq-process}
     \end{figure}
 
-\subsection{Pull requests in Github}
+\subsection{Pull Requests in Github}
 
 Github supports all types of distributed development outlined above; however,
 pull requests receive special treatment. The site is tuned to allow easy forking
@@ -244,7 +248,7 @@ An example pull request on Github can be seen in Figure~\ref{fig:pullreq-scr}.
 
 A Github pull request contains a branch (local or in another repository) from
 which a core team member should pull commits. Github automatically
-discovers the commits to be merged and presents them in the pull request. By
+discovers the commits to be merged and pre\-sen\-ts them in the pull request. By
 default, pull requests are submitted to the base (``upstream'' in Git parlance)
 repository for inspection. The
 inspection is either a code review of the commits submitted with the pull
@@ -274,7 +278,7 @@ the original source code properties:
     request can be merged using plain Git utilities, using the following
     techniques: 
 
-    \begin{itemize}
+    \begin{compactitem}
 
       \item \emph{Branch merging:} The branch in the forked repository
         containing the pull request commits is merged into a branch in the base
@@ -288,7 +292,7 @@ the original source code properties:
         cannot be maintained, but authorship is 
         preserved~\cite[Chapter 5.3]{Chaco09}.
     
-    \end{itemize}
+    \end{compactitem}
 
     A technique that complements both of the above is \emph{commit
     squa\-shing}: if the full history is not of interest to the project,
@@ -327,9 +331,9 @@ merged to the project's main branch.
 The open nature of Github's pull requests lends itself to a variety of usage
 patterns. Except from basic patch submission, pull requests can be used as a
 requirements and design discussion tool\footnote{Github uses this internally:
-\url{https://github.com/blog/1124-how-we-use-pull-requests-to-build-github}} or
+\url{https://github.com/blog/1124}} or
 as a progress tracking tool towards the fulfillment of a project
-release.\footnote{\url{https://github.com/blog/831-issues-2-0-the-next-generation}} In
+release.\footnote{\url{https://github.com/blog/831}} In
 the first case, a pull request serves as a discussion board for soliciting the
 opinions of other developers while a new feature is being implemented. In the
 second case, pull requests are associated with milestones in Github's issue
@@ -383,7 +387,7 @@ sized bins.
 At a high level, the process to retrieve the dominant features for both
 classification tasks consists of two steps.  First, we run each dataset through
 6 classification algorithms, namely Random Forests (\texttt{randomforest}),
-variants of Logistic Regression (\texttt{logregr}) (binary for the \textsf{merge
+variants of Logistic Regression (\texttt{log\-re\-gr}) (binary for the \textsf{merge
 decision} task, multinomial for the \textsf{merge time} task) and Na\"ive Bayes
 (\texttt{naivebayes}), Support Vector Machines (\texttt{svm}), decision trees
 (\texttt{dtree}) and AdaBoost with decision trees (\texttt{adaboost}). We used
@@ -419,7 +423,7 @@ is described in Section~\ref{sec:qualdata}.
 
 \section{Data}
 
-\subsection{Github data}
+\subsection{Github Data}
 \label{sec:ghtorrent}
 
 We used Github data as provided through our {\sc ght}orrent project \cite{G13},
@@ -439,7 +443,7 @@ has been collecting data since February 2012. Up to August 2013,
 1.9 million pull requests from more than two hundred thousand projects
 have been collected.
 
-\subsection{Pull request project sample}
+\subsection{Pull Request Project Sample}
 \label{sec:expdata} 
 
 \textbf{Project selection.} To make the analysis practical, while avoiding to
@@ -480,7 +484,7 @@ the {\sc ght}orrent databases and analyzing each project's Git repository.
 Furthermore, for these selected projects we collected all merges and the values for all factors that we use in our machine learning experiment, as described below.
 
 \textbf{Merge detection.} To
-identify merged pull requests that are merged outside Github, we resorted to the following heuristics, listed here in order of application:
+identify merged pull requests that are mer\-ged outside Github, we resorted to the following heuristics, listed here in order of application:
 
 \begin{compactenum}
 
@@ -624,7 +628,7 @@ results are statistically significant ($n = 166,884, p < 0.001$).
 %\end{figure}
 
 \vspace{1em}
-\subsection{Qualitative data}
+\subsection{Qualitative Data}
 \label{sec:qualdata}
 To investigate how pull requests are used in practice and why some pull requests
 are not merged, we performed in-depth examination of random samples of pull
@@ -1103,12 +1107,11 @@ manually reviewing them supports this hypothesis further.
 \caption{Reasons for closing pull requests without merging.}
 \label{tab:unmerged}
 \end{table}
-\vspace{-1em}
 
 \section{Discussion}
 \label{sec:discussion}
 
-\subsection{The pull-based development model}
+\subsection{The Pull-based Development Model}
 
 \textbf{Development turnover.} One of the promises of the pull request model is
 fast development turnover, i.e., the time between the submission of a pull
@@ -1233,7 +1236,7 @@ the pull request at the contributor's site, and based on the project's
 profile, would provide automated suggestions for improvement (e.g., more tests,
 documentation). 
 
-\subsection{Threats to validity}
+\subsection{Threats to Validity}
 
 \textbf{Internal validity.} Our statistical analysis uses random forests as a way
 to identify and rank cross-factor importance on two response variables. The classification
@@ -1386,6 +1389,7 @@ Our findings have the following implications:
 
 Last but not least, our dataset provides a rich body of information on open source software development. The dataset as well as custom-built Ruby and R analysis tools are available on the Github repository 
 \href{https://github.com/gousiosg/pullreqs}{gousiosg/pullreqs}, along with instructions on how to use them.
+\vspace{-1.2em}
 
 \paragraph*{Acknowledgements}
 We would like to thank the anonymous reviewers for their comments.
