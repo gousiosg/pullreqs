@@ -8,7 +8,12 @@
 \usepackage{balance}
 \usepackage{xspace}
 \usepackage{paralist}
+\usepackage{color}
 %\usepackage{xfrac}
+
+\clubpenalty = 10000
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
 
 \begin{document}
 
@@ -68,7 +73,7 @@ Arie van Deursen\\
 
 \terms{Management}
 
-\keywords{pull-based development, pull request, distributed software development,
+\keywords{Pull-based development, pull request, distributed software development,
 empirical software engineering}
 
 \section{Introduction}
@@ -227,7 +232,7 @@ strategies can be employed with {\sc dvc}s:
       \label{fig:pullreq-process}
     \end{figure}
 
-\subsection{Pull Requests in Github}
+\paragraph*{Pull Requests in Github}
 
 Github supports all types of distributed development outlined above; however,
 pull requests receive special treatment. The site is tuned to allow easy forking
@@ -646,7 +651,7 @@ dataset for a total of 350 pull requests.
 %from our experience as pull request users and also by consulting 
 %the interviews in Pham et al.~\cite{Pham13} and Marlow et al.~\cite{Marlo13}.
 
-\section{Popularity of Pull-based Development}
+\section{Popularity of Pull-based De\-ve\-lop\-me\-nt}
 \label{sec:github}
 %\input{overall-stats.tex}
 
@@ -890,11 +895,14 @@ external contributions; a Spearman test indicates that it is not true ($\rho =
   come from contributors or the core team.}
 \end{minipage}}
 
-\section{Factors influencing merging and merge time}
+\section{Merging and merge time}
 \label{sec:accrej}
 
 \begin{table}
   \centering
+    \caption{Classifier performance for the merge decision and merge time
+  classification tasks.}
+ 
   \begin{tabular}{lcccc}
     \hline
     {\bf classifier} & {\sc auc} & {\sc acc} & {\sc prec} & {\sc rec} \\
@@ -910,9 +918,7 @@ external contributions; a Spearman test indicates that it is not true ($\rho =
     randomforest  & 0.73 & 0.59 & --- & ---   \\
     \hline
   \end{tabular}
-  \caption{Classifier performance for the merge decision and merge time
-  classification tasks. The results are means of 10-fold random selection
-  cross validation on all data, with 90\% train and 10\% test data.}
+
   \label{tab:classif-perf}
 \end{table}
 
@@ -998,13 +1004,67 @@ how fast a pull request will be accepted.
 %project's test coverage.}
 %\end{minipage}}
 
-\noindent \fbox{ \begin{minipage}{0.46\textwidth} \emph{RQ3: The decision to
+\noindent \fbox{ \begin{minipage}{0.96\columnwidth} \emph{RQ3: The decision to
   merge a pull request is mainly influenced by whether the pull request modifies
   recently modified code. The time to merge is influenced by the developer's
   previous track record, the size of the project and its test coverage and the
-  project's openness to external contributions.} \end{minipage}}
+  project's openness to external contributions.} 
+\end{minipage}}
 
+{\color{white} WTF}
+
+\pagebreak
 \section{Unmerged pull requests}
+
+\begin{table}[t]
+  \begin{small}
+  \centering
+
+  \caption{Reasons for closing pull requests without merging.}
+
+\begin{tabular}{p{6em}p{18em}r}
+    \hline
+    \textbf{Reason} & \textbf{Description} & \textbf{\%}
+\\
+    \hline
+    \textsf{obsolete} &	The {\sc pr} is no longer relevant, as the project
+    has progressed. & 4\\
+
+    \textsf{conflict} &	There feature is currently being implemented by other
+    {\sc pr} or in another branch. & 5\\
+
+    \textsf{superseded} &	A new {\sc pr} solves the problem better. & 18\\
+
+    \textsf{duplicate} & The functionality had been in the project prior to
+    the submission of the {\sc pr} & 2 \\
+
+    \textsf{superfluous} & {\sc pr} doesn't solve an existing problem or add a
+    feature needed by the project. & 6 \\
+
+    \textsf{deferred} & Proposed change delayed for further investigation in the
+    future. & 8\\
+
+    \textsf{process} & The {\sc pr} does not follow the correct project
+    conventions for sending and handling pull requests. & 9\\
+    
+    \textsf{tests} & Tests failed to run. & 1\\
+
+    \textsf{incorrect implementation} &	The implementation of the feature is
+    incorrect, missing or not following project standards. & 13\\
+
+    \hline 
+    \textsf{merged} & The {\sc pr} was identified as merged by the human
+    examiner & 19\\
+
+    \textsf{unknown} & The {\sc pr} could not be classified due to lacking
+    information & 15 \\
+
+    \hline
+  \end{tabular}
+\end{small}
+
+\label{tab:unmerged}
+\end{table}
 
 As most pull requests are indeed merged, it is interesting to explore why some
 pull requests are \emph{not} merged. For that reason, we manually looked into 350 pull
@@ -1060,54 +1120,7 @@ manually reviewing them supports this hypothesis further.
   Only 13\% of the pull requests are rejected due to technical reasons.}
 \end{minipage}}
 
-\begin{table}[t]
-  \begin{small}
-  \centering
-  \begin{tabular}{p{6em}p{18em}r}
-    \hline
-    \textbf{Reason} & \textbf{Description} & \textbf{\%}
-\\
-    \hline
-    \textsf{obsolete} &	The {\sc pr} is no longer relevant, as the project
-    has progressed. & 4\\
-
-    \textsf{conflict} &	There feature is currently being implemented by other
-    {\sc pr} or in another branch. & 5\\
-
-    \textsf{superseded} &	A new {\sc pr} solves the problem better. & 18\\
-
-    \textsf{duplicate} & The functionality had been in the project prior to
-    the submission of the {\sc pr} & 2 \\
-
-    \textsf{superfluous} & {\sc pr} doesn't solve an existing problem or add a
-    feature needed by the project. & 6 \\
-
-    \textsf{deferred} & Proposed change delayed for further investigation in the
-    future. & 8\\
-
-    \textsf{process} & The {\sc pr} does not follow the correct project
-    conventions for sending and handling pull requests. & 9\\
-    
-    \textsf{tests} & Tests failed to run. & 1\\
-
-    \textsf{incorrect implementation} &	The implementation of the feature is
-    incorrect, missing or not following project standards. & 13\\
-
-    \hline 
-    \textsf{merged} & The {\sc pr} was identified as merged by the human
-    examiner & 19\\
-
-    \textsf{unknown} & The {\sc pr} could not be classified due to lacking
-    information & 15 \\
-
-    \hline
-  \end{tabular}
-\end{small}
-
-\caption{Reasons for closing pull requests without merging.}
-\label{tab:unmerged}
-\end{table}
-
+\pagebreak
 \section{Discussion}
 \label{sec:discussion}
 
@@ -1391,9 +1404,11 @@ Last but not least, our dataset provides a rich body of information on open sour
 \href{https://github.com/gousiosg/pullreqs}{gousiosg/pullreqs}, along with instructions on how to use them.
 \vspace{-1.2em}
 
-\paragraph*{Acknowledgements}
+\section{ACKNOWLEDGMENTS}
 We would like to thank the anonymous reviewers for their comments.
 This work is partially supported by the Marie Curie {\sc ief} 298930 --- {\sc sefunc} and the {\sc nwo} 639.022.314 --- TestRoots projects.
+
+\pagebreak
 
 \bibliographystyle{abbrv}
 \balance
