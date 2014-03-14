@@ -268,7 +268,7 @@ ensure homogeneity:
 \end{compactitem}
 
 \paragraph*{Results} The final dataset consists of 865 projects (303 Python, 253 Java, 274 Ruby, 35 Scala) and 336,502 pull requests (120,475; 83,960; 113,665 and 18,402 for Python,
-Ruby, Java and Scala projects respectively). 60\% of the pull requests are
+Ruby, Java and Scala pro\-je\-cts respectively). 60\% of the pull requests are
 merged using Github's facilities while 16\% are identified as unmerged.
 The remaining 24\% is identified as merged using the heuristics described
 above ($H_1$: 11\%, $H_2$: 3\%, $H_3$: 4\%, $H_4$: 6\%).
@@ -283,29 +283,55 @@ The \pullreqs dataset is accompanied by an extensive analysis toolkit written in
 the R statistics language. The framework allows researchers to load selections
 of projects in R, provides basic statistics in tabular (e.g.
 Table~\ref{tab:features}) and graphical form (e.g. Figure~\ref{fig:features}),
-and exposes a command line base interface that tools can extend. Moreover,
-it implements a modular, multi-step data mining framework that researchers
-can easily re-use in similar machine learning experiments. The data mining
-parts include all the necessary steps for successfully executing a data mining
+and exposes a command line base interface that tools can extend. Moreover, it
+implements a modular, multi-step data mining framework that researchers can
+easily re-use in similar machine learning experiments. The data mining parts
+include all the necessary steps for successfully executing a data mining
 experiment, such as distribution plotting, cross correlation among features,
 pluggable model and algorithm definitions, $n$-fold cross-validation and
 plotting of important model variables such as Area Under Curve ({\sc auc}) and
-accuracy across cross-validation runs. To cope with the \pullreqs dataset
-size, several parts of the tooling employ parallelism and can thus exploit
-multi-core machines.
+accuracy across cross-validation runs. To cope with the \pullreqs dataset size,
+several parts of the tooling (mainly the cross validation and variable
+importance steps) employ parallelism and can thus exploit multi-core machines.
+
+\section{Limitations}
+
+The dataset, while extensive, is not entirely representative of all pull request
+activity on Github. Specifically, while it covers almost 10\% of the pull
+requests available in the GHTorrent database, the project selection process and
+consequent filtering leave out important aspects (e.g. development in
+Javascript, the most popular language on Github). Moreover, to analyze the
+projects, we extracted data from i) the {\sc ght}orrent relational database ii)
+the {\sc ght}orrent raw database iii) each project's Git repository.
+Differences in the data abstraction afforded by each data source may lead to
+different results in the following cases: i) Number of commits in a pull
+request: During their lifecycle, pull requests may be updated with new commits.
+However, when developers use commit squashing, the number of commits is reduced
+to one. Therefore the number of commits feature is often an idealized version of
+the actual work that took place. ii) Number of files and commits on touched
+files: The commits reported in a pull request also contain commits that merge
+branches, which the developer may have merged prior to performing his changes.
+These commits may contain several files not related to the pull request itself,
+which in turn affects our results. We  filtered out such commits, but this may
+not reflect the contents of certain pull requests.
 
 \section{Related Work}
 \label{sec:rel}
 
 The \pullreqs dataset is similar to the code review datasets published by
-Hamasaki et al.~\cite{Hamas13} and Mukadam et al.~\cite{Mukad13}.  It improves
-upon those two datasets by covering a wider array of projects and languages
-while also offering more precise related data, such as file counts and test
-cases. To the best of our knowledge, this is the only publicly available
-dataset covering pull-based development and certain aspects of distributed
-software development in general.
+Hamasaki et al.~\cite{Hamas13} and Mukadam et al.~\cite{Mukad13}.  While code
+reviewing is an inherent characteristic of pull requests, pull requests cover a
+wider range of project activities, such as discussion on project features,
+integration of attached external tools (continuous integration, code quality
+evalaution), management of project goals through milestones etc.  Thus the
+\pullreqs dataset improves upon those two datasets not only by covering a wider
+array of projects and languages but also by offering more precise related data,
+such as file counts and test cases and covering a wider range of activities. To
+the best of our knowledge, this is the only publicly available dataset covering
+pull-based development and certain aspects of distributed software development
+in general.
 
-\section{Research Opportunities and Conclusion}
+\section{Research Opportunities}
 
 The \pullreqs dataset can be used for a multitude of studies, apart from basic
 exploration of the pull-based distributed development model. Making the pull
@@ -331,6 +357,8 @@ projects. All source code and data is available on the Github repository
 of the construction process or the expansion of this dataset.
 Pull requests are especially welcome!
 
+\section{Acknowledgements}
+This work is supported by the {\sc nwo} 639.022.314 --- TestRoots project.
 
 \bibliographystyle{abbrv}
 \balance
