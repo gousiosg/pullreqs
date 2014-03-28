@@ -30,7 +30,7 @@ stats <- function(owner, repo) {
 }
 
 db <<- dbConnect(dbDriver("MySQL"), user = "ghtorrent", password = "ghtorrent", 
-                dbname = "ghtorrent", host = "127.0.0.1")
+                dbname = "ghtorrent", host = "dutiap")
 
 projects <- read.csv('projects.txt', sep = ' ')
 knit("index.Rmd")
