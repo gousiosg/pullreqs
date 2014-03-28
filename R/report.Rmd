@@ -239,3 +239,41 @@ This is a plot of forks created per month versus forks contributing code back
 (in the form of pull requests) per month. Ideally, all forks should contribute 
 back. In healty community, the montly number of forks contributing should be 
 increasing, as the total number of forks increases.
+
+### Slow Pull Request lifelines
+```{r plot5, message=FALSE, fig.align='center', echo=FALSE, fig.width=9}
+
+  q <- "
+    select pr.pullreq_id, prh1.created_at as opened, ifnull(prh2.created_at, now()) as closed
+    from pull_request_history prh1,
+      pull_requests pr left outer join pull_request_history prh2
+        on pr.id = prh2.pull_request_id
+        and prh2.action = 'closed'
+    where pr.id = prh1.pull_request_id
+    	and prh1.action = 'opened'
+    	and pr.base_repo_id = %d
+    group by pr.id
+    order by pr.pullreq_id desc
+  "
+
+  res <- dbSendQuery(db, sprintf(unwrap(q), pid))
+  df <- fetch(res, n = -1)
+  df$opened <- as.POSIXct(df$opened)
+  df$closed <- as.POSIXct(df$closed)
+
+  perc.09 <- as.numeric(quantile(df$closed - df$opened, 0.9))
+  df <- subset(df, closed - opened > perc.09)
+
+  ggplot(df) +
+    geom_point(aes(y = pullreq_id, x = closed), colour = "red") +
+    geom_point(aes(y = pullreq_id, x = opened), colour = "green") +
+    geom_segment(aes(y=pullreq_id, yend = pullreq_id, x = opened, xend = closed), alpha = 0.4) +
+    scale_y_discrete("Pull Request Number", breaks = NULL) +
+    scale_x_datetime("Time (open/close)")
+```
+In this plot, we can see the lifelines of the slowest 10% of pull requests.
+For this project, the cutoff is `r perc.09 / 3600 /24 ` days.
+The line represents the time between opening and closing the pull request.
+Pull requests whose end time aligns at the right edge of the plot are still open
+at the time of building this report. Generally, it is considered good practice
+to avoid having pull requests open for long.
