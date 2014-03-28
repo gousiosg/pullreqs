@@ -43,14 +43,22 @@ See here some reports for popular repositories:
 </div>
 
 <label for="projectSearch">Search for project: </label>
+<span>
 <input id="projectSearch" type="search" data-provide="typeahead" />
-
+<button id="go" type="button" class="btn btn-default">Go</button>
+</span>
 <script type="text/javascript">
   projects = [`r projectsjs`];
 
   $("#projectSearch").typeahead({
-      source: projects
-    });
+    source: projects
+  });
+
+  $("#go").click(function(){
+    if ($("#projectSearch").val() != "") {
+      window.location = "http://ghtorrent.org/pullreq-perf/" + $("#projectSearch").val();
+    }
+  });
 
 </script>
 
