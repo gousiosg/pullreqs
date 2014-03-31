@@ -32,13 +32,36 @@ See here some reports for popular repositories:
 <a href="/pullreq-perf/joyent-node/">Node.js</a>
 </button>
 <button type="button" class="btn btn-default">
-<a href="/pullreq-perf/jquery-jquery-mobile/">JQuery Mobile</a>
+<a href="/pullreq-perf/jquery-jquery/">JQuery</a>
 </button>
 <button type="button" class="btn btn-default">
 <a href="/pullreq-perf/mxcl-homebrew/">Homebrew</a>
 </button>
 <button type="button" class="btn btn-default">
 <a href="/pullreq-perf/akka-akka/">Akka</a>
+</button>
+</div>
+<div class="btn-toolbar">
+<button type="button" class="btn btn-default">
+<a href="/pullreq-perf/mbostock-d3/">D3.js</a>
+</button>
+<button type="button" class="btn btn-default">
+<a href="/pullreq-perf/bartaz-impress.js/">impress.js</a>
+</button>
+<button type="button" class="btn btn-default">
+<a href="/pullreq-perf/mojombo-jekyll/">Jekyll</a>
+</button>
+<button type="button" class="btn btn-default">
+<a href="/pullreq-perf/django-django/">Django</a>
+</button>
+<button type="button" class="btn btn-default">
+<a href="/pullreq-perf/antirez-redis/">Redis</a>
+</button>
+<button type="button" class="btn btn-default">
+<a href="/pullreq-perf/bitcoin-bitcoin/">Bitcoin</a>
+</button>
+<button type="button" class="btn btn-default">
+<a href="/pullreq-perf/Netflix-RxJava/">RxJava</a>
 </button>
 </div>
 
@@ -62,41 +85,44 @@ See here some reports for popular repositories:
 
 </script>
 
-#### What is this report about?
+### What is this report about?
 
 The report presents data on various aspects of pull request related activity 
-within a project repository. 
+within a project repository, with a special focus on how open the project
+is to external contributions.
 
-#### How did you choose the projects to analyze?
+### How did you choose the projects to analyze?
 
 As a starting point, I used the 
 [repository set](https://github.com/gousiosg/pullreqs/blob/master/projects.txt) 
-that I also use for 
+that I also use for my
 [research](http://www.gousios.gr/bibliography/GPD14.html) 
 [work](http://www.gousios.gr/bibliography/GZ14.html).
 Then, I added to this selection, the top 1000 repositories by number of stars
-as reported by the GHTorrent database. The actual list of projects 
-can be found 
+as reported by the GHTorrent database. I also added the top 50 projects in
+terms of 
+[total contributions received](http://www.gousios.gr/blog/The-triumph-of-online-collaboration/).
+The actual list of projects can be found 
 [here](https://github.com/gousiosg/ghtorrent.org/blob/master/pullreq-perf/projects.txt) 
 or by clicking on the "Show all repos" button below.
 
-#### How did you build it?
+### How did you build it?
 
 I used R to query GHTorrent's main MySQL database, then piped the results
 through [knitr](http://yihui.name/knitr/) templates which use 
-[ggplot2](ggplot2.org/) for generating the nice plots.
+[ggplot2](ggplot2.org/) for generating the nice plots.
+You can find the code [here](https://github.com/gousiosg/pullreqs/tree/master/R/report.Rmd):
 
-#### My repository is not included!
+### My repository is not included!
 
 You can [send me an email](mailto:gousiosg@gmail.com) and I will make sure your
 repository will be included in the next round of report generation.
 
-#### The report for my project is just plain wrong!
+### The report for my project is just plain wrong!
 
-If you have time to explain to me what is wrong, please 
+If you have time to explain to me what is wrong, I would appreciate if 
 [send me an email](mailto:gousiosg@gmail.com) and I will fix
 the issue.
-
 
 <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#allrepos">
   Show all repos
