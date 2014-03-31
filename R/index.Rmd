@@ -1,6 +1,6 @@
 ---
 layout: page
-title: GHTorrent Openess reports
+title: GHTorrent Performance reports
 tagline: 
 ---
 
@@ -42,7 +42,7 @@ See here some reports for popular repositories:
 </button>
 </div>
 
-<label for="projectSearch">Search for project: </label>
+<label for="projectSearch">Or search for project repository (e.g. akka-akka): </label>
 <span>
 <input id="projectSearch" type="search" data-provide="typeahead" />
 <button id="go" type="button" class="btn btn-default">Go</button>
@@ -62,15 +62,40 @@ See here some reports for popular repositories:
 
 </script>
 
-### What is this report supposed to say?
+#### What is this report about?
 
-The report is presenting data on various aspects of project openess. 
+The report presents data on various aspects of pull request related activity 
+within a project repository. 
 
-### How did you build it?
+#### How did you choose the projects to analyze?
 
-For fun and profit. I was always wondering how various projects behave with
-respect to external contributions and whether their . 
-Moreover, I wanted to lure developers to answer my research questionnaire.
+As a starting point, I used the 
+[repository set](https://github.com/gousiosg/pullreqs/blob/master/projects.txt) 
+that I also use for 
+[research](http://www.gousios.gr/bibliography/GPD14.html) 
+[work](http://www.gousios.gr/bibliography/GZ14.html).
+Then, I added to this selection, the top 1000 repositories by number of stars
+as reported by the GHTorrent database. The actual list of projects 
+can be found 
+[here](https://github.com/gousiosg/ghtorrent.org/blob/master/pullreq-perf/projects.txt) 
+or by clicking on the "Show all repos" button below.
+
+#### How did you build it?
+
+I used R to query GHTorrent's main MySQL database, then piped the results
+through [knitr](http://yihui.name/knitr/) templates which use 
+[ggplot2](ggplot2.org/) for generating the nice plots.
+
+#### My repository is not included!
+
+You can [send me an email](mailto:gousiosg@gmail.com) and I will make sure your
+repository will be included in the next round of report generation.
+
+#### The report for my project is just plain wrong!
+
+If you have time to explain to me what is wrong, please 
+[send me an email](mailto:gousiosg@gmail.com) and I will fix
+the issue.
 
 
 <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#allrepos">

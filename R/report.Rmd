@@ -88,9 +88,8 @@ unwrap <- function(str) {
 
   ggplot(backlog.stats) + 
     aes(x = month, y = value, fill = variable) + 
-    geom_bar(stat = "identity") + 
-#    geom_line(stat = "identity", aes(colour = variable), size = 2)
-    scale_x_datetime()
+    geom_bar("Number of pull requests", stat = "identity") + 
+    scale_x_datetime("Date")
 
 ```
 
