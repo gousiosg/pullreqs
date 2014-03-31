@@ -17,20 +17,29 @@ library(RMySQL)
 library(knitr)
 
 # Genearte stats
+
 stats <- function(owner, repo) {
-    dirname = sprintf("%s-%s", owner,repo)
-    print(sprintf("Running in %s", dirname))
-    cwd <- getwd()
-    dir.create(dirname)
-    file.copy("report.Rmd", sprintf("%s/%s", dirname, "index.Rmd"))
-    setwd(dirname)
+  dirname = sprintf("%s-%s", owner,repo)
+  print(sprintf("Running in %s", dirname))
+  cwd <- getwd()
+  dir.create(dirname)
+  file.copy("report.Rmd", sprintf("%s/%s", dirname, "index.Rmd"))
+  setwd(dirname)
+  
+  tryCatch({
     knit("index.Rmd")
-    setwd(cwd)
     file.remove(sprintf("%s/%s", dirname, "index.Rmd"))
+  }, error = function(e) {
+    print(e)
+    setwd(cwd)
+    unlink(dirname, TRUE, TRUE)
+  }, finally = {
+    setwd(cwd)
+  })
 }
 
 db <<- dbConnect(dbDriver("MySQL"), user = "ghtorrent", password = "ghtorrent", 
-                dbname = "ghtorrent", host = "127.0.0.1")
+                 dbname = "ghtorrent", host = "dutiap")
 
 projects <- read.csv('projects.txt', sep = ' ')
 knit("index.Rmd")
