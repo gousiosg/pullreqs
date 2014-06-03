@@ -167,3 +167,25 @@ pull request merge time classifiers.
 
 * [R/var-importance.R](https://github.com/gousiosg/pullreqs/blob/master/R/var-importance.R) Generate the variable importance plots for choosing important features
 
+
+####Citation information
+If you find this work interesting and want to use it in your work, please cite it as follows:
+
+```
+@inproceedings{GZ14,
+  author = {Gousios, Georgios and Zaidman, Andy},
+  title = {A Dataset for Pull-based Development Research},
+  booktitle = {Proceedings of the 11th Working Conference on Mining Software Repositories},
+  series = {MSR 2014},
+  year = {2014},
+  isbn = {978-1-4503-2863-0},
+  location = {Hyderabad, India},
+  pages = {368--371},
+  numpages = {4},
+  doi = {10.1145/2597073.2597122},
+  acmid = {2597122},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  keywords = {distributed software development, empirical software engineering, pull request, pull-based development},
+}
+```
