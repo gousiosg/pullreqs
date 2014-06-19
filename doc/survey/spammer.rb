@@ -8,7 +8,7 @@ require 'set'
 
 email_tmpl = File.open('email.erb').read
 
-mysql = Mysql2::Client.new(:host => "dutihr",
+mysql = Mysql2::Client.new(:host => "rs1",
                            :username => ARGV[1],
                            :password => ARGV[2],
                            :database => "ghtorrent")
@@ -36,7 +36,7 @@ def q_top_mergers(owner, repo)
         and u.login = '#{owner}'
       group by u1.id
       order by count(*) desc
-      limit 10"
+      limit 3"
 end
 
 def q_top_submitters(owner, repo)
@@ -54,7 +54,7 @@ def q_top_submitters(owner, repo)
         and u.login = '#{owner}'
       group by u1.id
       order by count(*) desc
-      limit 10"
+      limit 5"
 end
 
 def render_erb(template, locals)
@@ -73,16 +73,16 @@ def send_spam(db, tmpl,  owner, repo)
 
     email = render_erb(tmpl, :name => m[:name], :email => m[:email], :login => m[:login],
                  :role => 'integrators', :repo => "#{owner}/#{repo}",
-                 :link => 'https://www.surveymonkey.com/s/pullreq-handlers',
+                 :link => 'https://www.surveymonkey.com/s/pullreqs-integrators',
                  :perflink => "http://ghtorrent.org/pullreq-perf/#{owner}-#{repo}/")
 
     Net::SMTP.start('localhost', 25, 'ghtorrent.org') do |smtp|
       begin
         smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
                         m[:email])
-        puts "Sent email to #{m[:email]}, merger at #{owner}/#{repo}, sent #{@num_send}"
+        puts "[#{Time.now}] Sent email to #{m[:email]}, integrator at #{owner}/#{repo}, sent #{@num_send}"
       rescue
-        puts "Cannot send email to #{m[:email]}"
+        puts "[#{Time.now}] Cannot send email to #{m[:email]}"
       end
       @num_send += 1
     end
@@ -98,16 +98,16 @@ def send_spam(db, tmpl,  owner, repo)
 
     email = render_erb(tmpl, :name => m[:name], :email => m[:email], :login => m[:login],
                  :role => 'contributors', :repo => "#{owner}/#{repo}",
-                 :link => 'https://www.surveymonkey.com/s/pullreqs-contrib',
+                 :link => 'https://www.surveymonkey.com/s/pullreqs-contributors',
                  :perflink => "http://ghtorrent.org/pullreq-perf/#{owner}-#{repo}/")
 
     Net::SMTP.start('localhost', 25, 'ghtorrent.org') do |smtp|
       begin
         smtp.send_message(email, 'Georgios Gousios <G.Gousios@tudelft.nl>',
                         m[:email])
-        puts "Sent email to #{m[:email]}, submitter at #{owner}/#{repo}, sent #{@num_send}"
+        puts "[#{Time.now}] Sent email to #{m[:email]}, contributor at #{owner}/#{repo}, sent #{@num_send}"
       rescue
-        puts "Cannot send email to #{m[:email]}"
+        puts "[#{Time.now}] Cannot send email to #{m[:email]}"
       end
       @num_send += 1
     end
@@ -126,11 +126,10 @@ end
 File.open(ARGV[0]).each do |line|
   owner, repo = line.split(/ /)
   
-  if @num_send > 200
-    break
-  end
-  
   send_spam(mysql, email_tmpl, owner.strip, repo.strip)
+  ts = 10 * (Random.rand(4) + 1)
+  puts "[#{Time.now}] Sleeping for #{ts} seconds"
+  sleep(ts)
 end
 
 File.open("used-emails.txt", 'w+') do |f|
