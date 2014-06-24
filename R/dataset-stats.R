@@ -230,15 +230,15 @@ merged_pullreqs <- fetch(res, n = -1)$cnt
 print(sprintf("Perc merged pull requests: %f", (merged_pullreqs/opened_pullreqs) * 100))
 
 # Pull reqs per month plot
-res <- dbSendQuery(con, "select last_day(prh.created_at) as cdate, count(*) as pull_reqs from pull_requests pr, pull_request_history prh where prh.pull_request_id = pr.id and prh.action = 'opened' and unix_timestamp(prh.created_at) between 1328054400 and 1375228800 group by  month(prh.created_at), year(prh.created_at) order by prh.created_at")
+res <- dbSendQuery(con, "select last_day(prh.created_at) as cdate, count(*) as pull_reqs from pull_requests pr, pull_request_history prh where prh.pull_request_id = pr.id and prh.action = 'opened' and unix_timestamp(prh.created_at) between 1328054400 and 1396224000 group by  month(prh.created_at), year(prh.created_at) order by prh.created_at")
 pullreqs_per_month <- fetch(res, n = -1)
 
-res <- dbSendQuery(con, "select cdate, count(repo) as repos_with_pull_reqs from (select last_day(prh.created_at) as cdate, pr.base_repo_id as repo from pull_requests pr, pull_request_history prh where pr.id = prh.pull_request_id and prh.action = 'opened' and unix_timestamp(prh.created_at) between 1328054400 and 1375228800 group by pr.base_repo_id, month(prh.created_at), year(prh.created_at)  order by cdate) as a group by cdate")
+res <- dbSendQuery(con, "select cdate, count(repo) as repos_with_pull_reqs from (select last_day(prh.created_at) as cdate, pr.base_repo_id as repo from pull_requests pr, pull_request_history prh where pr.id = prh.pull_request_id and prh.action = 'opened' and unix_timestamp(prh.created_at) between 1328054400 and 1396224000 group by pr.base_repo_id, month(prh.created_at), year(prh.created_at)  order by cdate) as a group by cdate")
 repos_with_pullreqs_per_month <- fetch(res, n = -1)
 
 pullreqs_per_month <- merge(pullreqs_per_month, repos_with_pullreqs_per_month, by = "cdate")
 pullreqs_per_month$cdate <- as.POSIXct(pullreqs_per_month$cdate, origin = "1970-01-01")
-pullreqs_per_month$ratio <- pullreqs_per_month$pull_reqs / pullreqs_per_month$repos
+#pullreqs_per_month$ratio <- pullreqs_per_month$pull_reqs / pullreqs_per_month$repos
 
 store.pdf(ggplot(pullreqs_per_month, aes(x = cdate)) +
    #scale_x_datetime(breaks = date_breaks(width = "6 months")) +
@@ -255,7 +255,7 @@ store.pdf(ggplot(pullreqs_per_month, aes(x = cdate)) +
    theme(legend.title=element_blank()),
       plot.location,"num-pullreqs-month.pdf")
 
-pullreqs_per_month <- melt(pullreqs_per_month)
+pullreqs_per_month <- melt(pullreqs_per_month, id.vars = "cdate")
 
 store.pdf(ggplot(pullreqs_per_month, aes(x = cdate, y = value, fill = variable)) +
   scale_x_datetime() +

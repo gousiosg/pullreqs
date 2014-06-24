@@ -69,7 +69,7 @@ format.results <- function(name, test, predictions) {
                        predicted = as.ordered(predictions))
   if (length(levels(metrics$actual)) == length(levels(metrics$predicted))) {
     metrics$correct <- metrics$actual == metrics$predicted
-    metric.stats <- sqldf("select a.actual, a.incor, b.cor, b.cor * 1.0/(a.incor + b.cor) as accuracy from (select actual, count(*) as incor from metrics m where correct = 0 group by actual) a, (select actual, count(*) as cor from metrics m where correct = 1 group by actual) b where a.actual = b.actual")
+    metric.stats <- sqldf("select a.actual, a.incor, b.cor, b.cor * 1.0/(a.incor + b.cor) as accuracy from (select actual, count(*) as incor from metrics m where correct = 0 group by actual) a, (select actual, count(*) as cor from metrics m where correct = 1 group by actual) b where a.actual = b.actual", drv = "SQLite")
     roc <- multiclass.roc(predictions, test$merge_time)
     auc <- as.numeric(roc$auc)
     printf("%s auc: %f, acc: %f", name, auc, mean(metric.stats$accuracy))
