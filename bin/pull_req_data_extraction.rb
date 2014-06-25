@@ -218,8 +218,9 @@ Extract data for pull requests for a given repository
   # Get a list of pull requests for the processed project
   def pull_reqs(project)
     q = <<-QUERY
-    select u.login as login, p.name as project_name, pr.id, pr.pullreq_id as github_id, pr.base_repo_id as project_id
-           a.created_at as created_at, b.created_at as closed_at,
+    select u.login as login, p.name as project_name,
+    pr.id, pr.pullreq_id as github_id, pr.base_repo_id as project_id,
+    a.created_at as created_at, b.created_at as closed_at,
 			     (select created_at
             from pull_request_history prh1
             where prh1.pull_request_id = pr.id
@@ -310,8 +311,8 @@ Extract data for pull requests for a given repository
         :followers                => followers(pr[:id])[0][:num_followers],
         :intra_branch             => if intra_branch?(pr[:id])[0][:intra_branch] == 1 then true else false end,
         :main_team_member         => if main_team_member?(pr[:id])[0][:main_team_member] == 1 then true else false end,
-        :open                     => open_at_creation(time_created, pr[:project_id]),
-        :close_order              => close_order(time_created, pr[:project_id])
+        :open                     => '[' + open_at_creation(time_created, pr[:project_id]).map{|x| x[:pullreq_id]}.join(',') + ']',
+        :close_order              => '[' + close_order(time_created, pr[:project_id]).map{|x| x[:pullreq_id]}.join(',') + ']'
     }
   end
 
@@ -369,11 +370,11 @@ Extract data for pull requests for a given repository
       # 3. Last comment contains a commit number
       last.scan(/([0-9a-f]{6,40})/m).each do |x|
         # Commit is identified as merged
-        if last.match(/merg(?:ing|ed)/i) or 
+        if last.match(/merg(?:ing|ed)/i) or
           last.match(/appl(?:ying|ied)/i) or
           last.match(/pull[?:ing|ed]/i) or
           last.match(/push[?:ing|ed]/i) or
-          last.match(/integrat[?:ing|ed]/i) 
+          last.match(/integrat[?:ing|ed]/i)
           return [true, :commit_sha_in_comments]
         else
           # Commit appears in master branch
@@ -384,11 +385,11 @@ Extract data for pull requests for a given repository
       end
 
       # 4. Merg[ing|ed] or appl[ing|ed] as last comment of pull request
-      if last.match(/merg(?:ing|ed)/i) or 
+      if last.match(/merg(?:ing|ed)/i) or
         last.match(/appl(?:ying|ed)/i) or
         last.match(/pull[?:ing|ed]/i) or
         last.match(/push[?:ing|ed]/i) or
-        last.match(/integrat[?:ing|ed]/i) 
+        last.match(/integrat[?:ing|ed]/i)
         return [true, :merged_in_comments]
       end
     end
@@ -504,12 +505,11 @@ Extract data for pull requests for a given repository
   end
 
   # Number of followers of the person that created the pull request
-  # TODO: FIXME: Temporarily changed user_id->follower_id to fix issue in db
   def followers(pr_id)
     q = <<-QUERY
     select count(f.follower_id) as num_followers
     from pull_requests pr, followers f, pull_request_history prh
-    where pr.user_id = f.user_id
+    where prh.actor_id = f.user_id
       and prh.pull_request_id = pr.id
       and prh.action = 'opened'
       and f.created_at < prh.created_at
@@ -532,13 +532,14 @@ Extract data for pull requests for a given repository
     if_empty(db.fetch(q, pr_id).all, :num_watchers)
   end
 
-  # Number of followers of the person that created the pull request
+  # The person that created a pull request
   def requester(pr_id)
     q = <<-QUERY
     select u.login as login
-    from users u, pull_requests pr
-    where pr.user_id = u.id
-      and pr.id = ?
+    from users u, pull_request_history prh
+    where prh.actor_id = u.id
+      and prh.action = 'opened'
+      and prh.pull_request_id = ?
     QUERY
     if_empty(db.fetch(q, pr_id).all, :login)
   end
@@ -547,13 +548,15 @@ Extract data for pull requests for a given repository
   def prev_pull_requests(pr_id, action)
     q = <<-QUERY
     select count(pullreq_id) as num_pull_reqs
-    from pull_requests pr
-    where pr.user_id = (select pr1.user_id from pull_requests pr1 where pr1.id = ?)
-    and pr.base_repo_id = (select pr1.base_repo_id from pull_requests pr1 where pr1.id = ?)
-    and exists (select * from pull_request_history prh where prh.action = ? and prh.pull_request_id = pr.id)
-    and pr.pullreq_id < (select pr1.pullreq_id from pull_requests pr1 where pr1.id = ?)
+    from pull_requests pr, pull_request_history prh
+    where pr.id = prh.pull_request_id
+      and prh.actor_id = (select prh1.actor_id from pull_request_history prh1 where prh1.pull_request_id = ? and prh1.action = ?)
+      and prh.action = ?
+      and pr.base_repo_id = (select pr1.base_repo_id from pull_requests pr1 where pr1.id = ?)
+      and exists (select * from pull_request_history prh where prh.action = ? and prh.pull_request_id = pr.id)
+      and pr.pullreq_id < (select pr1.pullreq_id from pull_requests pr1 where pr1.id = ?)
     QUERY
-    if_empty(db.fetch(q, pr_id, pr_id, action, pr_id).all, :num_pull_reqs)
+    if_empty(db.fetch(q, pr_id, action, action, pr_id, action, pr_id).all, :num_pull_reqs)
   end
 
   # Check if the pull request is intra_branch
@@ -568,12 +571,14 @@ Extract data for pull requests for a given repository
   # Check if the requester is part of the project's main team
   def main_team_member?(pr_id)
     q = <<-QUERY
-    select exists(select *
-          from project_members
-          where user_id = u.id and repo_id = pr.base_repo_id) as main_team_member
-    from users u, pull_requests pr
-    where pr.user_id = u.id
-    and pr.id = ?
+    select if(count(prh.id) = 0, false, true) as main_team_member
+    from pull_request_history prh
+      join pull_requests pr on pr.id = prh.pull_request_id
+      join project_members pm on pm.user_id = prh.actor_id
+    where prh.action = 'opened'
+      and pr.base_repo_id = pm.repo_id
+      and prh.pull_request_id = ?
+      and prh.created_at > pm.created_at
     QUERY
     if_empty(db.fetch(q, pr_id).all, :main_team_member)
   end
@@ -715,6 +720,7 @@ Extract data for pull requests for a given repository
 
   private
 
+  # MongoDB entry of the processed pull request
   def pull_req_entry(pr_id)
     q = <<-QUERY
     select u.login as user, p.name as name, pr.pullreq_id as pullreq_id
@@ -791,36 +797,46 @@ Extract data for pull requests for a given repository
     select pr.pullreq_id as pullreq_id
     from pull_requests pr, pull_request_history prh1, pull_request_history prh2
     where pr.id = prh1.pull_request_id
-    and pr.id = prh2.pull_request_id
-    and prh1.action = 'opened'
-    and prh1.created_at < ?
-    and prh2.action = 'closed'
-    and prh2.created_at > ?
-    and pr.base_repo_id = ?
-    order by prh1
+      and pr.id = prh2.pull_request_id
+      and prh1.action = 'opened'
+      and unix_timestamp(prh1.created_at) < ?
+      and prh2.action = 'closed'
+      and unix_timestamp(prh2.created_at) > ?
+      and pr.base_repo_id = ?
+    union
+    select pr.pullreq_id as pullreq_id
+    from pull_requests pr, pull_request_history prh1
+    where pr.id = prh1.pull_request_id
+      and prh1.action = 'opened'
+      and pr.base_repo_id = ?
+      and unix_timestamp(prh1.created_at) < ?
+      and not exists (select * from pull_request_history prh2 where prh2.pull_request_id = prh1.pull_request_id
+    and prh2.action = 'closed')
+
     QUERY
 
-    db.fetch(q, created_at, created_at, project_id).all
+    db.fetch(q, created_at, created_at, project_id, project_id, created_at).all
   end
 
   def close_order(created_at, project_id)
     q = <<-QUERY
-    select pr2.pullreq_id
+    select pr2.pullreq_id as pullreq_id, max(prh.created_at) as latest_close
     from pull_request_history prh, pull_requests pr2,
-      (select pr.id as id
+      (select distinct(pr.id) as id
       from pull_requests pr, pull_request_history prh1, pull_request_history prh2
       where pr.id = prh1.pull_request_id
-      and pr.id = prh2.pull_request_id
-      and prh1.action = 'opened'
-      and prh1.created_at < ?
-      and prh2.action = 'closed'
-      and prh2.created_at > ?
-      and pr.base_repo_id = ?
+        and pr.id = prh2.pull_request_id
+        and prh1.action = 'opened'
+        and unix_timestamp(prh1.created_at) < ?
+        and prh2.action = 'closed'
+        and unix_timestamp(prh2.created_at) > ?
+        and pr.base_repo_id = ?
       order by pullreq_id asc) as opened
     where opened.id = prh.pull_request_id
-    and pr2.id = opened.id
-    and prh.action = 'closed'
-    order by prh.created_at asc
+      and pr2.id = opened.id
+      and prh.action = 'closed'
+    group by pr2.pullreq_id
+    order by latest_close asc
     QUERY
 
     db.fetch(q, created_at, created_at, project_id).all
