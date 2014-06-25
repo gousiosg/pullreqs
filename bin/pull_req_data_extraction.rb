@@ -108,7 +108,7 @@ Extract data for pull requests for a given repository
       Trollop::die "Cannot find user #{ARGV[0]}"
     end
 
-    repo_entry = ght.transaction{ght.ensure_repo(ARGV[0], ARGV[1], false, false, false)}
+    repo_entry = ght.transaction{ght.ensure_repo(ARGV[0], ARGV[1])}
 
     if repo_entry.nil?
       Trollop::die "Cannot find repository #{ARGV[0]}/#{ARGV[1]}"
@@ -145,7 +145,7 @@ Extract data for pull requests for a given repository
         :sloc,:src_churn,:test_churn,:commits_on_files_touched,
         :test_lines_per_kloc,:test_cases_per_kloc,:asserts_per_kloc,
         :watchers,:requester,:prev_pullreqs,:requester_succ_rate,:followers,
-        :intra_branch,:main_team_member
+        :intra_branch,:main_team_member,:open,:close_order
       ]
 
     # Print file header
@@ -218,7 +218,7 @@ Extract data for pull requests for a given repository
   # Get a list of pull requests for the processed project
   def pull_reqs(project)
     q = <<-QUERY
-    select u.login as login, p.name as project_name, pr.id, pr.pullreq_id as github_id,
+    select u.login as login, p.name as project_name, pr.id, pr.pullreq_id as github_id, pr.base_repo_id as project_id
            a.created_at as created_at, b.created_at as closed_at,
 			     (select created_at
             from pull_request_history prh1
@@ -266,15 +266,17 @@ Extract data for pull requests for a given repository
     commits_last_3_month = commits_last_x_months(pr[:id], false, 3)[0][:num_commits]
     prev_pull_reqs = prev_pull_requests(pr[:id],'opened')[0][:num_pull_reqs]
 
+    time_created = Time.at(pr[:created_at]).to_i
+    time_closed = Time.at(pr[:closed_at]).to_i
     # Create line for a pull request
     {
         :pull_req_id              => pr[:id],
         :project_name             => "#{pr[:login]}/#{pr[:project_name]}",
         :lang                     => lang,
         :github_id                => pr[:github_id],
-        :created_at               => Time.at(pr[:created_at]).to_i,
+        :created_at               => time_created,
         :merged_at                => merge_time(pr, merged, git_merged),
-        :closed_at                => Time.at(pr[:closed_at]).to_i,
+        :closed_at                => time_closed,
         :lifetime_minutes         => pr[:lifetime_minutes],
         :mergetime_minutes        => merge_time_minutes(pr, merged, git_merged),
         :merged_using             => merge_reason.to_s,
@@ -282,22 +284,22 @@ Extract data for pull requests for a given repository
         :forward_links            => forward_links?(pr[:login], pr[:project_name], pr[:github_id]),
         :team_size                => team_size_at_open(pr[:id], 3)[0][:teamsize],
         :num_commits              => num_commits(pr[:id])[0][:commit_count],
-        :num_commit_comments     => num_comments(pr[:id])[0][:comment_count],
-        :num_issue_comments      => num_issue_comments(pr[:id])[0][:issue_comment_count],
+        :num_commit_comments      => num_comments(pr[:id])[0][:comment_count],
+        :num_issue_comments       => num_issue_comments(pr[:id])[0][:issue_comment_count],
         :num_comments             => num_comments(pr[:id])[0][:comment_count] + num_issue_comments(pr[:id])[0][:issue_comment_count],
         :num_participants         => num_participants(pr[:id])[0][:participants],
-        :files_added             => stats[:files_added],
-        :files_deleted           => stats[:files_removed],
-        :files_modified          => stats[:files_modified],
+        :files_added              => stats[:files_added],
+        :files_deleted            => stats[:files_removed],
+        :files_modified           => stats[:files_modified],
         :files_changed            => stats[:files_added] + stats[:files_modified] + stats[:files_removed],
-        :src_files               => stats[:src_files],
-        :doc_files               => stats[:doc_files],
-        :other_files             => stats[:other_files],
+        :src_files                => stats[:src_files],
+        :doc_files                => stats[:doc_files],
+        :other_files              => stats[:other_files],
         :perc_external_contribs   => ((commits_last_3_month - commits_last_x_months(pr[:id], true, 3)[0][:num_commits]) * 100) / commits_last_3_month,
         :sloc                     => src,
         :src_churn                => stats[:lines_added] + stats[:lines_deleted],
         :test_churn               => stats[:test_lines_added] + stats[:test_lines_deleted],
-        :commits_on_files_touched => commits_on_files_touched(pr[:id], Time.at(Time.at(pr[:created_at]).to_i - 3600 * 24 * 90)),
+        :commits_on_files_touched => commits_on_files_touched(pr[:id], Time.at(time_created - 3600 * 24 * 90)),
         :test_lines_per_kloc      => (test_lines(pr[:id]).to_f / src.to_f) * 1000,
         :test_cases_per_kloc      => (num_test_cases(pr[:id]).to_f / src.to_f) * 1000,
         :asserts_per_kloc         => (num_assertions(pr[:id]).to_f / src.to_f) * 1000,
@@ -307,7 +309,9 @@ Extract data for pull requests for a given repository
         :requester_succ_rate      => if prev_pull_reqs > 0 then prev_pull_requests(pr[:id], 'merged')[0][:num_pull_reqs].to_f / prev_pull_reqs.to_f else 0 end,
         :followers                => followers(pr[:id])[0][:num_followers],
         :intra_branch             => if intra_branch?(pr[:id])[0][:intra_branch] == 1 then true else false end,
-        :main_team_member         => if main_team_member?(pr[:id])[0][:main_team_member] == 1 then true else false end
+        :main_team_member         => if main_team_member?(pr[:id])[0][:main_team_member] == 1 then true else false end,
+        :open                     => open_at_creation(time_created, pr[:project_id]),
+        :close_order              => close_order(time_created, pr[:project_id])
     }
   end
 
@@ -780,6 +784,46 @@ Extract data for pull requests for a given repository
 
     }.call
     Thread.current[:issue_cmnt]
+  end
+
+  def open_at_creation(created_at, project_id)
+    q = <<-QUERY
+    select pr.pullreq_id as pullreq_id
+    from pull_requests pr, pull_request_history prh1, pull_request_history prh2
+    where pr.id = prh1.pull_request_id
+    and pr.id = prh2.pull_request_id
+    and prh1.action = 'opened'
+    and prh1.created_at < ?
+    and prh2.action = 'closed'
+    and prh2.created_at > ?
+    and pr.base_repo_id = ?
+    order by prh1
+    QUERY
+
+    db.fetch(q, created_at, created_at, project_id).all
+  end
+
+  def close_order(created_at, project_id)
+    q = <<-QUERY
+    select pr2.pullreq_id
+    from pull_request_history prh, pull_requests pr2,
+      (select pr.id as id
+      from pull_requests pr, pull_request_history prh1, pull_request_history prh2
+      where pr.id = prh1.pull_request_id
+      and pr.id = prh2.pull_request_id
+      and prh1.action = 'opened'
+      and prh1.created_at < ?
+      and prh2.action = 'closed'
+      and prh2.created_at > ?
+      and pr.base_repo_id = ?
+      order by pullreq_id asc) as opened
+    where opened.id = prh.pull_request_id
+    and pr2.id = opened.id
+    and prh.action = 'closed'
+    order by prh.created_at asc
+    QUERY
+
+    db.fetch(q, created_at, created_at, project_id).all
   end
 
   def if_empty(result, field)
