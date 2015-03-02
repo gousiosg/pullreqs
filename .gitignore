@@ -27,3 +27,4 @@ tmp
 .DS_Store
 *.swp
 doc/build
+.Rproj.user

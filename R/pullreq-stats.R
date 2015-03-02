@@ -51,7 +51,6 @@ if(length(list.files(pattern="R")) == 0) {
 print("Loading data files..")
 all <- load.data(project.list)
 
-
 #  Number of projects per language
 for(language in c("ruby", "java", "python", "scala")) {
   printf("%d projects in %s", length(unique(subset(all, lang == language)$project_name)), language)
@@ -116,17 +115,16 @@ store.pdf(p, plot.location, "pr-num-comments-hist.pdf")
 printf("Avg pullreq merged: %f", (nrow(merged)/nrow(all))*100)
 
 # Merge % mean
-a <- do.call(rbind, Map(function(x) {
-  total = nrow(x)
-  merged = nrow(subset(x, merged_at > 0))
-  unmerged_perc = (100 * (total - merged))/total
-  merged_perc = 100 - unmerged_perc
-  rbind(data.frame(project=project.name(x), status="merged", value=merged_perc),
-        data.frame(project=project.name(x), status="unmerged", value=unmerged_perc))
-}, dfs))
+a <- all
+a <- sqldf("select count(*) as num_cases, project_name, merged from a group by project_name, merged", drv="SQLite")
+a$perc <- apply(a, 1, function(x){
+  total <- sum(as.integer(subset(a, project_name == x[2])$num_cases))
+  as.integer(x[1]) / total * 100
+})
 
-printf("Mean of pullreq merged: %f", mean(subset(a, status == "merged")$value))
-printf("Shapiro-Wilkes pullreq merged perc pvalue: %f", shapiro.test(subset(a, status == "merged")$value)$p.value)
+printf("Mean of pullreq merged: %f", mean(subset(a, merged == TRUE)$perc))
+printf("Shapiro-Wilkes pullreq merged perc pvalue: %f", 
+       shapiro.test(subset(a, merged == T)$perc)$p.value)
 
 # Merged pull reqs quantiles
 to.days <- function(x) {
