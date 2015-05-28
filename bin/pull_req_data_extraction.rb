@@ -506,12 +506,11 @@ Extract data for pull requests for a given repository
   end
 
   # Number of followers of the person that created the pull request
-  # TODO: FIXME: Temporarily changed user_id->follower_id to fix issue in db
   def followers(pr_id)
     q = <<-QUERY
     select count(f.follower_id) as num_followers
     from pull_requests pr, followers f, pull_request_history prh
-    where pr.user_id = f.user_id
+    where prh.actor_id = f.user_id
       and prh.pull_request_id = pr.id
       and prh.action = 'opened'
       and f.created_at < prh.created_at
@@ -538,9 +537,10 @@ Extract data for pull requests for a given repository
   def requester(pr_id)
     q = <<-QUERY
     select u.login as login
-    from users u, pull_requests pr
-    where pr.user_id = u.id
-      and pr.id = ?
+    from users u, pull_request_history prh
+    where prh.actor_id = u.id
+      and action = 'opened'
+      and prh.pull_request_id = ?
     QUERY
     if_empty(db.fetch(q, pr_id).all, :login)
   end
@@ -548,14 +548,18 @@ Extract data for pull requests for a given repository
   # Number of previous pull requests for the pull requester
   def prev_pull_requests(pr_id, action)
     q = <<-QUERY
-    select count(pullreq_id) as num_pull_reqs
-    from pull_requests pr
-    where pr.user_id = (select pr1.user_id from pull_requests pr1 where pr1.id = ?)
-    and pr.base_repo_id = (select pr1.base_repo_id from pull_requests pr1 where pr1.id = ?)
-    and exists (select * from pull_request_history prh where prh.action = ? and prh.pull_request_id = pr.id)
-    and pr.pullreq_id < (select pr1.pullreq_id from pull_requests pr1 where pr1.id = ?)
+    select count(*) as num_pull_reqs
+    from pull_request_history prh, pull_requests pr
+    where prh.action = ?
+      and prh.created_at < (select min(created_at) from pull_request_history prh1 where prh1.pull_request_id = ?)
+      and prh.actor_id = (select min(actor_id) from pull_request_history prh1 where prh1.pull_request_id = ? and action = ?)
+      and prh.pull_request_id = pr.id
+      and pr.base_repo_id = (select pr1.base_repo_id from pull_requests pr1 where pr1.id = ?);
     QUERY
-    if_empty(db.fetch(q, pr_id, pr_id, action, pr_id).all, :num_pull_reqs)
+    if_empty(db.fetch(q, action, pr_id, pr_id, action, pr_id).all, :num_pull_reqs)
+  end
+    QUERY
+    db.fetch(q, pr_id, pr_id, pr_id).all.size > 0
   end
 
   # Check if the pull request is intra_branch
@@ -573,8 +577,9 @@ Extract data for pull requests for a given repository
     select exists(select *
           from project_members
           where user_id = u.id and repo_id = pr.base_repo_id) as main_team_member
-    from users u, pull_requests pr
-    where pr.user_id = u.id
+    from users u, pull_request_history prh, pull_requests pr
+    where prh.actor_id = u.id
+    and pr.id = prh.pull_request_id
     and pr.id = ?
     QUERY
     if_empty(db.fetch(q, pr_id).all, :main_team_member)
