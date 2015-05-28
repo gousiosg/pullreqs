@@ -14,6 +14,7 @@ require 'linguist'
 require 'grit'
 require 'thread'
 require 'parallel'
+require 'mongo'
 
 require 'java'
 require 'ruby'
@@ -24,7 +25,6 @@ require 'python'
 
 class PullReqDataExtraction < GHTorrent::Command
 
-  include GHTorrent::Persister
   include GHTorrent::Settings
   include Grit
 
@@ -57,7 +57,11 @@ Extract data for pull requests for a given repository
   end
 
   def mongo
-    Thread.current[:mongo_db] ||= connect(:mongo, settings)
+    Thread.current[:mongo_db] ||= Proc.new do
+      mongo_db = MongoClient.new(config(:mongo_host), config(:mongo_port)).db(config(:mongo_db))
+      mongo_db.authenticate(config(:mongo_username), config(:mongo_passwd))
+      mongo_db
+    end.call
     Thread.current[:mongo_db]
   end
 
@@ -108,7 +112,7 @@ Extract data for pull requests for a given repository
       Trollop::die "Cannot find user #{ARGV[0]}"
     end
 
-    repo_entry = ght.transaction{ght.ensure_repo(ARGV[0], ARGV[1], false, false, false)}
+    repo_entry = ght.transaction{ght.ensure_repo(ARGV[0], ARGV[1])}
 
     if repo_entry.nil?
       Trollop::die "Cannot find repository #{ARGV[0]}/#{ARGV[1]}"
@@ -167,7 +171,7 @@ Extract data for pull requests for a given repository
     and pc.commit_id = c.id
     QUERY
 
-    commits = mongo.get_underlying_connection['commits']
+    commits = mongo['commits']
     fixre = /(?:fixe[sd]?|close[sd]?|resolve[sd]?)(?:[^\/]*?|and)#([0-9]+)/mi
 
     @closed_by_commit ={}
@@ -282,17 +286,17 @@ Extract data for pull requests for a given repository
         :forward_links            => forward_links?(pr[:login], pr[:project_name], pr[:github_id]),
         :team_size                => team_size_at_open(pr[:id], 3)[0][:teamsize],
         :num_commits              => num_commits(pr[:id])[0][:commit_count],
-        :num_commit_comments     => num_comments(pr[:id])[0][:comment_count],
-        :num_issue_comments      => num_issue_comments(pr[:id])[0][:issue_comment_count],
+        :num_commit_comments      => num_comments(pr[:id])[0][:comment_count],
+        :num_issue_comments       => num_issue_comments(pr[:id])[0][:issue_comment_count],
         :num_comments             => num_comments(pr[:id])[0][:comment_count] + num_issue_comments(pr[:id])[0][:issue_comment_count],
         :num_participants         => num_participants(pr[:id])[0][:participants],
-        :files_added             => stats[:files_added],
-        :files_deleted           => stats[:files_removed],
-        :files_modified          => stats[:files_modified],
+        :files_added              => stats[:files_added],
+        :files_deleted            => stats[:files_removed],
+        :files_modified           => stats[:files_modified],
         :files_changed            => stats[:files_added] + stats[:files_modified] + stats[:files_removed],
-        :src_files               => stats[:src_files],
-        :doc_files               => stats[:doc_files],
-        :other_files             => stats[:other_files],
+        :src_files                => stats[:src_files],
+        :doc_files                => stats[:doc_files],
+        :other_files              => stats[:other_files],
         :perc_external_contribs   => ((commits_last_3_month - commits_last_x_months(pr[:id], true, 3)[0][:num_commits]) * 100) / commits_last_3_month,
         :sloc                     => src,
         :src_churn                => stats[:lines_added] + stats[:lines_deleted],
@@ -539,7 +543,7 @@ Extract data for pull requests for a given repository
     if_empty(db.fetch(q, pr_id).all, :login)
   end
 
-  # Number of pull
+  # Number of previous pull requests for the pull requester
   def prev_pull_requests(pr_id, action)
     q = <<-QUERY
     select count(pullreq_id) as num_pull_reqs
@@ -721,9 +725,9 @@ Extract data for pull requests for a given repository
     QUERY
     pullreq = db.fetch(q, pr_id).all[0]
 
-    entry = mongo.find(:pull_requests, {:owner => pullreq[:user],
+    entry = mongo['pull_requests'].find_one({:owner => pullreq[:user],
                                         :repo => pullreq[:name],
-                                        :number => pullreq[:pullreq_id]})[0]
+                                        :number => pullreq[:pullreq_id]})
     entry
   end
 
@@ -739,7 +743,7 @@ Extract data for pull requests for a given repository
     commits = db.fetch(q, pr_id).all
 
     commits.reduce([]){ |acc, x|
-      a = mongo.find(:commits, {:sha => x[:sha]})[0]
+      a = mongo['commits'].find_one({:sha => x[:sha]})
       acc << a unless a.nil?
       acc
     }.select{|c| c['parents'].size <= 1}
@@ -771,7 +775,7 @@ Extract data for pull requests for a given repository
     end
 
     Thread.current[:issue_cmnt] ||= Proc.new {
-      issue_comments = mongo.get_underlying_connection['issue_comments']
+      issue_comments = mongo['issue_comments']
       ic = issue_comments.find(
           {'owner' => owner, 'repo' => repo, 'issue_id' => pr_id.to_i},
           {:fields => {'body' => 1, 'created_at' => 1, '_id' => 0},
