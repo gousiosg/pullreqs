@@ -11,8 +11,8 @@ require 'bundler'
 require 'ghtorrent'
 require 'time'
 require 'linguist'
-require 'grit'
 require 'thread'
+require 'rugged'
 require 'parallel'
 require 'mongo'
 
@@ -26,7 +26,7 @@ require 'python'
 class PullReqDataExtraction < GHTorrent::Command
 
   include GHTorrent::Settings
-  include Grit
+  include Mongo
 
   def prepare_options(options)
     options.banner <<-BANNER
@@ -82,12 +82,13 @@ Extract data for pull requests for a given repository
     @semaphore ||= Mutex.new
     @semaphore
   end
+
   def stripped(f)
     @stripped ||= Hash.new
     unless @stripped.has_key? f
       semaphore.synchronize do
         unless @stripped.has_key? f
-          @stripped[f] = strip_comments(repo.blob(f[:sha]).data)
+          @stripped[f] = strip_comments(repo.read(f[:oid]).data)
         end
       end
     end
@@ -155,11 +156,12 @@ Extract data for pull requests for a given repository
     # Print file header
     puts format.map{|x| x.to_s}.join(',')
 
-    # Store all commits abbreviated SHA-1s for later comparisons
-
-    @all_commits = (1..50).reduce(['master']) do |acc, x|
-      acc + repo.commits(acc.last, 1000).map{|x| x.id_abbrev}
-    end.flatten.sort.uniq[1..-1]
+    walker = Rugged::Walker.new(repo)
+    walker.sorting(Rugged::SORT_DATE)
+    walker.push(repo.head.target)
+    @all_commits = walker.map do |commit|
+      commit.oid[0..10]
+    end
 
     # Get commits that close issues/pull requests
     # Index them by issue/pullreq id, as a sha might close multiple issues
@@ -603,8 +605,8 @@ Extract data for pull requests for a given repository
     end
 
     def file_type(f)
-      lang = Linguist::Language.detect(f, nil)
-      if lang.nil? then :data else lang.type end
+      lang = Linguist::Language.find_by_filename(f)
+      if lang.empty? then :data else lang[0].type end
     end
 
     def file_type_count(commits, type)
@@ -665,8 +667,9 @@ Extract data for pull requests for a given repository
   end
 
   def commits_on_files_touched(pr_id, oldest)
-    pullreq = pull_req_entry(pr_id)
+    pr_against = pull_req_entry(pr_id)['base']['sha']
     commits = commit_entries(pr_id)
+
     commits_per_file = commits.flat_map { |c|
       c['files'].map { |f|
         [c['sha'], f['filename']]
@@ -674,16 +677,25 @@ Extract data for pull requests for a given repository
     }.group_by {|c|
       c[1]
     }
-    commits_per_file.map { |k,v|
-      commits_in_pr = commits_per_file[k].map{|x| x[0]}
-      commits_in_pr.flat_map{|x|
-        repo.log(x, k)
-      }.find_all { |l|
-        not commits_in_pr.include?(l.sha) and
-        l.authored_date > oldest and
-        l.authored_date < Time.parse(pullreq['created_at'])
-      }.size
-    }.flatten.reduce(0) { |acc, x| acc + x }  # Count the total number of commits
+
+    commits_per_file.keys.map do |filename|
+      commits_in_pr = commits_per_file[filename].map{|x| x[0]}
+
+      walker = Rugged::Walker.new(repo)
+      walker.sorting(Rugged::SORT_DATE)
+      walker.push(pr_against)
+
+      num_commits = walker.take_while do |c|
+        c.time > oldest
+      end.reduce(0) do |acc, c|
+        if (c.diff(paths: [filename.to_s]).size > 0 and
+            not commits_in_pr.include? c.oid)
+          acc += 1
+        end
+        acc
+      end
+      num_commits
+    end.reduce(0) { |acc, x| acc + x }
   end
 
 
@@ -759,9 +771,21 @@ Extract data for pull requests for a given repository
     and p.id = ?
     QUERY
 
-    base_commit = db.fetch(q, pr_id).all[0][:sha]
-    files = repo.lstree(base_commit, :recursive => true)
+    def lslr(tree, path = '')
+      all_files = []
+      for f in tree.map{|x| x}
+        f[:path] = path + '/' + f[:name]
+        if f[:type] == :tree
+          all_files << lslr(repo.lookup(f[:oid]), f[:path])
+        else
+          all_files << f
+        end
+      end
+      all_files.flatten
+    end
 
+    base_commit = db.fetch(q, pr_id).all[0][:sha]
+    files = lslr(repo.lookup(base_commit).tree)
     files.select{|x| filter.call(x)}
   end
 
@@ -827,17 +851,17 @@ Extract data for pull requests for a given repository
       proc_out.join
     end
 
-    checkout_dir = File.join(config(:cache_dir), "repos", user, repo)
+    checkout_dir = File.join('cache', user, repo)
 
     begin
-      repo = Grit::Repo.new(checkout_dir)
+      repo = Rugged::Repository.new(checkout_dir)
       if update
         spawn("cd #{checkout_dir} && git pull")
       end
       repo
     rescue
       spawn("git clone git://github.com/#{user}/#{repo}.git #{checkout_dir}")
-      Grit::Repo.new(checkout_dir)
+      Rugged::Repository.new(checkout_dir)
     end
   end
 
@@ -895,19 +919,6 @@ Extract data for pull requests for a given repository
     raise Exception.new("Unimplemented")
   end
 
-end
-
-# Monkey patch grit to fix bug in commits containing signed patches
-# see: http://alexdo.de/2013/03/25/how-i-fixed-grits-gpg-weakness/
-class Grit::Commit
-  class << self
-    alias_method :original_list_from_string, :list_from_string
-
-    def list_from_string(repo, text)
-      text.gsub!(/gpgsig -----BEGIN PGP SIGNATURE-----[\n\r](.*[\n\r])*? -----END PGP SIGNATURE-----[\n\r]/, "")
-      original_list_from_string(repo, text)
-    end
-  end
 end
 
 PullReqDataExtraction.run
