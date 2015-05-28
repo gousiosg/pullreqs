@@ -149,8 +149,8 @@ Extract data for pull requests for a given repository
         :perc_external_contribs,
         :sloc,:src_churn,:test_churn,:commits_on_files_touched,
         :test_lines_per_kloc,:test_cases_per_kloc,:asserts_per_kloc,
-        :watchers,:requester,:prev_pullreqs,:requester_succ_rate,:followers,
-        :intra_branch,:main_team_member
+        :watchers,:requester,:closer,:prev_pullreqs,:requester_succ_rate,:followers,
+        :intra_branch,:main_team_member,:social_connection_tsay
       ]
 
     # Print file header
@@ -309,11 +309,13 @@ Extract data for pull requests for a given repository
         :asserts_per_kloc         => (num_assertions(pr[:id]).to_f / src.to_f) * 1000,
         :watchers                 => watchers(pr[:id])[0][:num_watchers],
         :requester                => requester(pr[:id])[0][:login],
+        :closer                   => closer(pr[:id])[0][:login],
         :prev_pullreqs            => prev_pull_reqs,
         :requester_succ_rate      => if prev_pull_reqs > 0 then prev_pull_requests(pr[:id], 'merged')[0][:num_pull_reqs].to_f / prev_pull_reqs.to_f else 0 end,
         :followers                => followers(pr[:id])[0][:num_followers],
         :intra_branch             => if intra_branch?(pr[:id])[0][:intra_branch] == 1 then true else false end,
-        :main_team_member         => if main_team_member?(pr[:id])[0][:main_team_member] == 1 then true else false end
+        :main_team_member         => if main_team_member?(pr[:id])[0][:main_team_member] == 1 then true else false end,
+        :social_connection_tsay   => social_connection_tsay?(pr[:id])
     }
   end
 
@@ -533,6 +535,19 @@ Extract data for pull requests for a given repository
     if_empty(db.fetch(q, pr_id).all, :num_watchers)
   end
 
+  # Person that first closed the pull request
+  def closer(pr_id)
+    q = <<-QUERY
+    select u.login as login
+    from users u, pull_request_history prh
+    where prh.actor_id = u.id
+      and action = 'closed'
+      and prh.pull_request_id = ?
+    limit 1
+    QUERY
+    if_empty(db.fetch(q, pr_id).all, :login)
+  end
+
   # Number of followers of the person that created the pull request
   def requester(pr_id)
     q = <<-QUERY
@@ -558,6 +573,29 @@ Extract data for pull requests for a given repository
     QUERY
     if_empty(db.fetch(q, action, pr_id, pr_id, action, pr_id).all, :num_pull_reqs)
   end
+
+  def social_connection_tsay?(pr_id)
+    q = <<-QUERY
+    select *
+    from followers
+    where user_id = (
+      select min(prh.actor_id)
+      from pull_request_history prh
+      where prh.pull_request_id = ?
+        and prh.action = 'closed'
+        )
+    and follower_id = (
+      select min(prh.actor_id)
+      from pull_request_history prh
+      where prh.pull_request_id = ?
+        and prh.action = 'opened'
+        )
+    and created_at < (
+      select min(created_at)
+        from pull_request_history
+        where pull_request_id = ?
+        and action = 'opened'
+    )
     QUERY
     db.fetch(q, pr_id, pr_id, pr_id).all.size > 0
   end
