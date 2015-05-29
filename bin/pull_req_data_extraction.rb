@@ -59,7 +59,9 @@ Extract data for pull requests for a given repository
   def mongo
     Thread.current[:mongo_db] ||= Proc.new do
       mongo_db = MongoClient.new(config(:mongo_host), config(:mongo_port)).db(config(:mongo_db))
-      mongo_db.authenticate(config(:mongo_username), config(:mongo_passwd))
+      unless config(:mongo_username).nil?
+        mongo_db.authenticate(config(:mongo_username), config(:mongo_passwd))
+      end
       mongo_db
     end.call
     Thread.current[:mongo_db]
