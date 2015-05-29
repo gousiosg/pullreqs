@@ -236,7 +236,7 @@ Extract data for pull requests for a given repository
   def process_pull_request(pr, lang)
 
     # Statistics across pull request commits
-    stats = pr_stats(pr[:id])
+    stats = pr_stats(pr)
 
     merged = ! pr[:merged_at].nil?
     git_merged = false
@@ -251,8 +251,9 @@ Extract data for pull requests for a given repository
 
     if src == 0 then raise Exception.new("Bad number of lines: #{0}") end
 
-    commits_last_3_month = commits_last_x_months(pr[:id], false, 3)[0][:num_commits]
-    prev_pull_reqs = prev_pull_requests(pr[:id],'opened')[0][:num_pull_reqs]
+    months_back = 3
+    commits_incl_prs = commits_last_x_months(pr, false, months_back)
+    prev_pull_reqs = prev_pull_requests(pr,'opened')
 
     # Create line for a pull request
     {
@@ -266,14 +267,15 @@ Extract data for pull requests for a given repository
         :lifetime_minutes         => pr[:lifetime_minutes],
         :mergetime_minutes        => merge_time_minutes(pr, merged, git_merged),
         :merged_using             => merge_reason.to_s,
-        :conflict                 => conflict?(pr[:login], pr[:project_name], pr[:github_id]),
-        :forward_links            => forward_links?(pr[:login], pr[:project_name], pr[:github_id]),
-        :team_size                => team_size_at_open(pr[:id], 3)[0][:teamsize],
-        :num_commits              => num_commits(pr[:id])[0][:commit_count],
-        :num_commit_comments      => num_comments(pr[:id])[0][:comment_count],
-        :num_issue_comments       => num_issue_comments(pr[:id])[0][:issue_comment_count],
-        :num_comments             => num_comments(pr[:id])[0][:comment_count] + num_issue_comments(pr[:id])[0][:issue_comment_count],
-        :num_participants         => num_participants(pr[:id])[0][:participants],
+        :conflict                 => conflict?(pr),
+        :forward_links            => forward_links?(pr),
+        :team_size                => team_size_at_open(pr, months_back),
+        :num_commits              => num_commits(pr),
+        :num_pr_comments          => num_pr_comments(pr),
+        :num_issue_comments       => num_issue_comments(pr),
+        :num_commit_comments      => num_commit_comments(pr),
+        :num_comments             => num_pr_comments(pr) + num_issue_comments(pr) + num_commit_comments(pr),
+        :num_participants         => num_participants(pr),
         :files_added              => stats[:files_added],
         :files_deleted            => stats[:files_removed],
         :files_modified           => stats[:files_modified],
@@ -281,23 +283,23 @@ Extract data for pull requests for a given repository
         :src_files                => stats[:src_files],
         :doc_files                => stats[:doc_files],
         :other_files              => stats[:other_files],
-        :perc_external_contribs   => ((commits_last_3_month - commits_last_x_months(pr[:id], true, 3)[0][:num_commits]) * 100) / commits_last_3_month,
+        :perc_external_contribs   => (commits_incl_prs - commits_last_x_months(pr, true, months_back)).to_f / commits_incl_prs,
         :sloc                     => src,
         :src_churn                => stats[:lines_added] + stats[:lines_deleted],
         :test_churn               => stats[:test_lines_added] + stats[:test_lines_deleted],
-        :commits_on_files_touched => commits_on_files_touched(pr[:id], Time.at(Time.at(pr[:created_at]).to_i - 3600 * 24 * 90)),
+        :commits_on_files_touched => commits_on_files_touched(pr, months_back),
         :test_lines_per_kloc      => (test_lines(pr[:id]).to_f / src.to_f) * 1000,
         :test_cases_per_kloc      => (num_test_cases(pr[:id]).to_f / src.to_f) * 1000,
         :asserts_per_kloc         => (num_assertions(pr[:id]).to_f / src.to_f) * 1000,
-        :watchers                 => watchers(pr[:id])[0][:num_watchers],
-        :requester                => requester(pr[:id])[0][:login],
-        :closer                   => closer(pr[:id])[0][:login],
+        :watchers                 => watchers(pr),
+        :requester                => requester(pr),
+        :closer                   => closer(pr),
         :prev_pullreqs            => prev_pull_reqs,
-        :requester_succ_rate      => if prev_pull_reqs > 0 then prev_pull_requests(pr[:id], 'merged')[0][:num_pull_reqs].to_f / prev_pull_reqs.to_f else 0 end,
-        :followers                => followers(pr[:id])[0][:num_followers],
-        :intra_branch             => if intra_branch?(pr[:id])[0][:intra_branch] == 1 then true else false end,
-        :main_team_member         => if main_team_member?(pr[:id])[0][:main_team_member] == 1 then true else false end,
-        :social_connection_tsay   => social_connection_tsay?(pr[:id])
+        :requester_succ_rate      => if prev_pull_reqs > 0 then prev_pull_requests(pr, 'merged').to_f / prev_pull_reqs.to_f else 0 end,
+        :followers                => followers(pr),
+        :intra_branch             => if intra_branch?(pr) == 1 then true else false end,
+        :main_team_member         => if main_team_member?(pr) == 1 then true else false end,
+        :social_connection_tsay   => social_connection_tsay?(pr),
     }
   end
 
@@ -382,13 +384,16 @@ Extract data for pull requests for a given repository
     [false, :unknown]
   end
 
-  def conflict?(owner, repo, pr_id)
-    issue_comments(owner, repo, pr_id).reduce(false) do |acc, x|
+  def conflict?(pr)
+    issue_comments(pr[:owner], pr[:project_name], pr[:id]).reduce(false) do |acc, x|
       acc || (not x['body'].match(/conflict/i).nil?)
     end
   end
 
-  def forward_links?(owner, repo, pr_id)
+  def forward_links?(pr)
+    owner = pr[:login]
+    repo = pr[:project_name]
+    pr_id = pr[:github_id]
     issue_comments(owner, repo, pr_id).reduce(false) do |acc, x|
       # Try to find pull_requests numbers referenced in each comment
       a = x['body'].scan(/\#([0-9]+)/m).reduce(false) do |acc1, m|
@@ -412,9 +417,9 @@ Extract data for pull requests for a given repository
     end
   end
 
-# Number of developers that have committed at least once in the interval
+  # Number of developers that have committed at least once in the interval
   # between the pull request open up to +interval_months+ back
-  def team_size_at_open(pr_id, interval_months)
+  def team_size_at_open(pr, interval_months)
     q = <<-QUERY
     select count(distinct author_id) as teamsize
     from projects p, commits c, project_commits pc, pull_requests pr,
@@ -429,11 +434,11 @@ Extract data for pull requests for a given repository
       and c.created_at > DATE_SUB(prh.created_at, INTERVAL #{interval_months} MONTH)
       and pr.id=?;
     QUERY
-    db.fetch(q, pr_id).all
+    db.fetch(q, pr[:id]).first[:teamsize]
   end
 
   # Number of commits in pull request
-  def num_commits(pr_id)
+  def num_commits(pr)
     q = <<-QUERY
     select count(*) as commit_count
     from pull_requests pr, pull_request_commits prc
@@ -441,11 +446,11 @@ Extract data for pull requests for a given repository
       and pr.id=?
     group by prc.pull_request_id
     QUERY
-    if_empty(db.fetch(q, pr_id).all, :commit_count)
+    db.fetch(q, pr[:id]).first[:commit_count]
   end
 
-  # Number of src code review comments in pull request
-  def num_comments(pr_id)
+  # Number of pull request code review comments in pull request
+  def num_pr_comments(pr)
     q = <<-QUERY
     select count(*) as comment_count
     from pull_request_comments prc
@@ -455,11 +460,11 @@ Extract data for pull requests for a given repository
       from pull_request_history
       where action = 'closed' and pull_request_id = ?)
     QUERY
-    if_empty(db.fetch(q, pr_id, pr_id).all, :comment_count)
+    db.fetch(q, pr[:id], pr[:id]).first[:comment_count]
   end
 
   # Number of pull request discussion comments
-  def num_issue_comments(pr_id)
+  def num_issue_comments(pr)
     q = <<-QUERY
     select count(*) as issue_comment_count
     from pull_requests pr, issue_comments ic, issues i
@@ -472,10 +477,21 @@ Extract data for pull requests for a given repository
       from pull_request_history
       where action = 'closed' and pull_request_id = ?)
     QUERY
-    if_empty(db.fetch(q, pr_id, pr_id).all, :issue_comment_count)
+    db.fetch(q, pr[:id], pr[:id]).first[:issue_comment_count]
   end
 
-  def num_participants(pr_id)
+  # Number of commit comments on commits composing the pull request
+  def num_commit_comments(pr)
+    q = <<-QUERY
+    select count(*) as commit_comment_count
+    from pull_request_commits prc, commit_comments cc
+    where prc.commit_id = cc.commit_id
+      and prc.pull_request_id = ?
+    QUERY
+    db.fetch(q, pr[:id]).first[:commit_comment_count]
+  end
+
+  def num_participants(pr)
     q = <<-QUERY
     select count(distinct(user_id)) as participants from
       (select user_id
@@ -486,11 +502,11 @@ Extract data for pull requests for a given repository
        from issue_comments ic, issues i
        where i.id = ic.issue_id and i.pull_request_id = ?) as num_participants
     QUERY
-    if_empty(db.fetch(q, pr_id, pr_id).all, :num_participants)
+    db.fetch(q, pr[:id], pr[:id]).first[:num_participants]
   end
 
   # Number of followers of the person that created the pull request
-  def followers(pr_id)
+  def followers(pr)
     q = <<-QUERY
     select count(f.follower_id) as num_followers
     from pull_requests pr, followers f, pull_request_history prh
@@ -500,11 +516,11 @@ Extract data for pull requests for a given repository
       and f.created_at < prh.created_at
       and pr.id = ?
     QUERY
-    if_empty(db.fetch(q, pr_id).all, :num_followers)
+    db.fetch(q, pr[:id]).first[:num_followers]
   end
 
   # Number of project watchers/stargazers at the time the pull request was made
-  def watchers(pr_id)
+  def watchers(pr)
     q = <<-QUERY
     select count(w.user_id) as num_watchers
     from watchers w, pull_requests pr, pull_request_history prh
@@ -514,11 +530,11 @@ Extract data for pull requests for a given repository
       and prh.action='opened'
       and pr.id = ?
     QUERY
-    if_empty(db.fetch(q, pr_id).all, :num_watchers)
+    db.fetch(q, pr[:id]).first[:num_watchers]
   end
 
   # Person that first closed the pull request
-  def closer(pr_id)
+  def closer(pr)
     q = <<-QUERY
     select u.login as login
     from users u, pull_request_history prh
@@ -527,11 +543,11 @@ Extract data for pull requests for a given repository
       and prh.pull_request_id = ?
     limit 1
     QUERY
-    if_empty(db.fetch(q, pr_id).all, :login)
+    db.fetch(q, pr[:id]).first[:login]
   end
 
   # Number of followers of the person that created the pull request
-  def requester(pr_id)
+  def requester(pr)
     q = <<-QUERY
     select u.login as login
     from users u, pull_request_history prh
@@ -539,11 +555,11 @@ Extract data for pull requests for a given repository
       and action = 'opened'
       and prh.pull_request_id = ?
     QUERY
-    if_empty(db.fetch(q, pr_id).all, :login)
+    db.fetch(q, pr[:id]).first[:login]
   end
 
   # Number of previous pull requests for the pull requester
-  def prev_pull_requests(pr_id, action)
+  def prev_pull_requests(pr, action)
     q = <<-QUERY
     select count(*) as num_pull_reqs
     from pull_request_history prh, pull_requests pr
@@ -553,10 +569,10 @@ Extract data for pull requests for a given repository
       and prh.pull_request_id = pr.id
       and pr.base_repo_id = (select pr1.base_repo_id from pull_requests pr1 where pr1.id = ?);
     QUERY
-    if_empty(db.fetch(q, action, pr_id, pr_id, action, pr_id).all, :num_pull_reqs)
+    db.fetch(q, action, pr[:id], pr[:id], action, pr[:id]).first[:num_pull_reqs]
   end
 
-  def social_connection_tsay?(pr_id)
+  def social_connection_tsay?(pr)
     q = <<-QUERY
     select *
     from followers
@@ -579,20 +595,21 @@ Extract data for pull requests for a given repository
         and action = 'opened'
     )
     QUERY
-    db.fetch(q, pr_id, pr_id, pr_id).all.size > 0
+    db.fetch(q, pr[:id], pr[:id], pr[:id]).all.size > 0
+  end
   end
 
   # Check if the pull request is intra_branch
-  def intra_branch?(pr_id)
+  def intra_branch?(pr)
     q = <<-QUERY
     select IF(base_repo_id = head_repo_id, true, false) as intra_branch
     from pull_requests where id = ?
     QUERY
-    if_empty(db.fetch(q, pr_id).all, :intra_branch)
+    db.fetch(q, pr[:id]).first[:intra_branch]
   end
 
   # Check if the requester is part of the project's main team
-  def main_team_member?(pr_id)
+  def main_team_member?(pr)
     q = <<-QUERY
     select exists(select *
           from project_members
@@ -602,14 +619,14 @@ Extract data for pull requests for a given repository
     and pr.id = prh.pull_request_id
     and pr.id = ?
     QUERY
-    if_empty(db.fetch(q, pr_id).all, :main_team_member)
+    db.fetch(q, pr[:id]).first[:main_team_member]
   end
 
   # Various statistics for the pull request. Returned as Hash with the following
   # keys: :lines_added, :lines_deleted, :files_added, :files_removed,
   # :files_modified, :files_touched, :src_files, :doc_files, :other_files.
-  def pr_stats(pr_id)
-
+  def pr_stats(pr)
+    pr_id = pr[:id]
     raw_commits = commit_entries(pr_id)
     result = Hash.new(0)
 
@@ -691,9 +708,10 @@ Extract data for pull requests for a given repository
     result
   end
 
-  def commits_on_files_touched(pr_id, oldest)
-    pr_against = pull_req_entry(pr_id)['base']['sha']
-    commits = commit_entries(pr_id)
+  def commits_on_files_touched(pr, months_back)
+    oldest = Time.at(Time.at(pr[:created_at]).to_i - 3600 * 24 * 30 * months_back)
+    pr_against = pull_req_entry(pr[:id])['base']['sha']
+    commits = commit_entries(pr[:id])
 
     commits_per_file = commits.flat_map { |c|
       c['files'].map { |f|
@@ -713,8 +731,8 @@ Extract data for pull requests for a given repository
       num_commits = walker.take_while do |c|
         c.time > oldest
       end.reduce(0) do |acc, c|
-        if (c.diff(paths: [filename.to_s]).size > 0 and
-            not commits_in_pr.include? c.oid)
+        if c.diff(paths: [filename.to_s]).size > 0 and
+            not commits_in_pr.include? c.oid
           acc += 1
         end
         acc
@@ -723,11 +741,10 @@ Extract data for pull requests for a given repository
     end.reduce(0) { |acc, x| acc + x }
   end
 
-
-  # Total number of commits on the project in the month before the pull request
-  # was opened. The second parameter controls whether commits from other
-  # pull requests should be accounted for
-  def commits_last_x_months(pr_id, exclude_pull_req, months)
+  # Total number of commits on the project in the period up to `months` before
+  # the pull request was opened. `exclude_pull_req` controls whether commits
+  # from pull requests should be accounted for.
+  def commits_last_x_months(pr, exclude_pull_req, months)
     q = <<-QUERY
     select count(c.id) as num_commits
     from projects p, commits c, project_commits pc, pull_requests pr,
@@ -747,7 +764,7 @@ Extract data for pull requests for a given repository
     end
     q << ';'
 
-    if_empty(db.fetch(q, pr_id).all, :num_commits)
+    db.fetch(q, pr[:id]).first[:num_commits]
   end
 
   private
@@ -833,22 +850,6 @@ Extract data for pull requests for a given repository
 
     }.call
     Thread.current[:issue_cmnt]
-  end
-
-  def if_empty(result, field)
-    if result.nil? or result.empty?
-      [{field => 0}]
-    else
-      result
-    end
-  end
-
-  def not_zero(result, field)
-    if result[0][field].nil? or result[0][field] == 0
-      raise Exception.new("Field #{field} cannot have value 0")
-    else
-      result
-    end
   end
 
   def count_lines(files, include_filter = lambda{|x| true})
