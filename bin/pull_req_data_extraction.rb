@@ -135,27 +135,6 @@ Extract data for pull requests for a given repository
       @threads = ARGV[3].to_i
     end
 
-    format = [
-        :pull_req_id, :project_name, :lang, :github_id,
-        :created_at, :merged_at, :closed_at, :lifetime_minutes, :mergetime_minutes,
-        :merged_using, :conflict, :forward_links,
-        :team_size, :num_commits,
-        :num_commit_comments,:num_issue_comments,
-        :num_comments, :num_participants,
-        :files_added, :files_deleted, :files_modified,
-        :files_changed,
-        :src_files, :doc_files, :other_files,
-#        :commits_last_month, :main_team_commits_last_month,
-        :perc_external_contribs,
-        :sloc,:src_churn,:test_churn,:commits_on_files_touched,
-        :test_lines_per_kloc,:test_cases_per_kloc,:asserts_per_kloc,
-        :watchers,:requester,:closer,:prev_pullreqs,:requester_succ_rate,:followers,
-        :intra_branch,:main_team_member,:social_connection_tsay
-      ]
-
-    # Print file header
-    puts format.map{|x| x.to_s}.join(',')
-
     walker = Rugged::Walker.new(repo)
     walker.sorting(Rugged::SORT_DATE)
     walker.push(repo.head.target)
@@ -207,18 +186,19 @@ Extract data for pull requests for a given repository
     }
     prs = pull_reqs(repo_entry)
 
-    if threads > 1
-      Parallel.map(prs, :in_threads => threads) do |pr|
-        do_pr.call(pr)
-      end.select{|x| !x.nil?}.sort{|a,b| b[:github_id]<=>a[:github_id]}.each{|x| puts x.values.join(',')}
-    else
-      prs.each do |pr|
-        a = do_pr.call(pr);
-        unless a.nil?
-          puts a.values.join(',')
-        end
-      end
-    end
+    results = if threads > 1
+                Parallel.map(prs, :in_threads => threads) do |pr|
+                  do_pr.call(pr)
+                end
+              else
+                prs.map do |pr|
+                  do_pr.call(pr);
+                end
+              end.select { |x| !x.nil? }
+
+    puts results.first.keys.map{|x| x.to_s}.join(',')
+    results.sort{|a,b| b[:github_id]<=>a[:github_id]}.each{|x| puts x.values.join(',')}
+
   end
 
   # Get a list of pull requests for the processed project
