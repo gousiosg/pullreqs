@@ -300,6 +300,8 @@ Extract data for pull requests for a given repository
         :intra_branch             => if intra_branch?(pr) == 1 then true else false end,
         :main_team_member         => if main_team_member?(pr) == 1 then true else false end,
         :social_connection_tsay   => social_connection_tsay?(pr),
+        :hotness_basilescu        => hotness_basilescu(pr, months_back),
+        :team_size_basilescu      => team_size_basilescu(pr, months_back)
     }
   end
 
@@ -597,6 +599,42 @@ Extract data for pull requests for a given repository
     QUERY
     db.fetch(q, pr[:id], pr[:id], pr[:id]).all.size > 0
   end
+
+  # Median number of commits to files touched by the pull request relative to
+  # all project commits during the last three months
+  def hotness_basilescu(pr_id, months_back)
+    commits_on_files_touched(pr_id, months_back).to_f / commits_last_x_months(pr_id, true, months_back).to_f
+  end
+
+  # Number of integrators active (i.e., closed at least one issue/pull
+  # request, not their own) during 3 months prior to pull request
+  # creation.
+  def team_size_basilescu(pr, months_back)
+    q = <<-QUERY
+    select distinct(prh.actor_id) as actor
+    from pull_requests pr, pull_request_history prh
+    where pr.id = prh.pull_request_id
+     and pr.base_repo_id = (select pr1.base_repo_id from pull_requests pr1 where pr1.id = ?)
+     and prh.created_at <= (select min(prh.created_at) from pull_request_history where pull_request_id = ? and action = 'opened')
+     and prh.created_at > DATE_SUB((select min(prh.created_at) from pull_request_history where pull_request_id = ? and action = 'opened'), INTERVAL #{months_back} MONTH)
+     and prh.action = 'closed';
+    QUERY
+    db.fetch(q, pr[:id], pr[:id], pr[:id]).all.flat_map{|x| x[:actor]}.uniq.size
+  end
+
+  def social_distance_basilescu?(pr_id)
+
+  end
+
+  # Total number of words in the pull request title and description
+  def description_complexity(pr_id)
+
+  end
+
+  # Total number of pull requests still open in each project at current pull
+  # request creation time.
+  def workload(pr_id)
+
   end
 
   # Check if the pull request is intra_branch
@@ -744,7 +782,7 @@ Extract data for pull requests for a given repository
   # Total number of commits on the project in the period up to `months` before
   # the pull request was opened. `exclude_pull_req` controls whether commits
   # from pull requests should be accounted for.
-  def commits_last_x_months(pr, exclude_pull_req, months)
+  def commits_last_x_months(pr, exclude_pull_req, months_back)
     q = <<-QUERY
     select count(c.id) as num_commits
     from projects p, commits c, project_commits pc, pull_requests pr,
@@ -755,7 +793,7 @@ Extract data for pull requests for a given repository
       and prh.pull_request_id = pr.id
       and prh.action = 'opened'
       and c.created_at < prh.created_at
-      and c.created_at > DATE_SUB(prh.created_at, INTERVAL #{months} MONTH)
+      and c.created_at > DATE_SUB(prh.created_at, INTERVAL #{months_back} MONTH)
       and pr.id=?
     QUERY
 
