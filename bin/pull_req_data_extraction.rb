@@ -301,7 +301,9 @@ Extract data for pull requests for a given repository
         :main_team_member         => if main_team_member?(pr) == 1 then true else false end,
         :social_connection_tsay   => social_connection_tsay?(pr),
         :hotness_basilescu        => hotness_basilescu(pr, months_back),
-        :team_size_basilescu      => team_size_basilescu(pr, months_back)
+        :team_size_basilescu      => team_size_basilescu(pr, months_back),
+        :description_complexity   => description_complexity(pr),
+        :workload                 => workload(pr)
     }
   end
 
@@ -627,14 +629,32 @@ Extract data for pull requests for a given repository
   end
 
   # Total number of words in the pull request title and description
-  def description_complexity(pr_id)
-
+  def description_complexity(pr)
+    pull_req = pull_req_entry(pr[:id])
+    (pull_req['title'] + ' ' + pull_req['body']).gsub(/[\n\r]\s+/, ' ').split(/\s+/).size
   end
 
-  # Total number of pull requests still open in each project at current pull
+  # Total number of pull requests still open in each project at pull
   # request creation time.
-  def workload(pr_id)
-
+  def workload(pr)
+    q = <<-QUERY
+    select count(distinct(prh.pull_request_id)) as num_open
+    from pull_request_history prh, pull_requests pr, pull_request_history prh3
+    where prh.created_at <  prh3.created_at
+    and prh.action = 'opened'
+    and pr.id = prh.pull_request_id
+    and prh3.pull_request_id = ?
+    and (exists (select * from pull_request_history prh1
+                where prh1.action = 'closed'
+          and prh1.pull_request_id = prh.pull_request_id
+          and prh1.created_at > prh3.created_at)
+      or not exists (select * from pull_request_history prh1
+               where prh1.action = 'closed'
+               and prh1.pull_request_id = prh.pull_request_id)
+    )
+    and pr.base_repo_id = (select pr3.base_repo_id from pull_requests pr3 where pr3.id = ?)
+    QUERY
+    db.fetch(q, pr[:id], pr[:id]).first[:num_open]
   end
 
   # Check if the pull request is intra_branch
@@ -746,6 +766,9 @@ Extract data for pull requests for a given repository
     result
   end
 
+  # Number of commits on the files changed by the pull request
+  # between the time the PR was created and `months_back`
+  # excluding those created by the PR
   def commits_on_files_touched(pr, months_back)
     oldest = Time.at(Time.at(pr[:created_at]).to_i - 3600 * 24 * 30 * months_back)
     pr_against = pull_req_entry(pr[:id])['base']['sha']
@@ -817,10 +840,9 @@ Extract data for pull requests for a given repository
     QUERY
     pullreq = db.fetch(q, pr_id).all[0]
 
-    entry = mongo['pull_requests'].find_one({:owner => pullreq[:user],
-                                        :repo => pullreq[:name],
-                                        :number => pullreq[:pullreq_id]})
-    entry
+    mongo['pull_requests'].find_one({:owner => pullreq[:user],
+                                     :repo => pullreq[:name],
+                                     :number => pullreq[:pullreq_id]})
   end
 
   # JSON objects for the commits included in the pull request
