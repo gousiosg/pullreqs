@@ -308,7 +308,13 @@ Extract data for pull requests for a given repository
         :hotness_basilescu        => hotness_basilescu(pr, months_back),
         :team_size_basilescu      => team_size_basilescu(pr, months_back),
         :description_complexity   => description_complexity(pr),
-        :workload                 => workload(pr)
+        :workload                 => workload(pr),
+        :prior_interaction_issue_events    => prior_interaction_issue_events(pr, months_back),
+        :prior_interaction_issue_comments  => prior_interaction_issue_comments(pr, months_back),
+        :prior_interaction_pr_events       => prior_interaction_pr_events(pr, months_back),
+        :prior_interaction_pr_comments     => prior_interaction_pr_comments(pr, months_back),
+        :prior_interaction_commits         => prior_interaction_commits(pr, months_back),
+        :prior_interaction_commit_comments => prior_interaction_commit_comments(pr, months_back)
     }
   end
 
@@ -611,6 +617,106 @@ Extract data for pull requests for a given repository
     )
     QUERY
     db.fetch(q, pr[:id], pr[:id], pr[:id]).all.size > 0
+  end
+
+  # The number of events before a particular pull request that the user has
+  # participated in for this project.
+  def prior_interaction_issue_events(pr, months_back)
+    q = <<-QUERY
+      select count(distinct(i.id)) as num_issue_events
+      from issue_events ie, pull_request_history prh, pull_requests pr, issues i
+      where ie.actor_id = prh.actor_id
+        and i.repo_id = pr.base_repo_id
+        and i.id = ie.issue_id
+        and prh.pull_request_id = pr.id
+        and prh.action = 'opened'
+        and ie.created_at > DATE_SUB(prh.created_at, INTERVAL #{months_back} MONTH)
+        and ie.created_at < prh.created_at
+        and prh.pull_request_id = ?
+    QUERY
+    db.fetch(q, pr[:id]).first[:num_issue_events]
+  end
+
+  def prior_interaction_issue_comments(pr, months_back)
+    q = <<-QUERY
+    select count(distinct(ic.comment_id)) as issue_comment_count
+    from pull_request_history prh, pull_requests pr, issues i, issue_comments ic
+    where ic.user_id = prh.actor_id
+      and i.repo_id = pr.base_repo_id
+      and i.id = ic.issue_id
+      and prh.pull_request_id = pr.id
+      and prh.action = 'opened'
+      and ic.created_at > DATE_SUB(prh.created_at, INTERVAL #{months_back} MONTH)
+      and ic.created_at < prh.created_at
+      and prh.pull_request_id = ?;
+    QUERY
+    db.fetch(q, pr[:id]).first[:issue_comment_count]
+  end
+
+  def prior_interaction_pr_events(pr, months_back)
+    q = <<-QUERY
+    select count(distinct(prh1.id)) as count_pr
+    from  pull_request_history prh1, pull_request_history prh, pull_requests pr1, pull_requests pr
+    where prh1.actor_id = prh.actor_id
+      and pr1.base_repo_id = pr.base_repo_id
+      and pr1.id = prh1.pull_request_id
+      and pr.id = prh.pull_request_id
+      and prh.action = 'opened'
+      and prh1.created_at > DATE_SUB(prh.created_at, INTERVAL #{months_back} MONTH)
+      and prh1.created_at < prh.created_at
+      and prh.pull_request_id = ?
+    QUERY
+    db.fetch(q, pr[:id]).first[:count_pr]
+  end
+
+  def prior_interaction_pr_comments(pr, months_back)
+    q = <<-QUERY
+    select count(prc.comment_id) as count_pr_comments
+    from pull_request_history prh, pull_requests pr1, pull_requests pr, pull_request_comments prc
+    where prh.actor_id = prc.user_id
+      and pr1.base_repo_id = pr.base_repo_id
+      and pr1.id = prh.pull_request_id
+      and pr.id = prc.pull_request_id
+      and prh.action = 'opened'
+      and prc.created_at > DATE_SUB(prh.created_at, INTERVAL #{months_back} MONTH)
+      and prc.created_at < prh.created_at
+      and prh.pull_request_id = ?
+    QUERY
+    db.fetch(q, pr[:id]).first[:count_pr_comments]
+  end
+
+  def prior_interaction_commits(pr, months_back)
+    q = <<-QUERY
+    select count(distinct(c.id)) as count_commits
+    from pull_request_history prh, pull_requests pr, commits c, project_commits pc
+    where (c.author_id = prh.actor_id or c.committer_id = prh.actor_id)
+      and pc.project_id = pr.base_repo_id
+      and c.id = pc.commit_id
+      and prh.pull_request_id = pr.id
+      and prh.action = 'opened'
+      and c.created_at > DATE_SUB(prh.created_at, INTERVAL #{months_back} MONTH)
+      and c.created_at < prh.created_at
+      and prh.pull_request_id = ?;
+    QUERY
+    db.fetch(q, pr[:id]).first[:count_commits]
+  end
+
+  def prior_interaction_commit_comments(pr, months_back)
+    q = <<-QUERY
+    select count(distinct(cc.id)) as count_commits
+    from pull_request_history prh, pull_requests pr, commits c, project_commits pc, commit_comments cc
+    where cc.commit_id = c.id
+      and cc.user_id = prh.actor_id
+      and pc.project_id = pr.base_repo_id
+      and c.id = pc.commit_id
+      and prh.pull_request_id = pr.id
+      and prh.action = 'opened'
+      and cc.created_at > DATE_SUB(prh.created_at, INTERVAL #{months_back} MONTH)
+      and cc.created_at < prh.created_at
+      and prh.pull_request_id = ?;
+
+    QUERY
+    db.fetch(q, pr[:id]).first[:count_commits]
   end
 
   # Median number of commits to files touched by the pull request relative to
