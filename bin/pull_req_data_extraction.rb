@@ -511,7 +511,7 @@ Extract data for pull requests for a given repository
        from issue_comments ic, issues i
        where i.id = ic.issue_id and i.pull_request_id = ?) as num_participants
     QUERY
-    db.fetch(q, pr[:id], pr[:id]).first[:num_participants]
+    db.fetch(q, pr[:id], pr[:id]).first[:participants]
   end
 
   # Number of followers of the person that created the pull request
@@ -552,7 +552,13 @@ Extract data for pull requests for a given repository
       and prh.pull_request_id = ?
     limit 1
     QUERY
-    db.fetch(q, pr[:id]).first[:login]
+    closer = db.fetch(q, pr[:id]).first
+
+    unless closer.nil?
+      closer[:login]
+    else
+      ''
+    end
   end
 
   # Number of followers of the person that created the pull request
@@ -610,7 +616,7 @@ Extract data for pull requests for a given repository
   # Median number of commits to files touched by the pull request relative to
   # all project commits during the last three months
   def hotness_basilescu(pr_id, months_back)
-    commits_on_files_touched(pr_id, months_back).to_f / commits_last_x_months(pr_id, true, months_back).to_f
+    commits_on_files_touched(pr_id, months_back).to_f / commits_last_x_months(pr_id, false, months_back).to_f
   end
 
   # Number of integrators active (i.e., closed at least one issue/pull
@@ -619,14 +625,16 @@ Extract data for pull requests for a given repository
   def team_size_basilescu(pr, months_back)
     q = <<-QUERY
     select distinct(prh.actor_id) as actor
-    from pull_requests pr, pull_request_history prh
+    from pull_requests pr, pull_request_history prh, pull_request_history prh1
     where pr.id = prh.pull_request_id
+	 and prh1.pull_request_id = ?
+     and prh1.action = 'opened'
      and pr.base_repo_id = (select pr1.base_repo_id from pull_requests pr1 where pr1.id = ?)
-     and prh.created_at <= (select min(prh.created_at) from pull_request_history where pull_request_id = ? and action = 'opened')
-     and prh.created_at > DATE_SUB((select min(prh.created_at) from pull_request_history where pull_request_id = ? and action = 'opened'), INTERVAL #{months_back} MONTH)
+     and prh.created_at <= prh1.created_at
+     and prh.created_at > DATE_SUB(prh1.created_at, INTERVAL 3 MONTH)
      and prh.action = 'closed';
     QUERY
-    db.fetch(q, pr[:id], pr[:id], pr[:id]).all.flat_map{|x| x[:actor]}.uniq.size
+    db.fetch(q, pr[:id], pr[:id]).all.flat_map{|x| x[:actor]}.uniq.size
   end
 
   def social_distance_basilescu?(pr_id)
