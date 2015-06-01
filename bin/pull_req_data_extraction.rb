@@ -179,6 +179,7 @@ Extract data for pull requests for a given repository
         if interrupted
           return
         end
+        STDERR.puts r
         r
       rescue Exception => e
         STDERR.puts "Error processing pull_request #{pr[:github_id]}: #{e.message}"
@@ -204,7 +205,7 @@ Extract data for pull requests for a given repository
   end
 
   # Get a list of pull requests for the processed project
-  def pull_reqs(project)
+  def pull_reqs(project, github_id = -1)
     q = <<-QUERY
     select u.login as login, p.name as project_name, pr.id, pr.pullreq_id as github_id,
            a.created_at as created_at, b.created_at as closed_at,
@@ -226,9 +227,13 @@ Extract data for pull requests for a given repository
 	    and a.created_at < b.created_at
       and p.owner_id = u.id
       and p.id = ?
-	  group by pr.id
-    order by pr.pullreq_id desc;
     QUERY
+
+    if github_id != -1
+      q += " and pr.pullreq_id = #{github_id} "
+    end
+    q += 'group by pr.id order by pr.pullreq_id desc;'
+
     db.fetch(q, project[:id]).all
   end
 
@@ -249,7 +254,7 @@ Extract data for pull requests for a given repository
     # Count number of src/comment lines
     src = src_lines(pr[:id].to_f)
 
-    if src == 0 then raise Exception.new("Bad number of lines: #{0}") end
+    if src == 0 then raise Exception.new("Bad src lines: 0, pr: #{pr[:github_id]}, id: #{pr[:id]}") end
 
     months_back = 3
     commits_incl_prs = commits_last_x_months(pr, false, months_back)
@@ -878,7 +883,12 @@ Extract data for pull requests for a given repository
       for f in tree.map{|x| x}
         f[:path] = path + '/' + f[:name]
         if f[:type] == :tree
-          all_files << lslr(repo.lookup(f[:oid]), f[:path])
+          begin
+            all_files << lslr(repo.lookup(f[:oid]), f[:path])
+          rescue Exception => e
+            STDERR.puts e
+            all_files
+          end
         else
           all_files << f
         end
@@ -887,8 +897,13 @@ Extract data for pull requests for a given repository
     end
 
     base_commit = db.fetch(q, pr_id).all[0][:sha]
-    files = lslr(repo.lookup(base_commit).tree)
-    files.select{|x| filter.call(x)}
+    begin
+      files = lslr(repo.lookup(base_commit).tree)
+      files.select{|x| filter.call(x)}
+    rescue Exception => e
+      STDERR.puts "Cannot find commit #{base_commit} in base repo"
+      []
+    end
   end
 
   # Returns all comments for the issue sorted by creation date ascending
