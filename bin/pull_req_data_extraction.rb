@@ -314,7 +314,8 @@ Extract data for pull requests for a given repository
         :prior_interaction_pr_events       => prior_interaction_pr_events(pr, months_back),
         :prior_interaction_pr_comments     => prior_interaction_pr_comments(pr, months_back),
         :prior_interaction_commits         => prior_interaction_commits(pr, months_back),
-        :prior_interaction_commit_comments => prior_interaction_commit_comments(pr, months_back)
+        :prior_interaction_commit_comments => prior_interaction_commit_comments(pr, months_back),
+        :first_response           => first_response(pr)
     }
   end
 
@@ -737,14 +738,45 @@ Extract data for pull requests for a given repository
      and prh1.action = 'opened'
      and pr.base_repo_id = (select pr1.base_repo_id from pull_requests pr1 where pr1.id = ?)
      and prh.created_at <= prh1.created_at
-     and prh.created_at > DATE_SUB(prh1.created_at, INTERVAL 3 MONTH)
+     and prh.created_at > DATE_SUB(prh1.created_at, INTERVAL #{months_back} MONTH)
      and prh.action = 'closed';
     QUERY
     db.fetch(q, pr[:id], pr[:id]).all.flat_map{|x| x[:actor]}.uniq.size
   end
 
-  def social_distance_basilescu?(pr_id)
+  def social_distance_basilescu(pr_id)
 
+  end
+
+  def availability(pr_id)
+
+  end
+
+  # Time interval in minutes from pull request creation to first response
+  # by reviewers
+  def first_response(pr)
+    q = <<-QUERY
+      select min(created) as first_resp from (
+        select min(prc.created_at) as created
+        from pull_request_comments prc, users u
+        where prc.pull_request_id = ?
+          and u.id = prc.user_id
+          and u.login not in ('travis-ci', 'cloudbees')
+        union
+        select min(ic.created_at) as created
+        from issues i, issue_comments ic, users u
+        where i.pull_request_id = ?
+          and i.id = ic.issue_id
+          and u.id = ic.user_id
+          and u.login not in ('travis-ci', 'cloudbees')
+      ) as a;
+    QUERY
+    resp = db.fetch(q, pr[:id], pr[:id]).first[:first_resp]
+    unless resp.nil?
+      (resp - pr[:created_at]).to_i / 60
+    else
+      -1
+    end
   end
 
   # Total number of words in the pull request title and description
