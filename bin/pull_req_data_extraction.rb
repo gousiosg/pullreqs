@@ -5,7 +5,8 @@
 # BSD licensed, see LICENSE in top level dir
 #
 
-require 'ghtorrent'
+# require 'rubygems'
+# require 'bundler'
 require 'time'
 require 'linguist'
 require 'thread'
@@ -14,6 +15,8 @@ require 'parallel'
 require 'mongo'
 require 'travis'
 require 'json'
+require 'sequel'
+require 'trollop'
 
 require 'java'
 require 'ruby'
@@ -22,44 +25,75 @@ require 'c'
 require 'javascript'
 require 'python'
 
-class PullReqDataExtraction < GHTorrent::Command
+class PullReqDataExtraction
 
-  include GHTorrent::Settings
   include Mongo
 
-  def prepare_options(options)
-    options.banner <<-BANNER
+  class << self
+    def run(args = ARGV)
+      attr_accessor :options, :args, :name, :config
+
+      command = new()
+      command.name = self.class.name
+      command.args = args
+
+      command.process_options
+      command.validate
+
+      command.config = YAML::load_file command.options[:config]
+
+      if command.options[:travis]
+        get_travis(ARGV[0] + '/' + ARGV[1])
+        return
+      end
+
+      command.go
+    end
+  end
+
+  def process_options
+    command = self
+    @options = Trollop::options do
+      banner <<-BANNER
 Extract data for pull requests for a given repository
 
-#{command_name} owner repo lang
+#{File.basename($0)} owner repo lang
 
-    BANNER
+      BANNER
+      opt :config, 'config.yaml file location', :short => 'c',
+          :default => 'config.yaml'
+      opt :travis, 'Only run the Travis build retrieval process',
+          :short => 't'
+    end
   end
 
   def validate
-    super
+    if options[:config].nil?
+      unless (file_exists?("config.yaml"))
+        Trollop::die "No config file in default location (#{Dir.pwd}). You
+                        need to specify the #{:config} parameter."
+      end
+    else
+      Trollop::die "Cannot find file #{options[:config]}" \
+          unless File.exists?(options[:config])
+    end
+
     Trollop::die 'Three arguments required' unless !args[2].nil?
   end
 
-  def ght
-    Thread.current[:ght] ||= GHTorrent::Mirror.new(settings)
-    Thread.current[:ght]
-  end
-
-  def logger
-    ght.logger
-  end
-
   def db
-    Thread.current[:sql_db] ||= ght.get_db
+    Thread.current[:sql_db] ||= Proc.new do
+      Sequel.single_threaded = true
+      Sequel.connect(self.config['sql']['url'], :encoding => 'utf8')
+    end.call
     Thread.current[:sql_db]
   end
 
   def mongo
     Thread.current[:mongo_db] ||= Proc.new do
-      mongo_db = MongoClient.new(config(:mongo_host), config(:mongo_port)).db(config(:mongo_db))
-      unless config(:mongo_username).nil?
-        mongo_db.authenticate(config(:mongo_username), config(:mongo_passwd))
+      mongo_db = MongoClient.new(self.config['mongo']['host'], self.config['mongo']['port']).db(self.config['mongo']['db'])
+      unless self.config['mongo']['username'].nil?
+        mongo_db.authenticate(self.config['mongo']['username'], self.config['mongo']['passwd'])
       end
       mongo_db
     end.call
@@ -141,21 +175,24 @@ Extract data for pull requests for a given repository
   def go
     interrupted = false
 
-    trap("INT") {
-      STDERR.puts "pull_req_data_extraction(#{Process.pid}): Received SIGINT, exiting"
+    trap('INT') {
+      STDERR.puts "#{File.basename($0)}(#{Process.pid}): Received SIGINT, exiting"
       interrupted = true
     }
 
     # Init the semaphore
     semaphore
 
-    user_entry = ght.transaction{ght.ensure_user(ARGV[0], false, false)}
+    user_entry = db[:users].first(:login => ARGV[0])
 
     if user_entry.nil?
       Trollop::die "Cannot find user #{ARGV[0]}"
     end
 
-    repo_entry = ght.transaction{ght.ensure_repo(ARGV[0], ARGV[1])}
+    repo_entry = db.from(:projects, :users).\
+                  where(:users__id => :projects__owner_id).\
+                  where(:users__login => ARGV[0]).\
+                  where(:projects__name => ARGV[1]).select(:projects__id).first
 
     if repo_entry.nil?
       Trollop::die "Cannot find repository #{ARGV[0]}/#{ARGV[1]}"
@@ -1144,7 +1181,7 @@ Extract data for pull requests for a given repository
 
       proc_out = Thread.new {
         while !proc.eof
-          logger.debug "#{proc.gets}"
+          STDERR.puts "#{proc.gets}"
         end
       }
 

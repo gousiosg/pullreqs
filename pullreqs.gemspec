@@ -18,9 +18,11 @@ Gem::Specification.new do |gem|
   gem.add_dependency "sequel", ['>= 3.35']
   gem.add_dependency "github-linguist", ['>= 4.5']
   gem.add_dependency "rugged", ['>= 0.22']
-  gem.add_dependency 'ghtorrent', ['>= 0.10']
   gem.add_dependency 'parallel', ['>= 0.7.1']
-  gem.add_dependency 'mongo', ['>= 1.12']
+  gem.add_dependency 'mongo', ['>= 1.12', '< 2.0' ]
   gem.add_dependency 'travis', ['>= 1.7']
+  gem.add_dependency 'sequel', ['>= 4.23']
+  gem.add_dependency 'trollop', ['>= 2.1.2']
+  gem.add_dependency 'mysql2', ['>= 0.3']
 
 end
