@@ -1,13 +1,10 @@
 #!/usr/bin/env ruby
 #
-# (c) 2012 -- 2014 Georgios Gousios <gousiosg@gmail.com>
+# (c) 2012 -- 2015 Georgios Gousios <gousiosg@gmail.com>
 #
 # BSD licensed, see LICENSE in top level dir
 #
 
-
-require 'rubygems'
-require 'bundler'
 require 'ghtorrent'
 require 'time'
 require 'linguist'
@@ -15,6 +12,8 @@ require 'thread'
 require 'rugged'
 require 'parallel'
 require 'mongo'
+require 'travis'
+require 'json'
 
 require 'java'
 require 'ruby'
@@ -65,6 +64,47 @@ Extract data for pull requests for a given repository
       mongo_db
     end.call
     Thread.current[:mongo_db]
+  end
+
+  def get_travis(repo)
+    save_file = File.join('cache', repo.gsub(/\//, '-') + '.travis.json')
+    if File.exists?(save_file)
+      builds = File.open(save_file, 'r').read
+      JSON.parse(builds, :symbolize_names => true)
+    else
+      # Get PR build status from Travis
+      begin
+        repository = Travis::Repository.find(repo)
+      rescue Exception => e
+        STDERR.puts "Error getting Travis builds for #{repo}: #{e.message}"
+        return []
+      end
+
+      builds = []
+      repository.each_build do |build|
+        builds << if build.pull_request?
+                    STDERR.puts "Build for PR: #{build[:pull_request_number]}"
+                    jobs = build.jobs
+                    commits = jobs.map { |x| x.commit }
+                    jobs.zip(commits).map do |y|
+                      {
+                          :pull_req => build[:pull_request_number],
+                          :status => y[0][:state],
+                          :commit => y[1][:sha],
+                          :finished_at => y[0][:finished_at]
+                      }
+                    end
+                  end
+      end
+      builds = builds.select { |x| !x.nil? }.flatten
+      File.open(save_file, 'w'){|f| f.puts builds.to_json}
+      builds
+    end
+  end
+
+  def travis
+    @travis_builds ||= (Proc.new {get_travis(ARGV[0] + '/' + ARGV[1])}).call
+    @travis_builds
   end
 
   def repo
@@ -172,8 +212,10 @@ Extract data for pull requests for a given repository
       acc
     end
 
+    travis
+
     # Process pull request list
-    do_pr = Proc.new {|pr|
+    do_pr = Proc.new do |pr|
       begin
         r = process_pull_request(pr, ARGV[2].downcase)
         if interrupted
@@ -186,7 +228,8 @@ Extract data for pull requests for a given repository
         STDERR.puts e.backtrace
         #raise e
       end
-    }
+    end
+
     prs = pull_reqs(repo_entry)
 
     results = if threads > 1
@@ -315,7 +358,8 @@ Extract data for pull requests for a given repository
         :prior_interaction_pr_comments     => prior_interaction_pr_comments(pr, months_back),
         :prior_interaction_commits         => prior_interaction_commits(pr, months_back),
         :prior_interaction_commit_comments => prior_interaction_commit_comments(pr, months_back),
-        :first_response           => first_response(pr)
+        :first_response           => first_response(pr),
+        :ci_latency               => ci_latency(pr)
     }
   end
 
@@ -774,6 +818,15 @@ Extract data for pull requests for a given repository
     resp = db.fetch(q, pr[:id], pr[:id]).first[:first_resp]
     unless resp.nil?
       (resp - pr[:created_at]).to_i / 60
+    else
+      -1
+    end
+  end
+
+  def ci_latency(pr)
+    last_run = travis.find_all{|b| b[:pull_req] == pr[:github_id]}.sort_by { |x| Time.parse(x[:finished_at]).to_i }[-1]
+    unless last_run.nil?
+      Time.parse(last_run[:finished_at]) - pr[:created_at]
     else
       -1
     end

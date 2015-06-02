@@ -21,5 +21,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'ghtorrent', ['>= 0.10']
   gem.add_dependency 'parallel', ['>= 0.7.1']
   gem.add_dependency 'mongo', ['>= 1.12']
+  gem.add_dependency 'travis', ['>= 1.7']
 
 end
