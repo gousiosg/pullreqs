@@ -5,8 +5,6 @@
 # BSD licensed, see LICENSE in top level dir
 #
 
-# require 'rubygems'
-# require 'bundler'
 require 'time'
 require 'linguist'
 require 'thread'
@@ -43,7 +41,8 @@ class PullReqDataExtraction
       command.config = YAML::load_file command.options[:config]
 
       if command.options[:travis]
-        get_travis(ARGV[0] + '/' + ARGV[1])
+        STDERR.puts "Getting Travis build info for #{ARGV[0] + '/' + ARGV[1]} "
+        command.get_travis(ARGV[0] + '/' + ARGV[1])
         return
       end
 
@@ -93,7 +92,7 @@ Extract data for pull requests for a given repository
     Thread.current[:mongo_db] ||= Proc.new do
       mongo_db = MongoClient.new(self.config['mongo']['host'], self.config['mongo']['port']).db(self.config['mongo']['db'])
       unless self.config['mongo']['username'].nil?
-        mongo_db.authenticate(self.config['mongo']['username'], self.config['mongo']['passwd'])
+        mongo_db.authenticate(self.config['mongo']['username'], self.config['mongo']['password'])
       end
       mongo_db
     end.call
@@ -234,6 +233,7 @@ Extract data for pull requests for a given repository
     commits = mongo['commits']
     fixre = /(?:fixe[sd]?|close[sd]?|resolve[sd]?)(?:[^\/]*?|and)#([0-9]+)/mi
 
+    STDERR.write "Calculating PRs closed by commits\n"
     @closed_by_commit ={}
     @closed_by_commit = db.fetch(q, repo_entry[:id]).reduce({}) do |acc, x|
       sha = x[:sha]
@@ -249,6 +249,24 @@ Extract data for pull requests for a given repository
       acc
     end
 
+    prs = pull_reqs(repo_entry)
+
+    STDERR.write "Calculating close reason\n"
+    @close_reason = {}
+    @close_reason = prs.reduce({}) do |acc, pr|
+      merged = !pr[:merged_at].nil?
+      git_merged = false
+      merge_reason = :github
+
+      if not merged
+        git_merged, merge_reason = merged_with_git?(pr)
+      end
+
+      acc[pr[:github_id]] = [git_merged, merge_reason]
+      acc
+    end
+
+    # Init travis data
     travis
 
     # Process pull request list
@@ -266,8 +284,6 @@ Extract data for pull requests for a given repository
         #raise e
       end
     end
-
-    prs = pull_reqs(repo_entry)
 
     results = if threads > 1
                 Parallel.map(prs, :in_threads => threads) do |pr|
@@ -322,14 +338,8 @@ Extract data for pull requests for a given repository
 
     # Statistics across pull request commits
     stats = pr_stats(pr)
-
-    merged = ! pr[:merged_at].nil?
-    git_merged = false
-    merge_reason = :github
-
-    if not merged
-      git_merged, merge_reason = merged_with_git?(pr)
-    end
+    merged = !pr[:merged_at].nil?
+    git_merged, merge_reason = @close_reason[pr[:id]]
 
     # Count number of src/comment lines
     src = src_lines(pr[:id].to_f)
@@ -422,7 +432,8 @@ Extract data for pull requests for a given repository
 
   # Checks whether a merge of the pull request occurred outside Github
   # This will only discover clean merges; rebases and force-pushes override
-  # the commit history, so they are impossible to detect.
+  # the commit history, so they are impossible to detect without source code
+  # analysis.
   def merged_with_git?(pr)
 
     #1. Commits from the pull request appear in the master branch
@@ -636,8 +647,9 @@ Extract data for pull requests for a given repository
     select u.login as login
     from users u, pull_request_history prh
     where prh.actor_id = u.id
-      and action = 'closed'
+      and (action = 'closed' or action = 'merged')
       and prh.pull_request_id = ?
+    order by prh.created_at asc
     limit 1
     QUERY
     closer = db.fetch(q, pr[:id]).first
@@ -663,16 +675,25 @@ Extract data for pull requests for a given repository
 
   # Number of previous pull requests for the pull requester
   def prev_pull_requests(pr, action)
-    q = <<-QUERY
-    select count(*) as num_pull_reqs
+      q = <<-QUERY
+    select pr.pullreq_id, prh.pull_request_id as num_pull_reqs
     from pull_request_history prh, pull_requests pr
     where prh.action = ?
       and prh.created_at < (select min(created_at) from pull_request_history prh1 where prh1.pull_request_id = ?)
       and prh.actor_id = (select min(actor_id) from pull_request_history prh1 where prh1.pull_request_id = ? and action = ?)
       and prh.pull_request_id = pr.id
       and pr.base_repo_id = (select pr1.base_repo_id from pull_requests pr1 where pr1.id = ?);
-    QUERY
-    db.fetch(q, action, pr[:id], pr[:id], action, pr[:id]).first[:num_pull_reqs]
+      QUERY
+
+    if action == 'merged'
+      prs = db.fetch(q, action, pr[:id], pr[:id], action, pr[:id]).all
+      prs.reduce(0) do |acc, pull_req|
+        acc += 1 if  @close_reason[pull_req[:github_id]] != :unknown
+        acc
+      end
+    else
+      db.fetch(q, action, pr[:id], pr[:id], action, pr[:id]).all.size
+    end
   end
 
   def social_connection_tsay?(pr)
