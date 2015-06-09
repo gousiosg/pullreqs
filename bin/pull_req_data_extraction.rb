@@ -406,7 +406,9 @@ Extract data for pull requests for a given repository
         :prior_interaction_commits         => prior_interaction_commits(pr, months_back),
         :prior_interaction_commit_comments => prior_interaction_commit_comments(pr, months_back),
         :first_response           => first_response(pr),
-        :ci_latency               => ci_latency(pr)
+        :ci_latency               => ci_latency(pr),
+        :ci_errors                => ci_errors?(pr),
+        :ci_test_failures         => ci_test_failures?(pr),
     }
   end
 
@@ -881,6 +883,7 @@ Extract data for pull requests for a given repository
     end
   end
 
+  # Time between PR arrival and last CI run
   def ci_latency(pr)
     last_run = travis.find_all{|b| b[:pull_req] == pr[:github_id]}.sort_by { |x| Time.parse(x[:finished_at]).to_i }[-1]
     unless last_run.nil?
@@ -888,6 +891,16 @@ Extract data for pull requests for a given repository
     else
       -1
     end
+  end
+
+  # Did the build result in errors?
+  def ci_errors?(pr)
+    not travis.find_all{|b| b[:pull_req] == pr[:github_id] and b[:status] == 'errored'}.empty?
+  end
+
+  # Did the build result in test failuers?
+  def ci_test_failures?(pr)
+    not travis.find_all{|b| b[:pull_req] == pr[:github_id] and b[:status] == 'failed'}.empty?
   end
 
   # Total number of words in the pull request title and description
