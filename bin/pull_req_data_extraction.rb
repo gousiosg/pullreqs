@@ -677,23 +677,33 @@ Extract data for pull requests for a given repository
 
   # Number of previous pull requests for the pull requester
   def prev_pull_requests(pr, action)
-      q = <<-QUERY
-    select pr.pullreq_id, prh.pull_request_id as num_pull_reqs
-    from pull_request_history prh, pull_requests pr
-    where prh.action = ?
-      and prh.created_at < (select min(created_at) from pull_request_history prh1 where prh1.pull_request_id = ?)
-      and prh.actor_id = (select min(actor_id) from pull_request_history prh1 where prh1.pull_request_id = ? and action = ?)
-      and prh.pull_request_id = pr.id
-      and pr.base_repo_id = (select pr1.base_repo_id from pull_requests pr1 where pr1.id = ?);
-      QUERY
 
     if action == 'merged'
-      prs = db.fetch(q, action, pr[:id], pr[:id], action, pr[:id]).all
+      q = <<-QUERY
+      select pr.pullreq_id, prh.pull_request_id as num_pull_reqs
+      from pull_request_history prh, pull_requests pr
+      where prh.action = 'opened'
+        and prh.created_at < (select min(created_at) from pull_request_history prh1 where prh1.pull_request_id = ? and prh1.action = 'opened')
+        and prh.actor_id = (select min(actor_id) from pull_request_history prh1 where prh1.pull_request_id = ? and prh1.action = 'opened')
+        and prh.pull_request_id = pr.id
+        and pr.base_repo_id = (select pr1.base_repo_id from pull_requests pr1 where pr1.id = ?);
+      QUERY
+
+      prs = db.fetch(q, pr[:id], pr[:id], pr[:id]).all
       prs.reduce(0) do |acc, pull_req|
-        acc += 1 if  @close_reason[pull_req[:github_id]] != :unknown
+        acc += 1 if @close_reason[pull_req[:pullreq_id]] != :unknown
         acc
       end
     else
+      q = <<-QUERY
+      select pr.pullreq_id, prh.pull_request_id as num_pull_reqs
+      from pull_request_history prh, pull_requests pr
+      where prh.action = ?
+        and prh.created_at < (select min(created_at) from pull_request_history prh1 where prh1.pull_request_id = ?)
+        and prh.actor_id = (select min(actor_id) from pull_request_history prh1 where prh1.pull_request_id = ? and action = ?)
+        and prh.pull_request_id = pr.id
+        and pr.base_repo_id = (select pr1.base_repo_id from pull_requests pr1 where pr1.id = ?);
+      QUERY
       db.fetch(q, action, pr[:id], pr[:id], action, pr[:id]).all.size
     end
   end
@@ -946,9 +956,9 @@ Extract data for pull requests for a given repository
     q = <<-QUERY
     select exists(select *
           from project_members
-          where user_id = u.id and repo_id = pr.base_repo_id) as main_team_member
-    from users u, pull_request_history prh, pull_requests pr
-    where prh.actor_id = u.id
+          where user_id = prh.actor_id and repo_id = pr.base_repo_id) as main_team_member
+    from pull_request_history prh, pull_requests pr
+    where prh.action = 'opened'
     and pr.id = prh.pull_request_id
     and pr.id = ?
     QUERY
