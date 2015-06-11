@@ -100,6 +100,7 @@ Extract data for pull requests for a given repository
   end
 
   def get_travis(repo)
+    STDERR.puts "Getting Travis information"
     save_file = File.join('cache', repo.gsub(/\//, '-') + '.travis.json')
     if File.exists?(save_file)
       builds = File.open(save_file, 'r').read
@@ -116,7 +117,7 @@ Extract data for pull requests for a given repository
       builds = []
       repository.each_build do |build|
         builds << if build.pull_request?
-                    STDERR.puts "Build for PR: #{build[:pull_request_number]}"
+                    STDERR.write "\rBuild for PR: #{build[:pull_request_number]}"
                     jobs = build.jobs
                     commits = jobs.map { |x| x.commit }
                     jobs.zip(commits).map do |y|
@@ -233,7 +234,7 @@ Extract data for pull requests for a given repository
     commits = mongo['commits']
     fixre = /(?:fixe[sd]?|close[sd]?|resolve[sd]?)(?:[^\/]*?|and)#([0-9]+)/mi
 
-    STDERR.write "Calculating PRs closed by commits\n"
+    STDERR.puts "Calculating PRs closed by commits:"
     @closed_by_commit ={}
     @closed_by_commit = db.fetch(q, repo_entry[:id]).reduce({}) do |acc, x|
       sha = x[:sha]
@@ -245,6 +246,7 @@ Extract data for pull requests for a given repository
             acc[m[y].to_i] = sha
           end
         end
+        STDERR.write "\r#{sha}"
       end
       acc
     end
