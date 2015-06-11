@@ -249,11 +249,11 @@ Extract data for pull requests for a given repository
       acc
     end
 
-    prs = pull_reqs(repo_entry)
+    @prs = pull_reqs(repo_entry)
 
     STDERR.write "Calculating close reason\n"
     @close_reason = {}
-    @close_reason = prs.reduce({}) do |acc, pr|
+    @close_reason = @prs.reduce({}) do |acc, pr|
       merged = !pr[:merged_at].nil?
       git_merged = false
       merge_reason = :github
@@ -263,6 +263,13 @@ Extract data for pull requests for a given repository
       end
 
       acc[pr[:github_id]] = [git_merged, merge_reason]
+      acc
+    end
+
+    STDERR.write "Calculating mergers\n"
+    @close_reason = @prs.reduce(@close_reason) do |acc, pr|
+      merge_person = merger(pr)
+      acc[pr[:github_id]] << merge_person unless merge_person.nil?
       acc
     end
 
@@ -286,11 +293,11 @@ Extract data for pull requests for a given repository
     end
 
     results = if threads > 1
-                Parallel.map(prs, :in_threads => threads) do |pr|
+                Parallel.map(@prs, :in_threads => threads) do |pr|
                   do_pr.call(pr)
                 end
               else
-                prs.map do |pr|
+                @prs.map do |pr|
                   do_pr.call(pr);
                 end
               end.select { |x| !x.nil? }
@@ -339,7 +346,7 @@ Extract data for pull requests for a given repository
     # Statistics across pull request commits
     stats = pr_stats(pr)
     merged = !pr[:merged_at].nil?
-    git_merged, merge_reason = @close_reason[pr[:id]]
+    git_merged, merge_reason, merge_person = @close_reason[pr[:github_id]]
 
     # Count number of src/comment lines
     src = src_lines(pr[:id].to_f)
@@ -389,11 +396,12 @@ Extract data for pull requests for a given repository
         :watchers                 => watchers(pr),
         :requester                => requester(pr),
         :closer                   => closer(pr),
+        :merger                   => merge_person,
         :prev_pullreqs            => prev_pull_reqs,
         :requester_succ_rate      => if prev_pull_reqs > 0 then prev_pull_requests(pr, 'merged').to_f / prev_pull_reqs.to_f else 0 end,
         :followers                => followers(pr),
         :intra_branch             => if intra_branch?(pr) == 1 then true else false end,
-        :main_team_member         => if main_team_member?(pr) == 1 then true else false end,
+        :main_team_member         => main_team_member?(pr, months_back),
         :social_connection_tsay   => social_connection_tsay?(pr),
         :hotness_basilescu        => hotness_basilescu(pr, months_back),
         :team_size_basilescu      => team_size_basilescu(pr, months_back),
@@ -456,7 +464,7 @@ Extract data for pull requests for a given repository
     # master branch
     unless @closed_by_commit[pr[:github_id]].nil?
       sha = @closed_by_commit[pr[:github_id]]
-      if not @all_commits.select { |x| sha.start_with? x }.empty?
+      unless @all_commits.select { |x| sha.start_with? x }.empty?
         return [true, :fixes_in_commit]
       end
     end
@@ -647,12 +655,11 @@ Extract data for pull requests for a given repository
   def closer(pr)
     q = <<-QUERY
     select u.login as login
-    from users u, pull_request_history prh
-    where prh.actor_id = u.id
-      and (action = 'closed' or action = 'merged')
-      and prh.pull_request_id = ?
-    order by prh.created_at asc
-    limit 1
+    from issues i, issue_events ie, users u
+    where i.pull_request_id = ?
+      and ie.issue_id = i.id
+      and (ie.action = 'closed' or ie.action = 'merged')
+      and u.id = ie.actor_id
     QUERY
     closer = db.fetch(q, pr[:id]).first
 
@@ -660,6 +667,31 @@ Extract data for pull requests for a given repository
       closer[:login]
     else
       ''
+    end
+  end
+
+  # Person that first merged the pull request
+  def merger(pr)
+    q = <<-QUERY
+    select u.login as login
+    from issues i, issue_events ie, users u
+    where i.pull_request_id = ?
+      and ie.issue_id = i.id
+      and ie.action = 'merged'
+      and u.id = ie.actor_id
+    QUERY
+    merger = db.fetch(q, pr[:id]).first
+
+    if merger.nil?
+      # If the PR was merged, then it is safe to assume that the
+      # closer is also the merger
+      if not @close_reason[pr[:github_id]].nil? and @close_reason[pr[:github_id]][1] != :unknown
+        closer(pr)
+      else
+        ''
+      end
+    else
+      merger[:login]
     end
   end
 
@@ -689,9 +721,11 @@ Extract data for pull requests for a given repository
         and pr.base_repo_id = (select pr1.base_repo_id from pull_requests pr1 where pr1.id = ?);
       QUERY
 
-      prs = db.fetch(q, pr[:id], pr[:id], pr[:id]).all
-      prs.reduce(0) do |acc, pull_req|
-        acc += 1 if @close_reason[pull_req[:pullreq_id]] != :unknown
+      pull_reqs = db.fetch(q, pr[:id], pr[:id], pr[:id]).all
+      pull_reqs.reduce(0) do |acc, pull_req|
+        if not @close_reason[pull_req[:pullreq_id]].nil? and @close_reason[pull_req[:pullreq_id]][1] != :unknown
+          acc += 1
+        end
         acc
       end
     else
@@ -840,22 +874,42 @@ Extract data for pull requests for a given repository
     commits_on_files_touched(pr_id, months_back).to_f / commits_last_x_months(pr_id, false, months_back).to_f
   end
 
-  # Number of integrators active (i.e., closed at least one issue/pull
-  # request, not their own) during 3 months prior to pull request
+  # People that committed (not through pull requests) up to months_back
+  # from the time the PR was created.
+  def committer_team(pr, months_back)
+    q = <<-QUERY
+    select distinct(u.login)
+    from commits c, project_commits pc, pull_requests pr, users u, pull_request_history prh
+    where pr.base_repo_id = pc.project_id
+      and not exists (select * from pull_request_commits where commit_id = c.id)
+      and pc.commit_id = c.id
+      and pr.id = ?
+      and u.id = c.committer_id
+      and u.fake is false
+      and prh.pull_request_id = pr.id
+      and prh.action = 'opened'
+      and c.created_at > DATE_SUB(prh.created_at, INTERVAL #{months_back} MONTH);
+    QUERY
+    db.fetch(q, pr[:id]).all
+  end
+
+  # People that merged (not through pull requests) up to months_back
+  # from the time the PR was created.
+  def merger_team(pr, months_back)
+    @close_reason.map do |k,v|
+      created_at = @prs.find{|x| x[:github_id] == k}
+      [created_at[:created_at], v[2]]
+    end.find_all do |x|
+      x[0].to_i > (pr[:created_at].to_i  - months_back * 30 * 24 * 3600)
+    end.map do |x|
+      x[1]
+    end.select{|x| x != ''}.uniq
+  end
+
+  # Number of integrators active during x months prior to pull request
   # creation.
   def team_size_basilescu(pr, months_back)
-    q = <<-QUERY
-    select distinct(prh.actor_id) as actor
-    from pull_requests pr, pull_request_history prh, pull_request_history prh1
-    where pr.id = prh.pull_request_id
-	 and prh1.pull_request_id = ?
-     and prh1.action = 'opened'
-     and pr.base_repo_id = (select pr1.base_repo_id from pull_requests pr1 where pr1.id = ?)
-     and prh.created_at <= prh1.created_at
-     and prh.created_at > DATE_SUB(prh1.created_at, INTERVAL #{months_back} MONTH)
-     and prh.action = 'closed';
-    QUERY
-    db.fetch(q, pr[:id], pr[:id]).all.flat_map{|x| x[:actor]}.uniq.size
+    (committer_team(pr, months_back) + merger_team(pr, months_back)).uniq.size
   end
 
   def social_distance_basilescu(pr_id)
@@ -952,17 +1006,8 @@ Extract data for pull requests for a given repository
   end
 
   # Check if the requester is part of the project's main team
-  def main_team_member?(pr)
-    q = <<-QUERY
-    select exists(select *
-          from project_members
-          where user_id = prh.actor_id and repo_id = pr.base_repo_id) as main_team_member
-    from pull_request_history prh, pull_requests pr
-    where prh.action = 'opened'
-    and pr.id = prh.pull_request_id
-    and pr.id = ?
-    QUERY
-    db.fetch(q, pr[:id]).first[:main_team_member]
+  def main_team_member?(pr, months_back)
+    (committer_team(pr, months_back) + merger_team(pr, months_back)).uniq.include? requester(pr)
   end
 
   # Various statistics for the pull request. Returned as Hash with the following
@@ -1108,7 +1153,6 @@ Extract data for pull requests for a given repository
     if exclude_pull_req
       q << ' and not exists (select * from pull_request_commits prc1 where prc1.commit_id = c.id)'
     end
-    q << ';'
 
     db.fetch(q, pr[:id]).first[:num_commits]
   end
