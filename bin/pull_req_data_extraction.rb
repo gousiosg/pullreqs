@@ -100,7 +100,6 @@ Extract data for pull requests for a given repository
   end
 
   def get_travis(repo)
-    STDERR.puts "Getting Travis information"
     save_file = File.join('cache', repo.gsub(/\//, '-') + '.travis.json')
     if File.exists?(save_file)
       builds = File.open(save_file, 'r').read
@@ -114,6 +113,7 @@ Extract data for pull requests for a given repository
         return []
       end
 
+      STDERR.puts "Getting Travis information for #{repo}"
       builds = []
       repository.each_build do |build|
         builds << if build.pull_request?
@@ -125,7 +125,7 @@ Extract data for pull requests for a given repository
                           :pull_req => build[:pull_request_number],
                           :status => y[0][:state],
                           :commit => y[1][:sha],
-                          :finished_at => y[0][:finished_at]
+                          :finished_at => y[0][:finished_at].to_s
                       }
                     end
                   end
