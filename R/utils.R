@@ -109,10 +109,10 @@ load.filter <- function(path) {
         function(from){as.POSIXct(from, origin = "1970-01-01")})
   a <- read.csv(path, check.names = T, 
                 colClasses = c("integer",rep("factor",2), rep("integer", 6),
-                               rep("factor", 3), rep("integer", 18),
-                               rep("double", 3), "integer",  "factor",
-                               "integer", "double", "integer",
-                               "factor", "factor"))
+                               rep("factor", 3), rep("integer", 14), "double",
+                               rep("int", 4), rep("double", 3), "integer",  rep("factor", 2),
+                               "integer", "double", "integer", rep("factor", 3), "double",
+                               rep("int", 11)))
 
   a$conflict <- a$conflict == "true"
   a$conflict <- as.factor(a$conflict)

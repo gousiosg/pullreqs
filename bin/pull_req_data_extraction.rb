@@ -231,29 +231,32 @@ Extract data for pull requests for a given repository
     and pc.commit_id = c.id
     QUERY
 
-    commits = mongo['commits']
     fixre = /(?:fixe[sd]?|close[sd]?|resolve[sd]?)(?:[^\/]*?|and)#([0-9]+)/mi
 
-    STDERR.puts "Calculating PRs closed by commits:"
+    STDERR.puts 'Calculating PRs closed by commits:'
     @closed_by_commit ={}
-    @closed_by_commit = db.fetch(q, repo_entry[:id]).reduce({}) do |acc, x|
-      sha = x[:sha]
-      commits.find({:sha => sha},
-                   {:fields => {'commit.message' => 1, '_id' => 0}}).each do |x|
-        comment = x['commit']['message']
-        comment.match(fixre) do |m|
-          (1..(m.size - 1)).map do |y|
-            acc[m[y].to_i] = sha
+    commits_in_prs = db.fetch(q, repo_entry[:id]).all
+    @closed_by_commit =
+        Parallel.map(commits_in_prs, :in_threads => threads) do |x|
+          sha = x[:sha]
+          result = {}
+          mongo['commits'].find({:sha => sha},
+                                {:fields => {'commit.message' => 1, '_id' => 0}}).map do |x|
+            STDERR.write "\r #{sha}"
+            comment = x['commit']['message']
+
+            comment.match(fixre) do |m|
+              (1..(m.size - 1)).map do |y|
+                result[m[y].to_i] = sha
+              end
+            end
           end
-        end
-        STDERR.write "\r#{sha}"
-      end
-      acc
-    end
+          result
+        end.select{|x| !x.empty?}.reduce({}){|acc, x| acc.merge(x)}
 
     @prs = pull_reqs(repo_entry)
 
-    STDERR.write "Calculating close reason\n"
+    STDERR.puts "\nCalculating close reason"
     @close_reason = {}
     @close_reason = @prs.reduce({}) do |acc, pr|
       merged = !pr[:merged_at].nil?
@@ -294,15 +297,9 @@ Extract data for pull requests for a given repository
       end
     end
 
-    results = if threads > 1
-                Parallel.map(@prs, :in_threads => threads) do |pr|
-                  do_pr.call(pr)
-                end
-              else
-                @prs.map do |pr|
-                  do_pr.call(pr);
-                end
-              end.select { |x| !x.nil? }
+    results = Parallel.map(@prs, :in_threads => threads) do |pr|
+      do_pr.call(pr)
+    end.select { |x| !x.nil? }
 
     puts results.first.keys.map{|x| x.to_s}.join(',')
     results.sort{|a,b| b[:github_id]<=>a[:github_id]}.each{|x| puts x.values.join(',')}
