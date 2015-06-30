@@ -385,12 +385,12 @@ Extract data for pull requests for a given repository
         :src_files                => stats[:src_files],
         :doc_files                => stats[:doc_files],
         :other_files              => stats[:other_files],
-        :perc_external_contribs   => (commits_incl_prs - commits_last_x_months(pr, true, months_back)).to_f / commits_incl_prs,
+        :perc_external_contribs   => commits_last_x_months(pr, true, months_back) / commits_incl_prs,
         :sloc                     => src,
         :src_churn                => stats[:lines_added] + stats[:lines_deleted],
         :test_churn               => stats[:test_lines_added] + stats[:test_lines_deleted],
         :commits_on_files_touched => commits_on_files_touched(pr, months_back),
-        :commits_to_hotest_file   => commits_to_hotest_file(pr, months_back),
+        :commits_to_hottest_file   => commits_to_hottest_file(pr, months_back),
         :test_lines_per_kloc      => (test_lines(pr[:id]).to_f / src.to_f) * 1000,
         :test_cases_per_kloc      => (num_test_cases(pr[:id]).to_f / src.to_f) * 1000,
         :asserts_per_kloc         => (num_assertions(pr[:id]).to_f / src.to_f) * 1000,
@@ -556,10 +556,23 @@ Extract data for pull requests for a given repository
     db.fetch(q, pr[:id]).first[:teamsize]
   end
 
-
-
   def num_commits_at_open(pr)
-    #raise Exception
+    q = <<-QUERY
+    select count(*) as commit_count
+    from pull_requests pr, pull_request_commits prc, commits c, pull_request_history prh
+    where pr.id = prc.pull_request_id
+      and pr.id=?
+      and prc.commit_id = c.id
+      and prh.action = 'opened'
+      and prh.pull_request_id = pr.id
+      and c.created_at <= prh.created_at
+    group by prc.pull_request_id
+    QUERY
+    begin
+      db.fetch(q, pr[:id]).first[:commit_count]
+    rescue
+      0
+    end
   end
 
   # Number of commits in pull request
@@ -888,8 +901,10 @@ Extract data for pull requests for a given repository
 
   # Median number of commits to files touched by the pull request relative to
   # all project commits during the last three months
-  def hotness_vasilescu(pr_id, months_back)
-    commits_on_files_touched(pr_id, months_back).to_f / commits_last_x_months(pr_id, false, months_back).to_f
+  def hotness_vasilescu(pr, months_back)
+    commits_per_file = commits_on_pr_files(pr, months_back).map{|x| x[1].size}.sort
+    med = commits_per_file[commits_per_file.size/2]
+    med / commits_last_x_months(pr, true, months_back).to_f
   end
 
   # People that committed (not through pull requests) up to months_back
@@ -906,7 +921,8 @@ Extract data for pull requests for a given repository
       and u.fake is false
       and prh.pull_request_id = pr.id
       and prh.action = 'opened'
-      and c.created_at > DATE_SUB(prh.created_at, INTERVAL #{months_back} MONTH);
+      and c.created_at > DATE_SUB(prh.created_at, INTERVAL #{months_back} MONTH)
+      and c.created_at < prh.created_at;
     QUERY
     db.fetch(q, pr[:id]).all
   end
@@ -1124,12 +1140,10 @@ Extract data for pull requests for a given repository
     result
   end
 
-  # Number of commits on the files changed by the pull request
-  # between the time the PR was created and `months_back`
-  # excluding those created by the PR
-  def commits_on_files_touched(pr, months_back)
-
-    # TODO: Make sure that each SHA is only counted once
+  # Return a hash of file names and commits on those files in the
+  # period between pull request open and months_back. The returned
+  # results do not include the commits comming from the PR.
+  def commits_on_pr_files(pr, months_back)
 
     oldest = Time.at(Time.at(pr[:created_at]).to_i - 3600 * 24 * 30 * months_back)
     pr_against = pull_req_entry(pr[:id])['base']['sha']
@@ -1143,28 +1157,40 @@ Extract data for pull requests for a given repository
       c[1]
     }
 
-    commits_per_file.keys.map do |filename|
+    commits_per_file.keys.reduce({}) do |acc, filename|
       commits_in_pr = commits_per_file[filename].map{|x| x[0]}
 
       walker = Rugged::Walker.new(repo)
       walker.sorting(Rugged::SORT_DATE)
       walker.push(pr_against)
 
-      num_commits = walker.take_while do |c|
+      commit_list = walker.take_while do |c|
         c.time > oldest
-      end.reduce(0) do |acc, c|
+      end.reduce([]) do |acc1, c|
         if c.diff(paths: [filename.to_s]).size > 0 and
             not commits_in_pr.include? c.oid
-          acc += 1
+          acc1 << c.oid
         end
-        acc
+        acc1
       end
-      num_commits
-    end.reduce(0) { |acc, x| acc + x }
+      acc.merge({filename => commit_list})
+    end
   end
 
-  def commits_to_hotest_file(pr, months_back)
-    #raise Exception
+  # Number of unique commits on the files changed by the pull request
+  # between the time the PR was created and `months_back`
+  # excluding those created by the PR
+  def commits_on_files_touched(pr, months_back)
+    commits_on_pr_files(pr, months_back).reduce([]) do |acc, commit_list|
+      acc + commit_list[1]
+    end.flatten.uniq.size
+  end
+
+  # Number of commits to the hottest file between the time the PR was created
+  # and `months_back`
+  def commits_to_hottest_file(pr, months_back)
+    a = commits_on_pr_files(pr, months_back).map{|x| x}.sort_by { |x| x[1].size}
+    a.last[1].size
   end
 
 
@@ -1317,11 +1343,11 @@ Extract data for pull requests for a given repository
     begin
       repo = Rugged::Repository.new(checkout_dir)
       if update
-        spawn("cd #{checkout_dir} && git pull")
+        #spawn("cd #{checkout_dir} && git pull")
       end
       repo
     rescue
-      spawn("git clone git://github.com/#{user}/#{repo}.git #{checkout_dir}")
+      #spawn("git clone git://github.com/#{user}/#{repo}.git #{checkout_dir}")
       Rugged::Repository.new(checkout_dir)
     end
   end
