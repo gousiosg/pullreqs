@@ -108,22 +108,14 @@ load.filter <- function(path) {
   setAs("character", "POSIXct",
         function(from){as.POSIXct(from, origin = "1970-01-01")})
   a <- read.csv(path, check.names = T, 
-                colClasses = c("integer",rep("factor",2), rep("integer", 6),
-                               rep("factor", 3), rep("integer", 14), "double",
-                               rep("int", 4), rep("double", 3), "integer",  rep("factor", 2),
-                               "integer", "double", "integer", rep("factor", 3), "double",
-                               rep("int", 11)))
+                colClasses = c("integer",rep("factor",2), rep("integer", 6), "factor",
+                               rep("logical", 2), rep("integer", 14), "double",
+                               rep("integer", 4), rep("double", 3), "integer",  rep("factor", 3),
+                               "integer", "double", "integer", rep("logical", 3), "double",
+                               rep("integer", 10), 'double', rep("logical", 2)))
 
-  a$conflict <- a$conflict == "true"
-  a$conflict <- as.factor(a$conflict)
-  a$forward_links <- a$forward_links == "true"
-  a$forward_links <- as.factor(a$forward_links)
-  a$main_team_member <- a$main_team_member == "true"
-  a$main_team_member <- as.factor(a$main_team_member)
-  a$intra_branch <- a$intra_branch == "true"
-  a$intra_branch <- as.factor(a$intra_branch)
   a$merged <- !is.na(a$merged_at)
-  a$merged <- as.factor(a$merged)
+  a$merged <- as.logical(a$merged)
   # Take care of cases where csv file production was interupted, so the last
   # line has wrong fields
   a <- subset(a, !is.na(intra_branch))

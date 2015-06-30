@@ -372,6 +372,7 @@ Extract data for pull requests for a given repository
         :forward_links            => forward_links?(pr),
         :team_size                => team_size_at_open(pr, months_back),
         :num_commits              => num_commits(pr),
+        :num_commits_open         => num_commits_at_open(pr),
         :num_pr_comments          => num_pr_comments(pr),
         :num_issue_comments       => num_issue_comments(pr),
         :num_commit_comments      => num_commit_comments(pr),
@@ -389,6 +390,7 @@ Extract data for pull requests for a given repository
         :src_churn                => stats[:lines_added] + stats[:lines_deleted],
         :test_churn               => stats[:test_lines_added] + stats[:test_lines_deleted],
         :commits_on_files_touched => commits_on_files_touched(pr, months_back),
+        :commits_to_hotest_file   => commits_to_hotest_file(pr, months_back),
         :test_lines_per_kloc      => (test_lines(pr[:id]).to_f / src.to_f) * 1000,
         :test_cases_per_kloc      => (num_test_cases(pr[:id]).to_f / src.to_f) * 1000,
         :asserts_per_kloc         => (num_assertions(pr[:id]).to_f / src.to_f) * 1000,
@@ -402,8 +404,8 @@ Extract data for pull requests for a given repository
         :intra_branch             => if intra_branch?(pr) == 1 then true else false end,
         :main_team_member         => main_team_member?(pr, months_back),
         :social_connection_tsay   => social_connection_tsay?(pr),
-        :hotness_basilescu        => hotness_basilescu(pr, months_back),
-        :team_size_basilescu      => team_size_basilescu(pr, months_back),
+        :hotness_vasilescu        => hotness_vasilescu(pr, months_back),
+        :team_size_vasilescu      => team_size_vasilescu(pr, months_back),
         :description_complexity   => description_complexity(pr),
         :workload                 => workload(pr),
         :prior_interaction_issue_events    => prior_interaction_issue_events(pr, months_back),
@@ -554,6 +556,12 @@ Extract data for pull requests for a given repository
     db.fetch(q, pr[:id]).first[:teamsize]
   end
 
+
+
+  def num_commits_at_open(pr)
+    #raise Exception
+  end
+
   # Number of commits in pull request
   def num_commits(pr)
     q = <<-QUERY
@@ -654,13 +662,24 @@ Extract data for pull requests for a given repository
   def closer(pr)
     q = <<-QUERY
     select u.login as login
-    from issues i, issue_events ie, users u
-    where i.pull_request_id = ?
-      and ie.issue_id = i.id
-      and (ie.action = 'closed' or ie.action = 'merged')
-      and u.id = ie.actor_id
+    from pull_request_history prh, users u
+    where prh.pull_request_id = ?
+      and prh.actor_id = u.id
+      and prh.action = 'closed'
     QUERY
     closer = db.fetch(q, pr[:id]).first
+
+    if closer.nil?
+      q = <<-QUERY
+      select u.login as login
+      from issues i, issue_events ie, users u
+      where i.pull_request_id = ?
+        and ie.issue_id = i.id
+        and (ie.action = 'closed' or ie.action = 'merged')
+        and u.id = ie.actor_id
+      QUERY
+      closer = db.fetch(q, pr[:id]).first
+    end
 
     unless closer.nil?
       closer[:login]
@@ -869,7 +888,7 @@ Extract data for pull requests for a given repository
 
   # Median number of commits to files touched by the pull request relative to
   # all project commits during the last three months
-  def hotness_basilescu(pr_id, months_back)
+  def hotness_vasilescu(pr_id, months_back)
     commits_on_files_touched(pr_id, months_back).to_f / commits_last_x_months(pr_id, false, months_back).to_f
   end
 
@@ -907,12 +926,14 @@ Extract data for pull requests for a given repository
 
   # Number of integrators active during x months prior to pull request
   # creation.
-  def team_size_basilescu(pr, months_back)
+  def team_size_vasilescu(pr, months_back)
     (committer_team(pr, months_back) + merger_team(pr, months_back)).uniq.size
   end
 
-  def social_distance_basilescu(pr_id)
-
+  def social_distance_vasilescu(pr_id)
+    # 1. get all PRs or issues for which the submitter of this PR appears as a commenter or actor
+    # 2. for each of those, get all other commentners and actors that are members of the core team and add them to a set
+    # 3. divide size of 2. to main team size (always < 1)
   end
 
   def availability(pr_id)
@@ -929,6 +950,10 @@ Extract data for pull requests for a given repository
         where prc.pull_request_id = ?
           and u.id = prc.user_id
           and u.login not in ('travis-ci', 'cloudbees')
+          and prc.created_at < (
+            select max(created_at)
+            from pull_request_history
+            where action = 'closed' and pull_request_id = ?)
         union
         select min(ic.created_at) as created
         from issues i, issue_comments ic, users u
@@ -936,9 +961,13 @@ Extract data for pull requests for a given repository
           and i.id = ic.issue_id
           and u.id = ic.user_id
           and u.login not in ('travis-ci', 'cloudbees')
+          and ic.created_at < (
+            select max(created_at)
+            from pull_request_history
+            where action = 'closed' and pull_request_id = ?)
       ) as a;
     QUERY
-    resp = db.fetch(q, pr[:id], pr[:id]).first[:first_resp]
+    resp = db.fetch(q, pr[:id], pr[:id], pr[:id], pr[:id]).first[:first_resp]
     unless resp.nil?
       (resp - pr[:created_at]).to_i / 60
     else
@@ -1099,6 +1128,9 @@ Extract data for pull requests for a given repository
   # between the time the PR was created and `months_back`
   # excluding those created by the PR
   def commits_on_files_touched(pr, months_back)
+
+    # TODO: Make sure that each SHA is only counted once
+
     oldest = Time.at(Time.at(pr[:created_at]).to_i - 3600 * 24 * 30 * months_back)
     pr_against = pull_req_entry(pr[:id])['base']['sha']
     commits = commit_entries(pr[:id])
@@ -1130,6 +1162,11 @@ Extract data for pull requests for a given repository
       num_commits
     end.reduce(0) { |acc, x| acc + x }
   end
+
+  def commits_to_hotest_file(pr, months_back)
+    #raise Exception
+  end
+
 
   # Total number of commits on the project in the period up to `months` before
   # the pull request was opened. `exclude_pull_req` controls whether commits
