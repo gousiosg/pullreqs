@@ -1343,11 +1343,11 @@ Extract data for pull requests for a given repository
     begin
       repo = Rugged::Repository.new(checkout_dir)
       if update
-        #spawn("cd #{checkout_dir} && git pull")
+        spawn("cd #{checkout_dir} && git pull")
       end
       repo
     rescue
-      #spawn("git clone git://github.com/#{user}/#{repo}.git #{checkout_dir}")
+      spawn("git clone git://github.com/#{user}/#{repo}.git #{checkout_dir}")
       Rugged::Repository.new(checkout_dir)
     end
   end
