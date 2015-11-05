@@ -72,7 +72,7 @@ def send_spam(db, tmpl,  owner, repo)
     end
 
     email = render_erb(tmpl, :name => m[:name], :email => m[:email], :login => m[:login],
-                 :role => 'integrators', :repo => "#{owner}/#{repo}",
+                 :role => 'integrators', :git => "#{owner}/#{repo}",
                  :link => 'https://www.surveymonkey.com/s/pullreqs-integrators',
                  :perflink => "http://ghtorrent.org/pullreq-perf/#{owner}-#{repo}/")
 
@@ -97,7 +97,7 @@ def send_spam(db, tmpl,  owner, repo)
     end
 
     email = render_erb(tmpl, :name => m[:name], :email => m[:email], :login => m[:login],
-                 :role => 'contributors', :repo => "#{owner}/#{repo}",
+                 :role => 'contributors', :git => "#{owner}/#{repo}",
                  :link => 'https://www.surveymonkey.com/s/pullreqs-contributors',
                  :perflink => "http://ghtorrent.org/pullreq-perf/#{owner}-#{repo}/")
 
