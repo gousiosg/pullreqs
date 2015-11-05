@@ -11,11 +11,16 @@ source(file = "R/cmdline.R")
 source(file = "R/utils.R")
 source(file = "R/classification.R")
 
-merge.decision.model <- merged ~ team_size + num_commits + files_changed +
-  perc_external_contribs + sloc + src_churn + test_churn + num_comments +
-  commits_on_files_touched +  test_lines_per_kloc + prev_pullreqs +
-  requester_succ_rate + main_team_member + conflict + forward_links + 
-  num_participants
+minority.class <- nrow(subset(all, all$merged == FALSE))
+merge.decision.model <- merged ~ team_size + num_commits +
+  perc_external_contribs +  src_churn + test_churn + num_comments +
+  commits_on_files_touched + commits_to_hottest_file + prev_pullreqs +
+  requester_succ_rate + main_team_member + 
+  num_participants + prior_interaction_events + prior_interaction_comments +
+  social_connection_tsay + hotness_vasilescu + team_size_vasilescu +
+  description_complexity + workload  + test_cases_per_kloc + asserts_per_kloc +
+  followers + team_size + files_changed + perc_external_contribs + description_complexity +
+  intra_branch
 
 # Returns a list l where 
 # l[1] training dataset

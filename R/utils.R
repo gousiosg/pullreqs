@@ -107,15 +107,43 @@ load.some <- function(dir = ".", pattern = "*.csv$", howmany = -1) {
 load.filter <- function(path) {
   setAs("character", "POSIXct",
         function(from){as.POSIXct(from, origin = "1970-01-01")})
-  a <- read.csv(path, check.names = T, 
-                colClasses = c("integer",rep("factor",2), rep("integer", 6), "factor",
-                               rep("logical", 2), rep("integer", 14), "double",
-                               rep("integer", 4), rep("double", 3), "integer",  rep("factor", 3),
-                               "integer", "double", "integer", rep("logical", 3), "double",
-                               rep("integer", 10), 'double', rep("logical", 2)))
+
+  a <- read.csv(path, 
+                 check.names = T, 
+                 colClasses = c("integer",
+                                rep("factor",2), 
+                                rep("integer", 6), 
+                                "factor",
+                                rep("factor", 2), 
+                                rep("integer", 15), 
+                                "double",
+                                rep("integer", 5), 
+                                rep("double", 3), 
+                                "integer",  
+                                rep("factor", 3),
+                                "integer", 
+                                "double", 
+                                "integer", 
+                                rep("factor", 3), 
+                                "double",
+                                rep("integer", 10), 
+                                "double", 
+                                rep("factor", 2))
+  )
 
   a$merged <- !is.na(a$merged_at)
-  a$merged <- as.logical(a$merged)
+  
+  a$conflict <- as.factor(a$conflict)
+  a$forward_links <- as.factor(a$forward_links)
+  a$intra_branch <- as.factor(a$intra_branch)
+  a$social_connection_tsay <- as.factor(a$social_connection_tsay)
+  a$ci_errors <- as.factor(a$ci_errors)
+  a$ci_test_failures <- as.factor(a$ci_test_failures)
+  a$merged <- as.factor(a$merged)
+
+  a$prior_interaction_comments <- a$prior_interaction_issue_comments + a$prior_interaction_pr_comments + a$prior_interaction_commit_comments
+  a$prior_interaction_events <- a$prior_interaction_issue_events + a$prior_interaction_pr_events + a$prior_interaction_commits
+  
   # Take care of cases where csv file production was interupted, so the last
   # line has wrong fields
   a <- subset(a, !is.na(intra_branch))

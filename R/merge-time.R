@@ -14,10 +14,33 @@ source(file = "R/classification.R")
 library(pROC)
 library(sqldf)
 
-merge.time.model = merge_time ~ team_size + files_changed +
-  perc_external_contribs + sloc + src_churn + test_churn +
-  commits_on_files_touched +  test_lines_per_kloc + prev_pullreqs +
-  requester_succ_rate + main_team_member + conflict + forward_links
+merge.time.model = 
+  lifetime_minutes ~ 
+#  team_size + 
+  num_commits_open + 
+  files_changed + 
+  src_files + 
+#  doc_files +
+  other_files +
+  commits_on_files_touched +
+  test_lines_per_kloc + 
+  asserts_per_kloc +
+  watchers +
+  prev_pullreqs +
+  requester_succ_rate +
+  followers +
+#  intra_branch +
+#  main_team_member +
+#  social_connection_tsay +
+  hotness_vasilescu +
+  team_size_vasilescu +
+  description_complexity +
+  workload +
+  prior_interaction_comments +
+  prior_interaction_events +
+  has_ci
+
+all <- subset(all, lifetime_minutes <= fancy.threshold(all$lifetime_minutes))
 
 prepare.data.mergetime <- function(df, num_samples = nrow(df),
                                    bins = c(0, mean(df$mergetime_minutes), max(df$mergetime_minutes)),
