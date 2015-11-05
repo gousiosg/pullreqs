@@ -108,7 +108,7 @@ Extract data for pull requests for a given repository
       # Get PR build status from Travis
       begin
         repository = Travis::Repository.find(repo)
-      rescue Exception => e
+      rescue StandardError => e
         STDERR.puts "Error getting Travis builds for #{repo}: #{e.message}"
         return []
       end
@@ -141,9 +141,9 @@ Extract data for pull requests for a given repository
     @travis_builds
   end
 
-  def repo
-    Thread.current[:repo] ||= clone(ARGV[0], ARGV[1])
-    Thread.current[:repo]
+  def git
+    Thread.current[:git] ||= clone(ARGV[0], ARGV[1])
+    Thread.current[:git]
   end
 
   def threads
@@ -164,7 +164,7 @@ Extract data for pull requests for a given repository
     unless @stripped.has_key? f
       semaphore.synchronize do
         unless @stripped.has_key? f
-          @stripped[f] = strip_comments(repo.read(f[:oid]).data)
+          @stripped[f] = strip_comments(git.read(f[:oid]).data)
         end
       end
     end
@@ -214,9 +214,9 @@ Extract data for pull requests for a given repository
       @threads = ARGV[3].to_i
     end
 
-    walker = Rugged::Walker.new(repo)
+    walker = Rugged::Walker.new(git)
     walker.sorting(Rugged::SORT_DATE)
-    walker.push(repo.head.target)
+    walker.push(git.head.target)
     @all_commits = walker.map do |commit|
       commit.oid[0..10]
     end
@@ -290,7 +290,7 @@ Extract data for pull requests for a given repository
         end
         STDERR.puts r
         r
-      rescue Exception => e
+      rescue StandardError => e
         STDERR.puts "Error processing pull_request #{pr[:github_id]}: #{e.message}"
         STDERR.puts e.backtrace
         #raise e
@@ -310,7 +310,7 @@ Extract data for pull requests for a given repository
   def pull_reqs(project, github_id = -1)
     q = <<-QUERY
     select u.login as login, p.name as project_name, pr.id, pr.pullreq_id as github_id,
-           a.created_at as created_at, b.created_at as closed_at,
+           a.created_at as created_at, b.created_at as closed_at, c.sha as base_commit,
 			     (select created_at
             from pull_request_history prh1
             where prh1.pull_request_id = pr.id
@@ -321,13 +321,14 @@ Extract data for pull requests for a given repository
                                            where prh1.pull_request_id = pr.id and prh1.action='merged' limit 1)
       ) as mergetime_minutes
     from pull_requests pr, projects p, users u,
-         pull_request_history a, pull_request_history b
+         pull_request_history a, pull_request_history b, commits c
     where p.id = pr.base_repo_id
 	    and a.pull_request_id = pr.id
       and a.pull_request_id = b.pull_request_id
       and a.action='opened' and b.action='closed'
 	    and a.created_at < b.created_at
       and p.owner_id = u.id
+      and c.id = pr.base_commit_id
       and p.id = ?
     QUERY
 
@@ -348,9 +349,9 @@ Extract data for pull requests for a given repository
     git_merged, merge_reason, merge_person = @close_reason[pr[:github_id]]
 
     # Count number of src/comment lines
-    src = src_lines(pr[:id].to_f)
+    src = src_lines(pr[:base_commit])
 
-    if src == 0 then raise Exception.new("Bad src lines: 0, pr: #{pr[:github_id]}, id: #{pr[:id]}") end
+    if src == 0 then raise StandardError.new("Bad src lines: 0, pr: #{pr[:github_id]}, id: #{pr[:id]}") end
 
     months_back = 3
     commits_incl_prs = commits_last_x_months(pr, false, months_back)
@@ -391,9 +392,9 @@ Extract data for pull requests for a given repository
         :test_churn               => stats[:test_lines_added] + stats[:test_lines_deleted],
         :commits_on_files_touched => commits_on_files_touched(pr, months_back),
         :commits_to_hottest_file   => commits_to_hottest_file(pr, months_back),
-        :test_lines_per_kloc      => (test_lines(pr[:id]).to_f / src.to_f) * 1000,
-        :test_cases_per_kloc      => (num_test_cases(pr[:id]).to_f / src.to_f) * 1000,
-        :asserts_per_kloc         => (num_assertions(pr[:id]).to_f / src.to_f) * 1000,
+        :test_lines_per_kloc      => (test_lines(pr[:base_commit]).to_f / src.to_f) * 1000,
+        :test_cases_per_kloc      => (num_test_cases(pr[:base_commit]).to_f / src.to_f) * 1000,
+        :asserts_per_kloc         => (num_assertions(pr[:base_commit]).to_f / src.to_f) * 1000,
         :watchers                 => watchers(pr),
         :requester                => requester(pr),
         :closer                   => closer(pr),
@@ -904,7 +905,7 @@ Extract data for pull requests for a given repository
   def hotness_vasilescu(pr, months_back)
     commits_per_file = commits_on_pr_files(pr, months_back).map{|x| x[1].size}.sort
     med = commits_per_file[commits_per_file.size/2]
-    med / commits_last_x_months(pr, true, months_back).to_f
+    med / commits_last_x_months(pr, false, months_back).to_f
   end
 
   # People that committed (not through pull requests) up to months_back
@@ -927,17 +928,34 @@ Extract data for pull requests for a given repository
     db.fetch(q, pr[:id]).all
   end
 
-  # People that merged (not through pull requests) up to months_back
-  # from the time the PR was created.
+  # People that merged (not necessarily through pull requests) up to months_back
+  # from the time the built PR was created.
   def merger_team(pr, months_back)
-    @close_reason.map do |k,v|
-      created_at = @prs.find{|x| x[:github_id] == k}
-      [created_at[:created_at], v[2]]
-    end.find_all do |x|
-      x[0].to_i > (pr[:created_at].to_i  - months_back * 30 * 24 * 3600)
-    end.map do |x|
-      x[1]
-    end.select{|x| x != ''}.uniq
+    recently_merged = @prs.find_all do |b|
+      @close_reason[b[:github_id]][1] != :unknown and
+          b[:created_at].to_i > (pr[:created_at].to_i - months_back * 30 * 24 * 3600)
+    end.map do |b|
+      b[:github_id]
+    end
+
+    q = <<-QUERY
+    select u1.login as merger
+    from users u, projects p, pull_requests pr, pull_request_history prh, users u1
+    where prh.action = 'closed'
+      and prh.actor_id = u1.id
+      and prh.pull_request_id = pr.id
+      and pr.base_repo_id = p.id
+      and p.owner_id = u.id
+      and u.login = ?
+      and p.name = ?
+      and pr.pullreq_id = ?
+    QUERY
+
+    recently_merged.map do |pr_num|
+      a = db.fetch(q, pr[:login], pr[:repo], pr_num).first
+      if not a.nil? then a[:merger] else nil end
+    end.select {|x| not x.nil?}.uniq
+
   end
 
   # Number of integrators active during x months prior to pull request
@@ -948,7 +966,7 @@ Extract data for pull requests for a given repository
 
   def social_distance_vasilescu(pr_id)
     # 1. get all PRs or issues for which the submitter of this PR appears as a commenter or actor
-    # 2. for each of those, get all other commentners and actors that are members of the core team and add them to a set
+    # 2. for each of those, get all other commenters and actors that are members of the core team and add them to a set
     # 3. divide size of 2. to main team size (always < 1)
   end
 
@@ -1160,7 +1178,7 @@ Extract data for pull requests for a given repository
     commits_per_file.keys.reduce({}) do |acc, filename|
       commits_in_pr = commits_per_file[filename].map{|x| x[0]}
 
-      walker = Rugged::Walker.new(repo)
+      walker = Rugged::Walker.new(git)
       walker.sorting(Rugged::SORT_DATE)
       walker.push(pr_against)
 
@@ -1254,44 +1272,6 @@ Extract data for pull requests for a given repository
     }.select{|c| c['parents'].size <= 1}
   end
 
-  # List of files in a project checkout. Filter is an optional binary function
-  # that takes a file entry and decides whether to include it in the result.
-  def files_at_commit(pr_id, filter = lambda{true})
-    q = <<-QUERY
-    select c.sha
-    from pull_requests p, commits c
-    where c.id = p.base_commit_id
-    and p.id = ?
-    QUERY
-
-    def lslr(tree, path = '')
-      all_files = []
-      for f in tree.map{|x| x}
-        f[:path] = path + '/' + f[:name]
-        if f[:type] == :tree
-          begin
-            all_files << lslr(repo.lookup(f[:oid]), f[:path])
-          rescue Exception => e
-            STDERR.puts e
-            all_files
-          end
-        else
-          all_files << f
-        end
-      end
-      all_files.flatten
-    end
-
-    base_commit = db.fetch(q, pr_id).all[0][:sha]
-    begin
-      files = lslr(repo.lookup(base_commit).tree)
-      files.select{|x| filter.call(x)}
-    rescue Exception => e
-      STDERR.puts "Cannot find commit #{base_commit} in base repo"
-      []
-    end
-  end
-
   # Returns all comments for the issue sorted by creation date ascending
   def issue_comments(owner, repo, pr_id)
     Thread.current[:issue_id] ||= pr_id
@@ -1313,14 +1293,50 @@ Extract data for pull requests for a given repository
     Thread.current[:issue_cmnt]
   end
 
+  # Recursively get information from all files given a rugged Git tree
+  def lslr(tree, path = '')
+    all_files = []
+    for f in tree.map { |x| x }
+      f[:path] = path + '/' + f[:name]
+      if f[:type] == :tree
+        begin
+          all_files << lslr(git.lookup(f[:oid]), f[:path])
+        rescue StandardError => e
+          STDERR.puts e
+          all_files
+        end
+      else
+        all_files << f
+      end
+    end
+    all_files.flatten
+  end
+
+  # List of files in a project checkout. Filter is an optional binary function
+  # that takes a file entry and decides whether to include it in the result.
+  def files_at_commit(sha, filter = lambda { true })
+
+    begin
+      files = lslr(git.lookup(sha).tree)
+      if files.size <= 0
+        STDERR.puts "No files for commit #{sha}"
+      end
+      files.select { |x| filter.call(x) }
+    rescue StandardError => e
+      STDERR.puts "Cannot find commit #{sha} in base repo"
+      []
+    end
+  end
+
   def count_lines(files, include_filter = lambda{|x| true})
-    files.map{ |f|
-      stripped(f).lines.select{|x|
+    a = files.map do |f|
+      stripped(f).lines.select do |x|
         not x.strip.empty?
-      }.select{ |x|
+      end.select do |x|
         include_filter.call(x)
-      }.size
-    }.reduce(0){|acc,x| acc + x}
+      end.size
+    end
+    a.reduce(0){|acc,x| acc + x}
   end
 
   # Clone or update, if already cloned, a git repository
@@ -1343,62 +1359,60 @@ Extract data for pull requests for a given repository
     begin
       repo = Rugged::Repository.new(checkout_dir)
       if update
-        #spawn("cd #{checkout_dir} && git pull")
+        spawn("cd #{checkout_dir} && git pull")
       end
       repo
     rescue
-      #spawn("git clone git://github.com/#{user}/#{repo}.git #{checkout_dir}")
+      spawn("git clone --bare git://github.com/#{user}/#{repo}.git #{checkout_dir}")
       Rugged::Repository.new(checkout_dir)
     end
   end
 
-  # [buff] is an array of file lines, with empty lines stripped
-  # [regexp] is a regexp or an array of regexps to match multiline comments
-  def count_multiline_comments(buff, regexp)
-    unless regexp.is_a?(Array) then regexp = [regexp] end
-
-    regexp.reduce(0) do |acc, regexp|
-      acc + buff.reduce(''){|acc,x| acc + x}.scan(regexp).map { |x|
-        x.map{|y| y.lines.count}.reduce(0){|acc,y| acc + y}
-      }.reduce(0){|acc, x| acc + x}
-    end
+  def src_files(sha)
+    files_at_commit(sha, src_file_filter)
   end
 
-  # [buff] is an array of file lines, with empty lines stripped
-  def count_single_line_comments(buff, comment_regexp)
-    a = buff.select { |l|
-      not l.match(comment_regexp).nil?
-    }.size
-    a
+  def src_lines(sha)
+    count_lines(src_files(sha))
   end
 
-  def src_files(pr_id)
-    raise Exception.new("Unimplemented")
+  def test_files(sha)
+    files_at_commit(sha, test_file_filter)
   end
 
-  def src_lines(pr_id)
-    raise Exception.new("Unimplemented")
+  def test_lines(sha)
+    count_lines(test_files(sha))
   end
 
-  def test_files(pr_id)
-    raise Exception.new("Unimplemented")
+  def num_test_cases(sha)
+    count_lines(test_files(sha), test_case_filter)
   end
 
-  def test_lines(pr_id)
-    raise Exception.new("Unimplemented")
+  def num_assertions(sha)
+    count_lines(test_files(sha), assertion_filter)
   end
 
-  def num_test_cases(pr_id)
-    raise Exception.new("Unimplemented")
-  end
-
-  def num_assertions(pr_id)
-    raise Exception.new("Unimplemented")
-  end
-
-  # Return a function filename -> Boolean, that determines whether a
+  # Return a f: filename -> Boolean, that determines whether a
   # filename is a test file
   def test_file_filter
+    raise Exception.new("Unimplemented")
+  end
+
+  # Return a f: filename -> Boolean, that determines whether a
+  # filename is a src file
+  def src_file_filter
+    raise Exception.new("Unimplemented")
+  end
+
+  # Return a f: buff -> Boolean, that determines whether a
+  # line represents a test case declaration
+  def test_case_filter
+    raise Exception.new("Unimplemented")
+  end
+
+  # Return a f: buff -> Boolean, that determines whether a
+  # line represents an assertion
+  def assertion_filter
     raise Exception.new("Unimplemented")
   end
 

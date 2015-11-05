@@ -132,7 +132,7 @@ module PythonData
     Thread.current[:ds_cache] ||= {}
     if Thread.current[:ds_cache][pr_id].nil?
       docstr = (src_files(pr_id) + test_files(pr_id)).flat_map do |f|
-          buff = repo.read(f[:oid]).data
+          buff = git.read(f[:oid]).data
           buff.scan(ml_comment_regexps[0])
           end
       Thread.current[:ds_cache][pr_id] = docstr.flatten
