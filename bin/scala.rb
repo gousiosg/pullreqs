@@ -25,9 +25,9 @@ module ScalaData
 
   def assertion_filter
     lambda do |l|
-      not l.match(/[.\s]assert[\s({]+/).nil? or          # JUnit, scalatest
-          not l.match(/[.\s]must[\s({]+/).nil? or        # scalatest
-          not l.match(/[.\s]should[\s({]+/).nil?        # scalatest, specs2
+      not l.match(/assert/).nil? or                # JUnit, scalatest
+          not l.match(/[.\s]must[\s({]+/).nil? or  # scalatest
+          not l.match(/[.\s]should[\s({]+/).nil?   # scalatest, specs2
     end
   end
 

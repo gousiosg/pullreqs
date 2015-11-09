@@ -28,3 +28,4 @@ tmp
 *.swp
 doc/build
 .Rproj.user
+cache

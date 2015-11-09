@@ -345,6 +345,7 @@ Extract data for pull requests for a given repository
 
     # Statistics across pull request commits
     stats = pr_stats(pr)
+    stats_open = pr_stats(pr, true)
     merged = !pr[:merged_at].nil?
     git_merged, merge_reason, merge_person = @close_reason[pr[:github_id]]
 
@@ -359,10 +360,13 @@ Extract data for pull requests for a given repository
 
     # Create line for a pull request
     {
+        # Generall stuff
         :pull_req_id              => pr[:id],
         :project_name             => "#{pr[:login]}/#{pr[:project_name]}",
         :lang                     => lang,
         :github_id                => pr[:github_id],
+
+        # PR characteristics
         :created_at               => Time.at(pr[:created_at]).to_i,
         :merged_at                => merge_time(pr, merged, git_merged),
         :closed_at                => Time.at(pr[:closed_at]).to_i,
@@ -371,14 +375,23 @@ Extract data for pull requests for a given repository
         :merged_using             => merge_reason.to_s,
         :conflict                 => conflict?(pr),
         :forward_links            => forward_links?(pr),
-        :team_size                => team_size_at_open(pr, months_back),
+        :intra_branch             => if intra_branch?(pr) == 1 then true else false end,
+        :description_length       => description_length(pr),
         :num_commits              => num_commits(pr),
         :num_commits_open         => num_commits_at_open(pr),
         :num_pr_comments          => num_pr_comments(pr),
         :num_issue_comments       => num_issue_comments(pr),
         :num_commit_comments      => num_commit_comments(pr),
         :num_comments             => num_pr_comments(pr) + num_issue_comments(pr) + num_commit_comments(pr),
+        :num_commit_comments_open => num_commit_comments(pr, true),
         :num_participants         => num_participants(pr),
+        :files_added_open         => stats_open[:files_added],
+        :files_deleted_open       => stats_open[:files_removed],
+        :files_modified_open      => stats_open[:files_modified],
+        :files_changed_open       => stats_open[:files_added] + stats[:files_modified] + stats[:files_removed],
+        :src_files_open           => stats_open[:src_files],
+        :doc_files_open           => stats_open[:doc_files],
+        :other_files_open         => stats_open[:other_files],
         :files_added              => stats[:files_added],
         :files_deleted            => stats[:files_removed],
         :files_modified           => stats[:files_modified],
@@ -386,29 +399,38 @@ Extract data for pull requests for a given repository
         :src_files                => stats[:src_files],
         :doc_files                => stats[:doc_files],
         :other_files              => stats[:other_files],
-        :perc_external_contribs   => commits_last_x_months(pr, true, months_back) / commits_incl_prs,
-        :sloc                     => src,
+        :src_churn_open           => stats_open[:lines_added] + stats_open[:lines_deleted],
+        :test_churn_open          => stats_open[:test_lines_added] + stats_open[:test_lines_deleted],
         :src_churn                => stats[:lines_added] + stats[:lines_deleted],
         :test_churn               => stats[:test_lines_added] + stats[:test_lines_deleted],
+        :entropy_diff             => entropy_diff(pr, months_back),
         :commits_on_files_touched => commits_on_files_touched(pr, months_back),
-        :commits_to_hottest_file   => commits_to_hottest_file(pr, months_back),
+        :commits_to_hottest_file  => commits_to_hottest_file(pr, months_back),
+        :hotness                  => hotness(pr, months_back),
+        :at_mentions_description  => at_mentions_description(pr),
+        :at_mentions_comments     => at_mentions_comments(pr),
+
+        # Project characteristics
+        :perc_external_contribs   => commits_last_x_months(pr, true, months_back) / commits_incl_prs,
+        :sloc                     => src,
         :test_lines_per_kloc      => (test_lines(pr[:base_commit]).to_f / src.to_f) * 1000,
         :test_cases_per_kloc      => (num_test_cases(pr[:base_commit]).to_f / src.to_f) * 1000,
         :asserts_per_kloc         => (num_assertions(pr[:base_commit]).to_f / src.to_f) * 1000,
         :watchers                 => watchers(pr),
+        :team_size                => team_size(pr, months_back),
+        :workload                 => workload(pr),
+
+        # Contributor characteristics
         :requester                => requester(pr),
         :closer                   => closer(pr),
         :merger                   => merge_person,
         :prev_pullreqs            => prev_pull_reqs,
         :requester_succ_rate      => if prev_pull_reqs > 0 then prev_pull_requests(pr, 'merged').to_f / prev_pull_reqs.to_f else 0 end,
         :followers                => followers(pr),
-        :intra_branch             => if intra_branch?(pr) == 1 then true else false end,
         :main_team_member         => main_team_member?(pr, months_back),
         :social_connection_tsay   => social_connection_tsay?(pr),
-        :hotness_vasilescu        => hotness_vasilescu(pr, months_back),
-        :team_size_vasilescu      => team_size_vasilescu(pr, months_back),
-        :description_complexity   => description_complexity(pr),
-        :workload                 => workload(pr),
+
+        # Project/contributor interaction characteristics
         :prior_interaction_issue_events    => prior_interaction_issue_events(pr, months_back),
         :prior_interaction_issue_comments  => prior_interaction_issue_comments(pr, months_back),
         :prior_interaction_pr_events       => prior_interaction_pr_events(pr, months_back),
@@ -416,9 +438,11 @@ Extract data for pull requests for a given repository
         :prior_interaction_commits         => prior_interaction_commits(pr, months_back),
         :prior_interaction_commit_comments => prior_interaction_commit_comments(pr, months_back),
         :first_response           => first_response(pr),
+
+        # CI on the PR
         :ci_latency               => ci_latency(pr),
         :ci_errors                => ci_errors?(pr),
-        :ci_test_failures         => ci_test_failures?(pr),
+        :ci_test_failures         => ci_test_failures?(pr)
     }
   end
 
@@ -537,26 +561,6 @@ Extract data for pull requests for a given repository
     end
   end
 
-  # Number of developers that have committed at least once in the interval
-  # between the pull request open up to +interval_months+ back
-  def team_size_at_open(pr, interval_months)
-    q = <<-QUERY
-    select count(distinct author_id) as teamsize
-    from projects p, commits c, project_commits pc, pull_requests pr,
-         pull_request_history prh
-    where p.id = pc.project_id
-      and pc.commit_id = c.id
-      and p.id = pr.base_repo_id
-      and prh.pull_request_id = pr.id
-      and not exists (select * from pull_request_commits prc1 where prc1.commit_id = c.id)
-      and prh.action = 'opened'
-      and c.created_at < prh.created_at
-      and c.created_at > DATE_SUB(prh.created_at, INTERVAL #{interval_months} MONTH)
-      and pr.id=?;
-    QUERY
-    db.fetch(q, pr[:id]).first[:teamsize]
-  end
-
   def num_commits_at_open(pr)
     q = <<-QUERY
     select count(*) as commit_count
@@ -620,13 +624,26 @@ Extract data for pull requests for a given repository
   end
 
   # Number of commit comments on commits composing the pull request
-  def num_commit_comments(pr)
-    q = <<-QUERY
-    select count(*) as commit_comment_count
-    from pull_request_commits prc, commit_comments cc
-    where prc.commit_id = cc.commit_id
-      and prc.pull_request_id = ?
-    QUERY
+  def num_commit_comments(pr, at_open = false)
+    if at_open
+      q = <<-QUERY
+      select count(*) as commit_comment_count
+      from pull_request_commits prc, commit_comments cc,
+           pull_request_history prh
+      where prc.commit_id = cc.commit_id
+        and prh.action = 'opened'
+        and cc.created_at <= prh.created_at
+        and prh.pull_request_id = prc.pull_request_id
+        and prc.pull_request_id = ?
+      QUERY
+    else
+      q = <<-QUERY
+      select count(*) as commit_comment_count
+      from pull_request_commits prc, commit_comments cc
+      where prc.commit_id = cc.commit_id
+        and prc.pull_request_id = ?
+      QUERY
+    end
     db.fetch(q, pr[:id]).first[:commit_comment_count]
   end
 
@@ -774,6 +791,11 @@ Extract data for pull requests for a given repository
     end
   end
 
+  # Do the contributor and the person that closed the PR follow
+  # each other?
+  # Defined in: Tsay, Jason, Laura Dabbish, and James Herbsleb.
+  # "Influence of social and technical factors for evaluating contribution in GitHub."
+  # Proceedings of the ICSE 2014
   def social_connection_tsay?(pr)
     q = <<-QUERY
     select *
@@ -800,8 +822,48 @@ Extract data for pull requests for a given repository
     db.fetch(q, pr[:id], pr[:id], pr[:id]).all.size > 0
   end
 
+  # People that merged (not necessarily through pull requests) up to months_back
+  # from the time the built PR was created.
+  def merger_team(pr, months_back)
+    recently_merged = @prs.find_all do |b|
+      @close_reason[b[:github_id]][1] != :unknown and
+          b[:created_at].to_i > (pr[:created_at].to_i - months_back * 30 * 24 * 3600)
+    end.map do |b|
+      b[:github_id]
+    end
+
+    q = <<-QUERY
+    select u1.login as merger
+    from users u, projects p, pull_requests pr, pull_request_history prh, users u1
+    where prh.action = 'closed'
+      and prh.actor_id = u1.id
+      and prh.pull_request_id = pr.id
+      and pr.base_repo_id = p.id
+      and p.owner_id = u.id
+      and u.login = ?
+      and p.name = ?
+      and pr.pullreq_id = ?
+    QUERY
+
+    recently_merged.map do |pr_num|
+      a = db.fetch(q, pr[:login], pr[:repo], pr_num).first
+      if not a.nil? then a[:merger] else nil end
+    end.select {|x| not x.nil?}.uniq
+
+  end
+
+  # Number of integrators active during x months prior to pull request
+  # creation.
+  def team_size(pr, months_back)
+    (committer_team(pr, months_back) + merger_team(pr, months_back)).uniq.size
+  end
+
   # The number of events before a particular pull request that the user has
   # participated in for this project.
+  # The following features originate in:
+  # Yu, Y., Wang, H., Filkov, V., Devanbu, P., & Vasilescu, B.
+  # Wait For It: Determinants of Pull Request Evaluation Latency on GitHub.
+  # MSR 2015
   def prior_interaction_issue_events(pr, months_back)
     q = <<-QUERY
       select count(distinct(i.id)) as num_issue_events
@@ -902,7 +964,7 @@ Extract data for pull requests for a given repository
 
   # Median number of commits to files touched by the pull request relative to
   # all project commits during the last three months
-  def hotness_vasilescu(pr, months_back)
+  def hotness(pr, months_back)
     commits_per_file = commits_on_pr_files(pr, months_back).map{|x| x[1].size}.sort
     med = commits_per_file[commits_per_file.size/2]
     med / commits_last_x_months(pr, false, months_back).to_f
@@ -912,7 +974,7 @@ Extract data for pull requests for a given repository
   # from the time the PR was created.
   def committer_team(pr, months_back)
     q = <<-QUERY
-    select distinct(u.login)
+    select distinct(u.login) as committer
     from commits c, project_commits pc, pull_requests pr, users u, pull_request_history prh
     where pr.base_repo_id = pc.project_id
       and not exists (select * from pull_request_commits where commit_id = c.id)
@@ -925,46 +987,10 @@ Extract data for pull requests for a given repository
       and c.created_at > DATE_SUB(prh.created_at, INTERVAL #{months_back} MONTH)
       and c.created_at < prh.created_at;
     QUERY
-    db.fetch(q, pr[:id]).all
+    db.fetch(q, pr[:id]).all.map{|x| x[:committer]}
   end
 
-  # People that merged (not necessarily through pull requests) up to months_back
-  # from the time the built PR was created.
-  def merger_team(pr, months_back)
-    recently_merged = @prs.find_all do |b|
-      @close_reason[b[:github_id]][1] != :unknown and
-          b[:created_at].to_i > (pr[:created_at].to_i - months_back * 30 * 24 * 3600)
-    end.map do |b|
-      b[:github_id]
-    end
-
-    q = <<-QUERY
-    select u1.login as merger
-    from users u, projects p, pull_requests pr, pull_request_history prh, users u1
-    where prh.action = 'closed'
-      and prh.actor_id = u1.id
-      and prh.pull_request_id = pr.id
-      and pr.base_repo_id = p.id
-      and p.owner_id = u.id
-      and u.login = ?
-      and p.name = ?
-      and pr.pullreq_id = ?
-    QUERY
-
-    recently_merged.map do |pr_num|
-      a = db.fetch(q, pr[:login], pr[:repo], pr_num).first
-      if not a.nil? then a[:merger] else nil end
-    end.select {|x| not x.nil?}.uniq
-
-  end
-
-  # Number of integrators active during x months prior to pull request
-  # creation.
-  def team_size_vasilescu(pr, months_back)
-    (committer_team(pr, months_back) + merger_team(pr, months_back)).uniq.size
-  end
-
-  def social_distance_vasilescu(pr_id)
+  def strength_social_connection(pr_id)
     # 1. get all PRs or issues for which the submitter of this PR appears as a commenter or actor
     # 2. for each of those, get all other commenters and actors that are members of the core team and add them to a set
     # 3. divide size of 2. to main team size (always < 1)
@@ -1009,6 +1035,13 @@ Extract data for pull requests for a given repository
     end
   end
 
+  # Number of commits to the hottest file between the time the PR was created
+  # and `months_back`
+  def commits_to_hottest_file(pr, months_back)
+    a = commits_on_pr_files(pr, months_back).map{|x| x}.sort_by { |x| x[1].size}
+    a.last[1].size
+  end
+
   # Time between PR arrival and last CI run
   def ci_latency(pr)
     last_run = travis.find_all{|b| b[:pull_req] == pr[:github_id]}.sort_by { |x| Time.parse(x[:finished_at]).to_i }[-1]
@@ -1030,7 +1063,7 @@ Extract data for pull requests for a given repository
   end
 
   # Total number of words in the pull request title and description
-  def description_complexity(pr)
+  def description_length(pr)
     pull_req = pull_req_entry(pr[:id])
     (pull_req['title'] + ' ' + pull_req['body']).gsub(/[\n\r]\s+/, ' ').split(/\s+/).size
   end
@@ -1075,9 +1108,9 @@ Extract data for pull requests for a given repository
   # Various statistics for the pull request. Returned as Hash with the following
   # keys: :lines_added, :lines_deleted, :files_added, :files_removed,
   # :files_modified, :files_touched, :src_files, :doc_files, :other_files.
-  def pr_stats(pr)
+  def pr_stats(pr, at_open = false)
     pr_id = pr[:id]
-    raw_commits = commit_entries(pr_id)
+    raw_commits = commit_entries(pr_id, at_open)
     result = Hash.new(0)
 
     def file_count(commits, status)
@@ -1160,7 +1193,7 @@ Extract data for pull requests for a given repository
 
   # Return a hash of file names and commits on those files in the
   # period between pull request open and months_back. The returned
-  # results do not include the commits comming from the PR.
+  # results do not include the commits coming from the PR.
   def commits_on_pr_files(pr, months_back)
 
     oldest = Time.at(Time.at(pr[:created_at]).to_i - 3600 * 24 * 30 * months_back)
@@ -1204,14 +1237,6 @@ Extract data for pull requests for a given repository
     end.flatten.uniq.size
   end
 
-  # Number of commits to the hottest file between the time the PR was created
-  # and `months_back`
-  def commits_to_hottest_file(pr, months_back)
-    a = commits_on_pr_files(pr, months_back).map{|x| x}.sort_by { |x| x[1].size}
-    a.last[1].size
-  end
-
-
   # Total number of commits on the project in the period up to `months` before
   # the pull request was opened. `exclude_pull_req` controls whether commits
   # from pull requests should be accounted for.
@@ -1237,7 +1262,74 @@ Extract data for pull requests for a given repository
     db.fetch(q, pr[:id]).first[:num_commits]
   end
 
+  # Total entropy introduced by PR
+  def entropy_diff(pr, months_back)
+    # A1 Calc current entropy for existing files changed (modified, deleted) by PR
+    files = commit_entries(pr[:id], at_open = true).flat_map{|x| x['files']}.map{|x| '/' + x['filename']}
+    file_tree = lslr(git.lookup(pr[:base_commit]).tree)
+
+    entropies = file_tree.reduce({}) do |acc, f|
+      if files.include? f[:path]
+        acc.merge({f => entropy(git.read(f[:oid]).data)})
+      else
+        acc
+      end
+    end
+    entropies.reduce(0){|acc, x| acc + x[1]}
+
+    # Find all files changed by commits when the PR was opened
+
+    # A2 Calc entropy for new versions of existing files
+    entropies.reduce(0){|acc, x| acc + x[1]}
+
+
+    # B Calc entropy for files added by PR
+    # C Calc entropy for files deleted by PR
+    # abs(A2 - A1 + B + C)
+  end
+
+  # Num of @uname mentions in the description
+  # Modelling the results of: An Exploratory Study of @-mention in GitHub's Pull-requests
+  # DOI: 10.1109/APSEC.2014.58
+  def at_mentions_description(pr)
+    pull_req = pull_req_entry(pr[:id])
+    if pull_req['body'].nil?
+      pull_req['body'].\
+        gsub(/`.*?`/, '').\
+        gsub(/[\w]*@[\w]+\.[\w]+/, '').\
+        scan(/(@[a-zA-Z0-9]+)/).size
+    else
+      0
+    end
+  end
+
+  # Num of @uname mentions in comments
+  def at_mentions_comments(pr)
+    issue_comments(pr[:login], pr[:project_name], pr[:github_id]).map do |ic|
+      # Remove stuff between backticks (they may be code)
+      # e.g. see comments in https://github.com/ReactiveX/RxScala/pull/166
+      ic['body'].\
+          gsub(/`.*?`/, '').\
+          gsub(/[\w]*@[\w]+\.[\w]+/, '')
+    end.map do |ic|
+      ic.scan(/(@[a-zA-Z0-9]+)/).size
+    end.reduce(0) do |acc, x|
+      acc + x
+    end
+  end
+
   private
+
+  def entropy(s)
+    counts = Hash.new(0.0)
+    s.each_char { |c| counts[c] += 1 }
+    leng = s.length
+
+    counts.values.reduce(0) do |entropy, count|
+      freq = count / leng
+      entropy - freq * Math.log2(freq)
+    end
+  end
 
   def pull_req_entry(pr_id)
     q = <<-QUERY
@@ -1255,14 +1347,29 @@ Extract data for pull requests for a given repository
   end
 
   # JSON objects for the commits included in the pull request
-  def commit_entries(pr_id)
-    q = <<-QUERY
-    select c.sha as sha
-    from pull_requests pr, pull_request_commits prc, commits c
-    where pr.id = prc.pull_request_id
-    and prc.commit_id = c.id
-    and pr.id = ?
-    QUERY
+  def commit_entries(pr_id, at_open = false)
+    if at_open
+      q = <<-QUERY
+        select c.sha as sha
+        from pull_requests pr, pull_request_commits prc,
+             commits c, pull_request_history prh
+        where pr.id = prc.pull_request_id
+        and prc.commit_id = c.id
+        and prh.action = 'opened'
+        and prh.pull_request_id = pr.id
+        and c.created_at <= prh.created_at
+        and pr.id = ?
+      QUERY
+    else
+      q = <<-QUERY
+        select c.sha as sha
+        from pull_requests pr, pull_request_commits prc, commits c
+        where pr.id = prc.pull_request_id
+        and prc.commit_id = c.id
+        and pr.id = ?
+      QUERY
+    end
+
     commits = db.fetch(q, pr_id).all
 
     commits.reduce([]){ |acc, x|
