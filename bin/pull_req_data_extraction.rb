@@ -403,7 +403,8 @@ Extract data for pull requests for a given repository
         :test_churn_open          => stats_open[:test_lines_added] + stats_open[:test_lines_deleted],
         :src_churn                => stats[:lines_added] + stats[:lines_deleted],
         :test_churn               => stats[:test_lines_added] + stats[:test_lines_deleted],
-        :entropy_diff             => entropy_diff(pr, months_back),
+        :new_entropy              => new_entropy(pr),
+        :entropy_diff             => (new_entropy(pr) / project_entropy(pr)) * 100,
         :commits_on_files_touched => commits_on_files_touched(pr, months_back),
         :commits_to_hottest_file  => commits_to_hottest_file(pr, months_back),
         :hotness                  => hotness(pr, months_back),
@@ -1263,29 +1264,26 @@ Extract data for pull requests for a given repository
   end
 
   # Total entropy introduced by PR
-  def entropy_diff(pr, months_back)
-    # A1 Calc current entropy for existing files changed (modified, deleted) by PR
-    files = commit_entries(pr[:id], at_open = true).flat_map{|x| x['files']}.map{|x| '/' + x['filename']}
-    file_tree = lslr(git.lookup(pr[:base_commit]).tree)
+  def new_entropy(pr)
+    files = commit_entries(pr[:id], at_open = true).flat_map{|x| x['files']}
 
-    entropies = file_tree.reduce({}) do |acc, f|
-      if files.include? f[:path]
-        acc.merge({f => entropy(git.read(f[:oid]).data)})
-      else
-        acc
-      end
-    end
-    entropies.reduce(0){|acc, x| acc + x[1]}
-
-    # Find all files changed by commits when the PR was opened
+    entropy_diffs = files.\
+      select{ |f| ['modified', 'added'].include? f['status']}.\
+      map{|x| unless x['patch'].nil? then entropy(x['patch'].gsub(/@@.*@@/,'')) else 0 end}
 
     # A2 Calc entropy for new versions of existing files
-    entropies.reduce(0){|acc, x| acc + x[1]}
+    del_entropies = files.\
+      select{|f| f['status'] == 'deleted'}.\
+      map{|x| entropy(x['patch'].gsub(/@@.*@@/,''))}
 
+    (entropy_diffs - del_entropies).reduce(0){|acc, x| acc + x}
+  end
 
-    # B Calc entropy for files added by PR
-    # C Calc entropy for files deleted by PR
-    # abs(A2 - A1 + B + C)
+  def project_entropy(pr)
+    lslr(git.lookup(pr[:base_commit]).tree).\
+      select{|f| f[:type] == :blob}.\
+      map {|f| entropy(git.read(f[:oid]).data)}.\
+      reduce(0){|acc, x| acc + x}
   end
 
   # Num of @uname mentions in the description
