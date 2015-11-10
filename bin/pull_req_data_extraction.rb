@@ -200,9 +200,9 @@ Extract data for pull requests for a given repository
 
     case ARGV[2]
       when /ruby/i then self.extend(RubyData)
+      when /javascript/i then self.extend(JavascriptData)
       when /java/i then self.extend(JavaData)
       when /scala/i then self.extend(ScalaData)
-      when /javascript/i then self.extend(JavascriptData)
       when /c/i then self.extend(CData)
       when /python/i then self.extend(PythonData)
     end
@@ -417,7 +417,7 @@ Extract data for pull requests for a given repository
         :test_lines_per_kloc      => (test_lines(pr[:base_commit]).to_f / src.to_f) * 1000,
         :test_cases_per_kloc      => (num_test_cases(pr[:base_commit]).to_f / src.to_f) * 1000,
         :asserts_per_kloc         => (num_assertions(pr[:base_commit]).to_f / src.to_f) * 1000,
-        :watchers                 => watchers(pr),
+        :stars                    => stars(pr),
         :team_size                => team_size(pr, months_back),
         :workload                 => workload(pr),
 
@@ -429,7 +429,7 @@ Extract data for pull requests for a given repository
         :requester_succ_rate      => if prev_pull_reqs > 0 then prev_pull_requests(pr, 'merged').to_f / prev_pull_reqs.to_f else 0 end,
         :followers                => followers(pr),
         :main_team_member         => main_team_member?(pr, months_back),
-        :social_connection_tsay   => social_connection_tsay?(pr),
+        :social_connection        => social_connection?(pr),
 
         # Project/contributor interaction characteristics
         :prior_interaction_issue_events    => prior_interaction_issue_events(pr, months_back),
@@ -590,7 +590,11 @@ Extract data for pull requests for a given repository
       and pr.id=?
     group by prc.pull_request_id
     QUERY
-    db.fetch(q, pr[:id]).first[:commit_count]
+    begin
+      db.fetch(q, pr[:id]).first[:commit_count]
+    rescue
+      0
+    end
   end
 
   # Number of pull request code review comments in pull request
@@ -677,7 +681,7 @@ Extract data for pull requests for a given repository
   end
 
   # Number of project watchers/stargazers at the time the pull request was made
-  def watchers(pr)
+  def stars(pr)
     q = <<-QUERY
     select count(w.user_id) as num_watchers
     from watchers w, pull_requests pr, pull_request_history prh
@@ -797,7 +801,7 @@ Extract data for pull requests for a given repository
   # Defined in: Tsay, Jason, Laura Dabbish, and James Herbsleb.
   # "Influence of social and technical factors for evaluating contribution in GitHub."
   # Proceedings of the ICSE 2014
-  def social_connection_tsay?(pr)
+  def social_connection?(pr)
     q = <<-QUERY
     select *
     from followers
