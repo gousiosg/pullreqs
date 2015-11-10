@@ -373,7 +373,7 @@ Extract data for pull requests for a given repository
         :stars                    => stars(pr),
         :team_size                => team_size(pr, months_back),
         :workload                 => workload(pr),
-        :has_ci                   => has_ci?(pr),
+        :ci                       => ci(pr),
 
         # Contributor characteristics
         :requester                => requester(pr),
@@ -986,14 +986,44 @@ Extract data for pull requests for a given repository
     a.last[1].size
   end
 
+  CIBADGES = {
+      /https:\/\/.*.cloudbees.com\/buildStatus\/icon/    => :cloudbees,
+      /https:\/\/circleci.com\/gh\/.*\.(png|svg)/        => :circleci,
+      /https:\/\/travis-ci.org\/.*\.(svg|png)/           => :travis,
+      /https:\/\/app.wercker.com\/status\/.*\/m/         => :wrecker,
+      /https:\/\/api.shippable.com\/projects\/.*\/badge/ => :shippable,
+      /https:\/\/codeship.com\/projects\/.*\/status/     => :codeship,
+      /https:\/\/semaphoreapp.com\/vast/                 => :semaphoreapp,
+      /https:\/\/snap-ci.com\/.*\/branch/                => :snapci
+  }
 
-  def has_ci?(pr)
-    config = %w(.travis.yml circle.yml .travis.yaml circle.yaml shippable.yml)
+  CICONFIGS = {
+      /.travis.y[a]?ml/   => :travis,
+      /circle.y[a]?ml/    => :circleci,
+      /shippable.y[a]?ml/ => :shippable,
+      /wercker.y[a]?ml/   => :wercker
+  }
+
+  def ci(pr)
+    # Check whether a CI configuration file exists in the root directory
     root_files = files_at_commit(pr[:base_commit], lambda{|f| f[:path].count('/') == 1})
     root_files.each do |f|
-      return true if config.include? f[:path].gsub(/\//, '')
+      CICONFIGS.keys.each do |ci|
+        return CICONFIGS[ci] unless f[:path].match(ci).nil?
+      end
     end
-    false
+
+    # Check whether a README file contains a CI badge
+    readmes = root_files.find{|f| f[:path].match(/\/README/)}
+    return :unknown if readmes.empty?
+    readme = git.read(readmes[0][:oid]).data
+    CIBADGES.keys.each do |badge|
+      if readme.match(badge)
+        return CIBADGES[badge]
+      end
+    end
+
+    return :unknown
   end
 
   # Total number of words in the pull request title and description
