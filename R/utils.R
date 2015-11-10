@@ -108,45 +108,92 @@ load.filter <- function(path) {
   setAs("character", "POSIXct",
         function(from){as.POSIXct(from, origin = "1970-01-01")})
 
-  a <- read.csv(path, 
-                 check.names = T, 
-                 colClasses = c("integer",
-                                rep("factor",2), 
-                                rep("integer", 6), 
-                                "factor",
-                                rep("factor", 2), 
-                                rep("integer", 15), 
-                                "double",
-                                rep("integer", 5), 
-                                rep("double", 3), 
-                                "integer",  
-                                rep("factor", 3),
-                                "integer", 
-                                "double", 
-                                "integer", 
-                                rep("factor", 3), 
-                                "double",
-                                rep("integer", 10), 
-                                "double", 
-                                rep("factor", 2))
+  a <- read.csv(path, check.names = T, 
+                colClasses = c(
+                "integer",      #pull_req_id
+                "factor",       #project_name
+                "factor",       #lang
+                "integer",      #github_id
+                "integer",      #created_at
+                "integer",      #merged_at
+                "integer",      #closed_at
+                "integer",      #lifetime_minutes
+                "integer",      #mergetime_minutes
+                "factor",       #merged_using
+                "factor",       #conflict
+                "factor",       #forward_links
+                "factor",       #intra_branch
+                "integer",      #description_length
+                "integer",      #num_commits
+                "integer",      #num_commits_open
+                "integer",      #num_pr_comments
+                "integer",      #num_issue_comments
+                "integer",      #num_commit_comments
+                "integer",      #num_comments
+                "integer",      #num_commit_comments_open
+                "integer",      #num_participants
+                "integer",      #files_added_open
+                "integer",      #files_deleted_open
+                "integer",      #files_modified_open
+                "integer",      #files_changed_open
+                "integer",      #src_files_open
+                "integer",      #doc_files_open
+                "integer",      #other_files_open
+                "integer",      #files_added
+                "integer",      #files_deleted
+                "integer",      #files_modified
+                "integer",      #files_changed
+                "integer",      #src_files
+                "integer",      #doc_files
+                "integer",      #other_files
+                "integer",      #src_churn_open
+                "integer",      #test_churn_open
+                "integer",      #src_churn
+                "integer",      #test_churn
+                "numeric",      #new_entropy
+                "numeric",      #entropy_diff
+                "integer",      #commits_on_files_touched
+                "integer",      #commits_to_hottest_file
+                "numeric",      #hotness
+                "integer",      #at_mentions_description
+                "integer",      #at_mentions_comments
+                "numeric",      #perc_external_contribs
+                "integer",      #sloc
+                "numeric",      #test_lines_per_kloc
+                "numeric",      #test_cases_per_kloc
+                "numeric",      #asserts_per_kloc
+                "integer",      #watchers
+                "integer",      #team_size
+                "integer",      #workload
+                "factor",       #requester
+                "factor",       #closer
+                "factor",       #merger
+                "integer",      #prev_pullreqs
+                "numeric",      #requester_succ_rate
+                "integer",      #followers
+                "factor",       #main_team_member
+                "factor",       #social_connection
+                "integer",      #prior_interaction_issue_events
+                "integer",      #prior_interaction_issue_comments
+                "integer",      #prior_interaction_pr_events
+                "integer",      #prior_interaction_pr_comments
+                "integer",      #prior_interaction_commits
+                "integer",      #prior_interaction_commit_comments
+                "integer",      #first_response
+                "numeric",      #ci_latency
+                "factor",       #ci_errors
+                "factor"        #ci_test_failures
+                )
   )
 
-  a$merged <- !is.na(a$merged_at)
-  
-  a$conflict <- as.factor(a$conflict)
-  a$forward_links <- as.factor(a$forward_links)
-  a$intra_branch <- as.factor(a$intra_branch)
-  a$social_connection_tsay <- as.factor(a$social_connection_tsay)
-  a$ci_errors <- as.factor(a$ci_errors)
-  a$ci_test_failures <- as.factor(a$ci_test_failures)
-  a$merged <- as.factor(a$merged)
-
+ 
   a$prior_interaction_comments <- a$prior_interaction_issue_comments + a$prior_interaction_pr_comments + a$prior_interaction_commit_comments
   a$prior_interaction_events <- a$prior_interaction_issue_events + a$prior_interaction_pr_events + a$prior_interaction_commits
-  
-  # Take care of cases where csv file production was interupted, so the last
-  # line has wrong fields
-  a <- subset(a, !is.na(intra_branch))
+  a$merged <- !is.na(a$merged_at)
+  a$merged <- as.factor(a$merged)
+#   # Take care of cases where csv file production was interupted, so the last
+#   # line has wrong fields
+  a <- subset(a, !is.na(ci_test_failures))
   a
 }
 
