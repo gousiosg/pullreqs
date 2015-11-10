@@ -61,8 +61,6 @@ Extract data for pull requests for a given repository
       BANNER
       opt :config, 'config.yaml file location', :short => 'c',
           :default => 'config.yaml'
-      opt :travis, 'Only run the Travis build retrieval process',
-          :short => 't'
     end
   end
 
@@ -97,48 +95,6 @@ Extract data for pull requests for a given repository
       mongo_db
     end.call
     Thread.current[:mongo_db]
-  end
-
-  def get_travis(repo)
-    save_file = File.join('cache', repo.gsub(/\//, '-') + '.travis.json')
-    if File.exists?(save_file)
-      builds = File.open(save_file, 'r').read
-      JSON.parse(builds, :symbolize_names => true)
-    else
-      # Get PR build status from Travis
-      begin
-        repository = Travis::Repository.find(repo)
-      rescue StandardError => e
-        STDERR.puts "Error getting Travis builds for #{repo}: #{e.message}"
-        return []
-      end
-
-      STDERR.puts "Getting Travis information for #{repo}"
-      builds = []
-      repository.each_build do |build|
-        builds << if build.pull_request?
-                    STDERR.write "\rBuild for PR: #{build[:pull_request_number]}"
-                    jobs = build.jobs
-                    commits = jobs.map { |x| x.commit }
-                    jobs.zip(commits).map do |y|
-                      {
-                          :pull_req => build[:pull_request_number],
-                          :status => y[0][:state],
-                          :commit => y[1][:sha],
-                          :finished_at => y[0][:finished_at].to_s
-                      }
-                    end
-                  end
-      end
-      builds = builds.select { |x| !x.nil? }.flatten
-      File.open(save_file, 'w'){|f| f.puts builds.to_json}
-      builds
-    end
-  end
-
-  def travis
-    @travis_builds ||= (Proc.new {get_travis(ARGV[0] + '/' + ARGV[1])}).call
-    @travis_builds
   end
 
   def git
@@ -277,9 +233,6 @@ Extract data for pull requests for a given repository
       acc[pr[:github_id]] << merge_person unless merge_person.nil?
       acc
     end
-
-    # Init travis data
-    travis
 
     # Process pull request list
     do_pr = Proc.new do |pr|
@@ -420,6 +373,7 @@ Extract data for pull requests for a given repository
         :stars                    => stars(pr),
         :team_size                => team_size(pr, months_back),
         :workload                 => workload(pr),
+        :has_ci                   => has_ci?(pr),
 
         # Contributor characteristics
         :requester                => requester(pr),
@@ -438,12 +392,7 @@ Extract data for pull requests for a given repository
         :prior_interaction_pr_comments     => prior_interaction_pr_comments(pr, months_back),
         :prior_interaction_commits         => prior_interaction_commits(pr, months_back),
         :prior_interaction_commit_comments => prior_interaction_commit_comments(pr, months_back),
-        :first_response           => first_response(pr),
-
-        # CI on the PR
-        :ci_latency               => ci_latency(pr),
-        :ci_errors                => ci_errors?(pr),
-        :ci_test_failures         => ci_test_failures?(pr)
+        :first_response           => first_response(pr)
     }
   end
 
@@ -995,16 +944,6 @@ Extract data for pull requests for a given repository
     db.fetch(q, pr[:id]).all.map{|x| x[:committer]}
   end
 
-  def strength_social_connection(pr_id)
-    # 1. get all PRs or issues for which the submitter of this PR appears as a commenter or actor
-    # 2. for each of those, get all other commenters and actors that are members of the core team and add them to a set
-    # 3. divide size of 2. to main team size (always < 1)
-  end
-
-  def availability(pr_id)
-
-  end
-
   # Time interval in minutes from pull request creation to first response
   # by reviewers
   def first_response(pr)
@@ -1047,24 +986,14 @@ Extract data for pull requests for a given repository
     a.last[1].size
   end
 
-  # Time between PR arrival and last CI run
-  def ci_latency(pr)
-    last_run = travis.find_all{|b| b[:pull_req] == pr[:github_id]}.sort_by { |x| Time.parse(x[:finished_at]).to_i }[-1]
-    unless last_run.nil?
-      Time.parse(last_run[:finished_at]) - pr[:created_at]
-    else
-      -1
+
+  def has_ci?(pr)
+    config = %w(.travis.yml circle.yml .travis.yaml circle.yaml shippable.yml)
+    root_files = files_at_commit(pr[:base_commit], lambda{|f| f[:path].count('/') == 1})
+    root_files.each do |f|
+      return true if config.include? f[:path].gsub(/\//, '')
     end
-  end
-
-  # Did the build result in errors?
-  def ci_errors?(pr)
-    not travis.find_all{|b| b[:pull_req] == pr[:github_id] and b[:status] == 'errored'}.empty?
-  end
-
-  # Did the build result in test failuers?
-  def ci_test_failures?(pr)
-    not travis.find_all{|b| b[:pull_req] == pr[:github_id] and b[:status] == 'failed'}.empty?
+    false
   end
 
   # Total number of words in the pull request title and description

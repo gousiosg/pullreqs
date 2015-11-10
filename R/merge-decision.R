@@ -19,7 +19,7 @@ merge.decision.model <- merged ~ conflict + forward_links + intra_branch +
   src_churn_open + test_churn_open + new_entropy + entropy_diff + 
   commits_on_files_touched + commits_to_hottest_file + hotness +
   at_mentions_description + perc_external_contribs + test_lines_per_kloc +
-  test_cases_per_kloc + asserts_per_kloc + stars + team_size + workload +
+  test_cases_per_kloc + asserts_per_kloc + stars + team_size + workload + has_ci +
   prev_pullreqs + requester_succ_rate + followers + main_team_member +
   social_connection + prior_interaction_comments +
   prior_interaction_events

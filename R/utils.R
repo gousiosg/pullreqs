@@ -167,6 +167,7 @@ load.filter <- function(path) {
                 "integer",      #watchers
                 "integer",      #team_size
                 "integer",      #workload
+                "factor",       #has_ci
                 "factor",       #requester
                 "factor",       #closer
                 "factor",       #merger
@@ -182,9 +183,6 @@ load.filter <- function(path) {
                 "integer",      #prior_interaction_commits
                 "integer",      #prior_interaction_commit_comments
                 "integer",      #first_response
-                "numeric",      #ci_latency
-                "factor",       #ci_errors
-                "factor"        #ci_test_failures
                 )
   )
 
