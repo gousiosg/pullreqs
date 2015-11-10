@@ -5,6 +5,7 @@
 #
 
 library(methods)
+library(data.table)
 
 # printf for R
 printf <- function(...) invisible(print(sprintf(...)))
@@ -90,18 +91,19 @@ load.all <- function(dir = ".", pattern = "*.csv$",
 
 # Load some dataframes
 load.some <- function(dir = ".", pattern = "*.csv$", howmany = -1) {
-  n = 0
-  merged <- data.frame()
-  for (file in list.files(path = dir, pattern = pattern, full.names = T)) {
-    n = n + 1
-    if (howmany < n) {
-      return(merged)
+  l = Reduce(function(acc, file){
+    if (length(acc) <= howmany) {
+      dt <- load.filter(file)
+      printf("Loaded file %s (%d rows)", file, nrow(dt))
+      c(acc, list(dt))
+    } else {
+      print(sprintf("Ignoring file %s", file))
+      acc
     }
-    print(sprintf("Reading file %s", file))
-    df = load.filter(file)
-    merged <- rbind(merged, addcol.merged.df(df))
-  }
-  merged
+  }, list.files(path = dir, pattern = pattern, full.names = T),
+  c())
+
+  rbindlist(l)
 }
 
 load.filter <- function(path) {
@@ -194,7 +196,7 @@ load.filter <- function(path) {
 #   # Take care of cases where csv file production was interupted, so the last
 #   # line has wrong fields
   a <- subset(a, !is.na(ci_test_failures))
-  a
+  data.table(a)
 }
 
 # Name of a project in a dataframe

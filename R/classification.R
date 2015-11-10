@@ -1,5 +1,5 @@
 #
-# (c) 2012 -- 2014 Georgios Gousios <gousiosg@gmail.com>
+# (c) 2012 -- 2015 Georgios Gousios <gousiosg@gmail.com>
 #
 # BSD licensed, see LICENSE in top level dir
 #
@@ -17,16 +17,6 @@ library(nnet)
 library(reshape)
 library(ggplot2)
 library(foreach)
-
-# Get a project with the appropriate fields by name to run through a classification task
-# class.project <- function(dfs, name) {
-#   prepare.project.df(get.project(dfs, name))
-# }
-
-# Strip a project data frame from unused columns
-prepare.project.df <- function(a) {
-  a[,c(7:41)]
-}
 
 rf.train <- function(model, train.set) {
   rfmodel <- randomForest(model, data=train.set, importance = T)

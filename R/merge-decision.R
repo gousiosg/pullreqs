@@ -12,37 +12,36 @@ source(file = "R/utils.R")
 source(file = "R/classification.R")
 
 minority.class <- nrow(subset(all, all$merged == FALSE))
-merge.decision.model <- merged ~ team_size + num_commits +
-  perc_external_contribs +  src_churn + test_churn + num_comments +
-  commits_on_files_touched + commits_to_hottest_file + prev_pullreqs +
-  requester_succ_rate + main_team_member + 
-  num_participants + prior_interaction_events + prior_interaction_comments +
-  social_connection_tsay + hotness_vasilescu + team_size_vasilescu +
-  description_complexity + workload  + test_cases_per_kloc + asserts_per_kloc +
-  followers + team_size + files_changed + perc_external_contribs + description_complexity +
-  intra_branch
+merge.decision.model <- merged ~ conflict + forward_links + intra_branch +
+  description_length + num_commits_open + num_commit_comments_open + 
+  files_added_open + files_deleted_open + files_modified_open +
+  files_changed_open + src_files_open + doc_files_open + other_files_open +
+  src_churn_open + test_churn_open + new_entropy + entropy_diff + 
+  commits_on_files_touched + commits_to_hottest_file + hotness +
+  at_mentions_description + perc_external_contribs + test_lines_per_kloc +
+  test_cases_per_kloc + asserts_per_kloc + stars + team_size + workload +
+  prev_pullreqs + requester_succ_rate + followers + main_team_member +
+  social_connection + prior_interaction_comments +
+  prior_interaction_events
 
 # Returns a list l where 
 # l[1] training dataset
 # l[2] testing dataset
 prepare.data.mergedecision <- function(df, num_samples) {
-  # Prepare the data for prediction
-  a <- prepare.project.df(df)
-
-  if (num_samples >= nrow(a)) {
-    num_samples = nrow(a) - 1
+  if (num_samples >= nrow(df)) {
+    num_samples = nrow(df) - 1
   }
 
   # Take sample
-  a <- a[sample(nrow(a), size=num_samples), ]
+  df <- df[sample(nrow(df), size=num_samples), ]
 
   # Remove column mergetime_minutes as it contains NAs
-  a <- a[-c(1)]
+  df <- df[-c(1)]
 
   # split data into training and test data
-  a.train <- a[1:floor(nrow(a)*.90), ]
-  a.test <- a[(floor(nrow(a)*.90)+1):nrow(a), ]
-  list(train=a.train, test=a.test)
+  df.train <- df[1:floor(nrow(df)*.90), ]
+  df.test <- df[(floor(nrow(df)*.90)+1):nrow(df), ]
+  list(train=df.train, test=df.test)
 }
 
 # Returns a dataframe with the AUC, PREC, REC values per classifier
