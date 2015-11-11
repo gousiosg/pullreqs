@@ -238,9 +238,6 @@ Extract data for pull requests for a given repository
     do_pr = Proc.new do |pr|
       begin
         r = process_pull_request(pr, ARGV[2].downcase)
-        if interrupted
-          return
-        end
         STDERR.puts r
         r
       rescue StandardError => e
@@ -251,12 +248,16 @@ Extract data for pull requests for a given repository
     end
 
     results = Parallel.map(@prs, :in_threads => threads) do |pr|
+      if interrupted
+        raise Parallel::Kill
+      end
       do_pr.call(pr)
-    end.select { |x| !x.nil? }
+    end
 
-    puts results.first.keys.map{|x| x.to_s}.join(',')
-    results.sort{|a,b| b[:github_id]<=>a[:github_id]}.each{|x| puts x.values.join(',')}
-
+    unless results.nil?
+      puts results.select { |x| !x.nil? }.first.keys.map{|x| x.to_s}.join(',')
+      results.select { |x| !x.nil? }.sort{|a,b| b[:github_id]<=>a[:github_id]}.each{|x| puts x.values.join(',')}
+    end
   end
 
   # Get a list of pull requests for the processed project
