@@ -51,11 +51,4 @@ else
   input=${@:$OPTIND:1}
 fi
 
-cat $input |
-grep -v "^#"|
-while read pr; do
-  name=`echo $pr|cut -f1,2 -d' '|tr ' ' '@'`
-  echo "ruby -Ibin bin/pull_req_data_extraction.rb -c config.yaml $pr 3 1>$dir/$name.csv 2>$dir/$name.err"
-done | 
-xargs -P $parallel -Istr sh -c str
-
+parallel --progress --joblog parjobs --xapply -P $parallel ruby -Ibin bin/pull_req_data_extraction.rb -c config.yaml {1} {2} {3} 3 '1>' $dir/{1}@{2}.csv '2>' $dir/{1}@{2}.err ::: `cat $input|cut -f1 -d' '` ::: `cat $input|cut -f2 -d' '` ::: `cat $input|cut -f3 -d' '`
