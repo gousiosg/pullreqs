@@ -1015,7 +1015,9 @@ Extract data for pull requests for a given repository
 
     # Check whether a README file contains a CI badge
     readmes = root_files.find{|f| f[:path].match(/\/README/)}
-    return :unknown if readmes.empty?
+    return :unknown if readmes.nil? or readmes.empty?
+    return :unknown if readmes[0].nil?
+
     readme = git.read(readmes[0][:oid]).data
     CIBADGES.keys.each do |badge|
       if readme.match(badge)
