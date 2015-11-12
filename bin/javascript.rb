@@ -24,6 +24,7 @@ module JavascriptData
           (
             path.include?('test/') or
             path.include?('tests/') or
+            path.include?('testing/') or
             path.include?('__tests__') or
             not path.match(/.+_test/i).nil?)
     end
@@ -32,8 +33,9 @@ module JavascriptData
   def assertion_filter
     lambda { |l|
       (not l.match(/assert/).nil? or      #chai, node.js
-          not l.match(/\.expect/).nil? or # Jasmine
-          not l.match(/\.should/).nil?)   # Mocha
+          not l.match(/\.?[e|E]xpect/).nil? or # Jasmine
+          not l.match(/\.?[s|S]hould/).nil? or  # Mocha
+          not l.match(/([e|E]qual\s*\(|ok\s*\()/).nil?) #qunit
     }
   end
 
