@@ -310,6 +310,8 @@ Extract data for pull requests for a given repository
 
     months_back = 3
     commits_incl_prs = commits_last_x_months(pr, false, months_back)
+    commits_incl_prs = 1 if commits_incl_prs == 0 # To avoid divsions by zero below
+
     prev_pull_reqs = prev_pull_requests(pr,'opened')
 
     # Create line for a pull request
@@ -918,11 +920,14 @@ Extract data for pull requests for a given repository
   end
 
   # Median number of commits to files touched by the pull request relative to
-  # all project commits during the last three months
+  # all (including those from the PR) project commits during the last three months
   def hotness(pr, months_back)
     commits_per_file = commits_on_pr_files(pr, months_back).map{|x| x[1].size}.sort
     med = commits_per_file[commits_per_file.size/2]
-    med / commits_last_x_months(pr, false, months_back).to_f
+    med = 0 if med.nil?
+    all_commits = commits_last_x_months(pr, true, months_back)
+    all_commits = 1 if all_commits == 0
+    med / all_commits.to_f
   end
 
   # People that committed (not through pull requests) up to months_back
@@ -984,7 +989,11 @@ Extract data for pull requests for a given repository
   # and `months_back`
   def commits_to_hottest_file(pr, months_back)
     a = commits_on_pr_files(pr, months_back).map{|x| x}.sort_by { |x| x[1].size}
-    a.last[1].size
+    unless a.empty?
+      a.last[1].size
+    else
+      0
+    end
   end
 
   CIBADGES = {
@@ -1032,8 +1041,8 @@ Extract data for pull requests for a given repository
   # Total number of words in the pull request title and description
   def description_length(pr)
     pull_req = pull_req_entry(pr[:id])
-    title = unless pull_req['title'].nil? then pull_req['tile'] else '' end
-    body = unless pull_req['body'].nil? then pull_req['body'] else '' end
+    title = unless pull_req['title'].nil? then pull_req['title'] else ' ' end
+    body = unless pull_req['body'].nil? then pull_req['body'] else ' ' end
     (title + ' ' + body).gsub(/[\n\r]\s+/, ' ').split(/\s+/).size
   end
 
@@ -1084,16 +1093,24 @@ Extract data for pull requests for a given repository
 
     def file_count(commits, status)
       commits.map do |c|
-        c['files'].reduce(Array.new) do |acc, y|
-          if y['status'] == status then acc << y['filename'] else acc end
+        unless c['files'].nil?
+          c['files'].reduce(Array.new) do |acc, y|
+            if y['status'] == status then acc << y['filename'] else acc end
+          end
+        else
+          []
         end
       end.flatten.uniq.size
     end
 
     def files_touched(commits)
       commits.map do |c|
-        c['files'].map do |y|
-          y['filename']
+        unless c['files'].nil?
+          c['files'].map do |y|
+            y['filename']
+          end
+        else
+          []
         end
       end.flatten.uniq.size
     end
@@ -1105,13 +1122,18 @@ Extract data for pull requests for a given repository
 
     def file_type_count(commits, type)
       commits.map do |c|
-        c['files'].reduce(Array.new) do |acc, y|
-          if file_type(y['filename']) == type then acc << y['filename'] else acc end
+        unless c['files'].nil?
+          c['files'].reduce(Array.new) do |acc, y|
+            if file_type(y['filename']) == type then acc << y['filename'] else acc end
+          end
+        else
+          []
         end
       end.flatten.uniq.size
     end
 
     def lines(commit, type, action)
+      return 0 if commit['files'].nil?
       commit['files'].select do |x|
         next unless file_type(x['filename']) == :programming
 
@@ -1167,13 +1189,17 @@ Extract data for pull requests for a given repository
 
     oldest = Time.at(Time.at(pr[:created_at]).to_i - 3600 * 24 * 30 * months_back)
     pr_against = pull_req_entry(pr[:id])['base']['sha']
-    commits = commit_entries(pr[:id])
+    commits = commit_entries(pr[:id], at_open = true)
 
     commits_per_file = commits.flat_map { |c|
-      c['files'].map { |f|
-        [c['sha'], f['filename']]
-      }
-    }.group_by {|c|
+      unless c['files'].nil?
+        c['files'].map { |f|
+          [c['sha'], f['filename']]
+        }
+      else
+        []
+      end
+    }.select{|x| x.size > 1}.group_by {|c|
       c[1]
     }
 
