@@ -1032,7 +1032,9 @@ Extract data for pull requests for a given repository
   # Total number of words in the pull request title and description
   def description_length(pr)
     pull_req = pull_req_entry(pr[:id])
-    (pull_req['title'] + ' ' + pull_req['body']).gsub(/[\n\r]\s+/, ' ').split(/\s+/).size
+    title = unless pull_req['title'].nil? then pull_req['tile'] else '' end
+    body = unless pull_req['body'].nil? then pull_req['body'] else '' end
+    (title + ' ' + body).gsub(/[\n\r]\s+/, ' ').split(/\s+/).size
   end
 
   # Total number of pull requests still open in each project at pull
