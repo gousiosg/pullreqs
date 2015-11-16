@@ -22,6 +22,7 @@ module JavascriptData
       path = if f.class == Hash then f[:path] else f end
       path.end_with?('.js') and
           (
+            path.include?('spec/') or
             path.include?('test/') or
             path.include?('tests/') or
             path.include?('testing/') or

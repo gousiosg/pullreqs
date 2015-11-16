@@ -11,7 +11,6 @@ require 'thread'
 require 'rugged'
 require 'parallel'
 require 'mongo'
-require 'travis'
 require 'json'
 require 'sequel'
 require 'trollop'
@@ -1040,7 +1039,7 @@ Extract data for pull requests for a given repository
 
   # Total number of words in the pull request title and description
   def description_length(pr)
-    pull_req = pull_req_entry(pr[:id])
+    pull_req = pull_req_entry(pr)
     title = unless pull_req['title'].nil? then pull_req['title'] else ' ' end
     body = unless pull_req['body'].nil? then pull_req['body'] else ' ' end
     (title + ' ' + body).gsub(/[\n\r]\s+/, ' ').split(/\s+/).size
@@ -1188,7 +1187,7 @@ Extract data for pull requests for a given repository
   def commits_on_pr_files(pr, months_back)
 
     oldest = Time.at(Time.at(pr[:created_at]).to_i - 3600 * 24 * 30 * months_back)
-    pr_against = pull_req_entry(pr[:id])['base']['sha']
+    pr_against = pull_req_entry(pr)['base']['sha']
     commits = commit_entries(pr[:id], at_open = true)
 
     commits_per_file = commits.flat_map { |c|
@@ -1284,8 +1283,8 @@ Extract data for pull requests for a given repository
   # Modelling the results of: An Exploratory Study of @-mention in GitHub's Pull-requests
   # DOI: 10.1109/APSEC.2014.58
   def at_mentions_description(pr)
-    pull_req = pull_req_entry(pr[:id])
-    if pull_req['body'].nil?
+    pull_req = pull_req_entry(pr)
+    unless pull_req['body'].nil?
       pull_req['body'].\
         gsub(/`.*?`/, '').\
         gsub(/[\w]*@[\w]+\.[\w]+/, '').\
@@ -1300,9 +1299,13 @@ Extract data for pull requests for a given repository
     issue_comments(pr[:login], pr[:project_name], pr[:github_id]).map do |ic|
       # Remove stuff between backticks (they may be code)
       # e.g. see comments in https://github.com/ReactiveX/RxScala/pull/166
-      ic['body'].\
-          gsub(/`.*?`/, '').\
-          gsub(/[\w]*@[\w]+\.[\w]+/, '')
+      unless ic['body'].nil?
+        ic['body'].\
+            gsub(/`.*?`/, '').\
+            gsub(/[\w]*@[\w]+\.[\w]+/, '')
+      else
+        0
+      end
     end.map do |ic|
       ic.scan(/(@[a-zA-Z0-9]+)/).size
     end.reduce(0) do |acc, x|
@@ -1323,19 +1326,10 @@ Extract data for pull requests for a given repository
     end
   end
 
-  def pull_req_entry(pr_id)
-    q = <<-QUERY
-    select u.login as user, p.name as name, pr.pullreq_id as pullreq_id
-    from pull_requests pr, projects p, users u
-    where pr.id = ?
-    and pr.base_repo_id = p.id
-    and u.id = p.owner_id
-    QUERY
-    pullreq = db.fetch(q, pr_id).all[0]
-
-    mongo['pull_requests'].find_one({:owner => pullreq[:user],
-                                     :repo => pullreq[:name],
-                                     :number => pullreq[:pullreq_id]})
+  def pull_req_entry(pr)
+    mongo['pull_requests'].find_one({:owner => pr[:login],
+                                     :repo => pr[:project_name],
+                                     :number => pr[:github_id]})
   end
 
   # JSON objects for the commits included in the pull request
