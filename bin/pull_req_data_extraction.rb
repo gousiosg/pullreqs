@@ -214,6 +214,7 @@ Extract data for pull requests for a given repository
     STDERR.puts "\nCalculating close reason"
     @close_reason = {}
     @close_reason = @prs.reduce({}) do |acc, pr|
+      STDERR.write "\r #{pr[:github_id]}"
       merged = !pr[:merged_at].nil?
       git_merged = false
       merge_reason = :github
@@ -226,8 +227,9 @@ Extract data for pull requests for a given repository
       acc
     end
 
-    STDERR.write "Calculating mergers\n"
+    STDERR.write "\nCalculating mergers\n"
     @close_reason = @prs.reduce(@close_reason) do |acc, pr|
+      STDERR.write "\r #{pr[:github_id]}"
       merge_person = merger(pr)
       acc[pr[:github_id]] << merge_person unless merge_person.nil?
       acc
@@ -246,6 +248,7 @@ Extract data for pull requests for a given repository
       end
     end
 
+    #@prs = @prs.select{|x| x[:github_id] == 135}
     results = Parallel.map(@prs, :in_threads => threads) do |pr|
       if interrupted
         raise Parallel::Kill
@@ -367,7 +370,7 @@ Extract data for pull requests for a given repository
         :at_mentions_comments     => at_mentions_comments(pr),
 
         # Project characteristics
-        :perc_external_contribs   => commits_last_x_months(pr, true, months_back) / commits_incl_prs,
+        :perc_external_contribs   => commits_last_x_months(pr, true, months_back).to_f / commits_incl_prs.to_f,
         :sloc                     => src,
         :test_lines_per_kloc      => (test_lines(pr[:base_commit]).to_f / src.to_f) * 1000,
         :test_cases_per_kloc      => (num_test_cases(pr[:base_commit]).to_f / src.to_f) * 1000,
@@ -802,7 +805,7 @@ Extract data for pull requests for a given repository
     QUERY
 
     recently_merged.map do |pr_num|
-      a = db.fetch(q, pr[:login], pr[:repo], pr_num).first
+      a = db.fetch(q, pr[:login], pr[:project_name], pr_num).first
       if not a.nil? then a[:merger] else nil end
     end.select {|x| not x.nil?}.uniq
 
@@ -919,12 +922,12 @@ Extract data for pull requests for a given repository
   end
 
   # Median number of commits to files touched by the pull request relative to
-  # all (including those from the PR) project commits during the last three months
+  # all (including those coming from PRs) project commits during the last three months
   def hotness(pr, months_back)
     commits_per_file = commits_on_pr_files(pr, months_back).map{|x| x[1].size}.sort
     med = commits_per_file[commits_per_file.size/2]
     med = 0 if med.nil?
-    all_commits = commits_last_x_months(pr, true, months_back)
+    all_commits = commits_last_x_months(pr, false, months_back)
     all_commits = 1 if all_commits == 0
     med / all_commits.to_f
   end

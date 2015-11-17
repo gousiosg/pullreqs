@@ -32,6 +32,58 @@ The analysis scripts only are only interested in the connection details for
 MySQL and MongoDB, and the location of a temporary directory 
 (the `cache_dir` directory).
 
+## Selecting the projects to analyze
+
+1. Create intermediate tables to do the querying
+
+```sql
+create view project_languages_totals as
+select project_id, language, bytes, max(created_at) as last_update
+from project_languages
+group by project_id, language, bytes;
+```
+
+```sql
+create table project_language_perc_last_update as
+select a.project_id as project_id, a.language as language,  
+a.bytes / (select sum(b.bytes) 
+           from project_languages_totals b
+           where b.project_id = a.project_id 
+           group by b.project_id) as ratio
+from project_languages_totals a;
+```
+
+2. For each one of the languages `java, javascript, scala, ruby, python` 
+run the following query on the GHTorrent database:
+
+```sql
+select u.login, p.name, count(*)
+from projects p, users u, pull_requests pr
+where p.owner_id = u.id
+and pr.base_repo_id = p.id
+and p.deleted is false
+and p.forked_from is null
+and p.language = 'Javascript'
+and (
+	select ratio 
+    from project_language_perc_last_update lu 
+    where lu.project_id = p.id
+		and lu.language = 'javascript' limit 1) >= 0.75
+and exists (select * 
+            from project_commits pc, commits c 
+			where c.id = pc.commit_id
+			and pc.project_id = p.id
+            and c.created_at > DATE_SUB(DATE('2015-11-01'), INTERVAL 6 MONTH) limit 1)
+group by p.id
+having count(*) > 50
+order by count(*) desc;
+```
+
+This will return the top 200 projects that have more than 50 pull 
+requests, whose main language (main means > 75% code in this lanugage
+is) is the indicated one and which have received at least one commit
+in the period Apr 1 and Nov 1, 2015.
+
 ## Analyzing the data
 
 The data analysis consists of two steps:
