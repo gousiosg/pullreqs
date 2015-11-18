@@ -29,7 +29,7 @@ module PythonData
       end
 
     normal_tests = test_files(pr_id).reduce(0) do |acc, f|
-      cases = stripped(f).scan(/\s*def\s* test_(.*)\(.*\):/).size
+      cases = stripped(f).scan(/\s*def\s* test_(.*)\s*\(.*\)\s*:\s/).size
       acc + cases
     end
     ds_tests + normal_tests
@@ -54,7 +54,7 @@ module PythonData
     end
 
     normal_tests = test_files(pr_id).reduce(0) do |acc, f|
-      cases = stripped(f).lines.select{|l| not l.match(/assert/).nil?}
+      cases = stripped(f).lines.select{|l| not l.match(/(assert|@raises|@timed)/).nil?}
       acc + cases.size
     end
     Thread.current[:ds_cache] = {} # Hacky optimization to avoid memory problems
@@ -94,7 +94,8 @@ module PythonData
           (
             not path.match(/test_.+/i).nil? or
             not path.match(/.+_test/i).nil? or
-            not path.match(/tests?/i).nil?
+            not path.match(/tests?/i).nil? or
+            not path.match(/specs?/i).nil?
           ) or (
             not path.match(/test\//).nil?
           )
