@@ -51,4 +51,4 @@ else
   input=${@:$OPTIND:1}
 fi
 
-parallel --progress --joblog parjobs --xapply -P $parallel ruby -Ibin bin/pull_req_data_extraction.rb -c config.yaml {1} {2} {3} 2 '1>' $dir/{1}@{2}.csv '2>' $dir/{1}@{2}.err ::: `cat $input|cut -f1 -d' '` ::: `cat $input|cut -f2 -d' '` ::: `cat $input|cut -f3 -d' '`
+parallel --gnu --progress --joblog parjobs --xapply -P $parallel ruby -Ibin bin/pull_req_data_extraction.rb -c config.yaml {1} {2} {3} 2 '1>' $dir/{1}@{2}.csv '2>' $dir/{1}@{2}.err ::: `cat $input|cut -f1 -d' '` ::: `cat $input|cut -f2 -d' '` ::: `cat $input|cut -f3 -d' '`
