@@ -8,14 +8,17 @@ You only need the following in case you want to regenerate (or generate more)
 the data files used for the analysis. The data files used in the various
 papers can be found in `data/*.csv`.
 
-Make sure that Ruby 1.9.3 is installed on your machine. You can 
+Make sure that Ruby 2.2 is installed on your machine. You can 
 try [RVM](https://rvm.io/), if it is not. Then, it should suffice
 to do:
 
 <pre>
+apt-get install libicu-dev cmake libmysqlclient-dev parallel
+rvm install 2.2.1
+rvm use 2.2.1
 gem install bundler
 bundle install
-gem install mysql2
+gem install mysql2 bson_ext
 </pre>
 
 The executable commands in this project inherit functionality from the
@@ -79,9 +82,9 @@ having count(*) > 50
 order by count(*) desc;
 ```
 
-This will return the top 200 projects that have more than 50 pull 
-requests, whose main language (main means > 75% code in this lanugage
-is) is the indicated one and which have received at least one commit
+This will return all projects that have more than 50 pull 
+requests, whose main language (main means > 75% code in this lanugage) 
+is the indicated one and which have received at least one commit
 in the period Apr 1 and Nov 1, 2015.
 
 ## Analyzing the data
@@ -103,7 +106,9 @@ To produce the required data files, first run the
 where: 
 * `owner` is the project owner
 * `repo` is the name of the repository
-* `lang` is the main repository language as reported by Github. At the moment, only `ruby`, `java`, `python` and `scala` projects can produce fully compatible data files.
+* `lang` is the main repository language as reported by Github. 
+At the moment, only `ruby`, `java`, `python`, `scala` and `javascript` are
+supported.
 
 The projects we analyzed in each paper are included in the `projects.txt`
 file included in each paper directory. 

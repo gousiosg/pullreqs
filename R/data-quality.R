@@ -60,7 +60,7 @@ projects.few.asserts <- subset(aggregate(asserts_per_kloc~project_name + lang, a
        asserts_per_kloc < 2)
 
 projects.few.tests <- merge(projects.few.test_lines, projects.few.asserts)
-printf("projects with few tests")
+printf("projects with test_lines_per_kloc < 100 or asserts_per_kloc < 2")
 print(projects.few.tests$project_name)
 
 # Hotness > 1 (!)
@@ -105,7 +105,7 @@ total <- total + r
 
 printf("Removed %d number of rows from the dataset", total)
 
-# Projects where the majority of PRs have team_size = 0
+# Projects where team_size = 0 is quite common
 team.size.zero <- merge(aggregate(team_size~project_name, subset(a, team_size == 0), length),
       aggregate(team_size~project_name, a, length),
       by.x="project_name", by.y="project_name")
@@ -113,7 +113,4 @@ team.size.zero <- merge(aggregate(team_size~project_name, subset(a, team_size ==
 team.size.zero$ratio <- team.size.zero$team_size.x / team.size.zero$team_size.y
 print("projects where team size is zero in > 0.05 % of the cases")
 print(as.character(subset(team.size.zero, ratio > 0.05)$project_name))
-
-
-
 

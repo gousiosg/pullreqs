@@ -14,40 +14,23 @@ source(file = "R/classification.R")
 library(pROC)
 library(sqldf)
 
-merge.time.model = 
-  lifetime_minutes ~ 
-#  team_size + 
-  num_commits_open + 
-  files_changed + 
-  src_files + 
-#  doc_files +
-  other_files +
-  commits_on_files_touched +
-  test_lines_per_kloc + 
-  asserts_per_kloc +
-  watchers +
-  prev_pullreqs +
-  requester_succ_rate +
-  followers +
-#  intra_branch +
-#  main_team_member +
-#  social_connection_tsay +
-  hotness_vasilescu +
-  team_size_vasilescu +
-  description_complexity +
-  workload +
-  prior_interaction_comments +
-  prior_interaction_events +
-  has_ci
-
-all <- subset(all, lifetime_minutes <= fancy.threshold(all$lifetime_minutes))
+minority.class <- nrow(subset(all, all$merged == FALSE))
+merge.time.model <- lifetime_minutes ~ conflict + forward_links + intra_branch +
+  description_length + num_commits_open + num_commit_comments_open + 
+  files_added_open + files_deleted_open + files_modified_open +
+  files_changed_open + src_files_open + doc_files_open + other_files_open +
+  src_churn_open + test_churn_open + new_entropy + entropy_diff + 
+  commits_on_files_touched + commits_to_hottest_file + hotness +
+  at_mentions_description + perc_external_contribs + test_lines_per_kloc +
+  test_cases_per_kloc + asserts_per_kloc + stars + team_size + workload +
+  prev_pullreqs + requester_succ_rate + followers + main_team_member +
+  social_connection + first_response + prior_interaction_comments +
+  prior_interaction_events
 
 prepare.data.mergetime <- function(df, num_samples = nrow(df),
                                    bins = c(0, mean(df$mergetime_minutes), max(df$mergetime_minutes)),
                                    labels = c('FAST', 'SLOW')) {
-  # Prepare the data for prediction
-  a <- prepare.project.df(df)
-
+ 
   # sample filter pull-requests that have not been merged
   a <- subset(a, merged == TRUE)
 

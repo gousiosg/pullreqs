@@ -8,23 +8,23 @@ source(file = "R/packages.R")
 library(optparse)
 
 # The following variables are exported to all scripts including this file
-mysql.user =  "ghtorrent"
-mysql.passwd = "ghtorrent"
-mysql.db = "ghtorrent"
-mysql.host = "127.0.0.1"
+mysql.user <-  "ghtorrent"
+mysql.passwd <- "ghtorrent"
+mysql.db <- "ghtorrent"
+mysql.host <- "127.0.0.1"
 
 # Paths
-base.dir        = "."
-platform.sep    = "/"
+base.dir        <- "."
+platform.sep    <- "/"
 
-plot.location   = sprintf("%s%s%s", base.dir, platform.sep, "figs")
-latex.location  = sprintf("%s%s%s", base.dir, platform.sep, "latex")
-project.list    = sprintf("%s%s%s", base.dir, platform.sep, "projects.txt")
+plot.location   <- sprintf("%s%s%s", base.dir, platform.sep, "figs")
+latex.location  <- sprintf("%s%s%s", base.dir, platform.sep, "latex")
+project.list    <- sprintf("%s%s%s", base.dir, platform.sep, "projects.txt")
 
-data.file.location    = "data"
-overall.dataset.stats = sprintf("%s%s%s", data.file.location, platform.sep, "project-statistics.txt")
+data.file.location    <- "data"
+overall.dataset.stats <- sprintf("%s%s%s", data.file.location, platform.sep, "project-statistics.txt")
 
-num.processes = 2
+num.processes <- 2
 
 # Cmd-line parser
 option_list <- list(
@@ -55,17 +55,17 @@ if (args$help) {
   parse_args(OptionParser(option_list = option_list))
 }
 
-project.list  = args$project.list
-base.dir      = args$base.dir
-mysql.user    = args$mysql.user
-mysql.passwd  = args$mysql.passwd
-mysql.db      = args$mysql.db
-mysql.host    = args$mysql.host
-num.processes = args$num.processses
+project.list  <- args$project.list
+base.dir      <- args$base.dir
+mysql.user    <- args$mysql.user
+mysql.passwd  <- args$mysql.passwd
+mysql.db      <- args$mysql.db
+mysql.host    <- args$mysql.host
+num.processes <- args$num.processes
 
-plot.location   = sprintf("%s%s%s", base.dir, platform.sep, "figs")
-latex.location  = sprintf("%s%s%s", base.dir, platform.sep, "latex")
-project.list    = sprintf("%s%s%s", base.dir, platform.sep, "projects.txt")
+plot.location   <- sprintf("%s%s%s", base.dir, platform.sep, "figs")
+latex.location  <- sprintf("%s%s%s", base.dir, platform.sep, "latex")
+project.list    <- sprintf("%s%s%s", base.dir, platform.sep, "projects.txt")
 
-data.file.location    = "data"
-overall.dataset.stats = sprintf("%s%s%s", data.file.location, platform.sep, "project-statistics.txt")
+data.file.location    <- "data"
+overall.dataset.stats <- sprintf("%s%s%s", data.file.location, platform.sep, "project-statistics.txt")

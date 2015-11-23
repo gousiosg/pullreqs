@@ -11,18 +11,24 @@ source(file = "R/cmdline.R")
 source(file = "R/utils.R")
 source(file = "R/classification.R")
 
-minority.class <- nrow(subset(all, all$merged == FALSE))
-merge.decision.model <- merged ~ conflict + forward_links + intra_branch +
+minority.class <- nrow(subset(all, all$merged == 'FALSE'))
+merge.decision.model <- merged ~ intra_branch +
   description_length + num_commits_open + num_commit_comments_open + 
   files_added_open + files_deleted_open + files_modified_open +
   files_changed_open + src_files_open + doc_files_open + other_files_open +
   src_churn_open + test_churn_open + new_entropy + entropy_diff + 
   commits_on_files_touched + commits_to_hottest_file + hotness +
   at_mentions_description + perc_external_contribs + test_lines_per_kloc +
-  test_cases_per_kloc + asserts_per_kloc + stars + team_size + workload + has_ci +
+  test_cases_per_kloc + asserts_per_kloc + team_size + workload +
   prev_pullreqs + requester_succ_rate + followers + main_team_member +
   social_connection + prior_interaction_comments +
-  prior_interaction_events
+  prior_interaction_events + has_ci
+
+merge.decision.model <- merged ~ team_size + num_commits + files_changed +
+  perc_external_contribs + sloc + src_churn_open + test_churn_open + num_comments +
+  commits_on_files_touched +  test_lines_per_kloc + prev_pullreqs +
+  requester_succ_rate + main_team_member + conflict + forward_links + 
+  num_participants
 
 # Returns a list l where 
 # l[1] training dataset

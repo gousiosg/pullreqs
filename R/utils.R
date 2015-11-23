@@ -6,6 +6,8 @@
 
 library(methods)
 library(data.table)
+library(foreach)
+library(cliffsd)
 
 # printf for R
 printf <- function(...) invisible(print(sprintf(...)))
@@ -72,21 +74,25 @@ load.all <- function(dir = ".", pattern = "*.csv$",
 
   to_load <- which.to.load(dir, pattern, projects.file)
 
-  Reduce(function(acc, x) {
-      if (file.exists(x)) {
-         print(sprintf("Reading file %s", x))
-         a <- load.filter(pipe(sprintf("cat %s", x)))
-         if (nrow(a) == 0) {
-          printf("Warning - No rows in file %s", x)
-          acc
-         } else {
-           c(acc, list(a))
-         }
+  l <- foreach(x = to_load, .combine=c) %dopar% {
+    if (file.exists(x)) {
+      print(sprintf("Reading file %s", x))
+      
+      a <- tryCatch(load.filter(x), 
+                    error = function(e){print(e); data.table()})
+      if (nrow(a) == 0) {
+        printf("Warning - No rows in file %s", x)
+        list()
       } else {
-        printf("File does not exist %s", x)
-        acc
+        list(a)
       }
-    }, to_load, c())
+    } else {
+      printf("File does not exist %s", x)
+      list()
+    }
+  }
+
+  rbindlist(l)
 }
 
 # Load some dataframes
@@ -164,10 +170,10 @@ load.filter <- function(path) {
                 "numeric",      #test_lines_per_kloc
                 "numeric",      #test_cases_per_kloc
                 "numeric",      #asserts_per_kloc
-                "integer",      #watchers
+                "integer",      #stars
                 "integer",      #team_size
                 "integer",      #workload
-                "factor",       #has_ci
+                "factor",       #ci
                 "factor",       #requester
                 "factor",       #closer
                 "factor",       #merger
@@ -182,18 +188,21 @@ load.filter <- function(path) {
                 "integer",      #prior_interaction_pr_comments
                 "integer",      #prior_interaction_commits
                 "integer",      #prior_interaction_commit_comments
-                "integer",      #first_response
+                "integer"      #first_response
                 )
   )
 
- 
   a$prior_interaction_comments <- a$prior_interaction_issue_comments + a$prior_interaction_pr_comments + a$prior_interaction_commit_comments
   a$prior_interaction_events <- a$prior_interaction_issue_events + a$prior_interaction_pr_events + a$prior_interaction_commits
+
+  a$has_ci <- a$ci != 'unknown'
+  a$has_ci <- as.factor(a$has_ci)
+
   a$merged <- !is.na(a$merged_at)
   a$merged <- as.factor(a$merged)
 #   # Take care of cases where csv file production was interupted, so the last
 #   # line has wrong fields
-  a <- subset(a, !is.na(ci_test_failures))
+  a <- subset(a, !is.na(first_response))
   data.table(a)
 }
 
@@ -254,4 +263,26 @@ store.pdf <- function(data, where, name)
   pdf(paste(where,name, sep="/"))
   plot(data)
   dev.off()
+}
+
+# Get the owner part form a "owner/repo" repository naming
+owner <- function(repo.name) {
+  unlist(strsplit(repo.name, '/'))[1]
+}
+
+# Get the repo part form a "owner/repo" repository naming
+repo <- function(repo.name) {
+  unlist(strsplit(repo.name, '/'))[2]
+}
+
+# Simple outlier technique
+outlier.threshold <- function(x, at.least=0.02, at.most=0.03) {
+  z <- quantile(x, 1 - at.least)
+  y <- quantile(x, 1 - at.most)
+  mean(c(z ,y))
+}
+
+remove.outliers <- function(x) {
+  threshold <- outlier.threshold(x)
+  Filter(function(y){ y < threshold}, x)
 }

@@ -19,7 +19,9 @@ library(ggplot2)
 library(foreach)
 
 rf.train <- function(model, train.set) {
-  rfmodel <- randomForest(model, data=train.set, importance = T)
+  #minority.class <- nrow(subset(all, all$merged == 'FALSE'))
+  rfmodel <- randomForest(model, data=train.set, do.trace=T, importance = T, ntree = 100)#, 
+                          #sampsize=c('TRUE' = 2*minority.class, 'FALSE'= minority.class), mtry=5, ntree=100)
   print(rfmodel)
   print(importance(rfmodel))
   varImpPlot(rfmodel, type=1)
