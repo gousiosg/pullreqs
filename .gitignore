@@ -29,3 +29,6 @@ tmp
 doc/build
 .Rproj.user
 cache
+data/*.err
+data/*.csv
+
