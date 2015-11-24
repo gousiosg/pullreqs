@@ -29,7 +29,7 @@ numeric.fields <- c('description_length','num_commits_open','num_pr_comments',
 cross.cor <- all[, numeric.fields, with = F]
 
 cor.table <- cor(cross.cor, method = "spearman")
-corrplot(cor.table, method="circle",order = "hclust", addrect = 2)
+#corrplot(cor.table, method="circle",order = "hclust", addrect = 2)
 
 highly.correlated <- function(cor.table, threshold = "0.7") {
   cor.table[lower.tri(cor.table, diag = TRUE)] <- NA
@@ -52,7 +52,7 @@ numeric.fields <- setdiff(numeric.fields, correlated)
 cross.cor <- all.1[, numeric.fields, with = F]
 
 cor.table <- cor(cross.cor, method = "spearman")
-corrplot(cor.table, method="circle",order = "hclust", addrect = 2)
+#corrplot(cor.table, method="circle",order = "hclust", addrect = 2)
 
 
 rm(cross.cor, cor.table, all.1)
