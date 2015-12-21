@@ -1635,7 +1635,7 @@ buildbot buildbot 1899
 boto boto 1992
 DIRACGrid DIRAC 2046
 autotest virt-test 2050
-SiCKRAGETV SickRage 2068
+SickRage SickRage 2068
 pulp pulp 2150
 RedHatQE cfme_tests 2274
 mongodb docs 2373
