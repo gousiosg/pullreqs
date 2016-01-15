@@ -16,6 +16,22 @@ all <- data.frame(all)
 #all <- data.frame(all.1)
 #all <- all[sample(nrow(all.1), 50000), ]
 
+all$lifetime_minutes <- as.integer(all$lifetime_minutes)
+
+all$close_class <- apply(all, 1, function(x) {
+  lifetime_minutes <- as.integer(x[8])
+  if (lifetime_minutes < 60) {
+    return("FAST")
+  } else if (lifetime_minutes > 60 && lifetime_minutes < 24* 60 ) {
+    return("MEDIUM")
+  } else {
+    return("SLOW")
+  }
+})
+
+all$close_class <- as.factor(all$close_class)
+
+# This removes highly correlated features from the tested model
 merge.time.model <- merged ~ intra_branch +
   description_length + num_commits_open + num_commit_comments_open + 
   files_added_open + files_deleted_open + files_modified_open +
@@ -27,19 +43,6 @@ merge.time.model <- merged ~ intra_branch +
   prev_pullreqs + requester_succ_rate + followers + main_team_member +
   social_connection + prior_interaction_comments +
   prior_interaction_events + has_ci
-
-# This removes highly correlated features from the tested model
-merge.decision.model <- merged ~ intra_branch +
-  description_length + num_commits_open + num_commit_comments_open + 
-  files_added_open + files_deleted_open +
-  files_changed_open + doc_files_open + other_files_open +
-  src_churn_open + test_churn_open + entropy_diff + 
-  commits_to_hottest_file + hotness +
-  at_mentions_description + perc_external_contribs + test_lines_per_kloc +
-  test_cases_per_kloc + team_size + workload +
-  prev_pullreqs + requester_succ_rate + followers + main_team_member +
-  social_connection + prior_interaction_comments +
-  has_ci
 
 # Determine best settings for each classifier
 fitControl <- trainControl(

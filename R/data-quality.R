@@ -6,6 +6,8 @@ source(file = "R/utils.R")
 
 library(plyr)
 library(RMySQL)
+library(doMC)
+registerDoMC(cores = 3)
 
 a <- load.all(dir = data.file.location)
 
@@ -50,7 +52,7 @@ prs.per.project$prs.in.db <- apply(prs.per.project, 1, function(x) {
 
 prs.per.project$diff <- 100 - (prs.per.project$prs.in.data/prs.per.project$prs.in.db) * 100
 printf("projects with lots of unbuild PRs")
-subset(prs.per.project, diff >= 10)
+subset(prs.per.project, diff >= 20)
 
 # Projects where few tests where recognized
 projects.few.test_lines <- subset(aggregate(test_lines_per_kloc~project_name + lang, a, mean), 
