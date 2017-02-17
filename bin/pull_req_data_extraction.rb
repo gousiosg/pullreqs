@@ -174,6 +174,7 @@ Extract data for pull requests for a given repository
       when /scala/i then self.extend(ScalaData)
       when /c/i then self.extend(CData)
       when /python/i then self.extend(PythonData)
+      when /go/i then self.extend(GoData)
     end
 
     # Update the repo

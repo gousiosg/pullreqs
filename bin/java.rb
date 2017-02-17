@@ -2,7 +2,7 @@
 # (c) 2012 -- 2015 Georgios Gousios <gousiosg@gmail.com>
 #
 
-require 'comment_stripper'
+require_relative 'comment_stripper'
 
 module JavaData
 

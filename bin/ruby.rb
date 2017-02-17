@@ -2,7 +2,7 @@
 # (c) 2012 -- 2015 Georgios Gousios <gousiosg@gmail.com>
 #
 
-require 'comment_stripper'
+require_relative 'comment_stripper'
 
 module RubyData
 
@@ -18,9 +18,11 @@ module RubyData
   def test_file_filter
     lambda do |f|
       path = if f.class == Hash then f[:path] else f end
-      path.end_with?('.rb') && (path.include?('test/') ||
-          path.include?('tests/') ||
-          path.include?('spec/'))
+      path.end_with?('.rb') and (
+          (path.include?('test/') or
+          path.include?('tests/') or
+          path.include?('spec/')) and
+      not path.include?('lib/'))
     end
   end
 
