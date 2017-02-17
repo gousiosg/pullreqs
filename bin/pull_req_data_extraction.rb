@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# (c) 2012 -- 2015 Georgios Gousios <gousiosg@gmail.com>
+# (c) 2012 -- 2017 Georgios Gousios <gousiosg@gmail.com>
 #
 # BSD licensed, see LICENSE in top level dir
 #
@@ -15,16 +15,20 @@ require 'json'
 require 'sequel'
 require 'trollop'
 
-require 'java'
-require 'ruby'
-require 'scala'
-require 'c'
-require 'javascript'
-require 'python'
+require_relative 'java'
+require_relative 'ruby'
+require_relative 'scala'
+require_relative 'c'
+require_relative 'javascript'
+require_relative 'python'
 
 class PullReqDataExtraction
 
-  include Mongo
+  REQ_LIMIT = 4990
+  THREADS = 2
+
+  attr_accessor :prs, :owner, :repo, :all_commits,
+                :closed_by_commit, :close_reason, :token
 
   class << self
     def run(args = ARGV)
@@ -39,12 +43,6 @@ class PullReqDataExtraction
 
       command.config = YAML::load_file command.options[:config]
 
-      if command.options[:travis]
-        STDERR.puts "Getting Travis build info for #{ARGV[0] + '/' + ARGV[1]} "
-        command.get_travis(ARGV[0] + '/' + ARGV[1])
-        return
-      end
-
       command.go
     end
   end
@@ -55,7 +53,7 @@ class PullReqDataExtraction
       banner <<-BANNER
 Extract data for pull requests for a given repository
 
-#{File.basename($0)} owner repo lang
+#{File.basename($0)} owner repo token
 
       BANNER
       opt :config, 'config.yaml file location', :short => 'c',
@@ -74,7 +72,7 @@ Extract data for pull requests for a given repository
           unless File.exists?(options[:config])
     end
 
-    Trollop::die 'Three arguments required' unless !args[2].nil?
+    Trollop::die 'Two arguments required' unless !args[1].nil?
   end
 
   def db
@@ -87,23 +85,27 @@ Extract data for pull requests for a given repository
 
   def mongo
     Thread.current[:mongo_db] ||= Proc.new do
-      mongo_db = MongoClient.new(self.config['mongo']['host'], self.config['mongo']['port']).db(self.config['mongo']['db'])
-      unless self.config['mongo']['username'].nil?
-        mongo_db.authenticate(self.config['mongo']['username'], self.config['mongo']['password'])
-      end
-      mongo_db
+      uname  = self.config['mongo']['username']
+      passwd = self.config['mongo']['password']
+      host   = self.config['mongo']['host']
+      port   = self.config['mongo']['port']
+      db     = self.config['mongo']['db']
+
+      constring = if uname.nil?
+                    "mongodb://#{host}:#{port}/#{db}"
+                  else
+                    "mongodb://#{uname}:#{passwd}@#{host}:#{port}/#{db}"
+                  end
+
+      Mongo::Logger.logger.level = Logger::Severity::WARN
+      Mongo::Client.new(constring)
     end.call
     Thread.current[:mongo_db]
   end
 
   def git
-    Thread.current[:git] ||= clone(ARGV[0], ARGV[1])
-    Thread.current[:git]
-  end
-
-  def threads
-    @threads ||= 1
-    @threads
+    Thread.current[:repo] ||= clone(ARGV[0], ARGV[1])
+    Thread.current[:repo]
   end
 
   # Read a source file from the repo and strip its comments
@@ -126,34 +128,46 @@ Extract data for pull requests for a given repository
     @stripped[f]
   end
 
+  def log(msg, level = 0)
+    semaphore.synchronize do
+      (0..level).each { STDERR.write ' ' }
+      STDERR.puts msg
+    end
+  end
+
   # Main command code
   def go
     interrupted = false
 
     trap('INT') {
-      STDERR.puts "#{File.basename($0)}(#{Process.pid}): Received SIGINT, exiting"
+      log "#{File.basename($0)}(#{Process.pid}): Received SIGINT, exiting"
       interrupted = true
     }
 
-    # Init the semaphore
-    semaphore
+    self.owner = ARGV[0]
+    self.repo = ARGV[1]
+    self.token = ARGV[2]
 
-    user_entry = db[:users].first(:login => ARGV[0])
+    user_entry = db[:users].first(:login => owner)
 
     if user_entry.nil?
-      Trollop::die "Cannot find user #{ARGV[0]}"
+      Trollop::die "Cannot find user #{owner}"
     end
 
     repo_entry = db.from(:projects, :users).\
                   where(:users__id => :projects__owner_id).\
-                  where(:users__login => ARGV[0]).\
-                  where(:projects__name => ARGV[1]).select(:projects__id).first
+                  where(:users__login => owner).\
+                  where(:projects__name => repo).\
+                  select(:projects__id, :projects__language).\
+                  first
 
     if repo_entry.nil?
-      Trollop::die "Cannot find repository #{ARGV[0]}/#{ARGV[1]}"
+      Trollop::die "Cannot find repository #{owner}/#{repo}"
     end
 
-    case ARGV[2]
+    language = repo_entry[:language]
+
+    case language
       when /ruby/i then self.extend(RubyData)
       when /javascript/i then self.extend(JavascriptData)
       when /java/i then self.extend(JavaData)
@@ -165,16 +179,13 @@ Extract data for pull requests for a given repository
     # Update the repo
     clone(ARGV[0], ARGV[1], true)
 
-    unless ARGV[3].nil?
-      @threads = ARGV[3].to_i
-    end
-
     walker = Rugged::Walker.new(git)
     walker.sorting(Rugged::SORT_DATE)
     walker.push(git.head.target)
-    @all_commits = walker.map do |commit|
+    self.all_commits = walker.map do |commit|
       commit.oid[0..10]
     end
+    log "#{all_commits.size} commits to process"
 
     # Get commits that close issues/pull requests
     # Index them by issue/pullreq id, as a sha might close multiple issues
@@ -188,16 +199,14 @@ Extract data for pull requests for a given repository
 
     fixre = /(?:fixe[sd]?|close[sd]?|resolve[sd]?)(?:[^\/]*?|and)#([0-9]+)/mi
 
-    STDERR.puts 'Calculating PRs closed by commits:'
-    @closed_by_commit ={}
+    log 'Calculating PRs closed by commits'
     commits_in_prs = db.fetch(q, repo_entry[:id]).all
-    @closed_by_commit =
-        Parallel.map(commits_in_prs, :in_threads => threads) do |x|
+    self.closed_by_commit =
+        Parallel.map(commits_in_prs, :in_threads => THREADS) do |x|
           sha = x[:sha]
           result = {}
           mongo['commits'].find({:sha => sha},
                                 {:fields => {'commit.message' => 1, '_id' => 0}}).map do |x|
-            STDERR.write "\r #{sha}"
             comment = x['commit']['message']
 
             comment.match(fixre) do |m|
@@ -207,49 +216,35 @@ Extract data for pull requests for a given repository
             end
           end
           result
-        end.select{|x| !x.empty?}.reduce({}){|acc, x| acc.merge(x)}
+        end.select { |x| !x.empty? }.reduce({}) { |acc, x| acc.merge(x) }
+    log "#{closed_by_commit.size} PRs closed by commits"
 
-    @prs = pull_reqs(repo_entry)
+    self.prs = pull_reqs(repo_entry)
 
-    STDERR.puts "\nCalculating close reason"
-    @close_reason = {}
-    @close_reason = @prs.reduce({}) do |acc, pr|
-      STDERR.write "\r #{pr[:github_id]}"
-      merged = !pr[:merged_at].nil?
-      git_merged = false
-      merge_reason = :github
+    log "Calculating PR close reasons"
+    self.close_reason = prs.reduce({}) do |acc, pr|
+      mw = merged_with(pr)
+      log "PR #{pr[:github_id]}, #{mw}"
 
-      if not merged
-        git_merged, merge_reason = merged_with_git?(pr)
-      end
-
-      acc[pr[:github_id]] = [git_merged, merge_reason]
+      acc[pr[:github_id]] = mw
       acc
     end
-
-    STDERR.write "\nCalculating mergers\n"
-    @close_reason = @prs.reduce(@close_reason) do |acc, pr|
-      STDERR.write "\r #{pr[:github_id]}"
-      merge_person = merger(pr)
-      acc[pr[:github_id]] << merge_person unless merge_person.nil?
-      acc
-    end
+    log "Close reasons: #{close_reason.group_by { |_, v| v }.reduce({}) { |acc, x| acc.merge({x[0] => x[1].size}) }}"
 
     # Process pull request list
     do_pr = Proc.new do |pr|
       begin
-        r = process_pull_request(pr, ARGV[2].downcase)
-        STDERR.puts r
+        r = process_pull_request(pr, language)
+        log r
         r
       rescue StandardError => e
-        STDERR.puts "Error processing pull_request #{pr[:github_id]}: #{e.message}"
-        STDERR.puts e.backtrace
+        log "Error processing pull_request #{pr[:github_id]}: #{e.message}"
+        log e.backtrace
         #raise e
       end
     end
 
-    #@prs = @prs.select{|x| x[:github_id] == 135}
-    results = Parallel.map(@prs, :in_threads => threads) do |pr|
+    results = Parallel.map(prs, :in_threads => THREADS) do |pr|
       if interrupted
         raise Parallel::Kill
       end
@@ -302,8 +297,6 @@ Extract data for pull requests for a given repository
     # Statistics across pull request commits
     stats = pr_stats(pr)
     stats_open = pr_stats(pr, true)
-    merged = !pr[:merged_at].nil?
-    git_merged, merge_reason, merge_person = @close_reason[pr[:github_id]]
 
     # Count number of src/comment lines
     src = src_lines(pr[:base_commit])
@@ -318,7 +311,7 @@ Extract data for pull requests for a given repository
 
     # Create line for a pull request
     {
-        # Generall stuff
+        # General stuff
         :pull_req_id              => pr[:id],
         :project_name             => "#{pr[:login]}/#{pr[:project_name]}",
         :lang                     => lang,
@@ -326,11 +319,11 @@ Extract data for pull requests for a given repository
 
         # PR characteristics
         :created_at               => Time.at(pr[:created_at]).to_i,
-        :merged_at                => merge_time(pr, merged, git_merged),
+        :merged_at                => merge_ts(pr),
         :closed_at                => Time.at(pr[:closed_at]).to_i,
         :lifetime_minutes         => pr[:lifetime_minutes],
-        :mergetime_minutes        => merge_time_minutes(pr, merged, git_merged),
-        :merged_using             => merge_reason.to_s,
+        :mergetime_minutes        => merge_time_minutes(pr),
+        :merged_using             => close_reason[pr[:github_id]],
         :conflict                 => conflict?(pr),
         :forward_links            => forward_links?(pr),
         :intra_branch             => if intra_branch?(pr) == 1 then true else false end,
@@ -372,9 +365,9 @@ Extract data for pull requests for a given repository
         # Project characteristics
         :perc_external_contribs   => commits_last_x_months(pr, true, months_back).to_f / commits_incl_prs.to_f,
         :sloc                     => src,
-        :test_lines_per_kloc      => (test_lines(pr[:base_commit]).to_f / src.to_f) * 1000,
-        :test_cases_per_kloc      => (num_test_cases(pr[:base_commit]).to_f / src.to_f) * 1000,
-        :asserts_per_kloc         => (num_assertions(pr[:base_commit]).to_f / src.to_f) * 1000,
+        :test_lines               => test_lines(pr[:base_commit]),
+        :test_cases               => num_test_cases(pr[:base_commit]),
+        :asserts                  => num_assertions(pr[:base_commit]),
         :stars                    => stars(pr),
         :team_size                => team_size(pr, months_back),
         :workload                 => workload(pr),
@@ -383,7 +376,7 @@ Extract data for pull requests for a given repository
         # Contributor characteristics
         :requester                => requester(pr),
         :closer                   => closer(pr),
-        :merger                   => merge_person,
+        :merger                   => merger(pr),
         :prev_pullreqs            => prev_pull_reqs,
         :requester_succ_rate      => if prev_pull_reqs > 0 then prev_pull_requests(pr, 'merged').to_f / prev_pull_reqs.to_f else 0 end,
         :followers                => followers(pr),
@@ -397,90 +390,103 @@ Extract data for pull requests for a given repository
         :prior_interaction_pr_comments     => prior_interaction_pr_comments(pr, months_back),
         :prior_interaction_commits         => prior_interaction_commits(pr, months_back),
         :prior_interaction_commit_comments => prior_interaction_commit_comments(pr, months_back),
-        :first_response           => first_response(pr)
+        :first_response                    => first_response(pr)
     }
   end
 
-  def merge_time(pr, merged, git_merged)
-    if merged
+  def merge_ts(pr)
+
+    if not pr[:merged_at].nil?
       Time.at(pr[:merged_at]).to_i
-    elsif git_merged
+    elsif close_reason[pr[:github_id]] == :commits_in_master
       Time.at(pr[:closed_at]).to_i
     else
-      ''
+      nil
     end
   end
 
-  def merge_time_minutes(pr, merged, git_merged)
-    if merged
+  def merge_time_minutes(pr)
+    if not pr[:merged_at].nil?
       Time.at(pr[:mergetime_minutes]).to_i
-    elsif git_merged
+    elsif close_reason[pr[:github_id]] == :commits_in_master
       pr[:lifetime_minutes].to_i
     else
-      ''
+      nil
     end
   end
 
-  # Checks whether a merge of the pull request occurred outside Github
-  # This will only discover clean merges; rebases and force-pushes override
-  # the commit history, so they are impossible to detect without source code
-  # analysis.
-  def merged_with_git?(pr)
+  # Checks how a merge occured
+  def merged_with(pr)
+    #0. Merged with Github?
+    q = <<-QUERY
+	  select prh.id as merge_id
+    from pull_request_history prh
+	  where prh.action = 'merged'
+      and prh.pull_request_id = ?
+    QUERY
+    r = db.fetch(q, pr[:id]).first
+    unless r.nil?
+      return :merge_button
+    end
 
-    #1. Commits from the pull request appear in the master branch
+    #1. Commits from the pull request appear in the project's main branch
     q = <<-QUERY
 	  select c.sha
     from pull_request_commits prc, commits c
 	  where prc.commit_id = c.id
-		  and prc.pull_request_id = ?
+      and prc.pull_request_id = ?
     QUERY
     db.fetch(q, pr[:id]).each do |x|
-      unless @all_commits.select { |y| x[:sha].start_with? y }.empty?
-        return [true, :commits_in_master]
+      unless all_commits.select { |y| x[:sha].start_with? y }.empty?
+        return :commits_in_master
       end
     end
 
     #2. The PR was closed by a commit (using the Fixes: convention).
     # Check whether the commit that closes the PR is in the project's
     # master branch
-    unless @closed_by_commit[pr[:github_id]].nil?
-      sha = @closed_by_commit[pr[:github_id]]
-      unless @all_commits.select { |x| sha.start_with? x }.empty?
-        return [true, :fixes_in_commit]
+    sha = closed_by_commit[pr[:github_id]]
+    unless sha.nil?
+      unless all_commits.include? sha
+        return :fixes_in_commit
       end
     end
 
-    comments = issue_comments(pr[:login], pr[:project_name], pr[:github_id])
+    comments = mongo['issue_comments'].find(
+        {'owner' => owner, 'repo' => repo, 'issue_id' => pr[:github_id].to_i},
+        {:projection => {'body' => 1, 'created_at' => 1, '_id' => 0},
+         :sort => {'created_at' => 1}}
+    ).map { |x| x }
 
     comments.reverse.take(3).map { |x| x['body'] }.uniq.each do |last|
       # 3. Last comment contains a commit number
       last.scan(/([0-9a-f]{6,40})/m).each do |x|
         # Commit is identified as merged
-        if last.match(/merg(?:ing|ed)/i) or 
-          last.match(/appl(?:ying|ied)/i) or
-          last.match(/pull[?:ing|ed]/i) or
-          last.match(/push[?:ing|ed]/i) or
-          last.match(/integrat[?:ing|ed]/i) 
-          return [true, :commit_sha_in_comments]
+        if last.match(/merg(?:ing|ed)/i) or
+            last.match(/appl(?:ying|ied)/i) or
+            last.match(/pull[?:ing|ed]/i) or
+            last.match(/push[?:ing|ed]/i) or
+            last.match(/integrat[?:ing|ed]/i)
+          return :commit_sha_in_comments
         else
           # Commit appears in master branch
-          unless @all_commits.select { |y| x[0].start_with? y }.empty?
-            return [true, :commit_sha_in_comments]
+          unless all_commits.select { |y| x[0].start_with? y }.empty?
+            return :commit_sha_in_comments
           end
         end
       end
 
       # 4. Merg[ing|ed] or appl[ing|ed] as last comment of pull request
-      if last.match(/merg(?:ing|ed)/i) or 
-        last.match(/appl(?:ying|ed)/i) or
-        last.match(/pull[?:ing|ed]/i) or
-        last.match(/push[?:ing|ed]/i) or
-        last.match(/integrat[?:ing|ed]/i) 
-        return [true, :merged_in_comments]
+      if last.match(/merg(?:ing|ed)/i) or
+          last.match(/appl(?:ying|ed)/i) or
+          last.match(/pull[?:ing|ed]/i) or
+          last.match(/push[?:ing|ed]/i) or
+          last.match(/integrat[?:ing|ed]/i)
+        return :merged_in_comments
       end
     end
 
-    [false, :unknown]
+    :unknown
   end
 
   def conflict?(pr)
@@ -674,7 +680,7 @@ Extract data for pull requests for a given repository
     unless closer.nil?
       closer[:login]
     else
-      ''
+      nil
     end
   end
 
@@ -693,10 +699,10 @@ Extract data for pull requests for a given repository
     if merger.nil?
       # If the PR was merged, then it is safe to assume that the
       # closer is also the merger
-      if not @close_reason[pr[:github_id]].nil? and @close_reason[pr[:github_id]][1] != :unknown
+      if not close_reason[pr[:github_id]].nil? and close_reason[pr[:github_id]] != :unknown
         closer(pr)
       else
-        ''
+        nil
       end
     else
       merger[:login]
@@ -731,7 +737,7 @@ Extract data for pull requests for a given repository
 
       pull_reqs = db.fetch(q, pr[:id], pr[:id], pr[:id]).all
       pull_reqs.reduce(0) do |acc, pull_req|
-        if not @close_reason[pull_req[:pullreq_id]].nil? and @close_reason[pull_req[:pullreq_id]][1] != :unknown
+        if not close_reason[pull_req[:pullreq_id]].nil? and close_reason[pull_req[:pullreq_id]][1] != :unknown
           acc += 1
         end
         acc
@@ -784,8 +790,8 @@ Extract data for pull requests for a given repository
   # People that merged (not necessarily through pull requests) up to months_back
   # from the time the built PR was created.
   def merger_team(pr, months_back)
-    recently_merged = @prs.find_all do |b|
-      @close_reason[b[:github_id]][1] != :unknown and
+    recently_merged = prs.find_all do |b|
+      close_reason[b[:github_id]][1] != :unknown and
           b[:created_at].to_i > (pr[:created_at].to_i - months_back * 30 * 24 * 3600)
     end.map do |b|
       b[:github_id]
@@ -1330,9 +1336,9 @@ Extract data for pull requests for a given repository
   end
 
   def pull_req_entry(pr)
-    mongo['pull_requests'].find_one({:owner => pr[:login],
-                                     :repo => pr[:project_name],
-                                     :number => pr[:github_id]})
+    mongo['pull_requests'].find({:owner => pr[:login],
+                                 :repo => pr[:project_name],
+                                 :number => pr[:github_id]}).limit(1).first
   end
 
   # JSON objects for the commits included in the pull request
@@ -1362,7 +1368,7 @@ Extract data for pull requests for a given repository
     commits = db.fetch(q, pr_id).all
 
     commits.reduce([]){ |acc, x|
-      a = mongo['commits'].find_one({:sha => x[:sha]})
+      a = mongo['commits'].find({:sha => x[:sha]}).limit(1).first
       acc << a unless a.nil?
       acc
     }.select{|c| c['parents'].size <= 1}
@@ -1370,23 +1376,12 @@ Extract data for pull requests for a given repository
 
   # Returns all comments for the issue sorted by creation date ascending
   def issue_comments(owner, repo, pr_id)
-    Thread.current[:issue_id] ||= pr_id
+    mongo['issue_comments'].find(
+        {'owner' => owner, 'repo' => repo, 'issue_id' => pr_id.to_i},
+        {:fields => {'body' => 1, 'created_at' => 1, '_id' => 0},
+         :sort   => {'created_at' => 1}}
+    ).map { |x| x }
 
-    if pr_id != Thread.current[:issue_id]
-      Thread.current[:issue_id] = pr_id
-      Thread.current[:issue_cmnt] = nil
-    end
-
-    Thread.current[:issue_cmnt] ||= Proc.new {
-      issue_comments = mongo['issue_comments']
-      ic = issue_comments.find(
-          {'owner' => owner, 'repo' => repo, 'issue_id' => pr_id.to_i},
-          {:fields => {'body' => 1, 'created_at' => 1, '_id' => 0},
-           :sort => {'created_at' => :asc}}
-      ).map {|x| x}
-
-    }.call
-    Thread.current[:issue_cmnt]
   end
 
   # Recursively get information from all files given a rugged Git tree
@@ -1398,7 +1393,7 @@ Extract data for pull requests for a given repository
         begin
           all_files << lslr(git.lookup(f[:oid]), f[:path])
         rescue StandardError => e
-          STDERR.puts e
+          log e
           all_files
         end
       else
@@ -1415,11 +1410,11 @@ Extract data for pull requests for a given repository
     begin
       files = lslr(git.lookup(sha).tree)
       if files.size <= 0
-        STDERR.puts "No files for commit #{sha}"
+        log "No files for commit #{sha}"
       end
       files.select { |x| filter.call(x) }
     rescue StandardError => e
-      STDERR.puts "Cannot find commit #{sha} in base repo"
+      log "Cannot find commit #{sha} in base repo"
       []
     end
   end
@@ -1443,14 +1438,14 @@ Extract data for pull requests for a given repository
 
       proc_out = Thread.new {
         while !proc.eof
-          STDERR.puts "#{proc.gets}"
+          log "GIT: #{proc.gets}"
         end
       }
 
       proc_out.join
     end
 
-    checkout_dir = File.join('cache', user, repo)
+    checkout_dir = File.join('repos', user, repo)
 
     begin
       repo = Rugged::Repository.new(checkout_dir)
@@ -1459,7 +1454,7 @@ Extract data for pull requests for a given repository
       end
       repo
     rescue
-      spawn("git clone --bare git://github.com/#{user}/#{repo}.git #{checkout_dir}")
+      spawn("git clone git://github.com/#{user}/#{repo}.git #{checkout_dir}")
       Rugged::Repository.new(checkout_dir)
     end
   end

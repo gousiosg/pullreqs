@@ -15,12 +15,10 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = 0.1
 
-  gem.add_dependency "sequel", ['>= 3.35']
   gem.add_dependency "github-linguist", ['>= 4.5']
   gem.add_dependency "rugged", ['>= 0.22']
   gem.add_dependency 'parallel', ['>= 0.7.1']
-  gem.add_dependency 'mongo', ['>= 1.12', '< 2.0' ]
-  gem.add_dependency 'bson_ext', ['>= 1.12', '< 2.0' ]
+  gem.add_dependency 'mongo', ['>=2.4.0']
   gem.add_dependency 'sequel', ['>= 4.23']
   gem.add_dependency 'trollop', ['>= 2.1.2']
   gem.add_dependency 'mysql2', ['>= 0.4']
