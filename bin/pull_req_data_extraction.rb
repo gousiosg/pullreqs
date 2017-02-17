@@ -262,6 +262,7 @@ Extract data for pull requests for a given repository
     q = <<-QUERY
     select u.login as login, p.name as project_name, pr.id, pr.pullreq_id as github_id,
            a.created_at as created_at, b.created_at as closed_at, c.sha as base_commit,
+           c1.sha as head_commit,
 			     (select created_at
             from pull_request_history prh1
             where prh1.pull_request_id = pr.id
@@ -272,13 +273,14 @@ Extract data for pull requests for a given repository
                                            where prh1.pull_request_id = pr.id and prh1.action='merged' limit 1)
       ) as mergetime_minutes
     from pull_requests pr, projects p, users u,
-         pull_request_history a, pull_request_history b, commits c
+         pull_request_history a, pull_request_history b, commits c, commits c1
     where p.id = pr.base_repo_id
 	    and a.pull_request_id = pr.id
       and a.pull_request_id = b.pull_request_id
       and a.action='opened' and b.action='closed'
 	    and a.created_at < b.created_at
       and p.owner_id = u.id
+      and c1.id = pr.head_commit_id
       and c.id = pr.base_commit_id
       and p.id = ?
     QUERY
@@ -297,6 +299,13 @@ Extract data for pull requests for a given repository
     # Statistics across pull request commits
     stats = pr_stats(pr)
     stats_open = pr_stats(pr, true)
+
+    # Test diff stats
+    pr_commits = commit_entries(pr[:id], true).sort{|a,b| a['commit']['author']['date'] <=> b['commit']['author']['date']}
+    test_diff_open = test_diff_stats(pr[:base_commit], pr_commits.last[:sha])
+
+    pr_commits = commit_entries(pr[:id], false).sort{|a,b| a['commit']['author']['date'] <=> b['commit']['author']['date']}
+    test_diff = test_diff_stats(pr[:base_commit], pr_commits.last[:sha])
 
     # Count number of src/comment lines
     src = src_lines(pr[:base_commit])
@@ -352,6 +361,10 @@ Extract data for pull requests for a given repository
         :other_files              => stats[:other_files],
         :src_churn_open           => stats_open[:lines_added] + stats_open[:lines_deleted],
         :test_churn_open          => stats_open[:test_lines_added] + stats_open[:test_lines_deleted],
+        :tests_added_open         => test_diff_open[:tests_added],
+        :tests_deleted_open       => test_diff_open[:tests_deleted],
+        :tests_added              => test_diff[:tests_added],
+        :tests_deleted            => test_diff[:tests_deleted],
         :src_churn                => stats[:lines_added] + stats[:lines_deleted],
         :test_churn               => stats[:test_lines_added] + stats[:test_lines_deleted],
         :new_entropy              => new_entropy(pr),
@@ -1190,6 +1203,48 @@ Extract data for pull requests for a given repository
     result
   end
 
+  def test_diff_stats(from_sha, to_sha)
+
+    from = git.lookup(from_sha)
+    to = git.lookup(to_sha)
+
+    diff = to.diff(from)
+
+    added = deleted = 0
+    state = :none
+    diff.patch.lines.each do |line|
+      if line.start_with? '---'
+        file_path = line.strip.split(/---/)[1]
+        next if file_path.nil?
+
+        file_path = file_path[2..-1]
+        next if file_path.nil?
+
+        if test_file_filter.call(file_path)
+          state = :in_test
+        end
+      end
+
+      if line.start_with? '- ' and state == :in_test
+        if test_case_filter.call(line)
+          deleted += 1
+        end
+      end
+
+      if line.start_with? '+ ' and state == :in_test
+        if test_case_filter.call(line)
+          added += 1
+        end
+      end
+
+      if line.start_with? 'diff --'
+        state = :none
+      end
+    end
+
+    {:tests_added => added, :tests_deleted => deleted}
+  end
+
   # Return a hash of file names and commits on those files in the
   # period between pull request open and months_back. The returned
   # results do not include the commits coming from the PR.
@@ -1369,6 +1424,11 @@ Extract data for pull requests for a given repository
 
     commits.reduce([]){ |acc, x|
       a = mongo['commits'].find({:sha => x[:sha]}).limit(1).first
+
+      if a.nil?
+        a = github_commit(owner, repo, x)
+      end
+
       acc << a unless a.nil?
       acc
     }.select{|c| c['parents'].size <= 1}
@@ -1456,6 +1516,55 @@ Extract data for pull requests for a given repository
     rescue
       spawn("git clone git://github.com/#{user}/#{repo}.git #{checkout_dir}")
       Rugged::Repository.new(checkout_dir)
+    end
+  end
+
+  # Load a commit from Github. Will return an empty hash if the commit does not exist.
+  def github_commit(owner, repo, sha)
+    parent_dir = File.join('commits', "#{owner}@#{repo}")
+    commit_json = File.join(parent_dir, "#{sha}.json")
+    FileUtils::mkdir_p(parent_dir)
+
+    r = nil
+    if File.exists? commit_json
+      r = begin
+        JSON.parse File.open(commit_json).read
+      rescue
+        # This means that the retrieval operation resulted in no commit being retrieved
+        {}
+      end
+      return r
+    end
+
+    url = "https://api.github.com/repos/#{owner}/#{repo}/commits/#{sha}"
+    log("Requesting #{url} (#{@remaining} remaining)")
+
+    contents = nil
+    begin
+      r = open(url, 'User-Agent' => 'ghtorrent', 'Authorization' => "token #{token}")
+      @remaining = r.meta['x-ratelimit-remaining'].to_i
+      @reset = r.meta['x-ratelimit-reset'].to_i
+      contents = r.read
+      JSON.parse contents
+    rescue OpenURI::HTTPError => e
+      @remaining = e.io.meta['x-ratelimit-remaining'].to_i
+      @reset = e.io.meta['x-ratelimit-reset'].to_i
+      log "Cannot get #{url}. Error #{e.io.status[0].to_i}"
+      {}
+    rescue StandardError => e
+      log "Cannot get #{url}. General error: #{e.message}"
+      {}
+    ensure
+      File.open(commit_json, 'w') do |f|
+        f.write contents unless r.nil?
+        f.write '' if r.nil?
+      end
+
+      if 5000 - @remaining >= REQ_LIMIT
+        to_sleep = @reset - Time.now.to_i + 2
+        log "Request limit reached, sleeping for #{to_sleep} secs"
+        sleep(to_sleep)
+      end
     end
   end
 
