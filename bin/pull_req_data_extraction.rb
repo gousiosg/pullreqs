@@ -154,12 +154,13 @@ Extract data for pull requests for a given repository
       Trollop::die "Cannot find user #{owner}"
     end
 
-    repo_entry = db.from(:projects, :users).\
-                  where(:users__id => :projects__owner_id).\
-                  where(:users__login => owner).\
-                  where(:projects__name => repo).\
-                  select(:projects__id, :projects__language).\
-                  first
+    #repo_entry = db.from(:projects, :users).\
+    #              where(:users__id => :projects__owner_id).\
+    #              where(:users__login => owner).\
+    #              where(:projects__name => repo).\
+    #              select(:projects__id, :projects__language).\
+    #              first
+    repo_entry = db["SELECT projects.id, projects.language from projects, users WHERE (users.id = projects.owner_id) and (users.login = '#{owner}') and (projects.name = '#{repo}') LIMIT 1;"].first
 
     if repo_entry.nil?
       Trollop::die "Cannot find repository #{owner}/#{repo}"
