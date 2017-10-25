@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# (c) 2012 -- 2017 Georgios Gousios <gousiosg@gmail.com>
+# (c) 2012 -- onwards Georgios Gousios <gousiosg@gmail.com>
 #
 # BSD licensed, see LICENSE in top level dir
 #
@@ -18,14 +18,14 @@ require 'trollop'
 require_relative 'java'
 require_relative 'ruby'
 require_relative 'scala'
-require_relative 'c'
 require_relative 'javascript'
 require_relative 'python'
+require_relative 'go'
 
 class PullReqDataExtraction
 
   REQ_LIMIT = 4990
-  THREADS = 2
+  THREADS = 1
 
   attr_accessor :prs, :owner, :repo, :all_commits,
                 :closed_by_commit, :close_reason, :token
@@ -72,7 +72,7 @@ Extract data for pull requests for a given repository
           unless File.exists?(options[:config])
     end
 
-    Trollop::die 'Two arguments required' unless !args[1].nil?
+    Trollop::die 'Three arguments required' if args[2].nil?
   end
 
   def db
@@ -154,12 +154,14 @@ Extract data for pull requests for a given repository
       Trollop::die "Cannot find user #{owner}"
     end
 
-    repo_entry = db.from(:projects, :users).\
-                  where(:users__id => :projects__owner_id).\
-                  where(:users__login => owner).\
-                  where(:projects__name => repo).\
-                  select(:projects__id, :projects__language).\
-                  first
+    q = <<-QUERY
+    SELECT p.id, p.language 
+    FROM projects p, users u
+    WHERE u.id = p.owner_id
+      AND u.login = ? 
+      AND p.name = ?
+    QUERY
+    repo_entry = db.fetch(q, owner, repo).first
 
     if repo_entry.nil?
       Trollop::die "Cannot find repository #{owner}/#{repo}"
@@ -172,9 +174,9 @@ Extract data for pull requests for a given repository
       when /javascript/i then self.extend(JavascriptData)
       when /java/i then self.extend(JavaData)
       when /scala/i then self.extend(ScalaData)
-      when /c/i then self.extend(CData)
       when /python/i then self.extend(PythonData)
       when /go/i then self.extend(GoData)
+      else Trollop::die "Language #{lang} not supported"
     end
 
     # Update the repo

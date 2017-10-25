@@ -21,11 +21,9 @@ bundle install
 gem install mysql2 bson_ext
 </pre>
 
-The executable commands in this project inherit functionality from the
-[GHTorrent](https://github.com/gousiosg/github-mirror) libraries. 
-To work, they need the GHTorrent MongoDB data and a recent version of
-the GHTorrent MySQL database. For that, you may use the data from
-[ghtorrent.org](http://ghtorrent.org).
+To work, the data extaction scripts need the GHTorrent MongoDB data and a
+recent version of the GHTorrent MySQL database. For that, you may use the
+data from [ghtorrent.org](http://ghtorrent.org).
 
 In addition to command specific arguments, the commands use the same
 `config.yaml` file for specific connection details to external systems.  You

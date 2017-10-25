@@ -1,5 +1,5 @@
 #
-# (c) 2012 -- 2015 Georgios Gousios <gousiosg@gmail.com>
+# (c) 2012 -- onwards Georgios Gousios <gousiosg@gmail.com>
 #
 
 require 'comment_stripper'
@@ -33,8 +33,8 @@ module JavascriptData
 
   def assertion_filter
     lambda { |l|
-      (not l.match(/assert/).nil? or      #chai, node.js
-          not l.match(/\.?[e|E]xpect/).nil? or # Jasmine
+      (not l.match(/assert/).nil? or            #chai, node.js
+          not l.match(/\.?[e|E]xpect/).nil? or  # Jasmine
           not l.match(/\.?[s|S]hould/).nil? or  # Mocha
           not l.match(/([e|E]qual\s*\(|ok\s*\()/).nil?) #qunit
     }

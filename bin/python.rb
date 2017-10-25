@@ -1,5 +1,5 @@
 #
-# (c) 2012 -- 2017 Georgios Gousios <gousiosg@gmail.com>
+# (c) 2012 -- onwards Georgios Gousios <gousiosg@gmail.com>
 #
 
 require_relative 'comment_stripper'
