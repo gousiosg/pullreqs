@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# (c) 2012 -- 2014 Georgios Gousios <gousiosg@gmail.com>
+# (c) 2012 -- onwards Georgios Gousios <gousiosg@gmail.com>
 #
 # BSD licensed, see LICENSE in top level dir
 #
@@ -11,8 +11,10 @@ dir='.'
 usage()
 {
   echo ""
-	echo "Usage: $0 [-p num_processes] [-d output_dir] file"
-  echo "Runs pull_req_data_extraction for an input file using multiple processes"
+	echo "Usage: $0 [-p num_processes] [-d output_dir] file tokens"
+  echo "Runs build_data_extraction for a list of projects"
+  echo "file: contains a list of 'owner repo' pairs"
+  echo "tokens: contains a list of GitHub API tokens"
   echo "Options:"
   echo "  -p Number of processes to run in parallel (default: $parallel)"
   echo "  -d Output directory (default: $dir)"
@@ -49,6 +51,7 @@ if [ -z ${@:$OPTIND:1} ]; then
   usage
 else
   input=${@:$OPTIND:1}
+  tokens=${@:$OPTIND+1:1}
 fi
 
-parallel --gnu --progress --joblog parjobs --xapply -P $parallel ruby -Ibin bin/pull_req_data_extraction.rb -c config.yaml {1} {2} {3} 2 '1>' $dir/{1}@{2}.csv '2>' $dir/{1}@{2}.err ::: `cat $input|cut -f1 -d' '` ::: `cat $input|cut -f2 -d' '` ::: `cat $input|cut -f3 -d' '`
+parallel --gnu --progress --joblog parjobs --xapply -P $parallel ruby -Ibin bin/pull_req_data_extraction.rb -c config.yaml {1} {2} {3} '1>' $dir/{1}@{2}.csv '2>' $dir/{1}@{2}.err ::: `cat $input|cut -f1 -d' '` ::: `cat $input|cut -f2 -d' '` ::: `cat $tokens`
