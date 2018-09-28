@@ -92,7 +92,7 @@ The data analysis consists of two steps:
 * Generating intermediate data files
 * Analyzing data files with R
 
-####Generating intermediate files
+#### Generating intermediate files
 
 To produce the required data files, first run the
 `bin/pull_req_data_extraction.rb` script like so:
@@ -198,7 +198,7 @@ test files. Test cases are recognized by "grepping" for `test*` (RUnit),
 
 * Scala: Same as Java with the addition of specs2 matchers
 
-####Processing data with R
+#### Processing data with R
 
 The statistical analysis is done with R. Generally, it suffices to
 do 
@@ -223,7 +223,7 @@ pull request merge time classifiers.
 * [R/var-importance.R](https://github.com/gousiosg/pullreqs/blob/master/R/var-importance.R) Generate the variable importance plots for choosing important features
 
 
-####Citation information
+#### Citation information
 If you find this work interesting and want to use it in your work, please cite it as follows:
 
 ```
