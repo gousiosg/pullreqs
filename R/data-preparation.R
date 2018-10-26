@@ -41,20 +41,17 @@ highly.correlated <- function(cor.table, threshold = "0.7") {
     }
   }
 }
+#
+#correlated <- findCorrelation(cor.table, cutoff = 0.75, exact = T, names = T)
+#printf("Removing highly correlated columns")
+#print(correlated)
 
-correlated <- findCorrelation(cor.table, cutoff = 0.75, exact = T, names = T)
-printf("Removing highly correlated columns")
-print(correlated)
+#all.1 <- all[, !correlated,  with = F]
+#numeric.fields <- setdiff(numeric.fields, correlated)
 
-all.1 <- all[, !correlated,  with = F]
-numeric.fields <- setdiff(numeric.fields, correlated)
+#cross.cor <- all.1[, numeric.fields, with = F]
 
-cross.cor <- all.1[, numeric.fields, with = F]
+#cor.table <- cor(cross.cor, method = "spearman")
+##corrplot(cor.table, method="circle",order = "hclust", addrect = 2)
 
-cor.table <- cor(cross.cor, method = "spearman")
-#corrplot(cor.table, method="circle",order = "hclust", addrect = 2)
-
-
-rm(cross.cor, cor.table, all.1)
-
-
+#rm(cross.cor, cor.table, all.1)

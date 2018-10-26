@@ -266,15 +266,14 @@ Extract data for pull requests for a given repository
     select u.login as login, p.name as project_name, pr.id, pr.pullreq_id as github_id,
            a.created_at as created_at, b.created_at as closed_at, c.sha as base_commit,
            c1.sha as head_commit,
-			     (select created_at
-            from pull_request_history prh1
-            where prh1.pull_request_id = pr.id
-            and prh1.action='merged' limit 1) as merged_at,
+			     ( select created_at
+             from pull_request_history prh1
+             where prh1.pull_request_id = pr.id
+             and prh1.action='merged' limit 1) as merged_at,
            timestampdiff(minute, a.created_at, b.created_at) as lifetime_minutes,
-			timestampdiff(minute, a.created_at, (select created_at
+			     timestampdiff(minute, a.created_at, (select created_at
                                            from pull_request_history prh1
-                                           where prh1.pull_request_id = pr.id and prh1.action='merged' limit 1)
-      ) as mergetime_minutes
+                                           where prh1.pull_request_id = pr.id and prh1.action='merged' limit 1)) as mergetime_minutes
     from pull_requests pr, projects p, users u,
          pull_request_history a, pull_request_history b, commits c, commits c1
     where p.id = pr.base_repo_id

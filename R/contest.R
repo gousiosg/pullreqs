@@ -1,4 +1,5 @@
 library(data.table)
+library(foreach)
 
 printf <- function(...) invisible(print(sprintf(...)))
 
@@ -168,7 +169,7 @@ all$pr_ratio <- apply(all, 1, function(x) {
 })
 
 all.contest<- data.frame(all)[,
-    c('project_name', 'lang','github_id', 'intra_branch',
+    c('project_name', 'lang','github_id', 'intra_branch', 'lifetime_minutes',
       'description_length','num_commits_open','num_commit_comments_open',
       'files_added_open','files_deleted_open','files_modified_open',
       'files_changed_open','src_files_open','doc_files_open','other_files_open',

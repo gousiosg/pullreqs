@@ -15,6 +15,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = 0.1
 
+  gem.add_dependency "charlock_holmes", ['>= 0.7.6']
   gem.add_dependency "github-linguist", ['>= 4.5']
   gem.add_dependency "rugged", ['>= 0.22']
   gem.add_dependency 'parallel', ['>= 0.7.1']

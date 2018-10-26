@@ -18,21 +18,20 @@ all <- data.frame(all)
 
 all$lifetime_minutes <- as.integer(all$lifetime_minutes)
 
-all$close_class <- apply(all, 1, function(x) {
-  lifetime_minutes <- as.integer(x[8])
-  if (lifetime_minutes < 60) {
-    return("FAST")
-  } else if (lifetime_minutes > 60 && lifetime_minutes < 24* 60 ) {
-    return("MEDIUM")
+all$process_speed <- apply(all, 1, function(x) {
+  lifetime_minutes <- as.integer(x[6])
+  if (lifetime_minutes <= 60) {
+    return("1HR")
+  } else if (lifetime_minutes > 60 && lifetime_minutes <= (24 * 60 * 3)) {
+    return("3DAYS")
   } else {
-    return("SLOW")
+    return("LONGER")
   }
 })
 
-all$close_class <- as.factor(all$close_class)
+all$process_speed <- as.factor(all$process_speed)
 
-# This removes highly correlated features from the tested model
-merge.time.model <- merged ~ intra_branch +
+merge.time.model <- process_speed ~ intra_branch +
   description_length + num_commits_open + num_commit_comments_open + 
   files_added_open + files_deleted_open + files_modified_open +
   files_changed_open + src_files_open + doc_files_open + other_files_open +
@@ -42,7 +41,19 @@ merge.time.model <- merged ~ intra_branch +
   test_cases_per_kloc + asserts_per_kloc + team_size + workload + pr_ratio +
   prev_pullreqs + requester_succ_rate + followers + main_team_member +
   social_connection + prior_interaction_comments +
-  prior_interaction_events + has_ci
+  prior_interaction_events + has_ci + project_name + lang
+
+merge.time.model.regr <- lifetime_minutes ~ intra_branch +
+  description_length + num_commits_open + num_commit_comments_open + 
+  files_added_open + files_deleted_open + files_modified_open +
+  files_changed_open + src_files_open + doc_files_open + other_files_open +
+  src_churn_open + test_churn_open + new_entropy + entropy_diff + 
+  commits_on_files_touched + commits_to_hottest_file + hotness +
+  at_mentions_description + perc_external_contribs + test_lines_per_kloc +
+  test_cases_per_kloc + asserts_per_kloc + team_size + workload + pr_ratio +
+  prev_pullreqs + requester_succ_rate + followers + main_team_member +
+  social_connection + prior_interaction_comments +
+  prior_interaction_events + has_ci + project_name + lang
 
 # Determine best settings for each classifier
 fitControl <- trainControl(
